@@ -1,0 +1,26 @@
+# Terms first defined in lesson 8.5 (areas between graphs, solids of revolution).
+- id: solid-of-revolution
+  term: גוף סיבוב
+  en: solid of revolution
+  definition: >-
+    הגוף שנוצר כשתחום במישור מסתובב סביב ישר (ציר הסיבוב) שאינו חוצה אותו. כל חתך ניצב לציר הוא דיסקה או טבעת.
+  reject: []
+  lesson: '8.5'
+- id: disc-method
+  term: שיטת הדיסקות
+  en: disc (and washer) method
+  symbol: 'V=\pi\int_a^b\bigl(f(x)\bigr)^2dx'
+  definition: >-
+    חישוב נפח של גוף סיבוב בפרוסות ניצבות לציר: סביב ציר $x$ הפרוסה בנקודה $x$ היא דיסקה ברדיוס $f(x)$, ולכן
+    $V=\pi\int_a^bf(x)^2dx$. כשיש חור, הפרוסה היא **טבעת** עם רדיוסים $R>r$, בשטח $\pi(R^2-r^2)$.
+  reject: [שיטת הדסקיות]
+  lesson: '8.5'
+- id: shell-method
+  term: שיטת הקליפות הגליליות
+  en: cylindrical shell method
+  symbol: 'V=2\pi\int_a^b x\,f(x)\,dx'
+  definition: >-
+    חישוב נפח של גוף סיבוב בגלילים דקים שמקבילים לציר: קליפה ברדיוס $r$ (המרחק לציר), בגובה $h$ ובעובי $dx$
+    תורמת $2\pi r\,h\,dx$. סביב ציר $y$, לתחום שמתחת ל-$y=f(x)$: $V=2\pi\int_a^bx\,f(x)\,dx$.
+  reject: []
+  lesson: '8.5'

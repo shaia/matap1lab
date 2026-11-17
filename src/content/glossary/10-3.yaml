@@ -1,0 +1,26 @@
+# Terms first defined in lesson 10.3 (differentiability and the tangent plane).
+- id: differentiable-several-variables
+  term: פונקציה דיפרנציאבילית
+  en: differentiable function (several variables)
+  definition: >-
+    $f(x,y)$ דיפרנציאבילית ב-$(x_0,y_0)$ אם יש לה שם קירוב לינארי:
+    $f(x_0+h,y_0+k)=f(x_0,y_0)+ah+bk+\psi$ עם $\frac{\psi}{\sqrt{h^2+k^2}}\to0$. אז בהכרח $a=f_x(x_0,y_0)$ ו-$b=f_y(x_0,y_0)$,
+    ולגרף יש מישור משיק. נגזרות חלקיות רציפות בסביבה מבטיחות דיפרנציאביליות; קיומן בנקודה בלבד אינו מספיק.
+  lesson: '10.3'
+- id: tangent-plane
+  term: מישור משיק
+  en: tangent plane
+  symbol: 'z=f(x_0,y_0)+f_x(x-x_0)+f_y(y-y_0)'
+  definition: >-
+    לגרף של פונקציה דיפרנציאבילית $z=f(x,y)$ בנקודה $(x_0,y_0,z_0)$: המישור
+    $z=z_0+f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)$, עם הנורמל $(f_x,f_y,-1)$. ליד הנקודה הוא הקירוב הלינארי של $f$. למשטח
+    גובה $F(x,y,z)=c$ המישור המשיק הוא המישור דרך הנקודה שמאונך ל-$\nabla F$.
+  lesson: '10.3'
+- id: total-differential
+  term: דיפרנציאל שלם
+  en: total differential
+  symbol: 'df=f_x\,dx+f_y\,dy'
+  definition: >-
+    החלק הלינארי של השינוי של $f$ כשכל המשתנים משתנים מעט: $df=f_x\,dx+f_y\,dy$ (ובשלושה משתנים גם $f_z\,dz$). משמש
+    להערכת שינוי קטן ולהערכת שגיאה: $|\Delta f|\approx|df|\le|f_x|\,|dx|+|f_y|\,|dy|$.
+  lesson: '10.3'

@@ -1,0 +1,257 @@
+# Lesson 13.1 — surface area and surface integrals of a function (enrichment, "if time permits").
+# Objectives (src/course.ts):
+#   OBJ-13.1-1  compute the surface area of a parametrised surface and of a graph
+#   OBJ-13.1-2  compute the surface integral of a scalar function
+#   OBJ-13.1-3  use surface integrals for the mass and the centre of mass of a shell
+# May use everything of chapters 1–12 (double integrals, polar coordinates). Spherical: θ from the z-axis, φ azimuth.
+# Keys recomputed in screens/tools/recompute-ch13.py.
+chapter: 13
+questions:
+  - id: Q-13.1-dS-def
+    type: mc
+    objectives: [OBJ-13.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $S$ משטח בפרמטריזציה $\vec r(u,v)$, $(u,v)\in D$. למה שטח הפנים הוא $\iint_D|\vec r_u\times\vec r_v|\,du\,dv$?
+    choices:
+      - text: 'מלבן קטן $\Delta u\times\Delta v$ הופך על המשטח בקירוב למקבילית עם הצלעות $\vec r_u\Delta u$ ו-$\vec r_v\Delta v$, ושטחה $|\vec r_u\times\vec r_v|\Delta u\Delta v$'
+        correct: true
+        feedback: >-
+          נכון. זה אותו רעיון כמו היעקוביאן בשיעור 11.3: מקדם שינוי השטח, הפעם ממישור הפרמטרים למשטח במרחב. אורך המכפלה
+          הווקטורית הוא שטח המקבילית.
+      - text: 'כי שטח המשטח שווה לשטח של תחום הפרמטרים $D$'
+        feedback: >-
+          אז לספירה ברדיוס 3 ($D=[0,\pi]\times[0,2\pi]$) היה יוצא $2\pi^2$, בלי תלות ברדיוס. המשטח נמתח ביחס ל-$D$, והמקדם
+          הוא $|\vec r_u\times\vec r_v|$.
+        misconception: MC-c13-dS-is-dudv
+      - text: 'כי $|\vec r_u\times\vec r_v|=|\vec r_u|+|\vec r_v|$ הוא ההיקף של התא'
+        feedback: >-
+          שטח של מקבילית אינו סכום אורכי הצלעות. הוא $|\vec r_u|\,|\vec r_v|\sin\alpha=|\vec r_u\times\vec r_v|$.
+        misconception: MC-c11-normal-not-cross
+
+  - id: Q-13.1-sphere-area
+    type: numeric
+    objectives: [OBJ-13.1-1]
+    level: basic
+    prompt: >-
+      חשבו את שטח הפנים של ספירה ברדיוס 3 בעזרת הפרמטריזציה הכדורית, $dS=R^2\sin\theta\,d\theta\,d\varphi$.
+    answer: 113.097335529233
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $36\pi=4\pi R^2$. $\int_0^{2\pi}\int_0^\pi9\sin\theta\,d\theta\,d\varphi=9\cdot2\cdot2\pi$.
+    wrongFeedback: >-
+      $\theta$ רצה מ-0 עד $\pi$ ו-$\varphi$ מ-0 עד $2\pi$; $\int_0^\pi\sin\theta\,d\theta=2$.
+    commonWrong:
+      - value: 177.652879219608
+        feedback: >-
+          $18\pi^2=9\cdot\pi\cdot2\pi$: בלי $\sin\theta$. ליד הקטבים מעגלי הרוחב קטנים, ו-$dS$ קטן איתם.
+        misconception: MC-c11-sphere-normal-no-sin
+      - value: 19.7392088021787
+        feedback: >-
+          $2\pi^2$ הוא השטח של תחום הפרמטרים $[0,\pi]\times[0,2\pi]$, לא של הספירה.
+        misconception: MC-c13-dS-is-dudv
+
+  - id: Q-13.1-mass-meaning
+    type: mc
+    objectives: [OBJ-13.1-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      קליפה דקה בצורת משטח $S$, עם צפיפות שטחית $\sigma(x,y,z)$ (מסה ליחידת שטח). איך מחשבים את המסה שלה?
+    choices:
+      - text: '$M=\iint_S\sigma\,dS$'
+        correct: true
+        feedback: 'נכון: כל חתיכה קטנה שוקלת $\sigma\,\Delta S$, וסוכמים.'
+      - text: '$M=\iiint\sigma\,dV$ על הגוף שהקליפה סוגרת'
+        feedback: >-
+          זה היה נכון לגוף מלא עם צפיפות נפחית. לקליפה אין נפח: המסה שלה מפוזרת על המשטח.
+        misconception: MC-c13-shell-vs-solid
+      - text: '$M=\iint_D\sigma\,du\,dv$ על תחום הפרמטרים'
+        feedback: 'חסר $|\vec r_u\times\vec r_v|$: שטח החתיכה על המשטח, לא בתחום הפרמטרים.'
+        misconception: MC-c13-dS-is-dudv
+
+  - id: Q-13.1-graph-plane
+    type: numeric
+    objectives: [OBJ-13.1-1]
+    level: mid
+    prompt: >-
+      חשבו את השטח של החלק של המישור $z=2x+2y$ שנמצא מעל עיגול היחידה $x^2+y^2\le1$.
+    answer: 9.42477796076938
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $3\pi$. $\sqrt{1+f_x^2+f_y^2}=\sqrt{1+4+4}=3$, קבוע, ולכן השטח הוא 3 כפול שטח העיגול.
+    wrongFeedback: >-
+      לגרף $dS=\sqrt{1+f_x^2+f_y^2}\,dA$. כאן הגורם קבוע.
+    commonWrong:
+      - value: 28.2743338823081
+        feedback: '$9\pi$: שכחתם את השורש. הגורם הוא האורך של $(-f_x,-f_y,1)=(-2,-2,1)$, כלומר 3.'
+        misconception: MC-c13-graph-no-sqrt
+      - value: 3.14159265358979
+        feedback: '$\pi$ הוא שטח הצל על המישור $xy$. המישור משופע, ולכן החלק שלו גדול יותר.'
+        misconception: MC-c13-surface-vs-shadow
+
+  - id: Q-13.1-cone
+    type: numeric
+    objectives: [OBJ-13.1-1]
+    level: mid
+    prompt: >-
+      חשבו את שטח המעטפת של החרוט $z=\sqrt{x^2+y^2}$, $0\le z\le2$. (בשיעור 11.2 מצאנו לפרמטריזציה
+      $(u\cos v,u\sin v,u)$ ש-$|\vec r_u\times\vec r_v|=u\sqrt2$.)
+    answer: 17.7715317526335
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $4\sqrt2\,\pi$. $\int_0^{2\pi}\int_0^2u\sqrt2\,du\,dv=\sqrt2\cdot2\cdot2\pi$. בדיקה מהגיאומטריה: שטח מעטפת של
+      חרוט הוא $\pi$ כפול רדיוס הבסיס (2) כפול אורך הקו היוצר ($2\sqrt2$).
+    wrongFeedback: >-
+      $u$ רץ מ-0 עד 2 (כי $z=u$) ו-$v$ מ-0 עד $2\pi$.
+    commonWrong:
+      - value: 12.5663706143592
+        feedback: >-
+          $4\pi$ הוא שטח הצל, העיגול ברדיוס 2. דפנות החרוט משופעות ב-$45^\circ$, ולכן כל חתיכה גדולה מהצל שלה פי $\sqrt2$.
+        misconception: MC-c13-surface-vs-shadow
+
+  - id: Q-13.1-hemisphere-z
+    type: numeric
+    objectives: [OBJ-13.1-2]
+    level: mid
+    prompt: >-
+      $S$ חצי הספירה העליון ברדיוס 1 ($z\ge0$). חשבו $\iint_Sz\,dS$.
+    answer: 3.14159265358979
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\pi$. $z=\cos\theta$, $dS=\sin\theta\,d\theta\,d\varphi$, ו-$\int_0^{2\pi}\int_0^{\pi/2}\cos\theta\sin\theta\,d\theta\,d\varphi=2\pi\cdot\frac12$.
+    wrongFeedback: >-
+      בחצי העליון $0\le\theta\le\frac{\pi}{2}$. הציבו $z=\cos\theta$ והכפילו ב-$dS$ של הספירה.
+    commonWrong:
+      - value: 6.28318530717959
+        feedback: '$2\pi=2\pi\int_0^{\pi/2}\cos\theta\,d\theta$: בלי $\sin\theta$ של $dS$.'
+        misconception: MC-c11-sphere-normal-no-sin
+
+  - id: Q-13.1-triangle
+    type: numeric
+    objectives: [OBJ-13.1-2]
+    level: mid
+    prompt: >-
+      $S$ החלק של המישור $x+y+z=1$ ברביע הראשון של המרחב ($x,y,z\ge0$). חשבו $\iint_Sx\,dS$.
+    answer: 0.288675134594813
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{\sqrt3}{6}$. כגרף $z=1-x-y$: $dS=\sqrt{1+1+1}\,dA=\sqrt3\,dA$, והצל הוא המשולש $x,y\ge0$, $x+y\le1$, שבו
+      $\iint x\,dA=\int_0^1x(1-x)\,dx=\frac16$.
+    wrongFeedback: >-
+      כתבו את המשטח כגרף מעל המשולש במישור $xy$, חשבו את הגורם $\sqrt{1+f_x^2+f_y^2}$, ואז אינטגרל כפול על המשולש.
+    commonWrong:
+      - value: 0.166666666666667
+        feedback: >-
+          $\frac16$ הוא האינטגרל על הצל. המישור משופע, ו-$dS=\sqrt3\,dA$.
+        misconception: MC-c13-surface-vs-shadow
+
+  - id: Q-13.1-symmetry
+    type: twotier
+    objectives: [OBJ-13.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $S$ הספירה ברדיוס 5 סביב הראשית. מה $\iint_Sx\,dS$?
+    choices:
+      - text: '0'
+        correct: true
+        feedback: 'נכון, בלי חישוב.'
+      - text: 'מספר חיובי'
+        feedback: >-
+          על חצי הספירה עם $x<0$ התרומות שליליות, ובדיוק מקזזות את אלה של $x>0$.
+        misconception: MC-c13-closed-surface-zero
+    reasons:
+      - text: 'הספירה סימטרית לשיקוף $x\to-x$, ו-$x$ מחליפה סימן בשיקוף, כך שהתרומות מתקזזות בזוגות'
+        correct: true
+        feedback: 'בדיוק. (לעומת זאת $\iint_Sx^2\,dS>0$: הפונקציה זוגית וחיובית.)'
+      - text: 'כל אינטגרל משטחי על משטח סגור הוא 0'
+        feedback: >-
+          $\iint_S1\,dS$ הוא שטח הפנים, $100\pi$, ואינו 0. כאן האפס בא מהסימטריה של $x$, לא מכך שהמשטח סגור.
+        misconception: MC-c13-closed-surface-zero
+      - text: '$x=0$ במרכז הספירה'
+        feedback: 'המרכז אינו על המשטח. האינטגרל סוכם את ערכי $x$ על הספירה עצמה.'
+        misconception: MC-c13-closed-surface-zero
+
+  - id: Q-13.1-rank
+    type: rank
+    objectives: [OBJ-13.1-2]
+    level: mid
+    prompt: >-
+      סדרו את שלבי החישוב של $\iint_Sf\,dS$.
+    help: 'גררו את השלבים לפי הסדר: הראשון למעלה.'
+    items:
+      - { id: param, label: 'בוחרים פרמטריזציה $\vec r(u,v)$ ואת תחום הפרמטרים $D$' }
+      - { id: cross, label: 'מחשבים $\vec r_u\times\vec r_v$ ואת האורך שלו' }
+      - { id: subst, label: 'מציבים את $\vec r(u,v)$ ב-$f$' }
+      - { id: integrate, label: 'מחשבים את האינטגרל הכפול $\iint_Df(\vec r(u,v))\,|\vec r_u\times\vec r_v|\,du\,dv$' }
+    order: [param, [cross, subst], integrate]
+    correctFeedback: 'נכון. את אורך הנורמל ואת ההצבה ב-$f$ אפשר לעשות בכל סדר; האינטגרל הכפול בא בסוף.'
+    wrongFeedback: 'בלי פרמטריזציה אין $\vec r_u$, $\vec r_v$ ואין מה להציב. האינטגרל הכפול הוא הצעד האחרון.'
+
+  - id: Q-13.1-mass
+    type: numeric
+    objectives: [OBJ-13.1-3]
+    level: mid
+    prompt: >-
+      קליפה כדורית ברדיוס 2 סביב הראשית, עם צפיפות שטחית $\sigma=z^2$. חשבו את המסה שלה.
+    answer: 67.0206432765823
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{64\pi}{3}$. $z^2=4\cos^2\theta$, $dS=4\sin\theta\,d\theta\,d\varphi$, ו-
+      $16\cdot2\pi\int_0^\pi\cos^2\theta\sin\theta\,d\theta=32\pi\cdot\frac23$.
+    wrongFeedback: >-
+      $dS=R^2\sin\theta\,d\theta\,d\varphi$ עם $R=2$, ו-$z=2\cos\theta$. האינטגרל ב-$\theta$ בהצבה $w=\cos\theta$.
+    commonWrong:
+      - value: 16.7551608191456
+        feedback: >-
+          $\frac{16\pi}{3}$ מתקבל עם $dS=\sin\theta\,d\theta\,d\varphi$, בלי $R^2=4$. על ספירה ברדיוס 2 כל תא גדול פי 4 מעל
+          ספירת היחידה.
+        misconception: MC-c13-dS-is-dudv
+
+  - id: Q-13.1-paraboloid
+    type: numeric
+    objectives: [OBJ-13.1-1]
+    level: exam
+    prompt: >-
+      חשבו את שטח הפנים של הפרבולואיד $z=x^2+y^2$ מתחת למישור $z=1$.
+    answer: 5.33041350026897
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{\pi}{6}\left(5\sqrt5-1\right)$. $\sqrt{1+4x^2+4y^2}=\sqrt{1+4r^2}$, ובקוטביות
+      $\int_0^{2\pi}\int_0^1\sqrt{1+4r^2}\,r\,dr\,d\theta=2\pi\cdot\frac{1}{12}\left(5^{3/2}-1\right)$ (הצבה $w=1+4r^2$).
+    wrongFeedback: >-
+      הגורם הוא $\sqrt{1+f_x^2+f_y^2}$; התחום הוא עיגול היחידה, ולכן קוטביות, עם $dA=r\,dr\,d\theta$.
+    commonWrong:
+      - value: 9.29247203268241
+        feedback: >-
+          זה $2\pi\int_0^1\sqrt{1+4r^2}\,dr$, בלי הגורם $r$ של הקוטביות. עם $r$ גם ההצבה $w=1+4r^2$ נעשית פשוטה.
+        misconception: MC-c11-polar-jacobian-one
+      - value: 3.14159265358979
+        feedback: '$\pi$ הוא שטח הצל, עיגול היחידה. הפרבולואיד מתעקם כלפי מעלה, ושטחו גדול יותר.'
+        misconception: MC-c13-surface-vs-shadow
+
+  - id: Q-13.1-centroid
+    type: numeric
+    objectives: [OBJ-13.1-3]
+    level: exam
+    prompt: >-
+      קליפה חצי-כדורית הומוגנית: חצי הספירה העליון ברדיוס 1. חשבו את $\bar z$ של מרכז המסה.
+    answer: 0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. השטח $2\pi$, ו-$\iint_Sz\,dS=\pi$ (חישבנו קודם), לכן $\bar z=\frac{\pi}{2\pi}=\frac12$. בגלל הסימטריה
+      $\bar x=\bar y=0$.
+    wrongFeedback: >-
+      $\bar z=\frac{\iint_Sz\,dS}{\iint_S1\,dS}$: הצפיפות קבועה ומתבטלת.
+    commonWrong:
+      - value: 0.375
+        feedback: >-
+          $\frac38$ הוא מרכז המסה של חצי **כדור מלא** (אינטגרל משולש, פרק 12). בקליפה כל המסה על הספירה, רחוקה יותר מהבסיס.
+        misconception: MC-c13-shell-vs-solid
+      - value: 0.636619772367581
+        feedback: >-
+          $\frac{2}{\pi}$ הוא מרכז המסה של תיל בצורת חצי מעגל (אינטגרל קווי). כאן המסה מפוזרת על משטח, ושטח רב יותר נמצא
+          קרוב לבסיס, שם מעגלי הרוחב גדולים.
+        misconception: MC-c13-shell-vs-solid

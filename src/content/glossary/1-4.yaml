@@ -1,0 +1,25 @@
+# Terms first defined in lesson 1.4 (the cross product).
+- id: cross-product
+  term: מכפלה וקטורית
+  en: cross product (vector product)
+  symbol: '\vec u\times\vec v'
+  definition: >-
+    הווקטור $\vec u\times\vec v=(u_2v_3-u_3v_2,\ u_3v_1-u_1v_3,\ u_1v_2-u_2v_1)$. הוא מאונך ל-$\vec u$ ול-$\vec v$, אורכו
+    $|\vec u||\vec v|\sin\theta$ (שטח המקבילית שהם פורשים), וכיוונו לפי כלל יד ימין. $\vec v\times\vec u=-\vec u\times\vec v$,
+    ו-$\vec u\times\vec v=\vec0$ בדיוק כשהם מקבילים.
+  lesson: '1.4'
+- id: right-hand-rule
+  term: כלל יד ימין
+  en: right-hand rule
+  definition: >-
+    הדרך לקבוע את הכיוון של $\vec u\times\vec v$: מכופפים את אצבעות יד ימין מ-$\vec u$ אל $\vec v$ (בזווית הקטנה מ-$\pi$),
+    והאגודל מצביע בכיוון המכפלה. כך $\hat\imath\times\hat\jmath=\hat k$, $\hat\jmath\times\hat k=\hat\imath$, $\hat k\times\hat\imath=\hat\jmath$.
+  lesson: '1.4'
+- id: torque
+  term: מומנט כוח
+  en: torque
+  symbol: '\vec\tau=\vec r\times\vec F'
+  definition: >-
+    כוח $\vec F$ שפועל בנקודה שמיקומה $\vec r$ ביחס לנקודת הציר יוצר מומנט $\vec\tau=\vec r\times\vec F$ (בסדר הזה). גודלו
+    $|\vec r||\vec F|\sin\theta$, וכיוונו ציר הסיבוב לפי כלל יד ימין. כוח לאורך $\vec r$ אינו יוצר מומנט.
+  lesson: '1.4'

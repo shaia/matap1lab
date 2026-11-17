@@ -1,0 +1,61 @@
+# Terms first defined in lesson 5.1 (velocity and the difference quotient).
+- id: average-velocity
+  term: מהירות ממוצעת
+  en: average velocity
+  symbol: '\frac{x(t_0+h)-x(t_0)}{h}'
+  definition: >-
+    ההעתק בפרק זמן חלקי אורך פרק הזמן: $\frac{x(t_0+h)-x(t_0)}{h}$. בגרף מקום-זמן זה השיפוע של המיתר בין שתי הנקודות.
+  lesson: '5.1'
+- id: difference-quotient
+  term: מנת הפרשים
+  en: difference quotient
+  symbol: '\frac{f(x+h)-f(x)}{h}'
+  definition: >-
+    המנה $\frac{f(x+h)-f(x)}{h}$ ל-$h\ne0$: השיפוע של המיתר בין $(x,f(x))$ ל-$(x+h,f(x+h))$. הנגזרת היא הגבול שלה
+    כש-$h\to0$.
+  lesson: '5.1'
+- id: derivative
+  term: נגזרת
+  en: derivative
+  symbol: "f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}"
+  definition: >-
+    $f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}$, כשהגבול קיים וסופי: השיפוע של המשיק לגרף בנקודה, קצב השינוי הרגעי של
+    $f$. הנגזרת של המקום לפי הזמן היא המהירות.
+  lesson: '5.1'
+- id: instantaneous-velocity
+  term: מהירות רגעית
+  en: instantaneous velocity
+  symbol: "v(t_0)=x'(t_0)"
+  definition: >-
+    הגבול של המהירות הממוצעת כשפרק הזמן שואף ל-0: $v(t_0)=\lim_{h\to0}\frac{x(t_0+h)-x(t_0)}{h}=x'(t_0)$, השיפוע של
+    המשיק לגרף המקום.
+  lesson: '5.1'
+- id: differentiable-one-variable
+  term: פונקציה גזירה
+  en: differentiable function (one variable)
+  definition: >-
+    $f$ גזירה בנקודה $x_0$ אם הגבול $\lim_{h\to0}\frac{f(x_0+h)-f(x_0)}{h}$ קיים וסופי; גזירה בקטע אם היא גזירה בכל
+    נקודה שלו. פונקציה גזירה בנקודה רציפה בה, אבל לא להפך.
+  lesson: '5.1'
+- id: one-sided-derivative
+  term: נגזרת חד-צדדית
+  en: one-sided derivative
+  symbol: "f'_+(x_0),\\ f'_-(x_0)"
+  definition: >-
+    הגבול של מנת ההפרשים רק מימין ($h\to0^+$) או רק משמאל ($h\to0^-$). $f$ גזירה ב-$x_0$ בדיוק כששתיהן קיימות, סופיות
+    ושוות.
+  lesson: '5.1'
+- id: corner-point
+  term: נקודת פינה
+  en: corner point
+  definition: >-
+    נקודה שבה $f$ רציפה ושתי הנגזרות החד-צדדיות קיימות אבל שונות, כמו $|x|$ ב-0 (שיפוע $-1$ משמאל ו-1 מימין). שם
+    $f$ אינה גזירה.
+  lesson: '5.1'
+- id: vertical-tangent
+  term: משיק אנכי
+  en: vertical tangent
+  definition: >-
+    כש-$f$ רציפה ב-$x_0$ ומנת ההפרשים שואפת ל-$\infty$ (או ל-$-\infty$), למשל $\sqrt[3]{x}$ ב-0. הגרף חלק, המשיק הוא
+    הישר האנכי $x=x_0$, ו-$f$ אינה גזירה שם.
+  lesson: '5.1'

@@ -1,0 +1,219 @@
+# Lesson 1.1 — vectors: arrow and coordinates (notes pp. 15–16, 18).
+# Objectives (src/course.ts):
+#   OBJ-1.1-1  represent a vector as an arrow and as coordinates; find the vector from A to B
+#   OBJ-1.1-2  add vectors, multiply by a scalar, and read both operations geometrically
+#   OBJ-1.1-3  compute the length of a vector and the unit vector in a given direction
+# Every number recomputed in screens/tools/recompute-ch1.py.
+chapter: 1
+questions:
+  - id: Q-1.1-ab
+    type: mc
+    objectives: [OBJ-1.1-1]
+    level: basic
+    prompt: >-
+      $A=(1,-2,3)$ ו-$B=(4,0,-1)$. מהו הווקטור $\vec{AB}$?
+    choices:
+      - text: '$(3,2,-4)$'
+        correct: true
+        feedback: >-
+          נכון. $\vec{AB}=B-A=(4-1,\ 0-(-2),\ -1-3)$. בדיקה: $A+(3,2,-4)=(4,0,-1)=B$.
+      - text: '$(-3,-2,4)$'
+        feedback: >-
+          זה $A-B=\vec{BA}$, הווקטור מ-$B$ ל-$A$: אותו אורך, כיוון הפוך. מ-$A$ ל-$B$: סוף פחות התחלה.
+        misconception: MC-c1-ab-order
+      - text: '$(5,-2,2)$'
+        feedback: >-
+          זה $A+B$. ההעתק מ-$A$ ל-$B$ הוא מה שצריך להוסיף ל-$A$ כדי להגיע ל-$B$, כלומר $B-A$.
+        misconception: MC-c1-ab-sum
+    hints: ['$A+\vec{AB}=B$.']
+
+  - id: Q-1.1-ab-length
+    type: numeric
+    objectives: [OBJ-1.1-3, OBJ-1.1-1]
+    level: basic
+    prompt: >-
+      $A=(1,-2,3)$ ו-$B=(4,0,-1)$. חשבו את המרחק $|\vec{AB}|$. (אפשר לכתוב ערך מדויק, כמו √7 או 3π/4.)
+    answer: 5.3851648071345
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec{AB}=(3,2,-4)$, ו-$|\vec{AB}|=\sqrt{9+4+16}=\sqrt{29}\approx5.39$.
+    wrongFeedback: >-
+      מצאו את $\vec{AB}=B-A$, ואז $|\vec v|=\sqrt{v_1^2+v_2^2+v_3^2}$.
+    commonWrong:
+      - value: 9
+        feedback: >-
+          $9=3+2+4$: חיברתם את הערכים המוחלטים של הרכיבים. האורך הוא שורש סכום הריבועים.
+        misconception: MC-c1-length-sum
+      - value: 29
+        feedback: >-
+          29 הוא $|\vec{AB}|^2$. חסר השורש.
+        misconception: MC-c1-length-no-root
+    hints: ['פיתגורס במרחב: $|\vec v|^2=v_1^2+v_2^2+v_3^2$.']
+
+  - id: Q-1.1-unit
+    type: numeric
+    objectives: [OBJ-1.1-3]
+    level: basic
+    prompt: >-
+      מצאו את וקטור היחידה $\hat u$ בכיוון $\vec w=(2,-1,2)$. מהו הרכיב השלישי (רכיב ה-$z$) שלו?
+    answer: 0.666666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $|\vec w|=\sqrt{4+1+4}=3$, ולכן $\hat u=\frac{\vec w}{3}=\left(\frac23,-\frac13,\frac23\right)$. בדיקה:
+      $\frac49+\frac19+\frac49=1$.
+    wrongFeedback: >-
+      $\hat u=\frac{\vec w}{|\vec w|}$. חשבו קודם את האורך.
+    commonWrong:
+      - value: 0.4
+        feedback: >-
+          חילקתם ב-$5=2+1+2$, סכום הערכים המוחלטים. האורך הוא $\sqrt{4+1+4}=3$.
+        misconception: MC-c1-length-sum
+      - value: 0.222222222222222
+        feedback: >-
+          חילקתם ב-$|\vec w|^2=9$. מחלקים באורך עצמו, 3; אחרת אורך התוצאה $\frac13$, לא 1.
+        misconception: MC-c1-length-no-root
+    hints: ['וקטור יחידה: אותו כיוון, אורך 1.']
+
+  - id: Q-1.1-diagonal
+    type: mc
+    objectives: [OBJ-1.1-2, OBJ-1.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $ABCD$ מקבילית, $\vec u=\vec{AB}$ ו-$\vec v=\vec{AD}$. מהו $\vec{BD}$?
+    choices:
+      - text: '$\vec v-\vec u$'
+        correct: true
+        feedback: >-
+          נכון. מ-$B$ חוזרים ל-$A$ ($-\vec u$) וממשיכים ל-$D$ ($\vec v$): $\vec{BD}=-\vec u+\vec v$.
+      - text: '$\vec u-\vec v$'
+        feedback: >-
+          זה $\vec{DB}$, האלכסון בכיוון ההפוך. $\vec{BD}=D-B$: סוף פחות התחלה.
+        misconception: MC-c1-ab-order
+      - text: '$\vec u+\vec v$'
+        feedback: >-
+          $\vec u+\vec v=\vec{AC}$ הוא האלכסון היוצא מ-$A$ (כלל המקבילית). האלכסון השני מחבר את קצות הצלעות, והוא הפרש.
+        misconception: MC-c1-diagonal-sum
+    hints: ['כתבו את $\vec{BD}$ כדרך: מ-$B$ ל-$A$ ומ-$A$ ל-$D$.']
+
+  - id: Q-1.1-scale-tf
+    type: twotier
+    objectives: [OBJ-1.1-2, OBJ-1.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: לכל וקטור $\vec v\ne\vec 0$, הווקטור $-2\vec v$ הוא באותו כיוון כמו $\vec v$ ואורכו $2|\vec v|$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. האורך אכן $2|\vec v|$, אבל הכיוון הפוך.'
+      - text: 'נכון'
+        feedback: >-
+          הסימן של הסקלר קובע את הכיוון: $-2\vec v$ מצביע הפוך ל-$\vec v$. למשל $-2(1,0,0)=(-2,0,0)$.
+        misconception: MC-c1-negative-scalar
+    reasons:
+      - text: '$|\lambda\vec v|=|\lambda|\,|\vec v|$, וסקלר שלילי הופך את הכיוון'
+        correct: true
+        feedback: 'בדיוק: האורך גדל פי $|-2|=2$, והחץ מסתובב בחצי סיבוב.'
+      - text: 'כפל בסקלר משנה רק אורך, לעולם לא כיוון'
+        feedback: >-
+          סקלר חיובי משנה רק אורך. סקלר שלילי גם הופך את הכיוון: $-\vec v+\vec v=\vec 0$.
+        misconception: MC-c1-negative-scalar
+      - text: 'האורך הוא $-2|\vec v|$, ולכן הטענה שגויה רק באורך'
+        feedback: >-
+          אורך הוא תמיד אי-שלילי: $|-2\vec v|=2|\vec v|$. מה שהמינוס משנה הוא הכיוון.
+        misconception: MC-c1-negative-scalar
+
+  - id: Q-1.1-section
+    type: numeric
+    objectives: [OBJ-1.1-2, OBJ-1.1-1]
+    level: mid
+    prompt: >-
+      $A=(3,0,6)$ ו-$B=(0,6,-3)$. הנקודה $P$ על הקטע $AB$ מחלקת אותו ביחס $1:2$ (כלומר $|AP|:|PB|=1:2$). מהו רכיב ה-$z$
+      של $P$?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec{AB}=(-3,6,-9)$ ו-$P=A+\frac13\vec{AB}=(2,2,3)$. בדיקה: $|AP|=\frac13|AB|$ ו-$|PB|=\frac23|AB|$.
+    wrongFeedback: >-
+      ביחס $1:2$ הקטע מתחלק לשלושה חלקים שווים, ו-$P$ במרחק חלק אחד מ-$A$: $P=A+t\vec{AB}$ עם $t$ מתאים.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          זה $A+\frac23\vec{AB}=(1,4,0)$, הנקודה שמחלקת ביחס $2:1$: היא קרובה ל-$B$. ביחס $1:2$ מ-$A$ לוקחים $\frac13$.
+        misconception: MC-c1-section-ratio
+      - value: 1.5
+        feedback: >-
+          זה רכיב ה-$z$ של אמצע הקטע, $\frac{6+(-3)}{2}$. יחס $1:2$ אינו חצי: $t=\frac13$.
+        misconception: MC-c1-section-ratio
+    hints: ['$P=A+t\,\vec{AB}$; איזה $t$ מתאים ליחס $1:2$?']
+
+  - id: Q-1.1-unit-tf
+    type: twotier
+    objectives: [OBJ-1.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $\left(\frac13,\frac13,\frac13\right)$ הוא וקטור יחידה.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. אורכו $\sqrt{3\cdot\frac19}=\frac{1}{\sqrt3}\approx0.577$.'
+      - text: 'נכון'
+        feedback: >-
+          סכום הרכיבים 1, אבל האורך הוא שורש סכום הריבועים: $\frac{1}{\sqrt3}$. וקטור היחידה בכיוון הזה הוא
+          $\frac{1}{\sqrt3}(1,1,1)$.
+        misconception: MC-c1-length-sum
+    reasons:
+      - text: 'האורך הוא $\sqrt{\frac19+\frac19+\frac19}=\frac{1}{\sqrt3}\ne1$'
+        correct: true
+        feedback: 'בדיוק. וקטור יחידה נבדק לפי $|\vec v|=1$, כלומר סכום **ריבועי** הרכיבים 1.'
+      - text: 'סכום הרכיבים הוא 1, וזה התנאי לווקטור יחידה'
+        feedback: >-
+          התנאי הוא $v_1^2+v_2^2+v_3^2=1$. למשל $(1,1,-1)$ סכום רכיביו 1 ואורכו $\sqrt3$.
+        misconception: MC-c1-length-sum
+      - text: 'כל רכיב קטן מ-1, ולכן זה וקטור יחידה'
+        feedback: >-
+          רכיבים קטנים מ-1 לא מבטיחים אורך 1: $(0.1,0,0)$ אורכו $0.1$. בודקים את סכום הריבועים.
+        misconception: MC-c1-length-sum
+
+  - id: Q-1.1-collinear
+    type: numeric
+    objectives: [OBJ-1.1-1, OBJ-1.1-2]
+    level: exam
+    prompt: >-
+      לאיזה ערך של $t$ הנקודות $A=(1,2,3)$, $B=(2,4,7)$ ו-$C=(4,8,t)$ נמצאות על ישר אחד?
+    answer: 15
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec{AB}=(1,2,4)$ ו-$\vec{AC}=(3,6,t-3)$. שלוש הנקודות על ישר אחד בדיוק כש-$\vec{AC}$ כפולה של $\vec{AB}$: משני
+      הרכיבים הראשונים $\vec{AC}=3\vec{AB}$, ולכן $t-3=12$.
+    wrongFeedback: >-
+      נקודות על ישר אחד: הווקטורים $\vec{AB}$ ו-$\vec{AC}$ מקבילים, כלומר אחד כפולה בסקלר של השני.
+    commonWrong:
+      - value: 14
+        feedback: >-
+          $C=2B$ נותן $t=14$: השוויתם וקטורי מקום. אבל ווקטורי המקום תלויים בראשית; מה שקובע הוא ההעתקים $\vec{AB}$ ו-$\vec{AC}$.
+          עם $t=14$: $\vec{AC}=(3,6,11)$, שאינו $3\vec{AB}=(3,6,12)$.
+        misconception: MC-c1-position-vs-displacement
+    hints: ['השוו את $\vec{AC}$ לכפולה של $\vec{AB}$.']
+
+  - id: Q-1.1-forces
+    type: numeric
+    objectives: [OBJ-1.1-2, OBJ-1.1-3]
+    level: exam
+    prompt: >-
+      על גוף פועלים שני כוחות, $\vec F_1=(3,4,0)$ ו-$\vec F_2=(1,-2,2)$ (בניוטון). איזה גודל צריך להיות לכוח שלישי
+      $\vec F_3$ כדי שהגוף יהיה בשיווי משקל ($\vec F_1+\vec F_2+\vec F_3=\vec 0$)? (אפשר לכתוב ערך מדויק, כמו √7 או 3π/4.)
+    answer: 4.89897948556636
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec F_3=-(\vec F_1+\vec F_2)=-(4,2,2)$, וגודלו $\sqrt{16+4+4}=\sqrt{24}=2\sqrt6\approx4.90$ ניוטון.
+    wrongFeedback: >-
+      $\vec F_3=-(\vec F_1+\vec F_2)$. חברו רכיב אחר רכיב, ואז חשבו אורך.
+    commonWrong:
+      - value: 8
+        feedback: >-
+          $8=|\vec F_1|+|\vec F_2|=5+3$: חיברתם גדלים. זה נכון רק לכוחות באותו כיוון; כאן הזווית ביניהם גורמת לקיזוז חלקי.
+        misconception: MC-c1-length-additive
+    hints: ['חברו את הכוחות כווקטורים, לא את הגדלים.']

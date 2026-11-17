@@ -1,0 +1,297 @@
+# Lesson 5.2 — tangent line, linear approximation and differentials (notes pp. 7–8).
+# Objectives (src/course.ts):
+#   OBJ-5.2-1  find the tangent line and use it as a linear approximation near the point
+#   OBJ-5.2-2  use the differential to estimate a small change of a function and an error
+#   OBJ-5.2-3  know the notations for the derivative and move between them
+# Every number is recomputed in screens/tools/checks_ch5.py.
+chapter: 5
+questions:
+  - id: Q-5.2-tangent-x2
+    type: expr
+    objectives: [OBJ-5.2-1]
+    level: basic
+    prompt: >-
+      (מהסיכומים, עמ׳ 7) כתבו את משוואת הישר המשיק לגרף של $f(x)=x^2$ בנקודה $x=3$, בצורה $y=\ldots$ (כתבו רק את אגף ימין,
+      במשתנה x).
+    answer: '6*x - 9'
+    answerTex: '$y=9+6(x-3)=6x-9$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. $f(3)=9$ ו-$f'(3)=6$, ולכן $y=9+6(x-3)=6x-9$. בדיקה: ב-$x=3$ הישר נותן 9.
+    wrongFeedback: >-
+      המשיק עובר ב-$(3,f(3))$ ושיפועו $f'(3)$: $y=f(3)+f'(3)(x-3)$.
+    commonWrong:
+      - expr: '6*x'
+        feedback: >-
+          לישר $y=6x$ יש השיפוע הנכון, אבל ב-$x=3$ הוא נותן 18 ולא 9: הוא לא עובר בנקודת ההשקה.
+        misconception: MC-c5-tangent-through-origin
+      - expr: '9 + 9*(x - 3)'
+        feedback: >-
+          לקחתם כשיפוע את $f(3)=9$. השיפוע הוא הנגזרת, $f'(3)=6$.
+        misconception: MC-c5-value-vs-derivative
+      - expr: '9 + 2*x*(x - 3)'
+        feedback: >-
+          כתבתם $f'(x)=2x$ במקום המספר $f'(3)=6$. יצאה פרבולה, לא ישר.
+        misconception: MC-c5-tangent-slope-not-number
+
+  - id: Q-5.2-sqrt-approx
+    type: numeric
+    objectives: [OBJ-5.2-1]
+    level: basic
+    prompt: >-
+      השתמשו בקירוב הלינארי של $f(x)=\sqrt x$ ליד $x=4$ כדי להעריך את $\sqrt{4.1}$. כתבו את הערך שהקירוב נותן.
+    answer: 2.025
+    tolerance: 0.00001
+    correctFeedback: >-
+      נכון. $f(4)=2$, $f'(x)=\frac{1}{2\sqrt x}$ ולכן $f'(4)=\frac14$; $\sqrt{4.1}\approx2+\frac14\cdot0.1=2.025$. הערך האמיתי
+      $2.0248\ldots$: הקירוב טוב כי 4.1 קרוב ל-4.
+    wrongFeedback: >-
+      $\sqrt{4+h}\approx f(4)+f'(4)h$ עם $h=0.1$.
+    commonWrong:
+      - value: 2.0248456731316584
+        feedback: >-
+          זה הערך האמיתי של $\sqrt{4.1}$ (ממחשבון). השאלה מבקשת את מה שהקירוב הלינארי נותן: $2+\frac14\cdot0.1$.
+      - value: 2.05
+        feedback: >-
+          לקחתם שיפוע $\frac12$: זה המקדם בכלל החזקה, אבל $f'(4)=\frac{1}{2\sqrt4}=\frac14$. הציבו את הנקודה בנגזרת.
+        misconception: MC-c5-tangent-slope-not-number
+
+  - id: Q-5.2-notes-75
+    type: numeric
+    objectives: [OBJ-5.2-3]
+    level: basic
+    prompt: >-
+      (מהסיכומים, עמ׳ 8) $y=f(x)=x^3$. חשבו את $\left.\frac{dy}{dx}\right|_{x=5}$.
+    answer: 75
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{dy}{dx}=3x^2$, וב-$x=5$: $75$. זה $f'(5)$, השיפוע; הגובה הוא $f(5)=125$. (בסיכומים כתוב "y = 75", וזו
+      טעות סימון: $y'(5)=75$.)
+    wrongFeedback: >-
+      $\left.\frac{dy}{dx}\right|_{x=5}$ פירושו: גוזרים, ואחר כך מציבים $x=5$.
+    commonWrong:
+      - value: 125
+        feedback: '125 הוא $f(5)=5^3$, הערך ולא הנגזרת.'
+        misconception: MC-c5-value-vs-derivative
+      - value: 0
+        feedback: >-
+          0 מתקבל אם מציבים 5 **לפני** הגזירה: $f(5)=125$ הוא קבוע, ונגזרתו 0. הסימון אומר לגזור ואז להציב.
+        misconception: MC-c5-evaluate-before-diff
+
+  - id: Q-5.2-notation-same
+    type: multi
+    objectives: [OBJ-5.2-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $y=f(x)$. אילו מהביטויים הבאים שווים ל-$f'(5)$ לכל פונקציה גזירה $f$? סמנו את כולם.
+    choices:
+      - text: '$\left.\frac{dy}{dx}\right|_{x=5}$'
+        correct: true
+        feedback: 'נכון. סימון לייבניץ, מוערך ב-$x=5$.'
+      - text: '$\left.\frac{df}{dx}\right|_{x=5}$'
+        correct: true
+        feedback: 'נכון. אותו סימון, עם שם הפונקציה במקום $y$.'
+      - text: '$\lim_{h\to0}\frac{f(5+h)-f(5)}{h}$'
+        correct: true
+        feedback: 'נכון. זו ההגדרה עצמה.'
+      - text: '$\frac{d}{dx}\big[f(5)\big]$'
+        feedback: >-
+          $f(5)$ הוא מספר קבוע, והנגזרת שלו 0 תמיד. קודם גוזרים, אחר כך מציבים.
+        misconception: MC-c5-evaluate-before-diff
+      - text: '$\frac{f(5)}{5}$'
+        feedback: >-
+          זה השיפוע של המיתר מהראשית אל $(5,f(5))$, לא של המשיק ב-5.
+        misconception: MC-c5-avg-vs-instant
+
+  - id: Q-5.2-approx-quality
+    type: mc
+    objectives: [OBJ-5.2-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      הקירוב הלינארי של $\sqrt x$ ליד $x=4$ הוא $L(x)=2+\frac14(x-4)$. לאיזה מהמספרים הבאים $L$ נותן את הקירוב **הכי
+      מדויק** לשורש?
+    choices:
+      - text: '$x=4.1$'
+        correct: true
+        feedback: >-
+          נכון. $L(4.1)=2.025$ ו-$\sqrt{4.1}\approx2.0248$: הפרש של כ-$0.00015$. ככל שמתרחקים מ-4 השגיאה גדלה.
+      - text: '$x=5$'
+        feedback: >-
+          $L(5)=2.25$ ו-$\sqrt5\approx2.236$: שגיאה של כ-$0.014$, פי 90 בערך מאשר ב-4.1.
+        misconception: MC-c5-linear-approx-everywhere
+      - text: '$x=9$'
+        feedback: >-
+          $L(9)=3.25$, אבל $\sqrt9=3$. רחוק מנקודת ההשקה הגרף מתעקם והישר כבר לא קרוב אליו.
+        misconception: MC-c5-linear-approx-everywhere
+      - text: 'לכולם אותו דיוק, כי המשיק הוא ישר אחד'
+        feedback: >-
+          המשיק "נצמד" לגרף רק ליד נקודת ההשקה. השגיאה תלויה במרחק מ-4.
+        misconception: MC-c5-linear-approx-everywhere
+
+  - id: Q-5.2-sphere
+    type: numeric
+    objectives: [OBJ-5.2-2]
+    level: mid
+    prompt: >-
+      הרדיוס של כדור נמדד: $r=10$ ס״מ, בשגיאה של עד $0.1$ ס״מ. העריכו בעזרת דיפרנציאל את השגיאה המקסימלית בנפח
+      $V=\frac43\pi r^3$ (בסמ״ק).
+    answer: 125.66370614359172
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון: $40\pi\approx125.7$ סמ״ק. $dV=4\pi r^2\,dr=4\pi\cdot100\cdot0.1$. זו שגיאה יחסית של $\frac{40\pi}{\frac43\pi\cdot1000}=3\%$,
+      פי שלושה מהשגיאה היחסית ברדיוס.
+    wrongFeedback: >-
+      $dV=V'(r)\,dr$ עם $V'(r)=4\pi r^2$, $r=10$ ו-$dr=0.1$.
+    commonWrong:
+      - value: 0.004188790204786391
+        feedback: >-
+          זה $\frac43\pi(0.1)^3$: הצבתם את השגיאה **במקום** $r$ בנוסחת הנפח. הדיפרנציאל הוא $V'(r)\,dr$, הנגזרת בנקודה
+          כפול השגיאה.
+        misconception: MC-c5-differential-is-exact
+      - value: 41.8879020478639
+        feedback: >-
+          זה $\frac43\pi r^2\,dr$: שכחתם את המקדם 3 שכלל החזקה מוריד, $(r^3)'=3r^2$.
+        misconception: MC-c5-relative-error-exponent
+
+  - id: Q-5.2-relative-error
+    type: numeric
+    objectives: [OBJ-5.2-2]
+    level: mid
+    prompt: >-
+      את הצלע של קובייה מודדים בשגיאה יחסית של $1\%$. בכמה אחוזים, בקירוב, עלולה לטעות הערכת הנפח $V=a^3$? (כתבו
+      מספר באחוזים, בלי הסימן %.)
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $dV=3a^2\,da$, ולכן $\frac{dV}{V}=3\frac{da}{a}=3\cdot1\%$.
+    wrongFeedback: >-
+      חלקו את $dV=3a^2\,da$ ב-$V=a^3$.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          השגיאה היחסית לא עוברת כמו שהיא: הנפח רגיש לצלע פי 3, כי $\frac{dV}{V}=3\frac{da}{a}$.
+        misconception: MC-c5-relative-error-exponent
+      - value: 0.0001
+        feedback: >-
+          זה $(1\%)^3$ באחוזים: העליתם את השגיאה בחזקה במקום להכפיל אותה במעריך.
+        misconception: MC-c5-relative-error-exponent
+
+  - id: Q-5.2-dy-vs-Dy
+    type: twotier
+    objectives: [OBJ-5.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      ל-$f(x)=x^2$ ב-$x=1$ עם $dx=0.1$: $dy=f'(1)\,dx=0.2$, ואילו $\Delta y=f(1.1)-f(1)=0.21$. נכון או לא נכון: יש
+      כאן טעות חישוב, כי $dy$ צריך להיות בדיוק השינוי של $f$.
+    choices:
+      - text: 'לא נכון: אין טעות'
+        correct: true
+        feedback: >-
+          נכון. $dy$ ו-$\Delta y$ הם שני דברים שונים, וההפרש ביניהם כאן $(dx)^2=0.01$.
+      - text: 'נכון: $dy$ חייב לצאת $0.21$'
+        feedback: >-
+          $dy$ הוא השינוי לאורך המשיק, לא לאורך הגרף. הוא רק **מעריך** את $\Delta y$.
+        misconception: MC-c5-differential-is-exact
+    reasons:
+      - text: '$dy$ הוא השינוי לאורך המשיק; $\Delta y-dy=(dx)^2$ קטן לעומת $dx$, אבל אינו 0'
+        correct: true
+        feedback: >-
+          בדיוק. $(1+dx)^2-1=2dx+(dx)^2$: החלק הלינארי $2dx$ הוא $dy$, והשארית $(dx)^2$ זניחה רק יחסית ל-$dx$.
+      - text: 'כי $dx=0.1$ גדול מדי; ל-$dx$ קטן מספיק $dy=\Delta y$ בדיוק'
+        feedback: >-
+          ל-$x^2$ ההפרש הוא $(dx)^2$, שאינו 0 לאף $dx\ne0$. הוא רק קטן הרבה יותר מ-$dx$.
+        misconception: MC-c5-differential-is-exact
+      - text: 'כי $f''(1)=1$, ולכן $dy=0.1$'
+        feedback: >-
+          $f'(x)=2x$, ולכן $f'(1)=2$ ו-$dy=0.2$. החישוב בשאלה נכון.
+        misconception: MC-c5-value-vs-derivative
+
+  - id: Q-5.2-leibniz-meaning
+    type: mc
+    objectives: [OBJ-5.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $s(t)$ הוא המקום (במטרים) של רכבת ברגע $t$ (בשניות), ונתון $\left.\frac{ds}{dt}\right|_{t=2}=3$. מה המשמעות?
+    choices:
+      - text: 'ברגע $t=2$ הרכבת נעה במהירות 3 מטר לשנייה'
+        correct: true
+        feedback: 'נכון. $\frac{ds}{dt}$ היא המהירות הרגעית, ויחידותיה מטר חלקי שנייה.'
+      - text: 'ברגע $t=2$ הרכבת נמצאת 3 מטר מהראשית'
+        feedback: 'זה $s(2)=3$, המקום. הנגזרת מודדת קצב שינוי.'
+        misconception: MC-c5-value-vs-derivative
+      - text: 'בשתי השניות הראשונות הרכבת עברה בממוצע 3 מטר בכל שנייה'
+        feedback: >-
+          זו מהירות ממוצעת, $\frac{s(2)-s(0)}{2}$. הנגזרת ב-$t=2$ מתארת את הרגע עצמו.
+        misconception: MC-c5-avg-vs-instant
+      - text: 'ברגע $t=2$ הרכבת עוברת 3 מטר כפול שנייה'
+        feedback: >-
+          ליחידה "מטר כפול שנייה" אין כאן משמעות. $\frac{ds}{dt}$ הוא גבול של $\frac{\Delta s}{\Delta t}$: מטר **חלקי** שנייה.
+        misconception: MC-c5-derivative-units
+
+  - id: Q-5.2-units
+    type: mc
+    objectives: [OBJ-5.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $V(t)$ הוא נפח המים (בליטרים) במיכל אחרי $t$ דקות. מה היחידות של $\frac{dV}{dt}$, ומה המשמעות של
+      $\frac{dV}{dt}<0$?
+    choices:
+      - text: 'ליטר לדקה; המיכל מתרוקן'
+        correct: true
+        feedback: 'נכון. $\frac{dV}{dt}$ הוא קצב השינוי של הנפח; שלילי פירושו שהנפח קטן.'
+      - text: 'ליטרים; במיכל יש כמות שלילית של מים'
+        feedback: >-
+          $\frac{dV}{dt}$ אינו הנפח אלא קצב השינוי שלו. נפח לא יכול להיות שלילי, הקצב כן.
+        misconception: MC-c5-value-vs-derivative
+      - text: 'ליטר כפול דקה; המיכל מתרוקן'
+        feedback: >-
+          הנגזרת היא גבול של $\frac{\Delta V}{\Delta t}$, ולכן יחידותיה ליטר **חלקי** דקה.
+        misconception: MC-c5-derivative-units
+
+  - id: Q-5.2-pendulum
+    type: numeric
+    objectives: [OBJ-5.2-2]
+    level: exam
+    prompt: >-
+      זמן המחזור של מטוטלת הוא $T=2\pi\sqrt{L/g}$. מאריכים את החוט $L$ ב-$1\%$. בכמה אחוזים, בקירוב, משתנה $T$? (כתבו
+      מספר באחוזים.)
+    answer: 0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $T=cL^{1/2}$ עם $c=\frac{2\pi}{\sqrt g}$, ולכן $dT=\frac12cL^{-1/2}dL$ ו-$\frac{dT}{T}=\frac12\frac{dL}{L}=0.5\%$.
+    wrongFeedback: >-
+      כתבו $T=cL^{1/2}$, חשבו $dT$, וחלקו ב-$T$.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          השגיאה היחסית מוכפלת במעריך: $T$ פרופורציוני ל-$L^{1/2}$, ולכן השינוי היחסי חצי.
+        misconception: MC-c5-relative-error-exponent
+      - value: 2
+        feedback: >-
+          חילקתם במעריך במקום להכפיל: $\frac{dT}{T}=\frac12\frac{dL}{L}$, לא $2\frac{dL}{L}$.
+        misconception: MC-c5-relative-error-exponent
+
+  - id: Q-5.2-tangent-again
+    type: numeric
+    objectives: [OBJ-5.2-1]
+    level: exam
+    prompt: >-
+      הישר המשיק לגרף של $f(x)=x^3-3x$ בנקודה $x=2$ חותך את הגרף בנקודה נוספת. מהו שיעור ה-$x$ שלה?
+    answer: -4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f(2)=2$ ו-$f'(2)=3\cdot4-3=9$, והמשיק $y=9x-16$. החיתוך: $x^3-3x=9x-16$, כלומר $x^3-12x+16=0$, וזה
+      $(x-2)^2(x+4)=0$. השורש הכפול $x=2$ הוא נקודת ההשקה, והנקודה הנוספת $x=-4$.
+    wrongFeedback: >-
+      מצאו את המשיק, השוו אותו ל-$f$, ופרקו לגורמים: $x=2$ חייב להיות שורש **כפול**.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          2 היא נקודת ההשקה עצמה. השאלה מבקשת את הנקודה הנוספת: חלקו את הפולינום ב-$(x-2)^2$.
+    hints: ['למה $x=2$ הוא שורש כפול של $f(x)$ פחות המשיק?']

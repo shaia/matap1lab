@@ -1,0 +1,129 @@
+# Chapter 13 review — surface integrals (enrichment, lessons 13.1–13.2), easy to hard.
+# Both lessons are touched; most questions reach back to chapters 11 (parametrised surfaces) and 12 (double integrals,
+# polar coordinates, moment of inertia). No divergence theorem. Each hint names the lesson to go back to.
+# Keys recomputed in screens/tools/recompute-ch13.py and with cas.py.
+chapter: 13
+questions:
+  - id: Q-13-review-01
+    type: numeric
+    objectives: [OBJ-13.1-1, OBJ-11.2-2]
+    level: basic
+    prompt: >-
+      חשבו את השטח של החלק של המישור $z=x+2y$ שנמצא מעל הריבוע $0\le x\le1$, $0\le y\le1$.
+    answer: 2.44948974278318
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\sqrt6$. כגרף: $\vec r_x\times\vec r_y=(-1,-2,1)$, שאורכו $\sqrt6$, קבוע, כפול שטח הריבוע 1.
+    wrongFeedback: >-
+      $dS=\sqrt{1+f_x^2+f_y^2}\,dA$ עם $f_x=1$, $f_y=2$.
+    commonWrong:
+      - value: 1
+        feedback: '1 הוא שטח הצל, הריבוע. המישור משופע ולכן גדול ממנו.'
+        misconception: MC-c13-surface-vs-shadow
+      - value: 6
+        feedback: '$1+1+4=6$ בלי השורש: הגורם הוא **אורך** הנורמל $(-1,-2,1)$.'
+        misconception: MC-c13-graph-no-sqrt
+    hints:
+      - 'חזרו לשיעור 11.2: הנורמל של גרף, ולשיעור 13.1: שטח של גרף.'
+
+  - id: Q-13-review-02
+    type: mc
+    objectives: [OBJ-13.2-1, OBJ-13.1-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $S$ משטח, $f$ פונקציה ו-$\vec F$ שדה. אם הופכים את כיוון הנורמל של $S$, מה קורה ל-$\iint_Sf\,dS$ ול-$\iint_S\vec F\cdot\hat n\,dS$?
+    choices:
+      - text: 'הראשון לא משתנה, השני מחליף סימן'
+        correct: true
+        feedback: >-
+          נכון. $dS$ הוא שטח, חיובי בכל כיוון; $\hat n$ הוא וקטור שמתהפך. כמו בעקומים: $\int_Cf\,ds$ לא תלוי בכיוון,
+          ו-$\int_C\vec F\cdot d\vec r$ מחליף סימן.
+      - text: 'שניהם מחליפים סימן'
+        feedback: 'באינטגרל של פונקציה אין נורמל בכלל: $dS=|\vec r_u\times\vec r_v|\,du\,dv$ כולל ערך מוחלט.'
+        misconception: MC-c11-reverse-scalar-sign
+      - text: 'שניהם לא משתנים'
+        feedback: 'השטף סופר מה שעובר בכיוון של $\hat n$; כשהכיוון מתהפך, גם הסימן.'
+        misconception: MC-c13-flux-orientation
+    hints:
+      - 'חזרו לשיעור 13.2: כיוון הנורמל, ולשיעור 11.4: אותה תופעה באינטגרלים קוויים.'
+
+  - id: Q-13-review-03
+    type: numeric
+    objectives: [OBJ-13.2-2, OBJ-11.2-2]
+    level: mid
+    prompt: >-
+      חשבו את השטף של השדה הקבוע $\vec F=(0,0,1)$ דרך חצי הספירה העליון ברדיוס 1, עם הנורמל החיצוני.
+    answer: 3.14159265358979
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\pi$. $\vec F\cdot\hat n=z=\cos\theta$, ו-$\int_0^{2\pi}\int_0^{\pi/2}\cos\theta\sin\theta\,d\theta\,d\varphi=\pi$. זה
+      שטח הצל, עיגול היחידה: כל מה שעולה דרך העיגול בבסיס יוצא דרך הכיפה.
+    wrongFeedback: >-
+      על ספירת היחידה $\hat n=(x,y,z)$, ולכן $\vec F\cdot\hat n=z$. הכפילו ב-$dS=\sin\theta\,d\theta\,d\varphi$.
+    commonWrong:
+      - value: 6.28318530717959
+        feedback: >-
+          $2\pi$ הוא שטח חצי הספירה, כלומר $|\vec F|$ כפול השטח. ליד קו המשווה השדה כמעט משיק לספירה ועובר בה מעט.
+        misconception: MC-c13-flux-magnitude
+    hints:
+      - 'חזרו לשיעור 13.2: שטף דרך ספירה, ולשיעור 11.2: הנורמל של הספירה.'
+
+  - id: Q-13-review-04
+    type: numeric
+    objectives: [OBJ-13.2-2, OBJ-13.2-1]
+    level: mid
+    prompt: >-
+      $S$ השפה של הגליל המלא $x^2+y^2\le1$, $0\le z\le2$: מעטפת, מכסה עליון ובסיס. חשבו את השטף של $\vec F=(x,y,z)$
+      החוצה דרך $S$ (שלושה חלקים).
+    answer: 18.8495559215388
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $6\pi$. מעטפת: $\vec F\cdot\hat n=x^2+y^2=1$, שטח $4\pi$. מכסה ($z=2$, $\hat n=\hat k$): $\vec F\cdot\hat n=2$,
+      שטח $\pi$, כלומר $2\pi$. בסיס ($z=0$, $\hat n=-\hat k$): $\vec F\cdot\hat n=-z=0$.
+    wrongFeedback: >-
+      חשבו כל חלק לחוד עם הנורמל החיצוני שלו: רדיאלי במעטפת, $\hat k$ במכסה, $-\hat k$ בבסיס.
+    hints:
+      - 'חזרו לשיעור 13.2: שטף דרך גליל, וחלוקה של משטח סגור לחלקים.'
+
+  - id: Q-13-review-05
+    type: numeric
+    objectives: [OBJ-13.1-3, OBJ-11.2-1]
+    level: mid
+    prompt: >-
+      קליפה בצורת החרוט $z=\sqrt{x^2+y^2}$, $0\le z\le1$, עם צפיפות שטחית $\sigma=z$. חשבו את המסה שלה.
+    answer: 2.96192195877224
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{2\sqrt2\,\pi}{3}$. עם $\vec r(u,v)=(u\cos v,u\sin v,u)$: $dS=u\sqrt2\,du\,dv$ ו-$\sigma=u$, ולכן
+      $\int_0^{2\pi}\int_0^1\sqrt2\,u^2\,du\,dv=\sqrt2\cdot\frac13\cdot2\pi$.
+    wrongFeedback: >-
+      פרמטרו את החרוט כמו בשיעור 11.2, חשבו $|\vec r_u\times\vec r_v|$, והציבו $z=u$.
+    commonWrong:
+      - value: 2.0943951023932
+        feedback: >-
+          $\frac{2\pi}{3}$ הוא האינטגרל על הצל ($dA=u\,du\,dv$). דפנות החרוט משופעות, ו-$dS=\sqrt2\,dA$.
+        misconception: MC-c13-surface-vs-shadow
+    hints:
+      - 'חזרו לשיעור 11.2: פרמטריזציה של חרוט, ולשיעור 13.1: מסה של קליפה.'
+
+  - id: Q-13-review-06
+    type: numeric
+    objectives: [OBJ-13.1-2, OBJ-12.7-3]
+    level: exam
+    prompt: >-
+      קליפה כדורית דקה ברדיוס 1 עם צפיפות שטחית $\sigma=1$. חשבו את מומנט ההתמד שלה סביב ציר $z$,
+      $I_z=\iint_S(x^2+y^2)\,dS$.
+    answer: 8.37758040957278
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{8\pi}{3}$. $x^2+y^2=\sin^2\theta$ ו-$dS=\sin\theta\,d\theta\,d\varphi$, ו-$2\pi\int_0^\pi\sin^3\theta\,d\theta=2\pi\cdot\frac43$.
+      בדיקה: עם המסה $M=4\pi$ זה $\frac23MR^2$, הנוסחה המוכרת לקליפה (לכדור מלא $\frac25MR^2$).
+    wrongFeedback: >-
+      המרחק בריבוע מציר $z$ הוא $x^2+y^2=\sin^2\theta$ על ספירת היחידה. $\int_0^\pi\sin^3\theta\,d\theta$ בהצבה $w=\cos\theta$.
+    commonWrong:
+      - value: 9.86960440108936
+        feedback: '$\pi^2=2\pi\int_0^\pi\sin^2\theta\,d\theta$: בלי $\sin\theta$ של $dS$.'
+        misconception: MC-c11-sphere-normal-no-sin
+    hints:
+      - 'חזרו לשיעור 13.1: אינטגרל משטחי על ספירה, ולשיעור 12.7: מומנט התמד.'

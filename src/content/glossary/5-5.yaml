@@ -1,0 +1,15 @@
+# Terms first defined in lesson 5.5 (the derivative table and its uses).
+- id: related-rates
+  term: קצבים קשורים
+  en: related rates
+  definition: >-
+    בעיה שבה כמה גדלים משתנים בזמן וקשורים במשוואה שנכונה בכל רגע. גוזרים את המשוואה לפי הזמן $t$ ומקבלים קשר בין
+    הנגזרות שלהם (הקצבים), ורק אחר כך מציבים את ערכי הרגע המבוקש.
+  lesson: '5.5'
+- id: local-extremum
+  term: נקודת קיצון מקומית
+  en: local extremum
+  definition: >-
+    $x_0$ היא נקודת מקסימום מקומי של $f$ אם $f(x)\le f(x_0)$ לכל $x$ קרוב מספיק ל-$x_0$ (מינימום מקומי: $\ge$). בנקודה
+    פנימית שבה $f$ גזירה, בקיצון מקומי $f'(x_0)=0$; ההפך אינו נכון ($x^3$ ב-0).
+  lesson: '5.5'

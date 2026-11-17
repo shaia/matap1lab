@@ -1,0 +1,304 @@
+# Lesson 6.3 — the expansions of the elementary functions.
+# Objectives (src/course.ts):
+#   OBJ-6.3-1  the Taylor series of exp, sin, cos, ln(1+x), the geometric series, arctan and (1+x)^a
+#   OBJ-6.3-2  new expansions from known ones: substitution, multiplication, differentiation, integration
+#   OBJ-6.3-3  limits by expansion; the leading term and the next one
+# Keys recomputed in screens/tools/recompute-ch6.py.
+chapter: 6
+questions:
+  - id: Q-6.3-cos-series
+    type: mc
+    objectives: [OBJ-6.3-1]
+    qualitative: true
+    level: basic
+    prompt: 'איזה מהטורים הבאים הוא טור טיילור של $\cos x$ סביב 0?'
+    choices:
+      - text: '$1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\dots$'
+        correct: true
+        feedback: >-
+          נכון. $\cos$ זוגית, ולכן רק חזקות זוגיות; הנגזרות ב-0 הן $1,0,-1,0,1,\dots$, והסימנים מתחלפים.
+      - text: '$1-\frac{x^2}{2}+\frac{x^4}{4}-\frac{x^6}{6}+\dots$'
+        feedback: 'המכנים הם עצרות: המקדם של $x^4$ הוא $\frac{\cos^{(4)}(0)}{4!}=\frac{1}{24}$, לא $\frac14$.'
+        misconception: MC-c6-forget-factorial
+      - text: '$x-\frac{x^3}{3!}+\frac{x^5}{5!}-\dots$'
+        feedback: >-
+          זה הטור של $\sin x$. בדקו ב-$x=0$: $\cos0=1$, ולכן הטור של $\cos$ חייב להתחיל ב-1.
+        misconception: MC-c6-sin-cos-swap
+      - text: '$1+\frac{x^2}{2!}+\frac{x^4}{4!}+\dots$'
+        feedback: >-
+          בלי הסימנים המתחלפים זה הטור של $\cosh x$. הנגזרת השנייה של $\cos$ היא $-\cos$, ולכן $\cos''(0)=-1$.
+        misconception: MC-c6-alternating-sign-lost
+    hints: ['$\cos0=1$, ו-$\cos$ פונקציה זוגית.']
+
+  - id: Q-6.3-ln-coeff
+    type: numeric
+    objectives: [OBJ-6.3-1]
+    level: basic
+    prompt: 'מהו המקדם של $x^4$ בטור טיילור של $\ln(1+x)$ סביב 0?'
+    answer: -0.25
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\dots$: המקדם של $x^k$ הוא $\frac{(-1)^{k+1}}{k}$, בלי עצרת.
+    wrongFeedback: >-
+      $\ln(1+x)$ היא האינטגרל של $\frac{1}{1+x}=1-x+x^2-x^3+\dots$; בצעו אינטגרציה איבר-איבר.
+    commonWrong:
+      - value: -0.0416666666667
+        feedback: >-
+          זה $\frac{-1}{24}$, עם $4!$ במכנה. בטור של הלוגריתם המכנה הוא $k$, לא $k!$: $f^{(4)}(0)=-3!$, ו-$\frac{-3!}{4!}=-\frac14$.
+        misconception: MC-c6-ln-factorial
+      - value: 0.25
+        feedback: 'הסימנים מתחלפים והאיבר הראשון חיובי, ולכן המקדם של החזקה הזוגית $x^4$ שלילי.'
+        misconception: MC-c6-alternating-sign-lost
+    hints: ['כתבו את ארבעת האיברים הראשונים של הטור.']
+
+  - id: Q-6.3-binom
+    type: expr
+    objectives: [OBJ-6.3-1]
+    level: mid
+    prompt: >-
+      כתבו את פולינום טיילור מסדר 2 סביב 0 של $f(x)=\frac{1}{\sqrt{1+x}}=(1+x)^{-1/2}$, בעזרת הטור הבינומי
+      $(1+x)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}{2!}x^2+\dots$
+    answer: '1 - x/2 + 3*x^2/8'
+    answerTex: '$T_2(x)=1-\frac{x}{2}+\frac{3}{8}x^2$'
+    variables: [x]
+    domain: [-0.5, 0.5]
+    correctFeedback: >-
+      נכון. $\alpha=-\frac12$: $\alpha x=-\frac x2$, ו-$\frac{\alpha(\alpha-1)}{2}=\frac{(-\frac12)(-\frac32)}{2}=\frac38$.
+    wrongFeedback: 'הציבו $\alpha=-\frac12$ בנוסחה, בזהירות עם הסימנים: $\alpha-1=-\frac32$.'
+    commonWrong:
+      - expr: '1 - x/2 + 3*x^2/4'
+        feedback: 'המקדם הוא $\frac{\alpha(\alpha-1)}{2!}$: שכחתם לחלק ב-$2!$.'
+        misconception: MC-c6-forget-factorial
+      - expr: '1 + x/2 - x^2/8'
+        feedback: >-
+          זה הפיתוח של $\sqrt{1+x}$, עם $\alpha=\frac12$. כאן השורש במכנה, ולכן $\alpha=-\frac12$.
+        misconception: MC-c6-binom-alpha
+    hints: ['מהו $\alpha$ כש-$f=(1+x)^{-1/2}$?']
+
+  - id: Q-6.3-gauss
+    type: expr
+    objectives: [OBJ-6.3-2]
+    level: basic
+    prompt: >-
+      כתבו את פולינום טיילור מסדר 6 סביב 0 של $e^{-x^2}$, בהצבה בטור של $e^u$.
+    answer: '1 - x^2 + x^4/2 - x^6/6'
+    answerTex: '$1-x^2+\frac{x^4}{2}-\frac{x^6}{6}$'
+    variables: [x]
+    domain: [-1, 1]
+    correctFeedback: >-
+      נכון. $e^u=1+u+\frac{u^2}{2!}+\frac{u^3}{3!}+\dots$ עם $u=-x^2$: $u^2=x^4$ ו-$u^3=-x^6$.
+    wrongFeedback: 'מציבים $u=-x^2$ באיברים $1,u,\frac{u^2}{2},\frac{u^3}{6}$, שנותנים את החזקות $0,2,4,6$.'
+    commonWrong:
+      - expr: '1 - x^2 + x^4/24 - x^6/720'
+        feedback: >-
+          לקחתם את המקדם של $x^4$ בטור של $e^x$, כאילו מתאימים חזקה לחזקה. ההצבה פועלת על **האיברים**: $x^4$ בא מ-$\frac{u^2}{2!}$,
+          ולכן מקדמו $\frac12$.
+        misconception: MC-c6-subst-match-powers
+    hints: ['איזה איבר של $e^u$ נותן את $x^4$ כש-$u=-x^2$?']
+
+  - id: Q-6.3-exp-sin
+    type: numeric
+    objectives: [OBJ-6.3-2]
+    level: mid
+    prompt: 'מהו המקדם של $x^3$ בטור טיילור סביב 0 של $e^x\sin x$?'
+    answer: 0.333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\left(1+x+\frac{x^2}{2}+\dots\right)\left(x-\frac{x^3}{6}+\dots\right)$: החזקה $x^3$ באה מ-$\frac{x^2}{2}\cdot x$ ומ-$1\cdot\left(-\frac{x^3}{6}\right)$,
+      יחד $\frac12-\frac16=\frac13$.
+    wrongFeedback: 'אספו את כל הזוגות של איבר מכל טור שהחזקות שלהם מסתכמות ב-3.'
+    commonWrong:
+      - value: -0.0277777777778
+        feedback: >-
+          זה $\frac16\cdot\left(-\frac16\right)$: כפלתם רק את המקדמים של $x^3$ בשני הטורים. במכפלת טורים $x^3$ מתקבל מכל זוג
+          חזקות שסכומן 3.
+        misconception: MC-c6-product-termwise
+      - value: 0.5
+        feedback: 'שכחתם את הזוג $1\cdot\left(-\frac{x^3}{6}\right)$. צריך את כל הזוגות שסכום החזקות בהם 3.'
+        misconception: MC-c6-product-termwise
+    hints: ['$x^3=x^2\cdot x=x^0\cdot x^3$: אילו מהזוגות האלה קיימים?']
+
+  - id: Q-6.3-diff-geom
+    type: twotier
+    objectives: [OBJ-6.3-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא: ל-$|x|<1$, $\frac{1}{(1-x)^2}=1+2x+3x^2+4x^3+\dots$
+    choices:
+      - text: נכון
+        correct: true
+        feedback: >-
+          נכון. $\frac{1}{(1-x)^2}$ היא הנגזרת של $\frac{1}{1-x}=1+x+x^2+x^3+\dots$, ובתחום ההתכנסות מותר לגזור איבר-איבר.
+      - text: לא נכון
+        feedback: >-
+          גזרו את הטור ההנדסי איבר-איבר: $\left(x^k\right)'=kx^{k-1}$ נותן בדיוק $1+2x+3x^2+\dots$. ובדיקה: ב-$x=0$ שני הצדדים 1.
+        misconception: MC-c6-series-ops-forbidden
+    reasons:
+      - text: 'זו הנגזרת של הטור ההנדסי, וגזירה איבר-איבר מותרת בתוך תחום ההתכנסות'
+        correct: true
+        feedback: 'בדיוק. כך מקבלים טורים חדשים בלי לחשב אף נגזרת מסדר גבוה.'
+      - text: 'כי מעלים את הטור ההנדסי בריבוע איבר-איבר: $(1+x+x^2)^2\to1+x^2+x^4$'
+        feedback: >-
+          ריבוע של טור אינו ריבוע של כל איבר: $(1+x+x^2+\dots)^2$ מכיל את כל המכפלות $x^ix^j$, ואם אוספים אותן מקבלים
+          $1+2x+3x^2+\dots$, אותה תשובה בדרך ארוכה יותר.
+        misconception: MC-c6-product-termwise
+      - text: 'אין דרך לדעת בלי לחשב את כל הנגזרות של $\frac{1}{(1-x)^2}$ ב-0'
+        feedback: >-
+          אפשר, אבל אין צורך: גזירה, אינטגרציה, הצבה וכפל של טורים ידועים נותנים את טור טיילור עצמו, כי טור החזקות
+          של פונקציה יחיד.
+        misconception: MC-c6-series-ops-forbidden
+    hints: ['מה הנגזרת של $\frac{1}{1-x}$?']
+
+  - id: Q-6.3-arctan
+    type: mc
+    objectives: [OBJ-6.3-1, OBJ-6.3-2]
+    level: mid
+    prompt: >-
+      $\arctan x=\int_0^x\frac{dt}{1+t^2}$. בעזרת הטור ההנדסי עם $-t^2$, מהו טור טיילור של $\arctan x$ סביב 0?
+    choices:
+      - text: '$x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\dots$'
+        correct: true
+        feedback: >-
+          נכון. $\frac{1}{1+t^2}=1-t^2+t^4-\dots$, ואינטגרציה איבר-איבר מ-0 עד $x$ נותנת מכנים אי-זוגיים, בלי עצרות.
+      - text: '$x-\frac{x^3}{3!}+\frac{x^5}{5!}-\dots$'
+        feedback: >-
+          זה הטור של $\sin x$. אינטגרציה של $t^{2k}$ נותנת $\frac{x^{2k+1}}{2k+1}$: המכנה הוא החזקה, לא העצרת שלה.
+        misconception: MC-c6-arctan-factorials
+      - text: '$1-x^2+x^4-x^6+\dots$'
+        feedback: 'זה הטור של $\frac{1}{1+x^2}$, הנגזרת. עוד צריך לבצע אינטגרציה איבר-איבר.'
+        misconception: MC-c6-series-ops-forbidden
+      - text: '$x+\frac{x^3}{3}+\frac{x^5}{5}+\dots$'
+        feedback: >-
+          ההצבה היא $u=-t^2$, ולכן $\frac{1}{1-u}=1+u+u^2+\dots=1-t^2+t^4-\dots$: הסימנים מתחלפים.
+        misconception: MC-c6-alternating-sign-lost
+    hints: ['$\frac{1}{1+t^2}=\frac{1}{1-(-t^2)}$.']
+
+  - id: Q-6.3-deriv-from-series
+    type: numeric
+    objectives: [OBJ-6.3-2]
+    level: mid
+    prompt: 'תהי $f(x)=e^{x^2}$. חשבו את $f^{(4)}(0)$ בעזרת טור טיילור, בלי לגזור ארבע פעמים.'
+    answer: 12
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $e^{x^2}=1+x^2+\frac{x^4}{2}+\dots$, והמקדם של $x^4$ הוא $\frac{f^{(4)}(0)}{4!}$. לכן
+      $f^{(4)}(0)=4!\cdot\frac12=12$.
+    wrongFeedback: 'מצאו את המקדם $a_4$ של $x^4$ בטור, וזכרו ש-$a_4=\frac{f^{(4)}(0)}{4!}$.'
+    commonWrong:
+      - value: 0.5
+        feedback: 'זה המקדם $a_4$ עצמו. הנגזרת היא $4!\cdot a_4$.'
+        misconception: MC-c6-coeff-is-derivative
+      - value: 1
+        feedback: >-
+          לקחתם $\frac{4!}{4!}$: המקדם של $x^4$ בטור של $e^{x^2}$ בא מ-$\frac{u^2}{2!}$ עם $u=x^2$, ולכן הוא $\frac12$ ולא
+          $\frac{1}{4!}$.
+        misconception: MC-c6-subst-match-powers
+    hints: ['הציבו $u=x^2$ בטור של $e^u$.']
+
+  - id: Q-6.3-lim-cos
+    type: numeric
+    objectives: [OBJ-6.3-3]
+    level: basic
+    prompt: 'חשבו בעזרת טור טיילור: $\lim_{x\to0}\frac{1-\cos x}{x^2}$.'
+    answer: 0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $1-\cos x=\frac{x^2}{2}-\frac{x^4}{24}+\dots$, ולכן המנה $\frac12-\frac{x^2}{24}+\dots\to\frac12$.
+    wrongFeedback: 'הציבו $\cos x=1-\frac{x^2}{2}+\dots$ במונה, צמצמו, ושאפו ל-0.'
+    commonWrong:
+      - value: 1
+        feedback: 'זה מתקבל מ-$\cos x\approx1-x^2$: המקדם של $x^2$ הוא $\frac{1}{2!}$.'
+        misconception: MC-c6-forget-factorial
+      - value: 0
+        feedback: >-
+          עצרתם באיבר הראשון, $\cos x\approx1$, וקיבלתם $\frac{0}{x^2}$. צריך את האיבר המוביל של המונה, $\frac{x^2}{2}$.
+        misconception: MC-c6-truncate-too-early
+    hints: ['מהו האיבר המוביל של $1-\cos x$?']
+
+  - id: Q-6.3-lim-sin
+    type: numeric
+    objectives: [OBJ-6.3-3]
+    level: mid
+    prompt: 'חשבו: $\lim_{x\to0}\frac{x-\sin x}{x^3}$.'
+    answer: 0.166666666667
+    tolerance: 0.001
+    correctFeedback: 'נכון. $x-\sin x=\frac{x^3}{6}-\frac{x^5}{120}+\dots$, ולכן הגבול $\frac16$.'
+    wrongFeedback: 'פתחו את $\sin x$ עד החזקה השלישית; החזקה הראשונה מתבטלת.'
+    commonWrong:
+      - value: 0
+        feedback: >-
+          מ-$\sin x\approx x$ מתקבל מונה 0, אבל זה רק אומר שהאיבר המוביל רחוק יותר. פתחו עד שהמונה אינו אפס: עד $x^3$.
+        misconception: MC-c6-truncate-too-early
+      - value: -0.166666666667
+        feedback: '$\sin x=x-\frac{x^3}{6}+\dots$, ולכן $x-\sin x=+\frac{x^3}{6}$. מינוס כפול מינוס.'
+        misconception: MC-c6-alternating-sign-lost
+    hints: ['המכנה $x^3$ אומר עד איזו חזקה לפתח.']
+
+  - id: Q-6.3-leading
+    type: mc
+    objectives: [OBJ-6.3-3]
+    qualitative: true
+    level: mid
+    prompt: 'ליד $x=0$, למה דומה $\sin x-x$?'
+    choices:
+      - text: '$-\frac{x^3}{6}$: האיבר המוביל, ממעלה 3'
+        correct: true
+        feedback: >-
+          נכון. $\sin x-x=-\frac{x^3}{6}+\frac{x^5}{120}-\dots$, וכש-$x\to0$ האיבר הראשון שונה מאפס שולט: היחס בין הפונקציה
+          לבינו שואף ל-1.
+      - text: 'לאפס, כי $\sin x\approx x$'
+        feedback: >-
+          $\sin x\approx x$ הוא קירוב מסדר ראשון, והוא אומר רק שההפרש קטן מ-$x$. כדי לדעת **כמה** קטן מפתחים הלאה: ההפרש
+          מתנהג כמו $-\frac{x^3}{6}$, לא כמו 0.
+        misconception: MC-c6-truncate-too-early
+      - text: '$\frac{x^3}{6}$'
+        feedback: 'הסימן: $\sin x=x-\frac{x^3}{6}+\dots$, ולכן $\sin x-x$ מתחיל ב-$-\frac{x^3}{6}$; ל-$x>0$ קטן $\sin x<x$.'
+        misconception: MC-c6-alternating-sign-lost
+      - text: '$-\frac{x^2}{2}$'
+        feedback: '$\sin$ אי-זוגית, ולכן בטור שלה אין חזקות זוגיות. $-\frac{x^2}{2}$ הוא האיבר המוביל של $\cos x-1$.'
+        misconception: MC-c6-sin-cos-swap
+    hints: ['כתבו שני איברים של $\sin x$.']
+
+  - id: Q-6.3-lim-exam
+    type: numeric
+    objectives: [OBJ-6.3-3]
+    level: exam
+    prompt: 'חשבו: $\lim_{x\to0}\frac{e^{x^2}-\cos x-\frac32x^2}{x^4}$.'
+    answer: 0.458333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{11}{24}$. $e^{x^2}=1+x^2+\frac{x^4}{2}+\dots$ ו-$\cos x=1-\frac{x^2}{2}+\frac{x^4}{24}-\dots$, ולכן המונה
+      $\left(\frac12-\frac1{24}\right)x^4+\dots=\frac{11}{24}x^4+\dots$
+    wrongFeedback: 'פתחו את שתי הפונקציות עד $x^4$ (כולל), החסירו ובדקו שהאיברים עד $x^2$ מתבטלים.'
+    commonWrong:
+      - value: 0.541666666667
+        feedback: 'זה $\frac{13}{24}$: המקדם של $x^4$ ב-$\cos x$ הוא $+\frac{1}{24}$, ובחיסור הוא נותן $-\frac{1}{24}$.'
+        misconception: MC-c6-alternating-sign-lost
+      - value: 0.5
+        feedback: 'עצרתם את $\cos x$ ב-$x^2$. במכנה $x^4$, ולכן צריך את כל האיברים עד $x^4$ בשתי הפונקציות.'
+        misconception: MC-c6-truncate-too-early
+    hints: ['כמה איברים צריך מכל טור כשהמכנה $x^4$?']
+
+  - id: Q-6.3-two-terms
+    type: expr
+    objectives: [OBJ-6.3-3]
+    level: exam
+    prompt: >-
+      מצאו את שני האיברים הראשונים שאינם אפס בטור טיילור סביב 0 של $f(x)=e^x-1-\sin x$. כתבו את סכומם.
+    answer: 'x^2/2 + x^3/3'
+    answerTex: '$\frac{x^2}{2}+\frac{x^3}{3}$'
+    variables: [x]
+    domain: [-1, 1]
+    correctFeedback: >-
+      נכון. $e^x-1=x+\frac{x^2}{2}+\frac{x^3}{6}+\dots$ ו-$\sin x=x-\frac{x^3}{6}+\dots$; ההפרש
+      $\frac{x^2}{2}+\left(\frac16+\frac16\right)x^3+\dots$. ליד 0 הגרף דומה לפרבולה $\frac{x^2}{2}$, מוטה מעט על ידי $\frac{x^3}{3}$.
+    wrongFeedback: 'פתחו את שתי הפונקציות עד $x^3$ והחסירו.'
+    commonWrong:
+      - expr: 'x^2/2 + x^3/6'
+        feedback: 'השמטתם את $-\frac{x^3}{6}$ של הסינוס. החיסור שלו מוסיף עוד $\frac{x^3}{6}$.'
+        misconception: MC-c6-truncate-too-early
+      - expr: 'x^2/2'
+        feedback: 'זה רק האיבר המוביל. השאלה מבקשת גם את האיבר שאחריו, ממעלה 3.'
+        misconception: MC-c6-truncate-too-early
+    hints: ['האיברים ממעלה 1 מתבטלים. מה נשאר ממעלה 2 ו-3?']

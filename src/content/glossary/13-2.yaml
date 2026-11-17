@@ -1,0 +1,17 @@
+# Terms first defined in lesson 13.2 (flux of a vector field).
+- id: oriented-surface
+  term: משטח מכוון
+  en: oriented surface
+  symbol: '\hat n'
+  definition: >-
+    משטח עם בחירה רציפה של כיוון לנורמל היחידה $\hat n$ בכל נקודה: למשל "החוצה" בספירה, או "למעלה" בגרף. בפרמטריזציה
+    הכיוון הוא של $\vec r_u\times\vec r_v$, והחלפת הסדר הופכת אותו.
+  lesson: '13.2'
+- id: flux
+  term: שטף
+  en: flux
+  symbol: '\iint_S\vec F\cdot\hat n\,dS=\iint_D\vec F(\vec r(u,v))\cdot(\vec r_u\times\vec r_v)\,du\,dv'
+  definition: >-
+    האינטגרל המשטחי של הרכיב הנורמלי של שדה: $\iint_S\vec F\cdot\hat n\,dS$. כש-$\vec F$ שדה מהירות של זורם, זה הנפח שעובר
+    דרך המשטח ביחידת זמן, בכיוון של $\hat n$. מחליף סימן כשהופכים את כיוון הנורמל.
+  lesson: '13.2'

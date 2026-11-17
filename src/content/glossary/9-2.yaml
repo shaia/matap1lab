@@ -1,0 +1,28 @@
+# Terms first defined in lesson 9.2 (the velocity vector and the tangent line).
+- id: velocity-vector
+  term: וקטור מהירות
+  en: velocity vector
+  symbol: '\vec v(t)=\vec r\,''(t)'
+  definition: >-
+    הנגזרת של וקטור המקום: $\vec v(t)=\lim_{h\to0}\frac{\vec r(t+h)-\vec r(t)}{h}=(x'(t),y'(t),z'(t))$, נגזרת לפי
+    רכיבים. כשהוא שונה מאפס הוא משיק לעקום ומצביע בכיוון התנועה, והישר המשיק הוא $\vec r(t_0)+s\,\vec v(t_0)$.
+  reject: []
+  lesson: '9.2'
+- id: speed
+  term: גודל המהירות
+  en: speed
+  symbol: '|\vec v(t)|'
+  definition: >-
+    האורך של וקטור המהירות, $|\vec v|=\sqrt{x'^2+y'^2+z'^2}$: כמה מהר הנקודה נעה, בלי הכיוון. זה הקצב שבו גדל
+    אורך הדרך, $\frac{ds}{dt}=|\vec v|$.
+  reject: []
+  lesson: '9.2'
+- id: acceleration-vector
+  term: וקטור תאוצה
+  en: acceleration vector
+  symbol: '\vec a(t)=\vec v\,''(t)=\vec r\,''''(t)'
+  definition: >-
+    הנגזרת של וקטור המהירות, $\vec a=(x'',y'',z'')$. לפי החוק השני של ניוטון $\vec a=\frac{\vec F}{m}$. הוא אינו
+    אפס גם כשרק כיוון המהירות משתנה, כמו בתנועה מעגלית.
+  reject: []
+  lesson: '9.2'

@@ -1,0 +1,284 @@
+# Lesson 12.4 — triple integrals (notes pp. 82–84).
+# Objectives (src/course.ts):
+#   OBJ-12.4-1  compute a triple integral over a box and over a solid between two surfaces
+#   OBJ-12.4-2  describe a solid in space and choose the order of integration
+#   OBJ-12.4-3  compute the volume and the mass of a solid with a triple integral
+# Recomputed with sympy (screens/tools/recompute-ch12.py). From the notes: the box of p. 82 (270), and the solid of
+# pp. 83–84 under the plane 25x + 32y + 20z = 160 over the triangle (0,0), (4,0), (0,5): volume 110/3 (the notes stop
+# early, and one line writes the bound 5 - 4x/5 for 5 - 5x/4), and the integral of x + y + z over it (520/3).
+chapter: 12
+questions:
+  - id: Q-12.4-box
+    type: numeric
+    objectives: [OBJ-12.4-1]
+    level: basic
+    prompt: >-
+      חשבו את $\iiint_B\left(x^2y+xz\right)dV$, כש-$B$ התיבה $0\le x\le3$, $0\le y\le5$, $0\le z\le2$.
+    answer: 270
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. לפי $z$: $\int_0^2\left(x^2y+xz\right)dz=2x^2y+2x$. לפי $y$: $\int_0^5\left(2x^2y+2x\right)dy=25x^2+10x$. לפי
+      $x$: $\int_0^3\left(25x^2+10x\right)dx=225+45=270$.
+    wrongFeedback: >-
+      שלושה אינטגרלים זה בתוך זה, מהפנימי החוצה: בכל שלב שאר המשתנים קבועים.
+    commonWrong:
+      - value: 30
+        feedback: >-
+          30 הוא הנפח של התיבה, $\iiint_B1\,dV$. כאן האינטגרנד אינו 1.
+        misconception: MC-c12-integral-is-size
+    hints: ['$\int_0^2xz\,dz=x\cdot\frac{4}{2}$.']
+
+  - id: Q-12.4-inner-z
+    type: expr
+    objectives: [OBJ-12.4-1]
+    level: basic
+    prompt: >-
+      הגוף $E$ נמצא מעל משולש $D$ במישור $xy$ ומתחת למישור $z=8-\frac{8}{5}y-\frac54x$. כותבים
+      $\iiint_E(x+y+z)\,dV=\iint_D\left(\int_0^{h}(x+y+z)\,dz\right)dA$ עם $h=8-\frac85y-\frac54x$. חשבו את האינטגרל
+      הפנימי כפונקציה של $x$ ו-$y$ (מותר להשאיר את $h$ כתוב במפורש).
+    answer: '(x+y)*(8-8*y/5-5*x/4) + (8-8*y/5-5*x/4)^2/2'
+    answerTex: '$\int_0^h(x+y+z)\,dz=(x+y)h+\frac{h^2}{2}$, עם $h=8-\frac85y-\frac54x$'
+    variables: [x, y]
+    domain: [0, 2]
+    correctFeedback: >-
+      נכון. $x+y$ קבוע לגבי $z$ ונותן $(x+y)h$, ו-$\int_0^hz\,dz=\frac{h^2}{2}$.
+    wrongFeedback: >-
+      באינטגרל לפי $z$, $x$ ו-$y$ קבועים. חשבו פונקציה קדומה לפי $z$ והציבו $z=h$ ו-$z=0$.
+    commonWrong:
+      - expr: '(x+y+8-8*y/5-5*x/4)*(8-8*y/5-5*x/4)'
+        feedback: >-
+          זה $(x+y+z)\cdot z$ ב-$z=h$: התייחסתם ל-$z$ כאילו היה קבוע. $z$ הוא משתנה האינטגרציה, ו-$\int_0^hz\,dz=\frac{h^2}{2}$.
+        misconception: MC-c12-inner-constant
+      - expr: '(x+y)*(8-8*y/5-5*x/4)'
+        feedback: >-
+          חסר המחובר $\int_0^hz\,dz=\frac{h^2}{2}$.
+        misconception: MC-c12-inner-constant
+    hints: ['$\int_0^h z\,dz=\frac{h^2}{2}$.']
+
+  - id: Q-12.4-between-expr
+    type: expr
+    objectives: [OBJ-12.4-1]
+    level: mid
+    prompt: >-
+      $E$ הוא הגוף שבין הפרבולואיד $z=x^2+y^2$ (למטה) לפרבולואיד $z=2-x^2-y^2$ (למעלה). כותבים
+      $\iiint_E1\,dV=\iint_D\left(\int\,dz\right)dA$. מהו האינטגרל הפנימי, כפונקציה של $x$ ו-$y$?
+    answer: '2 - 2*x^2 - 2*y^2'
+    answerTex: '$\int_{x^2+y^2}^{2-x^2-y^2}1\,dz=2-2x^2-2y^2$'
+    variables: [x, y]
+    domain: [-0.7, 0.7]
+    correctFeedback: >-
+      נכון. הגבול העליון פחות התחתון: $\left(2-x^2-y^2\right)-\left(x^2+y^2\right)$. זה הגובה של העמודה מעל $(x,y)$, והוא
+      חיובי בדיוק על העיגול $x^2+y^2\le1$, שהוא $D$.
+    wrongFeedback: >-
+      אינטגרל של 1 לפי $z$ מגבול תחתון לגבול עליון הוא העליון פחות התחתון.
+    commonWrong:
+      - expr: '2*x^2 + 2*y^2 - 2'
+        feedback: >-
+          הפכתם את הגבולות: התחתון פחות העליון. הגובה של עמודה חיובי, ולכן העליון פחות התחתון.
+        misconception: MC-c12-region-wrong-side
+      - expr: '2 - x^2 - y^2'
+        feedback: >-
+          זה הגובה עד המישור $z=0$, בלי להחסיר את המשטח התחתון $z=x^2+y^2$.
+        misconception: MC-c12-volume-top-only
+    hints: ['מי למעלה ומי למטה ב-$(0,0)$?']
+
+  - id: Q-12.4-order-limits
+    type: mc
+    objectives: [OBJ-12.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $E$ הוא הטטרהדר $x\ge0$, $y\ge0$, $z\ge0$, $x+y+z\le1$. אילו גבולות מתארים את $E$ בסדר $dz\,dy\,dx$?
+    choices:
+      - text: '$0\le x\le1$, $0\le y\le1-x$, $0\le z\le1-x-y$'
+        correct: true
+        feedback: >-
+          נכון. $z$ מ-0 עד המישור; ההיטל על המישור $xy$ הוא המשולש $x+y\le1$, ולכן $y\le1-x$; ו-$x$ בין 0 ל-1. כל גבול תלוי
+          רק במשתנים שמחוץ לו.
+      - text: '$0\le x\le1$, $0\le y\le1$, $0\le z\le1$'
+        feedback: >-
+          זו הקובייה $[0,1]^3$ כולה, פי 6 מהטטרהדר. הגבולות הפנימיים צריכים לתלות במשתנים החיצוניים.
+        misconception: MC-c12-bounding-rectangle
+      - text: '$0\le x\le1$, $0\le y\le1-x-z$, $0\le z\le1-x-y$'
+        feedback: >-
+          הגבול של $y$ תלוי ב-$z$, אבל $z$ הוא המשתנה הפנימי ביותר: כשמגיעים לאינטגרל לפי $y$, $z$ כבר לא קיים. הגבול
+          האמצעי תלוי רק ב-$x$.
+        misconception: MC-c12-outer-limit-variable
+      - text: '$0\le x\le1$, $0\le y\le1$, $0\le z\le1-x-y$'
+        feedback: >-
+          כש-$x+y>1$ הגבול העליון של $z$ שלילי, ושם אין נקודות של $E$. ההיטל של $E$ על המישור $xy$ הוא המשולש $y\le1-x$, לא
+          הריבוע.
+        misconception: MC-c12-region-wrong-side
+
+  - id: Q-12.4-choose-order
+    type: mc
+    objectives: [OBJ-12.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $E$ הוא הגוף שבין הפרבולואיד $z=x^2+y^2$ למישור $z=4$. איך כדאי לתאר אותו לאינטגרל משולש?
+    choices:
+      - text: 'קודם $z$, מ-$x^2+y^2$ עד 4, ואחר כך על העיגול $x^2+y^2\le4$ במישור $xy$'
+        correct: true
+        feedback: >-
+          נכון. כל עמודה אנכית נכנסת דרך הפרבולואיד ויוצאת דרך המישור, וההיטל על המישור $xy$ הוא העיגול שבו המשטחים נחתכים
+          ($x^2+y^2=4$). את העיגול אחר כך נוח לתאר בקוטביות.
+      - text: 'קודם $x$, אחר כך $y$, ובסוף $z$ מ-0 עד 4, כמו בתיבה'
+        feedback: >-
+          אפשרי, אבל צריך לכל $z$ את העיגול $x^2+y^2\le z$, ואת $x$ בין $-\sqrt{z-y^2}$ ל-$\sqrt{z-y^2}$: קשה יותר. בודקים
+          איזה סדר נותן גבולות פשוטים.
+        misconception: MC-c12-order-by-habit
+      - text: 'קודם $z$ מ-0 עד 4, ואחר כך על הריבוע $[-2,2]\times[-2,2]$'
+        feedback: >-
+          זו התיבה שמכילה את הגוף. העמודה מעל $(x,y)$ מתחילה בפרבולואיד, לא ב-0, וההיטל הוא עיגול, לא ריבוע.
+        misconception: MC-c12-bounding-rectangle
+
+  - id: Q-12.4-rank-setup
+    type: rank
+    objectives: [OBJ-12.4-2]
+    level: mid
+    prompt: >-
+      סדרו את שלבי הבנייה של אינטגרל משולש $\iiint_Ef\,dV$ על גוף שחסום בין שני משטחים, בסדר $dz\,dy\,dx$.
+    help: סדרו את שלבי השיטה מהראשון לאחרון.
+    items:
+      - id: a
+        label: 'משרטטים את הגוף ומזהים את המשטח התחתון $z=g(x,y)$ ואת העליון $z=h(x,y)$.'
+      - id: b
+        label: 'מוצאים את ההיטל $D$ של הגוף על המישור $xy$ (לרוב: איפה המשטחים נחתכים).'
+      - id: c
+        label: 'מתארים את $D$ כתחום בין שני גרפים: $a\le x\le b$, $g_1(x)\le y\le g_2(x)$.'
+      - id: d
+        label: 'כותבים $\int_a^b\!\int_{g_1(x)}^{g_2(x)}\!\int_{g(x,y)}^{h(x,y)}f\,dz\,dy\,dx$.'
+      - id: e
+        label: 'מחשבים מהפנימי החוצה: קודם לפי $z$ ($x,y$ קבועים), אחר כך לפי $y$, ובסוף לפי $x$.'
+    order: [a, b, c, d, e]
+    correctFeedback: >-
+      נכון. התיאור הולך מבחוץ פנימה (גוף, היטל, רצועות), והחישוב מבפנים החוצה.
+    wrongFeedback: >-
+      את הגבולות של $z$ קוראים מהמשטחים, את התחום $D$ מההיטל, ורק אז כותבים את האינטגרל. החישוב מתחיל באינטגרל הפנימי.
+
+  - id: Q-12.4-tetra-volume
+    type: numeric
+    objectives: [OBJ-12.4-3]
+    level: basic
+    prompt: >-
+      חשבו את הנפח של הטטרהדר $x\ge0$, $y\ge0$, $z\ge0$, $x+y+z\le1$ כאינטגרל משולש של 1.
+    answer: 0.166666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^1\!\int_0^{1-x}(1-x-y)\,dy\,dx=\int_0^1\frac{(1-x)^2}{2}\,dx=\frac16$. בדיקה: פירמידה עם בסיס $\frac12$
+      וגובה 1, ו-$\frac13\cdot\frac12\cdot1=\frac16$.
+    wrongFeedback: >-
+      הגבולות: $0\le z\le1-x-y$, $0\le y\le1-x$, $0\le x\le1$.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          1 הוא הנפח של הקובייה $[0,1]^3$: גבולות קבועים בשלושת האינטגרלים.
+        misconception: MC-c12-bounding-rectangle
+    hints: ['$\int_0^{1-x}(1-x-y)\,dy=\frac{(1-x)^2}{2}$.']
+
+  - id: Q-12.4-cube-mass
+    type: numeric
+    objectives: [OBJ-12.4-3]
+    level: basic
+    prompt: >-
+      לקובייה $[0,1]^3$ צפיפות $\rho(x,y,z)=x+y+z$. חשבו את המסה שלה.
+    answer: 1.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $M=\iiint\rho\,dV=3\cdot\iiint x\,dV=3\cdot\frac12=\frac32$ (שלושת המחוברים שווים מסימטריה).
+    wrongFeedback: >-
+      המסה היא האינטגרל של הצפיפות על הגוף: $\iiint_{[0,1]^3}(x+y+z)\,dV$.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          1 הוא הנפח של הקובייה. המסה היא $\iiint\rho\,dV$, ולא $\iiint1\,dV$, כשהצפיפות אינה 1.
+        misconception: MC-c12-integral-is-size
+    hints: ['$\iiint_{[0,1]^3}x\,dV=\int_0^1x\,dx$.']
+
+  - id: Q-12.4-slanted-volume
+    type: numeric
+    objectives: [OBJ-12.4-3, OBJ-12.4-1]
+    level: mid
+    prompt: >-
+      חשבו את הנפח של הגוף החסום על ידי המישורים $x=0$, $y=0$, $z=0$, $5x+4y=20$ ו-$25x+32y+20z=160$.
+    answer: 36.6666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. הבסיס הוא המשולש $0\le x\le4$, $0\le y\le5-\frac54x$, והגג $z=8-\frac54x-\frac85y$. הנפח
+      $\int_0^4\!\int_0^{5-5x/4}\left(8-\frac54x-\frac85y\right)dy\,dx=\frac{110}{3}$. בדיקה: הגג מישורי, ולכן הנפח הוא שטח
+      הבסיס (10) כפול ממוצע הגבהים בקודקודים, $\frac{8+3+0}{3}$.
+    wrongFeedback: >-
+      הגבולות: $0\le z\le8-\frac54x-\frac85y$; ההיטל על המישור $xy$ הוא המשולש שבין הצירים לישר $5x+4y=20$.
+    commonWrong:
+      - value: 30
+        feedback: >-
+          30 הוא האינטגרל של הגובה על המלבן $[0,4]\times[0,5]$. מעל הישר $5x+4y=20$ הגוף לא קיים (והגג שם אף מתחת ל-$z=0$),
+          ולכן הגבול של $y$ הוא $5-\frac54x$.
+        misconception: MC-c12-bounding-rectangle
+    hints: ['$z=\frac{160-25x-32y}{20}$.']
+
+  - id: Q-12.4-top-only
+    type: twotier
+    objectives: [OBJ-12.4-3, OBJ-12.4-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $E$ הוא הגוף שבין $z=x^2+y^2$ (למטה) ל-$z=4$ (למעלה), מעל העיגול $D$: $x^2+y^2\le4$. נכון או לא נכון: הנפח של $E$
+      הוא $\iint_D4\,dA=16\pi$.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: 'נכון. $16\pi$ הוא הנפח של הגליל כולו. הנפח של $E$ קטן ממנו.'
+      - text: נכון
+        feedback: >-
+          $\iint_D4\,dA$ הוא הנפח מתחת למישור $z=4$ עד $z=0$, כולל החלק שמתחת לפרבולואיד, שאינו שייך ל-$E$.
+        misconception: MC-c12-volume-top-only
+    reasons:
+      - text: 'הגובה של העמודה מעל $(x,y)$ הוא העליון פחות התחתון, $4-(x^2+y^2)$, ולא 4'
+        correct: true
+        feedback: 'בדיוק. $\iint_D\left(4-x^2-y^2\right)dA=8\pi$ (בקוטביות).'
+      - text: 'הנפח הוא $\iiint_E1\,dV$, וזה תמיד שווה לאינטגרל של המשטח העליון על ההיטל'
+        feedback: >-
+          $\iiint_E1\,dV=\iint_D\left(\int_{g}^{h}dz\right)dA=\iint_D(h-g)\,dA$: המשטח התחתון מופיע כגבול התחתון של $z$.
+        misconception: MC-c12-volume-top-only
+      - text: 'הנפח הוא $\iint_D(x^2+y^2)\,dA$, הנפח מתחת לפרבולואיד'
+        feedback: >-
+          זה הנפח **מתחת** לפרבולואיד, מחוץ ל-$E$. $E$ נמצא מעליו.
+        misconception: MC-c12-region-wrong-side
+
+  - id: Q-12.4-tetra-mass
+    type: numeric
+    objectives: [OBJ-12.4-3, OBJ-12.4-1]
+    level: exam
+    prompt: >-
+      לטטרהדר $x\ge0$, $y\ge0$, $z\ge0$, $x+y+z\le1$ צפיפות $\rho=z$ (הוא כבד יותר למעלה). חשבו את המסה שלו.
+    answer: 0.0416666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^{1-x-y}z\,dz=\frac{(1-x-y)^2}{2}$; לפי $y$: $\int_0^{1-x}\frac{(1-x-y)^2}{2}dy=\frac{(1-x)^3}{6}$; לפי
+      $x$: $\int_0^1\frac{(1-x)^3}{6}dx=\frac1{24}$.
+    wrongFeedback: >-
+      $M=\int_0^1\!\int_0^{1-x}\!\int_0^{1-x-y}z\,dz\,dy\,dx$. בכל שלב הציבו $u=1-x-y$ או $u=1-x$.
+    commonWrong:
+      - value: 0.166666666666667
+        feedback: >-
+          $\frac16$ הוא הנפח. המסה היא האינטגרל של הצפיפות $z$, וקטנה מהנפח כי $z\le1$ בכל הגוף.
+        misconception: MC-c12-integral-is-size
+    hints: ['$\int_0^{a}\frac{(a-y)^2}{2}dy=\frac{a^3}{6}$.']
+
+  - id: Q-12.4-slanted-integral
+    type: numeric
+    objectives: [OBJ-12.4-1]
+    level: exam
+    prompt: >-
+      $E$ הוא הגוף שמעל המשולש $0\le x\le4$, $0\le y\le5-\frac54x$ ומתחת למישור $z=8-\frac54x-\frac85y$. חשבו
+      את $\iiint_E(x+y+z)\,dV$.
+    answer: 173.333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. האינטגרל הפנימי $(x+y)h+\frac{h^2}{2}$, עם $h=8-\frac54x-\frac85y$, ואחריו שני אינטגרלים של פולינומים:
+      $\frac{520}{3}$. בדיקה: זה הנפח $\frac{110}{3}$ כפול הממוצע של $x+y+z$ בגוף, $\frac{52}{11}\approx4.7$, ערך סביר.
+    wrongFeedback: >-
+      לפי $z$ מ-0 עד $h$, אחר כך לפי $y$ מ-0 עד $5-\frac54x$, ובסוף לפי $x$ מ-0 עד 4.
+    hints: ['כתבו את האינטגרל הפנימי בעזרת $h$, ופתחו סוגריים רק לפני האינטגרל לפי $y$.']

@@ -1,0 +1,10 @@
+# Terms first defined in lesson 12.6 (general change of variables).
+- id: change-of-variables
+  term: החלפת משתנים באינטגרל כפול
+  en: change of variables (in a multiple integral)
+  symbol: '\iint_D f\,dx\,dy=\iint_{D^*} f\big(x(u,v),y(u,v)\big)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv'
+  definition: >-
+    מעבר ממשתנים $x,y$ למשתנים $u,v$ דרך העתקה חד-חד-ערכית מתחום $D^*$ במישור $uv$ על $D$: מתרגמים את התחום ואת
+    האינטגרנד, ומכפילים בערך המוחלט של היעקוביאן, מקדם השינוי של שטח. קוטביות, גליליות וכדוריות הן מקרים פרטיים.
+  reject: []
+  lesson: '12.6'

@@ -1,0 +1,289 @@
+# Chapter 2 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# Every number recomputed in screens/tools/recompute-ch2.py.
+chapter: 2
+questions:
+  - id: Q-2-exam-1
+    type: exam
+    title: מסלול של כוכב לכת
+    prompt: >-
+      כוכב לכת נע סביב שמש שנמצאת בראשית, במסלול $\frac{(x-4)^2}{25}+\frac{y^2}{9}=1$ (יחידות שרירותיות).
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-2.1-2, OBJ-2.1-3]
+        prompt: >-
+          מהו המרחק הקטן ביותר בין כוכב הלכת לשמש? (הנקודה הקרובה ביותר על ציר $x$.)
+        answer: 1
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. המרכז $(4,0)$ וחצי הציר בכיוון $x$ הוא 5, ולכן המסלול חותך את ציר $x$ ב-$x=-1$ וב-$x=9$. הקרובה לשמש:
+          $(-1,0)$, במרחק 1.
+        wrongFeedback: 'הציבו $y=0$: $(x-4)^2=25$.'
+        commonWrong:
+          - value: 9
+            feedback: '9 הוא המרחק **הגדול** ביותר, בנקודה $(9,0)$.'
+          - value: 21
+            feedback: '21 מתקבל מ-$x-4=\pm25$: 25 הוא $a^2$, וחצי הציר הוא 5.'
+            misconception: MC-c2-square-not-root
+
+      - label: ב
+        points: 5
+        type: expr
+        objectives: [OBJ-2.1-2]
+        prompt: >-
+          כתבו פרמטריזציה של המסלול עם $x(t)=4+5\cos t$, $0\le t<2\pi$, נגד כיוון השעון. מהו $y(t)$? (השתמשו במשתנה $t$)
+        answer: '3*sin(t)'
+        answerTex: '$x(t)=4+5\cos t,\quad y(t)=3\sin t$'
+        variables: [t]
+        domain: [0, 6]
+        correctFeedback: 'נכון. $\frac{25\cos^2t}{25}+\frac{9\sin^2t}{9}=1$.'
+        wrongFeedback: 'חצי הציר בכיוון $y$ הוא $\sqrt9$.'
+        commonWrong:
+          - expr: '9*sin(t)'
+            feedback: '9 הוא $b^2$; חצי הציר 3.'
+            misconception: MC-c2-square-not-root
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-2.3-2, OBJ-2.3-1]
+        prompt: >-
+          הראו שבקואורדינטות קוטביות סביב השמש המסלול הוא $r=\frac{9}{5-4\cos\theta}$.
+        solution:
+          - kind: given
+            text: 'המסלול $\frac{(x-4)^2}{25}+\frac{y^2}{9}=1$, וקואורדינטות קוטביות $x=r\cos\theta$, $y=r\sin\theta$, $r=\sqrt{x^2+y^2}$.'
+          - kind: goal
+            text: 'נקודה $(x,y)\ne(0,0)$ על המסלול אם ורק אם $r(5-4\cos\theta)=9$, כלומר $5r=9+4x$.'
+          - kind: idea
+            text: >-
+              כופלים את משוואת האליפסה במכנה המשותף ופותחים סוגריים; מצד שני מעלים בריבוע את $5r=9+4x$ ומחליפים את
+              $r^2$ ב-$x^2+y^2$. אם שתי המשוואות זהות, סיימנו (בתנאי שהסימן מתאים).
+          - kind: computation
+            text: >-
+              כפל ב-225: $9(x-4)^2+25y^2=225$, כלומר $9x^2-72x+25y^2-81=0$.
+          - kind: computation
+            text: >-
+              מצד שני $25r^2=(9+4x)^2$ נותן $25x^2+25y^2=81+72x+16x^2$, כלומר $9x^2-72x+25y^2-81=0$: אותה משוואה.
+          - kind: check
+            text: >-
+              ההעלאה בריבוע יכולה להכניס פתרונות עם $5r=-(9+4x)$. אבל על המסלול $-1\le x\le9$, ולכן $9+4x\ge5>0$:
+              הסימן החיובי הוא הנכון. ב-$\theta=0$: $r=9$, הנקודה $(9,0)$; ב-$\theta=\pi$: $r=1$, הנקודה $(-1,0)$, כמו
+              בסעיף א.
+          - kind: result
+            text: 'המסלול הוא $r=\frac{9}{5-4\cos\theta}$, $0\le\theta<2\pi$, והשמש באחד המוקדים של האליפסה.'
+        rubric:
+          - text: 'הצבה נכונה של $x=r\cos\theta$, $y=r\sin\theta$ (או של $r^2=x^2+y^2$) והגעה למשוואה קרטזית אחת לשני הצדדים'
+            weight: 4
+          - text: 'השוואה מפורשת של שתי המשוואות הפולינומיות'
+            weight: 3
+          - text: 'טיפול בסימן אחרי ההעלאה בריבוע (או בדיקה שהמכנה חיובי)'
+            weight: 2
+          - text: 'בדיקה בנקודה אחת לפחות, למשל $\theta=0$ או $\theta=\pi$'
+            weight: 1
+
+      - label: ד
+        points: 5
+        type: numeric
+        objectives: [OBJ-2.3-1, OBJ-2.3-2]
+        prompt: >-
+          מה המרחק בין כוכב הלכת לשמש כשהזווית הקוטבית שלו $\theta=\frac{\pi}{3}$?
+        answer: 3
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $r=\frac{9}{5-2}=3$, והנקודה $\left(\frac32,\frac{3\sqrt3}{2}\right)$. בדיקה במשוואה הקרטזית:
+          $\frac{6.25}{25}+\frac{27/4}{9}=\frac14+\frac34=1$.
+        wrongFeedback: '$\cos\frac{\pi}{3}=\frac12$; הציבו בנוסחה מסעיף ג.'
+        commonWrong:
+          - value: 1.2857142857142858
+            feedback: 'זה $\frac97$, מ-$5+4\cos\theta$: סימן הפוך במכנה. ב-$\theta=0$ הוא נותן 1, לא 9.'
+
+  - id: Q-2-exam-2
+    type: exam
+    title: גביע בתוך כדור
+    prompt: >-
+      הגוף $E$ הוא החלק של הכדור $x^2+y^2+z^2\le2z$ שנמצא מעל החרוט $z=\sqrt{x^2+y^2}$.
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-2.4-1, OBJ-2.4-2]
+        prompt: >-
+          בקואורדינטות כדוריות הספירה $x^2+y^2+z^2=2z$ היא $r=2\cos\theta$. מהו $r$ על הספירה בכיוון $\theta=\frac{\pi}{4}$?
+        answer: 1.4142135623730951
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $\sqrt2$. $r^2=2r\cos\theta$, ולכן $r=2\cos\theta$, וב-$\theta=\frac{\pi}{4}$: $2\cdot\frac{\sqrt2}{2}$.
+        wrongFeedback: 'הציבו $\theta=\frac{\pi}{4}$ ב-$r=2\cos\theta$.'
+        commonWrong:
+          - value: 2
+            feedback: '2 הוא $r$ בכיוון ציר $z$ ($\theta=0$), הנקודה העליונה $(0,0,2)$.'
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-2.5-3, OBJ-2.4-2]
+        prompt: >-
+          באיזה גובה $z$ (חוץ מהראשית) החרוט פוגש את הספירה?
+        answer: 1
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. על החרוט $x^2+y^2=z^2$, ולכן $2z^2=2z$: $z=0$ או $z=1$. מעגל החיתוך הוא $x^2+y^2=1$ בגובה 1, ובכדוריות
+          $r=\sqrt2$, $\theta=\frac{\pi}{4}$ (כמו בסעיף א).
+        wrongFeedback: 'הציבו $x^2+y^2=z^2$ במשוואת הספירה.'
+        commonWrong:
+          - value: 1.4142135623730951
+            feedback: '$\sqrt2$ הוא המרחק מהראשית לנקודות החיתוך ($r$ הכדורי), לא הגובה שלהן.'
+            misconception: MC-c2-cyl-r-vs-sph-r
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-2.4-3, OBJ-2.4-1]
+        prompt: >-
+          תארו את $E$ בקואורדינטות כדוריות ובקואורדינטות גליליות (גבולות לכל קואורדינטה).
+        solution:
+          - kind: given
+            text: '$E$: $x^2+y^2+z^2\le2z$ וגם $z\ge\sqrt{x^2+y^2}$.'
+          - kind: idea
+            text: >-
+              מתרגמים כל תנאי בנפרד. בכדוריות שני המשטחים פשוטים: הספירה היא $r=2\cos\theta$ והחרוט $\theta=\frac{\pi}{4}$.
+              בגליליות החרוט הוא $z=r$ והספירה היא $r^2+(z-1)^2=1$.
+          - kind: step
+            text: >-
+              כדוריות: $x^2+y^2+z^2\le2z$ הוא $r^2\le2r\cos\theta$, כלומר $r\le2\cos\theta$. מעל החרוט פירושו קרוב לציר
+              $z$: $0\le\theta\le\frac{\pi}{4}$. אין תלות באזימוט.
+          - kind: result
+            text: 'בכדוריות: $0\le\varphi<2\pi$, $0\le\theta\le\frac{\pi}{4}$, $0\le r\le2\cos\theta$.'
+          - kind: step
+            text: >-
+              גליליות: הספירה $r^2+(z-1)^2\le1$ נותנת $1-\sqrt{1-r^2}\le z\le1+\sqrt{1-r^2}$, והחרוט נותן $z\ge r$. לכל
+              $0\le r\le1$ מתקיים $r\ge1-\sqrt{1-r^2}$ (כי $\sqrt{1-r^2}\ge1-r$, ובריבוע: $1-r^2\ge1-2r+r^2$, כלומר
+              $2r(1-r)\ge0$). לכן הגבול התחתון הוא החרוט.
+          - kind: check
+            text: >-
+              החרוט והספירה נפגשים ב-$r=1$, $z=1$ (סעיף ב): שם $r=1+\sqrt{1-1}$. ל-$r>1$ אין נקודות בכדור.
+          - kind: result
+            text: 'בגליליות: $0\le\theta<2\pi$, $0\le r\le1$, $r\le z\le1+\sqrt{1-r^2}$.'
+        rubric:
+          - text: 'תרגום הספירה ל-$r=2\cos\theta$ ושל החרוט ל-$\theta=\frac{\pi}{4}$, בכיוון הנכון של אי-השוויון ($\theta$ קטן)'
+            weight: 3
+          - text: 'תיאור כדורי מלא, כולל $0\le\varphi<2\pi$'
+            weight: 2
+          - text: 'בגליליות: חסם עליון מהספירה וחסם תחתון מהחרוט, עם נימוק שהחרוט הוא המחמיר'
+            weight: 3
+          - text: 'הטווח $0\le r\le1$ מתוך נקודת המפגש של החרוט והספירה'
+            weight: 2
+
+      - label: ד
+        points: 5
+        type: numeric
+        objectives: [OBJ-2.5-3, OBJ-2.4-3]
+        prompt: >-
+          החתך של $E$ במישור $z=\frac12$ הוא עיגול. מה הרדיוס שלו?
+        answer: 0.5
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. בגובה $\frac12$ החרוט דורש $r\le\frac12$, והספירה דורשת $r^2\le2\cdot\frac12-\frac14=\frac34$, כלומר
+          $r\le\frac{\sqrt3}{2}$. התנאי המחמיר הוא של החרוט.
+        wrongFeedback: 'בגובה $z=\frac12$ בדקו את שני התנאים, $r\le z$ ו-$r^2+z^2\le2z$, וקחו את המחמיר.'
+        commonWrong:
+          - value: 0.8660254037844386
+            feedback: >-
+              $\frac{\sqrt3}{2}$ הוא החתך של **הכדור** בגובה $\frac12$. אבל $E$ נמצא גם מעל החרוט, ושם $r\le z=\frac12$.
+            misconception: MC-c2-cone-inside-outside
+
+  - id: Q-2-exam-3
+    type: exam
+    title: מגדל קירור
+    prompt: >-
+      הדופן של מגדל קירור היא החלק של המשטח $x^2+y^2-\frac{z^2}{4}=1$ שבין $z=-2$ ל-$z=4$.
+    parts:
+      - label: א
+        points: 4
+        type: mc
+        objectives: [OBJ-2.5-2]
+        prompt: 'מהו המשטח $x^2+y^2-\frac{z^2}{4}=1$?'
+        choices:
+          - text: 'היפרבולואיד חד-יריעתי'
+            correct: true
+            feedback: 'נכון. לכל $z$ החתך הוא מעגל ברדיוס $\sqrt{1+\frac{z^2}{4}}\ge1$: יריעה אחת, צרה ב-$z=0$.'
+          - text: 'היפרבולואיד דו-יריעתי'
+            feedback: 'ב-$z=0$ החתך הוא מעגל היחידה, ולכן אין "פער" בין יריעות. דו-יריעתי הוא עם $-1$ באגף ימין.'
+            misconception: MC-c2-hyperboloid-sheets
+          - text: 'חרוט'
+            feedback: 'לחרוט אגף ימין 0, והוא עובר בראשית. כאן $(0,0,0)$ אינה על המשטח.'
+            misconception: MC-c2-degenerate-conic
+
+      - label: ב
+        points: 6
+        type: numeric
+        objectives: [OBJ-2.5-3]
+        prompt: 'מה הרדיוס של פתח המגדל העליון, בגובה $z=4$?'
+        answer: 2.23606797749979
+        tolerance: 0.001
+        correctFeedback: 'נכון, $\sqrt5$: $x^2+y^2=1+\frac{16}{4}=5$. בתחתית, $z=-2$, הרדיוס $\sqrt2$, ובמותן ($z=0$) 1.'
+        wrongFeedback: 'הציבו $z=4$: $x^2+y^2=1+\frac{z^2}{4}$.'
+        commonWrong:
+          - value: 5
+            feedback: '5 הוא $R^2$; הרדיוס $\sqrt5$.'
+            misconception: MC-c2-square-not-root
+          - value: 1
+            feedback: '1 הוא הרדיוס במותן, ב-$z=0$. החתכים גדלים עם $|z|$.'
+            misconception: MC-c2-section-same-size
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-2.5-1, OBJ-2.5-3]
+        prompt: >-
+          מצאו את החתכים של המשטח במישורים $z=c$, $x=0$ ו-$x=1$, ותארו כל אחד. הראו שהמשטח מכיל את הישר
+          $(1,s,2s)$, $s\in\mathbb{R}$.
+        solution:
+          - kind: idea
+            text: 'מציבים את המישור במשוואה ומזהים את העקום שנשאר בשני המשתנים האחרים.'
+          - kind: step
+            text: '$z=c$: $x^2+y^2=1+\frac{c^2}{4}$, מעגל סביב ציר $z$ ברדיוס $\sqrt{1+\frac{c^2}{4}}$, הקטן ביותר ב-$c=0$.'
+          - kind: step
+            text: >-
+              $x=0$: $y^2-\frac{z^2}{4}=1$, היפרבולה במישור $yz$ שחותכת את ציר $y$ ב-$\pm1$, עם האסימפטוטות $z=\pm2y$.
+          - kind: step
+            text: >-
+              $x=1$: $y^2-\frac{z^2}{4}=0$, כלומר $(2y-z)(2y+z)=0$: זוג הישרים $z=2y$ ו-$z=-2y$ במישור $x=1$, שנחתכים
+              ב-$(1,0,0)$. זה חתך מנוון: המישור $x=1$ משיק למותן.
+          - kind: check
+            text: 'הצבה ישירה של $(1,s,2s)$: $1+s^2-\frac{4s^2}{4}=1$. מתקיים לכל $s$.'
+          - kind: result
+            text: >-
+              חתכים אופקיים מעגלים, החתך $x=0$ היפרבולה, והחתך $x=1$ זוג ישרים; בפרט הישר $(1,s,2s)$ מונח כולו על
+              המשטח. (לכן אפשר לבנות מגדל כזה מקורות ישרות.)
+        rubric:
+          - text: 'החתכים האופקיים: מעגלים עם רדיוס נכון כפונקציה של $c$'
+            weight: 3
+          - text: 'החתך $x=0$: היפרבולה, עם נקודות החיתוך או האסימפטוטות'
+            weight: 2
+          - text: 'החתך $x=1$: פירוק לזוג ישרים'
+            weight: 3
+          - text: 'בדיקה שהישר $(1,s,2s)$ מקיים את המשוואה לכל $s$'
+            weight: 2
+
+      - label: ד
+        points: 5
+        type: expr
+        objectives: [OBJ-2.5-3, OBJ-2.1-1]
+        prompt: >-
+          כתבו פרמטריזציה של מעגל החתך בגובה $z=2$ בצורה $x=R\cos t$, $y=R\sin t$, $z=2$. מהו $y(t)$? (השתמשו במשתנה $t$)
+        answer: 'sqrt(2)*sin(t)'
+        answerTex: '$x=\sqrt2\cos t,\quad y=\sqrt2\sin t,\quad z=2$'
+        variables: [t]
+        domain: [0, 6]
+        correctFeedback: 'נכון. $x^2+y^2=1+\frac44=2$, ולכן $R=\sqrt2$.'
+        wrongFeedback: 'מצאו קודם את הרדיוס בגובה 2.'
+        commonWrong:
+          - expr: '2*sin(t)'
+            feedback: '2 הוא $R^2$; $R=\sqrt2$.'
+            misconception: MC-c2-square-not-root
+          - expr: 'sin(t)'
+            feedback: 'רדיוס 1 הוא של המותן, $z=0$. בגובה 2 החתך גדול יותר.'
+            misconception: MC-c2-section-same-size

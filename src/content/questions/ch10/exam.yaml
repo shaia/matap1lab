@@ -1,0 +1,273 @@
+# Chapter 10 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# Every number recomputed in screens/tools/recompute-ch10.py (sections "exam 1–3").
+chapter: 10
+questions:
+  - id: Q-10-exam-1
+    type: exam
+    title: טמפרטורה על דיסקה
+    prompt: >-
+      הטמפרטורה על דיסקה מתכתית $x^2+y^2\le4$ היא $T(x,y)=x^2+2y^2-2x$.
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-10.4-1]
+        prompt: >-
+          מהו קצב העלייה המהיר ביותר של $T$ (מעלות ליחידת אורך) בנקודה $(0,1)$? (אפשר לכתוב שורש.)
+        answer: 4.472135955
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $2\sqrt5$. $\nabla T=(2x-2,\,4y)=(-2,4)$, והקצב המרבי $|\nabla T|=\sqrt{20}$, בכיוון $\frac{(-1,2)}{\sqrt5}$.
+        wrongFeedback: 'הקצב המרבי הוא האורך של הגרדיאנט בנקודה.'
+        commonWrong:
+          - value: 2
+            feedback: '$2=T_x+T_y$. הקצב המרבי הוא $|\nabla T|=\sqrt{T_x^2+T_y^2}$, בכיוון הגרדיאנט.'
+            misconception: MC-c10-max-rate-sum
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-10.5-1]
+        prompt: >-
+          נמלה הולכת על המעגל $\vec r(t)=(\cos t,\sin t)$. מהו קצב השינוי של הטמפרטורה שהיא מרגישה ב-$t=\frac{\pi}{2}$?
+        answer: 2
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. ב-$t=\frac\pi2$ הנמלה ב-$(0,1)$ ומהירותה $\vec r\,'=(-\sin t,\cos t)=(-1,0)$. $\frac{dT}{dt}=\nabla T\cdot\vec r\,'=(-2,4)\cdot(-1,0)=2$.
+        wrongFeedback: '$\frac{dT}{dt}=\nabla T(\vec r(t))\cdot\vec r\,''(t)$. מצאו את המקום ואת המהירות ב-$t=\frac\pi2$.'
+        commonWrong:
+          - value: 4
+            feedback: '$4=\nabla T\cdot\vec r$, עם וקטור המקום $(0,1)$. כלל השרשרת כופל בווקטור המהירות $(-1,0)$.'
+            misconception: MC-c10-chain-position-not-velocity
+
+      - label: ג
+        points: 15
+        type: open
+        objectives: [OBJ-10.8-1, OBJ-10.8-2]
+        prompt: >-
+          מצאו את הטמפרטורה הגבוהה ביותר ואת הנמוכה ביותר על הדיסקה, ואת הנקודות שבהן הן מתקבלות.
+        solution:
+          - kind: given
+            text: '$T=x^2+2y^2-2x$, רציפה, על התחום הסגור והחסום $x^2+y^2\le4$.'
+          - kind: goal
+            text: 'המקסימום והמינימום המוחלטים של $T$ בדיסקה, והנקודות שבהן הם מתקבלים.'
+          - kind: idea
+            text: >-
+              בתחום סגור וחסום פונקציה רציפה מקבלת מקסימום ומינימום. המועמדים: נקודות קריטיות בפנים ונקודות על השפה. על המעגל
+              מציבים $y^2=4-x^2$ ומקבלים בעיה במשתנה אחד בקטע $[-2,2]$.
+          - kind: computation
+            text: >-
+              פנים: $T_x=2x-2=0$, $T_y=4y=0$, ולכן $(1,0)$, שנמצאת בדיסקה ($1<4$). $T(1,0)=1-2=-1$.
+          - kind: computation
+            text: >-
+              שפה: $y^2=4-x^2$, ולכן $T=x^2+2(4-x^2)-2x=8-x^2-2x=:g(x)$, $-2\le x\le2$. $g'(x)=-2x-2=0$ ב-$x=-1$:
+              $g(-1)=9$, בנקודות $(-1,\pm\sqrt3)$. בקצות הקטע: $g(2)=0$ בנקודה $(2,0)$, ו-$g(-2)=8$ בנקודה $(-2,0)$.
+          - kind: check
+            text: >-
+              כל ערך $x\in[-2,2]$ מתאים לנקודות על המעגל, ולכן ההצבה מכסה את כל השפה. בדיקה בלגרנז׳: $2x-2=2\lambda x$,
+              $4y=2\lambda y$ נותנים $y=0$ (הנקודות $(\pm2,0)$) או $\lambda=2$ ($x=-1$), אותם מועמדים.
+          - kind: result
+            text: >-
+              המועמדים: $-1$, $9$, $0$, $8$. הטמפרטורה הגבוהה ביותר $9$, בנקודות $(-1,\pm\sqrt3)$; הנמוכה ביותר $-1$,
+              בנקודה $(1,0)$ שבפנים.
+        rubric:
+          - text: 'מציאת הנקודה הקריטית $(1,0)$, בדיקה שהיא בתחום, והערך $-1$'
+            weight: 3
+          - text: 'צמצום נכון של $T$ לשפה (הצבה של $y^2=4-x^2$, פרמטריזציה $(2\cos t,2\sin t)$ או לגרנז׳) לבעיה במשתנה אחד'
+            weight: 4
+          - text: 'מציאת $x=-1$ (או המקבילה בפרמטר), עם הערך $9$, ובדיקת קצות הקטע ($0$ ו-$8$)'
+            weight: 4
+          - text: 'השוואת כל המועמדים ומסקנה נכונה, עם הנקודות'
+            weight: 4
+
+  - id: Q-10-exam-2
+    type: exam
+    title: פחית עם מינימום פח
+    prompt: >-
+      פחית גלילית סגורה, ברדיוס $r$ ובגובה $h$, צריכה להכיל נפח $V=\pi r^2h=16\pi$ (סמ"ק). שטח הפח הוא
+      $S=2\pi r^2+2\pi rh$. מחפשים את הפחית עם השטח הקטן ביותר.
+    parts:
+      - label: א
+        points: 5
+        type: mc
+        objectives: [OBJ-10.9-1]
+        qualitative: true
+        prompt: >-
+          מה המשמעות הגיאומטרית של התנאי $\nabla S=\lambda\nabla V$ בנקודה האופטימלית, במישור $(r,h)$?
+        choices:
+          - text: 'קו הגובה של $S$ שעובר בנקודה משיק לעקום $V=16\pi$'
+            correct: true
+            feedback: >-
+              נכון. שני הגרדיאנטים מאונכים לעקום האילוץ בנקודה. אילו קו הגובה של $S$ היה חוצה את העקום, אפשר היה לזוז לאורך
+              העקום לערכי $S$ נמוכים יותר.
+          - text: 'השטח $S$ אינו משתנה כשזזים בכיוון כלשהו מהנקודה'
+            feedback: 'זה $\nabla S=0$, וכאן $\nabla S=(4\pi r+2\pi h,\ 2\pi r)$ אינו מתאפס כש-$r>0$. רק לאורך העקום $S$ לא משתנה ברגע הראשון.'
+            misconception: MC-c10-lagrange-gradient-zero
+          - text: 'הגרדיאנטים של $S$ ושל $V$ מאונכים זה לזה'
+            feedback: 'שניהם מאונכים לעקום האילוץ, ולכן הם מקבילים זה לזה.'
+            misconception: MC-c10-lagrange-perp
+
+      - label: ב
+        points: 12
+        type: open
+        objectives: [OBJ-10.9-2]
+        prompt: >-
+          מצאו בשיטת כופלי לגרנז׳ את $r$ ואת $h$ של הפחית האופטימלית.
+        solution:
+          - kind: given
+            text: '$S(r,h)=2\pi r^2+2\pi rh$, האילוץ $g(r,h)=\pi r^2h-16\pi=0$, עם $r,h>0$.'
+          - kind: goal
+            text: 'הנקודה שבה $S$ מינימלי על העקום $g=0$.'
+          - kind: idea
+            text: 'בנקודת קיצון על האילוץ $\nabla S=\lambda\nabla g$. מסלקים את $\lambda$ ומקבלים קשר בין $h$ ל-$r$, ומציבים באילוץ.'
+          - kind: computation
+            text: >-
+              $\nabla S=(4\pi r+2\pi h,\ 2\pi r)$, $\nabla g=(2\pi rh,\ \pi r^2)$. המשוואות: $4\pi r+2\pi h=2\lambda\pi rh$ ו-$2\pi r=\lambda\pi r^2$.
+          - kind: step
+            text: >-
+              מהשנייה, כש-$r>0$: $\lambda=\frac2r$. הצבה בראשונה: $4r+2h=2\cdot\frac2r\cdot rh=4h$, ולכן $h=2r$.
+          - kind: computation
+            text: 'באילוץ: $\pi r^2\cdot2r=16\pi$, כלומר $r^3=8$, $r=2$ ו-$h=4$.'
+          - kind: check
+            text: >-
+              $V=\pi\cdot4\cdot4=16\pi$. זה המינימום: $S\to\infty$ כש-$r\to0^+$ (כי $h=\frac{16}{r^2}$ ו-$2\pi rh=\frac{32\pi}{r}$) וכש-$r\to\infty$,
+              ויש נקודה קריטית אחת.
+          - kind: result
+            text: '$r=2$, $h=4$: הגובה שווה לקוטר.'
+        rubric:
+          - text: 'כתיבה נכונה של $\nabla S$, $\nabla g$ ושל מערכת לגרנז׳ עם האילוץ'
+            weight: 3
+          - text: 'סילוק $\lambda$ (בלי לחלק באפס) וקבלת $h=2r$'
+            weight: 4
+          - text: 'הצבה באילוץ ו-$r=2$, $h=4$'
+            weight: 3
+          - text: 'נימוק שזה מינימום (התנהגות בקצוות, או השוואה)'
+            weight: 2
+
+      - label: ג
+        points: 4
+        type: numeric
+        objectives: [OBJ-10.9-2]
+        standalone: false
+        prompt: >-
+          מהו השטח הקטן ביותר? (אפשר לכתוב תשובה עם pi.)
+        answer: 75.3982236862
+        tolerance: 0.001
+        correctFeedback: 'נכון, $24\pi$: $S=2\pi\cdot4+2\pi\cdot2\cdot4=8\pi+16\pi$.'
+        wrongFeedback: 'הציבו $r=2$, $h=4$ ב-$S=2\pi r^2+2\pi rh$.'
+
+      - label: ד
+        points: 4
+        type: numeric
+        objectives: [OBJ-10.3-2]
+        prompt: >-
+          במפעל מייצרים פחיות עם $r=2$ ו-$h=4$, אבל הרדיוס יכול לסטות עד $0.01$ והגובה עד $0.02$. העריכו בעזרת הדיפרנציאל
+          את הסטייה **המרבית** בנפח. (אפשר לכתוב תשובה עם pi.)
+        answer: 0.753982236862
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $0.24\pi$. $|dV|\le|V_r|\cdot0.01+|V_h|\cdot0.02=2\pi rh\cdot0.01+\pi r^2\cdot0.02=0.16\pi+0.08\pi$.
+        wrongFeedback: '$dV=V_r\,dr+V_h\,dh$; במקרה הגרוע שתי התרומות באותו כיוון.'
+        commonWrong:
+          - value: 0.502654824574
+            feedback: '$0.16\pi$ הוא רק התרומה של הרדיוס. גם הגובה סוטה, ומוסיף $\pi r^2\cdot0.02=0.08\pi$.'
+            misconception: MC-c10-differential-one-term
+
+  - id: Q-10-exam-3
+    type: exam
+    title: ארבע נקודות קריטיות
+    prompt: >-
+      תהי $f(x,y)=x^3+3xy^2-15x-12y$.
+    parts:
+      - label: א
+        points: 4
+        type: numeric
+        objectives: [OBJ-10.7-1]
+        prompt: >-
+          כמה נקודות קריטיות יש ל-$f$?
+        answer: 4
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $f_x=3x^2+3y^2-15=0$ ו-$f_y=6xy-12=0$, כלומר $x^2+y^2=5$ ו-$xy=2$: $(1,2)$, $(2,1)$, $(-1,-2)$, $(-2,-1)$.
+        wrongFeedback: >-
+          כתבו $x^2+y^2=5$ ו-$xy=2$. הציבו $y=\frac2x$ וקבלו משוואה ריבועית ב-$x^2$. אם $(x,y)$ פתרון, גם $(-x,-y)$
+          פתרון.
+
+      - label: ב
+        points: 13
+        type: open
+        objectives: [OBJ-10.7-3, OBJ-10.7-1]
+        prompt: >-
+          סווגו כל נקודה קריטית (מינימום מקומי, מקסימום מקומי או נקודת אוכף), ומצאו את ערכי $f$ בנקודות הקיצון.
+        solution:
+          - kind: given
+            text: '$f=x^3+3xy^2-15x-12y$, פולינום, עם הנקודות הקריטיות $(1,2)$, $(2,1)$, $(-1,-2)$, $(-2,-1)$.'
+          - kind: goal
+            text: 'סוג כל נקודה, והערך של $f$ במינימום ובמקסימום.'
+          - kind: idea
+            text: 'מבחן הנגזרות השניות: $D=f_{xx}f_{yy}-f_{xy}^2$ בכל נקודה, ואם $D>0$ הסימן של $f_{xx}$ מכריע.'
+          - kind: computation
+            text: '$f_{xx}=6x$, $f_{yy}=6x$, $f_{xy}=6y$, ולכן $D=36x^2-36y^2=36(x^2-y^2)$.'
+          - kind: step
+            text: >-
+              $(2,1)$: $D=108>0$, $f_{xx}=12>0$, מינימום מקומי, $f(2,1)=8+6-30-12=-28$. $(-2,-1)$: $D=108>0$, $f_{xx}=-12<0$,
+              מקסימום מקומי, $f(-2,-1)=28$.
+          - kind: step
+            text: '$(1,2)$ ו-$(-1,-2)$: $D=36(1-4)=-108<0$, נקודות אוכף.'
+          - kind: check
+            text: '$f(-x,-y)=-f(x,y)$, ולכן המקסימום ב-$(-2,-1)$ הוא מינוס המינימום ב-$(2,1)$, כמו שיצא.'
+          - kind: result
+            text: >-
+              $(2,1)$ מינימום מקומי ($f=-28$); $(-2,-1)$ מקסימום מקומי ($f=28$); $(1,2)$ ו-$(-1,-2)$ נקודות אוכף.
+        rubric:
+          - text: 'נגזרות שניות נכונות ונוסחה נכונה ל-$D$'
+            weight: 3
+          - text: 'חישוב $D$ בכל ארבע הנקודות'
+            weight: 4
+          - text: 'סיווג נכון לפי סימן $D$ וסימן $f_{xx}$'
+            weight: 4
+          - text: 'ערכי $f$ במינימום ($-28$) ובמקסימום ($28$)'
+            weight: 2
+
+      - label: ג
+        points: 4
+        type: expr
+        objectives: [OBJ-10.7-2]
+        prompt: >-
+          כתבו את פולינום טיילור מסדר שני של $f$ סביב $(2,1)$, כנוסחה ב-$x$ וב-$y$.
+        answer: '-28 + 6*(x - 2)^2 + 6*(x - 2)*(y - 1) + 6*(y - 1)^2'
+        answerTex: '$T_2=-28+6(x-2)^2+6(x-2)(y-1)+6(y-1)^2$'
+        variables: [x, y]
+        correctFeedback: >-
+          נכון. בנקודה קריטית אין איברים לינאריים, ו-$\tfrac12\left(12\Delta x^2+2\cdot6\,\Delta x\Delta y+12\Delta y^2\right)$.
+          הצורה הריבועית חיובית ($D>0$, $f_{xx}>0$), כמו שמתאים למינימום.
+        wrongFeedback: >-
+          $f(2,1)=-28$, $f_x=f_y=0$, $f_{xx}=12$, $f_{xy}=6$, $f_{yy}=12$. הציבו בנוסחת טיילור מסדר שני.
+        commonWrong:
+          - expr: '-28 + 12*(x - 2)^2 + 12*(x - 2)*(y - 1) + 12*(y - 1)^2'
+            feedback: 'חסר החצי שלפני האיברים מסדר שני.'
+            misconception: MC-c10-taylor-forget-half
+          - expr: '-28 + 6*(x - 2)^2 + 3*(x - 2)*(y - 1) + 6*(y - 1)^2'
+            feedback: 'המקדם של $\Delta x\Delta y$ הוא $f_{xy}=6$ עצמה ($\tfrac12\cdot2f_{xy}$), לא חציה.'
+            misconception: MC-c10-taylor-mixed-factor
+
+      - label: ד
+        points: 4
+        type: mc
+        objectives: [OBJ-10.7-3]
+        qualitative: true
+        prompt: >-
+          איך נראים קווי הגובה של $f$ קרוב לנקודה $(1,2)$, ואיך קרוב ל-$(2,1)$?
+        choices:
+          - text: 'ליד $(1,2)$ קו הגובה $f=-26$ נראה כמו שני עקומים שנחתכים בנקודה; ליד $(2,1)$ קווי הגובה עקומים סגורים קטנים סביבה'
+            correct: true
+            feedback: >-
+              נכון. $(1,2)$ אוכף: $f-f(1,2)$ מחליפה סימן, וקו הגובה דרך הנקודה מתפצל בה. $(2,1)$ מינימום: ליד הנקודה
+              $f\approx-28+6(\Delta x^2+\Delta x\Delta y+\Delta y^2)$, וקווי הגובה קרובים לאליפסות.
+          - text: 'ליד שתי הנקודות קווי הגובה עקומים סגורים'
+            feedback: 'עקומים סגורים מופיעים ליד קיצון. $(1,2)$ נקודת אוכף, ושם $f$ גדולה מ-$f(1,2)$ בכיוונים מסוימים וקטנה באחרים.'
+            misconception: MC-c10-closed-contours-everywhere
+          - text: 'ליד שתי הנקודות קווי הגובה הם ישרים מקבילים'
+            feedback: 'ישרים מקבילים מתאימים לנקודה שבה $\nabla f\ne0$. בנקודה קריטית הקירוב הלינארי קבוע, והצורה נקבעת מהאיברים מסדר שני.'
+            misconception: MC-c10-critical-means-extremum

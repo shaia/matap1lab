@@ -1,0 +1,310 @@
+# Lesson 6.1 — higher derivatives and the Taylor polynomial.
+# Objectives (src/course.ts):
+#   OBJ-6.1-1  higher derivatives, a formula for the n-th derivative of simple functions
+#   OBJ-6.1-2  the Taylor polynomial about a point; a polynomial is its own Taylor polynomial
+#   OBJ-6.1-3  orders 1 and 2 geometrically: the tangent line and the osculating parabola
+# The notes have no one-variable Taylor (notes-index, p. 4 only lists "קירוב לינארי (+ טורי טיילור)"); the syllabus
+# supplies it. Every key recomputed with sympy (screens/tools/recompute-ch6.py).
+chapter: 6
+questions:
+  - id: Q-6.1-poly-vanish
+    type: multi
+    objectives: [OBJ-6.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      לאילו מהפונקציות הבאות יש $n$ שממנו והלאה הנגזרת $f^{(n)}$ היא אפס זהותית? סמנו את כולן.
+    choices:
+      - text: '$f(x)=x^5-3x$'
+        correct: true
+        feedback: 'נכון. כל גזירה מורידה את המעלה באחד: $f^{(5)}=120$ קבוע, ו-$f^{(6)}\equiv0$.'
+      - text: '$f(x)=(x-1)^3(x+2)$'
+        correct: true
+        feedback: 'נכון. זה פולינום ממעלה 4 (פתחו את הסוגריים אם צריך), ולכן $f^{(5)}\equiv0$.'
+      - text: '$f(x)=e^{2x}$'
+        feedback: >-
+          $f^{(n)}(x)=2^ne^{2x}$, שאינה מתאפסת אף פעם. כלל השרשרת מוסיף גורם 2 בכל גזירה, אבל האקספוננט נשאר.
+        misconception: MC-c6-chain-power
+      - text: '$f(x)=\sin x$'
+        feedback: >-
+          הנגזרות של $\sin x$ חוזרות במחזור של 4: $\cos x,\ -\sin x,\ -\cos x,\ \sin x$. אף אחת מהן אינה אפס זהותית.
+        misconception: MC-c6-chain-power
+      - text: '$f(x)=\frac1x$'
+        feedback: >-
+          $f^{(n)}(x)=\frac{(-1)^n n!}{x^{n+1}}$: החזקה השלילית רק הולכת וגדלה בערכה המוחלט, והנגזרת אף פעם אינה אפס.
+        misconception: MC-c6-nth-deriv-sign
+    hints: ['מה קורה למעלה של פולינום בכל גזירה? ומה קורה לחזקה שלילית?']
+
+  - id: Q-6.1-third-ln
+    type: expr
+    objectives: [OBJ-6.1-1]
+    level: basic
+    prompt: 'תהי $f(x)=\ln x$ ל-$x>0$. חשבו את $f''''''(x)$, הנגזרת השלישית.'
+    answer: '2/x^3'
+    answerTex: '$f''''''(x)=\frac{2}{x^3}$'
+    variables: [x]
+    domain: [0.5, 3]
+    correctFeedback: >-
+      נכון. $f'(x)=x^{-1}$, $f''(x)=-x^{-2}$, $f'''(x)=(-1)(-2)x^{-3}=\frac{2}{x^3}$.
+    wrongFeedback: >-
+      גזרו שלוש פעמים, כל פעם לפי $\left(x^k\right)'=kx^{k-1}$, ושימו לב לסימן של $k$ כשהוא שלילי.
+    commonWrong:
+      - expr: '-2/x^3'
+        feedback: >-
+          הסימן: $\left(-x^{-2}\right)'=-(-2)x^{-3}=+2x^{-3}$. גזירה של חזקה שלילית מוסיפה בכל פעם גורם שלילי, ולכן הסימנים
+          מתחלפים.
+        misconception: MC-c6-nth-deriv-sign
+    hints: ['כתבו $\frac1x=x^{-1}$ וגזרו כחזקה.']
+
+  - id: Q-6.1-tangent-is-T1
+    type: mc
+    objectives: [OBJ-6.1-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $f$ גזירה ב-$x_0$. מהו הגרף של פולינום טיילור מסדר 1 של $f$ סביב $x_0$, $T_1(x)=f(x_0)+f'(x_0)(x-x_0)$?
+    choices:
+      - text: 'הישר המשיק לגרף של $f$ בנקודה $(x_0,f(x_0))$'
+        correct: true
+        feedback: >-
+          נכון. ישר שעובר ב-$(x_0,f(x_0))$ ושיפועו $f'(x_0)$: זה בדיוק המשיק, הקירוב הלינארי מפרק 5.
+      - text: 'הישר דרך $(0,f(0))$ בשיפוע $f''(x_0)$'
+        feedback: >-
+          בפולינום טיילור סביב $x_0$ מופיעות חזקות של $x-x_0$, לא של $x$. ב-$x=x_0$ מתקבל $T_1(x_0)=f(x_0)$: הישר עובר
+          בנקודה שעל הגרף, לא בנקודה שמעל 0.
+        misconception: MC-c6-powers-of-x
+      - text: 'מיתר שמחבר שתי נקודות על הגרף משני צדי $x_0$'
+        feedback: >-
+          מיתר משתמש בשתי נקודות, והשיפוע שלו הוא מנת הפרשים. $T_1$ משתמש רק במידע בנקודה $x_0$ עצמה: הערך והנגזרת.
+          המיתר הופך למשיק רק בגבול.
+        misconception: MC-c6-taylor-global
+    hints: ['הציבו $x=x_0$ ב-$T_1$, וגזרו את $T_1$ פעם אחת.']
+
+  - id: Q-6.1-exp-at1
+    type: expr
+    objectives: [OBJ-6.1-2]
+    level: basic
+    prompt: >-
+      כתבו את פולינום טיילור מסדר 2 של $f(x)=e^x$ סביב $x_0=1$. השאירו אותו בחזקות של $(x-1)$ או פתחו סוגריים, כרצונכם.
+    answer: 'e + e*(x-1) + e*(x-1)^2/2'
+    answerTex: '$T_2(x)=e+e(x-1)+\frac{e}{2}(x-1)^2$'
+    variables: [x]
+    domain: [-1, 3]
+    correctFeedback: >-
+      נכון. כל הנגזרות של $e^x$ שוות $e$ ב-$x_0=1$, ולכן $T_2(x)=f(1)+f'(1)(x-1)+\frac{f''(1)}{2!}(x-1)^2$.
+    wrongFeedback: >-
+      $T_2(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2$. חשבו את שלוש הנגזרות ב-1 והציבו.
+    commonWrong:
+      - expr: 'e + e*(x-1) + e*(x-1)^2'
+        feedback: 'המקדם של $(x-1)^2$ הוא $\frac{f''''(1)}{2!}$: שכחתם לחלק ב-$2!$.'
+        misconception: MC-c6-forget-factorial
+      - expr: 'e + e*x + e*x^2/2'
+        feedback: >-
+          המקדמים נכונים, אבל סביב $x_0=1$ כותבים חזקות של $x-1$. בדקו: הפולינום שלכם נותן ב-$x=1$ את $\frac{5e}{2}$ ולא
+          את $e$.
+        misconception: MC-c6-powers-of-x
+    hints: ['כמה שווה $f^{(k)}(1)$ לכל $k$?']
+
+  - id: Q-6.1-nth-pattern
+    type: mc
+    objectives: [OBJ-6.1-1]
+    level: mid
+    prompt: >-
+      תהי $f(x)=\frac{1}{1-x}$ ל-$x\ne1$. מהי הנוסחה ל-$f^{(n)}(x)$?
+    choices:
+      - text: '$\frac{n!}{(1-x)^{n+1}}$'
+        correct: true
+        feedback: >-
+          נכון. $f=(1-x)^{-1}$, ובכל גזירה החזקה תורמת גורם שלילי והנגזרת הפנימית של $1-x$ תורמת עוד $-1$: שני המינוסים
+          מתבטלים. $f'=(1-x)^{-2}$, $f''=2(1-x)^{-3}$, $f'''=6(1-x)^{-4}$.
+      - text: '$\frac{(-1)^n n!}{(1-x)^{n+1}}$'
+        feedback: >-
+          זו הנוסחה ל-$\frac{1}{1+x}$. כאן כלל השרשרת מוסיף בכל גזירה גורם $-1$ מהנגזרת של $1-x$, והוא מבטל את הסימן
+          של החזקה. בדקו: $f'(x)=\frac{1}{(1-x)^2}>0$.
+        misconception: MC-c6-nth-deriv-sign
+      - text: '$\frac{1}{(1-x)^{n+1}}$'
+        feedback: >-
+          החזקה גדלה באחד בכל גזירה, והמעריך יורד כגורם: $1\cdot2\cdot3\cdots n=n!$. בלי הגורם הזה כבר $f''$ יוצא שגוי.
+        misconception: MC-c6-forget-factorial
+      - text: '$\frac{n}{(1-x)^{n+1}}$'
+        feedback: >-
+          המעריכים שיורדים מצטברים במכפלה: $1\cdot2\cdots n$, לא רק $n$ האחרון. בדקו ב-$n=3$: $f'''=\frac{6}{(1-x)^4}$.
+        misconception: MC-c6-forget-factorial
+    hints: ['חשבו את $f''$, $f''''$ ו-$f''''''$ וחפשו את הדפוס.']
+
+  - id: Q-6.1-sin3x-7
+    type: numeric
+    objectives: [OBJ-6.1-1]
+    level: mid
+    prompt: 'תהי $f(x)=\sin(3x)$. חשבו את $f^{(7)}(0)$.'
+    answer: -2187
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. כל גזירה מוסיפה גורם 3, והנגזרות של סינוס חוזרות במחזור של 4. $7=4+3$, ולכן
+      $f^{(7)}(x)=3^7\cdot(-\cos 3x)$ ו-$f^{(7)}(0)=-3^7=-2187$.
+    wrongFeedback: >-
+      $f^{(n)}(x)=3^n\sin^{(n)}(3x)$. מצאו את $\sin^{(7)}$ לפי המחזור $\sin\to\cos\to-\sin\to-\cos\to\sin$.
+    commonWrong:
+      - value: 2187
+        feedback: 'הגורם $3^7$ נכון, אבל הסימן לא: $\sin^{(3)}=-\cos$, ולכן $\sin^{(7)}(0)=-\cos0=-1$.'
+        misconception: MC-c6-nth-deriv-sign
+      - value: -3
+        feedback: >-
+          כלל השרשרת פועל בכל אחת משבע הגזירות, וכל אחת מוסיפה גורם 3: יחד $3^7$, לא 3 אחד.
+        misconception: MC-c6-chain-power
+    hints: ['מה נותנת גזירה אחת של $\sin(3x)$? ושתיים?']
+
+  - id: Q-6.1-poly-self
+    type: twotier
+    objectives: [OBJ-6.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $p(x)=x^3-2x+1$. נכון או לא: פולינום טיילור מסדר 3 של $p$ סביב $x_0=2$ שווה ל-$p(x)$ לכל $x$.
+    choices:
+      - text: נכון
+        correct: true
+        feedback: >-
+          נכון. $T_3(x)=5+10(x-2)+6(x-2)^2+(x-2)^3$, ואם פותחים סוגריים מקבלים בדיוק $x^3-2x+1$. זה אותו פולינום, כתוב
+          בחזקות של $x-2$.
+      - text: לא נכון
+        feedback: >-
+          $T_3$ נראה אחרת, כי הוא כתוב בחזקות של $x-2$, אבל זו רק צורת כתיבה: פתחו סוגריים ותקבלו את $p$. אי אפשר לקבל
+          פולינום שונה, כי ההפרש $p-T_3$ ממעלה 3 לכל היותר ומתאפס ב-2 עם שלוש נגזרותיו.
+        misconception: MC-c6-poly-taylor-different
+    reasons:
+      - text: 'ל-$p$ ול-$T_3$ אותו ערך ואותן שלוש נגזרות ב-2, ו-$p^{(4)}\equiv0$, כך שאין מה שיבדיל ביניהם'
+        correct: true
+        feedback: >-
+          בדיוק. פולינום ממעלה $n$ קבוע לגמרי על ידי $p(x_0),p'(x_0),\dots,p^{(n)}(x_0)$, ופולינום טיילור מסדר $n$ בונה
+          אותו מחדש מהמספרים האלה.
+      - text: 'כי פולינום טיילור הוא תמיד קירוב, וקירוב אף פעם אינו מדויק'
+        feedback: >-
+          קירוב יכול להיות מדויק. לפולינום ממעלה $n$, פולינום טיילור מכל סדר $m\ge n$ הוא הפולינום עצמו, בכל נקודה.
+        misconception: MC-c6-poly-taylor-different
+      - text: 'כי פולינום טיילור סביב $x_0$ מדויק רק בנקודה $x_0$ עצמה'
+        feedback: >-
+          זה נכון לפונקציה כללית, לא לפולינום ממעלה $\le3$: כאן אין שארית בכלל, כי הנגזרת הרביעית אפס.
+        misconception: MC-c6-taylor-global
+    hints: ['חשבו את $p(2)$, $p''(2)$, $p''''(2)$ ו-$p''''''(2)$.']
+
+  - id: Q-6.1-recenter
+    type: numeric
+    objectives: [OBJ-6.1-2]
+    level: mid
+    prompt: >-
+      כותבים את $p(x)=x^3-2x+1$ בחזקות של $(x-1)$: $p(x)=a_0+a_1(x-1)+a_2(x-1)^2+a_3(x-1)^3$. מהו $a_2$?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $a_2=\frac{p''(1)}{2!}$, ו-$p''(x)=6x$, כך ש-$a_2=\frac{6}{2}=3$. (כל הפיתוח:
+      $p(x)=0+1\cdot(x-1)+3(x-1)^2+(x-1)^3$.)
+    wrongFeedback: 'המקדם של $(x-x_0)^k$ בפולינום טיילור הוא $\frac{p^{(k)}(x_0)}{k!}$.'
+    commonWrong:
+      - value: 6
+        feedback: 'זה $p''''(1)$. המקדם הוא $\frac{p''''(1)}{2!}$: חסרה החלוקה ב-2.'
+        misconception: MC-c6-forget-factorial
+      - value: 0
+        feedback: >-
+          0 הוא המקדם של $x^2$ ב-$p$ כפי שהוא כתוב. בחזקות של $x-1$ המקדמים משתנים: פתחו את $(x-1)^3$ ותראו שהוא תורם
+          $x^2$.
+        misconception: MC-c6-powers-of-x
+    hints: ['איזו נגזרת של $p$ ב-1 קובעת את המקדם של $(x-1)^2$?']
+
+  - id: Q-6.1-osculating
+    type: mc
+    objectives: [OBJ-6.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f$ גזירה פעמיים ב-$x_0$, ו-$f''(x_0)\ne0$. הגרף של $T_2$, פולינום טיילור מסדר 2 סביב $x_0$, הוא פרבולה (הפרבולה
+      הצמודה). מה משותף לפרבולה הזאת ולגרף של $f$ בנקודה $x_0$?
+    choices:
+      - text: 'הערך, השיפוע והנגזרת השנייה, ולכן גם כיוון הפתיחה (למעלה או למטה)'
+        correct: true
+        feedback: >-
+          נכון. $T_2(x_0)=f(x_0)$, $T_2'(x_0)=f'(x_0)$ ו-$T_2''=f''(x_0)$. הנגזרת השנייה קובעת כמה הגרף מתעקם ולאן, ולכן
+          הפרבולה נצמדת לגרף טוב יותר מהמשיק.
+      - text: 'רק הערך והשיפוע, כמו למשיק'
+        feedback: >-
+          את זה נותן כבר $T_1$. המחובר $\frac{f''(x_0)}{2}(x-x_0)^2$ מוסיף התאמה של הנגזרת השנייה: גזרו את $T_2$ פעמיים
+          ובדקו.
+        misconception: MC-c6-osculating-tangent-only
+      - text: 'כל הנגזרות, כך שהפרבולה מתלכדת עם הגרף בסביבה של $x_0$'
+        feedback: >-
+          $T_2'''\equiv0$, ואילו $f'''(x_0)$ יכולה להיות כל מספר. הפרבולה צמודה לגרף ליד $x_0$, אבל בדרך כלל אינה
+          מתלכדת איתו בשום קטע.
+        misconception: MC-c6-taylor-global
+    hints: ['גזרו את $T_2(x)=f(x_0)+f''(x_0)(x-x_0)+\frac{f''''(x_0)}{2}(x-x_0)^2$ פעם ופעמיים.']
+
+  - id: Q-6.1-sqrt44
+    type: numeric
+    objectives: [OBJ-6.1-2, OBJ-6.1-3]
+    level: mid
+    prompt: >-
+      קרבו את $\sqrt{4.4}$ בעזרת $T_2$, פולינום טיילור מסדר 2 של $f(x)=\sqrt x$ סביב $x_0=4$. תנו את הערך של $T_2(4.4)$.
+    answer: 2.0975
+    tolerance: 0.0001
+    correctFeedback: >-
+      נכון. $f(4)=2$, $f'(4)=\frac{1}{2\sqrt4}=\frac14$, $f''(4)=-\frac14\cdot4^{-3/2}=-\frac{1}{32}$, ולכן
+      $T_2(4.4)=2+\frac{0.4}{4}-\frac{1}{64}(0.4)^2=2+0.1-0.0025=2.0975$. (המחשבון: $\sqrt{4.4}\approx2.09762$.)
+    wrongFeedback: >-
+      חשבו $f(4)$, $f'(4)$, $f''(4)$, הציבו ב-$T_2(x)=f(4)+f'(4)(x-4)+\frac{f''(4)}{2}(x-4)^2$ עם $x-4=0.4$.
+    commonWrong:
+      - value: 2.1
+        feedback: >-
+          זה $T_1(4.4)$, ערך המשיק. המחובר השלילי $\frac{f''(4)}{2}(0.4)^2$ מתקן את הקירוב: $\sqrt x$ קעורה, והמשיק עובר
+          מעל הגרף.
+        misconception: MC-c6-osculating-tangent-only
+      - value: 2.095
+        feedback: 'שכחתם לחלק ב-$2!$: המחובר הריבועי הוא $\frac{f''''(4)}{2}(0.4)^2=-0.0025$, וערכו המוחלט 0.0025, לא 0.005.'
+        misconception: MC-c6-forget-factorial
+    hints: ['$f''''(x)=-\frac14x^{-3/2}$.']
+
+  - id: Q-6.1-read-T2
+    type: mc
+    objectives: [OBJ-6.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      על $f$ ידוע: $f(1)=2$, $f'(1)=0$ ו-$f''(1)=-4$. מה אפשר לומר על הגרף של $f$ ליד $x=1$?
+    choices:
+      - text: 'הוא צמוד לפרבולה $y=2-2(x-1)^2$, שנפתחת למטה וקודקודה $(1,2)$: יש ל-$f$ מקסימום מקומי ב-1'
+        correct: true
+        feedback: >-
+          נכון. $T_2(x)=2+0\cdot(x-1)+\frac{-4}{2}(x-1)^2$. המשיק אופקי, והפרבולה הצמודה נפתחת למטה.
+      - text: 'הוא צמוד לפרבולה $y=2-4(x-1)^2$'
+        feedback: 'המקדם של $(x-1)^2$ הוא $\frac{f''''(1)}{2!}=-2$: חסרה החלוקה ב-2.'
+        misconception: MC-c6-forget-factorial
+      - text: 'הוא צמוד לישר $y=2$, ולכן ליד 1 הפונקציה כמעט קבועה ואין קיצון'
+        feedback: >-
+          הישר $y=2$ הוא רק המשיק. הנגזרת השנייה אומרת לאן הגרף מתעקם ממנו: למטה משני הצדדים, כלומר מקסימום מקומי.
+        misconception: MC-c6-osculating-tangent-only
+    hints: ['כתבו את $T_2$ סביב 1.']
+
+  - id: Q-6.1-tan-T3
+    type: expr
+    objectives: [OBJ-6.1-1, OBJ-6.1-2]
+    level: exam
+    prompt: >-
+      חשבו את פולינום טיילור מסדר 3 של $f(x)=\tan x$ סביב $x_0=0$. (היעזרו ב-$\left(\tan x\right)'=1+\tan^2x$ כדי לגזור
+      שוב ושוב.)
+    answer: 'x + x^3/3'
+    answerTex: '$T_3(x)=x+\frac{x^3}{3}$'
+    variables: [x]
+    domain: [-1, 1]
+    correctFeedback: >-
+      נכון. נסמן $s=\tan x$: $f'=1+s^2$, $f''=2s(1+s^2)$, $f'''=2(1+s^2)^2+4s^2(1+s^2)$. ב-0: $f=0$, $f'=1$, $f''=0$,
+      $f'''=2$, ולכן $T_3=x+\frac{2}{3!}x^3=x+\frac{x^3}{3}$.
+    wrongFeedback: >-
+      גזרו בכלל השרשרת: $\left(s^2\right)'=2s\,s'=2s(1+s^2)$. אחר כך הציבו $x=0$, $s=0$, וחלקו כל נגזרת ב-$k!$.
+    commonWrong:
+      - expr: 'x + 2*x^3'
+        feedback: '$f''''''(0)=2$ נכון, אבל המקדם של $x^3$ הוא $\frac{2}{3!}=\frac13$.'
+        misconception: MC-c6-forget-factorial
+      - expr: 'x + x^3/6'
+        feedback: >-
+          $\frac{x^3}{6}$ מתאים ל-$f'''(0)=1$. בגזירה של $2s(1+s^2)$ צריך כלל מכפלה: $2s'(1+s^2)+2s\cdot2ss'$, וב-0 זה
+          $2\cdot1\cdot1=2$.
+        misconception: MC-c6-chain-power
+    hints: ['כל נגזרת של $\tan x$ היא פולינום ב-$s=\tan x$; גזרו אותו בכלל השרשרת עם $s''=1+s^2$.']

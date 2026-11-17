@@ -1,0 +1,275 @@
+# Chapter 7 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# Keys recomputed in screens/tools/recompute-ch7.py.
+chapter: 7
+questions:
+  - id: Q-7-exam-1
+    type: exam
+    title: שלושה אינטגרלים, שלוש שיטות
+    prompt: 'חשבו את האינטגרלים הבאים. בכל אחד בחרו שיטה ובדקו את התשובה בגזירה.'
+    parts:
+      - label: א
+        points: 6
+        type: expr
+        objectives: [OBJ-7.3-1, OBJ-7.3-3]
+        prompt: 'חשבו $\int x^2\ln x\,dx$ ל-$x>0$.'
+        answer: 'x^3*log(x)/3 - x^3/9'
+        answerTex: '$\frac{x^3\ln x}{3}-\frac{x^3}{9}+C$'
+        variables: [x]
+        domain: [0.3, 3]
+        upToConstant: true
+        correctFeedback: 'נכון. גוזרים את $\ln x$: $\frac{x^3}{3}\ln x-\int\frac{x^3}{3}\cdot\frac1x\,dx=\frac{x^3\ln x}{3}-\frac{x^3}{9}$.'
+        wrongFeedback: 'בחלקים: $u=\ln x$, $v''=x^2$.'
+        commonWrong:
+          - expr: 'x^3*log(x)/3'
+            feedback: 'חסר האינטגרל שנשאר, $-\int\frac{x^2}{3}\,dx=-\frac{x^3}{9}$.'
+            misconception: MC-c7-parts-drop-integral
+
+      - label: ב
+        points: 7
+        type: expr
+        objectives: [OBJ-7.4-1, OBJ-7.4-2]
+        prompt: 'חשבו $\int\frac{5x+1}{x^2+x-2}\,dx$ בתחום $x>1$.'
+        answer: '2*log(abs(x-1)) + 3*log(abs(x+2))'
+        answerTex: '$2\ln|x-1|+3\ln|x+2|+C$'
+        variables: [x]
+        domain: [1.5, 4]
+        upToConstant: true
+        correctFeedback: >-
+          נכון. $x^2+x-2=(x-1)(x+2)$; בכיסוי $A=\frac{5+1}{1+2}=2$ ו-$B=\frac{-10+1}{-2-1}=3$.
+        wrongFeedback: 'פרקו את המכנה, מצאו את המקדמים בהצבת השורשים, ובצעו אינטגרציה לכל שבר.'
+        commonWrong:
+          - expr: '5/2*log(abs(x^2+x-2))'
+            feedback: 'הנגזרת של המכנה היא $2x+1$, והמונה $5x+1$ אינו כפולה שלה. צריך שברים חלקיים.'
+            misconception: MC-c7-log-of-denominator
+          - expr: '2*log(abs(x-1)) - 3*log(abs(x+2))'
+            feedback: '$B=\frac{-10+1}{-2-1}=\frac{-9}{-3}=3$: שני מינוסים.'
+            misconception: MC-c7-coverup-sign
+
+      - label: ג
+        points: 12
+        type: open
+        objectives: [OBJ-7.3-2, OBJ-7.6-3]
+        prompt: 'חשבו $\int e^x\cos x\,dx$ ובדקו את התשובה בגזירה.'
+        solution:
+          - kind: given
+            text: '$I=\int e^x\cos x\,dx$.'
+          - kind: goal
+            text: 'קדומה מפורשת, ובדיקה שנגזרתה $e^x\cos x$.'
+          - kind: idea
+            text: >-
+              אף גורם לא נעשה פשוט יותר בגזירה, אבל שניים חוזרים על עצמם: אחרי שתי אינטגרציות בחלקים (בשתיהן גוזרים את
+              הפונקציה הטריגונומטרית) $I$ חוזר עם מקדם $-1$, ופותרים בשבילו.
+          - kind: step
+            text: '$u=\cos x$, $v''=e^x$: $I=e^x\cos x-\int e^x(-\sin x)\,dx=e^x\cos x+\int e^x\sin x\,dx$.'
+          - kind: step
+            text: '$u=\sin x$, $v''=e^x$: $\int e^x\sin x\,dx=e^x\sin x-\int e^x\cos x\,dx=e^x\sin x-I$.'
+          - kind: computation
+            text: '$I=e^x\cos x+e^x\sin x-I$, ולכן $2I=e^x(\cos x+\sin x)$ ו-$I=\frac{e^x(\cos x+\sin x)}{2}+C$.'
+          - kind: check
+            text: >-
+              $\left(\frac{e^x(\cos x+\sin x)}{2}\right)'=\frac{e^x(\cos x+\sin x)+e^x(-\sin x+\cos x)}{2}=e^x\cos x$. נכון.
+          - kind: result
+            text: '$\int e^x\cos x\,dx=\frac{e^x(\cos x+\sin x)}{2}+C$.'
+        rubric:
+          - text: 'אינטגרציה בחלקים ראשונה נכונה, כולל הסימן של $\int e^x\sin x\,dx$'
+            weight: 3
+          - text: 'אינטגרציה שנייה עם אותה בחירה (גוזרים את הטריגונומטרית), כך ש-$I$ חוזר'
+            weight: 3
+          - text: 'פתרון המשוואה $2I=\dots$ כולל החלוקה ב-2 והקבוע $C$'
+            weight: 3
+          - text: 'בדיקה מלאה בגזירה שמחזירה את $e^x\cos x$'
+            weight: 3
+
+  - id: Q-7-exam-2
+    type: exam
+    title: ממהירות למקום
+    prompt: >-
+      חלקיק נע על ציר $x$ במהירות $v(t)=te^{-t}$ (במטר לשנייה, $t\ge0$ בשניות), ובזמן $t=0$ הוא בראשית: $x(0)=0$.
+    parts:
+      - label: א
+        points: 6
+        type: expr
+        objectives: [OBJ-7.3-1, OBJ-7.1-1]
+        prompt: 'מצאו את המקום $x(t)$ (כולל הקבוע שנקבע מהתנאי $x(0)=0$). כתבו את התשובה במשתנה $t$.'
+        answer: '1 - (t+1)*exp(-t)'
+        answerTex: '$x(t)=1-(t+1)e^{-t}$'
+        variables: [t]
+        domain: [0, 5]
+        correctFeedback: >-
+          נכון. בחלקים: $\int te^{-t}dt=-te^{-t}-e^{-t}+C=-(t+1)e^{-t}+C$, ו-$x(0)=-1+C=0$ נותן $C=1$.
+        wrongFeedback: 'מצאו קדומה של $v$ (בחלקים, $u=t$), ואז קבעו את הקבוע לפי $x(0)=0$.'
+        commonWrong:
+          - expr: '-(t+1)*exp(-t)'
+            feedback: 'זו קדומה, אבל $x(0)=-1$ לפיה. התנאי $x(0)=0$ קובע $C=1$.'
+            misconception: MC-c7-drop-constant
+          - expr: '1 - (t-1)*exp(-t)'
+            feedback: '$\int e^{-t}dt=-e^{-t}$, ולכן $-te^{-t}+\int e^{-t}dt=-te^{-t}-e^{-t}$.'
+            misconception: MC-c7-parts-sign-repeat
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-7.1-2]
+        standalone: false
+        prompt: 'מה המקום של החלקיק בזמן $t=2$? (אפשר לכתוב ביטוי עם e)'
+        answer: 0.59399415029
+        tolerance: 0.001
+        correctFeedback: 'נכון: $x(2)=1-3e^{-2}\approx0.594$ מטר. זה גם $\int_0^2te^{-t}\,dt$, לפי המשפט היסודי.'
+        wrongFeedback: 'הציבו $t=2$ ב-$x(t)$ מסעיף א.'
+        commonWrong:
+          - value: -0.40600584971
+            feedback: 'זה $-3e^{-2}$, בלי הקבוע $C=1$. המקום מתחיל ב-0 והמהירות חיובית, ולכן $x(2)>0$.'
+            misconception: MC-c7-drop-constant
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-7.3-2, OBJ-7.6-3]
+        prompt: >-
+          הראו ש-$\int t^2e^{-t}dt=-\left(t^2+2t+2\right)e^{-t}+C$ (אינטגרל כזה מופיע כשמחשבים את המקום הממוצע של החלקיק), ובדקו
+          בגזירה.
+        solution:
+          - kind: given
+            text: '$J=\int t^2e^{-t}dt$.'
+          - kind: goal
+            text: '$J=-(t^2+2t+2)e^{-t}+C$, ובדיקה בגזירה.'
+          - kind: idea
+            text: 'בכל אינטגרציה בחלקים גוזרים את החזקה של $t$, והיא יורדת באחת; אחרי שתי פעמים נשאר $\int e^{-t}dt$.'
+          - kind: step
+            text: '$u=t^2$, $v=-e^{-t}$: $J=-t^2e^{-t}+2\int te^{-t}dt$.'
+          - kind: step
+            text: '$u=t$, $v=-e^{-t}$: $\int te^{-t}dt=-te^{-t}+\int e^{-t}dt=-(t+1)e^{-t}$.'
+          - kind: computation
+            text: '$J=-t^2e^{-t}-2(t+1)e^{-t}+C=-(t^2+2t+2)e^{-t}+C$.'
+          - kind: check
+            text: '$\left(-(t^2+2t+2)e^{-t}\right)''=-(2t+2)e^{-t}+(t^2+2t+2)e^{-t}=t^2e^{-t}$. נכון.'
+          - kind: result
+            text: '$\int t^2e^{-t}dt=-\left(t^2+2t+2\right)e^{-t}+C$.'
+        rubric:
+          - text: 'בחירה נכונה בשתי האינטגרציות בחלקים ($u$ = החזקה של $t$)'
+            weight: 3
+          - text: 'סימנים נכונים: $v=-e^{-t}$ והמינוס שלפני האינטגרל'
+            weight: 3
+          - text: 'צירוף התוצאה לצורה המבוקשת'
+            weight: 2
+          - text: 'בדיקה בגזירה (כלל המכפלה) שמחזירה $t^2e^{-t}$'
+            weight: 2
+
+      - label: ד
+        points: 4
+        type: twotier
+        objectives: [OBJ-7.1-1]
+        qualitative: true
+        standalone: false
+        prompt: 'נכון או לא: החלקיק לעולם לא מגיע לנקודה $x=1$.'
+        choices:
+          - text: נכון
+            correct: true
+            feedback: 'נכון. $x(t)=1-(t+1)e^{-t}$, ו-$(t+1)e^{-t}>0$ לכל $t\ge0$: החלקיק מתקרב ל-1 ולא מגיע.'
+          - text: לא נכון
+            feedback: '$(t+1)e^{-t}$ חיובי לכל $t$, ולכן $x(t)<1$ תמיד; הוא רק שואף ל-0 כש-$t\to\infty$.'
+            misconception: MC-c7-drop-constant
+        reasons:
+          - text: '$1-x(t)=(t+1)e^{-t}$, שחיובי לכל $t\ge0$'
+            correct: true
+            feedback: 'בדיוק.'
+          - text: 'כי המהירות מתאפסת ב-$t=0$'
+            feedback: 'המהירות חיובית לכל $t>0$, והחלקיק תמיד מתקדם; הוא פשוט מאט מהר.'
+            misconception: MC-c7-antideriv-is-derivative
+          - text: 'כי המקום שווה למהירות, $te^{-t}$, שקטנה מ-1'
+            feedback: 'המקום הוא קדומה של המהירות, לא המהירות עצמה.'
+            misconception: MC-c7-antideriv-is-derivative
+
+  - id: Q-7-exam-3
+    type: exam
+    title: שברים חלקיים והצבה אוניברסלית
+    prompt: 'בשאלה זו שני אינטגרלים: אחד של פונקציה רציונלית, ואחד של פונקציה רציונלית של קוסינוס.'
+    parts:
+      - label: א
+        points: 4
+        type: mc
+        objectives: [OBJ-7.4-1]
+        prompt: 'מהי צורת הפירוק לשברים חלקיים של $\frac{1}{x\left(x^2+1\right)}$?'
+        choices:
+          - text: '$\frac Ax+\frac{Bx+C}{x^2+1}$'
+            correct: true
+            feedback: 'נכון. גורם לינארי ומעליו קבוע; גורם ריבועי בלי שורשים ומעליו מונה לינארי. (כאן $A=1$, $B=-1$, $C=0$.)'
+          - text: '$\frac Ax+\frac{C}{x^2+1}$'
+            feedback: 'מעל גורם ריבועי המונה לינארי. עם מונה קבוע אין פתרון: ננסה ונקבל סתירה במקדם של $x^2$.'
+            misconception: MC-c7-quadratic-numerator-const
+          - text: '$\frac Ax+\frac{B}{x-1}+\frac{C}{x+1}$'
+            feedback: '$x^2+1$ אינו מתפרק מעל הממשיים; $(x-1)(x+1)=x^2-1$.'
+            misconception: MC-c7-quadratic-factor-wrong
+
+      - label: ב
+        points: 7
+        type: expr
+        objectives: [OBJ-7.4-2, OBJ-7.4-3]
+        prompt: 'חשבו $\int\frac{dx}{x\left(x^2+1\right)}$ ל-$x>0$.'
+        answer: 'log(x) - log(x^2+1)/2'
+        answerTex: '$\ln x-\frac12\ln\left(x^2+1\right)+C$'
+        variables: [x]
+        domain: [0.3, 3]
+        upToConstant: true
+        correctFeedback: 'נכון. $\frac1x-\frac{x}{x^2+1}$, והשבר השני הוא חצי הנגזרת של המכנה חלקי המכנה.'
+        wrongFeedback: 'מצאו $A,B,C$ (הצבה $x=0$ נותנת $A=1$), ובצעו אינטגרציה לכל שבר.'
+        commonWrong:
+          - expr: 'log(x) - log(x^2+1)'
+            feedback: '$\int\frac{x}{x^2+1}dx=\frac12\ln(x^2+1)$: חסר החצי.'
+            misconception: MC-c7-subst-forget-factor
+          - expr: 'log(x) - atan(x)'
+            feedback: 'השבר השני הוא $\frac{-x}{x^2+1}$, עם $x$ במונה: לוגריתם, לא $\arctan$.'
+            misconception: MC-c7-atan-vs-log
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-7.5-2, OBJ-7.4-3]
+        prompt: 'חשבו $\int_0^{\pi/2}\frac{dx}{2+\cos x}$ בהצבה $t=\tan\frac x2$.'
+        solution:
+          - kind: given
+            text: '$\int_0^{\pi/2}\frac{dx}{2+\cos x}$; ההצבה $t=\tan\frac x2$.'
+          - kind: goal
+            text: 'ערך מדויק של האינטגרל.'
+          - kind: idea
+            text: >-
+              ההצבה הופכת פונקציה רציונלית של $\cos x$ לפונקציה רציונלית של $t$; כאן תתקבל שורה מהטבלה, $\int\frac{dt}{t^2+a^2}$.
+          - kind: definition
+            text: '$\cos x=\frac{1-t^2}{1+t^2}$, $dx=\frac{2\,dt}{1+t^2}$. הגבולות: $x=0\Rightarrow t=0$, $x=\frac\pi2\Rightarrow t=\tan\frac\pi4=1$.'
+          - kind: computation
+            text: >-
+              $2+\cos x=\frac{2(1+t^2)+1-t^2}{1+t^2}=\frac{3+t^2}{1+t^2}$, ולכן $\frac{dx}{2+\cos x}=\frac{1+t^2}{3+t^2}\cdot\frac{2\,dt}{1+t^2}=\frac{2\,dt}{t^2+3}$.
+          - kind: computation
+            text: >-
+              $\int_0^1\frac{2\,dt}{t^2+3}=\frac{2}{\sqrt3}\left[\arctan\frac{t}{\sqrt3}\right]_0^1=\frac{2}{\sqrt3}\cdot\frac\pi6=\frac{\pi}{3\sqrt3}$.
+          - kind: check
+            text: >-
+              $\frac{\pi}{3\sqrt3}\approx0.605$. סבירות: האינטגרנד בין $\frac13$ (ב-0) ל-$\frac12$ (ב-$\frac\pi2$), והקטע באורך
+              $\frac\pi2\approx1.571$, כך שהאינטגרל בין $0.52$ ל-$0.79$.
+          - kind: result
+            text: '$\int_0^{\pi/2}\frac{dx}{2+\cos x}=\frac{\pi}{3\sqrt3}=\frac{\sqrt3\,\pi}{9}$.'
+        rubric:
+          - text: 'נוסחאות ההצבה נכונות, כולל $dx=\frac{2\,dt}{1+t^2}$ והגבולות החדשים 0 ו-1'
+            weight: 3
+          - text: 'צמצום נכון ל-$\frac{2}{t^2+3}$'
+            weight: 3
+          - text: 'אינטגרציה עם $\frac1a\arctan\frac ta$, $a=\sqrt3$, וחישוב $\arctan\frac{1}{\sqrt3}=\frac\pi6$'
+            weight: 3
+          - text: 'בדיקת סבירות של התוצאה'
+            weight: 1
+
+      - label: ד
+        points: 4
+        type: numeric
+        objectives: [OBJ-7.4-2]
+        standalone: false
+        prompt: 'בעזרת סעיף ב, חשבו $\int_1^2\frac{dx}{x\left(x^2+1\right)}$. (אפשר לכתוב ביטוי עם ln)'
+        answer: 0.235001814623
+        tolerance: 0.001
+        correctFeedback: 'נכון: $\left(\ln2-\frac12\ln5\right)-\left(0-\frac12\ln2\right)=\frac32\ln2-\frac12\ln5\approx0.235$.'
+        wrongFeedback: 'הציבו 2 ו-1 בקדומה $\ln x-\frac12\ln(x^2+1)$ וחסרו.'
+        commonWrong:
+          - value: -0.223143551314
+            feedback: 'זה $2\ln2-\ln5$, מהקדומה בלי החצי. (אינטגרל של פונקציה חיובית לא יכול להיות שלילי.)'
+            misconception: MC-c7-subst-forget-factor

@@ -1,0 +1,351 @@
+# Lesson 0.1 — how to study the course, and the algebra we need.
+# Objectives (src/course.ts):
+#   OBJ-0.1-1  plan self-study by the path: lesson, understanding questions, workbook, review, exam questions
+#   OBJ-0.1-2  simplify algebraic expressions with powers, roots and fractions; solve quadratic equations
+#   OBJ-0.1-3  solve inequalities (absolute value, fractions) and write the solution as an interval or a union
+# Every number recomputed in screens/tools/recompute-ch0.py.
+chapter: 0
+questions:
+  - id: Q-0.1-path-order
+    type: rank
+    objectives: [OBJ-0.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      בכל פרק של הקורס יש מסלול לימוד קבוע. סדרו את שלביו מהראשון לאחרון.
+    help: 'גררו את השלבים לפי הסדר: השלב הראשון למעלה.'
+    items:
+      - { id: lesson, label: 'השיעור: תמונה, הגדרה, מתכון ודוגמאות' }
+      - { id: understanding, label: 'שאלות ההבנה של השיעור: בסיס, בינוני, מבחן' }
+      - { id: workbook, label: 'חוברת התרגול של השיעור' }
+      - { id: review, label: 'שאלות החזרה על כל הפרק' }
+      - { id: exam, label: 'שאלות המבחן של הפרק, עם פתרון מלא ומחוון' }
+      - { id: test, label: 'מבחן הפרק' }
+      - { id: summary, label: 'סיכום הפרק' }
+    order: [lesson, understanding, workbook, review, exam, test, summary]
+    correctFeedback: >-
+      נכון. כל שלב בונה על הקודם: שאלות ההבנה בודקות מושג אחד בכל פעם, החוברת מתרגלת אותו, שאלות החזרה מערבבות שיעורים,
+      ושאלות המבחן משלבות הכול. הסיכום בסוף מרכז את מה שכבר עבדתם עליו.
+    wrongFeedback: >-
+      חשבו מה כל שלב דורש: שאלה שמערבבת שני שיעורים (חזרה) באה אחרי שתרגלתם כל שיעור לבד (שאלות הבנה וחוברת), ושאלת
+      מבחן של 25 נקודות באה אחרי שאלות החזרה.
+
+  - id: Q-0.1-sure-wrong
+    type: mc
+    objectives: [OBJ-0.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      לפני הבדיקה של כל תשובה האתר שואל אם אתם בטוחים. עניתם לא נכון וסימנתם "בטוחים". מה זה מסמן?
+    choices:
+      - text: 'כנראה תפיסה שגויה: משהו שאתם מאמינים בו ושצריך לתקן, ולכן כדאי לפתוח את ההסבר שהמשוב מפנה אליו'
+        correct: true
+        feedback: >-
+          נכון. טעות "בטוחה" היא בדיוק הסימן לתפיסה שגויה, והאתר רושם אותה ומציע את השיעור שמתקן אותה. טעות "לא בטוחה"
+          מסמנת פער ידע: משהו שעוד לא נלמד.
+      - text: 'שום דבר מיוחד: שאלת הביטחון היא רק כדי שתחשבו רגע לפני הבדיקה'
+        feedback: >-
+          שאלת הביטחון היא הכלי שמפריד בין שני סוגי טעויות: "בטוחים ולא נכון" (תפיסה שגויה) מול "לא בטוחים ולא נכון"
+          (פער). בלי סימון כן האתר לא יודע מה להציע לכם.
+        misconception: MC-c0-confidence-noise
+      - text: 'שהשאלה הייתה מכשילה, ולכן כדאי לדלג לשאלות המבחן ולראות אם שם זה מסתדר'
+        feedback: >-
+          שאלת מבחן משלבת כמה שלבים, וטעות בה לא תראה לכם מה בדיוק לא הבנתם. דווקא כאן כדאי לחזור להסבר ולשאלות ההבנה
+          של אותו מושג.
+        misconception: MC-c0-exam-first
+
+  - id: Q-0.1-practice-entry
+    type: mc
+    objectives: [OBJ-0.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      השיעורים של פרק מסוים עוד לא כתובים, אבל דף התרגול שלו כבר קיים. מאיפה נכון להתחיל ללמוד את הפרק?
+    choices:
+      - text: 'משאלות ההבנה של השיעור הראשון בדף התרגול, לפי הסדר בסיס, בינוני, מבחן, ואחר כך השיעור הבא'
+        correct: true
+        feedback: >-
+          נכון. כל עוד השיעור לא כתוב, דף התרגול הוא נקודת הכניסה: המשוב והרמזים של שאלות ההבנה מסבירים את המושג צעד אחר
+          צעד, ושאלות החזרה והמבחן באות אחרי שעברתם על כל השיעורים.
+      - text: 'משאלות המבחן, כדי לדעת מה נדרש, ואחר כך לחזור לשאלות ההבנה רק בנושאים שבהם טעיתם'
+        feedback: >-
+          שאלת מבחן נבנית מכמה מושגים בבת אחת. בלי השלבים שלפניה קשה לדעת מה מהם חסר, והטעויות לא מלמדות הרבה.
+        misconception: MC-c0-exam-first
+      - text: 'משאלות החזרה, כי הן מכסות את כל הפרק בפעם אחת'
+        feedback: >-
+          שאלות החזרה מערבבות שיעורים ומניחות שכל שיעור כבר תורגל לבד. הן השלב הרביעי במסלול, לא הראשון.
+        misconception: MC-c0-exam-first
+
+  - id: Q-0.1-quad-roots
+    type: numeric
+    objectives: [OBJ-0.1-2]
+    level: basic
+    prompt: >-
+      פתרו את המשוואה $2x^2-5x-3=0$. מהו הפתרון הגדול מבין השניים?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\Delta=25+24=49$, ולכן $x=\frac{5\pm7}{4}$: $x=3$ או $x=-\frac12$. בדיקה: $2\cdot9-15-3=0$.
+    wrongFeedback: >-
+      הציבו בנוסחת השורשים עם $a=2$, $b=-5$, $c=-3$, ושימו לב שהמונה הוא $-b=5$.
+    commonWrong:
+      - value: 0.5
+        feedback: >-
+          זה $\frac{-5+7}{4}$: כתבתם $b$ במקום $-b$ במונה. השורשים שקיבלתם, $\frac12$ ו-$-3$, הם השורשים של
+          $2x^2+5x-3=0$. הצבה של $\frac12$ במשוואה המקורית נותנת $-5$, לא 0.
+        misconception: MC-c0-quadratic-formula
+      - value: 6
+        feedback: >-
+          זה $\frac{5+7}{2}$: חילקתם ב-$a$ במקום ב-$2a=4$. הצבה של 6 נותנת $72-30-3\ne0$.
+        misconception: MC-c0-quadratic-formula
+    hints: ['$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$, ואחר כך הציבו את התשובה בחזרה במשוואה.']
+
+  - id: Q-0.1-simplify-frac
+    type: expr
+    objectives: [OBJ-0.1-2]
+    level: basic
+    prompt: >-
+      פשטו את $\frac{x^2-4}{x^2+4x+4}$ (כש-$x\ne-2$) לשבר שבו המונה והמכנה ממעלה ראשונה. כתבו את התוצאה כביטוי ב-$x$.
+    answer: '(x-2)/(x+2)'
+    answerTex: '$\frac{x^2-4}{x^2+4x+4}=\frac{(x-2)(x+2)}{(x+2)^2}=\frac{x-2}{x+2}$'
+    variables: [x]
+    domain: [0, 3]
+    correctFeedback: >-
+      נכון. מפרקים את שניהם: $x^2-4=(x-2)(x+2)$ (הפרש ריבועים) ו-$x^2+4x+4=(x+2)^2$ (ריבוע של סכום), ומצמצמים את
+      הגורם המשותף $x+2$.
+    wrongFeedback: >-
+      פרקו לגורמים: הפרש ריבועים במונה וריבוע של סכום במכנה. מצמצמים רק גורם שכופל את כל המונה ואת כל המכנה.
+    commonWrong:
+      - expr: '-4/(4*x+4)'
+        feedback: >-
+          "צמצמתם" את $x^2$ מהמונה ומהמכנה, אבל $x^2$ הוא מחובר ולא גורם. ב-$x=1$ השבר המקורי שווה $-\frac13$, והביטוי
+          שלכם $-\frac12$.
+        misconception: MC-c0-cancel-terms
+    hints: ['$a^2-b^2=(a-b)(a+b)$ ו-$a^2+2ab+b^2=(a+b)^2$.']
+
+  - id: Q-0.1-rationalise
+    type: mc
+    objectives: [OBJ-0.1-2]
+    level: mid
+    prompt: >-
+      איזה מהביטויים הבאים שווה ל-$\frac{2}{\sqrt5-1}$?
+    choices:
+      - text: '$\frac{\sqrt5+1}{2}$'
+        correct: true
+        feedback: >-
+          נכון. כופלים מונה ומכנה בצמוד $\sqrt5+1$: $\frac{2(\sqrt5+1)}{5-1}=\frac{\sqrt5+1}{2}$. (שני הצדדים בערך
+          $1.618$.)
+      - text: '$\frac{\sqrt5+1}{3}$'
+        feedback: >-
+          המכנה אחרי הכפל בצמוד הוא $(\sqrt5)^2-1^2=4$, לא $5+1=6$. בערך: $\frac{\sqrt5+1}{3}\approx1.079$, ואילו
+          $\frac{2}{\sqrt5-1}\approx1.618$.
+        misconception: MC-c0-conjugate-product
+      - text: '$\frac{2}{\sqrt5}-2$'
+        feedback: >-
+          פיצלתם את המכנה: $\frac{2}{\sqrt5-1}\ne\frac2{\sqrt5}-\frac21$. הביטוי הזה שלילי (בערך $-1.106$), אבל המקורי
+          חיובי.
+        misconception: MC-c0-split-denominator
+      - text: '$\frac{\sqrt5-1}{2}$'
+        feedback: >-
+          כפלתם בביטוי $\sqrt5-1$ עצמו במקום בצמוד, אז המכנה $(\sqrt5-1)^2$ עדיין מכיל שורש. בערך: $0.618$, לא $1.618$.
+        misconception: MC-c0-conjugate-product
+    hints: ['כפלו מונה ומכנה ב-$\sqrt5+1$ והשתמשו ב-$(p-q)(p+q)=p^2-q^2$.']
+
+  - id: Q-0.1-sqrt-sum
+    type: twotier
+    objectives: [OBJ-0.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $\sqrt{x^2+9}=x+3$ לכל $x\ge0$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. השוויון מתקיים רק ב-$x=0$.'
+      - text: 'נכון'
+        feedback: >-
+          נסו $x=4$: $\sqrt{25}=5$ ואילו $4+3=7$. שורש אינו מתפצל על סכום.
+        misconception: MC-c0-root-of-sum
+    reasons:
+      - text: 'ב-$x=4$ אגף שמאל $\sqrt{25}=5$ ואגף ימין 7'
+        correct: true
+        feedback: >-
+          בדיוק: דוגמה נגדית אחת מספיקה. ובאופן כללי $(x+3)^2=x^2+6x+9$, שגדול מ-$x^2+9$ לכל $x>0$.
+      - text: '$\sqrt{x^2}=x$ ו-$\sqrt9=3$, ואפשר להוציא שורש מכל מחובר'
+        feedback: >-
+          שורש מתפצל על מכפלה, לא על סכום. $\sqrt{16+9}=5$, ולא $4+3$.
+        misconception: MC-c0-root-of-sum
+      - text: 'ב-$x=0$ שני האגפים שווים 3, ולכן הזהות נכונה'
+        feedback: >-
+          שוויון בנקודה אחת לא מוכיח זהות. זהות צריכה להתקיים בכל $x$, ומספיקה נקודה אחת שבה היא נכשלת כדי להפריך אותה.
+        misconception: MC-c0-root-of-sum
+
+  - id: Q-0.1-quad-param
+    type: numeric
+    objectives: [OBJ-0.1-2]
+    level: mid
+    prompt: >-
+      לאיזה ערך חיובי של $k$ יש למשוואה $x^2+kx+9=0$ פתרון יחיד?
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. פתרון יחיד כשהדיסקרימיננטה מתאפסת: $k^2-4\cdot9=0$, כלומר $k=\pm6$. עם $k=6$ המשוואה היא $(x+3)^2=0$.
+    wrongFeedback: >-
+      משוואה ריבועית יש לה פתרון יחיד בדיוק כש-$\Delta=b^2-4ac=0$. כאן $a=1$, $b=k$, $c=9$.
+    commonWrong:
+      - value: 3
+        feedback: >-
+          זה מ-$k^2-9=0$: שכחתם את ה-4 ב-$b^2-4ac$. עם $k=3$, $\Delta=9-36<0$ ואין פתרון ממשי בכלל.
+        misconception: MC-c0-quadratic-formula
+    hints: ['מתי משוואה ריבועית יש לה פתרון אחד בלבד?']
+
+  - id: Q-0.1-sqrt-eq
+    type: numeric
+    objectives: [OBJ-0.1-2]
+    level: exam
+    prompt: >-
+      פתרו את המשוואה $\sqrt{x+5}=x-1$. מהו סכום כל הפתרונות שלה? (אם יש פתרון אחד, כתבו אותו.)
+    answer: 4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. בהעלאה בריבוע: $x+5=x^2-2x+1$, כלומר $x^2-3x-4=0$, ו-$x=4$ או $x=-1$. הצבה: ב-$x=4$, $\sqrt9=3=4-1$; ב-$x=-1$,
+      $\sqrt4=2$ ואילו $-1-1=-2$. רק $x=4$ פותר.
+    wrongFeedback: >-
+      העלו בריבוע, פתרו את המשוואה הריבועית, והציבו כל פתרון במשוואה המקורית: שורש אינו יכול להיות שלילי.
+    commonWrong:
+      - value: 3
+        feedback: >-
+          $3=4+(-1)$: השארתם את $x=-1$. אבל שם אגף שמאל $\sqrt4=2$ ואגף ימין $-2$. ההעלאה בריבוע הוסיפה את הפתרון הזה.
+        misconception: MC-c0-squaring-extraneous
+      - value: -1
+        feedback: >-
+          $x=-1$ פותר את המשוואה אחרי ההעלאה בריבוע, אבל לא את המקורית: $\sqrt4=2\ne-2$.
+        misconception: MC-c0-squaring-extraneous
+    hints: ['אחרי העלאה בריבוע חייבים להציב בחזרה במשוואה המקורית.']
+
+  - id: Q-0.1-abs-ineq
+    type: mc
+    objectives: [OBJ-0.1-3]
+    level: basic
+    prompt: >-
+      מהו הפתרון של $|x-3|<2$?
+    choices:
+      - text: 'הקטע $(1,5)$'
+        correct: true
+        feedback: >-
+          נכון. $|x-3|$ הוא המרחק של $x$ מ-3, והמרחק קטן מ-2 בדיוק כש-$1<x<5$. באלגברה: $-2<x-3<2$.
+      - text: '$(-\infty,1)\cup(5,\infty)$'
+        feedback: >-
+          זה הפתרון של $|x-3|>2$. "המרחק מ-3 קטן מ-2" הוא קטע אחד סביב 3, לא שתי קרניים.
+        misconception: MC-c0-abs-or-and
+      - text: 'הקטע $(-5,5)$'
+        feedback: >-
+          זה מ-$|x|-3<2$, כלומר $|x|<5$. אבל $|x-3|\ne|x|-3$: ב-$x=-4$ למשל $|{-7}|=7>2$, ו-$-4$ אינו פתרון.
+        misconception: MC-c0-abs-linear
+    hints: ['$|x-a|$ הוא המרחק בין $x$ ל-$a$ על הישר.']
+
+  - id: Q-0.1-quad-ineq
+    type: mc
+    objectives: [OBJ-0.1-3]
+    level: basic
+    prompt: >-
+      מהו הפתרון של $x^2-x-6<0$?
+    choices:
+      - text: '$(-2,3)$'
+        correct: true
+        feedback: >-
+          נכון. $x^2-x-6=(x-3)(x+2)$, פרבולה פתוחה כלפי מעלה עם שורשים $-2$ ו-3, ולכן היא שלילית בין השורשים. בדיקה:
+          ב-$x=0$ מתקבל $-6<0$.
+      - text: '$(-\infty,-2)\cup(3,\infty)$'
+        feedback: >-
+          שם הביטוי חיובי: ב-$x=4$ מתקבל $16-4-6=6>0$. פרבולה פתוחה כלפי מעלה שלילית רק בין השורשים.
+        misconception: MC-c0-quadratic-ineq-outside
+      - text: '$(-3,2)$'
+        feedback: >-
+          השורשים של $(x-3)(x+2)$ הם 3 ו-$-2$: הגורם $x-3$ מתאפס ב-$x=3$, לא ב-$x=-3$. ב-$x=-2.5$ (בתוך הקטע שבחרתם)
+          מתקבל $6.25+2.5-6=2.75>0$.
+        misconception: MC-c0-shift-sign
+    hints: ['פרקו לגורמים ובדקו את הסימן בנקודה אחת בין השורשים.']
+
+  - id: Q-0.1-frac-ineq
+    type: mc
+    objectives: [OBJ-0.1-3]
+    level: mid
+    prompt: >-
+      מהו הפתרון של $\frac{x+1}{x-2}\ge0$?
+    choices:
+      - text: '$(-\infty,-1]\cup(2,\infty)$'
+        correct: true
+        feedback: >-
+          נכון. טבלת סימנים: המונה מתאפס ב-$-1$ והמכנה ב-2. השבר חיובי כשלשניהם אותו סימן, $x<-1$ או $x>2$, ושווה 0
+          ב-$x=-1$. ב-$x=2$ הוא אינו מוגדר.
+      - text: '$[-1,2)\cup(2,\infty)$'
+        feedback: >-
+          כפלתם ב-$x-2$ כאילו הוא תמיד חיובי. כש-$x<2$ הוא שלילי, וכיוון האי-שוויון מתהפך. ב-$x=0$: $\frac{1}{-2}<0$,
+          ו-0 אינו פתרון.
+        misconception: MC-c0-multiply-unknown-sign
+      - text: '$(-\infty,-1]\cup[2,\infty)$'
+        feedback: >-
+          ב-$x=2$ המכנה מתאפס והשבר אינו מוגדר, ולכן 2 לעולם אינו בפתרון, גם כשהסימן הוא $\ge$.
+        misconception: MC-c0-denominator-zero-included
+      - text: '$[-1,2)$'
+        feedback: >-
+          זה הקטע שבו השבר **שלילי** (או 0): ב-$x=0$ הוא $-\frac12$. הפכתם את הסימן בטבלה.
+        misconception: MC-c0-quadratic-ineq-outside
+    hints: ['אל תכפילו במכנה: בנו טבלת סימנים למונה ולמכנה.']
+
+  - id: Q-0.1-abs-gt
+    type: twotier
+    objectives: [OBJ-0.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: קבוצת הפתרונות של $|2x+1|>3$ היא קטע אחד.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. הפתרון הוא $(-\infty,-2)\cup(1,\infty)$: איחוד של שתי קרניים.'
+      - text: 'נכון'
+        feedback: >-
+          $|A|>3$ פירושו $A>3$ או $A<-3$. כאן $x>1$ או $x<-2$, ושני החלקים מופרדים: $x=0$ ביניהם אינו פתרון ($|1|=1$).
+        misconception: MC-c0-abs-or-and
+    reasons:
+      - text: '$|A|>3$ פירושו $A>3$ או $A<-3$, ולכן מתקבלות שתי קרניים מופרדות'
+        correct: true
+        feedback: 'בדיוק. "גדול מ" בערך מוחלט נותן "או", ו"קטן מ" נותן "וגם", כלומר קטע.'
+      - text: '$|2x+1|>3$ שקול ל-$-3>2x+1>3$, וזה קטע'
+        feedback: >-
+          אין מספר שגם קטן מ-$-3$ וגם גדול מ-3. ה"וגם" שייך ל-$|A|<3$; ב-$|A|>3$ מקבלים "או".
+        misconception: MC-c0-abs-or-and
+      - text: '$|2x+1|=2|x|+1$, ולכן $|x|>1$, שזה קטע אחד'
+        feedback: >-
+          ערך מוחלט אינו מתפצל על סכום: ב-$x=-1$, $|2x+1|=1$ ואילו $2|x|+1=3$. וגם $|x|>1$ אינו קטע אחד.
+        misconception: MC-c0-abs-linear
+
+  - id: Q-0.1-recip-ineq
+    type: mc
+    objectives: [OBJ-0.1-3]
+    level: exam
+    prompt: >-
+      מהו הפתרון של $\frac1x<x$?
+    choices:
+      - text: '$(-1,0)\cup(1,\infty)$'
+        correct: true
+        feedback: >-
+          נכון. $\frac1x<x\iff\frac{x^2-1}{x}>0\iff\frac{(x-1)(x+1)}{x}>0$. טבלת סימנים עם הנקודות $-1$, 0, 1: חיובי
+          ב-$(-1,0)$ וב-$(1,\infty)$. בדיקה: ב-$x=-\frac12$, $\frac1x=-2<-\frac12$.
+      - text: '$(-\infty,-1)\cup(1,\infty)$'
+        feedback: >-
+          כפלתם ב-$x$ בלי לבדוק את הסימן שלו וקיבלתם $x^2>1$. כש-$x<0$ הכפל הופך את הכיוון. ב-$x=-2$: $\frac1x=-\frac12$, שגדול
+          מ-$-2$, ולכן $-2$ אינו פתרון.
+        misconception: MC-c0-multiply-unknown-sign
+      - text: '$(-\infty,-1)\cup(0,1)$'
+        feedback: >-
+          זה הפתרון של $\frac1x>x$: הסימנים בטבלה התהפכו. ב-$x=\frac12$: $\frac1x=2>\frac12$.
+        misconception: MC-c0-quadratic-ineq-outside
+      - text: '$(1,\infty)$'
+        feedback: >-
+          חסר החלק השלילי: ב-$x=-\frac12$, $\frac1x=-2<-\frac12$, כלומר גם הוא פתרון. כפל ב-$x$ בלי לפצל למקרים לפי הסימן של
+          $x$ מאבד אותו.
+        misconception: MC-c0-multiply-unknown-sign
+    hints: ['העבירו הכול לאגף אחד, כתבו כשבר אחד, ובנו טבלת סימנים.']

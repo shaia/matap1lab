@@ -1,0 +1,33 @@
+# Terms first defined in lesson 11.4 (line integrals).
+- id: line-integral-scalar
+  term: אינטגרל קווי לפי אורך
+  en: line integral of a function with respect to arc length
+  symbol: '\int_C f\,ds=\int_a^b f(\vec r(t))\,|\vec r\,''(t)|\,dt'
+  definition: >-
+    הסכום של ערכי $f$ לאורך העקום $C$, כשכל קטע נשקל באורך שלו: גבול של $\sum f(P_k)\Delta s_k$. עם $f\equiv1$ זה
+    אורך העקום, ועם צפיפות זו מסה של תיל. לא תלוי בכיוון שבו עוברים על העקום.
+  lesson: '11.4'
+- id: line-integral
+  term: אינטגרל קווי של שדה
+  en: line integral of a vector field
+  symbol: '\int_C\vec F\cdot d\vec r=\int_a^b\vec F(\vec r(t))\cdot\vec r\,''(t)\,dt'
+  definition: >-
+    הסכום של $\vec F\cdot\Delta\vec r$ לאורך העקום, הרכיב של השדה בכיוון התנועה כפול הדרך. נכתב גם
+    $\int_C P\,dx+Q\,dy+R\,dz$. כשהשדה הוא כוח זו העבודה שלו. מחליף סימן כשהופכים את כיוון העקום.
+  lesson: '11.4'
+- id: work-of-field
+  term: עבודה של שדה כוח
+  en: work done by a force field
+  symbol: 'W=\int_C\vec F\cdot d\vec r'
+  definition: >-
+    האינטגרל הקווי של שדה כוח לאורך המסלול. רק הרכיב של הכוח בכיוון התנועה עושה עבודה; כוח שמאונך לתנועה עושה
+    עבודה 0.
+  lesson: '11.4'
+- id: closed-curve
+  term: עקום סגור
+  en: closed curve
+  symbol: '\oint_C'
+  definition: >-
+    עקום שנקודת הסוף שלו היא נקודת ההתחלה: $\vec r(a)=\vec r(b)$. אינטגרל קווי עליו נכתב $\oint_C$, ובלי הוראה אחרת
+    עוברים עליו נגד כיוון השעון.
+  lesson: '11.4'

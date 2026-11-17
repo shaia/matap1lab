@@ -1,0 +1,258 @@
+# Lesson 10.7 — critical points, second-order Taylor in two variables, the second-derivative test.
+# Objectives (src/course.ts):
+#   OBJ-10.7-1  find the critical points of a function of two variables
+#   OBJ-10.7-2  write the second-order Taylor polynomial in two variables and approximate with it
+#   OBJ-10.7-3  classify a critical point (min, max, saddle) by the second-derivative test, and describe the level curves near it
+# From the notes pp. 57–60, 68–70 (Taylor to second order, √(x²+y) near (3,16), D = AC − B², x² + y² − xy + x + y),
+# recomputed in screens/tools/recompute-ch10.py. D = f_xx f_yy − f_xy².
+chapter: 10
+questions:
+  - id: Q-10.7-crit-points
+    type: multi
+    objectives: [OBJ-10.7-1]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=x^3+y^3-3xy$. אילו מהנקודות הבאות הן נקודות קריטיות של $f$? סמנו את כולן.
+    choices:
+      - text: '$(0,0)$'
+        correct: true
+        feedback: 'נכון. $f_x=3x^2-3y=0$ ו-$f_y=3y^2-3x=0$ בראשית.'
+      - text: '$(1,1)$'
+        correct: true
+        feedback: 'נכון. $f_x=3-3=0$ ו-$f_y=3-3=0$. ($y=x^2$ ו-$x=y^2$ נותנים $x^4=x$, כלומר $x=0$ או $x=1$.)'
+      - text: '$(-1,-1)$'
+        feedback: '$f_x(-1,-1)=3+3=6\ne0$. מ-$y=x^2$ נובע $y\ge0$, ולכן אין נקודה קריטית עם $y<0$.'
+        misconception: MC-c10-partial-wrong-variable
+      - text: '$(1,-1)$'
+        feedback: '$f_y(1,-1)=3-3=0$, אבל $f_x(1,-1)=3+3=6\ne0$. בנקודה קריטית **שתי** הנגזרות מתאפסות.'
+        misconception: MC-c10-partial-wrong-variable
+
+  - id: Q-10.7-crit-value
+    type: numeric
+    objectives: [OBJ-10.7-1]
+    level: basic
+    prompt: >-
+      ל-$f(x,y)=x^2+y^2-xy+x+y$ יש נקודה קריטית אחת. מה הערך של $f$ בה?
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f_x=2x-y+1=0$ ו-$f_y=2y-x+1=0$ נותנים $x=y=-1$, ו-$f(-1,-1)=1+1-1-1-1=-1$.
+    wrongFeedback: >-
+      פתרו את המערכת $2x-y+1=0$, $2y-x+1=0$ (למשל, החסירו את המשוואות), והציבו את הנקודה ב-$f$.
+
+  - id: Q-10.7-crit-not-extremum
+    type: twotier
+    objectives: [OBJ-10.7-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      נכון או לא נכון: אם $\nabla f(x_0,y_0)=0$, אז ל-$f$ יש ב-$(x_0,y_0)$ מינימום מקומי או מקסימום מקומי.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. ל-$x^2-y^2$ הגרדיאנט מתאפס בראשית, והיא נקודת אוכף.'
+      - text: 'נכון'
+        feedback: 'גם במשתנה אחד זה לא נכון ($x^3$ ב-0). $\nabla f=0$ הוא תנאי הכרחי לקיצון פנימי, לא מספיק.'
+        misconception: MC-c10-critical-means-extremum
+    reasons:
+      - text: 'ל-$x^2-y^2$ בראשית: לאורך ציר $x$ מינימום, לאורך ציר $y$ מקסימום'
+        correct: true
+        feedback: 'בדיוק: בכל סביבה של הראשית יש ערכים חיוביים ושליליים, ו-$f(0,0)=0$.'
+      - text: 'מישור משיק אופקי מאפשר רק פסגה או עמק'
+        feedback: 'גם באוכף המישור המשיק אופקי: $z=0$ משיק ל-$x^2-y^2$ בראשית.'
+        misconception: MC-c10-critical-means-extremum
+      - text: 'הגרדיאנט מצביע לעלייה, ואם הוא 0 אין לאן לעלות'
+        feedback: 'הגרדיאנט מתאר רק את הקירוב הלינארי. כשהוא 0, הצורה נקבעת מהאיברים מסדר שני, והם יכולים לעלות בכיוון אחד ולרדת באחר.'
+        misconception: MC-c10-critical-means-extremum
+
+  - id: Q-10.7-taylor-shape
+    type: mc
+    objectives: [OBJ-10.7-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      ל-$f$ יש נקודה קריטית בראשית, עם $f(0,0)=1$, $f_{xx}=2$, $f_{xy}=1$, $f_{yy}=4$ שם. מהו פולינום טיילור מסדר שני של
+      $f$ סביב הראשית?
+    choices:
+      - text: '$1+x^2+xy+2y^2$'
+        correct: true
+        feedback: >-
+          נכון. בנקודה קריטית אין איברים לינאריים, ו-$\tfrac12\left(2x^2+2\cdot1\cdot xy+4y^2\right)=x^2+xy+2y^2$.
+      - text: '$1+2x^2+2xy+4y^2$'
+        feedback: 'חסר החצי של האיברים מסדר שני.'
+        misconception: MC-c10-taylor-forget-half
+      - text: '$1+x^2+\tfrac12xy+2y^2$'
+        feedback: 'האיבר המעורב מופיע פעמיים ($f_{xy}$ ו-$f_{yx}$), ולכן מקדם $xy$ הוא $\tfrac12\cdot2f_{xy}=f_{xy}=1$.'
+        misconception: MC-c10-taylor-mixed-factor
+      - text: '$1+x^2+2y^2$'
+        feedback: 'שכחתם את האיבר המעורב. הוא חשוב: הוא קובע את הנטייה של האליפסות (קווי הגובה) ליד הנקודה.'
+        misconception: MC-c10-taylor-mixed-factor
+
+  - id: Q-10.7-classify
+    type: mc
+    objectives: [OBJ-10.7-3]
+    level: basic
+    prompt: >-
+      ל-$f(x,y)=x^2+y^2-xy+x+y$ יש נקודה קריטית ב-$(-1,-1)$, ושם $f_{xx}=2$, $f_{xy}=-1$, $f_{yy}=2$. מה סוג הנקודה?
+    choices:
+      - text: 'מינימום מקומי'
+        correct: true
+        feedback: 'נכון. $D=2\cdot2-(-1)^2=3>0$ ו-$f_{xx}=2>0$.'
+      - text: 'מקסימום מקומי'
+        feedback: 'כש-$D>0$ הסימן של $f_{xx}$ מכריע: $f_{xx}>0$ פירושו קעור כלפי מעלה, כלומר מינימום.'
+        misconception: MC-c10-hessian-formula
+      - text: 'נקודת אוכף, כי $f_{xy}<0$'
+        feedback: 'הסימן של $f_{xy}$ לבדו לא קובע. מה שקובע הוא $D=f_{xx}f_{yy}-f_{xy}^2=3>0$.'
+        misconception: MC-c10-hessian-formula
+      - text: 'אי אפשר לדעת'
+        feedback: 'המבחן אינו מכריע רק כש-$D=0$. כאן $D=3$.'
+        misconception: MC-c10-disc-zero-saddle
+
+  - id: Q-10.7-disc
+    type: numeric
+    objectives: [OBJ-10.7-3]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=x^3+y^3-3xy$. חשבו את $D=f_{xx}f_{yy}-f_{xy}^2$ בנקודה הקריטית $(1,1)$.
+    answer: 27
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f_{xx}=6x=6$, $f_{yy}=6y=6$, $f_{xy}=-3$, ו-$D=36-9=27>0$. עם $f_{xx}>0$: מינימום מקומי, $f(1,1)=-1$.
+    wrongFeedback: '$f_x=3x^2-3y$, $f_y=3y^2-3x$. גזרו שוב, הציבו $(1,1)$, ואל תשכחו לרבע את $f_{xy}$.'
+    commonWrong:
+      - value: 39
+        feedback: '$36-(-3)$: לא ריבעתם את $f_{xy}$. $D=f_{xx}f_{yy}-f_{xy}^2$.'
+        misconception: MC-c10-hessian-formula
+      - value: 45
+        feedback: '$36+9$: הסימן שלפני $f_{xy}^2$ הוא מינוס.'
+        misconception: MC-c10-hessian-formula
+
+  - id: Q-10.7-taylor-exp
+    type: expr
+    objectives: [OBJ-10.7-2]
+    level: mid
+    prompt: >-
+      כתבו את פולינום טיילור מסדר שני של $f(x,y)=e^x\cos y$ סביב $(0,0)$.
+    answer: '1 + x + x^2/2 - y^2/2'
+    answerTex: '$T_2=1+x+\frac{x^2}{2}-\frac{y^2}{2}$'
+    variables: [x, y]
+    correctFeedback: >-
+      נכון. בראשית $f=1$, $f_x=1$, $f_y=0$, $f_{xx}=1$, $f_{xy}=0$, $f_{yy}=-1$, ולכן
+      $T_2=1+x+\tfrac12\left(x^2-y^2\right)$. בדיקה: כפל הפיתוחים $\left(1+x+\tfrac{x^2}{2}\right)\left(1-\tfrac{y^2}{2}\right)$
+      עד סדר 2 נותן אותו דבר.
+    wrongFeedback: >-
+      $T_2=f+f_xx+f_yy+\tfrac12\left(f_{xx}x^2+2f_{xy}xy+f_{yy}y^2\right)$, כל הנגזרות בראשית.
+    commonWrong:
+      - expr: '1 + x + x^2 - y^2'
+        feedback: 'חסר החצי שמול האיברים מסדר שני, כמו $\frac{f''''(0)}{2!}x^2$ במשתנה אחד.'
+        misconception: MC-c10-taylor-forget-half
+
+  - id: Q-10.7-taylor-coef
+    type: numeric
+    objectives: [OBJ-10.7-2]
+    level: mid
+    prompt: >-
+      תהי $z=\sqrt{x^2+y}$. מהו המקדם של $\Delta x\,\Delta y$ בפולינום טיילור מסדר שני סביב $(3,16)$? (כש-$\Delta x=x-3$,
+      $\Delta y=y-16$.)
+    answer: -0.012
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\frac{3}{250}$. $z_{xy}=-\frac{x}{2(x^2+y)^{3/2}}$, וב-$(3,16)$: $-\frac{3}{2\cdot125}$. המקדם הוא
+      $\tfrac12\cdot2z_{xy}=z_{xy}$.
+    wrongFeedback: >-
+      $z_x=\frac{x}{\sqrt{x^2+y}}$; גזרו אותה לפי $y$. המקדם של $\Delta x\Delta y$ ב-$T_2$ הוא $z_{xy}$.
+    commonWrong:
+      - value: -0.006
+        feedback: 'זה $\tfrac12z_{xy}$. האיבר המעורב בא עם $2z_{xy}$ בתוך הסוגריים של החצי, ולכן המקדם הוא $z_{xy}$ עצמה.'
+        misconception: MC-c10-taylor-mixed-factor
+
+  - id: Q-10.7-origin
+    type: mc
+    objectives: [OBJ-10.7-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      ל-$f(x,y)=x^3+y^3-3xy$ גם הראשית נקודה קריטית, ושם $f_{xx}=f_{yy}=0$ ו-$f_{xy}=-3$. מה סוג הנקודה, ואיך נראים לידה
+      קווי הגובה?
+    choices:
+      - text: 'נקודת אוכף; קו הגובה $f=0$ נראה לידה כמו שני עקומים שנחתכים בראשית'
+        correct: true
+        feedback: >-
+          נכון. $D=0-9<0$. ליד הראשית $f\approx-3xy$: חיובית ברביעים 2 ו-4, שלילית ב-1 ו-3, וקו הגובה $f=0$ קרוב לצירים.
+      - text: 'מינימום מקומי; קווי הגובה הם עקומים סגורים סביב הראשית'
+        feedback: 'עקומים סגורים מופיעים ליד קיצון. כאן $D=-9<0$, ו-$f$ מחליפה סימן בכל סביבה של הראשית.'
+        misconception: MC-c10-closed-contours-everywhere
+      - text: 'אי אפשר לדעת, כי $f_{xx}=0$'
+        feedback: 'המבחן אינו מכריע רק כש-$D=0$. כש-$D<0$ זו נקודת אוכף, יהיה $f_{xx}$ אשר יהיה.'
+        misconception: MC-c10-disc-zero-saddle
+      - text: 'מקסימום מקומי, כי $f_{xy}<0$'
+        feedback: 'הסימן של $f_{xy}$ אינו קובע. $D=-9<0$: אוכף.'
+        misconception: MC-c10-critical-means-extremum
+
+  - id: Q-10.7-taylor-approx
+    type: numeric
+    objectives: [OBJ-10.7-2]
+    level: exam
+    prompt: >-
+      ל-$z=\sqrt{x^2+y}$ ב-$(3,16)$: $z=5$, $z_x=\frac35$, $z_y=\frac1{10}$, $z_{xx}=\frac{16}{125}$, $z_{xy}=-\frac{3}{250}$,
+      $z_{yy}=-\frac{1}{500}$. העריכו את $\sqrt{3.1^2+15.8}$ בפולינום טיילור מסדר שני. (תנו לפחות 5 ספרות אחרי הנקודה.)
+    answer: 5.04084
+    tolerance: 0.000005
+    correctFeedback: >-
+      נכון. $\Delta x=0.1$, $\Delta y=-0.2$. החלק הלינארי $5.04$, והתיקון
+      $\tfrac12\left(0.00128+0.00048-0.00008\right)=0.00084$. הערך המדויק $5.040833\ldots$: השגיאה ירדה מכ-$8\cdot10^{-4}$
+      בקירוב הלינארי לכ-$7\cdot10^{-6}$.
+    wrongFeedback: >-
+      $T_2=5+0.6\Delta x+0.1\Delta y+\tfrac12\left(z_{xx}\Delta x^2+2z_{xy}\Delta x\Delta y+z_{yy}\Delta y^2\right)$. שימו לב לסימנים:
+      $\Delta y<0$ ו-$z_{xy}<0$.
+    commonWrong:
+      - value: 5.04072
+        feedback: 'האיבר המעורב נכנס עם $z_{xy}$ במקום $2z_{xy}$ בתוך הסוגריים, ויצא חצי מגודלו.'
+        misconception: MC-c10-taylor-mixed-factor
+      - value: 5.04168
+        feedback: 'חסר החצי לפני הסוגריים של האיברים מסדר שני, והתיקון יצא כפול.'
+        misconception: MC-c10-taylor-forget-half
+
+  - id: Q-10.7-disc-zero
+    type: twotier
+    objectives: [OBJ-10.7-3]
+    qualitative: true
+    level: exam
+    prompt: >-
+      ל-$f(x,y)=x^4+y^4$ הראשית נקודה קריטית עם $D=0$. נכון או לא נכון: הראשית היא נקודת אוכף.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $f\ge0=f(0,0)$ בכל מקום: מינימום (אפילו מוחלט). $D=0$ רק אומר שהמבחן שותק.'
+      - text: 'נכון'
+        feedback: '$D<0$ פירושו אוכף; $D=0$ אינו מכריע. כאן $f\ge0$ בכל מקום.'
+        misconception: MC-c10-disc-zero-saddle
+    reasons:
+      - text: 'כש-$D=0$ המבחן אינו מכריע, ובדיקה ישירה נותנת $f(x,y)\ge0=f(0,0)$'
+        correct: true
+        feedback: 'בדיוק. ול-$x^4-y^4$, עם אותו $D=0$, הראשית דווקא אוכף: צריך לבדוק כל מקרה.'
+      - text: '$D=0$ פירושו שהנקודה אינה מינימום ואינה מקסימום'
+        feedback: '$D=0$ מתאים לכל אחת מהאפשרויות: $x^4+y^4$ (מינימום), $-x^4-y^4$ (מקסימום), $x^4-y^4$ (אוכף).'
+        misconception: MC-c10-disc-zero-saddle
+      - text: 'כל נקודה קריטית שאינה נבדקת במבחן היא מינימום'
+        feedback: 'ל-$x^4-y^4$ גם $D=0$ בראשית, והיא אוכף. המבחן שותק, ולא מכריע לשום צד.'
+        misconception: MC-c10-critical-means-extremum
+
+  - id: Q-10.7-four-points
+    type: numeric
+    objectives: [OBJ-10.7-1, OBJ-10.7-3]
+    level: exam
+    prompt: >-
+      ל-$f(x,y)=x^3-12x+y^3-3y$ ארבע נקודות קריטיות. אחת מהן מינימום מקומי. מה הערך של $f$ בה?
+    answer: -18
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f_x=3x^2-12$, $f_y=3y^2-3$ נותנים $x=\pm2$, $y=\pm1$. $f_{xx}=6x$, $f_{yy}=6y$, $f_{xy}=0$, ו-$D=36xy$: ב-$(2,1)$
+      $D>0$ ו-$f_{xx}>0$, מינימום, $f=8-24+1-3=-18$. ב-$(-2,-1)$ מקסימום ($18$), וב-$(2,-1)$, $(-2,1)$ אוכף.
+    wrongFeedback: >-
+      מצאו את ארבע הנקודות, חשבו בכל אחת את $D=f_{xx}f_{yy}-f_{xy}^2$ ואת סימן $f_{xx}$, ובחרו את המינימום.
+    commonWrong:
+      - value: -14
+        feedback: >-
+          $-14=f(2,-1)$. שם $f_{xx}=12>0$, אבל $D=36\cdot2\cdot(-1)<0$: זו נקודת אוכף, לא מינימום, אף שהערך נמוך.
+        misconception: MC-c10-critical-means-extremum

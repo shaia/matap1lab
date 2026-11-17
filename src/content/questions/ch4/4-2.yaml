@@ -1,0 +1,290 @@
+# Lesson 4.2 — shifts and stretches of graphs, graphical solutions, parity and period.
+# Objectives (src/course.ts):
+#   OBJ-4.2-1  sketch the graph of a shift, stretch or reflection of a function from its graph
+#   OBJ-4.2-2  solve graphically f(x) = c or f(x) = g(x) and estimate the number of solutions
+#   OBJ-4.2-3  recognise even, odd and periodic functions from the formula and from the graph
+# Every number is recomputed in screens/tools/checks_ch4.py.
+chapter: 4
+questions:
+  - id: Q-4.2-shift-read
+    type: mc
+    objectives: [OBJ-4.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      איך מתקבל הגרף של $y=f(x-2)+1$ מהגרף של $y=f(x)$?
+    choices:
+      - text: 'הזזה 2 יחידות ימינה ויחידה אחת למעלה'
+        correct: true
+        feedback: >-
+          נכון. הערך ש-$f$ מקבלת ב-$a$, הפונקציה החדשה מקבלת ב-$a+2$ (ימינה), ועוד 1 (למעלה).
+      - text: 'הזזה 2 יחידות שמאלה ויחידה אחת למעלה'
+        feedback: >-
+          המינוס בתוך הסוגריים מטעה: $f(x-2)$ מגיעה לערך $f(0)$ רק ב-$x=2$, כלומר ימינה.
+        misconception: MC-c4-shift-direction
+      - text: 'הזזה 2 יחידות שמאלה ויחידה אחת למטה'
+        feedback: >-
+          שני הכיוונים הפוכים. $+1$ מחוץ לסוגריים מוסיף 1 לכל ערך: למעלה. ו-$x-2$ בפנים מזיז ימינה.
+        misconception: MC-c4-shift-direction
+
+  - id: Q-4.2-shift-formula
+    type: expr
+    objectives: [OBJ-4.2-1]
+    level: basic
+    prompt: >-
+      את הגרף של $y=x^2$ מזיזים 3 יחידות ימינה ו-2 יחידות למטה. כתבו את הפונקציה שהגרף החדש שלה (במשתנה x).
+    answer: '(x - 3)^2 - 2'
+    answerTex: '$y=(x-3)^2-2$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. ימינה ב-3: מחליפים $x$ ב-$x-3$. למטה ב-2: מחסירים 2. הקודקוד עובר מ-$(0,0)$ ל-$(3,-2)$.
+    wrongFeedback: >-
+      בדקו את הקודקוד: הוא צריך להגיע ל-$(3,-2)$. באיזה $x$ הנוסחה שלכם מתאפסת בתוך הריבוע?
+    commonWrong:
+      - expr: '(x + 3)^2 - 2'
+        feedback: >-
+          הקודקוד של $(x+3)^2-2$ הוא $(-3,-2)$: זו הזזה **שמאלה**. הזזה ימינה ב-3 היא $x-3$.
+        misconception: MC-c4-shift-direction
+
+  - id: Q-4.2-sin-half-count
+    type: numeric
+    objectives: [OBJ-4.2-2]
+    level: basic
+    prompt: >-
+      כמה פתרונות יש למשוואה $\sin x=\frac12$ בקטע $[0,4\pi]$? (חשבו לפי הגרף: הישר $y=\frac12$ מול גל הסינוס.)
+    answer: 4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. בכל מחזור של $2\pi$ הישר חותך את הגל פעמיים: $\frac\pi6,\frac{5\pi}6$ ועוד $2\pi$ לכל אחד, $\frac{13\pi}6,\frac{17\pi}6$.
+    wrongFeedback: >-
+      כמה מחזורים שלמים של הסינוס יש בקטע? וכמה חיתוכים בכל מחזור?
+    commonWrong:
+      - value: 2
+        feedback: >-
+          2 הם הפתרונות במחזור הראשון בלבד. בקטע $[0,4\pi]$ יש שני מחזורים, וכל אחד תורם שני חיתוכים.
+        misconception: MC-c4-periodic-one-period
+
+  - id: Q-4.2-parity
+    type: multi
+    objectives: [OBJ-4.2-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      אילו מהפונקציות הבאות **אי-זוגיות**? סמנו את כולן.
+    choices:
+      - text: '$x\cos x$'
+        correct: true
+        feedback: 'נכון. $(-x)\cos(-x)=-x\cos x$: אי-זוגית כפול זוגית נותנת אי-זוגית.'
+      - text: '$x^2\sin x$'
+        correct: true
+        feedback: 'נכון. $(-x)^2\sin(-x)=-x^2\sin x$.'
+      - text: '$x^3+1$'
+        feedback: >-
+          $f(-x)=-x^3+1$, וזה לא $-f(x)=-x^3-1$. הקבוע 1 שובר את האי-זוגיות: היא לא זוגית ולא אי-זוגית.
+        misconception: MC-c4-parity-by-exponents
+      - text: '$|x|^3$'
+        feedback: >-
+          $|-x|^3=|x|^3$: זוגית, למרות המעריך 3. בודקים את $f(-x)$, לא את המעריך.
+        misconception: MC-c4-parity-by-exponents
+
+  - id: Q-4.2-period-sin3x
+    type: numeric
+    objectives: [OBJ-4.2-3]
+    level: basic
+    prompt: >-
+      מהו המחזור של $\sin(3x)$? (אפשר לכתוב ערך מדויק, כמו 5π/6 או 3√2)
+    answer: 2.0943951023931957
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{2\pi}3$. $\sin(3x)$ משלימה מחזור כש-$3x$ גדל ב-$2\pi$, כלומר כש-$x$ גדל ב-$\frac{2\pi}3$.
+    wrongFeedback: >-
+      באיזה $T$ מתקיים $3(x+T)=3x+2\pi$?
+    commonWrong:
+      - value: 18.84955592153876
+        feedback: >-
+          זה $6\pi=2\pi\cdot3$: הכפלתם במקדם. מקדם 3 מאיץ את התנודה פי 3, ולכן המחזור **קצר** פי 3.
+        misconception: MC-c4-period-scaling
+
+  - id: Q-4.2-stretch
+    type: mc
+    objectives: [OBJ-4.2-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      איך מתקבל הגרף של $y=f(2x)$ מהגרף של $y=f(x)$?
+    choices:
+      - text: 'כיווץ לרוחב פי 2 לעבר ציר $y$'
+        correct: true
+        feedback: >-
+          נכון. הערך $f(a)$ מתקבל עכשיו כבר ב-$x=\frac a2$: כל נקודה מתקרבת פי 2 לציר $y$.
+      - text: 'מתיחה לרוחב פי 2'
+        feedback: >-
+          הפוך: $f(2x)$ "רצה" פי 2 מהר יותר. מתיחה לרוחב פי 2 היא $f\!\left(\frac x2\right)$.
+        misconception: MC-c4-stretch-direction
+      - text: 'מתיחה לגובה פי 2'
+        feedback: >-
+          זו $2f(x)$: מקדם **מחוץ** לפונקציה פועל על הערכים. מקדם בתוך הסוגריים פועל על $x$.
+        misconception: MC-c4-stretch-direction
+
+  - id: Q-4.2-reflect
+    type: expr
+    objectives: [OBJ-4.2-1]
+    level: mid
+    prompt: >-
+      משקפים את הגרף של $y=e^x$ ביחס לציר $y$, ואחר כך מזיזים אותו יחידה אחת למעלה. כתבו את הפונקציה שמתקבלת (במשתנה x).
+    answer: 'exp(-x) + 1'
+    answerTex: '$y=e^{-x}+1$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. שיקוף ביחס לציר $y$ מחליף $x$ ב-$-x$: $e^{-x}$. ההזזה מוסיפה 1. הגרף יורד ושואף ל-1 כש-$x\to\infty$.
+    wrongFeedback: >-
+      שיקוף ביחס לציר $y$ פועל על הקלט: $f(-x)$. שיקוף ביחס לציר $x$ פועל על הפלט: $-f(x)$.
+    commonWrong:
+      - expr: '-exp(x) + 1'
+        feedback: >-
+          $-e^x$ הוא שיקוף ביחס לציר $x$ (כל הערכים שליליים). ביחס לציר $y$ מחליפים $x$ ב-$-x$.
+        misconception: MC-c4-reflection-axis
+
+  - id: Q-4.2-abs-count
+    type: numeric
+    objectives: [OBJ-4.2-2]
+    level: mid
+    prompt: >-
+      כמה פתרונות יש למשוואה $|x^2-4|=3$? (שרטטו את $y=|x^2-4|$: הפרבולה $x^2-4$ עם החלק שמתחת לציר משוקף למעלה.)
+    answer: 4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x^2-4=3$ נותן $x=\pm\sqrt7$, ו-$x^2-4=-3$ נותן $x=\pm1$. בגרף: הישר $y=3$ חותך את שתי הזרועות החיצוניות ואת
+      "הגבעה" המשוקפת שגובהה 4.
+    wrongFeedback: >-
+      $|u|=3$ פירושו $u=3$ או $u=-3$. כמה פתרונות לכל אחת?
+    commonWrong:
+      - value: 2
+        feedback: >-
+          2 הם הפתרונות של $x^2-4=3$ בלבד. החלק המשוקף (בין $-2$ ל-2, עם שיא 4 ב-$x=0$) נחתך גם הוא על ידי $y=3$.
+        misconception: MC-c4-abs-graph-reflection
+
+  - id: Q-4.2-ln-line
+    type: twotier
+    objectives: [OBJ-4.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: למשוואה $\ln x=x-2$ יש פתרון יחיד, כי $\ln x$ גדל לאט מאוד והישר עוקף אותו פעם אחת.
+    choices:
+      - text: 'לא נכון: יש שני פתרונות'
+        correct: true
+        feedback: >-
+          נכון. ליד 0 הלוגריתם יורד ל-$-\infty$, מתחת לישר; ב-$x=1$, $\ln1=0>-1$, מעל הישר; וכש-$x$ גדול הישר שוב מעל. שתי
+          החלפות סדר, שני חיתוכים (ליד $0.16$ וליד $3.15$).
+      - text: 'נכון'
+        feedback: >-
+          בדקו גם ליד 0: $\ln0.01\approx-4.6<-1.99$, ולכן גם שם הישר מעל. יש חיתוך נוסף בין 0.01 ל-1.
+        misconception: MC-c4-graph-count-miss-far
+    reasons:
+      - text: 'הסדר בין שני הגרפים מתחלף פעמיים: ליד 0, ב-$x=1$, ובאינסוף'
+        correct: true
+        feedback: 'בדיוק. סופרים חיתוכים לפי החלפות הסדר בין הגרפים, כולל ליד קצות התחום.'
+      - text: 'פונקציה עולה וישר עולה נחתכים לכל היותר פעם אחת'
+        feedback: >-
+          לא נכון באופן כללי: $x^2$ והישר $y=1$ (או $\ln x$ ו-$x-2$) נחתכים פעמיים. רק כשאחת עולה והשנייה יורדת מובטח חיתוך
+          אחד לכל היותר.
+        misconception: MC-c4-graph-count-miss-far
+
+  - id: Q-4.2-neither
+    type: twotier
+    objectives: [OBJ-4.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $e^x$ אינה זוגית, ולכן היא אי-זוגית.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $e^x$ אינה זוגית ואינה אי-זוגית.'
+      - text: 'נכון'
+        feedback: >-
+          אי-זוגית דורשת $e^{-x}=-e^x$, אבל אגף שמאל חיובי ואגף ימין שלילי.
+        misconception: MC-c4-even-odd-exclusive
+    reasons:
+      - text: '$e^{-1}$ שונה גם מ-$e^1$ וגם מ-$-e^1$'
+        correct: true
+        feedback: 'בדיוק. נקודה אחת מספיקה כדי לשלול כל אחת מהתכונות.'
+      - text: 'כל פונקציה היא זוגית או אי-זוגית'
+        feedback: >-
+          רוב הפונקציות אינן אף אחת מהן. (אבל כל פונקציה היא **סכום** של זוגית ואי-זוגית: $e^x=\cosh x+\sinh x$.)
+        misconception: MC-c4-even-odd-exclusive
+      - text: '$e^x$ עולה, וכל פונקציה עולה היא אי-זוגית'
+        feedback: >-
+          $x^3+1$ עולה ואינה אי-זוגית. אי-זוגיות היא סימטריה סביב הראשית, ובודקים אותה ב-$f(-x)=-f(x)$, לא בכיוון הגרף.
+        misconception: MC-c4-parity-by-exponents
+
+  - id: Q-4.2-period-sum
+    type: numeric
+    objectives: [OBJ-4.2-3]
+    level: mid
+    prompt: >-
+      מהו המחזור של $f(x)=\sin(2x)+\cos(3x)$? (אפשר לכתוב ערך מדויק, כמו 5π/6 או 3√2)
+    answer: 6.283185307179586
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2\pi$. המחזורים $\pi$ ו-$\frac{2\pi}3$; הכפולה המשותפת הקטנה ביותר היא $2\pi=2\cdot\pi=3\cdot\frac{2\pi}3$.
+    wrongFeedback: >-
+      מצאו את המחזור של כל מחובר, ואז את המספר הקטן ביותר שהוא כפולה שלמה של שניהם.
+    commonWrong:
+      - value: 3.141592653589793
+        feedback: >-
+          $\pi$ הוא המחזור של $\sin2x$ בלבד. אבל $\cos(3(x+\pi))=-\cos3x$, ולכן הסכום לא חוזר אחרי $\pi$.
+        misconception: MC-c4-period-of-sum
+      - value: 2.0943951023931957
+        feedback: >-
+          $\frac{2\pi}3$ הוא המחזור של $\cos3x$ בלבד. צריך מספר שהוא כפולה של שני המחזורים.
+        misconception: MC-c4-period-of-sum
+
+  - id: Q-4.2-transform-order
+    type: expr
+    objectives: [OBJ-4.2-1]
+    level: exam
+    prompt: >-
+      על הגרף של $y=x^2$ מבצעים, בסדר הזה: מתיחה לרוחב פי 2, הזזה של יחידה אחת ימינה, ושיקוף ביחס לציר $x$. כתבו את
+      הפונקציה שמתקבלת (במשתנה x).
+    answer: '-((x - 1)/2)^2'
+    answerTex: '$y=-\left(\frac{x-1}{2}\right)^2$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. מתיחה: $\left(\frac x2\right)^2$; הזזה: מחליפים $x$ ב-$x-1$, $\left(\frac{x-1}2\right)^2$; שיקוף: מינוס לפני הכול.
+      בדיקה: הקודקוד ב-$(1,0)$, וב-$x=3$ הערך $-1$ (כמו $x^2$ ב-1, מתוח פי 2 ומוזז).
+    wrongFeedback: >-
+      כל פעולה מחליפה את $x$ **בנוסחה הנוכחית**. בדקו: הקודקוד צריך להיות ב-$x=1$.
+    commonWrong:
+      - expr: '-(x/2 - 1)^2'
+        feedback: >-
+          הקודקוד של $-\left(\frac x2-1\right)^2$ ב-$x=2$: החלפתם את $x$ ב-$x-1$ לפני המתיחה, ואז המתיחה הכפילה גם את ההזזה.
+        misconception: MC-c4-transform-order
+      - expr: '-(2*(x - 1))^2'
+        feedback: >-
+          $2(x-1)$ בפנים **מכווץ** פי 2. מתיחה לרוחב פי 2 היא חלוקה ב-2: $\frac{x-1}2$.
+        misconception: MC-c4-stretch-direction
+    hints: ['אחרי כל שלב כתבו את הנוסחה, ובדקו איפה הקודקוד.']
+
+  - id: Q-4.2-exp-square
+    type: numeric
+    objectives: [OBJ-4.2-2]
+    level: exam
+    prompt: >-
+      כמה פתרונות ממשיים יש למשוואה $2^x=x^2$? (שרטטו את שני הגרפים, ובדקו גם $x<0$ וגם $x$ גדולים.)
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x=2$ ו-$x=4$ ($4=4$, $16=16$), ועוד פתרון שלילי ליד $x\approx-0.77$: ב-$x=0$, $2^0=1>0$, וב-$x=-1$,
+      $\frac12<1$. כש-$x\to\infty$ האקספוננט שוב מעל, ולכן אין עוד.
+    wrongFeedback: >-
+      בדקו את הסדר בין $2^x$ ל-$x^2$ בנקודות $-1,0,3,5$: כל החלפת סדר היא חיתוך.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          את $x=2$ ו-$x=4$ קל לנחש. אבל ב-$x<0$ הפרבולה עולה ל-$\infty$ והאקספוננט יורד ל-0: יש חיתוך שלישי.
+        misconception: MC-c4-graph-count-miss-far

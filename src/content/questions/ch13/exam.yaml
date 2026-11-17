@@ -1,0 +1,185 @@
+# Chapter 13 exam questions (enrichment chapter: two questions) — original, in the style of an 80114 final, not taken
+# from a real exam. Each is worth 25 points, with an open part graded against a model solution and a rubric.
+# No divergence theorem: a closed surface is done piece by piece. Keys recomputed in screens/tools/recompute-ch13.py.
+chapter: 13
+questions:
+  - id: Q-13-exam-1
+    type: exam
+    title: כיפה עם צפיפות משתנה
+    prompt: >-
+      כיפה דקה בצורת חצי הספירה העליון $x^2+y^2+z^2=1$, $z\ge0$, עשויה מחומר שהצפיפות השטחית שלו היא $\sigma=z$ (הכיפה
+      עבה יותר למעלה). נשתמש בפרמטריזציה הכדורית $\vec r(\theta,\varphi)=(\sin\theta\cos\varphi,\ \sin\theta\sin\varphi,\ \cos\theta)$.
+    parts:
+      - label: א
+        points: 5
+        type: mc
+        objectives: [OBJ-13.1-1]
+        prompt: >-
+          מה תחום הפרמטרים של הכיפה, ומהו $dS$?
+        choices:
+          - text: '$0\le\theta\le\frac{\pi}{2}$, $0\le\varphi\le2\pi$, ו-$dS=\sin\theta\,d\theta\,d\varphi$'
+            correct: true
+            feedback: >-
+              נכון. $z=\cos\theta\ge0$ כש-$\theta\le\frac{\pi}{2}$, ו-$|\vec r_\theta\times\vec r_\varphi|=R^2\sin\theta$ עם $R=1$.
+          - text: '$0\le\theta\le\frac{\pi}{2}$, $0\le\varphi\le2\pi$, ו-$dS=d\theta\,d\varphi$'
+            feedback: 'חסר $|\vec r_\theta\times\vec r_\varphi|=\sin\theta$. ליד הקוטב התאים קטנים.'
+            misconception: MC-c11-sphere-normal-no-sin
+          - text: '$0\le\theta\le2\pi$, $0\le\varphi\le\frac{\pi}{2}$, ו-$dS=\sin\theta\,d\theta\,d\varphi$'
+            feedback: >-
+              $\theta$ היא הזווית מציר $z$, והיא שקובעת את הגובה. $\varphi\le\frac{\pi}{2}$ היה חותך רבע מהכיפה סביב ציר
+              $z$, ולא את החצי העליון.
+            misconception: MC-c11-sphere-angle-convention
+
+      - label: ב
+        points: 6
+        type: numeric
+        objectives: [OBJ-13.1-3, OBJ-13.1-2]
+        prompt: >-
+          חשבו את המסה של הכיפה.
+        answer: 3.14159265358979
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $\pi$. $\int_0^{2\pi}\int_0^{\pi/2}\cos\theta\sin\theta\,d\theta\,d\varphi=2\pi\cdot\frac12$.
+        wrongFeedback: '$M=\iint_S\sigma\,dS$ עם $\sigma=z=\cos\theta$.'
+        commonWrong:
+          - value: 6.28318530717959
+            feedback: '$2\pi$ מתקבל בלי $\sin\theta$ ב-$dS$: $2\pi\int_0^{\pi/2}\cos\theta\,d\theta$.'
+            misconception: MC-c11-sphere-normal-no-sin
+
+      - label: ג
+        points: 14
+        type: open
+        objectives: [OBJ-13.1-3, OBJ-13.1-2]
+        prompt: >-
+          מצאו את מרכז המסה של הכיפה, והשוו אותו למרכז המסה של כיפה הומוגנית, $\bar z=\frac12$. האם הכיוון של השינוי
+          הגיוני?
+        solution:
+          - kind: given
+            text: 'הכיפה $z=\cos\theta$, $0\le\theta\le\frac{\pi}{2}$; $\sigma=z$; $dS=\sin\theta\,d\theta\,d\varphi$; מסעיף ב $M=\pi$.'
+          - kind: goal
+            text: '$(\bar x,\bar y,\bar z)$, כש-$\bar z=\frac1M\iint_Sz\,\sigma\,dS$.'
+          - kind: idea
+            text: >-
+              סימטריה סביב ציר $z$ נותנת $\bar x=\bar y=0$ בלי חישוב. נשאר מומנט אחד: $\iint_Sz\cdot z\,dS$, אינטגרל כפול
+              בפרמטרים.
+          - kind: step
+            text: >-
+              $\sigma=z$ לא תלויה ב-$\varphi$, והכיפה סימטרית לשיקוף $x\to-x$, שבו $x\sigma$ מחליפה סימן. לכן
+              $\iint_Sx\sigma\,dS=0$, ובאותו אופן $\iint_Sy\sigma\,dS=0$.
+          - kind: computation
+            text: >-
+              $\iint_Sz^2\,dS=\int_0^{2\pi}\int_0^{\pi/2}\cos^2\theta\sin\theta\,d\theta\,d\varphi=2\pi\left[-\frac{\cos^3\theta}{3}\right]_0^{\pi/2}=\frac{2\pi}{3}$.
+          - kind: computation
+            text: '$\bar z=\frac{2\pi/3}{\pi}=\frac23$.'
+          - kind: check
+            text: >-
+              $\frac23>\frac12$: הצפיפות $\sigma=z$ מעבירה מסה כלפי מעלה, ולכן מרכז המסה עולה ביחס לכיפה ההומוגנית. וגם
+              $\bar z<1$, בתוך טווח הגבהים של הכיפה.
+          - kind: result
+            text: 'מרכז המסה $\left(0,0,\frac23\right)$, גבוה מ-$\left(0,0,\frac12\right)$ של הכיפה ההומוגנית, כצפוי.'
+        rubric:
+          - text: 'נימוק סימטריה ל-$\bar x=\bar y=0$'
+            weight: 2
+          - text: 'נוסחת המומנט $\iint_Sz\sigma\,dS$ עם $dS=\sin\theta\,d\theta\,d\varphi$ ותחום נכון'
+            weight: 4
+          - text: 'חישוב $\frac{2\pi}{3}$ (הצבה $w=\cos\theta$)'
+            weight: 4
+          - text: 'חלוקה במסה ותוצאה $\frac23$, עם השוואה מנומקת ל-$\frac12$'
+            weight: 4
+
+  - id: Q-13-exam-2
+    type: exam
+    title: שטף דרך פרבולואיד
+    prompt: >-
+      $S$ הפרבולואיד $z=4-x^2-y^2$, $z\ge0$, ו-$D$ העיגול $x^2+y^2\le4$ במישור $z=0$. יחד הם סוגרים גוף. השדה הוא
+      $\vec F(x,y,z)=(x,\ y,\ 1)$.
+    parts:
+      - label: א
+        points: 4
+        type: mc
+        objectives: [OBJ-13.2-1]
+        prompt: >-
+          כש-$S$ כתוב כגרף $\vec r(x,y)=(x,y,4-x^2-y^2)$, איזה וקטור הוא נורמל ל-$S$ שמצביע **החוצה** מהגוף (כלומר כלפי
+          מעלה)?
+        choices:
+          - text: '$(2x,\ 2y,\ 1)$'
+            correct: true
+            feedback: >-
+              נכון. $\vec r_x\times\vec r_y=(-f_x,-f_y,1)=(2x,2y,1)$, והרכיב ה-$z$ חיובי: כלפי מעלה, החוצה מהגוף.
+          - text: '$(-2x,\ -2y,\ -1)$'
+            feedback: 'זה $\vec r_y\times\vec r_x$, כלפי מטה, פנימה לגוף.'
+            misconception: MC-c13-flux-orientation
+          - text: '$(-2x,\ -2y,\ 1)$'
+            feedback: >-
+              הנורמל לגרף הוא $(-f_x,-f_y,1)$, ו-$f_x=-2x$, כך ש-$-f_x=2x$. בבדיקה: ב-$(1,0,3)$ הנורמל צריך לנטות החוצה מציר
+              $z$, כלומר רכיב $x$ חיובי.
+            misconception: MC-c11-cross-order
+
+      - label: ב
+        points: 12
+        type: open
+        objectives: [OBJ-13.2-2, OBJ-13.2-1]
+        prompt: >-
+          חשבו את השטף של $\vec F$ דרך $S$ כלפי מעלה.
+        solution:
+          - kind: given
+            text: '$\vec F=(x,y,1)$; $S$: $z=4-x^2-y^2$ מעל העיגול $x^2+y^2\le4$; הנורמל כלפי מעלה $(2x,2y,1)$ (סעיף א).'
+          - kind: goal
+            text: '$\iint_S\vec F\cdot\hat n\,dS$.'
+          - kind: idea
+            text: >-
+              לגרף, $\hat n\,dS=(-f_x,-f_y,1)\,dA$: השטף הופך לאינטגרל כפול על הצל, ועל עיגול עוברים לקוטביות.
+          - kind: computation
+            text: '$\vec F\cdot(2x,2y,1)=2x^2+2y^2+1=2r^2+1$.'
+          - kind: computation
+            text: >-
+              $\int_0^{2\pi}\int_0^2(2r^2+1)\,r\,dr\,d\theta=2\pi\left[\frac{r^4}{2}+\frac{r^2}{2}\right]_0^2=2\pi(8+2)=20\pi$.
+          - kind: check
+            text: >-
+              סימן: בכל נקודה $\vec F\cdot(2x,2y,1)>0$, כי השדה יוצא החוצה מציר $z$ ועולה, ולכן השטף כלפי מעלה חיובי.
+              הגורם $r$ של הקוטביות נכלל.
+          - kind: result
+            text: 'השטף של $\vec F$ דרך $S$ כלפי מעלה הוא $20\pi$.'
+        rubric:
+          - text: 'נורמל נכון כלפי מעלה ו-$\hat n\,dS=(2x,2y,1)\,dA$'
+            weight: 3
+          - text: 'המכפלה הסקלרית $2x^2+2y^2+1$ אחרי הצבת המשטח'
+            weight: 3
+          - text: 'מעבר לקוטביות עם $dA=r\,dr\,d\theta$ ותחום $0\le r\le2$'
+            weight: 3
+          - text: 'תוצאה $20\pi$ עם בדיקת סימן'
+            weight: 3
+
+      - label: ג
+        points: 5
+        type: numeric
+        objectives: [OBJ-13.2-1, OBJ-13.2-3]
+        prompt: >-
+          חשבו את השטף של $\vec F$ דרך העיגול $D$, עם הנורמל שמצביע החוצה מהגוף (כלומר $-\hat k$).
+        answer: -12.5663706143592
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $-4\pi$. $\vec F\cdot(-\hat k)=-1$ בכל נקודה, כפול השטח $4\pi$: הזרם נכנס לגוף דרך הבסיס.
+        wrongFeedback: '$\vec F\cdot\hat n$ עם $\hat n=(0,0,-1)$ קבוע על $D$; כפלו בשטח העיגול.'
+        commonWrong:
+          - value: 12.5663706143592
+            feedback: '$4\pi$ הוא השטף כלפי מעלה. החוצה מהגוף בבסיס פירושו כלפי מטה.'
+            misconception: MC-c13-flux-orientation
+
+      - label: ד
+        points: 4
+        type: numeric
+        objectives: [OBJ-13.2-3]
+        standalone: false
+        prompt: >-
+          מה השטף הכולל של $\vec F$ החוצה מהגוף, דרך $S$ ו-$D$ יחד?
+        answer: 50.2654824574367
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $16\pi=20\pi-4\pi$: יותר זרם יוצא מהגוף משנכנס אליו. (זה מתאים לכך ש-$\nabla\cdot\vec F=2>0$ בכל מקום: לשדה
+          יש מקורות בתוך הגוף.)
+        wrongFeedback: 'חברו את השטף החוצה דרך $S$ (סעיף ב) ואת השטף החוצה דרך $D$ (סעיף ג).'
+        commonWrong:
+          - value: 75.398223686155
+            feedback: '$24\pi=20\pi+4\pi$: את הבסיס לקחתם עם הנורמל כלפי מעלה, כלומר פנימה לגוף.'
+            misconception: MC-c13-flux-orientation

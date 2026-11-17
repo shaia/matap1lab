@@ -1,0 +1,328 @@
+# Lesson 0.4 — lines and circles in the plane.
+# Objectives (src/course.ts):
+#   OBJ-0.4-1  equation of a line from a point and a slope or from two points; parallel and perpendicular lines
+#   OBJ-0.4-2  distance between two points, midpoint of a segment
+#   OBJ-0.4-3  recognise a circle by its equation (completing the square), find its centre and radius
+# Every number recomputed in screens/tools/recompute-ch0.py.
+chapter: 0
+questions:
+  - id: Q-0.4-line-2pts
+    type: expr
+    objectives: [OBJ-0.4-1]
+    level: basic
+    prompt: >-
+      מצאו את משוואת הישר דרך $(1,2)$ ו-$(3,8)$. כתבו את $y$ כביטוי ב-$x$.
+    answer: '3*x - 1'
+    answerTex: '$y=3x-1$'
+    variables: [x]
+    correctFeedback: >-
+      נכון. השיפוע $m=\frac{8-2}{3-1}=3$, ומנקודה ושיפוע: $y-2=3(x-1)$, כלומר $y=3x-1$. בדיקה: ב-$x=3$ מתקבל 8.
+    wrongFeedback: >-
+      חשבו שיפוע (הפרש ה-$y$ חלקי הפרש ה-$x$), ואז $y-y_0=m(x-x_0)$. בדקו ששתי הנקודות מקיימות את התשובה.
+    commonWrong:
+      - expr: 'x/3 + 5/3'
+        feedback: >-
+          השיפוע שלכם $\frac13$: חילקתם הפרש $x$ בהפרש $y$. השיפוע הוא $\frac{\Delta y}{\Delta x}=\frac62=3$. הישר שלכם עובר
+          ב-$(1,2)$ אבל לא ב-$(3,8)$.
+        misconception: MC-c0-slope-inverted
+      - expr: '3*x - 5'
+        feedback: >-
+          זה $y=3(x-1)-2$: הסימן של $y_0$ התהפך. מ-$y-2=3(x-1)$ מתקבל $y=3(x-1)+2$. בדיקה: ב-$x=1$ צריך לצאת 2.
+        misconception: MC-c0-shift-sign
+    hints: ['$m=\frac{y_2-y_1}{x_2-x_1}$.']
+
+  - id: Q-0.4-perp
+    type: numeric
+    objectives: [OBJ-0.4-1]
+    level: basic
+    prompt: >-
+      מהו השיפוע של ישר המאונך לישר $2x+3y=6$?
+    answer: 1.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $y=-\frac23x+2$, ולכן השיפוע $-\frac23$, והמאונך $-\frac{1}{-2/3}=\frac32$. בדיקה: $-\frac23\cdot\frac32=-1$.
+    wrongFeedback: >-
+      בודדו את $y$ כדי למצוא את השיפוע $m$, ואז השיפוע המאונך הוא $-\frac1m$.
+    commonWrong:
+      - value: -1.5
+        feedback: >-
+          הפכתם את השבר אבל לא את הסימן. המכפלה $\left(-\frac23\right)\left(-\frac32\right)=1$, ולא $-1$.
+        misconception: MC-c0-perp-slope
+      - value: 0.666666666666667
+        feedback: >-
+          הפכתם את הסימן אבל לא את השבר. $\left(-\frac23\right)\cdot\frac23\ne-1$.
+        misconception: MC-c0-perp-slope
+      - value: -0.666666666666667
+        feedback: >-
+          זה השיפוע של הישר עצמו, ושל כל ישר **מקביל** לו. המאונך: $-\frac1m$.
+        misconception: MC-c0-perp-slope
+      - value: 2
+        feedback: >-
+          קראתם את המקדם של $x$ בצורה הכללית. מבודדים את $y$: $y=-\frac23x+2$.
+        misconception: MC-c0-slope-from-coefficient
+    hints: ['ישרים מאונכים: $m_1m_2=-1$.']
+
+  - id: Q-0.4-vertical
+    type: mc
+    objectives: [OBJ-0.4-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      מהי משוואת הישר דרך $(2,1)$ ו-$(2,5)$?
+    choices:
+      - text: '$x=2$'
+        correct: true
+        feedback: >-
+          נכון. לשתי הנקודות אותו $x$, והישר אנכי. לישר אנכי אין שיפוע: הפרש ה-$x$ הוא 0, ואי אפשר לחלק בו.
+      - text: '$y=2$'
+        feedback: >-
+          $y=2$ הוא ישר אופקי, והנקודות $(2,1)$, $(2,5)$ אינן עליו. הקבוע 2 הוא שיעור ה-$x$ של שתיהן.
+        misconception: MC-c0-vertical-horizontal
+      - text: '$y=0\cdot x+1$, ישר עם שיפוע 0'
+        feedback: >-
+          שיפוע 0 הוא ישר **אופקי**. כאן ה-$y$ משתנה (מ-1 ל-5) וה-$x$ לא, כך שהישר אנכי.
+        misconception: MC-c0-vertical-horizontal
+    hints: ['מה משותף לשתי הנקודות?']
+
+  - id: Q-0.4-parallel-tf
+    type: twotier
+    objectives: [OBJ-0.4-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: הישרים $y=2x+1$ ו-$4x-2y=5$ מקבילים.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. הישר השני הוא $y=2x-\frac52$: אותו שיפוע 2, וחיתוך שונה עם ציר ה-$y$.'
+      - text: 'לא נכון'
+        feedback: >-
+          בודדו את $y$ בישר השני: $y=2x-\frac52$. השיפועים שווים, והישרים שונים, ולכן מקבילים.
+        misconception: MC-c0-slope-from-coefficient
+    reasons:
+      - text: 'אחרי בידוד $y$ לשני הישרים שיפוע 2, והם אינם אותו ישר'
+        correct: true
+        feedback: 'בדיוק. מקבילים = אותו שיפוע וחיתוך שונה עם ציר ה-$y$ (1 מול $-\frac52$).'
+      - text: 'המקדמים של $x$ הם 2 ו-4, ולכן השיפועים שונים'
+        feedback: >-
+          4 הוא המקדם בצורה הכללית, לא השיפוע. בצורה $ax+by=c$ השיפוע $-\frac ab=-\frac{4}{-2}=2$.
+        misconception: MC-c0-slope-from-coefficient
+      - text: 'המכפלה של השיפועים היא $-1$'
+        feedback: >-
+          מכפלה $-1$ פירושה **מאונכים**. כאן המכפלה $2\cdot2=4$; השיפועים שווים.
+        misconception: MC-c0-perp-slope
+
+  - id: Q-0.4-dist
+    type: numeric
+    objectives: [OBJ-0.4-2]
+    level: basic
+    prompt: >-
+      חשבו את המרחק בין $(-1,2)$ ל-$(3,-1)$.
+    answer: 5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\sqrt{(3-(-1))^2+(-1-2)^2}=\sqrt{16+9}=5$: משולש פיתגורי 3, 4, 5.
+    wrongFeedback: >-
+      הפרש ה-$x$ הוא $3-(-1)$, הפרש ה-$y$ הוא $-1-2$. המרחק הוא שורש סכום הריבועים.
+    commonWrong:
+      - value: 7
+        feedback: >-
+          $7=4+3$: חיברתם את ההפרשים. זה אורך הדרך לאורך הצירים; בקו ישר המרחק הוא היתר, $\sqrt{4^2+3^2}=5$.
+        misconception: MC-c0-distance-sum
+      - value: 2.23606797749979
+        feedback: >-
+          זה $\sqrt{(-1+3)^2+(2-1)^2}=\sqrt5$: חיברתם קואורדינטות במקום לחסר. הפרש ה-$x$ הוא $3-(-1)=4$.
+        misconception: MC-c0-distance-add-coords
+    hints: ['$d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$.']
+
+  - id: Q-0.4-midpoint
+    type: numeric
+    objectives: [OBJ-0.4-2]
+    level: basic
+    prompt: >-
+      מהו שיעור ה-$x$ של אמצע הקטע בין $(-1,2)$ ל-$(5,-4)$?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{-1+5}{2}=2$. (האמצע כולו: $(2,-1)$.)
+    wrongFeedback: >-
+      אמצע הקטע הוא הממוצע של הקואורדינטות.
+    commonWrong:
+      - value: 3
+        feedback: >-
+          $3=\frac{5-(-1)}{2}$ הוא חצי מ**אורך** ההיטל על ציר ה-$x$, לא המקום של האמצע. המקום: הממוצע $\frac{-1+5}{2}$.
+        misconception: MC-c0-midpoint-difference
+    hints: ['$\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)$.']
+
+  - id: Q-0.4-taxicab-tf
+    type: twotier
+    objectives: [OBJ-0.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: המשולש שקודקודיו $A=(0,0)$, $B=(4,0)$ ו-$C=(1,3)$ שווה שוקיים.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. אורכי הצלעות $|AB|=4$, $|AC|=\sqrt{10}\approx3.16$ ו-$|BC|=\sqrt{18}\approx4.24$: שלושה אורכים שונים.'
+      - text: 'נכון'
+        feedback: >-
+          $|AC|=\sqrt{1^2+3^2}=\sqrt{10}$, לא $1+3$. אף שתי צלעות אינן שוות.
+        misconception: MC-c0-distance-sum
+    reasons:
+      - text: 'לפי נוסחת המרחק $|AB|=4$, $|AC|=\sqrt{10}$, $|BC|=\sqrt{18}$'
+        correct: true
+        feedback: 'בדיוק. שורש סכום ריבועי ההפרשים, לכל צלע.'
+      - text: '$|AC|=1+3=4=|AB|$'
+        feedback: >-
+          חיבור ההפרשים נותן את אורך הדרך לאורך הצירים, לא את אורך הצלע. $|AC|=\sqrt{1+9}=\sqrt{10}$.
+        misconception: MC-c0-distance-sum
+      - text: '$C$ נמצאת מעל אמצע $AB$'
+        feedback: >-
+          אמצע $AB$ הוא $(2,0)$, ו-$C=(1,3)$ אינה מעליו. אילו הייתה, המשולש היה שווה שוקיים.
+        misconception: MC-c0-midpoint-difference
+
+  - id: Q-0.4-equidistant
+    type: numeric
+    objectives: [OBJ-0.4-2, OBJ-0.4-1]
+    level: mid
+    prompt: >-
+      על ציר ה-$x$ יש נקודה $P=(p,0)$ שמרחקה מ-$A=(1,3)$ שווה למרחקה מ-$B=(5,1)$. מצאו את $p$.
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $(p-1)^2+9=(p-5)^2+1$, כלומר $p^2-2p+10=p^2-10p+26$, ו-$8p=16$. בדיקה: $|PA|^2=1+9=10$ ו-$|PB|^2=9+1=10$.
+    wrongFeedback: >-
+      השוו את ריבועי המרחקים $|PA|^2=|PB|^2$; ה-$p^2$ מתבטל ונשארת משוואה ממעלה ראשונה.
+    commonWrong:
+      - value: 3
+        feedback: >-
+          3 הוא שיעור ה-$x$ של אמצע $AB$. אבל $(3,0)$ אינה במרחק שווה: $|PA|^2=4+9=13$ ו-$|PB|^2=4+1=5$. הנקודות שבמרחק
+          שווה הן האנך האמצעי, והוא אינו אנכי כי $AB$ אינו אופקי.
+        misconception: MC-c0-equidistant-midpoint
+    hints: ['כתבו את שני המרחקים בריבוע והשוו.']
+
+  - id: Q-0.4-circle-radius
+    type: numeric
+    objectives: [OBJ-0.4-3]
+    level: basic
+    prompt: >-
+      מהו הרדיוס של המעגל $x^2+y^2-6x+4y-3=0$?
+    answer: 4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. השלמה לריבוע: $(x-3)^2-9+(y+2)^2-4-3=0$, כלומר $(x-3)^2+(y+2)^2=16$, ו-$r=4$.
+    wrongFeedback: >-
+      השלימו לריבוע: $x^2-6x=(x-3)^2-9$ ו-$y^2+4y=(y+2)^2-4$. אחר כך העבירו את הקבועים אגף.
+    commonWrong:
+      - value: 16
+        feedback: >-
+          16 הוא $r^2$. באגף ימין של $(x-a)^2+(y-b)^2=r^2$ נמצא ריבוע הרדיוס.
+        misconception: MC-c0-circle-radius
+      - value: 1.73205080756888
+        feedback: >-
+          $\sqrt3$ מגיע מהקבוע $-3$ בצורה הכללית. אבל ההשלמה לריבוע מוסיפה לו $9+4$, ולכן $r^2=3+9+4=16$.
+        misconception: MC-c0-circle-radius
+    hints: ['$x^2+bx=\left(x+\frac b2\right)^2-\frac{b^2}{4}$.']
+
+  - id: Q-0.4-circle-center
+    type: mc
+    objectives: [OBJ-0.4-3]
+    level: basic
+    prompt: >-
+      מהו המרכז של המעגל $x^2+y^2-6x+4y-3=0$?
+    choices:
+      - text: '$(3,-2)$'
+        correct: true
+        feedback: 'נכון. $(x-3)^2+(y+2)^2=16$: הסוגריים מתאפסים ב-$x=3$ וב-$y=-2$.'
+      - text: '$(-3,2)$'
+        feedback: >-
+          $(x-3)^2$ מתאפס ב-$x=3$, לא ב-$x=-3$. המעגל $(x-a)^2+(y-b)^2=r^2$ מרכזו ב-$(a,b)$.
+        misconception: MC-c0-shift-sign
+      - text: '$(6,-4)$'
+        feedback: >-
+          לקחתם את המקדמים עצמם. בהשלמה לריבוע לוקחים חצי: $x^2-6x=(x-3)^2-9$.
+        misconception: MC-c0-circle-center-coeff
+      - text: '$(-6,4)$'
+        feedback: >-
+          גם מקדמים במקום חציים, וגם סימן הפוך. $x^2-6x+\dots$ נותן $(x-3)^2$, ולכן $x=3$ במרכז.
+        misconception: MC-c0-circle-center-coeff
+    hints: ['השלימו לריבוע בנפרד ב-$x$ וב-$y$.']
+
+  - id: Q-0.4-circle-tf
+    type: twotier
+    objectives: [OBJ-0.4-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: המשוואה $x^2+y^2+2x+10=0$ מתארת מעגל.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. אין אף נקודה במישור שמקיימת אותה.'
+      - text: 'נכון'
+        feedback: >-
+          השלמה לריבוע נותנת $(x+1)^2+y^2=-9$. סכום ריבועים אינו יכול להיות שלילי, ולכן הקבוצה ריקה.
+        misconception: MC-c0-every-xy-square-circle
+    reasons:
+      - text: 'אחרי השלמה לריבוע $(x+1)^2+y^2=-9$, וסכום ריבועים אינו שלילי'
+        correct: true
+        feedback: 'בדיוק. מעגל מתקבל רק כשאגף ימין חיובי; כשהוא 0 זו נקודה אחת.'
+      - text: 'יש בה $x^2+y^2$ עם מקדמים שווים, וזה מספיק למעגל'
+        feedback: >-
+          מקדמים שווים ל-$x^2$ ול-$y^2$ הם תנאי הכרחי, לא מספיק. צריך גם שאגף ימין יהיה חיובי אחרי ההשלמה לריבוע.
+        misconception: MC-c0-every-xy-square-circle
+      - text: 'זה מעגל שמרכזו $(-1,0)$ ורדיוסו $\sqrt{10}$'
+        feedback: >-
+          הקבוע 10 נמצא באגף **שמאל**: $(x+1)^2+y^2=1-10=-9$. אין רדיוס שריבועו $-9$.
+        misconception: MC-c0-circle-radius
+
+  - id: Q-0.4-tangent
+    type: numeric
+    objectives: [OBJ-0.4-3, OBJ-0.4-1]
+    level: exam
+    prompt: >-
+      הנקודה $(4,6)$ נמצאת על המעגל $(x-1)^2+(y-2)^2=25$. מצאו את המשיק למעגל בנקודה הזו. היכן הוא חותך את ציר ה-$y$?
+      (כתבו את שיעור ה-$y$.)
+    answer: 9
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. שיפוע הרדיוס מ-$(1,2)$ ל-$(4,6)$ הוא $\frac43$, והמשיק מאונך לו: שיפוע $-\frac34$. לכן
+      $y=6-\frac34(x-4)=-\frac34x+9$.
+    wrongFeedback: >-
+      המשיק למעגל מאונך לרדיוס בנקודת ההשקה. מצאו את שיפוע הרדיוס, את השיפוע המאונך, ואז את הישר דרך $(4,6)$.
+    commonWrong:
+      - value: 0.666666666666667
+        feedback: >-
+          זה הישר $y=\frac43x+\frac23$, שעובר דרך המרכז: הוא הרדיוס עצמו, לא המשיק. המשיק מאונך לרדיוס.
+        misconception: MC-c0-tangent-radius-slope
+      - value: 3
+        feedback: >-
+          זה הישר עם שיפוע $+\frac34$: הפכתם את השבר בלי להפוך את הסימן. מאונך לשיפוע $\frac43$ הוא $-\frac34$.
+        misconception: MC-c0-perp-slope
+    hints: ['משיק למעגל מאונך לרדיוס שבנקודת ההשקה.']
+
+  - id: Q-0.4-chord
+    type: numeric
+    objectives: [OBJ-0.4-3, OBJ-0.4-2]
+    level: exam
+    prompt: >-
+      הישר $y=x+1$ חותך את המעגל $x^2+y^2=25$ בשתי נקודות. מהו אורך המיתר שביניהן?
+    answer: 9.89949493661167
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $7\sqrt2$. הצבה: $x^2+(x+1)^2=25$, כלומר $x^2+x-12=0$, ו-$x=3$ או $x=-4$. נקודות החיתוך $(3,4)$ ו-$(-4,-3)$,
+      והמרחק $\sqrt{49+49}=7\sqrt2\approx9.90$. בדיקת שפיות: פחות מהקוטר, 10.
+    wrongFeedback: >-
+      הציבו את $y=x+1$ במשוואת המעגל, מצאו את שתי הנקודות, וחשבו את המרחק ביניהן.
+    commonWrong:
+      - value: 14
+        feedback: >-
+          $14=7+7$: חיברתם את הפרשי הקואורדינטות. המרחק בקו ישר הוא $\sqrt{7^2+7^2}$. ו-14 גדול מהקוטר 10, כך שאינו יכול
+          להיות מיתר.
+        misconception: MC-c0-distance-sum
+      - value: 7
+        feedback: >-
+          7 הוא רק הפרש ה-$x$ בין הנקודות. גם $y$ משתנה ב-7, והמרחק $\sqrt{7^2+7^2}=7\sqrt2$.
+        misconception: MC-c0-distance-sum
+    hints: ['הציבו $y=x+1$ ב-$x^2+y^2=25$.']

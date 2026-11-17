@@ -1,0 +1,63 @@
+# Misconceptions first detected in lesson 11.4 (line integrals of a function and of a field).
+- id: MC-c11-ds-forgot-speed
+  title: שוכחים את גודל המהירות באינטגרל לפי אורך
+  belief: >-
+    $\int_C f\,ds=\int_a^b f(\vec r(t))\,dt$.
+  truth: >-
+    $ds=|\vec r\,'(t)|\,dt$: קטע קטן של פרמטר $dt$ הוא קשת באורך $|\vec r\,'(t)|\,dt$. לכן
+    $\int_C f\,ds=\int_a^b f(\vec r(t))\,|\vec r\,'(t)|\,dt$, וב-$f\equiv1$ מקבלים את אורך העקום.
+  remedy: { lesson: '11.4', label: 'אינטגרל לפי אורך: ds' }
+
+- id: MC-c11-work-forgot-rprime
+  title: שוכחים את וקטור המהירות באינטגרל של שדה
+  belief: >-
+    $\int_C\vec F\cdot d\vec r$ מחשבים כ-$\int_a^b\vec F(\vec r(t))\,dt$, או מכפילים סקלרית ב-$(1,1)$ במקום ב-$\vec r\,'(t)$.
+  truth: >-
+    $d\vec r=\vec r\,'(t)\,dt$, ולכן $\int_C\vec F\cdot d\vec r=\int_a^b\vec F(\vec r(t))\cdot\vec r\,'(t)\,dt$: בכל רגע
+    סוכמים את הרכיב של הכוח בכיוון התנועה כפול הדרך.
+  remedy: { lesson: '11.4', label: 'אינטגרל של שדה: F כפול r׳ סקלרית' }
+
+- id: MC-c11-differential-missing-factor
+  title: מחליפים dz ב-dt בלי הנגזרת של z
+  belief: >-
+    בכתיבה $\int_C P\,dx+Q\,dy+R\,dz$ אפשר להחליף כל דיפרנציאל ב-$dt$, או להשמיט את אחד מהם.
+  truth: >-
+    כל דיפרנציאל מקבל את הנגזרת שלו: $dx=x'(t)\,dt$, $dy=y'(t)\,dt$, $dz=z'(t)\,dt$. על $\vec r(t)=(t,3t,t^2)$:
+    $dx=dt$, $dy=3\,dt$, $dz=2t\,dt$. (גם בסיכומי ההרצאות נשמט כאן הגורם $2t$.)
+  remedy: { lesson: '11.4', label: 'כתיבה עם דיפרנציאלים' }
+
+- id: MC-c11-work-magnitude
+  title: חושבים שהעבודה היא גודל הכוח כפול אורך הדרך
+  belief: >-
+    העבודה של שדה לאורך עקום היא $|\vec F|$ כפול אורך העקום, בלי קשר לכיוון התנועה.
+  truth: >-
+    רק הרכיב של $\vec F$ **בכיוון התנועה** עושה עבודה: $\vec F\cdot\Delta\vec r=|\vec F|\,|\Delta\vec r|\cos\alpha$. כוח
+    שמאונך לתנועה (כמו כוח מרכזי בתנועה מעגלית) עושה עבודה 0, וכוח נגד התנועה עושה עבודה שלילית.
+  remedy: { lesson: '11.4', label: 'עבודה: הרכיב המשיק בלבד' }
+
+- id: MC-c11-reverse-work-same
+  title: חושבים שהעבודה לא תלויה בכיוון ההליכה על העקום
+  belief: >-
+    $\int_C\vec F\cdot d\vec r$ תלוי רק בקבוצת הנקודות של העקום, ולכן אותו ערך בשני הכיוונים.
+  truth: >-
+    כשהופכים את הכיוון, $d\vec r$ מתהפך: $\int_{-C}\vec F\cdot d\vec r=-\int_C\vec F\cdot d\vec r$. ללכת עם הרוח ונגד
+    הרוח אינו אותו דבר.
+  remedy: { lesson: '11.4', label: 'כיוון העקום ואינטגרל של שדה' }
+
+- id: MC-c11-reverse-scalar-sign
+  title: חושבים שגם אינטגרל לפי אורך מחליף סימן כשהופכים את הכיוון
+  belief: >-
+    $\int_{-C}f\,ds=-\int_Cf\,ds$, כמו באינטגרל של שדה.
+  truth: >-
+    $ds=|\vec r\,'(t)|\,dt$ הוא אורך, תמיד חיובי. מסה של תיל או אורך של עקום לא תלויים בכיוון שבו עוברים עליו:
+    $\int_{-C}f\,ds=\int_Cf\,ds$.
+  remedy: { lesson: '11.4', label: 'אינטגרל לפי אורך לא תלוי בכיוון' }
+
+- id: MC-c11-closed-zero-always
+  title: חושבים שאינטגרל של שדה על עקום סגור תמיד אפס
+  belief: >-
+    אם העקום חוזר לנקודת ההתחלה, העבודה היא 0, כי "לא זזנו".
+  truth: >-
+    העבודה על עקום סגור היא 0 לכל עקום סגור **רק** לשדה משמר. ל-$\vec F=(-y,x)$ העבודה על מעגל היחידה נגד כיוון
+    השעון היא $2\pi$: השדה דוחף לאורך כל הדרך.
+  remedy: { lesson: '11.4', label: 'עבודה על עקום סגור' }

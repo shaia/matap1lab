@@ -1,0 +1,279 @@
+# Lesson 7.1 — the antiderivative and the fundamental theorem.
+# Objectives (src/course.ts):
+#   OBJ-7.1-1  define an antiderivative and see why it is determined up to a constant
+#   OBJ-7.1-2  state the fundamental theorem of calculus and use it to compute a definite integral
+#   OBJ-7.1-3  immediate integrals from the table and by linearity
+# Notes pp. 9–10 (table, linearity, the area under sin on [0, π] = 2). This chapter feeds the computerised gateway
+# test on integration techniques: many `expr` questions with upToConstant. Keys in screens/tools/recompute-ch7.py.
+chapter: 7
+questions:
+  - id: Q-7.1-which-antideriv
+    type: multi
+    objectives: [OBJ-7.1-1]
+    qualitative: true
+    level: basic
+    prompt: 'אילו מהפונקציות הבאות הן פונקציות קדומות של $f(x)=2x$? סמנו את כולן.'
+    choices:
+      - text: '$x^2+7$'
+        correct: true
+        feedback: 'נכון. $\left(x^2+7\right)''=2x$: הקבוע נעלם בגזירה.'
+      - text: '$x^2-\pi$'
+        correct: true
+        feedback: 'נכון. גם $-\pi$ הוא קבוע.'
+      - text: '$(x+1)^2-2x$'
+        correct: true
+        feedback: 'נכון, אף שאינו נראה כך: $(x+1)^2-2x=x^2+1$, והנגזרת $2x$.'
+      - text: '$2$'
+        feedback: '2 היא הנגזרת של $2x$, לא פונקציה קדומה. קדומה $F$ מקיימת $F''=f$: צריך לגזור את המועמד ולקבל $2x$.'
+        misconception: MC-c7-antideriv-is-derivative
+      - text: '$x^2\cdot x$'
+        feedback: 'הנגזרת של $x^3$ היא $3x^2$, לא $2x$. בודקים קדומה רק בגזירה.'
+        misconception: MC-c7-power-rule-multiply
+    hints: ['גזרו כל מועמד ובדקו אם מתקבל $2x$.']
+
+  - id: Q-7.1-power
+    type: expr
+    objectives: [OBJ-7.1-3]
+    level: basic
+    prompt: 'חשבו $\int\left(3x^2-\frac{4}{x^3}+\sqrt x\right)dx$ ל-$x>0$. כתבו פונקציה קדומה אחת.'
+    answer: 'x^3 + 2/x^2 + 2/3*x^(3/2)'
+    answerTex: '$x^3+\frac{2}{x^2}+\frac23x^{3/2}+C$'
+    variables: [x]
+    domain: [0.3, 3]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $\int x^a\,dx=\frac{x^{a+1}}{a+1}+C$ לכל $a\ne-1$: $-4\cdot\frac{x^{-2}}{-2}=2x^{-2}$ ו-$\frac{x^{3/2}}{3/2}=\frac23x^{3/2}$.
+    wrongFeedback: 'כתבו כל מחובר כחזקה ($x^{-3}$, $x^{1/2}$) והפעילו $\int x^a\,dx=\frac{x^{a+1}}{a+1}+C$. בדקו בגזירה.'
+    commonWrong:
+      - expr: 'x^3 - 2/x^2 + 2/3*x^(3/2)'
+        feedback: 'הסימן: $\int x^{-3}\,dx=\frac{x^{-2}}{-2}$, ולכן $-4\cdot\frac{x^{-2}}{-2}=+\frac{2}{x^2}$.'
+        misconception: MC-c7-power-negative-exponent
+      - expr: 'x^3 + 2/x^2 + 3/2*x^(3/2)'
+        feedback: 'בחזקה מחלקים במעריך החדש, לא כופלים בו: $\int x^{1/2}\,dx=\frac{x^{3/2}}{3/2}=\frac23x^{3/2}$.'
+        misconception: MC-c7-power-rule-multiply
+    hints: ['$\frac{4}{x^3}=4x^{-3}$ ו-$\sqrt x=x^{1/2}$.']
+
+  - id: Q-7.1-trig-table
+    type: expr
+    objectives: [OBJ-7.1-3]
+    level: basic
+    prompt: 'חשבו $\int\left(2\cos x-3\sin x+\frac{1}{\cos^2x}\right)dx$.'
+    answer: '2*sin(x) + 3*cos(x) + tan(x)'
+    answerTex: '$2\sin x+3\cos x+\tan x+C$'
+    variables: [x]
+    domain: [-1, 1]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. מהטבלה (עמ׳ 9 במחברת): $\int\cos x\,dx=\sin x$, $\int\sin x\,dx=-\cos x$ ו-$\int\frac{dx}{\cos^2x}=\tan x$; ולכן
+      $-3\int\sin x\,dx=+3\cos x$.
+    wrongFeedback: 'השתמשו בליניאריות ובשלוש שורות של הטבלה. בדקו סימן בגזירה: $(\cos x)''=-\sin x$.'
+    commonWrong:
+      - expr: '2*sin(x) - 3*cos(x) + tan(x)'
+        feedback: >-
+          $\int\sin x\,dx=-\cos x$, ולכן $-3\int\sin x\,dx=+3\cos x$. גזרו את התשובה שלכם: מתקבל $+3\sin x$ במקום $-3\sin x$.
+        misconception: MC-c7-trig-integral-sign
+    hints: ['איזו פונקציה נגזרתה $\sin x$?']
+
+  - id: Q-7.1-one-over-x
+    type: expr
+    objectives: [OBJ-7.1-3]
+    level: basic
+    prompt: >-
+      חשבו $\int\frac{x^2+1}{x}\,dx$ **בתחום $x<0$**. (אפשר לכתוב $|x|$ או abs(x).)
+    answer: 'x^2/2 + log(abs(x))'
+    answerTex: '$\frac{x^2}{2}+\ln|x|+C$'
+    variables: [x]
+    domain: [-3, -0.3]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. מחלקים: $\frac{x^2+1}{x}=x+\frac1x$. ו-$\int\frac{dx}{x}=\ln|x|+C$: ל-$x<0$, $\left(\ln(-x)\right)'=\frac{-1}{-x}=\frac1x$
+      (עמ׳ 14 במחברת). $\ln x$ אינו מוגדר בכלל כש-$x<0$.
+    wrongFeedback: 'פרקו לשני מחוברים לפני האינטגרציה. ושימו לב: $\ln x$ לא מוגדר ל-$x<0$.'
+    commonWrong:
+      - expr: '(x^3/3 + x)/(x^2/2)'
+        feedback: >-
+          אינטגרל של מנה אינו מנת האינטגרלים: גזרו את התשובה שלכם ותראו שלא מתקבל $\frac{x^2+1}{x}$. קודם מחלקים, אחר כך
+          מבצעים אינטגרציה.
+        misconception: MC-c7-quotient-integrate-separately
+    hints: ['$\frac{x^2+1}{x}=x+\frac1x$.']
+
+  - id: Q-7.1-exp-table
+    type: expr
+    objectives: [OBJ-7.1-3]
+    level: mid
+    prompt: 'חשבו $\int\left(5e^x+2^x\right)dx$.'
+    answer: '5*exp(x) + 2^x/log(2)'
+    answerTex: '$5e^x+\frac{2^x}{\ln2}+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $\left(2^x\right)'=\ln2\cdot2^x$ (עמ׳ 13 במחברת), ולכן $\int2^x\,dx=\frac{2^x}{\ln2}+C$.
+    wrongFeedback: 'מה הנגזרת של $2^x$? חלקו בגורם שהיא מוסיפה.'
+    commonWrong:
+      - expr: '5*exp(x) + 2^(x+1)/(x+1)'
+        feedback: >-
+          כלל החזקה $\int x^a\,dx=\frac{x^{a+1}}{a+1}$ הוא לבסיס משתנה ומעריך קבוע. ב-$2^x$ המשתנה במעריך: זו פונקציה
+          מעריכית.
+        misconception: MC-c7-power-rule-on-exponential
+      - expr: '5*exp(x) + 2^x*log(2)'
+        feedback: 'זו הנגזרת של $2^x$, לא הקדומה: צריך לחלק ב-$\ln2$, לא לכפול.'
+        misconception: MC-c7-antideriv-is-derivative
+    hints: ['$2^x=e^{x\ln2}$.']
+
+  - id: Q-7.1-ftc-sin
+    type: numeric
+    objectives: [OBJ-7.1-2]
+    level: basic
+    prompt: 'חשבו את השטח מתחת לקשת של $\sin x$ בין 0 ל-$\pi$, כלומר $\int_0^\pi\sin x\,dx$ (עמ׳ 10 במחברת).'
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $F(x)=-\cos x$ קדומה, ולפי המשפט היסודי $\int_0^\pi\sin x\,dx=F(\pi)-F(0)=(-\cos\pi)-(-\cos0)=1+1=2$.
+    wrongFeedback: 'מצאו קדומה של $\sin x$ (בדקו את הסימן בגזירה) וחשבו $F(\pi)-F(0)$.'
+    commonWrong:
+      - value: -2
+        feedback: >-
+          זה מתקבל עם $F=\cos x$: $\cos\pi-\cos0=-2$. אבל $(\cos x)'=-\sin x$; הקדומה של $\sin x$ היא $-\cos x$. (ושטח של
+          קשת מעל הציר חיובי.)
+        misconception: MC-c7-trig-integral-sign
+    hints: ['$F(x)=-\cos x$.']
+
+  - id: Q-7.1-ftc-mid
+    type: numeric
+    objectives: [OBJ-7.1-2, OBJ-7.1-3]
+    level: mid
+    prompt: 'חשבו $\int_1^4\left(\sqrt x-\frac{1}{x^2}\right)dx$.'
+    answer: 3.91666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{47}{12}$. $F(x)=\frac23x^{3/2}+\frac1x$, ו-$F(4)-F(1)=\left(\frac{16}{3}+\frac14\right)-\left(\frac23+1\right)=\frac{47}{12}$.
+    wrongFeedback: 'מצאו קדומה, ואז הציבו: הגבול העליון פחות הגבול התחתון.'
+    commonWrong:
+      - value: -3.91666666667
+        feedback: 'חיסרתם בסדר הפוך: $F(b)-F(a)$, כלומר הערך בגבול העליון 4 פחות הערך בגבול התחתון 1.'
+        misconception: MC-c7-ftc-order
+      - value: 5.41666666667
+        feedback: >-
+          זה מתקבל עם $F=\frac23x^{3/2}-\frac1x$. $\int x^{-2}\,dx=\frac{x^{-1}}{-1}=-\frac1x$, ולכן $-\int x^{-2}\,dx=+\frac1x$.
+        misconception: MC-c7-power-negative-exponent
+    hints: ['$\int x^{-2}\,dx=-x^{-1}+C$.']
+
+  - id: Q-7.1-same-derivative
+    type: twotier
+    objectives: [OBJ-7.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא: אם $F'(x)=G'(x)$ לכל $x$ בקטע, אז $F=G$ בקטע.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: 'נכון. $F=x^2$ ו-$G=x^2+5$: אותה נגזרת, פונקציות שונות. מה שנכון: $F-G$ קבועה.'
+      - text: נכון
+        feedback: 'קבוע נעלם בגזירה, ולכן אי אפשר לשחזר אותו מהנגזרת: $x^2$ ו-$x^2+5$ הן דוגמה נגדית.'
+        misconception: MC-c7-drop-constant
+    reasons:
+      - text: '$(F-G)''=0$ בקטע, ולכן $F-G$ קבועה, אבל לא בהכרח אפס'
+        correct: true
+        feedback: >-
+          בדיוק. פונקציה שנגזרתה אפס בקטע קבועה בו (משפט הערך הממוצע: אין לה איפה לעלות או לרדת). זו הסיבה ל-"$+C$".
+      - text: 'גזירה היא פעולה הפיכה, ולכן הנגזרת קובעת את הפונקציה'
+        feedback: 'גזירה מאבדת את הקבוע: היא אינה חד-חד-ערכית. לכן האינטגרל הלא מסוים הוא משפחה של פונקציות.'
+        misconception: MC-c7-drop-constant
+      - text: 'שתי הפונקציות שוות בנקודה אחת, ולכן בכל מקום'
+        feedback: 'השאלה לא נתנה נקודה משותפת. אם נוסף תנאי כמו $F(0)=G(0)$, אז הקבוע אפס ו-$F=G$.'
+        misconception: MC-c7-drop-constant
+    hints: ['מה הנגזרת של $F-G$?']
+
+  - id: Q-7.1-ftc-constant
+    type: twotier
+    objectives: [OBJ-7.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא: בחישוב $\int_a^bf(x)\,dx=F(b)-F(a)$ לפי המשפט היסודי, התוצאה תלויה בקדומה $F$ שבחרנו.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. כל קדומה אחרת היא $F+C$, ו-$(F(b)+C)-(F(a)+C)=F(b)-F(a)$: הקבוע מתבטל. לכן באינטגרל מסוים לא כותבים $+C$.
+      - text: נכון
+        feedback: 'הקבוע מופיע פעמיים, פעם בכל גבול, ומתבטל בחיסור. כל קדומה נותנת אותו מספר.'
+        misconception: MC-c7-drop-constant
+    reasons:
+      - text: 'שתי קדומות נבדלות בקבוע, והקבוע מתבטל ב-$F(b)-F(a)$'
+        correct: true
+        feedback: 'בדיוק. (בתנאי שהקטע $[a,b]$ כולו בתחום של $f$, כך שהקבוע אחד.)'
+      - text: 'כי המשפט היסודי מחייב לבחור את הקדומה שמתאפסת ב-$a$'
+        feedback: 'אפשר לבחור אותה, אבל אין חובה: כל קדומה נותנת את אותו הפרש.'
+        misconception: MC-c7-ftc-lower-zero
+      - text: 'כי אינטגרל מסוים הוא שטח, ושטח תמיד חיובי'
+        feedback: >-
+          אינטגרל מסוים הוא שטח עם סימן: $\int_\pi^{2\pi}\sin x\,dx=-2$. ובכל מקרה, זה לא קשור לבחירת הקדומה.
+        misconception: MC-c7-ftc-order
+    hints: ['מה קורה ל-$F(b)-F(a)$ אם מחליפים את $F$ ב-$F+7$?']
+
+  - id: Q-7.1-product-trap
+    type: mc
+    objectives: [OBJ-7.1-3]
+    qualitative: true
+    level: mid
+    prompt: 'מה מהבאים נכון לכל שתי פונקציות רציפות $f,g$?'
+    choices:
+      - text: '$\int(3f+g)\,dx=3\int f\,dx+\int g\,dx$'
+        correct: true
+        feedback: 'נכון. זו הליניאריות (עמ׳ 10 במחברת): גזירה היא לינארית, ולכן גם הפעולה ההפוכה לה.'
+      - text: '$\int fg\,dx=\int f\,dx\cdot\int g\,dx$'
+        feedback: >-
+          דוגמה נגדית: $f=g=x$. $\int x^2\,dx=\frac{x^3}{3}$, ואילו $\left(\frac{x^2}{2}\right)^2=\frac{x^4}{4}$. למכפלה יש
+          שיטה משלה: אינטגרציה בחלקים (שיעור 7.3).
+        misconception: MC-c7-product-integral
+      - text: '$\int\frac fg\,dx=\frac{\int f\,dx}{\int g\,dx}$'
+        feedback: 'דוגמה נגדית: $\int\frac{x}{x}\,dx=x$, ואילו $\frac{x^2/2}{x^2/2}=1$.'
+        misconception: MC-c7-quotient-integrate-separately
+    hints: ['בדקו כל טענה על $f=g=x$.']
+
+  - id: Q-7.1-position
+    type: numeric
+    objectives: [OBJ-7.1-1, OBJ-7.1-3]
+    level: mid
+    prompt: >-
+      גוף נע על ישר במהירות $v(t)=3t^2-2$ (מטר לשנייה), ובזמן $t=0$ הוא במקום $x(0)=5$ מטר. איפה הוא בזמן $t=2$?
+    answer: 9
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x(t)=\int v\,dt=t^3-2t+C$, והתנאי $x(0)=5$ קובע $C=5$. לכן $x(2)=8-4+5=9$ מטר.
+    wrongFeedback: 'מצאו קדומה של $v$ עם קבוע, קבעו את הקבוע לפי $x(0)=5$, והציבו $t=2$.'
+    commonWrong:
+      - value: 4
+        feedback: 'שכחתם את הקבוע: $t^3-2t$ מתאים למקום התחלה 0. התנאי $x(0)=5$ קובע $C=5$.'
+        misconception: MC-c7-drop-constant
+      - value: 10
+        feedback: '10 הוא $v(2)$, המהירות. המקום הוא קדומה של המהירות.'
+        misconception: MC-c7-antideriv-is-derivative
+    hints: ['$x''(t)=v(t)$.']
+
+  - id: Q-7.1-two-pieces
+    type: mc
+    objectives: [OBJ-7.1-1]
+    qualitative: true
+    level: exam
+    prompt: >-
+      תהי $G(x)=\ln|x|+1$ כש-$x>0$ ו-$G(x)=\ln|x|+3$ כש-$x<0$. האם $G$ קדומה של $\frac1x$ על התחום $x\ne0$?
+    choices:
+      - text: 'כן: בכל אחד משני הקטעים $G''=\frac1x$, והקבוע יכול להיות שונה בכל קטע'
+        correct: true
+        feedback: >-
+          נכון. התחום $x\ne0$ אינו קטע אחד אלא שני קטעים, והטענה "שתי קדומות נבדלות בקבוע" נכונה בכל קטע בנפרד. לכן
+          הקדומה הכללית של $\frac1x$ היא $\ln|x|+C_1$ ל-$x>0$ ו-$\ln|x|+C_2$ ל-$x<0$.
+      - text: 'לא: שתי קדומות של אותה פונקציה נבדלות תמיד בקבוע אחד'
+        feedback: >-
+          הטענה נכונה רק על **קטע**. ב-0 יש חור בתחום, ושני הצדדים אינם "יודעים" זה על זה: $G-\ln|x|$ קבועה בכל צד, אבל לא
+          אותו קבוע.
+        misconception: MC-c7-constant-same-everywhere
+      - text: 'לא: $G$ אינה רציפה, ולכן אינה גזירה'
+        feedback: >-
+          $G$ מוגדרת רק ב-$x\ne0$, ובכל נקודה של התחום היא רציפה וגזירה. הקפיצה "ב-0" היא בנקודה שאינה בתחום.
+        misconception: MC-c7-constant-same-everywhere
+    hints: ['האם התחום $x\ne0$ הוא קטע אחד?']

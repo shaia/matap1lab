@@ -1,0 +1,218 @@
+# Lesson 3.5 — n-th roots.
+# Objectives (src/course.ts):
+#   OBJ-3.5-1  all n n-th roots of a complex number, in polar form
+#   OBJ-3.5-2  the roots as the vertices of a regular polygon; the roots of unity
+#   OBJ-3.5-3  simple polynomial equations over the complex numbers, and factoring a polynomial
+# Every number recomputed in screens/tools/recompute-ch3.py.
+chapter: 3
+questions:
+  - id: Q-3.5-count
+    type: mc
+    objectives: [OBJ-3.5-1]
+    qualitative: true
+    level: basic
+    prompt: 'כמה פתרונות יש למשוואה $z^4=-16$ במספרים המרוכבים?'
+    choices:
+      - text: '4'
+        correct: true
+        feedback: 'נכון. לכל $w\ne0$ יש בדיוק $n$ שורשים מסדר $n$: כאן $2\operatorname{cis}\left(\frac{\pi}{4}+\frac{k\pi}{2}\right)$, $k=0,1,2,3$, כלומר $\pm\sqrt2\pm\sqrt2i$.'
+      - text: '0'
+        feedback: 'בממשיים אין, כי $x^4\ge0$. במרוכבים לכל מספר שאינו 0 יש $n$ שורשים מסדר $n$.'
+        misconception: MC-c3-no-roots-of-negative
+      - text: '2'
+        feedback: 'שני שורשים נגדיים זה המקרה $n=2$. למשוואה ממעלה 4 יש 4 שורשים, על ריבוע סביב הראשית.'
+        misconception: MC-c3-roots-plus-minus
+
+  - id: Q-3.5-cube-roots
+    type: numeric
+    objectives: [OBJ-3.5-1]
+    level: basic
+    prompt: >-
+      מצאו את שלושת השורשים של $z^3=8i$. מהו החלק הממשי של השורש שהארגומנט שלו הוא החיובי הקטן ביותר?
+    answer: 1.7320508075688772
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\sqrt3$. $8i=8\operatorname{cis}\frac{\pi}{2}$, והשורשים $2\operatorname{cis}\left(\frac{\pi}{6}+\frac{2\pi k}{3}\right)$:
+      $\sqrt3+i$, $-\sqrt3+i$, $-2i$. הראשון: $2\cos\frac{\pi}{6}=\sqrt3$.
+    wrongFeedback: 'כתבו $8i$ בצורה קוטבית. הערך המוחלט של כל שורש $\sqrt[3]8$, והזוויות $\frac{\frac{\pi}{2}+2\pi k}{3}$.'
+    commonWrong:
+      - value: 6.928203230275509
+        feedback: '$4\sqrt3=8\cos\frac{\pi}{6}$: הערך המוחלט של השורש הוא $\sqrt[3]8=2$, לא 8.'
+        misconception: MC-c3-root-modulus
+      - value: 0
+        feedback: '0 מתקבל מ-$2\cos\frac{\pi}{2}$: השארתם את הזווית $\frac{\pi}{2}$ בלי לחלק אותה ב-3.'
+        misconception: MC-c3-root-angle-not-divided
+
+  - id: Q-3.5-spacing
+    type: numeric
+    objectives: [OBJ-3.5-2]
+    level: basic
+    prompt: 'מה הזווית (ברדיאנים) בין שני שורשים סמוכים של $z^6=w$, לכל $w\ne0$?'
+    answer: 1.0471975511965976
+    tolerance: 0.001
+    correctFeedback: 'נכון, $\frac{2\pi}{6}=\frac{\pi}{3}$. ששת השורשים הם קודקודי משושה משוכלל.'
+    wrongFeedback: 'השורשים מחלקים את כל המעגל, $2\pi$, לחלקים שווים.'
+    commonWrong:
+      - value: 0.5235987755982988
+        feedback: '$\frac{\pi}{6}$ הוא חצי מהמרווח: השורשים מחלקים $2\pi$, לא $\pi$.'
+        misconception: MC-c3-roots-spacing-pi-over-n
+
+  - id: Q-3.5-sqrt-complex
+    type: numeric
+    objectives: [OBJ-3.5-1, OBJ-3.5-3]
+    level: mid
+    prompt: >-
+      מצאו את שני השורשים הריבועיים של $-5+12i$ (פתרו $(a+bi)^2=-5+12i$). מהו החלק הממשי של השורש שחלקו הממשי חיובי?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, השורשים $\pm(2+3i)$. $a^2-b^2=-5$, $2ab=12$, ומהערך המוחלט $a^2+b^2=13$; לכן $a^2=4$, $b^2=9$, ו-$ab>0$.
+      בדיקה: $(2+3i)^2=4+12i-9$.
+    wrongFeedback: 'השוו חלק ממשי וחלק מדומה, והוסיפו את המשוואה $a^2+b^2=|-5+12i|=13$.'
+    commonWrong:
+      - value: 7.211102550927978
+        feedback: '$2\sqrt{13}$: לקחתם ערך מוחלט 13 לשורש. השורש מקבל ערך מוחלט $\sqrt{13}$.'
+        misconception: MC-c3-root-modulus
+
+  - id: Q-3.5-method
+    type: rank
+    objectives: [OBJ-3.5-1]
+    qualitative: true
+    level: mid
+    prompt: 'סדרו את השלבים למציאת כל הפתרונות של $z^n=w$, $w\ne0$.'
+    help: 'גררו את השלבים לסדר הנכון: הראשון למעלה.'
+    items:
+      - { id: polar, label: 'כותבים את $w$ בצורה קוטבית: $w=R\operatorname{cis}\alpha$' }
+      - { id: unknown, label: 'כותבים את הנעלם בצורה קוטבית, $z=\rho\operatorname{cis}\theta$, ומציבים: $\rho^n\operatorname{cis}n\theta=R\operatorname{cis}\alpha$' }
+      - { id: compare, label: 'משווים: $\rho=R^{1/n}$ ו-$n\theta=\alpha+2\pi k$' }
+      - { id: list, label: 'רושמים $\theta_k=\frac{\alpha+2\pi k}{n}$ ל-$k=0,1,\dots,n-1$: בדיוק $n$ שורשים שונים' }
+      - { id: check, label: 'בודקים: השורשים על מעגל ברדיוס $R^{1/n}$, במרווחים של $\frac{2\pi}{n}$' }
+    order: [polar, unknown, compare, list, check]
+    correctFeedback: 'נכון. המפתח: זוויות שוות מודולו $2\pi$, ולכן ההשוואה $n\theta=\alpha+2\pi k$ עם כל $k$ שלם.'
+    wrongFeedback: 'בלי צורה קוטבית אי אפשר להשוות זוויות; ובלי ה-$2\pi k$ מקבלים שורש אחד בלבד.'
+
+  - id: Q-3.5-unity-sixth
+    type: multi
+    objectives: [OBJ-3.5-2]
+    level: mid
+    prompt: 'אילו מהמספרים הם שורשי יחידה מסדר 6 (פתרונות של $z^6=1$)? סמנו את כולם.'
+    choices:
+      - text: '$-1$'
+        correct: true
+        feedback: 'נכון. $(-1)^6=1$; זה $\operatorname{cis}\pi$.'
+      - text: '$\frac{1+\sqrt3i}{2}$'
+        correct: true
+        feedback: 'נכון. $\operatorname{cis}\frac{\pi}{3}$, ו-$6\cdot\frac{\pi}{3}=2\pi$.'
+      - text: '$\frac{-1+\sqrt3i}{2}$'
+        correct: true
+        feedback: 'נכון. $\operatorname{cis}\frac{2\pi}{3}$, ו-$6\cdot\frac{2\pi}{3}=4\pi$.'
+      - text: '$i$'
+        feedback: '$i^6=i^2=-1$. $i=\operatorname{cis}\frac{\pi}{2}$, ו-$\frac{\pi}{2}$ אינו כפולה של $\frac{\pi}{3}$. הוא שורש יחידה מסדר 4.'
+        misconception: MC-c3-roots-of-unity-any-unit
+      - text: '$\frac{1+i}{\sqrt2}$'
+        feedback: 'ערכו המוחלט 1, אבל $\left(\operatorname{cis}\frac{\pi}{4}\right)^6=\operatorname{cis}\frac{3\pi}{2}=-i$. הוא שורש יחידה מסדר 8.'
+        misconception: MC-c3-roots-of-unity-any-unit
+
+  - id: Q-3.5-sum-unity
+    type: twotier
+    objectives: [OBJ-3.5-2]
+    qualitative: true
+    level: mid
+    prompt: 'מהו סכום כל שורשי היחידה מסדר $n$, ל-$n\ge2$?'
+    choices:
+      - text: '0'
+        correct: true
+        feedback: 'נכון. למשל ל-$n=2$: $1+(-1)=0$; ל-$n=4$: $1+i-1-i=0$.'
+      - text: '$n$'
+        feedback: 'כל שורש מקיים $\omega^n=1$, אבל $\omega$ עצמו אינו 1. ל-$n=2$ הסכום $1+(-1)=0$.'
+        misconception: MC-c3-roots-sum-n
+      - text: '1'
+        feedback: 'ל-$n=2$: $1+(-1)=0$, לא 1.'
+        misconception: MC-c3-roots-sum-n
+    reasons:
+      - text: 'השורשים הם קודקודי מצולע משוכלל שמרכזו בראשית, ולכן סכום הווקטורים מתאפס'
+        correct: true
+        feedback: 'בדיוק. סיבוב ב-$\frac{2\pi}{n}$ מעביר את הקבוצה לעצמה, ולכן גם את הסכום $S$: $\omega S=S$ עם $\omega\ne1$, כלומר $S=0$.'
+      - text: 'כי כל שורש שווה ל-1 בחזקת $n$'
+        feedback: '$\omega^n=1$ אינו אומר ש-$\omega=1$. במישור גאוס השורשים מפוזרים סביב המעגל.'
+        misconception: MC-c3-roots-sum-n
+      - text: 'כי השורשים באים בזוגות נגדיים'
+        feedback: 'זה נכון רק ל-$n$ זוגי. ל-$n=3$ אין זוגות נגדיים, והסכום עדיין 0.'
+        misconception: MC-c3-roots-plus-minus
+
+  - id: Q-3.5-factor
+    type: mc
+    objectives: [OBJ-3.5-3]
+    qualitative: true
+    level: mid
+    prompt: 'איך מתפרק $z^4+4$ למכפלה של שני פולינומים ריבועיים עם מקדמים **ממשיים**?'
+    choices:
+      - text: '$(z^2+2z+2)(z^2-2z+2)$'
+        correct: true
+        feedback: >-
+          נכון. השורשים של $z^4=-4$ הם $\pm1\pm i$. מצמידים כל שורש לצמוד שלו: $(z-1-i)(z-1+i)=z^2-2z+2$
+          ו-$(z+1-i)(z+1+i)=z^2+2z+2$.
+      - text: '$(z^2+2)^2$'
+        feedback: '$(z^2+2)^2=z^4+4z^2+4$: האיבר האמצעי חסר במקור.'
+        misconception: MC-c3-square-termwise
+      - text: '$(z^2+2i)(z^2-2i)$'
+        feedback: 'המכפלה אכן $z^4+4$, אבל המקדמים אינם ממשיים. כדי לקבל מקדמים ממשיים מצמידים שורשים צמודים.'
+        misconception: MC-c3-conjugate-root-any-coeffs
+      - text: 'אי אפשר, כי ל-$z^4+4$ אין שורשים'
+        feedback: 'אין לו שורשים **ממשיים**, אבל יש לו 4 שורשים מרוכבים, וכל זוג צמודים נותן גורם ריבועי ממשי.'
+        misconception: MC-c3-no-roots-of-negative
+
+  - id: Q-3.5-real-factors
+    type: twotier
+    objectives: [OBJ-3.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא: כל פולינום עם מקדמים ממשיים מתפרק למכפלה של גורמים ממשיים ממעלה 1 וממעלה 2.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. למשל $z^3-1=(z-1)(z^2+z+1)$ ו-$z^4+4=(z^2+2z+2)(z^2-2z+2)$.'
+      - text: 'לא נכון, $z^4+4$ אינו מתפרק כי אין לו שורשים ממשיים'
+        feedback: 'אין לו שורשים ממשיים, אבל השורשים המרוכבים $\pm1\pm i$ נותנים שני גורמים ריבועיים ממשיים.'
+        misconception: MC-c3-no-roots-of-negative
+    reasons:
+      - text: 'לפולינום ממעלה $n$ יש $n$ שורשים מרוכבים, והלא-ממשיים באים בזוגות צמודים; כל זוג נותן $z^2-2\operatorname{Re}(z_0)z+|z_0|^2$'
+        correct: true
+        feedback: 'בדיוק. זה המשפט היסודי של האלגברה (שהקורס משתמש בו בלי הוכחה) יחד עם הצמדה.'
+      - text: 'כי לכל פולינום ממשי יש שורש ממשי'
+        feedback: 'ל-$z^2+1$ אין שורש ממשי. זה נכון רק למעלה אי-זוגית.'
+        misconception: MC-c3-no-roots-of-negative
+      - text: 'כי השורשים של כל פולינום באים בזוגות צמודים'
+        feedback: 'רק כשהמקדמים ממשיים. ל-$z^2-iz$ השורשים $0$ ו-$i$.'
+        misconception: MC-c3-conjugate-root-any-coeffs
+
+  - id: Q-3.5-hexagon
+    type: numeric
+    objectives: [OBJ-3.5-2, OBJ-3.5-1]
+    level: exam
+    prompt: >-
+      קודקודי משושה משוכלל שמרכזו בראשית ואחד מקודקודיו $1+i$ הם כל השורשים של משוואה $z^6=w$. מהו $\operatorname{Im}w$?
+    answer: -8
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $w=(1+i)^6=(\sqrt2)^6\operatorname{cis}\frac{6\pi}{4}=8\operatorname{cis}\frac{3\pi}{2}=-8i$. כל קודקוד אחר הוא
+      $(1+i)\omega$ עם $\omega^6=1$, ולכן גם הוא שורש.
+    wrongFeedback: 'אם $1+i$ שורש, אז $w=(1+i)^6$. חשבו בצורה קוטבית.'
+    commonWrong:
+      - value: -64
+        feedback: '$2^6=64$ מתקבל מ-$|1+i|=2$. אבל $|1+i|=\sqrt2$, ו-$(\sqrt2)^6=8$.'
+        misconception: MC-c3-modulus-no-root
+
+  - id: Q-3.5-complex-quadratic
+    type: numeric
+    objectives: [OBJ-3.5-3, OBJ-3.5-1]
+    level: exam
+    prompt: >-
+      פתרו את $z^2-(3+2i)z+(5+5i)=0$. מהו החלק המדומה של השורש שחלקו המדומה גדול יותר?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\Delta=(3+2i)^2-4(5+5i)=-15-8i$, ושורש ריבועי שלו $1-4i$ (כי $(1-4i)^2=1-8i-16$). לכן
+      $z=\frac{3+2i\pm(1-4i)}{2}$: $2-i$ ו-$1+3i$. בדיקה: סכום $3+2i$, מכפלה $(2-i)(1+3i)=5+5i$.
+    wrongFeedback: 'נוסחת השורשים עובדת גם עם מקדמים מרוכבים; צריך שורש ריבועי מרוכב של $\Delta$.'

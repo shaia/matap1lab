@@ -1,0 +1,295 @@
+# Lesson 12.7 — applications: area, volume, centre of mass, moment of inertia (notes pp. 79–81).
+# Objectives (src/course.ts):
+#   OBJ-12.7-1  compute areas and volumes with double and triple integrals
+#   OBJ-12.7-2  compute the mass and the centre of mass of a body with a given density
+#   OBJ-12.7-3  compute a moment of inertia about an axis
+# Recomputed with sympy (screens/tools/recompute-ch12.py). From the notes: the region between y = 1/x and y = x²,
+# 1 ≤ x ≤ 2 (p. 79: A = 7/3 − ln 2; the notes write x̄ ≈ 2.75, which is ∬x dA before dividing by A: x̄ ≈ 1.677;
+# ȳ ≈ 1.738, unfinished there), and the hemisphere by polar coordinates (pp. 80–81, 2πR³/3).
+chapter: 12
+questions:
+  - id: Q-12.7-area-which
+    type: mc
+    objectives: [OBJ-12.7-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $D$ הוא התחום $a\le x\le b$, $g_1(x)\le y\le g_2(x)$, ו-$f$ פונקציה חיובית. איזה ביטוי נותן את **השטח** של $D$?
+    choices:
+      - text: '$\iint_D1\,dA=\int_a^b\left(g_2(x)-g_1(x)\right)dx$'
+        correct: true
+        feedback: 'נכון. האינטגרל הפנימי של 1 הוא אורך הרצועה האנכית, $g_2(x)-g_1(x)$.'
+      - text: '$\iint_Df\,dA$'
+        feedback: >-
+          זה הנפח מתחת לגרף של $f$ מעל $D$. השטח הוא המקרה $f\equiv1$.
+        misconception: MC-c12-integral-is-size
+      - text: '$\int_a^bg_2(x)\,dx$'
+        feedback: >-
+          זה השטח מתחת לעקום העליון עד ציר $x$, כולל מה שמתחת ל-$g_1$. צריך להחסיר את העקום התחתון.
+        misconception: MC-c12-volume-top-only
+
+  - id: Q-12.7-area-notes
+    type: numeric
+    objectives: [OBJ-12.7-1]
+    level: basic
+    prompt: >-
+      חשבו את השטח של התחום שבין $y=\frac1x$ ל-$y=x^2$, כש-$1\le x\le2$.
+    answer: 1.64018615277339
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. ב-$1<x\le2$, $x^2>\frac1x$, ולכן $A=\int_1^2\left(x^2-\frac1x\right)dx=\frac73-\ln2$.
+    wrongFeedback: >-
+      בדקו איזה עקום עליון (למשל ב-$x=2$), וחשבו את האינטגרל של העליון פחות התחתון מ-1 עד 2.
+    commonWrong:
+      - value: -1.64018615277339
+        feedback: >-
+          שטח שלילי: חיסרתם בסדר הפוך. ב-$1<x\le2$ הפרבולה מעל $\frac1x$.
+        misconception: MC-c12-region-wrong-side
+    hints: ['$\int_1^2\frac{dx}{x}=\ln2$.']
+
+  - id: Q-12.7-hemisphere
+    type: numeric
+    objectives: [OBJ-12.7-1]
+    level: mid
+    prompt: >-
+      חשבו את הנפח של חצי הכדור $0\le z\le\sqrt{9-x^2-y^2}$ כאינטגרל כפול על העיגול $x^2+y^2\le9$, בקואורדינטות קוטביות.
+    answer: 56.5486677646163
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^{2\pi}\!\int_0^3\sqrt{9-r^2}\,r\,dr\,d\theta=2\pi\cdot\frac{27}{3}=18\pi$, כמו $\frac23\pi R^3$ עם $R=3$.
+      ההצבה $t=9-r^2$, $dt=-2r\,dr$.
+    wrongFeedback: >-
+      הגובה מעל $(x,y)$ הוא $\sqrt{9-r^2}$; הכפילו ב-$r$, ובצעו הצבה $t=9-r^2$.
+    commonWrong:
+      - value: 44.4132198049021
+        feedback: >-
+          $\frac{9\pi^2}{2}$ יוצא בלי הגורם $r$: $\int_0^3\sqrt{9-r^2}\,dr=\frac{9\pi}{4}$ (רבע עיגול). עם הגורם $r$ ההצבה
+          עובדת ונותנת 9.
+        misconception: MC-c12-polar-no-r
+    hints: ['$\int_0^3\sqrt{9-r^2}\,r\,dr=\frac12\int_0^9\sqrt t\,dt$.']
+
+  - id: Q-12.7-mass-lamina
+    type: numeric
+    objectives: [OBJ-12.7-2]
+    level: basic
+    prompt: >-
+      לוח דק בצורת רבע עיגול $x^2+y^2\le4$, $x,y\ge0$, וצפיפותו (מסה ליחידת שטח) $\rho=\sqrt{x^2+y^2}$. חשבו את המסה.
+    answer: 4.18879020478639
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $M=\int_0^{\pi/2}\!\int_0^2r\cdot r\,dr\,d\theta=\frac\pi2\cdot\frac83=\frac{4\pi}{3}$.
+    wrongFeedback: >-
+      $M=\iint_D\rho\,dA$. בקוטביות $\rho=r$ ו-$dA=r\,dr\,d\theta$.
+    commonWrong:
+      - value: 3.14159265358979
+        feedback: >-
+          $\pi$ יוצא בלי הגורם $r$ של אלמנט השטח: $\frac\pi2\int_0^2r\,dr$.
+        misconception: MC-c12-polar-no-r
+    hints: ['רבע עיגול: $0\le\theta\le\frac\pi2$.']
+
+  - id: Q-12.7-centroid-x
+    type: numeric
+    objectives: [OBJ-12.7-2]
+    level: mid
+    prompt: >-
+      לוח הומוגני תופס את התחום שבין $y=\frac1x$ ל-$y=x^2$, $1\le x\le2$ (שטחו $\frac73-\ln2$). חשבו את $\bar x$ של מרכז המסה.
+    answer: 1.67663895671234
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\iint_Dx\,dA=\int_1^2x\left(x^2-\frac1x\right)dx=\frac{15}{4}-1=\frac{11}{4}$, ו-$\bar x=\frac{11/4}{7/3-\ln2}\approx1.677$.
+      בדיקה: בתוך $[1,2]$, ומימין לאמצע כי הלוח רחב יותר ליד $x=2$.
+    wrongFeedback: >-
+      $\bar x=\frac1A\iint_Dx\,dA$. חשבו את המונה כאינטגרל נשנה, וחלקו בשטח.
+    commonWrong:
+      - value: 2.75
+        feedback: >-
+          2.75 הוא $\iint_Dx\,dA$, לפני החלוקה בשטח (כך גם בסיכומים). מיקום שיוצא מחוץ ל-$[1,2]$ הוא סימן לחלוקה שנשכחה.
+        misconception: MC-c12-centroid-no-divide
+    hints: ['$\int_1^2\left(x^3-1\right)dx=\frac{15}{4}-1$.']
+
+  - id: Q-12.7-centroid-sanity
+    type: twotier
+    objectives: [OBJ-12.7-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סטודנט חישב את מרכז המסה של לוח שכולו בתוך הרצועה $1\le x\le2$ וקיבל $\bar x=2.75$. האם התוצאה אפשרית?
+    choices:
+      - text: 'לא: יש טעות'
+        correct: true
+        feedback: 'נכון. כנראה $\iint x\,dA$ בלי חלוקה בשטח.'
+      - text: 'כן'
+        feedback: >-
+          $\bar x$ הוא ממוצע של ערכי $x$ בלוח, וכל הערכים בין 1 ל-2. ממוצע לא יכול לצאת מחוץ לטווח.
+        misconception: MC-c12-centroid-anywhere
+    reasons:
+      - text: '$\bar x$ הוא ממוצע משוקלל עם משקלים חיוביים של ערכים מ-$[1,2]$, ולכן $1\le\bar x\le2$'
+        correct: true
+        feedback: 'בדיוק. בדיקה של שנייה, שתופסת את הטעות הנפוצה ביותר: שכחת החלוקה במסה או בשטח.'
+      - text: 'מרכז מסה יכול להיות מחוץ לגוף, למשל בטבעת'
+        feedback: >-
+          נכון שהמרכז של טבעת מחוץ לחומר שלה, אבל הוא עדיין בתוך הטווח של ה-$x$ וה-$y$ שלה. 2.75 נמצא מחוץ לכל הלוח.
+        misconception: MC-c12-centroid-anywhere
+      - text: 'אם הצפיפות גדולה ליד $x=2$, $\bar x$ יכול לעבור את 2'
+        feedback: >-
+          צפיפות גדולה מושכת את $\bar x$ **לכיוון** 2, אבל לא מעבר לו: ממוצע של מספרים שאינם עולים על 2 אינו עולה על 2.
+        misconception: MC-c12-centroid-anywhere
+
+  - id: Q-12.7-density-symmetry
+    type: twotier
+    objectives: [OBJ-12.7-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      לוח בצורת העיגול $x^2+y^2\le1$, וצפיפותו $\rho=1+x$. נכון או לא נכון: מסימטריה, $\bar x=0$.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: 'נכון. הצד הימני כבד יותר, ו-$\bar x>0$ (החישוב נותן $\frac14$).'
+      - text: נכון
+        feedback: >-
+          הצורה סימטרית, אבל הצפיפות לא: ב-$x>0$ היא גדולה מ-1, וב-$x<0$ קטנה מ-1. מרכז המסה זז ימינה.
+        misconception: MC-c12-density-ignored
+    reasons:
+      - text: 'בחישוב $\iint x(1+x)\,dA$ המחובר $\iint x\,dA$ מתאפס, אבל $\iint x^2\,dA>0$'
+        correct: true
+        feedback: 'בדיוק. $\iint x^2\,dA=\frac\pi4$ והמסה $\pi$, ולכן $\bar x=\frac14$.'
+      - text: 'בכל צורה סימטרית ביחס לציר $y$ מתקיים $\bar x=0$'
+        feedback: >-
+          רק כשגם הצפיפות סימטרית, $\rho(-x,y)=\rho(x,y)$. כאן $\rho(-x,y)=1-x$.
+        misconception: MC-c12-density-ignored
+      - text: 'מרכז המסה תמיד במרכז הגיאומטרי של הצורה'
+        feedback: >-
+          זה נכון רק בצפיפות אחידה. כאן המשקל של כל נקודה הוא $1+x$.
+        misconception: MC-c12-density-ignored
+
+  - id: Q-12.7-semicircle
+    type: numeric
+    objectives: [OBJ-12.7-2]
+    level: mid
+    prompt: >-
+      חשבו את $\bar y$ של מרכז המסה של חצי עיגול הומוגני $x^2+y^2\le9$, $y\ge0$.
+    answer: 1.27323954473516
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\iint y\,dA=\int_0^\pi\!\int_0^3r\sin\theta\,r\,dr\,d\theta=9\cdot2=18$, השטח $\frac{9\pi}{2}$, ולכן
+      $\bar y=\frac{18}{9\pi/2}=\frac4\pi$ (באופן כללי $\frac{4R}{3\pi}$). $\bar x=0$ מסימטריה.
+    wrongFeedback: >-
+      בקוטביות: $0\le r\le3$, $0\le\theta\le\pi$. חשבו את $\iint y\,dA$ וחלקו בשטח של חצי העיגול.
+    commonWrong:
+      - value: 18
+        feedback: >-
+          18 הוא $\iint y\,dA$, לפני החלוקה בשטח. ממילא $\bar y$ חייב להיות בין 0 ל-3.
+        misconception: MC-c12-centroid-no-divide
+    hints: ['$\int_0^3r^2\,dr=9$ ו-$\int_0^\pi\sin\theta\,d\theta=2$.']
+
+  - id: Q-12.7-centroid-y
+    type: numeric
+    objectives: [OBJ-12.7-2]
+    level: exam
+    prompt: >-
+      לוח הומוגני תופס את התחום שבין $y=\frac1x$ ל-$y=x^2$, $1\le x\le2$ (שטחו $\frac73-\ln2$). חשבו את $\bar y$ של מרכז המסה.
+    answer: 1.73760764604733
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_{1/x}^{x^2}y\,dy=\frac12\left(x^4-\frac1{x^2}\right)$, ו-$\int_1^2\frac12\left(x^4-\frac1{x^2}\right)dx=\frac12\left(\frac{31}{5}-\frac12\right)=\frac{57}{20}$.
+      לכן $\bar y=\frac{57/20}{7/3-\ln2}\approx1.738$. בדיקה: $y$ בלוח נע בין $\frac12$ ל-4.
+    wrongFeedback: >-
+      $\bar y=\frac1A\int_1^2\!\int_{1/x}^{x^2}y\,dy\,dx$. שימו לב: האינטגרל הפנימי הוא $\frac12\left(g_2^2-g_1^2\right)$, לא $\frac12\left(g_2-g_1\right)^2$.
+    commonWrong:
+      - value: 2.85
+        feedback: >-
+          2.85 הוא $\iint_Dy\,dA$, לפני החלוקה בשטח.
+        misconception: MC-c12-centroid-no-divide
+    hints: ['$\int_1^2x^{-2}dx=\frac12$.']
+
+  - id: Q-12.7-exam-plate
+    type: numeric
+    objectives: [OBJ-12.7-2]
+    level: exam
+    prompt: >-
+      לוח משולש עם הקודקודים $(0,0)$, $(2,0)$, $(0,2)$, וצפיפותו $\rho=x$. חשבו את $\bar x$ של מרכז המסה.
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $M=\int_0^2\!\int_0^{2-x}x\,dy\,dx=\int_0^2x(2-x)\,dx=\frac43$, ו-$\iint x\cdot x\,dA=\int_0^2x^2(2-x)\,dx=\frac43$,
+      ולכן $\bar x=1$. בלוח אחיד $\bar x=\frac23$; הצפיפות שגדלה עם $x$ מזיזה את המרכז ימינה.
+    wrongFeedback: >-
+      $\bar x=\frac{\iint x\rho\,dA}{\iint\rho\,dA}$, עם $\rho=x$ בשני האינטגרלים, על $0\le x\le2$, $0\le y\le2-x$.
+    commonWrong:
+      - value: 0.666666666666667
+        feedback: >-
+          $\frac23$ הוא $\bar x$ של משולש **אחיד** (ממוצע הקודקודים). כאן הצפיפות $x$, והמשקל של הצד הימני גדול יותר.
+        misconception: MC-c12-density-ignored
+      - value: 1.33333333333333
+        feedback: >-
+          $\frac43$ הוא $\iint x\rho\,dA$, לפני החלוקה במסה. גם המסה יוצאת כאן $\frac43$, ולכן המנה 1.
+        misconception: MC-c12-centroid-no-divide
+    hints: ['$\int_0^2x^2(2-x)\,dx=\frac{16}{3}-4$.']
+
+  - id: Q-12.7-inertia-disk
+    type: numeric
+    objectives: [OBJ-12.7-3]
+    level: basic
+    prompt: >-
+      דיסקה דקה $x^2+y^2\le4$ בצפיפות 1. חשבו את מומנט ההתמד שלה סביב ציר $z$ (הציר שמאונך לדיסקה דרך מרכזה):
+      $I=\iint_D\left(x^2+y^2\right)dA$.
+    answer: 25.1327412287183
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^{2\pi}\!\int_0^2r^2\cdot r\,dr\,d\theta=2\pi\cdot\frac{16}{4}=8\pi$, כלומר $\frac12MR^2$ עם $M=4\pi$, $R=2$.
+    wrongFeedback: >-
+      ריבוע המרחק מציר $z$ הוא $x^2+y^2=r^2$, ואלמנט השטח $r\,dr\,d\theta$.
+    commonWrong:
+      - value: 16.7551608191456
+        feedback: >-
+          $\frac{16\pi}{3}$ יוצא מ-$\int_0^2r^2\,dr$: או שהשתמשתם במרחק $r$ במקום בריבועו (עם הגורם $r$ של אלמנט השטח), או
+          שהשתמשתם ב-$r^2$ ושכחתם את הגורם $r$. האינטגרנד הנכון $r^2\cdot r=r^3$.
+        misconception: MC-c12-inertia-not-squared
+    hints: ['$\int_0^2r^3\,dr=4$.']
+
+  - id: Q-12.7-inertia-axis
+    type: mc
+    objectives: [OBJ-12.7-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      לוח דק תופס את התחום $D$ במישור $xy$, וצפיפותו $\rho$. מהו מומנט ההתמד שלו סביב ציר $x$?
+    choices:
+      - text: '$\iint_Dy^2\rho\,dA$'
+        correct: true
+        feedback: 'נכון. המרחק של $(x,y)$ מציר $x$ הוא $|y|$, ובמומנט ההתמד הוא מופיע בריבוע.'
+      - text: '$\iint_Dx^2\rho\,dA$'
+        feedback: >-
+          $|x|$ הוא המרחק מציר $y$. זה מומנט ההתמד סביב ציר $y$.
+        misconception: MC-c12-inertia-wrong-axis
+      - text: '$\iint_D\left(x^2+y^2\right)\rho\,dA$'
+        feedback: >-
+          זה ריבוע המרחק מהראשית, כלומר מומנט ההתמד סביב ציר $z$, הניצב ללוח.
+        misconception: MC-c12-inertia-wrong-axis
+      - text: '$\iint_Dy\,\rho\,dA$'
+        feedback: >-
+          זה המומנט הראשון, שממנו מקבלים את $\bar y$. במומנט ההתמד המרחק בריבוע.
+        misconception: MC-c12-inertia-not-squared
+
+  - id: Q-12.7-inertia-ball
+    type: numeric
+    objectives: [OBJ-12.7-3]
+    level: exam
+    prompt: >-
+      כדור מלא $x^2+y^2+z^2\le1$ בצפיפות 1. חשבו את מומנט ההתמד שלו סביב ציר $z$.
+    answer: 1.67551608191456
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. ריבוע המרחק מציר $z$ הוא $x^2+y^2=r^2\sin^2\theta$. לכן
+      $I=\int_0^{2\pi}\!\int_0^\pi\!\int_0^1r^4\sin^3\theta\,dr\,d\theta\,d\varphi=\frac15\cdot\frac43\cdot2\pi=\frac{8\pi}{15}$,
+      כלומר $\frac25MR^2$ עם $M=\frac{4\pi}{3}$.
+    wrongFeedback: >-
+      בכדוריות $x^2+y^2=r^2\sin^2\theta$, ו-$dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$. $\int_0^\pi\sin^3\theta\,d\theta=\frac43$.
+    commonWrong:
+      - value: 2.51327412287183
+        feedback: >-
+          $\frac{4\pi}{5}$ הוא $\iiint\left(x^2+y^2+z^2\right)dV$: מרחק מהמרכז, לא מהציר. סביב ציר $z$ ריבוע המרחק הוא
+          $x^2+y^2$.
+        misconception: MC-c12-inertia-wrong-axis
+    hints: ['$\sin^3\theta=\sin\theta\left(1-\cos^2\theta\right)$.']

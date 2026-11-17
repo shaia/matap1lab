@@ -1,0 +1,37 @@
+# Terms first defined in lesson 9.1 (parametrised curves).
+- id: vector-function
+  term: פונקציה וקטורית
+  en: vector-valued function
+  symbol: '\vec r(t)=\bigl(x(t),y(t),z(t)\bigr)'
+  definition: >-
+    פונקציה שמתאימה לכל מספר $t$ בקטע וקטור: $\vec r(t)=x(t)\,\hat\imath+y(t)\,\hat\jmath+z(t)\,\hat k$. בפיזיקה
+    $t$ הוא הזמן ו-$\vec r(t)$ וקטור המקום של נקודה נעה.
+  reject: []
+  lesson: '9.1'
+- id: parametric-curve
+  term: עקום בפרמטריזציה
+  en: parametric curve
+  symbol: '\{\vec r(t): a\le t\le b\}'
+  definition: >-
+    קבוצת הנקודות $\{\vec r(t): a\le t\le b\}$ שפונקציה וקטורית רציפה עוברת בהן, במישור או במרחב: המסלול של נקודה
+    נעה. הפונקציה $\vec r$ נקראת פרמטריזציה של העקום; לעקום אחד יש פרמטריזציות רבות, שנבדלות בכיוון ובמהירות.
+  reject: []
+  lesson: '9.1'
+- id: world-line
+  term: קו עולם
+  en: world line (graph of a vector function)
+  symbol: '\{(t,\vec r(t))\}'
+  definition: >-
+    הגרף של פונקציה וקטורית, $\{(t,\vec r(t)): a\le t\le b\}$: המסלול יחד עם הזמן, במרחב עם ממד אחד יותר. ההיטל שלו
+    על מרחב המקום הוא העקום. למשל קו העולם של $(\cos t,\sin t)$ הוא סליל סביב ציר $t$, והעקום הוא מעגל.
+  reject: []
+  lesson: '9.1'
+- id: helix
+  term: סליל
+  en: helix
+  symbol: '\vec r(t)=(R\cos t,\ R\sin t,\ ct)'
+  definition: >-
+    העקום $(R\cos t,R\sin t,ct)$: נקודה שמסתובבת במעגל ברדיוס $R$ סביב ציר $z$ ועולה בקצב קבוע. בכל סיבוב
+    ($\Delta t=2\pi$) הוא עולה $2\pi c$. הוא נמצא על הגליל $x^2+y^2=R^2$.
+  reject: []
+  lesson: '9.1'

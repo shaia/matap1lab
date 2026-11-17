@@ -1,0 +1,336 @@
+# Chapter 5 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# Every number is recomputed in screens/tools/checks_ch5.py.
+chapter: 5
+questions:
+  - id: Q-5-exam-1
+    type: exam
+    title: חקירת פונקציה בעזרת הנגזרת
+    prompt: >-
+      תהי $f(x)=x^2e^{-x}$, מוגדרת לכל $x$ ממשי.
+    parts:
+      - label: א
+        points: 6
+        type: expr
+        objectives: [OBJ-5.3-3]
+        prompt: 'חשבו את $f''(x)$.'
+        answer: '(2*x - x^2)*exp(-x)'
+        answerTex: '$f''(x)=2xe^{-x}-x^2e^{-x}=x(2-x)e^{-x}$'
+        variables: [x]
+        domain: [-2, 3]
+        correctFeedback: >-
+          נכון. כלל המכפלה, עם $(e^{-x})'=-e^{-x}$ מכלל השרשרת.
+        wrongFeedback: >-
+          $u=x^2$, $v=e^{-x}$; $v'=e^{-x}\cdot(-1)$.
+        commonWrong:
+          - expr: '-2*x*exp(-x)'
+            feedback: >-
+              זו מכפלת הנגזרות $2x\cdot(-e^{-x})$. כלל המכפלה הוא $u'v+uv'$.
+            misconception: MC-c5-product-of-derivatives
+          - expr: '(2*x + x^2)*exp(-x)'
+            feedback: >-
+              לקחתם $(e^{-x})'=e^{-x}$ בלי הנגזרת הפנימית $-1$.
+            misconception: MC-c5-chain-missing-inner
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-5.2-1]
+        prompt: 'מהו השיפוע של המשיק לגרף של $f$ בנקודה $x=3$?'
+        answer: -0.149361205103592
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $f'(3)=3\cdot(2-3)e^{-3}=-3e^{-3}\approx-0.149$.
+        wrongFeedback: >-
+          הציבו $x=3$ בנגזרת מסעיף א, לא בפונקציה.
+        commonWrong:
+          - value: 0.448083615310776
+            feedback: >-
+              $9e^{-3}=f(3)$ הוא הגובה של הגרף, לא השיפוע שלו.
+            misconception: MC-c5-value-vs-derivative
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-5.5-3]
+        prompt: >-
+          מצאו את תחומי העלייה והירידה של $f$ ואת נקודות הקיצון המקומיות שלה (עם הערכים). מהו הערך הגדול ביותר של $f$
+          בקטע $[0,4]$?
+        solution:
+          - kind: given
+            text: '$f(x)=x^2e^{-x}$ ו-$f''(x)=x(2-x)e^{-x}$ (סעיף א).'
+          - kind: goal
+            text: 'הסימן של $f''$ בכל תחום, נקודות הקיצון, והמקסימום בקטע הסגור $[0,4]$.'
+          - kind: idea
+            text: >-
+              $e^{-x}>0$ תמיד, ולכן הסימן של $f'$ הוא הסימן של $x(2-x)$. במקום שבו הסימן מתחלף יש קיצון; בקטע סגור משווים
+              גם עם הקצוות.
+          - kind: computation
+            text: >-
+              $x(2-x)<0$ כש-$x<0$ או $x>2$, ו-$x(2-x)>0$ כש-$0<x<2$. לכן $f$ יורדת ב-$(-\infty,0]$, עולה ב-$[0,2]$
+              ויורדת ב-$[2,\infty)$.
+          - kind: step
+            text: >-
+              ב-$x=0$ הנגזרת עוברת ממינוס לפלוס: מינימום מקומי, $f(0)=0$. ב-$x=2$ מפלוס למינוס: מקסימום מקומי,
+              $f(2)=4e^{-2}\approx0.541$.
+          - kind: check
+            text: >-
+              $f\ge0$ בכל מקום, ולכן המינימום $f(0)=0$ הוא גם מינימום מוחלט; זה מתאים. בקטע $[0,4]$ המועמדים:
+              $f(0)=0$, $f(2)=4e^{-2}\approx0.541$, $f(4)=16e^{-4}\approx0.293$.
+          - kind: result
+            text: >-
+              יורדת ב-$(-\infty,0]$ וב-$[2,\infty)$, עולה ב-$[0,2]$; מינימום מקומי $(0,0)$, מקסימום מקומי
+              $(2,4e^{-2})$. בקטע $[0,4]$ הערך הגדול ביותר הוא $4e^{-2}$, ב-$x=2$.
+        rubric:
+          - text: 'הסימן של $f''$ נקבע לפי $x(2-x)$, עם הנימוק ש-$e^{-x}>0$'
+            weight: 3
+          - text: 'תחומי עלייה וירידה נכונים'
+            weight: 2
+          - text: 'סיווג נכון של $x=0$ (מינימום) ושל $x=2$ (מקסימום) לפי החלפת הסימן, עם הערכים'
+            weight: 3
+          - text: 'בקטע $[0,4]$ הושוו גם הקצוות, והמקסימום $4e^{-2}$'
+            weight: 2
+
+      - label: ד
+        points: 4
+        type: twotier
+        objectives: [OBJ-5.5-3, OBJ-4.6-3]
+        qualitative: true
+        standalone: false
+        prompt: >-
+          נכון או לא נכון: למשוואה $x^2e^{-x}=0.3$ יש בדיוק שני פתרונות בתחום $x\ge0$.
+        choices:
+          - text: 'נכון'
+            correct: true
+            feedback: >-
+              נכון. ב-$[0,2]$ $f$ עולה מ-0 ל-$4e^{-2}\approx0.54$, ולכן חוצה את $0.3$ פעם אחת; ב-$[2,\infty)$ היא יורדת
+              מ-$0.54$ לאפס, וחוצה שוב פעם אחת (למשל $f(5)=25e^{-5}\approx0.17<0.3$).
+          - text: 'לא נכון'
+            feedback: >-
+              בכל אחד משני תחומי המונוטוניות יש בדיוק חצייה אחת של $0.3$: קיום מערך הביניים, יחידות מהמונוטוניות.
+            misconception: MC-c5-ivt-gives-uniqueness
+        reasons:
+          - text: 'בכל תחום מונוטוניות ($[0,2]$ ו-$[2,5]$) יש החלפה של $f-0.3$ מסימן לסימן, ו-$f$ מונוטונית שם'
+            correct: true
+            feedback: 'בדיוק: ערך הביניים נותן פתרון בכל תחום, והמונוטוניות נותנת שהוא יחיד שם.'
+          - text: 'משפט ערך הביניים לבדו נותן בדיוק שני פתרונות'
+            feedback: >-
+              משפט ערך הביניים נותן רק קיום. את "בדיוק" נותנת המונוטוניות בכל תחום.
+            misconception: MC-c5-ivt-gives-uniqueness
+          - text: 'ל-$f''$ שני אפסים, ולכן ל-$f=0.3$ שני פתרונות'
+            feedback: >-
+              מספר האפסים של $f'$ אינו מספר הפתרונות של $f=c$; הוא רק מחלק את הישר לתחומי מונוטוניות. ל-$c=0.6$ אין פתרון
+              כלל.
+            misconception: MC-c5-fprime-graph-is-f
+
+  - id: Q-5-exam-2
+    type: exam
+    title: עקום סתום וחלקיק שנע עליו
+    prompt: >-
+      העקום $C$ נתון במשוואה $x^2-xy+y^2=3$ (אליפסה מסובבת).
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-5.4-1]
+        prompt: 'הנקודה $(-1,1)$ נמצאת על $C$. מהו שיפוע המשיק ל-$C$ בה?'
+        answer: 1
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $2x-(y+xy')+2yy'=0$, ולכן $y'=\frac{2x-y}{x-2y}$, וב-$(-1,1)$: $\frac{-3}{-3}=1$.
+        wrongFeedback: >-
+          גזרו כל איבר לפי $x$; $-xy$ הוא מכפלה, ו-$(y^2)'=2yy'$. בודדו את $y'$.
+        commonWrong:
+          - value: 1.5
+            feedback: >-
+              $\frac32$ מתקבל כשגוזרים $(xy)'=y$ בלי האיבר $xy'$: אז $2x-y+2yy'=0$. גם $y$ שבמכפלה תלוי ב-$x$.
+            misconception: MC-c5-implicit-forget-yprime
+
+      - label: ב
+        points: 10
+        type: open
+        objectives: [OBJ-5.4-1]
+        prompt: >-
+          מצאו את כל הנקודות על $C$ שבהן המשיק אופקי. מהו הערך הגדול ביותר של $y$ על העקום?
+        solution:
+          - kind: given
+            text: '$x^2-xy+y^2=3$, ומגזירה סתומה $y''(x-2y)=2x-y$.'
+          - kind: goal
+            text: 'הנקודות שבהן $y''=0$, ומשם המקסימום של $y$.'
+          - kind: idea
+            text: >-
+              משיק אופקי פירושו $y'=0$: המונה $2x-y$ מתאפס והמכנה $x-2y$ לא. מצרפים את התנאי למשוואת העקום.
+          - kind: step
+            text: '$y''=0$ דורש $2x-y=0$, כלומר $y=2x$.'
+          - kind: computation
+            text: >-
+              הצבה בעקום: $x^2-2x^2+4x^2=3x^2=3$, ולכן $x=\pm1$: הנקודות $(1,2)$ ו-$(-1,-2)$.
+          - kind: check
+            text: >-
+              המכנה: ב-$(1,2)$, $x-2y=-3\ne0$; ב-$(-1,-2)$, $x-2y=3\ne0$. שתי הנקודות על העקום: $1-2+4=3$ ו-$1-2+4=3$.
+          - kind: step
+            text: >-
+              העקום סגור וחסום (אליפסה), ולכן $y$ מקבל עליו מקסימום ומינימום, ובהם המשיק אופקי. הערכים המועמדים הם $y=2$
+              ו-$y=-2$.
+          - kind: result
+            text: 'המשיק אופקי ב-$(1,2)$ וב-$(-1,-2)$; הערך הגדול ביותר של $y$ על העקום הוא 2.'
+        rubric:
+          - text: 'גזירה סתומה נכונה, כולל $(xy)''=y+xy''$, ונוסחה ל-$y''$'
+            weight: 3
+          - text: 'התנאי $y=2x$ (מונה מתאפס) והצבתו במשוואת העקום'
+            weight: 3
+          - text: 'שתי הנקודות, עם בדיקה שהמכנה אינו מתאפס'
+            weight: 2
+          - text: 'מסקנה: המקסימום של $y$ הוא 2, עם נימוק (אחת הנקודות שבהן המשיק אופקי)'
+            weight: 2
+
+      - label: ג
+        points: 6
+        type: numeric
+        objectives: [OBJ-5.5-2]
+        prompt: >-
+          חלקיק נע על $C$. כשהוא עובר בנקודה $(0,\sqrt3)$, שיעור ה-$x$ שלו גדל בקצב של 2 יחידות לשנייה. באיזה קצב משתנה
+          אז שיעור ה-$y$ שלו?
+        answer: 1
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\frac{dy}{dt}=y'\cdot\frac{dx}{dt}$, ו-$y'=\frac{2x-y}{x-2y}=\frac{-\sqrt3}{-2\sqrt3}=\frac12$ בנקודה, ולכן
+          $\frac12\cdot2=1$.
+        wrongFeedback: >-
+          גזרו את משוואת העקום לפי $t$ (או השתמשו ב-$y'$ מסעיף א וכלל השרשרת $\frac{dy}{dt}=\frac{dy}{dx}\frac{dx}{dt}$),
+          והציבו את הנקודה.
+        commonWrong:
+          - value: 2
+            feedback: >-
+              הקצבים אינם שווים: $\frac{dy}{dt}=\frac{dy}{dx}\cdot\frac{dx}{dt}$, והשיפוע בנקודה הוא $\frac12$.
+            misconception: MC-c5-related-same-rate
+
+      - label: ד
+        points: 4
+        type: mc
+        objectives: [OBJ-5.4-1, OBJ-5.1-3]
+        qualitative: true
+        prompt: 'הנקודה $(2,1)$ נמצאת על $C$. מה קורה שם לנוסחה $y''=\frac{2x-y}{x-2y}$?'
+        choices:
+          - text: 'המכנה מתאפס והמונה לא: למשיק ל-$C$ בנקודה הזו יש כיוון אנכי'
+            correct: true
+            feedback: >-
+              נכון. $x-2y=0$ ו-$2x-y=3\ne0$. ליד $(2,1)$ אי אפשר לכתוב את $C$ כגרף גזיר של $y$ כפונקציה של $x$: המשיק
+              הוא הישר $x=2$ (וזה הערך הגדול ביותר של $x$ על העקום).
+          - text: 'המשיק אופקי, כי הנגזרת "אינסופית" שווה 0'
+            feedback: >-
+              מנה עם מכנה שמתאפס שואפת לאינסוף: שיפוע תלול מאוד, אנכי. משיק אופקי הוא מונה שמתאפס.
+            misconception: MC-c5-implicit-zero-denominator
+          - text: 'אין לעקום משיק בנקודה הזו, כי יש שם פינה'
+            feedback: >-
+              העקום חלק (אליפסה); רק התיאור שלו כגרף של $y(x)$ נכשל שם. משיק אנכי אינו פינה.
+            misconception: MC-c5-implicit-zero-denominator
+
+  - id: Q-5-exam-3
+    type: exam
+    title: טווח של קליע
+    prompt: >-
+      קליע נורה מהקרקע במהירות $20$ מ׳ לשנייה בזווית $\theta$ (ברדיאנים) מעל האופק. בלי התנגדות אוויר ועם $g=10$ מ׳
+      לשנייה בריבוע, הטווח שלו (במטרים) הוא $R(\theta)=40\sin(2\theta)$, ל-$0\le\theta\le\frac\pi2$.
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-5.3-2]
+        prompt: 'חשבו את $R''\!\left(\frac\pi6\right)$ (מטר לרדיאן).'
+        answer: 40
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $R'(\theta)=40\cos(2\theta)\cdot2=80\cos(2\theta)$, וב-$\frac\pi6$: $80\cos\frac\pi3=40$.
+        wrongFeedback: >-
+          כלל השרשרת: הנגזרת של $\sin(2\theta)$ היא $2\cos(2\theta)$.
+        commonWrong:
+          - value: 20
+            feedback: >-
+              $40\cos\frac\pi3=20$: חסר הכופל 2 של הנגזרת הפנימית $(2\theta)'$.
+            misconception: MC-c5-chain-missing-inner
+
+      - label: ב
+        points: 6
+        type: numeric
+        objectives: [OBJ-5.2-2]
+        standalone: false
+        prompt: >-
+          היורה מכוון ל-$30^\circ$ וטועה ב-$1^\circ$ כלפי מעלה. העריכו בעזרת דיפרנציאל בכמה מטרים משתנה הטווח.
+        answer: 0.698131700797732
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, כ-$0.70$ מ׳. $dR=R'\!\left(\frac\pi6\right)d\theta=40\cdot\frac{\pi}{180}=\frac{2\pi}{9}$: מעלה אחת היא
+          $\frac{\pi}{180}$ רדיאן.
+        wrongFeedback: >-
+          $dR=R'(\theta)\,d\theta$, כש-$d\theta$ **ברדיאנים**.
+        commonWrong:
+          - value: 40
+            feedback: >-
+              הצבתם $d\theta=1$, כאילו מעלה אחת היא רדיאן אחד. הנגזרת מסעיף א היא למטר לרדיאן, ומעלה היא $\frac{\pi}{180}$
+              רדיאן.
+            misconception: MC-c5-degrees-in-calculus
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-5.5-3, OBJ-5.2-2]
+        prompt: >-
+          מצאו את הזווית שבה הטווח הגדול ביותר ואת הטווח הזה. הסבירו בעזרת הדיפרנציאל למה ליד הזווית הזו טעות קטנה
+          בכיוון כמעט אינה משנה את הטווח, ולמה ליד $\theta=\frac\pi6$ היא כן משנה.
+        solution:
+          - kind: given
+            text: '$R(\theta)=40\sin(2\theta)$ בקטע הסגור $\left[0,\frac\pi2\right]$, ו-$R''(\theta)=80\cos(2\theta)$.'
+          - kind: goal
+            text: 'המקסימום של $R$ בקטע, והשוואה של $dR=R''(\theta)\,d\theta$ ליד המקסימום וליד $\frac\pi6$.'
+          - kind: idea
+            text: >-
+              מקסימום בקטע סגור: מועמדים פנימיים עם $R'=0$ והקצוות. ליד נקודה שבה $R'=0$ המשיק אופקי, ולכן הדיפרנציאל
+              קרוב ל-0.
+          - kind: computation
+            text: >-
+              $R'(\theta)=0\iff\cos(2\theta)=0\iff2\theta=\frac\pi2$ (בקטע $0\le2\theta\le\pi$), כלומר $\theta=\frac\pi4$.
+              $R\!\left(\frac\pi4\right)=40$, ובקצוות $R(0)=R\!\left(\frac\pi2\right)=0$.
+          - kind: step
+            text: >-
+              הסימן: $R'>0$ ב-$\left(0,\frac\pi4\right)$ ו-$R'<0$ ב-$\left(\frac\pi4,\frac\pi2\right)$, ולכן $\frac\pi4$ היא
+              נקודת מקסימום.
+          - kind: step
+            text: >-
+              $dR=R'(\theta)\,d\theta$. ב-$\theta=\frac\pi4$: $R'=0$, ולכן $dR=0$ (השינוי האמיתי קטן הרבה יותר מ-$d\theta$).
+              ב-$\theta=\frac\pi6$: $R'=40$, ושגיאה של מעלה נותנת $dR\approx0.70$ מ׳ (סעיף ב).
+          - kind: result
+            text: >-
+              הטווח הגדול ביותר הוא 40 מ׳, בזווית $\frac\pi4$ ($45^\circ$). שם המשיק לגרף של $R$ אופקי, ולכן טעות קטנה בזווית
+              כמעט אינה משנה את הטווח; ב-$30^\circ$ השיפוע 40 מ׳ לרדיאן, והטווח רגיש לטעות.
+        rubric:
+          - text: '$R''(\theta)=80\cos(2\theta)$ והפתרון $\theta=\frac\pi4$ בקטע'
+            weight: 3
+          - text: 'הוכחה שזה מקסימום (החלפת סימן, או השוואה לקצוות), והערך 40'
+            weight: 3
+          - text: 'הסבר בעזרת $dR=R''\,d\theta$: ליד $\frac\pi4$ הדיפרנציאל 0'
+            weight: 2
+          - text: 'השוואה ל-$\frac\pi6$, שם $R''=40$ והטווח רגיש'
+            weight: 2
+
+      - label: ד
+        points: 4
+        type: expr
+        objectives: [OBJ-5.4-2]
+        prompt: >-
+          לזוויות $0\le\theta\le\frac\pi4$ אפשר להפוך: $\theta=\frac12\arcsin\frac{r}{40}$, כש-$r$ הוא הטווח הרצוי. כתבו את
+          $\frac{d\theta}{dr}$ כביטוי ב-$r$ (השתמשו באות r).
+        answer: '1/(2*sqrt(1600 - r^2))'
+        answerTex: '$\dfrac{d\theta}{dr}=\dfrac12\cdot\dfrac{1}{\sqrt{1-\frac{r^2}{1600}}}\cdot\dfrac1{40}=\dfrac{1}{2\sqrt{1600-r^2}}$'
+        variables: [r]
+        domain: [0, 30]
+        correctFeedback: >-
+          נכון. $(\arcsin w)'=\frac{1}{\sqrt{1-w^2}}$ בערך $w=\frac r{40}$, כפול $\frac1{40}$ וכפול $\frac12$. כש-$r\to40$
+          הנגזרת שואפת לאינסוף: הפונקציה ההפוכה מקבלת שם משיק אנכי, כי ל-$R$ משיק אופקי ב-$\frac\pi4$.
+        wrongFeedback: >-
+          גזרו את $\frac12\arcsin\frac r{40}$ בכלל השרשרת; הנגזרת הפנימית היא $\frac1{40}$.
+        commonWrong:
+          - expr: '20/sqrt(1600 - r^2)'
+            feedback: >-
+              זה $\frac12\cdot\frac{1}{\sqrt{1-r^2/1600}}$ בלי הכופל $\frac1{40}$ של הנגזרת הפנימית.
+            misconception: MC-c5-chain-missing-inner

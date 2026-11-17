@@ -1,0 +1,61 @@
+# Misconceptions first detected in lesson 4.5 (hyperbolic functions).
+- id: MC-c4-sinh-cosh-swap
+  title: מחליפים בין הסינוס לקוסינוס ההיפרבולי
+  belief: >-
+    $\sinh x=\frac{e^x+e^{-x}}2$ ו-$\cosh x=\frac{e^x-e^{-x}}2$, או $\cosh0=0$.
+  truth: >-
+    $\cosh x=\frac{e^x+e^{-x}}2$ (זוגית, $\cosh0=1$), $\sinh x=\frac{e^x-e^{-x}}2$ (אי-זוגית, $\sinh0=0$). כמו
+    $\cos0=1$ ו-$\sin0=0$.
+  remedy: { lesson: '4.5', label: 'ההגדרות של sinh ו-cosh' }
+
+- id: MC-c4-hyperbolic-half-forgot
+  title: שוכחים לחלק ב-2 בהגדרה של הפונקציות ההיפרבוליות
+  belief: >-
+    $\sinh x=e^x-e^{-x}$.
+  truth: >-
+    $\sinh x=\frac{e^x-e^{-x}}{2}$: הממוצע של $e^x$ ו-$-e^{-x}$. בלי החצי לא מתקיימת הזהות $\cosh^2x-\sinh^2x=1$.
+  remedy: { lesson: '4.5', label: 'ההגדרות של sinh ו-cosh' }
+
+- id: MC-c4-hyperbolic-periodic
+  title: חושבים שהפונקציות ההיפרבוליות מחזוריות וחסומות
+  belief: >-
+    כמו סינוס וקוסינוס, $\sinh$ ו-$\cosh$ מחזוריות וחסומות.
+  truth: >-
+    הן בנויות מ-$e^x$ ו-$e^{-x}$, ולכן אינן מחזוריות ואינן חסומות: $\cosh x\ge1$ ושואפת ל-$\infty$ בשני הכיוונים,
+    $\sinh$ עולה מ-$-\infty$ ל-$\infty$. הדמיון לטריגונומטריה הוא בזהויות, לא בגרפים.
+  remedy: { lesson: '4.5', label: 'הגרפים של sinh ו-cosh' }
+
+- id: MC-c4-hyperbolic-identity-sign
+  title: מעתיקים את הזהות הטריגונומטרית עם הסימן הלא נכון
+  belief: >-
+    $\cosh^2x+\sinh^2x=1$, ו-$\cosh2x=1-2\sinh^2x$, כמו בטריגונומטריה.
+  truth: >-
+    $\cosh^2x-\sinh^2x=1$ (מינוס), ו-$\cosh2x=1+2\sinh^2x=2\cosh^2x-1$. כלל אצבע: במעבר מזהות טריגונומטרית
+    לזהות היפרבולית, כל מכפלה של שני סינוסים מחליפה סימן.
+  remedy: { lesson: '4.5', label: 'הזהות הבסיסית' }
+
+- id: MC-c4-cosh-sign-choice
+  title: בוחרים לקוסינוס ההיפרבולי ערך שלילי
+  belief: >-
+    מ-$\cosh^2x=1+\sinh^2x$ נובע $\cosh x=\pm\sqrt{1+\sinh^2x}$, ושני הסימנים אפשריים.
+  truth: >-
+    $\cosh x=\frac{e^x+e^{-x}}2>0$ תמיד (ואפילו $\ge1$), ולכן $\cosh x=\sqrt{1+\sinh^2x}$ בלבד.
+  remedy: { lesson: '4.5', label: 'cosh חיובי תמיד' }
+
+- id: MC-c4-quadratic-root-choice
+  title: שומרים את שני השורשים כשהופכים פונקציה היפרבולית
+  belief: >-
+    מ-$e^{2x}-2ye^x-1=0$ מקבלים $e^x=y\pm\sqrt{y^2+1}$, ושני הסימנים נותנים פתרון.
+  truth: >-
+    $e^x>0$, ו-$y-\sqrt{y^2+1}<0$ תמיד, ולכן נשאר רק $e^x=y+\sqrt{y^2+1}$. ב-$\cosh x=y$ שני השורשים חיוביים ונותנים
+    $\pm x$; ההפוכה בוחרת את הענף $x\ge0$, כלומר את הסימן פלוס.
+  remedy: { lesson: '4.5', label: 'היפוך sinh ו-cosh: איזה שורש' }
+
+- id: MC-c4-tanh-unbounded
+  title: מעתיקים לטנגנס ההיפרבולי את האסימפטוטות של טנגנס
+  belief: >-
+    $\tanh x$ שואפת לאינסוף, או שיש לה אסימפטוטות אנכיות כמו ל-$\tan x$.
+  truth: >-
+    $\tanh x=\frac{\sinh x}{\cosh x}$ והמכנה לעולם אינו מתאפס. $\tanh x=\frac{1-e^{-2x}}{1+e^{-2x}}\to1$ כש-$x\to\infty$:
+    הישרים $y=\pm1$ הם אסימפטוטות **אופקיות**, ו-$|\tanh x|<1$.
+  remedy: { lesson: '4.5', label: 'הגרף של tanh' }

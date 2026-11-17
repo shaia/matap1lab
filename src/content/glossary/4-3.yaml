@@ -1,0 +1,33 @@
+# Terms first defined in lesson 4.3 (exponential, logarithm, inverse function, e).
+- id: inverse-function
+  term: פונקציה הפוכה
+  en: inverse function
+  symbol: 'f^{-1}'
+  definition: >-
+    לפונקציה חד-חד-ערכית $f$: הפונקציה $f^{-1}$ שמבטלת אותה, $f^{-1}(f(x))=x$ ו-$f(f^{-1}(y))=y$. התחום של $f^{-1}$ הוא
+    התמונה של $f$, והגרף שלה הוא שיקוף הגרף של $f$ ביחס לישר $y=x$. אין לבלבל עם $\frac1{f}$.
+  lesson: '4.3'
+- id: euler-number
+  term: המספר e
+  en: Euler's number e
+  symbol: 'e=\lim_{n\to\infty}\left(1+\frac1n\right)^n\approx2.71828'
+  definition: >-
+    $e=\lim_{n\to\infty}\left(1+\frac1n\right)^n\approx2.71828$, ובאופן שקול המספר שבו השטח מתחת ל-$\frac1t$ מ-1 עד $e$
+    שווה 1 (כך בסיכומים, עמ׳ 12).
+  lesson: '4.3'
+- id: natural-log
+  term: לוגריתם טבעי
+  en: natural logarithm
+  symbol: '\ln x'
+  definition: >-
+    הלוגריתם בבסיס $e$, מוגדר ל-$x>0$: $\ln x=y$ פירושו $e^y=x$. הפונקציות $e^x$ ו-$\ln x$ הפוכות זו לזו. בסיכומים (עמ׳ 12)
+    הוא מוגדר כשטח מתחת ל-$\frac1t$ בין 1 ל-$x$.
+  lesson: '4.3'
+- id: exponential-function
+  term: פונקציה מעריכית
+  en: exponential function
+  symbol: 'a^x=e^{x\ln a}'
+  definition: >-
+    $a^x$ עם בסיס קבוע $a>0$, $a\ne1$: מוגדרת לכל $x$, חיובית, עולה כש-$a>1$ ויורדת כש-$0<a<1$. כל אקספוננט הוא
+    $e^{x\ln a}$.
+  lesson: '4.3'

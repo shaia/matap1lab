@@ -1,0 +1,361 @@
+# Lesson 5.4 — implicit differentiation and the derivative of an inverse function.
+# Objectives (src/course.ts):
+#   OBJ-5.4-1  differentiate a curve given by an equation implicitly and find the slope at a point on it
+#   OBJ-5.4-2  compute the derivative of an inverse function; differentiate arcsin, arccos, arctan
+#   OBJ-5.4-3  differentiate by logarithms functions such as a power whose base and exponent both vary
+# Every key is recomputed in screens/tools/checks_ch5.py.
+chapter: 5
+questions:
+  - id: Q-5.4-circle-slope
+    type: numeric
+    objectives: [OBJ-5.4-1]
+    level: basic
+    prompt: >-
+      הנקודה $(3,4)$ נמצאת על המעגל $x^2+y^2=25$. גזרו את המשוואה באופן סתום ומצאו את שיפוע המשיק למעגל בנקודה הזו.
+    answer: -0.75
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $2x+2yy'=0$, ולכן $y'=-\frac xy=-\frac34$. בדיקה גיאומטרית: הרדיוס לנקודה שיפועו $\frac43$, והמשיק מאונך
+      לו: $\frac43\cdot\left(-\frac34\right)=-1$.
+    wrongFeedback: >-
+      גזרו כל איבר לפי $x$, כש-$y$ פונקציה של $x$: $(y^2)'=2yy'$. אחר כך בודדו את $y'$ והציבו את הנקודה.
+    hints: ['$(y^2)''=2y\,y''$, לפי כלל השרשרת.']
+
+  - id: Q-5.4-arctan
+    type: expr
+    objectives: [OBJ-5.4-2]
+    level: basic
+    prompt: 'גזרו: $f(x)=\arctan(x^2)$. כתבו את $f''(x)$ (אפשר להקליד arctan).'
+    answer: '2*x/(1 + x^4)'
+    answerTex: '$f''(x)=\dfrac{1}{1+(x^2)^2}\cdot2x=\dfrac{2x}{1+x^4}$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. $(\arctan y)'=\frac{1}{1+y^2}$ בערך $y=x^2$, כפול $2x$.
+    wrongFeedback: >-
+      $(\arctan y)'=\frac{1}{1+y^2}$. מה $y$ כאן, ומה נגזרתו?
+    commonWrong:
+      - expr: '1/(1 + x^4)'
+        feedback: >-
+          חסרה הנגזרת הפנימית $(x^2)'=2x$.
+        misconception: MC-c5-chain-missing-inner
+      - expr: '2*x/(1 + x^2)'
+        feedback: >-
+          הצבתם $x$ במקום $x^2$ בנגזרת החיצונית: $\frac{1}{1+y^2}$ מחושבת ב-$y=x^2$, ולכן במכנה $1+x^4$.
+        misconception: MC-c5-chain-outer-at-x
+
+  - id: Q-5.4-arccos
+    type: expr
+    objectives: [OBJ-5.4-2]
+    level: basic
+    prompt: 'גזרו: $f(x)=\arccos(2x)$ בקטע $|x|<\frac12$. כתבו את $f''(x)$ (אפשר להקליד arccos ו-sqrt).'
+    answer: '-2/sqrt(1 - 4*x^2)'
+    answerTex: '$f''(x)=-\dfrac{2}{\sqrt{1-4x^2}}$'
+    variables: [x]
+    domain: [-0.4, 0.4]
+    correctFeedback: >-
+      נכון. $(\arccos y)'=-\frac{1}{\sqrt{1-y^2}}$ בערך $y=2x$, כפול 2. הנגזרת שלילית: $\arccos$ יורדת.
+    wrongFeedback: >-
+      $(\arccos y)'=-\frac{1}{\sqrt{1-y^2}}$, עם מינוס, ואחריה הנגזרת הפנימית.
+    commonWrong:
+      - expr: '2/sqrt(1 - 4*x^2)'
+        feedback: >-
+          זו הנגזרת של $\arcsin(2x)$. ל-$\arccos$ יש מינוס: היא יורדת מ-$\pi$ ל-0 בקטע $[-1,1]$.
+        misconception: MC-c5-arccos-sign
+      - expr: '-1/sqrt(1 - 4*x^2)'
+        feedback: >-
+          חסר הכופל 2, הנגזרת של השכבה הפנימית $2x$.
+        misconception: MC-c5-chain-missing-inner
+
+  - id: Q-5.4-inverse-point
+    type: numeric
+    objectives: [OBJ-5.4-2]
+    level: basic
+    prompt: >-
+      $f(x)=x^3+x+1$ עולה בכל הישר, ולכן יש לה פונקציה הפוכה $f^{-1}$. שימו לב ש-$f(1)=3$. חשבו את $(f^{-1})'(3)$.
+    answer: 0.25
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $(f^{-1})'(3)=\frac{1}{f'(1)}$, כי $f(1)=3$; $f'(x)=3x^2+1$ ו-$f'(1)=4$. הנקודה $(1,3)$ על הגרף של $f$
+      מתאימה לנקודה $(3,1)$ על הגרף של ההפוכה, והשיפועים הופכיים.
+    wrongFeedback: >-
+      הנגזרת של ההפוכה ב-$b$ היא $\frac{1}{f'(a)}$, כש-$a$ הוא המספר שמקיים $f(a)=b$.
+    commonWrong:
+      - value: 0.0357142857142857
+        feedback: >-
+          $\frac{1}{28}=\frac{1}{f'(3)}$: חישבתם את $f'$ ב-3. אבל 3 הוא ערך של $f$; הנקודה המתאימה היא $a=1$.
+        misconception: MC-c5-inverse-wrong-point
+      - value: 4
+        feedback: >-
+          4 הוא $f'(1)$ עצמו. השיפוע של ההפוכה הוא **ההופכי**: השיקוף ביחס ל-$y=x$ מחליף בין $\Delta x$ ל-$\Delta y$.
+        misconception: MC-c5-inverse-is-reciprocal
+
+  - id: Q-5.4-xx
+    type: expr
+    objectives: [OBJ-5.4-3]
+    level: basic
+    prompt: 'גזרו: $f(x)=x^x$ ל-$x>0$. כתבו את $f''(x)$ (אפשר להקליד ln).'
+    answer: 'x^x*(log(x) + 1)'
+    answerTex: '$f''(x)=x^x(\ln x+1)$'
+    variables: [x]
+    domain: [0.3, 2.5]
+    correctFeedback: >-
+      נכון. $\ln f=x\ln x$, ולכן $\frac{f'}{f}=\ln x+x\cdot\frac1x$, ו-$f'=x^x(\ln x+1)$. אותו דבר מ-$x^x=e^{x\ln x}$.
+    wrongFeedback: >-
+      גם הבסיס וגם המעריך משתנים, ולכן אף אחד מהכללים הרגילים אינו מתאים. קחו $\ln$ של שני האגפים וגזרו.
+    commonWrong:
+      - expr: 'x*x^(x - 1)'
+        feedback: >-
+          זה כלל החזקה, שמניח מעריך **קבוע**. כאן המעריך $x$ משתנה (וזה בכלל $x^x$, לא נגזרת שלו).
+        misconception: MC-c5-power-rule-variable-exponent
+      - expr: 'x^x*log(x)'
+        feedback: >-
+          זה כלל האקספוננט, שמניח בסיס **קבוע**. חסרה התרומה של הבסיס המשתנה: $x\cdot\frac1x=1$.
+        misconception: MC-c5-power-rule-variable-exponent
+      - expr: 'log(x) + 1'
+        feedback: >-
+          זו הנגזרת של $\ln f$, כלומר $\frac{f'}{f}$. כדי לקבל את $f'$ כופלים בחזרה ב-$f=x^x$.
+        misconception: MC-c5-logdiff-forget-y
+
+  - id: Q-5.4-xy-curve
+    type: numeric
+    objectives: [OBJ-5.4-1]
+    level: mid
+    prompt: >-
+      הנקודה $(1,2)$ נמצאת על העקום $x^2+xy+y^2=7$. מצאו את שיפוע המשיק לעקום בנקודה הזו.
+    answer: -0.8
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. גזירה סתומה: $2x+(y+xy')+2yy'=0$, ולכן $y'=-\frac{2x+y}{x+2y}$, וב-$(1,2)$: $-\frac45$.
+    wrongFeedback: >-
+      האיבר $xy$ הוא מכפלה של $x$ בפונקציה $y(x)$: $(xy)'=y+xy'$. גזרו, בודדו $y'$ והציבו.
+    commonWrong:
+      - value: -1
+        feedback: >-
+          $-1$ מתקבל כשגוזרים $(xy)'=y$, כאילו $y$ קבוע: אז $2x+y+2yy'=0$ ו-$y'=-\frac{4}{4}$. גם $y$ שבמכפלה תלוי ב-$x$.
+        misconception: MC-c5-implicit-forget-yprime
+
+  - id: Q-5.4-implicit-why
+    type: twotier
+    objectives: [OBJ-5.4-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      גוזרים לפי $x$ את המשוואה $x^2+y^2=25$ של מעגל. נכון או לא נכון: הנגזרת של $y^2$ לפי $x$ היא $2y$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. ליד הנקודה, $y$ הוא פונקציה של $x$, ו-$y^2$ הרכבה: $(y^2)'=2y\cdot y'$.
+      - text: 'נכון'
+        feedback: >-
+          $2y$ היא הנגזרת של $y^2$ לפי $y$. לפי $x$ צריך כלל שרשרת, כי $y$ משתנה כש-$x$ משתנה.
+        misconception: MC-c5-implicit-forget-yprime
+    reasons:
+      - text: '$y$ תלוי ב-$x$ (על המעגל, ליד הנקודה, $y=\pm\sqrt{25-x^2}$), ולכן $y^2$ הוא הרכבה וכלל השרשרת נותן $2yy''$'
+        correct: true
+        feedback: >-
+          בדיוק. אפשר לבדוק עם $y=\sqrt{25-x^2}$: $y^2=25-x^2$ ונגזרתו $-2x$, ואכן $2yy'=2\sqrt{25-x^2}\cdot\frac{-x}{\sqrt{25-x^2}}=-2x$.
+      - text: 'בגזירה לפי $x$ מתייחסים ל-$y$ כאל קבוע'
+        feedback: >-
+          אם $y$ היה קבוע, גם $(y^2)'$ היה 0, ולא $2y$. בגזירה סתומה $y$ **אינו** קבוע: הוא הפונקציה שהמשוואה מגדירה.
+        misconception: MC-c5-implicit-forget-yprime
+      - text: 'גוזרים כל משתנה לפי עצמו: $x^2$ לפי $x$ ו-$y^2$ לפי $y$'
+        feedback: >-
+          כך מקבלים $2x+2y=0$, משוואה שאינה מכילה את $y'$ כלל ואינה נכונה על המעגל (ב-$(3,4)$: $14\ne0$).
+        misconception: MC-c5-implicit-forget-yprime
+
+  - id: Q-5.4-implicit-expr
+    type: expr
+    objectives: [OBJ-5.4-1]
+    level: mid
+    prompt: >-
+      העקום $x^2y+y^3=10$ עובר בנקודה $(1,2)$. גזרו באופן סתום וכתבו את $y'$ כביטוי ב-$x$ וב-$y$ (השתמשו באותיות x
+      ו-y).
+    answer: '-2*x*y/(x^2 + 3*y^2)'
+    answerTex: '$y''=-\dfrac{2xy}{x^2+3y^2}$'
+    variables: [x, y]
+    domain: [0.2, 2]
+    correctFeedback: >-
+      נכון. $(x^2y)'=2xy+x^2y'$ ו-$(y^3)'=3y^2y'$, ולכן $y'(x^2+3y^2)=-2xy$. ב-$(1,2)$: $y'=-\frac{4}{13}$.
+    wrongFeedback: >-
+      גזרו $x^2y$ בכלל המכפלה ו-$y^3$ בכלל השרשרת, אספו את האיברים עם $y'$ לצד אחד וחלקו.
+    commonWrong:
+      - expr: '-(2*x*y + 3*y^2)/x^2'
+        feedback: >-
+          גזרתם $(y^3)'=3y^2$ בלי $y'$. כל איבר שמכיל $y$ מקבל כופל $y'$ בגזירה לפי $x$.
+        misconception: MC-c5-implicit-forget-yprime
+
+  - id: Q-5.4-arcsin-derive
+    type: mc
+    objectives: [OBJ-5.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      גוזרים את $y=\arcsin x$: מ-$\sin y=x$ מקבלים $\cos y\cdot y'=1$, כלומר $y'=\frac{1}{\cos y}$. למה אחר כך כותבים
+      $\cos y=+\sqrt{1-x^2}$, ולא $-\sqrt{1-x^2}$?
+    choices:
+      - text: 'כי $y=\arcsin x$ נמצא בקטע $\left[-\frac\pi2,\frac\pi2\right]$, ושם $\cos y\ge0$'
+        correct: true
+        feedback: >-
+          נכון. התמונה של $\arcsin$ היא $\left[-\frac\pi2,\frac\pi2\right]$, והקוסינוס אינו שלילי בה. לכן
+          $(\arcsin x)'=\frac{1}{\sqrt{1-x^2}}$, והיא חיובית: $\arcsin$ עולה.
+      - text: 'כי שורש הוא תמיד חיובי, אז הסימן לא משנה'
+        feedback: >-
+          $\cos y=\pm\sqrt{1-\sin^2y}$, והסימן תלוי ב-$y$. הוא נקבע מתחום הערכים של $\arcsin$, לא מהסימון.
+        misconception: MC-c5-arccos-sign
+      - text: 'אין סיבה: גם $-\frac{1}{\sqrt{1-x^2}}$ נכון, וזו הנגזרת של $\arcsin$ באותה מידה'
+        feedback: >-
+          $-\frac{1}{\sqrt{1-x^2}}$ היא הנגזרת של $\arccos$, שהתמונה שלה $[0,\pi]$ והיא יורדת. ל-$\arcsin$ העולה הנגזרת
+          חיובית.
+        misconception: MC-c5-arccos-sign
+      - text: 'כי $(f^{-1})''=\frac{1}{f''}$, ו-$(\sin x)''=\cos x$ חיובי תמיד'
+        feedback: >-
+          $\cos x$ אינו חיובי תמיד, והנוסחה היא $(f^{-1})'(x)=\frac{1}{f'(y)}$ בנקודה $y=f^{-1}(x)$, לא $\frac{1}{f'(x)}$.
+        misconception: MC-c5-inverse-wrong-point
+
+  - id: Q-5.4-vertical
+    type: twotier
+    objectives: [OBJ-5.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f(x)=x^3$ עולה ממש, וההפוכה שלה היא $f^{-1}(x)=\sqrt[3]{x}$. נכון או לא נכון: $f^{-1}$ גזירה ב-0.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $f'(0)=0$: לגרף של $f$ משיק אופקי ב-$(0,0)$, ובשיקוף ביחס ל-$y=x$ הוא הופך למשיק **אנכי** לגרף של
+          $\sqrt[3]{x}$. המנה $\frac{\sqrt[3]h}{h}=h^{-2/3}\to\infty$.
+      - text: 'נכון'
+        feedback: >-
+          ההפוכה של פונקציה גזירה אינה חייבת להיות גזירה. הנוסחה $\frac{1}{f'(a)}$ דורשת $f'(a)\ne0$, וכאן $f'(0)=0$.
+        misconception: MC-c5-continuous-implies-differentiable
+    reasons:
+      - text: 'השיפוע של ההפוכה ב-$(0,0)$ הוא ההופכי של $f''(0)=0$: שיפוע אינסופי, משיק אנכי'
+        correct: true
+        feedback: 'בדיוק: משיק אופקי מתחלף במשיק אנכי בשיקוף.'
+      - text: 'ההפוכה של $x^3$ היא $\frac{1}{x^3}$, שאינה מוגדרת ב-0'
+        feedback: >-
+          $f^{-1}$ הופכת את $f$ ביחס להרכבה, לא ביחס לכפל: $f^{-1}(x)=\sqrt[3]x$, והיא מוגדרת ורציפה ב-0.
+        misconception: MC-c5-inverse-is-reciprocal
+      - text: 'כל הפונקציות ההפוכות גזירות, כי $(f^{-1})''=\frac{1}{f''}$'
+        feedback: >-
+          הנוסחה נכונה רק כש-$f'(a)\ne0$, ובנקודה המתאימה: $(f^{-1})'(b)=\frac{1}{f'(a)}$ עם $f(a)=b$.
+        misconception: MC-c5-inverse-wrong-point
+
+  - id: Q-5.4-inverse-exp
+    type: numeric
+    objectives: [OBJ-5.4-2]
+    level: mid
+    prompt: >-
+      $f(x)=x+e^x$ עולה בכל הישר. חשבו את $(f^{-1})'(1)$. (רמז: מצאו קודם את $a$ שמקיים $f(a)=1$.)
+    answer: 0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f(0)=0+1=1$, ולכן $a=0$; $f'(x)=1+e^x$ ו-$f'(0)=2$, כך ש-$(f^{-1})'(1)=\frac12$.
+    wrongFeedback: >-
+      נחשו $a$ קטן: מה $f(0)$? אחר כך $(f^{-1})'(1)=\frac{1}{f'(a)}$.
+    commonWrong:
+      - value: 0.268941421369995
+        feedback: >-
+          $\frac{1}{1+e}=\frac{1}{f'(1)}$: חישבתם את $f'$ ב-1, שהוא ערך של $f$. הנקודה המתאימה היא $a=0$.
+        misconception: MC-c5-inverse-wrong-point
+      - value: 2
+        feedback: >-
+          2 הוא $f'(0)$. נגזרת ההפוכה היא ההופכי שלו.
+        misconception: MC-c5-inverse-is-reciprocal
+
+  - id: Q-5.4-when-logdiff
+    type: multi
+    objectives: [OBJ-5.4-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      לאילו מהפונקציות הבאות (ל-$x>0$) גזירה לוגריתמית היא הדרך הטבעית, כי אף כלל רגיל (חזקה, אקספוננט) אינו מתאים
+      ישירות? סמנו את כולן.
+    choices:
+      - text: '$x^{\sin x}$'
+        correct: true
+        feedback: >-
+          נכון. גם הבסיס וגם המעריך משתנים. $\ln f=\sin x\ln x$.
+      - text: '$(1+x)^{1/x}$'
+        correct: true
+        feedback: >-
+          נכון. בסיס ומעריך משתנים: $\ln f=\frac{\ln(1+x)}{x}$.
+      - text: '$x^{\pi}$'
+        feedback: >-
+          המעריך קבוע: כלל החזקה נותן $\pi x^{\pi-1}$ מיד.
+        misconception: MC-c5-power-rule-variable-exponent
+      - text: '$\pi^{x}$'
+        feedback: >-
+          הבסיס קבוע: $(\pi^x)'=\pi^x\ln\pi$, כלל האקספוננט (אפשר לגזור גם לוגריתמית, אבל אין צורך).
+        misconception: MC-c5-power-rule-variable-exponent
+
+  - id: Q-5.4-x-sinx
+    type: expr
+    objectives: [OBJ-5.4-3]
+    level: mid
+    prompt: 'גזרו: $f(x)=x^{\sin x}$ ל-$x>0$. כתבו את $f''(x)$.'
+    answer: 'x^sin(x)*(cos(x)*log(x) + sin(x)/x)'
+    answerTex: '$f''(x)=x^{\sin x}\left(\cos x\ln x+\dfrac{\sin x}{x}\right)$'
+    variables: [x]
+    domain: [0.3, 3]
+    correctFeedback: >-
+      נכון. $\ln f=\sin x\ln x$; בכלל המכפלה $\frac{f'}{f}=\cos x\ln x+\frac{\sin x}{x}$, וכופלים ב-$f$.
+    wrongFeedback: >-
+      קחו $\ln$: $\ln f=\sin x\cdot\ln x$. גזרו את שני האגפים ($\frac{f'}{f}$ משמאל) ובודדו את $f'$.
+    commonWrong:
+      - expr: 'sin(x)*x^(sin(x) - 1)'
+        feedback: >-
+          זה כלל החזקה, שמתאים רק למעריך קבוע. חסרה התרומה של המעריך המשתנה, $x^{\sin x}\cos x\ln x$.
+        misconception: MC-c5-power-rule-variable-exponent
+      - expr: 'cos(x)*log(x) + sin(x)/x'
+        feedback: >-
+          זו $\frac{f'}{f}$, הנגזרת של $\ln f$. הצעד האחרון: כופלים ב-$f=x^{\sin x}$.
+        misconception: MC-c5-logdiff-forget-y
+
+  - id: Q-5.4-xx-slope
+    type: numeric
+    objectives: [OBJ-5.4-3]
+    level: exam
+    prompt: >-
+      מהו שיפוע המשיק לגרף של $y=x^x$ בנקודה $x=2$?
+    answer: 6.77258872223978
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $4(\ln2+1)\approx6.77$. $y'=x^x(\ln x+1)$, וב-2: $2^2(\ln2+1)$.
+    wrongFeedback: >-
+      גזרו לוגריתמית: $\ln y=x\ln x$, $\frac{y'}{y}=\ln x+1$, והציבו $x=2$, $y=4$.
+    commonWrong:
+      - value: 4
+        feedback: >-
+          $4=2\cdot2^{1}$, כלל החזקה $x\cdot x^{x-1}$. הוא מתעלם מכך שהמעריך משתנה.
+        misconception: MC-c5-power-rule-variable-exponent
+      - value: 2.77258872223978
+        feedback: >-
+          $4\ln2$ הוא כלל האקספוננט $x^x\ln x$, שמתעלם מכך שהבסיס משתנה. חסר האיבר $x^x\cdot1=4$.
+        misconception: MC-c5-power-rule-variable-exponent
+      - value: 1.69314718055995
+        feedback: >-
+          $\ln2+1$ הוא $\frac{y'}{y}$. כפלו ב-$y(2)=4$.
+        misconception: MC-c5-logdiff-forget-y
+
+  - id: Q-5.4-ellipse-tangent
+    type: numeric
+    objectives: [OBJ-5.4-1]
+    level: exam
+    prompt: >-
+      הנקודה $(2,1)$ נמצאת על האליפסה $x^2+4y^2=8$. מצאו את משוואת המשיק לאליפסה בנקודה הזו, וכתבו את הנקודה שבה הוא
+      חותך את ציר $y$: מהו שיעור ה-$y$ שלה?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $2x+8yy'=0$, ולכן $y'=-\frac{x}{4y}=-\frac12$ ב-$(2,1)$. המשיק $y=1-\frac12(x-2)$, וב-$x=0$: $y=2$.
+    wrongFeedback: >-
+      מצאו את השיפוע בגזירה סתומה, כתבו $y=y_0+m(x-x_0)$ דרך $(2,1)$ והציבו $x=0$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 מתקבל מהישר $y=-\frac12x$, שיש לו השיפוע הנכון אבל הוא עובר בראשית ולא בנקודת ההשקה $(2,1)$.
+        misconception: MC-c5-tangent-through-origin

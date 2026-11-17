@@ -1,0 +1,301 @@
+# Chapter 1 review — vectors and geometry in space (lessons 1.1–1.5), easy to hard.
+# Every lesson is touched; most questions combine two lessons, two reach back to chapter 0.
+# Each hint names the lesson to go back to. Every number recomputed with screens/tools/cas.py.
+chapter: 1
+questions:
+  - id: Q-1-review-01
+    type: numeric
+    objectives: [OBJ-1.2-3, OBJ-1.1-3]
+    level: basic
+    prompt: >-
+      מהו הרכיב של הכוח $\vec F=(3,-1,2)$ בכיוון הווקטור $(1,2,2)$?
+    answer: 1.66666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $|(1,2,2)|=3$, $\hat u=\frac13(1,2,2)$, ו-$\vec F\cdot\hat u=\frac{3-2+4}{3}=\frac53$.
+    wrongFeedback: >-
+      נרמלו את הכיוון לווקטור יחידה, ואז כפלו סקלרית.
+    commonWrong:
+      - value: 5
+        feedback: >-
+          5 הוא $\vec F\cdot(1,2,2)$, בלי לנרמל. הווקטור $(1,2,2)$ באורך 3, ולכן התוצאה גדולה פי 3.
+        misconception: MC-c1-proj-normalise
+    hints: ['חזרו לשיעור 1.1 (וקטור יחידה) ולשיעור 1.2 (היטל על כיוון).']
+
+  - id: Q-1-review-02
+    type: numeric
+    objectives: [OBJ-1.2-2, OBJ-1.4-2]
+    level: basic
+    prompt: >-
+      ידוע ש-$\vec u\cdot\vec v=6$ ו-$|\vec u\times\vec v|=6\sqrt3$. מהי הזווית בין $\vec u$ ל-$\vec v$ (ברדיאנים)?
+    answer: 1.0471975511966
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac\pi3$. מחלקים: $\frac{|\vec u\times\vec v|}{\vec u\cdot\vec v}=\frac{|\vec u||\vec v|\sin\theta}{|\vec u||\vec v|\cos\theta}=\tan\theta=\sqrt3$,
+      והאורכים מתבטלים.
+    wrongFeedback: >-
+      כתבו את שני הנתונים בעזרת $|\vec u||\vec v|$, $\sin\theta$ ו-$\cos\theta$, וחלקו אחד בשני.
+    commonWrong:
+      - value: 0.523598775598299
+        feedback: >-
+          $\frac\pi6$ מתקבל אם $\tan\theta=\frac{1}{\sqrt3}$, כלומר אם מייחסים את הקוסינוס למכפלה הווקטורית ואת הסינוס לסקלרית.
+          זה הפוך: $|\vec u\times\vec v|$ הולך עם $\sin\theta$.
+        misconception: MC-c1-cross-vs-dot
+    hints: ['חזרו לשיעור 1.2 ($\vec u\cdot\vec v=|\vec u||\vec v|\cos\theta$) ולשיעור 1.4 (גודל המכפלה הווקטורית).']
+
+  - id: Q-1-review-03
+    type: multi
+    objectives: [OBJ-1.2-1, OBJ-1.4-1, OBJ-1.5-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $\vec u,\vec v,\vec w$ וקטורים במרחב. אילו מהביטויים מוגדרים? סמנו את כולם.
+    choices:
+      - text: '$\vec u\cdot(\vec v\times\vec w)$'
+        correct: true
+        feedback: 'נכון: וקטור $\vec v\times\vec w$, ואז מכפלה סקלרית עם $\vec u$. זו המכפלה המשולשת, מספר.'
+      - text: '$(\vec u\cdot\vec v)\,\vec w$'
+        correct: true
+        feedback: 'נכון: מספר כפול וקטור, כלומר וקטור בכיוון $\vec w$.'
+      - text: '$\vec u\times(\vec v\times\vec w)$'
+        correct: true
+        feedback: 'נכון: שתי מכפלות וקטוריות בין וקטורים. התוצאה וקטור.'
+      - text: '$\vec u\times(\vec v\cdot\vec w)$'
+        feedback: >-
+          $\vec v\cdot\vec w$ הוא מספר, ומכפלה וקטורית מוגדרת רק בין שני וקטורים.
+        misconception: MC-c1-cross-vs-dot
+      - text: '$(\vec u\cdot\vec v)\cdot\vec w$'
+        feedback: >-
+          $\vec u\cdot\vec v$ מספר, ומכפלה סקלרית מוגדרת בין שני וקטורים. (אולי התכוונתם ל-$(\vec u\cdot\vec v)\vec w$, כפל בסקלר.)
+        misconception: MC-c1-dot-associative
+    hints: ['חזרו לשיעורים 1.2, 1.4 ו-1.5: מה כל מכפלה מקבלת ומה היא מחזירה.']
+
+  - id: Q-1-review-04
+    type: rank
+    objectives: [OBJ-1.3-3, OBJ-1.3-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      סדרו את שלבי המתכון למציאת נקודת החיתוך של ישר עם מישור.
+    help: 'השלב הראשון למעלה.'
+    items:
+      - { id: param, label: 'כותבים את הישר בצורה פרמטרית: $(x(t),y(t),z(t))=P_0+t\vec v$' }
+      - { id: sub, label: 'מציבים את $x(t),y(t),z(t)$ במשוואת המישור' }
+      - { id: solve, label: 'פותרים את המשוואה ב-$t$ (ואם $t$ נעלם: הישר מקביל למישור)' }
+      - { id: back, label: 'מציבים את ה-$t$ שנמצא בחזרה בישר כדי לקבל את הנקודה' }
+      - { id: check, label: 'בודקים שהנקודה מקיימת את משוואת המישור' }
+    order: [param, sub, solve, back, check]
+    correctFeedback: >-
+      נכון. השלב שנשכח הכי הרבה הוא הרביעי: $t$ הוא פרמטר, לא הנקודה.
+    wrongFeedback: >-
+      אי אפשר להציב במישור לפני שיש ביטויים ב-$t$, ואי אפשר לקבל נקודה לפני שיודעים את $t$.
+    hints: ['חזרו לשיעור 1.3: חיתוך ישר ומישור.']
+
+  - id: Q-1-review-05
+    type: mc
+    objectives: [OBJ-1.3-2, OBJ-1.4-3]
+    level: mid
+    prompt: >-
+      מהי משוואת המישור דרך $A=(1,1,1)$, $B=(2,0,3)$ ו-$C=(0,2,2)$?
+    choices:
+      - text: '$x+y=2$'
+        correct: true
+        feedback: >-
+          נכון. $\vec{AB}\times\vec{AC}=(1,-1,2)\times(-1,1,1)=(-3,-3,0)$, כלומר נורמל $(1,1,0)$, ו-$d=1+1=2$. בדיקה: $B$: $2+0=2$;
+          $C$: $0+2=2$. (המישור מקביל לציר ה-$z$, כי לנורמל אין רכיב $z$.)
+      - text: '$x-y=0$'
+        feedback: >-
+          זה מנורמל $(-3,3,0)$: הרכיב האמצעי של המכפלה הווקטורית בלי המינוס. בדיקה: $B=(2,0,3)$ נותנת $2\ne0$.
+        misconception: MC-c1-middle-sign
+      - text: '$-3x-3y=6$'
+        feedback: >-
+          הנורמל נכון, הסימן של $d$ לא: $A$ נותנת $-3-3=-6$.
+        misconception: MC-c1-plane-d-sign
+    hints: ['חזרו לשיעור 1.4 (נורמל כמכפלה וקטורית) ולשיעור 1.3 (מישור מנקודה ונורמל).']
+
+  - id: Q-1-review-06
+    type: numeric
+    objectives: [OBJ-1.3-1, OBJ-1.3-3, OBJ-1.1-1]
+    level: mid
+    prompt: >-
+      הישר דרך $A=(1,2,0)$ ו-$B=(3,3,2)$ חותך את המישור $x+2y+z=17$. מהו רכיב ה-$x$ של נקודת החיתוך?
+    answer: 5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec{AB}=(2,1,2)$ והישר $(1+2t,\ 2+t,\ 2t)$. הצבה: $5+6t=17$, $t=2$, והנקודה $(5,4,4)$. בדיקה: $5+8+4=17$.
+    wrongFeedback: >-
+      כיוון הישר הוא $\vec{AB}$. הציבו את הישר הפרמטרי במישור, מצאו $t$ והציבו בחזרה.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          $t=2$ הוא הפרמטר. הנקודה: $x=1+2\cdot2=5$.
+        misconception: MC-c1-t-is-point
+      - value: 4.27272727272727
+        feedback: >-
+          לקחתם את $B$ עצמה ככיוון, $(1+3t,2+3t,2t)$. כיוון הישר דרך שתי נקודות הוא $B-A=(2,1,2)$.
+        misconception: MC-c1-line-point-direction-swap
+    hints: ['חזרו לשיעור 1.1 ($\vec{AB}=B-A$) ולשיעור 1.3 (ישר פרמטרי וחיתוך עם מישור).']
+
+  - id: Q-1-review-07
+    type: twotier
+    objectives: [OBJ-1.2-1, OBJ-1.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: אם $\vec u\ne\vec0$ ו-$\vec u\cdot\vec v=\vec u\cdot\vec w$, אז $\vec v=\vec w$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. למשל $\vec u=\hat\imath$, $\vec v=\hat\jmath$, $\vec w=\hat k$: שתי המכפלות 0, והווקטורים שונים.'
+      - text: 'נכון'
+        feedback: >-
+          אי אפשר "לחלק" ב-$\vec u$. $\hat\imath\cdot\hat\jmath=\hat\imath\cdot\hat k=0$, ו-$\hat\jmath\ne\hat k$.
+        misconception: MC-c1-dot-zero-factor
+    reasons:
+      - text: 'השוויון אומר רק ש-$\vec u\cdot(\vec v-\vec w)=0$, כלומר $\vec v-\vec w$ מאונך ל-$\vec u$'
+        correct: true
+        feedback: 'בדיוק. כל וקטור מאונך ל-$\vec u$ יכול להיות ההפרש.'
+      - text: 'מכפלה סקלרית אפס פירושה שאחד הגורמים אפס, ולכן $\vec v-\vec w=\vec0$'
+        feedback: >-
+          מכפלה סקלרית אפס פירושה **מאונכים**. $\vec u\cdot(\vec v-\vec w)=0$ לא מחייב $\vec v-\vec w=\vec0$.
+        misconception: MC-c1-dot-zero-factor
+      - text: 'אפשר לצמצם את $\vec u$ כמו במספרים, כי $\vec u\ne\vec0$'
+        feedback: >-
+          במספרים מצמצמים כי $ab=0$ גורר $a=0$ או $b=0$. במכפלה סקלרית זה לא נכון, ולכן אין צמצום.
+        misconception: MC-c1-dot-zero-factor
+    hints: ['חזרו לשיעור 1.2: מכפלה סקלרית אפס ווקטורים מאונכים.']
+
+  - id: Q-1-review-08
+    type: numeric
+    objectives: [OBJ-1.3-3, OBJ-0.4-1]
+    level: mid
+    prompt: >-
+      אותו רעיון כמו מרחק מנקודה למישור עובד גם במישור $xy$: הנורמל לישר $ax+by=c$ הוא $(a,b)$. מהו המרחק מהראשית לישר
+      $3x+4y=10$?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{|3\cdot0+4\cdot0-10|}{\sqrt{9+16}}=\frac{10}{5}=2$. בדיקה: הנקודה הקרובה ביותר היא $2\cdot\frac{(3,4)}{5}=\left(\frac65,\frac85\right)$,
+      והיא על הישר: $\frac{18}{5}+\frac{32}{5}=10$.
+    wrongFeedback: >-
+      $\frac{|ax_P+by_P-c|}{\sqrt{a^2+b^2}}$: הרכיב בכיוון הנורמל **היחידה**.
+    commonWrong:
+      - value: 10
+        feedback: >-
+          חסר החילוק ב-$|(3,4)|=5$. הישר $6x+8y=20$ הוא אותו ישר, ובלי החילוק היה נותן 20.
+        misconception: MC-c1-distance-no-norm
+      - value: 0.4
+        feedback: >-
+          חילקתם ב-$|(3,4)|^2=25$. מחלקים באורך, 5.
+        misconception: MC-c1-distance-no-norm
+    hints: ['חזרו לשיעור 1.3 (מרחק נקודה ממישור) ולשיעור 0.4 (משוואת ישר).']
+
+  - id: Q-1-review-09
+    type: numeric
+    objectives: [OBJ-1.2-3, OBJ-1.1-2]
+    level: mid
+    prompt: >-
+      כוח קבוע $\vec F=(2,1,-1)$ פועל על חלקיק שזז בקו ישר מ-$(0,0,0)$ ל-$(1,2,0)$, ומשם בקו ישר ל-$(3,1,4)$. מהי העבודה
+      הכוללת של הכוח?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec F\cdot(1,2,0)+\vec F\cdot(2,-1,4)=4+(-1)=3$, וזה שווה ל-$\vec F\cdot(3,1,4)$: לכוח **קבוע** העבודה תלויה רק
+      בהעתק הכולל, כי $\vec F\cdot\vec d_1+\vec F\cdot\vec d_2=\vec F\cdot(\vec d_1+\vec d_2)$.
+    wrongFeedback: >-
+      חשבו את ההעתק של כל קטע (סוף פחות התחלה) וחברו את העבודות, או השתמשו בהעתק הכולל.
+    commonWrong:
+      - value: 7
+        feedback: >-
+          $7=\vec F\cdot(1,2,0)+\vec F\cdot(3,1,4)$: בקטע השני השתמשתם בווקטור המקום של נקודת הסיום במקום בהעתק $(2,-1,4)$.
+        misconception: MC-c1-position-vs-displacement
+    hints: ['חזרו לשיעור 1.1 (חיבור העתקים) ולשיעור 1.2 (עבודה כמכפלה סקלרית).']
+
+  - id: Q-1-review-10
+    type: numeric
+    objectives: [OBJ-1.5-2, OBJ-1.1-1, OBJ-1.4-2]
+    level: mid
+    prompt: >-
+      מהו שטח המשולש במישור שקודקודיו $(1,1)$, $(4,2)$ ו-$(2,5)$?
+    answer: 5.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. הצלעות מ-$(1,1)$: $(3,1)$ ו-$(1,4)$. $\begin{vmatrix}3&1\\1&4\end{vmatrix}=11$ הוא שטח המקבילית, והמשולש חצי: $\frac{11}{2}$.
+    wrongFeedback: >-
+      חשבו את שני הווקטורים מקודקוד אחד, את הדטרמיננטה שלהם (שטח המקבילית), וחלקו ב-2.
+    commonWrong:
+      - value: 11
+        feedback: >-
+          11 הוא שטח המקבילית. המשולש הוא חצי ממנה.
+        misconception: MC-c1-triangle-half
+    hints: ['חזרו לשיעור 1.5 (דטרמיננטה כשטח) ולשיעור 1.4 (משולש כחצי מקבילית).']
+
+  - id: Q-1-review-11
+    type: numeric
+    objectives: [OBJ-1.2-2, OBJ-1.3-2]
+    level: exam
+    prompt: >-
+      הזווית בין שני מישורים היא הזווית בין הנורמלים שלהם (החדה מבין השתיים). מהי הזווית (ברדיאנים) בין המישורים $x+y=1$
+      ו-$y+z=2$?
+    answer: 1.0471975511966
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac\pi3$. הנורמלים $(1,1,0)$ ו-$(0,1,1)$: $\cos\theta=\frac{1}{\sqrt2\sqrt2}=\frac12$.
+    wrongFeedback: >-
+      קראו את הנורמלים מהמקדמים (גם 0 הוא מקדם), ואז $\cos\theta=\frac{\vec n_1\cdot\vec n_2}{|\vec n_1||\vec n_2|}$.
+    commonWrong:
+      - value: 0.5
+        feedback: >-
+          $\frac12$ הוא $\cos\theta$. הזווית: $\arccos\frac12=\frac\pi3$.
+        misconception: MC-c1-cos-is-angle
+      - value: 60
+        feedback: >-
+          $60^\circ$ נכון, אבל התבקשה תשובה ברדיאנים.
+        misconception: MC-c0-radians-as-degrees
+    hints: ['חזרו לשיעור 1.3 (הנורמל מהמקדמים) ולשיעור 1.2 (הזווית בין וקטורים).']
+
+  - id: Q-1-review-12
+    type: numeric
+    objectives: [OBJ-1.2-2, OBJ-0.2-1]
+    level: exam
+    prompt: >-
+      $|\vec u|=3$, $|\vec v|=5$ ו-$|\vec u-\vec v|=7$. מהי הזווית בין $\vec u$ ל-$\vec v$ (ברדיאנים)?
+    answer: 2.0943951023932
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{2\pi}{3}$. $|\vec u-\vec v|^2=(\vec u-\vec v)\cdot(\vec u-\vec v)=|\vec u|^2+|\vec v|^2-2\vec u\cdot\vec v$, ולכן
+      $49=34-2\vec u\cdot\vec v$, $\vec u\cdot\vec v=-\frac{15}{2}$, ו-$\cos\theta=\frac{-15/2}{15}=-\frac12$. (זה משפט הקוסינוסים.)
+    wrongFeedback: >-
+      פתחו את $|\vec u-\vec v|^2$ בעזרת המכפלה הסקלרית, מצאו את $\vec u\cdot\vec v$, ואז את $\cos\theta$.
+    commonWrong:
+      - value: 1.0471975511966
+        feedback: >-
+          $\frac\pi3$ הוא $\arccos\frac12$. כאן $\cos\theta=-\frac12$, והזווית קהה: ברביע השני, $\frac{2\pi}{3}$. (וגם: הצלע 7 ארוכה
+          מ-$\sqrt{3^2+5^2}\approx5.8$, ולכן הזווית מולה קהה.)
+        misconception: MC-c0-quadrant-sign
+    hints: ['חזרו לשיעור 1.2 ($|\vec a|^2=\vec a\cdot\vec a$) ולשיעור 0.2 (קוסינוס שלילי ברביע השני).']
+
+  - id: Q-1-review-13
+    type: numeric
+    objectives: [OBJ-1.5-2, OBJ-1.4-2]
+    level: exam
+    prompt: >-
+      המקבילון נפרש מ-$\vec u=(1,1,0)$, $\vec v=(0,1,1)$ ו-$\vec w=(1,2,3)$. מהו הגובה שלו מעל הבסיס (המקבילית) שנפרש מ-$\vec u$
+      ו-$\vec v$? (אפשר לכתוב ערך מדויק, כמו √7 או 3π/4.)
+    answer: 1.15470053837925
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec u\times\vec v=(1,-1,1)$, שטח הבסיס $\sqrt3$, והנפח $|\vec w\cdot(\vec u\times\vec v)|=|1-2+3|=2$. נפח = בסיס
+      כפול גובה, ולכן הגובה $\frac{2}{\sqrt3}\approx1.155$: הרכיב של $\vec w$ בכיוון הנורמל.
+    wrongFeedback: >-
+      חשבו את הנפח (מכפלה משולשת) ואת שטח הבסיס ($|\vec u\times\vec v|$), וחלקו.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          2 הוא הנפח. הגובה הוא הנפח חלקי שטח הבסיס, $\sqrt3$.
+        misconception: MC-c1-distance-no-norm
+      - value: 0.666666666666667
+        feedback: >-
+          חילקתם ב-$|\vec u\times\vec v|^2=3$. שטח הבסיס הוא $|\vec u\times\vec v|=\sqrt3$.
+        misconception: MC-c1-distance-no-norm
+    hints: ['חזרו לשיעור 1.5 (מכפלה משולשת כנפח) ולשיעור 1.4 (שטח מקבילית).']

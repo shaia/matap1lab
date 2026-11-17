@@ -1,0 +1,277 @@
+# Lesson 7.3 — integration by parts.
+# Objectives (src/course.ts):
+#   OBJ-7.3-1  integrate by parts and choose which factor to differentiate and which to integrate
+#   OBJ-7.3-2  apply integration by parts several times, and handle an integral that comes back
+#   OBJ-7.3-3  integrals of the logarithm and of the inverse trigonometric functions
+# Notes p. 11 (∫u'v dx = uv − ∫uv' dx), p. 14 (∫x⁶ ln x dx = x⁷ln x/7 − x⁷/49 + C, recomputed: correct).
+# Keys recomputed in screens/tools/recompute-ch7.py.
+chapter: 7
+questions:
+  - id: Q-7.3-choose
+    type: mc
+    objectives: [OBJ-7.3-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      ב-$\int x\cos x\,dx$ משתמשים באינטגרציה בחלקים, $\int u\,v'\,dx=uv-\int u'v\,dx$. איזו בחירה מובילה לאינטגרל פשוט
+      יותר?
+    choices:
+      - text: 'גוזרים את $x$ ($u=x$) ומבצעים אינטגרציה ל-$\cos x$ ($v=\sin x$)'
+        correct: true
+        feedback: >-
+          נכון. $u'=1$, והאינטגרל שנשאר, $\int\sin x\,dx$, מיידי. הגורם הפולינומי "נעלם" בגזירה, והטריגונומטרי לא מסתבך
+          באינטגרציה.
+      - text: 'גוזרים את $\cos x$ ומבצעים אינטגרציה ל-$x$'
+        feedback: >-
+          אז $v=\frac{x^2}{2}$ ונשאר $\int\frac{x^2}{2}\sin x\,dx$: החזקה של $x$ **עלתה**, והאינטגרל קשה יותר מהמקורי.
+        misconception: MC-c7-parts-wrong-choice
+      - text: 'אין הבדל: שתי הבחירות נותנות אינטגרל באותה רמת קושי'
+        feedback: 'הבחירה קובעת הכול: אחת מורידה את החזקה של $x$ והשנייה מעלה אותה.'
+        misconception: MC-c7-parts-wrong-choice
+    hints: ['איזה גורם נעשה פשוט יותר כשגוזרים אותו?']
+
+  - id: Q-7.3-xex
+    type: expr
+    objectives: [OBJ-7.3-1]
+    level: basic
+    prompt: 'חשבו $\int xe^x\,dx$. כתבו פונקציה קדומה אחת.'
+    answer: 'x*exp(x) - exp(x)'
+    answerTex: '$\int xe^x\,dx=(x-1)e^x+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון: גוזרים את $x$ ומבצעים אינטגרציה ל-$e^x$, ואז $\int xe^x\,dx=xe^x-\int e^x\,dx$.
+    wrongFeedback: >-
+      בדקו בגזירה: הנגזרת של התשובה שלכם צריכה לצאת $xe^x$.
+    commonWrong:
+      - expr: 'x*exp(x)'
+        feedback: 'שכחתם את האינטגרל שנשאר אחרי האינטגרציה בחלקים: $-\int e^x\,dx$.'
+        misconception: MC-c7-parts-drop-integral
+    hints: ['איזה גורם נעשה פשוט יותר כשגוזרים אותו?']
+
+  - id: Q-7.3-xcos
+    type: expr
+    objectives: [OBJ-7.3-1]
+    level: basic
+    prompt: 'חשבו $\int x\cos x\,dx$.'
+    answer: 'x*sin(x) + cos(x)'
+    answerTex: '$x\sin x+\cos x+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: 'נכון. $u=x$, $v=\sin x$: $x\sin x-\int\sin x\,dx=x\sin x+\cos x+C$.'
+    wrongFeedback: 'אחרי הצעד $x\sin x-\int\sin x\,dx$, היזהרו בסימן של $\int\sin x\,dx$.'
+    commonWrong:
+      - expr: 'x*sin(x) - cos(x)'
+        feedback: '$\int\sin x\,dx=-\cos x$, ולכן $-\int\sin x\,dx=+\cos x$.'
+        misconception: MC-c7-trig-integral-sign
+      - expr: 'x*sin(x)'
+        feedback: 'חסר האינטגרל שנשאר, $-\int\sin x\,dx$.'
+        misconception: MC-c7-parts-drop-integral
+    hints: ['$u=x$, $v''=\cos x$.']
+
+  - id: Q-7.3-ln
+    type: expr
+    objectives: [OBJ-7.3-3]
+    level: basic
+    prompt: 'חשבו $\int\ln x\,dx$ ל-$x>0$.'
+    answer: 'x*log(x) - x'
+    answerTex: '$x\ln x-x+C$'
+    variables: [x]
+    domain: [0.3, 3]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. כותבים $\ln x=1\cdot\ln x$, גוזרים את $\ln x$ ומבצעים אינטגרציה ל-1: $x\ln x-\int x\cdot\frac1x\,dx=x\ln x-x+C$.
+    wrongFeedback: 'אין גורם שני? הוסיפו אחד: $\ln x=1\cdot\ln x$, וגזרו את הלוגריתם.'
+    commonWrong:
+      - expr: '1/x'
+        feedback: '$\frac1x$ היא הנגזרת של $\ln x$, לא הקדומה.'
+        misconception: MC-c7-antideriv-is-derivative
+      - expr: 'x*log(x)'
+        feedback: 'חסר $-\int x\cdot\frac1x\,dx=-x$. גזרו: $(x\ln x)''=\ln x+1$, ולא $\ln x$.'
+        misconception: MC-c7-parts-drop-integral
+    hints: ['$u=\ln x$, $v''=1$.']
+
+  - id: Q-7.3-notes
+    type: expr
+    objectives: [OBJ-7.3-1]
+    level: mid
+    prompt: 'חשבו $\int x^6\ln x\,dx$ ל-$x>0$ (עמ׳ 14 במחברת).'
+    answer: 'x^7*log(x)/7 - x^7/49'
+    answerTex: '$\frac{x^7\ln x}{7}-\frac{x^7}{49}+C$'
+    variables: [x]
+    domain: [0.3, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. גוזרים את $\ln x$ ומבצעים אינטגרציה ל-$x^6$: $\frac{x^7}{7}\ln x-\int\frac{x^7}{7}\cdot\frac1x\,dx=\frac{x^7\ln x}{7}-\frac{x^7}{49}+C$.
+      כאן, בשונה מ-$xe^x$, דווקא את הלוגריתם גוזרים: לחזקה $x^6$ אין בעיה באינטגרציה, ול-$\ln x$ יש.
+    wrongFeedback: 'גזרו את $\ln x$ (נגזרתו $\frac1x$ מבטלת חזקה), ובצעו אינטגרציה ל-$x^6$.'
+    commonWrong:
+      - expr: 'x^7*log(x)/7'
+        feedback: 'חסר האינטגרל שנשאר, $-\int\frac{x^6}{7}\,dx=-\frac{x^7}{49}$.'
+        misconception: MC-c7-parts-drop-integral
+      - expr: 'x^7*log(x)/7 - x^7/7'
+        feedback: 'האינטגרל שנשאר הוא $\int\frac{x^6}{7}\,dx=\frac{x^7}{49}$: ב-7 מחלקים פעמיים.'
+        misconception: MC-c7-power-rule-multiply
+    hints: ['$u=\ln x$, $v''=x^6$.']
+
+  - id: Q-7.3-x2ex
+    type: expr
+    objectives: [OBJ-7.3-2]
+    level: mid
+    prompt: 'חשבו $\int x^2e^x\,dx$.'
+    answer: '(x^2 - 2*x + 2)*exp(x)'
+    answerTex: '$\left(x^2-2x+2\right)e^x+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. פעמיים בחלקים: $x^2e^x-2\int xe^x\,dx=x^2e^x-2(x-1)e^x+C$. כל פעם החזקה של $x$ יורדת באחת.
+    wrongFeedback: 'בחלקים עם $u=x^2$ מקבלים $x^2e^x-2\int xe^x\,dx$; את $\int xe^x\,dx$ מחשבים שוב בחלקים.'
+    commonWrong:
+      - expr: '(x^2 - 2*x)*exp(x)'
+        feedback: 'בפעם השנייה שכחתם את האינטגרל שנשאר: $\int xe^x\,dx=(x-1)e^x$, לא $xe^x$.'
+        misconception: MC-c7-parts-drop-integral
+      - expr: '(x^2 - 2*x - 2)*exp(x)'
+        feedback: '$-2\int xe^x\,dx=-2\left[(x-1)e^x\right]=-2xe^x+2e^x$: המינוס שלפני האינטגרל חל על כל מה שבתוכו.'
+        misconception: MC-c7-parts-sign-repeat
+    hints: ['$\int xe^x\,dx=(x-1)e^x+C$.']
+
+  - id: Q-7.3-cycle
+    type: expr
+    objectives: [OBJ-7.3-2]
+    level: mid
+    prompt: 'חשבו $\int e^x\sin x\,dx$.'
+    answer: 'exp(x)*(sin(x) - cos(x))/2'
+    answerTex: '$\frac{e^x(\sin x-\cos x)}{2}+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. נסמן $I=\int e^x\sin x\,dx$. פעמיים בחלקים (בשתיהן גוזרים את הפונקציה הטריגונומטרית):
+      $I=e^x\sin x-e^x\cos x-I$, ולכן $2I=e^x(\sin x-\cos x)$.
+    wrongFeedback: 'אחרי שתי אינטגרציות בחלקים האינטגרל המקורי חוזר. העבירו אותו לאגף השני ופתרו.'
+    commonWrong:
+      - expr: 'exp(x)*(sin(x) - cos(x))'
+        feedback: 'מ-$I=e^x(\sin x-\cos x)-I$ מתקבל $2I=\dots$: צריך לחלק ב-2.'
+        misconception: MC-c7-parts-cycle-divide
+      - expr: 'exp(x)*(sin(x) + cos(x))/2'
+        feedback: '$\int e^x\cos x\,dx=e^x\cos x+\int e^x\sin x\,dx$; לפני זה יש מינוס, ולכן $-e^x\cos x$.'
+        misconception: MC-c7-parts-sign-repeat
+    hints: ['סמנו את האינטגרל $I$, וחפשו אותו שוב אחרי שתי אינטגרציות.']
+
+  - id: Q-7.3-cycle-qual
+    type: twotier
+    objectives: [OBJ-7.3-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      אחרי שתי אינטגרציות בחלקים על $I=\int e^x\cos x\,dx$ התקבל $I=e^x(\cos x+\sin x)-I$. נכון או לא: השיטה נכשלה, כי חזרנו
+      לאינטגרל שהתחלנו ממנו.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. זו משוואה ב-$I$: $2I=e^x(\cos x+\sin x)$, ולכן $I=\frac{e^x(\cos x+\sin x)}{2}+C$.
+      - text: נכון
+        feedback: 'האינטגרל חזר עם המקדם $-1$, ולא $+1$. אפשר לפתור: $2I=e^x(\cos x+\sin x)$.'
+        misconception: MC-c7-parts-cycle-fails
+    reasons:
+      - text: 'האינטגרל חזר עם מקדם שונה מ-1, ולכן אפשר לבודד אותו כמו נעלם במשוואה'
+        correct: true
+        feedback: 'בדיוק. (אילו היה חוזר עם מקדם $+1$, היינו מקבלים $0=\dots$ ולא היה מה לפתור: אז באמת הסתובבנו במעגל.)'
+      - text: 'כי כל אינטגרל שחוזר על עצמו שווה לאפס'
+        feedback: 'מ-$I=A-I$ לא נובע $I=0$ אלא $I=\frac A2$.'
+        misconception: MC-c7-parts-cycle-divide
+      - text: 'כי צריך היה לבחור בפעם השנייה את הגורם השני לגזירה'
+        feedback: >-
+          להפך: אם בפעם השנייה מחליפים את התפקידים, האינטגרציה מבטלת את הראשונה ומקבלים $I=I$. ממשיכים לגזור את אותו סוג
+          גורם, ואז $I$ חוזר במינוס.
+        misconception: MC-c7-parts-cycle-fails
+    hints: ['כתבו את המשוואה $I=A-I$. מה $I$?']
+
+  - id: Q-7.3-why-ln
+    type: mc
+    objectives: [OBJ-7.3-3, OBJ-7.3-1]
+    qualitative: true
+    level: mid
+    prompt: 'למה ב-$\int\ln x\,dx$ ו-$\int\arctan x\,dx$ דווקא גוזרים את הפונקציה ($u=\ln x$ או $u=\arctan x$) ומבצעים אינטגרציה ל-1?'
+    choices:
+      - text: 'כי הנגזרות שלהן, $\frac1x$ ו-$\frac{1}{1+x^2}$, הן פונקציות רציונליות, ואת מה שנשאר יודעים לחשב'
+        correct: true
+        feedback: >-
+          נכון. את $\ln x$ ו-$\arctan x$ אין בטבלה כאינטגרנד, אבל יש בטבלה את הנגזרות שלהן. אחרי הגזירה נשארים
+          $\int x\cdot\frac1x\,dx$ ו-$\int\frac{x}{1+x^2}\,dx$, שניהם קלים.
+      - text: 'כי תמיד גוזרים את הגורם השמאלי'
+        feedback: 'הסדר בכתיבה לא משנה. בוחרים לפי מה שמפשט: הגורם שנגזרתו פשוטה יותר.'
+        misconception: MC-c7-parts-wrong-choice
+      - text: 'כי $\int\ln x\,dx=\frac1x$'
+        feedback: 'זו הנגזרת. דווקא כיוון שאין לנו קדומה ידועה ל-$\ln x$ צריך את הטריק.'
+        misconception: MC-c7-antideriv-is-derivative
+    hints: ['מה הנגזרת של $\ln x$, ומה של $\arctan x$?']
+
+  - id: Q-7.3-atan
+    type: expr
+    objectives: [OBJ-7.3-3]
+    level: mid
+    prompt: 'חשבו $\int\arctan x\,dx$.'
+    answer: 'x*atan(x) - log(1+x^2)/2'
+    answerTex: '$x\arctan x-\frac12\ln\left(1+x^2\right)+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $u=\arctan x$, $v'=1$: $x\arctan x-\int\frac{x}{1+x^2}\,dx$, והאינטגרל שנשאר (הצבה $w=1+x^2$) הוא
+      $\frac12\ln(1+x^2)$.
+    wrongFeedback: 'בחלקים נשאר $\int\frac{x}{1+x^2}\,dx$: הצבה, עם החצי שמגיע מ-$dw=2x\,dx$.'
+    commonWrong:
+      - expr: 'x*atan(x) - log(1+x^2)'
+        feedback: '$\int\frac{x}{1+x^2}\,dx=\frac12\ln(1+x^2)$: חסר החצי.'
+        misconception: MC-c7-subst-forget-factor
+      - expr: 'x*atan(x)'
+        feedback: 'חסר האינטגרל שנשאר, $-\int\frac{x}{1+x^2}\,dx$.'
+        misconception: MC-c7-parts-drop-integral
+    hints: ['$u=\arctan x$, $v''=1$.']
+
+  - id: Q-7.3-asin
+    type: expr
+    objectives: [OBJ-7.3-3]
+    level: exam
+    prompt: 'חשבו $\int\arcsin x\,dx$ ל-$|x|<1$.'
+    answer: 'x*asin(x) + sqrt(1-x^2)'
+    answerTex: '$x\arcsin x+\sqrt{1-x^2}+C$'
+    variables: [x]
+    domain: [-0.8, 0.8]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $x\arcsin x-\int\frac{x}{\sqrt{1-x^2}}\,dx$; עם $w=1-x^2$, $dw=-2x\,dx$:
+      $\int\frac{x\,dx}{\sqrt{1-x^2}}=-\int\frac{dw}{2\sqrt w}=-\sqrt{1-x^2}$, ולכן התשובה $x\arcsin x+\sqrt{1-x^2}+C$.
+    wrongFeedback: 'אחרי החלקים נשאר $\int\frac{x}{\sqrt{1-x^2}}\,dx$: הצבה $w=1-x^2$, ושימו לב לסימן של $dw$.'
+    commonWrong:
+      - expr: 'x*asin(x) - sqrt(1-x^2)'
+        feedback: '$dw=-2x\,dx$: המינוס של הנגזרת הפנימית הופך את הסימן של $\sqrt{1-x^2}$.'
+        misconception: MC-c7-fprime-f-sign
+      - expr: 'x*asin(x)'
+        feedback: 'חסר האינטגרל שנשאר, $-\int\frac{x}{\sqrt{1-x^2}}\,dx$.'
+        misconception: MC-c7-parts-drop-integral
+    hints: ['$\left(\arcsin x\right)''=\frac{1}{\sqrt{1-x^2}}$.']
+
+  - id: Q-7.3-x3ex
+    type: numeric
+    objectives: [OBJ-7.3-2]
+    level: exam
+    prompt: 'חשבו $\int_0^1x^3e^x\,dx$. (אפשר לכתוב ביטוי עם e)'
+    answer: 0.563436343082
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $6-2e$. שלוש פעמים בחלקים: $F(x)=\left(x^3-3x^2+6x-6\right)e^x$. $F(1)=-2e$ ו-$F(0)=-6$, ולכן
+      $F(1)-F(0)=6-2e\approx0.563$. (בדיקת שפיות: האינטגרנד חיובי ומתחת ל-$e$ בקטע, והתוצאה בין 0 ל-$e$.)
+    wrongFeedback: 'מצאו קדומה בשלוש אינטגרציות בחלקים (בכל אחת $x^k$ נגזר), ואז $F(1)-F(0)$.'
+    commonWrong:
+      - value: -5.43656365692
+        feedback: >-
+          זה $F(1)=-2e$ בלבד. $F(0)=-6$, לא 0, ולכן צריך לחסר אותו. (ותוצאה שלילית לאינטגרל של פונקציה חיובית היא סימן
+          אזהרה.)
+        misconception: MC-c7-ftc-lower-zero
+    hints: ['הקדומה היא $\left(x^3-3x^2+6x-6\right)e^x$. כמה היא ב-0?']

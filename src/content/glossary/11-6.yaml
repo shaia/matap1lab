@@ -1,0 +1,27 @@
+# Terms first defined in lesson 11.6 (divergence and curl).
+- id: divergence
+  term: דיברגנץ
+  en: divergence
+  symbol: '\nabla\cdot\vec F=P_x+Q_y+R_z'
+  definition: >-
+    הפונקציה הסקלרית $\nabla\cdot\vec F=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}$.
+    בשדה מהירות של זורם היא מודדת כמה זרימה יוצאת מנפח קטן ליחידת נפח: חיובית במקור, שלילית בבור, ואפס בזרימה שאינה
+    נדחסת.
+  reject: [דיוורגנץ]
+  lesson: '11.6'
+- id: curl
+  term: רוטור
+  en: curl
+  symbol: '\nabla\times\vec F=\left(R_y-Q_z,\ P_z-R_x,\ Q_x-P_y\right)'
+  definition: >-
+    השדה הווקטורי $\nabla\times\vec F$, המכפלה הווקטורית של $\nabla$ עם $\vec F$. הוא מודד סיבוב מקומי: גלגל משוטים
+    קטן בזרם מסתובב סביב הכיוון של הרוטור. בשדה במישור $(P,Q)$ נשאר רק הרכיב $Q_x-P_y$ בכיוון $z$.
+  lesson: '11.6'
+- id: laplacian
+  term: לפלסיאן
+  en: Laplacian
+  symbol: '\nabla\cdot\nabla f=f_{xx}+f_{yy}+f_{zz}'
+  definition: >-
+    הדיברגנץ של הגרדיאנט: $\nabla\cdot\nabla f=f_{xx}+f_{yy}+f_{zz}$. בניגוד לרוטור של גרדיאנט, הוא אינו אפס באופן
+    כללי.
+  lesson: '11.6'

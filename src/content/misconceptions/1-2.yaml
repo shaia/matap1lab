@@ -1,0 +1,71 @@
+# Misconceptions first detected in lesson 1.2 (the dot product).
+- id: MC-c1-dot-associative
+  title: מקבצים מכפלה סקלרית כאילו היא אסוציאטיבית
+  belief: >-
+    $(\vec u\cdot\vec v)\,\vec w=\vec u\,(\vec v\cdot\vec w)$.
+  truth: >-
+    מכפלה סקלרית נותנת מספר. אגף שמאל הוא וקטור בכיוון $\vec w$, אגף ימין וקטור בכיוון $\vec u$, ובדרך כלל הם שונים:
+    עם $\vec u=\hat\imath$, $\vec v=\hat\imath$, $\vec w=\hat\jmath$ מתקבל $\hat\jmath$ מול $\vec 0$.
+  remedy: { lesson: '1.2', label: 'תכונות המכפלה הסקלרית' }
+
+- id: MC-c1-dot-zero-factor
+  title: חושבים שמכפלה סקלרית אפס פירושה שאחד הווקטורים אפס
+  belief: >-
+    אם $\vec u\cdot\vec v=0$ אז $\vec u=\vec 0$ או $\vec v=\vec 0$, ואם $\vec u\cdot\vec v=\vec u\cdot\vec w$ אז $\vec v=\vec w$.
+  truth: >-
+    $\vec u\cdot\vec v=0$ פירושו שהווקטורים מאונכים (או שאחד מהם אפס). לכן אי אפשר "לצמצם": $\vec u\cdot\vec v=\vec u\cdot\vec w$
+    אומר רק ש-$\vec u$ מאונך ל-$\vec v-\vec w$. כוח מאונך לתזוזה אינו עושה עבודה גם כשהוא גדול.
+  remedy: { lesson: '1.2', label: 'מכפלה סקלרית אפס: מאונכים' }
+
+- id: MC-c1-angle-no-normalise
+  title: לוקחים את המכפלה הסקלרית עצמה כקוסינוס הזווית
+  belief: >-
+    $\cos\theta=\vec u\cdot\vec v$.
+  truth: >-
+    $\cos\theta=\frac{\vec u\cdot\vec v}{|\vec u|\,|\vec v|}$. בלי החילוק התוצאה תלויה באורכים ויכולה לצאת גדולה מ-1, ואז
+    אין זווית כזו בכלל.
+  remedy: { lesson: '1.2', label: 'הזווית בין וקטורים' }
+
+- id: MC-c1-cos-is-angle
+  title: עוצרים בקוסינוס ומדווחים עליו כזווית
+  belief: >-
+    אם $\cos\theta=\frac12$, הזווית היא $\frac12$.
+  truth: >-
+    הזווית היא $\theta=\arccos\frac12=\frac\pi3$. הקוסינוס הוא מספר בין $-1$ ל-1, והזווית בין וקטורים היא בין 0 ל-$\pi$.
+  remedy: { lesson: '1.2', label: 'הזווית בין וקטורים' }
+
+- id: MC-c1-negative-dot-opposite
+  title: חושבים שמכפלה סקלרית שלילית פירושה כיוונים הפוכים
+  belief: >-
+    $\vec u\cdot\vec v<0$ פירושו שהווקטורים מצביעים בדיוק בכיוונים הפוכים.
+  truth: >-
+    הסימן של $\vec u\cdot\vec v$ הוא הסימן של $\cos\theta$: שלילי לכל זווית קהה, $\frac\pi2<\theta\le\pi$. כיוונים
+    הפוכים הם רק המקרה הקיצוני $\theta=\pi$.
+  remedy: { lesson: '1.2', label: 'הסימן של המכפלה הסקלרית' }
+
+- id: MC-c1-proj-normalise
+  title: שוכחים או מכפילים את החילוק באורך בהיטל
+  belief: >-
+    הרכיב של $\vec a$ בכיוון $\vec b$ הוא $\vec a\cdot\vec b$, או שווקטור ההיטל הוא $(\vec a\cdot\vec b)\vec b$.
+  truth: >-
+    הרכיב (ההיטל הסקלרי) הוא $\vec a\cdot\hat b=\frac{\vec a\cdot\vec b}{|\vec b|}$, ווקטור ההיטל
+    $\frac{\vec a\cdot\vec b}{|\vec b|^2}\vec b$. בדיקה: התוצאה לא אמורה להשתנות אם מחליפים את $\vec b$ ב-$2\vec b$.
+  remedy: { lesson: '1.2', label: 'היטל על כיוון' }
+
+- id: MC-c1-proj-componentwise
+  title: מטילים על ידי מחיקת רכיבים
+  belief: >-
+    ההיטל של $(2,1,3)$ על $(1,0,1)$ הוא $(2,0,3)$: משאירים את הרכיבים שבהם $\vec b$ שונה מ-0.
+  truth: >-
+    מחיקת רכיבים היא היטל רק על ציר או מישור צירים. על כיוון כללי משתמשים בנוסחה
+    $\frac{\vec a\cdot\vec b}{|\vec b|^2}\vec b$, שנותנת וקטור **מקביל** ל-$\vec b$; $(2,0,3)$ אינו מקביל ל-$(1,0,1)$.
+  remedy: { lesson: '1.2', label: 'היטל על כיוון' }
+
+- id: MC-c1-work-magnitudes
+  title: מחשבים עבודה כמכפלת הגדלים בלי הזווית
+  belief: >-
+    העבודה של כוח קבוע $\vec F$ לאורך העתק $\vec d$ היא $|\vec F|\,|\vec d|$.
+  truth: >-
+    $W=\vec F\cdot\vec d=|\vec F|\,|\vec d|\cos\theta$: רק הרכיב של הכוח בכיוון התנועה עושה עבודה. $|\vec F||\vec d|$ הוא
+    המקרה $\theta=0$ בלבד.
+  remedy: { lesson: '1.2', label: 'עבודה של כוח קבוע' }

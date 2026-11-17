@@ -1,0 +1,90 @@
+# Misconceptions first detected in lesson 4.4 (trigonometric functions and their inverses).
+- id: MC-c4-amplitude-sign
+  title: חושבים שאמפליטודה יכולה להיות שלילית
+  belief: >-
+    האמפליטודה של $-2\cos\frac x3$ היא $-2$.
+  truth: >-
+    האמפליטודה היא חצי המרחק בין הערך הגבוה לנמוך, ולכן חיובית: $|A|$ ב-$A\cos(kx)$. המינוס רק משקף את הגרף ביחס לקו
+    האמצע.
+  remedy: { lesson: '4.4', label: 'אמפליטודה' }
+
+- id: MC-c4-phase-shift-factor
+  title: קוראים את הזזת המופע בלי לחלק במקדם של x
+  belief: >-
+    הגרף של $\sin\!\left(2x-\frac\pi2\right)$ הוא $\sin2x$ מוזז ימינה ב-$\frac\pi2$.
+  truth: >-
+    מוציאים את המקדם: $\sin\!\left(2x-\frac\pi2\right)=\sin\!\left(2\left(x-\frac\pi4\right)\right)$, ולכן ההזזה היא
+    $\frac\pi4$. באופן כללי $\sin(kx-c)$ מוזזת ב-$\frac ck$.
+  remedy: { lesson: '4.4', label: 'הזזת מופע' }
+
+- id: MC-c4-tan-period-2pi
+  title: חושבים שהמחזור של טנגנס הוא 2π
+  belief: >-
+    כמו סינוס וקוסינוס, גם $\tan x$ חוזרת על עצמה רק אחרי $2\pi$.
+  truth: >-
+    $\tan(x+\pi)=\frac{-\sin x}{-\cos x}=\tan x$: המחזור הוא $\pi$. בין שתי אסימפטוטות סמוכות, $x=-\frac\pi2$ ו-$x=\frac\pi2$,
+    הטנגנס עובר על כל הממשיים.
+  remedy: { lesson: '4.4', label: 'הגרף של tan' }
+
+- id: MC-c4-arcsin-arccos-range-swap
+  title: מחליפים בין הטווחים של arcsin ו-arccos
+  belief: >-
+    $\arcsin$ מקבלת ערכים ב-$[0,\pi]$, או $\arccos$ ב-$\left[-\frac\pi2,\frac\pi2\right]$.
+  truth: >-
+    $\arcsin:[-1,1]\to\left[-\frac\pi2,\frac\pi2\right]$, כי שם הסינוס עולה ומכסה את $[-1,1]$. $\arccos:[-1,1]\to[0,\pi]$,
+    כי שם הקוסינוס יורד ומכסה את $[-1,1]$.
+  remedy: { lesson: '4.4', label: 'התחומים והתמונות של arcsin ו-arccos' }
+
+- id: MC-c4-inverse-range-ignored
+  title: חושבים ש-arcsin של סינוס מחזיר תמיד את הזווית
+  belief: >-
+    $\arcsin(\sin x)=x$ לכל $x$, למשל $\arcsin\!\left(\sin\frac{3\pi}{4}\right)=\frac{3\pi}4$.
+  truth: >-
+    $\arcsin$ מחזירה תמיד זווית ב-$\left[-\frac\pi2,\frac\pi2\right]$. לכן $\arcsin(\sin x)=x$ רק ל-$x$ בקטע הזה;
+    $\arcsin\!\left(\sin\frac{3\pi}4\right)=\arcsin\frac{\sqrt2}2=\frac\pi4$. (לעומת זאת $\sin(\arcsin y)=y$ לכל $y\in[-1,1]$.)
+  remedy: { lesson: '4.4', label: 'arcsin(sin x): רק בקטע הראשי' }
+
+- id: MC-c4-arccos-range
+  title: נותנים ל-arccos ערך שלילי
+  belief: >-
+    $\arccos\!\left(-\frac12\right)=-\frac\pi3$, כמו $\arcsin\!\left(-\frac12\right)=-\frac\pi6$.
+  truth: >-
+    $\arccos$ מחזירה זווית ב-$[0,\pi]$, ולא מספר שלילי. $\cos\frac{2\pi}3=-\frac12$, ולכן $\arccos\!\left(-\frac12\right)=\frac{2\pi}3$.
+    באופן כללי $\arccos(-y)=\pi-\arccos y$.
+  remedy: { lesson: '4.4', label: 'arccos של מספר שלילי' }
+
+- id: MC-c4-cos-arcsin-sign
+  title: נותנים ל-cos(arcsin x) סימן שלילי או כפול
+  belief: >-
+    $\cos(\arcsin x)=\pm\sqrt{1-x^2}$, וצריך לבחור סימן לפי $x$.
+  truth: >-
+    $\theta=\arcsin x$ נמצאת ב-$\left[-\frac\pi2,\frac\pi2\right]$, ושם $\cos\theta\ge0$. לכן $\cos(\arcsin x)=\sqrt{1-x^2}$
+    לכל $x\in[-1,1]$, בלי $\pm$.
+  remedy: { lesson: '4.4', label: 'פישוט cos(arcsin x)' }
+
+- id: MC-c4-triangle-legs-swap
+  title: מציבים את הצלעות במשולש העזר במקום הלא נכון
+  belief: >-
+    ל-$\theta=\arccos x$ שמים את $x$ מול הזווית, ולכן $\tan\theta=\frac{x}{\sqrt{1-x^2}}$.
+  truth: >-
+    $\cos\theta=x$ פירושו ניצב **ליד** הזווית $x$ ויתר 1; הניצב שמול הזווית $\sqrt{1-x^2}$. לכן
+    $\tan(\arccos x)=\frac{\sqrt{1-x^2}}{x}$. בדיקה ב-$x=1$: $\arccos1=0$ ו-$\tan0=0$.
+  remedy: { lesson: '4.4', label: 'משולש עזר לפישוט הרכבות' }
+
+- id: MC-c4-arctan-additive
+  title: מחברים ארקטנגנסים כאילו הם לינאריים
+  belief: >-
+    $\arctan a+\arctan b=\arctan(a+b)$.
+  truth: >-
+    $\arctan$ אינה לינארית. מנוסחת הטנגנס של סכום, $\tan(\alpha+\beta)=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}$.
+    למשל $\arctan1+\arctan1=\frac\pi2$, ואילו $\arctan2\approx1.107$.
+  remedy: { lesson: '4.4', label: 'סכום של ארקטנגנסים' }
+
+- id: MC-c4-inverse-needs-one-to-one
+  title: חושבים שלכל פונקציה יש הפוכה בלי לצמצם את התחום
+  belief: >-
+    $\sin$ מוגדרת על כל הישר, ולכן אפשר להפוך אותה על כל הישר.
+  truth: >-
+    פונקציה הפוכה קיימת רק לפונקציה **חד-חד-ערכית**: לכל ערך מקור יחיד. $\sin x=\frac12$ בעוד אינסוף נקודות, ולכן
+    מצמצמים לקטע $\left[-\frac\pi2,\frac\pi2\right]$, שבו הסינוס עולה ומקבל כל ערך ב-$[-1,1]$ פעם אחת.
+  remedy: { lesson: '4.4', label: 'למה מצמצמים את התחום' }

@@ -1,0 +1,298 @@
+# Chapter 9 review — curves (core lessons 9.1–9.3), easy to hard. Lesson 9.4 is enrichment: no question here uses it.
+# Every core lesson is touched; most questions combine two lessons or reach back to chapters 1–8; each hint names the
+# lesson to go back to. Numbers recomputed in screens/tools/recompute-ch9.py.
+chapter: 9
+questions:
+  - id: Q-9-review-01
+    type: mc
+    objectives: [OBJ-9.1-2, OBJ-1.3-1]
+    level: basic
+    prompt: >-
+      איזו פרמטריזציה מתארת את הישר דרך $P=(1,0,2)$ ו-$Q=(3,1,-1)$?
+    choices:
+      - text: '$(1+2t,\ t,\ 2-3t)$, $t\in\mathbb{R}$'
+        correct: true
+        feedback: 'נכון: $P+t(Q-P)$ עם $Q-P=(2,1,-3)$. ב-$t=0$ מתקבל $P$ וב-$t=1$ מתקבל $Q$.'
+      - text: '$(1+3t,\ t,\ 2-t)$, $t\in\mathbb{R}$'
+        feedback: 'זה $P+tQ$: ב-$t=1$ מתקבל $(4,1,1)$, לא $Q$. הכיוון הוא ההפרש $Q-P$.'
+        misconception: MC-c9-segment-add-endpoint
+      - text: '$(2t,\ t,\ -3t)$, $t\in\mathbb{R}$'
+        feedback: 'זה ישר בכיוון הנכון, אבל דרך הראשית: חסרה הנקודה $P$.'
+        misconception: MC-c9-tangent-missing-point
+      - text: '$(2+t,\ 1,\ -3+2t)$, $t\in\mathbb{R}$'
+        feedback: 'כאן הנקודה והכיוון התחלפו: נקודה $Q-P$ וכיוון $(1,0,2)=P$.'
+        misconception: MC-c9-tangent-missing-point
+    hints: ['חזרו לשיעור 9.1 (פרמטריזציה של קטע) ולשיעור 1.3 (ישר במרחב).']
+
+  - id: Q-9-review-02
+    type: mc
+    objectives: [OBJ-9.1-1, OBJ-4.5-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      איזה עקום מתאר $\vec r(t)=\left(2\cosh t,\ 3\sinh t\right)$, $t\in\mathbb{R}$?
+    choices:
+      - text: 'הענף הימני ($x>0$) של ההיפרבולה $\frac{x^2}{4}-\frac{y^2}{9}=1$'
+        correct: true
+        feedback: >-
+          נכון. $\cosh^2t-\sinh^2t=1$ נותן את המשוואה, ו-$x=2\cosh t\ge2$: רק הענף הימני מתקבל.
+      - text: 'כל ההיפרבולה $\frac{x^2}{4}-\frac{y^2}{9}=1$'
+        feedback: >-
+          המשוואה מתקיימת, אבל $\cosh t>0$ תמיד: אף נקודה עם $x<0$ אינה מתקבלת. בודקים גם את טווח הרכיבים.
+        misconception: MC-c9-cartesian-whole-curve
+      - text: 'האליפסה $\frac{x^2}{4}+\frac{y^2}{9}=1$'
+        feedback: 'הזהות ההיפרבולית היא $\cosh^2-\sinh^2=1$, עם **מינוס**, ולא כמו $\cos^2+\sin^2=1$.'
+        misconception: MC-c9-semi-axes-squared
+      - text: 'ההיפרבולה $\frac{x^2}{2}-\frac{y^2}{3}=1$'
+        feedback: 'במשוואה מופיעים ריבועי המקדמים: $\frac{x}{2}=\cosh t$, ולכן $\frac{x^2}{4}$.'
+        misconception: MC-c9-semi-axes-squared
+    hints: ['חזרו לשיעור 9.1 (משוואה קרטזית וטווח) ולשיעור 4.5 (הזהות ההיפרבולית).']
+
+  - id: Q-9-review-03
+    type: numeric
+    objectives: [OBJ-9.2-1, OBJ-1.1-3]
+    level: basic
+    prompt: >-
+      $\vec r(t)=\left(2t,\ t^2,\ \ln t\right)$. מהו גודל המהירות ב-$t=2$? (אפשר לכתוב שבר.)
+    answer: 4.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec v=(2,2t,\tfrac1t)$, וב-$t=2$: $(2,4,\tfrac12)$, שאורכו $\sqrt{4+16+\tfrac14}=\sqrt{\tfrac{81}{4}}=\tfrac92$.
+    wrongFeedback: 'גזרו כל רכיב, הציבו $t=2$, וחשבו את אורך הווקטור.'
+    commonWrong:
+      - value: 6.5
+        feedback: '$2+4+\tfrac12$: סכום הרכיבים במקום אורך הווקטור.'
+        misconception: MC-c9-speed-sum-components
+    hints: ['חזרו לשיעור 9.2 (וקטור מהירות) ולשיעור 1.1 (אורך של וקטור).']
+
+  - id: Q-9-review-04
+    type: numeric
+    objectives: [OBJ-9.2-2, OBJ-1.3-3]
+    level: mid
+    prompt: >-
+      הישר המשיק לסליל $\vec r(t)=(\cos t,\sin t,t)$ בנקודה שבה $t=\frac\pi2$ חותך את המישור $z=0$. מהו רכיב ה-$x$ של
+      נקודת החיתוך? (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 1.5707963267949
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac\pi2$. $\vec r\left(\tfrac\pi2\right)=\left(0,1,\tfrac\pi2\right)$, $\vec r\,'=(-\sin t,\cos t,1)=(-1,0,1)$.
+      הישר $\left(-s,\ 1,\ \tfrac\pi2+s\right)$ פוגש את $z=0$ ב-$s=-\tfrac\pi2$, ושם $x=\tfrac\pi2$, כלומר בנקודה
+      $\left(\tfrac\pi2,1,0\right)$.
+    wrongFeedback: >-
+      כתבו את הישר המשיק כנקודה ועוד $s$ כפול המהירות, מצאו את $s$ שבו $z=0$ והציבו ברכיב $x$.
+    hints: ['חזרו לשיעור 9.2 (הישר המשיק) ולשיעור 1.3 (חיתוך ישר ומישור).']
+
+  - id: Q-9-review-05
+    type: numeric
+    objectives: [OBJ-9.2-3, OBJ-8.1-2]
+    level: mid
+    prompt: >-
+      כדור נבעט מהראשית במהירות $\vec v(0)=(3,4)$ מטרים לשנייה, והתאוצה קבועה, $\vec a=(0,-10)$. מצאו את $\vec v(t)$
+      ואת $\vec r(t)$ באינטגרציה, וחשבו את הגובה המרבי של הכדור, במטרים.
+    answer: 0.8
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec v(t)=\vec v(0)+\int_0^t\vec a=(3,\ 4-10t)$, ו-$\vec r(t)=\int_0^t\vec v=(3t,\ 4t-5t^2)$. הגובה מרבי
+      כש-$v_y=0$, ב-$t=0.4$: $y=1.6-0.8=0.8$.
+    wrongFeedback: >-
+      בצעו אינטגרציה לתאוצה כדי לקבל מהירות (עם $\vec v(0)$), ולמהירות כדי לקבל מקום (עם $\vec r(0)=\vec 0$). בשיא
+      המהירות האנכית מתאפסת.
+    commonWrong:
+      - value: 1.6
+        feedback: >-
+          $1.6=4\cdot0.4$: השתמשתם במהירות האנכית ההתחלתית כאילו היא קבועה. ההעתק הוא $\int_0^{0.4}(4-10t)\,dt$, והכובד
+          מוריד ממנו $5t^2$.
+        misconception: MC-c9-constant-speed-zero-accel
+    hints: ['חזרו לשיעור 9.2 (תאוצה) ולשיעור 8.1 (העתק כאינטגרל של מהירות).']
+
+  - id: Q-9-review-06
+    type: numeric
+    objectives: [OBJ-9.3-3, OBJ-7.6-1]
+    level: exam
+    prompt: >-
+      חשבו את אורך הגרף של $y=\ln(\cos x)$, $0\le x\le\frac\pi4$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 0.88137358701954
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\ln\left(1+\sqrt2\right)$. $y'=-\tan x$ ו-$\sqrt{1+\tan^2x}=\frac{1}{\cos x}$ (חיובי בקטע). מהטבלה
+      $\int\frac{dx}{\cos x}=\ln\left|\frac1{\cos x}+\tan x\right|+C$, ולכן $L=\ln\left(\sqrt2+1\right)-\ln1$.
+    wrongFeedback: >-
+      $1+\tan^2x=\frac1{\cos^2x}$. את $\int\frac{dx}{\cos x}$ מוצאים בטבלה.
+    commonWrong:
+      - value: 0.34657359028
+        feedback: '$\int_0^{\pi/4}\tan x\,dx=\tfrac12\ln2$: זה $\int|f''|$, רק השינוי האנכי. בנוסחה $\sqrt{1+f''^2}$.'
+        misconception: MC-c9-length-projection
+    hints: ['חזרו לשיעור 9.3 (אורך של גרף) ולשיעור 7.6 (טבלת אינטגרלים).']
+
+  - id: Q-9-review-07
+    type: twotier
+    objectives: [OBJ-9.3-2, OBJ-9.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec r_1(t)=(\cos t,\sin t)$, $0\le t\le\pi$, ו-$\vec r_2(u)=\left(\cos\pi u^2,\ \sin\pi u^2\right)$, $0\le u\le1$.
+      נכון או לא נכון: לשתיהן אותו אורך, $\pi$, אף שקווי העולם שלהן שונים.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. שתיהן עוברות פעם אחת על חצי מעגל היחידה העליון. $|\vec r_2\,'(u)|=2\pi u$ ו-$\int_0^12\pi u\,du=\pi$. קווי
+          העולם שונים: $\vec r_2$ מתחילה לאט ומאיצה.
+      - text: 'לא נכון'
+        feedback: >-
+          הנוסחאות ומהירויות התנועה שונות, אבל העקום זהה ונעבר פעם אחת: האורך שווה. מה שתלוי בפרמטריזציה הוא קו
+          העולם.
+        misconception: MC-c9-curve-is-formula
+    reasons:
+      - text: 'אורך תלוי רק בעקום כשעוברים עליו פעם אחת, וקו העולם תלוי גם בתזמון'
+        correct: true
+        feedback: 'בדיוק. במילים של פיזיקה: אותו מסלול, אותה דרך, תנועה שונה.'
+      - text: 'לשתיהן אותה מהירות בכל רגע'
+        feedback: '$|\vec r_1\,''|=1$ ו-$|\vec r_2\,''|=2\pi u$: המהירויות שונות, וגם קטעי הפרמטר שונים.'
+        misconception: MC-c9-length-parameter-interval
+      - text: 'קווי העולם שלהן זהים, ולכן האורכים שווים'
+        feedback: 'קווי העולם שונים: ב-$t=u=\tfrac12$ הנקודות שונות. האורך שווה מסיבה אחרת.'
+        misconception: MC-c9-curve-equals-graph
+    hints: ['חזרו לשיעור 9.3 (אי-תלות בפרמטריזציה) ולשיעור 9.1 (עקום וקו עולם).']
+
+  - id: Q-9-review-08
+    type: numeric
+    objectives: [OBJ-9.3-1, OBJ-2.1-1]
+    level: basic
+    prompt: >-
+      $\vec r(t)=(2\cos3t,\ 2\sin3t)$, $0\le t\le\pi$. איזו דרך עברה הנקודה? (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 18.849555921539
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $6\pi$. $|\vec v|=2\cdot3=6$ קבוע, והזמן $\pi$. הזווית $3t$ עוברת $3\pi$: סיבוב וחצי על מעגל שהיקפו $4\pi$.
+    wrongFeedback: '$\int_0^\pi|\vec r\,''(t)|\,dt$; גודל המהירות קבוע.'
+    commonWrong:
+      - value: 12.566370614
+        feedback: '$4\pi$ הוא היקף המעגל. הנקודה הקיפה אותו סיבוב וחצי, והדרך סופרת כל מעבר.'
+        misconception: MC-c9-length-of-trace
+    hints: ['חזרו לשיעור 9.3 (אורך כאינטגרל של גודל המהירות) ולשיעור 2.1 (פרמטריזציה של מעגל).']
+
+  - id: Q-9-review-09
+    type: mc
+    objectives: [OBJ-9.1-1, OBJ-2.3-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      העקום הקוטבי $r=2\cos\theta$, $0\le\theta\le\pi$, כעקום בפרמטריזציה: $x=r\cos\theta=2\cos^2\theta$,
+      $y=r\sin\theta=2\cos\theta\sin\theta$. מהו?
+    choices:
+      - text: 'המעגל $(x-1)^2+y^2=1$'
+        correct: true
+        feedback: >-
+          נכון. $x-1=\cos2\theta$ ו-$y=\sin2\theta$: מעגל ברדיוס 1 סביב $(1,0)$, שהזווית $2\theta$ מקיפה פעם אחת.
+      - text: 'מעגל ברדיוס 2 סביב הראשית'
+        feedback: '$r$ אינו קבוע: $|r|$ יורד מ-2 ל-0 וחוזר ל-2, והמעגל עובר דרך הראשית (ב-$\theta=\frac\pi2$). מרכזו $(1,0)$, לא הראשית.'
+        misconception: MC-c9-centre-shift
+      - text: 'חצי מעגל בלבד, כי $\theta$ עובר רק על $[0,\pi]$'
+        feedback: >-
+          הנקודה היא $(1+\cos2\theta,\sin2\theta)$, והזווית $2\theta$ עוברת על $[0,2\pi]$: מעגל שלם.
+        misconception: MC-c9-cartesian-whole-curve
+    hints: ['חזרו לשיעור 9.1 (משוואה קרטזית) ולשיעור 2.3 (עקומים קוטביים).']
+
+  - id: Q-9-review-10
+    type: numeric
+    objectives: [OBJ-9.3-3, OBJ-2.3-2]
+    level: exam
+    prompt: >-
+      חשבו את אורך הספירלה $r=\theta^2$, $0\le\theta\le\sqrt5$. (אפשר לכתוב שבר.)
+    answer: 6.3333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{19}{3}$. $r^2+r'^2=\theta^4+4\theta^2=\theta^2(\theta^2+4)$, ולכן
+      $L=\int_0^{\sqrt5}\theta\sqrt{\theta^2+4}\,d\theta=\left[\tfrac13(\theta^2+4)^{3/2}\right]_0^{\sqrt5}=\tfrac{27-8}{3}$.
+    wrongFeedback: >-
+      $L=\int\sqrt{r^2+r'^2}\,d\theta$. הוציאו $\theta^2$ מהשורש, ואז הצבה $u=\theta^2+4$.
+    commonWrong:
+      - value: 3.7267799625
+        feedback: '$\int_0^{\sqrt5}\theta^2\,d\theta=\frac{5\sqrt5}{3}$: אינטגרל של $r$ לבדו.'
+        misconception: MC-c9-polar-length-r-only
+    hints: ['חזרו לשיעור 9.3 (אורך עקום קוטבי) ולשיעור 2.3 (קואורדינטות קוטביות).']
+
+  - id: Q-9-review-11
+    type: numeric
+    objectives: [OBJ-9.2-2, OBJ-1.2-2]
+    level: exam
+    prompt: >-
+      העקומים $\vec r_1(t)=(t,t^2)$ ו-$\vec r_2(t)=(t^2,t)$ נחתכים ב-$(1,1)$. מהי הזווית, ברדיאנים, בין הישרים המשיקים
+      שלהם שם?
+    answer: 0.64350110879328
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\arccos\frac45\approx0.6435$ (כ-$36.9^\circ$). בנקודה $t=1$ בשניהם: $\vec r_1\,'=(1,2)$ ו-$\vec r_2\,'=(2,1)$,
+      ו-$\cos\alpha=\frac{2+2}{\sqrt5\sqrt5}=\frac45$.
+    wrongFeedback: >-
+      הזווית בין עקומים היא הזווית בין וקטורי המהירות בנקודה. השתמשו במכפלה סקלרית. (התשובה ברדיאנים.)
+    commonWrong:
+      - value: 0.32175055440
+        feedback: >-
+          זו הזווית בין $(1,1)$ (וקטור המקום) לאחד המשיקים. הזווית בין העקומים היא בין שני וקטורי **המהירות**.
+        misconception: MC-c9-velocity-parallel-position
+    hints: ['חזרו לשיעור 9.2 (וקטור משיק) ולשיעור 1.2 (הזווית בין וקטורים).']
+
+  - id: Q-9-review-12
+    type: numeric
+    objectives: [OBJ-9.3-1, OBJ-8.1-2]
+    level: mid
+    prompt: >-
+      $\vec r(t)=(\cos\pi t,\ \sin\pi t)$, $0\le t\le3$. איזו **דרך** עברה הנקודה? (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 9.4247779607694
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $3\pi$. $|\vec v|=\pi$ במשך 3 יחידות זמן: סיבוב וחצי. ההעתק, לעומת זאת, $|\vec r(3)-\vec r(0)|=|(-1,0)-(1,0)|=2$.
+    wrongFeedback: 'דרך היא $\int|\vec v|\,dt$; העתק הוא $\vec r(3)-\vec r(0)$.'
+    commonWrong:
+      - value: 2
+        feedback: '2 הוא גודל ההעתק, מנקודת ההתחלה לנקודת הסיום בקו ישר. הדרך סופרת את כל המסלול.'
+        misconception: MC-c8-displacement-vs-distance
+      - value: 6.2831853072
+        feedback: '$2\pi$ הוא היקף המעגל. הנקודה הקיפה אותו פעם וחצי.'
+        misconception: MC-c9-length-of-trace
+    hints: ['חזרו לשיעור 9.3 (אורך עקום) ולשיעור 8.1 (העתק ודרך).']
+
+  - id: Q-9-review-13
+    type: expr
+    objectives: [OBJ-9.1-2, OBJ-2.1-3]
+    level: mid
+    prompt: >-
+      כתבו פרמטריזציה לאליפסה שמרכזה $(-1,2)$, עם חצי ציר 4 בכיוון $x$ ו-1 בכיוון $y$, בצורה $x(t)=\ldots$,
+      $y(t)=2+\sin t$, נגד כיוון השעון, כך שב-$t=0$ הנקודה $(3,2)$. הקלידו את $x(t)$.
+    answer: '-1+4*cos(t)'
+    answerTex: '$x(t)=-1+4\cos t,\quad y(t)=2+\sin t$; המשוואה: $\frac{(x+1)^2}{16}+(y-2)^2=1$'
+    variables: [t]
+    domain: [0, 6]
+    correctFeedback: 'נכון: המרכז ועוד חצי הציר כפול $\cos t$.'
+    wrongFeedback: 'מתחילים מ-$(4\cos t,\sin t)$ סביב הראשית ומזיזים את המרכז ל-$(-1,2)$.'
+    commonWrong:
+      - expr: '1+4*cos(t)'
+        feedback: 'המרכז הוא $x_0=-1$, ובפרמטריזציה מוסיפים אותו כמו שהוא. הסימן ההפוך שייך למשוואה, $(x+1)^2$.'
+        misconception: MC-c9-centre-shift
+      - expr: '-1+16*cos(t)'
+        feedback: '16 הוא ריבוע חצי הציר, שמופיע במשוואה. בפרמטריזציה מופיע 4.'
+        misconception: MC-c9-semi-axes-squared
+    hints: ['חזרו לשיעור 9.1 (פרמטריזציה של אליפסה) ולשיעור 2.1 (הזזה של אליפסה).']
+
+  - id: Q-9-review-14
+    type: mc
+    objectives: [OBJ-9.2-1, OBJ-5.3-2]
+    level: basic
+    prompt: >-
+      $\vec r(t)=\left(\sin(t^2),\ e^{-t}\right)$. מהו $\vec r\,'(t)$?
+    choices:
+      - text: '$\left(2t\cos(t^2),\ -e^{-t}\right)$'
+        correct: true
+        feedback: 'נכון. גוזרים כל רכיב בנפרד, בכלל השרשרת.'
+      - text: '$\left(\cos(t^2),\ -e^{-t}\right)$'
+        feedback: 'ברכיב הראשון חסרה הנגזרת הפנימית $2t$. גזירה של וקטור היא גזירה רגילה של כל רכיב, עם כל הכללים.'
+        misconception: MC-c9-componentwise-rules
+      - text: '$\cos(t^2)\cdot2t-e^{-t}$'
+        feedback: 'הנגזרת של פונקציה וקטורית היא **וקטור**: לא מחברים את הרכיבים.'
+        misconception: MC-c9-speed-sum-components
+      - text: '$\left(-2t\cos(t^2),\ e^{-t}\right)$'
+        feedback: 'הנגזרת של $\sin$ היא $\cos$, בלי מינוס, ו-$\left(e^{-t}\right)''=-e^{-t}$.'
+        misconception: MC-c9-componentwise-rules
+    hints: ['חזרו לשיעור 9.2 (גזירה לפי רכיבים) ולשיעור 5.3 (כלל השרשרת).']

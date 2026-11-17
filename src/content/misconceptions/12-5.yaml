@@ -1,0 +1,21 @@
+# Misconceptions first detected in lesson 12.5 (cylindrical and spherical coordinates).
+# Convention: spherical (r, θ, φ), θ from the positive z-axis (0 ≤ θ ≤ π), φ the azimuth (0 ≤ φ ≤ 2π).
+- id: MC-c12-spherical-element
+  title: אלמנט נפח שגוי בקואורדינטות כדוריות
+  belief: >-
+    בכדוריות $dV=dr\,d\theta\,d\varphi$, או $r^2\,dr\,d\theta\,d\varphi$, או $r^2\cos\theta\,dr\,d\theta\,d\varphi$.
+  truth: >-
+    התיבה הכדורית הקטנה היא בקירוב תיבה עם צלעות $dr$, $r\,d\theta$ ו-$r\sin\theta\,d\varphi$ (הרדיוס של מעגל הרוחב הוא
+    $r\sin\theta$), ולכן $dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$, כש-$\theta$ נמדדת מציר $z$. הגרסה עם $\cos$ שייכת
+    למוסכמה שבה הזווית נמדדת מהמישור $xy$ (כמו בסיכומים), ולא למוסכמה של הקורס.
+  remedy: { lesson: '12.5', label: 'אלמנט הנפח בכדוריות' }
+
+- id: MC-c12-spherical-ranges
+  title: טווחים שגויים לזוויות בקואורדינטות כדוריות
+  belief: >-
+    לכדור שלם $0\le\theta\le2\pi$ ו-$0\le\varphi\le\pi$, או שלחצי הכדור העליון לוקחים $0\le\theta\le\pi$.
+  truth: >-
+    $\theta$ (מציר $z$) רצה מ-0 (הקוטב הצפוני) עד $\pi$ (הקוטב הדרומי), ו-$\varphi$ מסתובבת סביב הציר מ-0 עד $2\pi$.
+    חצי הכדור העליון $z\ge0$ הוא $0\le\theta\le\frac\pi2$. עם הטווחים ההפוכים $\int_0^{2\pi}\sin\theta\,d\theta=0$ ו"הנפח"
+    יוצא 0.
+  remedy: { lesson: '12.5', label: 'טווחי הזוויות בכדוריות' }

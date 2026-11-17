@@ -1,0 +1,255 @@
+# Chapter 0 review — what we bring from high school (lessons 0.1–0.4), easy to hard.
+# Every lesson is touched; most questions combine two lessons. Each hint names the lesson to go back to.
+# Every number recomputed with screens/tools/cas.py and screens/tools/recompute-ch0.py.
+chapter: 0
+questions:
+  - id: Q-0-review-01
+    type: numeric
+    objectives: [OBJ-0.1-2]
+    level: basic
+    prompt: >-
+      פתרו את $x^2-2x-1=0$. מהו הפתרון הגדול? (אפשר לכתוב ערך מדויק, כמו √7 או 3π/4.)
+    answer: 2.41421356237309
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x=\frac{2\pm\sqrt{4+4}}{2}=1\pm\sqrt2$, והגדול $1+\sqrt2\approx2.414$.
+    wrongFeedback: >-
+      $a=1$, $b=-2$, $c=-1$: $\Delta=4+4=8$, ו-$\sqrt8=2\sqrt2$.
+    commonWrong:
+      - value: 4.82842712474619
+        feedback: >-
+          זה $2+\sqrt8$: שכחתם לחלק ב-$2a=2$. בדיקה: $(2+2\sqrt2)^2-2(2+2\sqrt2)-1=7+4\sqrt2\ne0$.
+        misconception: MC-c0-quadratic-formula
+    hints: ['חזרו לשיעור 0.1: נוסחת השורשים.']
+
+  - id: Q-0-review-02
+    type: numeric
+    objectives: [OBJ-0.3-1, OBJ-0.3-2]
+    level: basic
+    prompt: >-
+      חשבו את $e^{2\ln3}$.
+    answer: 9
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $e^{2\ln3}=\left(e^{\ln3}\right)^2=3^2=9$; או $2\ln3=\ln9$, ו-$e^{\ln9}=9$.
+    wrongFeedback: >-
+      $e^{\ln a}=a$. כתבו את $2\ln3$ כלוגריתם של מספר אחד.
+    commonWrong:
+      - value: 6
+        feedback: >-
+          $6=2\cdot e^{\ln3}$: ה-2 הוא חלק מהמעריך, ולכן הוא הופך לחזקה, לא לכופל. $e^{2\ln3}=\left(e^{\ln3}\right)^2$.
+        misconception: MC-c0-log-power-outside
+    hints: ['חזרו לשיעור 0.3: חוקי החזקות והלוגריתם כפעולה הפוכה.']
+
+  - id: Q-0-review-03
+    type: numeric
+    objectives: [OBJ-0.4-1, OBJ-0.2-1]
+    level: basic
+    prompt: >-
+      ישר יוצר זווית של $60^\circ$ עם הכיוון החיובי של ציר ה-$x$. מהו השיפוע שלו?
+    answer: 1.73205080756888
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\sqrt3$. בצעד ימינה באורך $\cos60^\circ$ עולים $\sin60^\circ$, והשיפוע הוא המנה $\tan60^\circ=\sqrt3$.
+    wrongFeedback: >-
+      שיפוע הוא עלייה חלקי ריצה. על מעגל היחידה, בזווית $\alpha$: ריצה $\cos\alpha$ ועלייה $\sin\alpha$.
+    commonWrong:
+      - value: 0.866025403784439
+        feedback: >-
+          זה $\sin60^\circ$, העלייה לאורך קטע באורך 1, לא העלייה לכל צעד אופקי של 1. השיפוע $\frac{\sin60^\circ}{\cos60^\circ}$.
+        misconception: MC-c0-slope-angle
+      - value: 0.5
+        feedback: >-
+          זה $\cos60^\circ$, הריצה האופקית. השיפוע הוא עלייה חלקי ריצה: $\tan60^\circ$.
+        misconception: MC-c0-slope-angle
+    hints: ['חזרו לשיעור 0.4 (שיפוע) ולשיעור 0.2 (סינוס וקוסינוס במעגל היחידה).']
+
+  - id: Q-0-review-04
+    type: rank
+    objectives: [OBJ-0.4-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      סדרו את שלבי המתכון למציאת המרכז והרדיוס של $x^2+y^2+Dx+Ey+F=0$.
+    help: 'השלב הראשון למעלה.'
+    items:
+      - { id: group, label: 'מקבצים: $(x^2+Dx)+(y^2+Ey)=-F$' }
+      - { id: square, label: 'משלימים לריבוע כל קבוצה: $x^2+Dx=\left(x+\frac D2\right)^2-\frac{D^2}{4}$, וכך גם ב-$y$' }
+      - { id: move, label: 'מעבירים את הקבועים לאגף ימין: $\left(x+\frac D2\right)^2+\left(y+\frac E2\right)^2=K$' }
+      - { id: sign, label: 'בודקים את הסימן של $K$: מעגל רק כש-$K>0$' }
+      - { id: read, label: 'קוראים: המרכז $\left(-\frac D2,-\frac E2\right)$ והרדיוס $\sqrt K$' }
+    order: [group, square, move, sign, read]
+    correctFeedback: >-
+      נכון. הבדיקה של $K$ באה לפני הקריאה: כש-$K\le0$ אין רדיוס לקרוא (נקודה אחת או קבוצה ריקה).
+    wrongFeedback: >-
+      אי אפשר לקרוא רדיוס לפני שיש צורה קנונית, ואי אפשר להשלים לריבוע לפני שמקבצים את האיברים של כל משתנה.
+    hints: ['חזרו לשיעור 0.4: השלמה לריבוע.']
+
+  - id: Q-0-review-05
+    type: numeric
+    objectives: [OBJ-0.2-3, OBJ-0.1-2]
+    level: mid
+    prompt: >-
+      כמה פתרונות יש למשוואה $2\cos^2x-\cos x-1=0$ בקטע $[0,2\pi)$?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. עם $u=\cos x$: $2u^2-u-1=0$, כלומר $u=1$ או $u=-\frac12$. $\cos x=1$ נותן $x=0$, ו-$\cos x=-\frac12$ נותן
+      $\frac{2\pi}{3}$ ו-$\frac{4\pi}{3}$. ($2\pi$ אינו בקטע.)
+    wrongFeedback: >-
+      הציבו $u=\cos x$, פתרו משוואה ריבועית, ואז מצאו את כל ה-$x$ בקטע לכל ערך של $u$.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          חסר פתרון: ל-$\cos x=-\frac12$ יש שניים בקטע, $\frac{2\pi}{3}$ וגם $\frac{4\pi}{3}$ (הקוסינוס זוגי).
+        misconception: MC-c0-arcsin-only
+    hints: ['חזרו לשיעור 0.2: כל הפתרונות של משוואה טריגונומטרית, ולשיעור 0.1: משוואה ריבועית.']
+
+  - id: Q-0-review-06
+    type: mc
+    objectives: [OBJ-0.3-3, OBJ-0.1-3]
+    level: mid
+    prompt: >-
+      מהו הפתרון של $\ln(x-1)<0$?
+    choices:
+      - text: '$(1,2)$'
+        correct: true
+        feedback: >-
+          נכון. $\ln u<0$ בדיוק כש-$0<u<1$. כאן $u=x-1$: $0<x-1<1$, כלומר $1<x<2$.
+      - text: '$(-\infty,2)$'
+        feedback: >-
+          $\ln(x-1)$ מוגדר רק כש-$x>1$. ב-$x=0$ למשל, $\ln(-1)$ אינו מוגדר.
+        misconception: MC-c0-domain-check-skip
+      - text: '$(0,1)$'
+        feedback: >-
+          זה הפתרון של $\ln x<0$. ההזזה $x-1$ מזיזה את הקטע ימינה ב-1: $0<x-1<1$.
+        misconception: MC-c0-shift-sign
+    hints: ['חזרו לשיעור 0.3: תחום ההגדרה של ln, ולשיעור 0.1: כתיבת פתרון כקטע.']
+
+  - id: Q-0-review-07
+    type: expr
+    objectives: [OBJ-0.4-1, OBJ-0.4-2]
+    level: mid
+    prompt: >-
+      מצאו את האנך האמצעי של הקטע בין $A=(1,3)$ ל-$B=(5,1)$: הישר שכל נקודה עליו נמצאת במרחק שווה מ-$A$ ומ-$B$. כתבו את
+      $y$ כביטוי ב-$x$.
+    answer: '2*x - 4'
+    answerTex: '$y=2x-4$'
+    variables: [x]
+    correctFeedback: >-
+      נכון. האמצע $(3,2)$, שיפוע $AB$ הוא $\frac{1-3}{5-1}=-\frac12$, והאנך שיפועו 2: $y-2=2(x-3)$. בדיקה: הנקודה $(2,0)$
+      עליו, ו-$|PA|^2=|PB|^2=10$.
+    wrongFeedback: >-
+      האנך האמצעי עובר באמצע $AB$ ומאונך ל-$AB$. מצאו את שני הנתונים וכתבו ישר מנקודה ושיפוע.
+    commonWrong:
+      - expr: '7/2 - x/2'
+        feedback: >-
+          זה הישר דרך האמצע עם השיפוע של $AB$ עצמו, $-\frac12$: הוא הישר $AB$. האנך צריך שיפוע $-\frac{1}{-1/2}=2$.
+        misconception: MC-c0-perp-slope
+    hints: ['חזרו לשיעור 0.4: אמצע קטע וישרים מאונכים.']
+
+  - id: Q-0-review-08
+    type: numeric
+    objectives: [OBJ-0.4-3, OBJ-0.4-2]
+    level: mid
+    prompt: >-
+      בכמה נקודות נפגשים המעגלים $x^2+y^2=4$ ו-$(x-3)^2+(y-4)^2=9$?
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. המרחק בין המרכזים $(0,0)$ ו-$(3,4)$ הוא 5, בדיוק סכום הרדיוסים $2+3$: המעגלים משיקים מבחוץ, בנקודה
+      $\left(\frac65,\frac85\right)$.
+    wrongFeedback: >-
+      השוו את המרחק בין המרכזים לסכום הרדיוסים (ולהפרש שלהם).
+    hints: ['חזרו לשיעור 0.4: מרכז ורדיוס, ונוסחת המרחק.']
+
+  - id: Q-0-review-09
+    type: twotier
+    objectives: [OBJ-0.1-2, OBJ-0.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $\sqrt{x^2}=x$ לכל $x$ ממשי.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $\sqrt{x^2}=|x|$; למשל ב-$x=-3$ מתקבל 3.'
+      - text: 'נכון'
+        feedback: >-
+          שורש ריבועי הוא תמיד אי-שלילי. ב-$x=-3$: $\sqrt9=3\ne-3$.
+        misconception: MC-c0-squaring-extraneous
+    reasons:
+      - text: 'השורש הריבועי אי-שלילי, ולכן $\sqrt{x^2}=|x|$'
+        correct: true
+        feedback: 'בדיוק. זו גם הסיבה שהעלאה בריבוע מוסיפה פתרונות: $x$ ו-$-x$ נותנים אותו ריבוע.'
+      - text: 'שורש וריבוע הן פעולות הפוכות, ולכן הן מבטלות זו את זו'
+        feedback: >-
+          הן מבטלות זו את זו רק על $x\ge0$. ריבוע "שוכח" את הסימן, והשורש מחזיר תמיד את הערך החיובי.
+        misconception: MC-c0-squaring-extraneous
+    hints: ['חזרו לשיעור 0.1: שורשים, ערך מוחלט, והעלאה בריבוע.']
+
+  - id: Q-0-review-10
+    type: mc
+    objectives: [OBJ-0.1-3, OBJ-0.4-2]
+    level: exam
+    prompt: >-
+      מהו הפתרון של $|x-1|+|x+2|\le5$? (רמז: $|x-a|$ הוא המרחק של $x$ מ-$a$.)
+    choices:
+      - text: '$[-3,2]$'
+        correct: true
+        feedback: >-
+          נכון. בשלושה תחומים: כש-$x\ge1$, $2x+1\le5$ נותן $x\le2$; כש-$-2\le x<1$, הסכום 3 תמיד; כש-$x<-2$, $-2x-1\le5$
+          נותן $x\ge-3$. במרחקים: סכום המרחקים מ-1 ומ-$-2$ הוא לפחות 3, וכל צעד מחוץ לקטע מוסיף 2.
+      - text: '$[-2,1]$'
+        feedback: >-
+          בקטע הזה הסכום הוא 3, אבל גם מחוץ לו יש פתרונות: ב-$x=2$, $1+4=5\le5$.
+        misconception: MC-c0-abs-or-and
+      - text: '$(-\infty,2]$'
+        feedback: >-
+          הורדתם את הערכים המוחלטים כאילו $x\ge1$ בכל מקום: $2x+1\le5$. ב-$x=-4$, $5+2=7>5$.
+        misconception: MC-c0-abs-linear
+    hints: ['חזרו לשיעור 0.1: אי-שוויונות עם ערך מוחלט (חלוקה לתחומים), ולשיעור 0.4: מרחק.']
+
+  - id: Q-0-review-11
+    type: numeric
+    objectives: [OBJ-0.2-2, OBJ-0.1-2]
+    level: exam
+    prompt: >-
+      ידוע ש-$\sin x+\cos x=\frac15$ ו-$0<x<\pi$. חשבו את $\tan x$.
+    answer: -1.33333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. בריבוע: $1+2\sin x\cos x=\frac1{25}$, ולכן $\sin x\cos x=-\frac{12}{25}$. $\sin x$ ו-$\cos x$ הם שורשי
+      $u^2-\frac15u-\frac{12}{25}=0$, כלומר $\frac45$ ו-$-\frac35$. ב-$(0,\pi)$ הסינוס חיובי: $\sin x=\frac45$,
+      $\cos x=-\frac35$, ו-$\tan x=-\frac43$.
+    wrongFeedback: >-
+      העלו בריבוע כדי למצוא את $\sin x\cos x$. אז הסכום והמכפלה ידועים, ו-$\sin x$, $\cos x$ פותרים משוואה ריבועית.
+    commonWrong:
+      - value: -0.75
+        feedback: >-
+          $-\frac34=\frac{\cos x}{\sin x}$: החלפתם בין סינוס לקוסינוס. ב-$(0,\pi)$ הסינוס חיובי, ולכן $\sin x=\frac45$.
+        misconception: MC-c0-sin-cos-swap
+      - value: 1.33333333333333
+        feedback: >-
+          המכפלה $\sin x\cos x$ שלילית, ולכן לשניהם סימנים שונים והטנגנס שלילי. לקחתם את שניהם חיוביים.
+        misconception: MC-c0-quadrant-sign
+    hints: ['חזרו לשיעור 0.2: $\sin^2x+\cos^2x=1$ וזווית כפולה, ולשיעור 0.1: משוואה ריבועית מסכום ומכפלה.']
+
+  - id: Q-0-review-12
+    type: numeric
+    objectives: [OBJ-0.3-3, OBJ-0.1-2]
+    level: exam
+    prompt: >-
+      פתרו את $\left(\log_2x\right)^2-3\log_2x+2=0$. מהו סכום כל הפתרונות?
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. עם $t=\log_2x$: $t^2-3t+2=0$, ולכן $t=1$ או $t=2$, כלומר $x=2$ או $x=4$. שניהם חיוביים, והסכום 6.
+    wrongFeedback: >-
+      הציבו $t=\log_2x$, פתרו את המשוואה הריבועית, וחזרו ל-$x=2^t$.
+    commonWrong:
+      - value: 3
+        feedback: >-
+          $3=1+2$ הוא סכום הערכים של $t=\log_2x$. צריך עוד צעד: $x=2^1$ ו-$x=2^2$.
+        misconception: MC-c0-substitution-back
+    hints: ['חזרו לשיעור 0.3: משוואות לוגריתמיות בהצבה, ולשיעור 0.1: משוואה ריבועית.']

@@ -1,0 +1,70 @@
+# Misconceptions first detected in lesson 7.2 (integration by substitution).
+- id: MC-c7-subst-no-du
+  title: בוחרים הצבה שהנגזרת שלה אינה מופיעה באינטגרל
+  belief: >-
+    כל ביטוי "מסובך" מתאים להצבה, למשל $u=x^2+1$ ב-$\int\frac{dx}{x^2+1}$ או $u=x^2$ ב-$\int e^{x^2}dx$.
+  truth: >-
+    הצבה $u=g(x)$ עובדת כשהגורם $g'(x)\,dx$ (עד קבוע) מופיע באינטגרל, כך שאחרי ההצבה לא נשאר $x$. ב-$\int x\cos(x^3)\,dx$
+    אין $x^2$, ול-$\int e^{x^2}dx$ אין בכלל קדומה אלמנטרית.
+  remedy: { lesson: '7.2', label: 'מתי מתאימה הצבה' }
+
+- id: MC-c7-subst-forget-factor
+  title: טועים בקבוע שבא מהקשר בין du ל-dx
+  belief: >-
+    $\int(2x+1)^5dx=\frac{(2x+1)^6}{6}$, או $\int\frac{x}{1+x^2}dx=\ln(1+x^2)$: הקבוע של $du$ אינו משנה.
+  truth: >-
+    מ-$du=g'(x)\,dx$ מבטאים בדיוק את מה שיש באינטגרל: $dx=\frac{du}{2}$ כש-$u=2x+1$, ו-$x\,dx=\frac{du}{2}$ כש-$u=1+x^2$.
+    בדיקה בגזירה (כלל השרשרת) מגלה כל קבוע חסר או עודף.
+  remedy: { lesson: '7.2', label: 'הצבה: מה קורה ל-dx' }
+
+- id: MC-c7-subst-mixed-variables
+  title: אחרי הצבה משאירים את x או מחליפים dx ב-du כמו שהוא
+  belief: >-
+    $\int x\sqrt{x^2+1}\,dx=\int x\sqrt u\,du$, או $\int\frac{dx}{1+\sqrt x}=\int\frac{du}{1+u}$.
+  truth: >-
+    $dx$ מוחלף לפי $du=g'(x)\,dx$, ואחרי ההצבה האינטגרל כולו במשתנה $u$: $x\,dx=\frac{du}{2}$; כש-$x=u^2$, $dx=2u\,du$.
+    אם נשאר $x$, ההצבה לא הושלמה.
+  remedy: { lesson: '7.2', label: 'ביצוע ההצבה עד הסוף' }
+
+- id: MC-c7-atan-vs-log
+  title: מבלבלים בין אינטגרל שנותן לוגריתם לאינטגרל שנותן arctan
+  belief: >-
+    $\int\frac{x}{1+x^2}dx=\arctan x$, או $\int\frac{dx}{x^2-4}=\frac12\arctan\frac x2$.
+  truth: >-
+    $\int\frac{dx}{x^2+a^2}=\frac1a\arctan\frac xa$ (בלי $x$ במונה, וסכום ריבועים במכנה). עם $x$ במונה זו נגזרת המכנה:
+    $\frac12\ln(x^2+a^2)$. ו-$x^2-a^2$ מתפרק לגורמים: שברים חלקיים ולוגריתמים.
+  remedy: { lesson: '7.2', label: 'לוגריתם או arctan' }
+
+- id: MC-c7-log-of-denominator
+  title: כותבים לוגריתם של המכנה לכל שבר
+  belief: >-
+    $\int\frac{dx}{Q(x)}=\ln|Q(x)|$, או $\int\frac{P}{Q}dx=\ln|Q|$ בלי קשר למונה.
+  truth: >-
+    $\int\frac{u'}{u}\,dx=\ln|u|+C$ רק כשהמונה הוא הנגזרת של המכנה (עד קבוע). אחרת: $\frac{1}{1+x^2}$ נותן $\arctan x$,
+    ופונקציה רציונלית כללית מפרקים לשברים חלקיים.
+  remedy: { lesson: '7.2', label: 'הנגזרת חלקי הפונקציה' }
+
+- id: MC-c7-fprime-f-sign
+  title: מאבדים את הסימן של הנגזרת הפנימית
+  belief: >-
+    $\int\tan x\,dx=\ln|\cos x|$, או $\int\sin^3x\,dx=\cos x-\frac{\cos^3x}{3}$.
+  truth: >-
+    עם $u=\cos x$, $du=-\sin x\,dx$, ולכן $\sin x\,dx=-du$: $\int\tan x\,dx=-\ln|\cos x|+C$. בודקים בגזירה, והמינוס מופיע.
+  remedy: { lesson: '7.2', label: 'הצבה עם הנגזרת הפנימית' }
+
+- id: MC-c7-fprime-f-confuse
+  title: מבלבלים בין u כפול u נגזרת לבין u נגזרת חלקי u
+  belief: >-
+    $\int\frac{\ln x}{x}dx=\ln|\ln x|$, כי "יש לוגריתם ויש $\frac1x$".
+  truth: >-
+    עם $u=\ln x$: $\frac{\ln x}{x}=u\,u'$, ו-$\int u\,du=\frac{u^2}{2}$. רק $\frac{u'}{u}=\frac{1}{x\ln x}$ נותן $\ln|\ln x|$.
+  remedy: { lesson: '7.2', label: 'הצבה עם הנגזרת הפנימית' }
+
+- id: MC-c7-division-remainder-sign
+  title: טועים בסימן של השארית בחילוק פולינומים
+  belief: >-
+    $\frac{x^2}{x+1}=x-1-\frac{1}{x+1}$, או $\frac{2u}{1+u}=2+\frac{2}{1+u}$.
+  truth: >-
+    בודקים את החילוק בכפל חזרה: $(x-1)(x+1)+1=x^2$, ולכן $\frac{x^2}{x+1}=x-1+\frac{1}{x+1}$; ו-$2(1+u)-2=2u$, ולכן
+    $\frac{2u}{1+u}=2-\frac{2}{1+u}$.
+  remedy: { lesson: '7.4', label: 'חילוק פולינומים לפני אינטגרציה' }

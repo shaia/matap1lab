@@ -1,0 +1,75 @@
+# Misconceptions first detected in lesson 3.2 (the Gauss plane: modulus, argument and conjugate).
+- id: MC-c3-modulus-components-sum
+  title: מחשבים ערך מוחלט כסכום הרכיבים
+  belief: >-
+    $|a+bi|=|a|+|b|$, למשל $|-5+12i|=17$.
+  truth: >-
+    $|a+bi|=\sqrt{a^2+b^2}$, אורך הווקטור מהראשית לנקודה $(a,b)$ (פיתגורס): $|-5+12i|=13$. הסכום $|a|+|b|$ הוא
+    הדרך "בצעדים לאורך הצירים", והוא גדול יותר כשאף רכיב אינו 0.
+  remedy: { lesson: '3.2', label: 'הערך המוחלט כאורך' }
+
+- id: MC-c3-modulus-no-root
+  title: שוכחים את השורש בערך המוחלט
+  belief: >-
+    $|1+i|=2$, ולכן $|(1+i)^8|=2^8$.
+  truth: >-
+    $|a+bi|^2=a^2+b^2$, ו-$|a+bi|$ הוא השורש: $|1+i|=\sqrt2$, ו-$|(1+i)^8|=(\sqrt2)^8=16$. בלי שורש נכון רק
+    $z\bar z=|z|^2$.
+  remedy: { lesson: '3.2', label: 'ערך מוחלט ושורש' }
+
+- id: MC-c3-arg-arctan
+  title: מחשבים ארגומנט כ-arctan של b חלקי a בלי לבדוק את הרביע
+  belief: >-
+    $\arg(a+bi)=\arctan\frac{b}{a}$ תמיד, למשל $\operatorname{Arg}(-1-\sqrt3i)=\frac{\pi}{3}$.
+  truth: >-
+    $\arctan$ נותן ערכים רק בין $-\frac{\pi}{2}$ ל-$\frac{\pi}{2}$. משרטטים את הנקודה, קובעים את הרביע, ומתקנים
+    ב-$\pm\pi$: $-1-\sqrt3i$ ברביע השלישי, ו-$\operatorname{Arg}=\frac{\pi}{3}-\pi=-\frac{2\pi}{3}$. על הצירים קוראים
+    ישר מהציור: $\operatorname{Arg}(-4)=\pi$.
+  remedy: { lesson: '3.2', label: 'הארגומנט ברביע הנכון' }
+
+- id: MC-c3-principal-arg-range
+  title: נותנים ארגומנט ראשי מחוץ לקטע מינוס פאי עד פאי
+  belief: >-
+    $\operatorname{Arg}(-1-\sqrt3i)=\frac{4\pi}{3}$, או $\operatorname{Arg}(-1)=-\pi$, או
+    $\operatorname{Arg}\bar z=-\operatorname{Arg}z$ לכל $z$.
+  truth: >-
+    בקורס הזה $\operatorname{Arg}z\in(-\pi,\pi]$: הקטע פתוח ב-$-\pi$ וסגור ב-$\pi$. לכן $\operatorname{Arg}(-1)=\pi$,
+    ו-$\frac{4\pi}{3}$ מתוקן ל-$\frac{4\pi}{3}-2\pi=-\frac{2\pi}{3}$. בגלל אותו קצה,
+    $\operatorname{Arg}\bar z=-\operatorname{Arg}z$ נכון לכל $z\ne0$ פרט למספרים ממשיים שליליים, שבהם שני הצדדים
+    $\pi$ ו-$-\pi$.
+  remedy: { lesson: '3.2', label: 'הארגומנט הראשי' }
+
+- id: MC-c3-conj-reflect-wrong-axis
+  title: משקפים את הצמוד דרך הציר הלא נכון
+  belief: >-
+    $\bar z$ הוא השיקוף של $z$ דרך הציר המדומה, או $-z$.
+  truth: >-
+    $\overline{a+bi}=a-bi$: אותו חלק ממשי, חלק מדומה הפוך, כלומר שיקוף דרך **הציר הממשי**. $-\bar z=-a+bi$ הוא השיקוף
+    דרך הציר המדומה, ו-$-z$ הוא סיבוב ב-$\pi$ סביב הראשית.
+  remedy: { lesson: '3.2', label: 'הצמוד כשיקוף' }
+
+- id: MC-c3-modulus-additive
+  title: חושבים שהערך המוחלט של סכום הוא סכום הערכים המוחלטים
+  belief: >-
+    $|z+w|=|z|+|w|$ לכל $z,w$.
+  truth: >-
+    חיבור מרוכבים הוא חיבור וקטורים, ולכן $|z+w|\le|z|+|w|$ (אי-שוויון המשולש), עם שוויון רק כשהווקטורים באותו
+    כיוון. $|1+i|=\sqrt2<2=|1|+|i|$.
+  remedy: { lesson: '3.2', label: 'חיבור כחיבור וקטורים' }
+
+- id: MC-c3-set-center-sign
+  title: טועים בסימן של המרכז בקבוצה כמו ערך מוחלט של z פחות a
+  belief: >-
+    $|z-2i|=3$ הוא מעגל שמרכזו $-2i$, או $|z+i|$ הוא המרחק מ-$i$.
+  truth: >-
+    $|z-a|$ הוא המרחק בין $z$ ל-$a$. לכן $|z-2i|=3$ הוא המעגל שמרכזו $2i$, ו-$|z+i|=|z-(-i)|$ הוא המרחק מ-$-i$.
+  remedy: { lesson: '3.2', label: 'ערך מוחלט של הפרש כמרחק' }
+
+- id: MC-c3-arg-set-line
+  title: חושבים שארגומנט קבוע הוא ישר שלם
+  belief: >-
+    הקבוצה $\{z:\operatorname{Arg}z=\frac{\pi}{4}\}$ היא הישר $y=x$.
+  truth: >-
+    ארגומנט קבוע הוא **קרן** מהראשית (בלי הראשית, שאין לה ארגומנט). החצי השני של הישר, $y=x<0$, הוא
+    $\operatorname{Arg}z=-\frac{3\pi}{4}$.
+  remedy: { lesson: '3.2', label: 'קבוצות לפי ארגומנט' }

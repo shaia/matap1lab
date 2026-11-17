@@ -1,0 +1,23 @@
+# Terms first defined in lesson 4.1 (function, domain, image, composition).
+- id: domain
+  term: תחום הגדרה
+  en: domain
+  definition: >-
+    קבוצת הקלטים שהפונקציה מוגדרת עליהם. כשנתונה רק נוסחה, תחום ההגדרה הוא כל ה-$x$ שבהם כל פעולה בנוסחה מותרת: מכנה
+    שונה מ-0, ביטוי אי-שלילי בתוך שורש זוגי, ביטוי חיובי בתוך $\ln$.
+  lesson: '4.1'
+- id: image
+  term: תמונה
+  en: image (range)
+  symbol: 'f(A)=\{f(x):x\in A\}'
+  definition: >-
+    קבוצת הערכים שהפונקציה באמת מקבלת: $f(A)=\{f(x):x\in A\}$. למשל התמונה של $x^2$ על $\mathbb{R}$ היא $[0,\infty)$.
+  lesson: '4.1'
+- id: composition
+  term: הרכבה
+  en: composition
+  symbol: '(f\circ g)(x)=f(g(x))'
+  definition: >-
+    הפונקציה $(f\circ g)(x)=f(g(x))$: מפעילים קודם את $g$ ועל התוצאה את $f$. היא מוגדרת ב-$x$ כש-$x$ בתחום של $g$ וגם
+    $g(x)$ בתחום של $f$. בדרך כלל $f\circ g\ne g\circ f$.
+  lesson: '4.1'

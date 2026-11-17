@@ -1,0 +1,322 @@
+# Chapter 12 review questions — they mix the core lessons 12.1–12.7 and reach back to 8.3 and 11.3.
+# Lesson 12.8 (Green's theorem) is enrichment: no question here cites OBJ-12.8-*.
+# Recomputed with sympy and checked by direct quadrature where an order is changed (screens/tools/recompute-ch12.py).
+chapter: 12
+questions:
+  - id: Q-12-review-01
+    type: numeric
+    objectives: [OBJ-12.1-2, OBJ-12.1-3]
+    level: basic
+    prompt: >-
+      חשבו את $\iint_R6xy^2\,dA$, כש-$R=[0,2]\times[0,1]$.
+    answer: 4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $6\left(\int_0^2x\,dx\right)\left(\int_0^1y^2\,dy\right)=6\cdot2\cdot\frac13=4$.
+    wrongFeedback: >-
+      מלבן ומכפלה: פרקו לאינטגרל לפי $x$ כפול אינטגרל לפי $y$.
+    hints: ['חזרו לשיעור 12.1: פירוק למכפלה על מלבן.']
+
+  - id: Q-12-review-02
+    type: mc
+    objectives: [OBJ-12.2-1]
+    level: basic
+    prompt: >-
+      $D$ הוא התחום שבין הפרבולה $y=x^2$ לישר $y=2x$. איזה אינטגרל נשנה בסדר $dx\,dy$ שווה ל-$\iint_Df\,dA$?
+    choices:
+      - text: '$\int_0^4\!\int_{y/2}^{\sqrt y}f\,dx\,dy$'
+        correct: true
+        feedback: >-
+          נכון. העקומים נחתכים ב-$(0,0)$ וב-$(2,4)$. ברצועה אופקית בגובה $y$ הישר ($x=\frac y2$) משמאל והפרבולה
+          ($x=\sqrt y$) מימין: ב-$y=1$, $\frac12<1$.
+      - text: '$\int_0^4\!\int_{\sqrt y}^{y/2}f\,dx\,dy$'
+        feedback: >-
+          הגבולות הפוכים: ב-$y=1$ הגבול "התחתון" 1 גדול מהעליון $\frac12$, והאינטגרל יוצא עם הסימן ההפוך.
+        misconception: MC-c12-region-wrong-side
+      - text: '$\int_0^4\!\int_0^2f\,dx\,dy$'
+        feedback: >-
+          גבולות קבועים מתארים את המלבן $[0,2]\times[0,4]$, ולא את התחום שבין העקומים.
+        misconception: MC-c12-bounding-rectangle
+      - text: '$\int_0^2\!\int_{x^2}^{2x}f\,dx\,dy$'
+        feedback: >-
+          אלה הגבולות של הסדר $dy\,dx$ עם הדיפרנציאלים מוחלפים. בסדר $dx\,dy$ צריך לקרוא את התחום ברצועות אופקיות.
+        misconception: MC-c12-swap-keep-limits
+    hints: ['חזרו לשיעור 12.2: תיאור תחום לפי $y$.']
+
+  - id: Q-12-review-03
+    type: mc
+    objectives: [OBJ-12.3-1, OBJ-11.3-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      מאיפה מגיע הגורם $r$ ב-$dA=r\,dr\,d\theta$?
+    choices:
+      - text: 'זה הערך המוחלט של היעקוביאן $\frac{\partial(x,y)}{\partial(r,\theta)}$ של המעבר $x=r\cos\theta$, $y=r\sin\theta$'
+        correct: true
+        feedback: >-
+          נכון. $\det\begin{pmatrix}\cos\theta&-r\sin\theta\\\sin\theta&r\cos\theta\end{pmatrix}=r\cos^2\theta+r\sin^2\theta=r$:
+          מקדם שינוי השטח של ההעתקה מ-$(r,\theta)$ ל-$(x,y)$.
+      - text: 'זו מוסכמה של כתיבה, ואפשר לוותר עליה כשהאינטגרנד אינו תלוי ב-$r$'
+        feedback: >-
+          הגורם הוא חלק משטח התא, בלי קשר לאינטגרנד. בלעדיו גם שטח העיגול יוצא שגוי: $\int_0^{2\pi}\!\int_0^Rdr\,d\theta=2\pi R$.
+        misconception: MC-c12-polar-no-r
+      - text: 'זה $\frac{\partial(r,\theta)}{\partial(x,y)}$, ולכן הוא $\frac1r$ ולא $r$'
+        feedback: >-
+          $\frac{\partial(r,\theta)}{\partial(x,y)}=\frac1r$ הוא היעקוביאן של ההעתקה ההפוכה. באינטגרל לפי $dr\,d\theta$ צריך
+          את $\frac{\partial(x,y)}{\partial(r,\theta)}=r$.
+        misconception: MC-c12-jacobian-inverse-direction
+    hints: ['חזרו לשיעור 11.3 (היעקוביאן של קוטביות) ולשיעור 12.3.']
+
+  - id: Q-12-review-04
+    type: numeric
+    objectives: [OBJ-12.2-3]
+    level: mid
+    prompt: >-
+      חשבו את $\int_0^1\!\int_{\sqrt x}^{1}e^{y^3}\,dy\,dx$.
+    answer: 0.572760609486348
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. התחום: $0\le x\le1$, $\sqrt x\le y\le1$, כלומר $0\le y\le1$, $0\le x\le y^2$. לכן
+      $\int_0^1\!\int_0^{y^2}e^{y^3}\,dx\,dy=\int_0^1y^2e^{y^3}\,dy=\frac{e-1}{3}$.
+    wrongFeedback: >-
+      ל-$e^{y^3}$ אין פונקציה קדומה אלמנטרית: החליפו סדר. שרטטו את התחום: מעל הפרבולה $y=\sqrt x$ (כלומר $x=y^2$) ומתחת
+      ל-$y=1$.
+    hints: ['חזרו לשיעור 12.2: החלפת סדר כשרק סדר אחד מאפשר לחשב.']
+
+  - id: Q-12-review-05
+    type: numeric
+    objectives: [OBJ-12.3-2]
+    level: mid
+    prompt: >-
+      חשבו את $\iint_A\sqrt{x^2+y^2}\,dA$, כש-$A$ הטבעת $1\le x^2+y^2\le9$.
+    answer: 54.4542726622231
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^{2\pi}\!\int_1^3r\cdot r\,dr\,d\theta=2\pi\cdot\frac{27-1}{3}=\frac{52\pi}{3}$.
+    wrongFeedback: >-
+      בטבעת $1\le r\le3$. האינטגרנד $r$, ועוד $r$ מאלמנט השטח.
+    commonWrong:
+      - value: 25.1327412287183
+        feedback: >-
+          $8\pi$ יוצא בלי הגורם $r$: $\int_1^3r\,dr=4$.
+        misconception: MC-c12-polar-no-r
+    hints: ['חזרו לשיעור 12.3: טבעות.']
+
+  - id: Q-12-review-06
+    type: numeric
+    objectives: [OBJ-12.7-1, OBJ-12.3-2]
+    level: exam
+    prompt: >-
+      חשבו את הנפח של הגוף שבין הפרבולואיד $z=x^2+y^2$ (למטה) למישור $z=2y$ (למעלה).
+    answer: 1.5707963267949
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. המשטחים נחתכים כש-$x^2+y^2=2y$, כלומר $x^2+(y-1)^2=1$: ההיטל $D$ הוא עיגול ברדיוס 1 סביב $(0,1)$. הנפח
+      $\iint_D\left(2y-x^2-y^2\right)dA=\iint_D\left(1-x^2-(y-1)^2\right)dA$, ובקוטביות סביב $(0,1)$:
+      $\int_0^{2\pi}\!\int_0^1\left(1-\rho^2\right)\rho\,d\rho\,d\theta=2\pi\cdot\frac14=\frac\pi2$.
+    wrongFeedback: >-
+      מצאו את ההיטל (איפה $x^2+y^2=2y$), והשלימו לריבוע. הגובה של העמודה הוא העליון פחות התחתון. (אפשר גם בקוטביות רגילות:
+      $0\le\theta\le\pi$, $0\le r\le2\sin\theta$.)
+    commonWrong:
+      - value: 6.28318530717959
+        feedback: >-
+          $2\pi$ הוא $\iint_D2y\,dA$, הנפח מתחת למישור עד $z=0$, בלי להחסיר את מה שמתחת לפרבולואיד.
+        misconception: MC-c12-volume-top-only
+    hints: ['חזרו לשיעור 12.7 (נפח בין משטחים) ולשיעור 12.3 (קוטביות).']
+
+  - id: Q-12-review-07
+    type: mc
+    objectives: [OBJ-12.5-3, OBJ-12.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $E$ הוא הגוף שמעל החרוט $z=\sqrt{x^2+y^2}$ ובתוך הכדור $x^2+y^2+z^2\le4$. איך כדאי לכתוב את $\iiint_Ez\,dV$?
+    choices:
+      - text: 'בכדוריות: $0\le r\le2$, $0\le\theta\le\frac\pi4$, $0\le\varphi\le2\pi$, עם $z=r\cos\theta$ ו-$dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$'
+        correct: true
+        feedback: >-
+          נכון. הספרה היא $r=2$ והחרוט $\theta=\frac\pi4$: כל השפה "קואורדינטה = קבוע", והגבולות כולם מספרים.
+      - text: 'בקרטזיות, על הריבוע $[-2,2]\times[-2,2]$ ו-$\sqrt{x^2+y^2}\le z\le2$'
+        feedback: >-
+          הריבוע גדול מההיטל, והגג הוא הספרה $z=\sqrt{4-x^2-y^2}$, לא $z=2$. גם עם התיקונים הגבולות מסובכים.
+        misconception: MC-c12-bounding-rectangle
+      - text: 'בכדוריות: $0\le r\le2$, $\frac\pi4\le\theta\le\pi$, $0\le\varphi\le2\pi$'
+        feedback: >-
+          $\theta>\frac\pi4$ הן הנקודות **מתחת** לחרוט (רחוקות יותר מציר $z$). הגוף שמעל החרוט קרוב לציר: $\theta\le\frac\pi4$.
+        misconception: MC-c12-spherical-ranges
+    hints: ['חזרו לשיעור 12.5: בחירת מערכת קואורדינטות.']
+
+  - id: Q-12-review-08
+    type: numeric
+    objectives: [OBJ-12.5-2, OBJ-12.7-2]
+    level: exam
+    prompt: >-
+      חשבו את $\bar z$ של מרכז המסה של חצי כדור מלא והומוגני $x^2+y^2+z^2\le4$, $z\ge0$.
+    answer: 0.75
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $V=\frac{16\pi}{3}$, ו-$\iiint z\,dV=\int_0^{2\pi}\!\int_0^{\pi/2}\!\int_0^2r\cos\theta\,r^2\sin\theta\,dr\,d\theta\,d\varphi=2\pi\cdot\frac12\cdot4=4\pi$.
+      לכן $\bar z=\frac{4\pi}{16\pi/3}=\frac34$, כלומר $\frac38R$.
+    wrongFeedback: >-
+      $\bar z=\frac1V\iiint z\,dV$ (הומוגני). בכדוריות $z=r\cos\theta$, וחצי הכדור העליון $0\le\theta\le\frac\pi2$.
+    commonWrong:
+      - value: 12.5663706143592
+        feedback: >-
+          $4\pi$ הוא $\iiint z\,dV$, לפני החלוקה בנפח. ממילא $\bar z$ חייב להיות בין 0 ל-2.
+        misconception: MC-c12-centroid-no-divide
+    hints: ['חזרו לשיעור 12.5 (כדוריות) ולשיעור 12.7 (מרכז מסה).']
+
+  - id: Q-12-review-09
+    type: twotier
+    objectives: [OBJ-12.6-1, OBJ-11.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      ההעתקה $x=2u$, $y=3v$ מעבירה את הריבוע $[0,1]^2$ במישור $uv$ למלבן $D=[0,2]\times[0,3]$. נכון או לא נכון:
+      $\iint_Df\,dx\,dy=\iint_{[0,1]^2}f(2u,3v)\cdot6\,du\,dv$.
+    choices:
+      - text: נכון
+        correct: true
+        feedback: 'נכון. $\frac{\partial(x,y)}{\partial(u,v)}=6$, ו-$f\equiv1$ נותן את השטח 6 של $D$.'
+      - text: 'לא נכון: צריך $\frac16$'
+        feedback: >-
+          $\frac16$ הוא $\frac{\partial(u,v)}{\partial(x,y)}$, מקדם ההעתקה ההפוכה. בדיקה עם $f\equiv1$: צריך לצאת 6.
+        misconception: MC-c12-jacobian-inverse-direction
+    reasons:
+      - text: 'היעקוביאן הוא מקדם שינוי השטח: כל תא קטן במישור $uv$ גדל פי $2\cdot3=6$'
+        correct: true
+        feedback: 'בדיוק. זה הפירוש מ-11.3: הדטרמיננטה של הקירוב הלינארי היא היחס בין שטחים.'
+      - text: 'בהחלפת משתנים מספיק להחליף את הגבולות, ולכן אין מקדם'
+        feedback: >-
+          הריבוע $[0,1]^2$ (שטח 1) והמלבן $D$ (שטח 6) אינם באותו גודל. בלי המקדם השטח יוצא 1.
+        misconception: MC-c12-change-no-jacobian
+      - text: 'המקדם הוא 6 רק כי $f$ חיובית'
+        feedback: >-
+          המקדם תלוי רק בהעתקה ($|J|=6$), לא בפונקציה.
+        misconception: MC-c12-change-no-jacobian
+    hints: ['חזרו לשיעור 11.3 (היעקוביאן כמקדם שטח) ולשיעור 12.6.']
+
+  - id: Q-12-review-10
+    type: numeric
+    objectives: [OBJ-12.4-1, OBJ-12.1-3]
+    level: basic
+    prompt: >-
+      חשבו את $\iiint_Bxyz\,dV$, כש-$B$ התיבה $[0,1]\times[0,2]\times[0,3]$.
+    answer: 4.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. גם בתיבה מכפלה מתפרקת: $\frac12\cdot2\cdot\frac92=\frac92$.
+    wrongFeedback: >-
+      $\left(\int_0^1x\,dx\right)\left(\int_0^2y\,dy\right)\left(\int_0^3z\,dz\right)$.
+    commonWrong:
+      - value: 6
+        feedback: >-
+          6 הוא הנפח של התיבה. כאן האינטגרנד $xyz$.
+        misconception: MC-c12-integral-is-size
+    hints: ['חזרו לשיעור 12.4 (תיבה) ולשיעור 12.1 (פירוק למכפלה).']
+
+  - id: Q-12-review-11
+    type: numeric
+    objectives: [OBJ-12.7-3]
+    level: mid
+    prompt: >-
+      לוח ריבועי דק $[-1,1]\times[-1,1]$ בצפיפות 1. חשבו את מומנט ההתמד שלו סביב ציר $z$ (הניצב ללוח דרך מרכזו).
+    answer: 2.66666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\iint\left(x^2+y^2\right)dA=2\cdot\iint x^2\,dA=2\cdot\frac23\cdot2=\frac83$.
+    wrongFeedback: >-
+      ריבוע המרחק מציר $z$ הוא $x^2+y^2$. האינטגרל מתפרק לשני מחוברים שווים מסימטריה.
+    commonWrong:
+      - value: 1.33333333333333
+        feedback: >-
+          $\frac43$ הוא $\iint y^2\,dA$, מומנט ההתמד סביב ציר $x$ בלבד. סביב ציר $z$ המרחק בריבוע $x^2+y^2$.
+        misconception: MC-c12-inertia-wrong-axis
+    hints: ['חזרו לשיעור 12.7: מרחק מציר הסיבוב.']
+
+  - id: Q-12-review-12
+    type: numeric
+    objectives: [OBJ-12.2-3, OBJ-12.7-1]
+    level: exam
+    prompt: >-
+      חשבו את הנפח של הגוף שמתחת למשטח $z=\sin\left(y^2\right)$ ומעל המשולש $0\le x\le y\le1$ במישור $xy$.
+    answer: 0.22984884706593
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. הנפח $\iint\sin\left(y^2\right)dA$. בסדר $dx\,dy$: $\int_0^1\!\int_0^y\sin\left(y^2\right)dx\,dy=\int_0^1y\sin\left(y^2\right)dy=\frac{1-\cos1}{2}$.
+      בסדר $dy\,dx$ נתקעים ב-$\int\sin\left(y^2\right)dy$.
+    wrongFeedback: >-
+      בחרו את הסדר שבו האינטגרל הפנימי נותן גורם $y$: קודם לפי $x$, מ-0 עד $y$.
+    hints: ['חזרו לשיעור 12.2 (החלפת סדר) ולשיעור 12.7 (נפח כאינטגרל כפול).']
+
+  - id: Q-12-review-13
+    type: numeric
+    objectives: [OBJ-12.6-2, OBJ-12.6-1, OBJ-12.1-3]
+    level: exam
+    prompt: >-
+      $D$ הוא המלבן המסובב $1\le x+y\le3$, $0\le x-y\le1$. חשבו את $\iint_D(x+y)\,e^{x-y}\,dA$.
+    answer: 3.43656365691809
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $u=x+y$, $v=x-y$: $D^*=[1,3]\times[0,1]$, $dA=\frac12du\,dv$, ו-$\frac12\int_1^3u\,du\int_0^1e^v\,dv=\frac12\cdot4\cdot(e-1)=2(e-1)$.
+    wrongFeedback: >-
+      ההחלפה $u=x+y$, $v=x-y$ הופכת את $D$ למלבן ואת האינטגרנד למכפלה $ue^v$. אל תשכחו את המקדם $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|$.
+    commonWrong:
+      - value: 13.7462546276724
+        feedback: >-
+          $8(e-1)$: הכפלתם ב-$\left|\frac{\partial(u,v)}{\partial(x,y)}\right|=2$ במקום ב-$\frac12$.
+        misconception: MC-c12-jacobian-inverse-direction
+      - value: 6.87312731383618
+        feedback: >-
+          $4(e-1)$ יוצא בלי יעקוביאן.
+        misconception: MC-c12-change-no-jacobian
+    hints: ['חזרו לשיעור 12.6, ולפירוק למכפלה משיעור 12.1.']
+
+  - id: Q-12-review-14
+    type: numeric
+    objectives: [OBJ-12.3-3, OBJ-12.3-1, OBJ-8.3-1]
+    level: mid
+    prompt: >-
+      חשבו את $\iint_{\mathbb{R}^2}\left(x^2+y^2\right)e^{-(x^2+y^2)}\,dA$.
+    answer: 3.14159265358979
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^{2\pi}\!\int_0^\infty r^2e^{-r^2}\,r\,dr\,d\theta$; בהצבה $t=r^2$: $\int_0^\infty r^3e^{-r^2}dr=\frac12\int_0^\infty te^{-t}dt=\frac12$,
+      ולכן התוצאה $\pi$.
+    wrongFeedback: >-
+      בקוטביות האינטגרנד $r^2e^{-r^2}$ כפול $r$. הציבו $t=r^2$ ובצעו אינטגרציה בחלקים (אינטגרל לא אמיתי עד $\infty$).
+    commonWrong:
+      - value: 2.78416399841585
+        feedback: >-
+          $\frac{\pi^{3/2}}{2}$ יוצא בלי הגורם $r$: $2\pi\int_0^\infty r^2e^{-r^2}dr$. עם הגורם $r$ ההצבה $t=r^2$ פותרת הכול.
+        misconception: MC-c12-polar-no-r
+    hints: ['חזרו לשיעור 12.3 (אינטגרל גאוס) ולשיעור 8.3 (אינטגרלים לא אמיתיים).']
+
+  - id: Q-12-review-15
+    type: twotier
+    objectives: [OBJ-12.7-2, OBJ-12.4-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      גוף נמצא כולו בתוך הקובייה $[0,1]^3$, וצפיפותו חיובית. סטודנטית חישבה $\bar z=1.3$. האם זה אפשרי?
+    choices:
+      - text: 'לא'
+        correct: true
+        feedback: 'נכון. $\bar z$ חייב להיות בין 0 ל-1.'
+      - text: 'כן, אם הצפיפות גדולה למעלה'
+        feedback: >-
+          צפיפות גדולה למעלה מזיזה את $\bar z$ לכיוון 1, אבל לא מעבר לו.
+        misconception: MC-c12-centroid-anywhere
+    reasons:
+      - text: '$\bar z=\frac1M\iiint z\rho\,dV$ הוא ממוצע משוקלל של ערכי $z$ מ-$[0,1]$ במשקלים חיוביים'
+        correct: true
+        feedback: 'בדיוק. תוצאה מחוץ לטווח מעידה לרוב על חלוקה במסה שנשכחה, או על גבולות שגויים.'
+      - text: 'מרכז מסה יכול להיות מחוץ לגוף'
+        feedback: >-
+          מחוץ לחומר של הגוף כן (טבעת), אבל לא מחוץ לטווח הקואורדינטות שלו.
+        misconception: MC-c12-centroid-anywhere
+      - text: 'כי $\iiint z\rho\,dV$ תמיד קטן מ-1'
+        feedback: >-
+          המומנט $\iiint z\rho\,dV$ יכול להיות גדול מ-1 (אם המסה גדולה). מה שקטן מ-1 הוא המנה שלו במסה.
+        misconception: MC-c12-centroid-no-divide
+    hints: ['חזרו לשיעור 12.7: בדיקת סבירות למרכז מסה.']

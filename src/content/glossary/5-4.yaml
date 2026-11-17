@@ -1,0 +1,23 @@
+# Terms first defined in lesson 5.4 (implicit differentiation, inverse functions, logarithmic differentiation).
+- id: implicit-differentiation
+  term: גזירה סתומה
+  en: implicit differentiation
+  definition: >-
+    גזירה של משוואה $F(x,y)=0$ שמגדירה עקום, לפי $x$, כש-$y$ נחשב לפונקציה של $x$: כל איבר עם $y$ נגזר בכלל השרשרת
+    ($(y^2)'=2yy'$). מהמשוואה שמתקבלת מבודדים את $y'$, השיפוע של העקום בנקודה.
+  lesson: '5.4'
+- id: inverse-function-derivative
+  term: נגזרת של פונקציה הפוכה
+  en: derivative of an inverse function
+  symbol: "(f^{-1})'(b)=\\frac{1}{f'(a)},\\ f(a)=b"
+  definition: >-
+    אם $f$ גזירה וחד-חד-ערכית ליד $a$, $f(a)=b$ ו-$f'(a)\ne0$, אז $(f^{-1})'(b)=\frac{1}{f'(a)}$. בגרף: השיקוף ביחס
+    לישר $y=x$ הופך שיפוע $m$ לשיפוע $\frac1m$.
+  lesson: '5.4'
+- id: logarithmic-differentiation
+  term: גזירה לוגריתמית
+  en: logarithmic differentiation
+  definition: >-
+    כדי לגזור $y=f(x)>0$ גוזרים את $\ln y$: $\frac{y'}{y}=(\ln f)'$, ואז $y'=y\,(\ln f)'$. נוח לחזקה שגם הבסיס וגם המעריך
+    שלה משתנים ($x^x$) ולמכפלות ומנות של גורמים רבים.
+  lesson: '5.4'

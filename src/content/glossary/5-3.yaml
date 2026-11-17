@@ -1,0 +1,23 @@
+# Terms first defined in lesson 5.3 (the rules of differentiation and the chain rule).
+- id: product-rule
+  term: כלל המכפלה
+  en: product rule
+  symbol: "(uv)'=u'v+uv'"
+  definition: >-
+    הנגזרת של מכפלה: $(uv)'=u'v+uv'$. כל גורם נגזר פעם אחת כשהאחר נשאר כמו שהוא.
+  lesson: '5.3'
+- id: quotient-rule
+  term: כלל המנה
+  en: quotient rule
+  symbol: "\\left(\\frac uv\\right)'=\\frac{u'v-uv'}{v^2}"
+  definition: >-
+    הנגזרת של מנה, במקום שבו $v\ne0$: $\left(\frac uv\right)'=\frac{u'v-uv'}{v^2}$, עם **מינוס** במונה.
+  lesson: '5.3'
+- id: chain-rule
+  term: כלל השרשרת
+  en: chain rule
+  symbol: "(f\\circ g)'(x)=f'(g(x))\\,g'(x)"
+  definition: >-
+    הנגזרת של הרכבה: $\big(f(g(x))\big)'=f'(g(x))\cdot g'(x)$, ובסימון לייבניץ $\frac{dz}{dx}=\frac{dz}{dy}\frac{dy}{dx}$
+    כש-$z=f(y)$, $y=g(x)$. בכמה שכבות כופלים את הנגזרות של כל השכבות, כל אחת בערך של מה שבתוכה.
+  lesson: '5.3'

@@ -1,0 +1,252 @@
+# Lesson 6.5 — sketching graphs.
+# Objectives (src/course.ts):
+#   OBJ-6.5-1  investigate a function: domain, asymptotes, increase and decrease, extrema, convexity, inflection points
+#   OBJ-6.5-2  sketch the graph from the investigation and check it against computed values
+#   OBJ-6.5-3  use the leading behaviour from Taylor to describe the graph near a point
+# Increase/decrease and extrema by the first derivative are lesson 5.5; here they are combined with f'' and Taylor.
+# Keys recomputed in screens/tools/recompute-ch6.py.
+chapter: 6
+questions:
+  - id: Q-6.5-asymptotes
+    type: multi
+    objectives: [OBJ-6.5-1]
+    level: basic
+    prompt: 'אילו מהישרים הבאים הם אסימפטוטות של הגרף של $f(x)=\frac{x^2+1}{x-1}$? סמנו את כולם.'
+    choices:
+      - text: '$x=1$'
+        correct: true
+        feedback: 'נכון. המכנה מתאפס ב-1 והמונה שם 2, ולכן $|f(x)|\to\infty$ כש-$x\to1$: אסימפטוטה אנכית.'
+      - text: '$y=x+1$'
+        correct: true
+        feedback: >-
+          נכון. חילוק פולינומים: $\frac{x^2+1}{x-1}=x+1+\frac{2}{x-1}$, והמחובר האחרון שואף ל-0 כש-$x\to\pm\infty$:
+          אסימפטוטה משופעת.
+      - text: '$y=1$'
+        feedback: >-
+          אסימפטוטה אופקית יש כשמעלת המונה אינה גדולה ממעלת המכנה. כאן המונה ממעלה 2 והמכנה ממעלה 1, ולכן $f$ גדלה כמו $x$.
+          1 הוא רק היחס בין המקדמים המובילים.
+        misconception: MC-c6-asymptote-degree
+      - text: '$x=-1$'
+        feedback: '$x^2+1$ אינו מתאפס אף פעם, ו-$x-1$ מתאפס רק ב-1. ב-$x=-1$ הפונקציה מוגדרת: $f(-1)=-1$.'
+        misconception: MC-c6-asymptote-denominator
+    hints: ['חלקו את $x^2+1$ ב-$x-1$ עם שארית.']
+
+  - id: Q-6.5-inflection
+    type: numeric
+    objectives: [OBJ-6.5-1]
+    level: basic
+    prompt: 'באיזה $x$ יש ל-$f(x)=x^3-6x^2+5$ נקודת פיתול?'
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f''(x)=6x-12$ מתאפסת ב-2 ומחליפה שם סימן: משמאל הגרף קעור (פתוח למטה), מימין קמור (פתוח למעלה).
+    wrongFeedback: 'נקודת פיתול היא נקודה שבה $f''''$ מחליפה סימן. גזרו פעמיים.'
+    commonWrong:
+      - value: 0
+        feedback: >-
+          $x=0$ היא נקודה קריטית: $f'(x)=3x^2-12x$ מתאפסת שם, וזה מקסימום מקומי. נקודת פיתול מוצאים מ-$f''$, לא מ-$f'$.
+        misconception: MC-c6-inflection-is-critical
+      - value: 4
+        feedback: 'ב-$x=4$ מתאפסת $f''$ (מינימום מקומי). נקודת הפיתול היא איפה ש-$f''''$ מחליפה סימן.'
+        misconception: MC-c6-inflection-is-critical
+    hints: ['$f''''(x)=6x-12$.']
+
+  - id: Q-6.5-x4
+    type: twotier
+    objectives: [OBJ-6.5-1]
+    qualitative: true
+    level: mid
+    prompt: 'ל-$f(x)=x^4$ מתקיים $f''''(0)=0$. נכון או לא: ל-$f$ יש נקודת פיתול ב-$x=0$.'
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. $f''(x)=12x^2\ge0$ משני צדי 0: הגרף קמור בכל מקום, ובאפס יש לו מינימום, לא פיתול.
+      - text: נכון
+        feedback: >-
+          $f''(0)=0$ הוא תנאי הכרחי בלבד. נקודת פיתול דורשת שהקמירות **תתחלף**, ו-$12x^2$ אינה מחליפה סימן.
+        misconception: MC-c6-fpp-zero-inflection
+    reasons:
+      - text: '$f''''(x)=12x^2$ אינה מחליפה סימן ב-0, ולכן הקמירות לא משתנה'
+        correct: true
+        feedback: 'בדיוק. בודקים את הסימן של $f''''$ משני הצדדים, לא רק את הערך שלה בנקודה.'
+      - text: 'כל נקודה שבה $f''''=0$ היא נקודת פיתול'
+        feedback: '$x^4$ היא הדוגמה הנגדית: $f''''(0)=0$, והגרף קמור משני הצדדים.'
+        misconception: MC-c6-fpp-zero-inflection
+      - text: 'כי $f''(0)=0$, ולכן 0 נקודה קריטית ולא נקודת פיתול'
+        feedback: >-
+          נקודה יכולה להיות גם קריטית וגם נקודת פיתול: ל-$x^3$ ב-0 יש $f'(0)=0$ והקמירות מתחלפת. ההכרעה היא לפי הסימן של
+          $f''$.
+        misconception: MC-c6-inflection-is-critical
+    hints: ['מה הסימן של $12x^2$ משמאל ל-0 ומימין לו?']
+
+  - id: Q-6.5-convex
+    type: mc
+    objectives: [OBJ-6.5-1]
+    level: mid
+    prompt: 'באיזה תחום הגרף של $f(x)=xe^{-x}$ קמור (פתוח כלפי מעלה)?'
+    choices:
+      - text: '$x>2$'
+        correct: true
+        feedback: >-
+          נכון. $f'(x)=(1-x)e^{-x}$ ו-$f''(x)=(x-2)e^{-x}$, ו-$e^{-x}>0$: $f''>0$ בדיוק כש-$x>2$. ב-$x=2$ נקודת פיתול.
+      - text: '$x<2$'
+        feedback: >-
+          שם $f''<0$, כלומר הגרף קעור (פתוח למטה). קמור פירושו $f''>0$: השיפוע עולה.
+        misconception: MC-c6-convex-sign
+      - text: '$x>1$'
+        feedback: >-
+          ב-1 מתאפסת $f'$: זה המקסימום, נקודה של $f'$. את הקמירות קובע הסימן של $f''=(x-2)e^{-x}$.
+        misconception: MC-c6-inflection-is-critical
+    hints: ['גזרו פעמיים בכלל המכפלה.']
+
+  - id: Q-6.5-max-value
+    type: numeric
+    objectives: [OBJ-6.5-1, OBJ-6.5-2]
+    level: mid
+    prompt: 'מהו הערך המקסימלי של $f(x)=xe^{-x}$ על כל הישר? (אפשר לכתוב ביטוי עם e)'
+    answer: 0.367879441171
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac1e$. $f'(x)=(1-x)e^{-x}$ חיובית משמאל ל-1 ושלילית מימין, ולכן ב-1 מקסימום מוחלט, $f(1)=e^{-1}$.
+      ($f\to-\infty$ כש-$x\to-\infty$ ו-$f\to0$ כש-$x\to\infty$.)
+    wrongFeedback: 'מצאו איפה $f''=0$, בדקו שזה מקסימום, והציבו בחזרה ב-$f$.'
+    hints: ['$f''(x)=(1-x)e^{-x}$.']
+
+  - id: Q-6.5-describe
+    type: mc
+    objectives: [OBJ-6.5-2]
+    qualitative: true
+    level: mid
+    prompt: 'איזה תיאור מתאים לגרף של $f(x)=\frac{x}{1+x^2}$?'
+    choices:
+      - text: >-
+          עובר בראשית, אי-זוגי, מקסימום $\left(1,\frac12\right)$ ומינימום $\left(-1,-\frac12\right)$, ושואף ל-0 בשני הכיוונים
+        correct: true
+        feedback: >-
+          נכון. $f'=\frac{1-x^2}{(1+x^2)^2}$ מתאפסת ב-$\pm1$; $f(-x)=-f(x)$; והמכנה ממעלה גבוהה יותר, ולכן $y=0$ אסימפטוטה
+          אופקית. בדיקה: $f(1)=\frac12$, $f(3)=0.3$, $f(10)\approx0.099$.
+      - text: 'אסימפטוטות אנכיות ב-$x=\pm1$, והגרף עולה בין שתיהן'
+        feedback: '$1+x^2\ge1$ לעולם אינו מתאפס, ולכן אין אסימפטוטות אנכיות. ב-$\pm1$ יש קיצון.'
+        misconception: MC-c6-asymptote-denominator
+      - text: 'עולה בכל הישר, ושואף ל-1 כש-$x\to\infty$'
+        feedback: >-
+          המכנה ממעלה 2 והמונה ממעלה 1, ולכן $f\to0$. ובדיקה בערך: $f(10)\approx0.099$, רחוק מ-1, וקטן מ-$f(1)=\frac12$, כך
+          שהפונקציה אינה עולה בכל הישר.
+        misconception: MC-c6-asymptote-degree
+    hints: ['חשבו את $f''$ ואת $f(1)$, $f(10)$.']
+
+  - id: Q-6.5-check-values
+    type: twotier
+    objectives: [OBJ-6.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סטודנטית חקרה את $f(x)=x^3-3x$ וכתבה: "מקסימום מקומי ב-$x=1$". נכון או לא? בדקו בערכים: $f(0.9)$, $f(1)$, $f(1.1)$.
+    choices:
+      - text: לא נכון, ב-1 יש מינימום מקומי
+        correct: true
+        feedback: >-
+          נכון. $f(0.9)=-1.971$, $f(1)=-2$, $f(1.1)=-1.969$: שני השכנים **גדולים** מ-$f(1)$. ובנגזרת: $f''(1)=6>0$.
+      - text: נכון
+        feedback: >-
+          הערכים מכריעים: $f(1)=-2$ קטן משני השכנים ($-1.971$ ו-$-1.969$). המקסימום המקומי הוא ב-$x=-1$, שם $f(-1)=2$.
+        misconception: MC-c6-skip-value-check
+    reasons:
+      - text: '$f(1)$ קטן מ-$f(0.9)$ ומ-$f(1.1)$, וגם $f''''(1)=6>0$'
+        correct: true
+        feedback: 'בדיוק. בדיקה בערכים היא דרך מהירה לתפוס טעות סימן בחקירה.'
+      - text: 'כל נקודה שבה $f''=0$ היא מקסימום'
+        feedback: '$f''(1)=0$ אומר רק שהמשיק אופקי. את הסוג קובעים לפי הסימן של $f''$ משני הצדדים או לפי $f''''$.'
+        misconception: MC-c6-skip-value-check
+      - text: 'כי $f(1)$ שלילי, ומקסימום חייב להיות חיובי'
+        feedback: 'הסימן של הערך לא קובע דבר: ל-$-x^2-1$ יש מקסימום ב-0 עם ערך $-1$. משווים לערכים הסמוכים.'
+        misconception: MC-c6-skip-value-check
+    hints: ['חשבו את שלושת הערכים.']
+
+  - id: Q-6.5-leading-coef
+    type: numeric
+    objectives: [OBJ-6.5-3]
+    level: mid
+    prompt: >-
+      ליד $x=0$ מתקיים $\ln(1+x)-x\approx ax^2$. מהו $a$? (ומה זה אומר על צורת הגרף ליד 0?)
+    answer: -0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\ln(1+x)=x-\frac{x^2}{2}+\dots$, ולכן $\ln(1+x)-x\approx-\frac{x^2}{2}$: ליד 0 הגרף צמוד לפרבולה הפתוחה למטה,
+      עם מקסימום מקומי 0 בראשית.
+    wrongFeedback: 'כתבו את שני האיברים הראשונים של $\ln(1+x)$.'
+    commonWrong:
+      - value: 0.5
+        feedback: 'בטור של $\ln(1+x)$ האיבר השני שלילי: $-\frac{x^2}{2}$.'
+        misconception: MC-c6-alternating-sign-lost
+    hints: ['$\ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\dots$']
+
+  - id: Q-6.5-flat-cubic
+    type: mc
+    objectives: [OBJ-6.5-3]
+    qualitative: true
+    level: mid
+    prompt: 'איך נראה הגרף של $f(x)=x-\sin x$ ליד $x=0$?'
+    choices:
+      - text: 'כמו $\frac{x^3}{6}$: עובר בראשית עם משיק אופקי, עולה, ומחליף שם קמירות (נקודת פיתול)'
+        correct: true
+        feedback: >-
+          נכון. $x-\sin x=\frac{x^3}{6}-\dots$; האיבר המוביל ממעלה אי-זוגית 3, ולכן הגרף חוצה את המשיק $y=0$, כמו $x^3$.
+      - text: 'כמו פרבולה, עם מינימום בראשית'
+        feedback: >-
+          פרבולה הייתה מתקבלת אילו האיבר המוביל היה $x^2$. כאן אין איבר כזה: $f''(0)=\sin0=0$, והאיבר המוביל ממעלה 3.
+        misconception: MC-c6-second-test-final
+      - text: 'כמו הישר $y=x$'
+        feedback: >-
+          $\sin x\approx x$, ולכן $x-\sin x$ קטן בהרבה מ-$x$: המשיק בראשית אופקי. הצורה נקבעת לפי האיבר המוביל, $\frac{x^3}{6}$.
+        misconception: MC-c6-truncate-too-early
+    hints: ['מהו האיבר המוביל של $x-\sin x$, ואיזו זוגיות יש לחזקה שלו?']
+
+  - id: Q-6.5-fourth-order
+    type: mc
+    objectives: [OBJ-6.5-3, OBJ-6.5-1]
+    level: exam
+    prompt: >-
+      $f(x)=\cos x+\frac{x^2}{2}$. ידוע ש-$f'(0)=f''(0)=f'''(0)=0$. מה יש ל-$f$ בנקודה $x=0$?
+    choices:
+      - text: 'מינימום מקומי'
+        correct: true
+        feedback: >-
+          נכון. $\cos x+\frac{x^2}{2}=1+\frac{x^4}{24}-\dots$: האיבר המוביל אחרי הקבוע ממעלה זוגית 4 ובמקדם חיובי, ולכן ליד
+          0 הגרף צמוד ל-$1+\frac{x^4}{24}$, שיש לו מינימום ב-0.
+      - text: 'נקודת פיתול, כי $f''''(0)=0$'
+        feedback: >-
+          $f''(0)=0$ אינו מספיק לפיתול. האיבר המוביל $\frac{x^4}{24}$ ממעלה זוגית, ולכן $f''\approx\frac{x^2}{2}\ge0$ משני
+          הצדדים: הקמירות לא מתחלפת.
+        misconception: MC-c6-fpp-zero-inflection
+      - text: 'אי אפשר לדעת, כי מבחן הנגזרת השנייה נכשל'
+        feedback: >-
+          מבחן הנגזרת השנייה לא מכריע כאן, אבל טיילור כן: מפתחים עד האיבר הראשון שאינו אפס. אם מעלתו זוגית יש קיצון, וסימן
+          המקדם קובע את סוגו.
+        misconception: MC-c6-second-test-final
+      - text: 'מקסימום מקומי, כי $\cos x$ מקסימלית ב-0'
+        feedback: >-
+          המחובר $\frac{x^2}{2}$ מבטל בדיוק את $-\frac{x^2}{2}$ של קוסינוס, והאיבר הבא, $+\frac{x^4}{24}$, חיובי.
+        misconception: MC-c6-truncate-too-early
+    hints: ['פתחו את $\cos x$ עד $x^4$.']
+
+  - id: Q-6.5-x2e
+    type: numeric
+    objectives: [OBJ-6.5-1, OBJ-6.5-2]
+    level: exam
+    prompt: >-
+      ל-$f(x)=x^2e^{-x}$ יש שתי נקודות פיתול. מהו ה-$x$ של הגדולה מביניהן? (אפשר לכתוב ביטוי עם שורש)
+    answer: 3.41421356237
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2+\sqrt2$. $f'(x)=x(2-x)e^{-x}$ ו-$f''(x)=(x^2-4x+2)e^{-x}$, שמתאפסת ומחליפה סימן ב-$x=2\pm\sqrt2$. לגרף:
+      מינימום ב-0, מקסימום ב-2 עם $f(2)=4e^{-2}\approx0.54$, ואסימפטוטה $y=0$ כש-$x\to\infty$.
+    wrongFeedback: 'גזרו פעמיים בכלל המכפלה; $e^{-x}>0$, ולכן הסימן של $f''''$ הוא הסימן של הפולינום שלפניו.'
+    commonWrong:
+      - value: 2
+        feedback: 'ב-$x=2$ מתאפסת $f''$: זה המקסימום. נקודות הפיתול הן השורשים של $x^2-4x+2$.'
+        misconception: MC-c6-inflection-is-critical
+      - value: 0.585786437627
+        feedback: 'זו נקודת הפיתול הקטנה, $2-\sqrt2$. השאלה מבקשת את הגדולה.'
+    hints: ['$f''''(x)=(x^2-4x+2)e^{-x}$.']

@@ -1,0 +1,71 @@
+# Misconceptions first detected in lesson 3.1 (arithmetic with complex numbers).
+- id: MC-c3-i-squared
+  title: טועים בסימן של i בריבוע
+  belief: >-
+    בפתיחת סוגריים $i\cdot i=1$, או ש-$(c+di)(c-di)=c^2-d^2$.
+  truth: >-
+    $i^2=-1$, וזו כל ההגדרה של $i$. לכן $(2+3i)(1-4i)=2-8i+3i-12i^2=14-5i$, ו-$(c+di)(c-di)=c^2-d^2i^2=c^2+d^2$.
+  remedy: { lesson: '3.1', label: 'כפל מספרים מרוכבים' }
+
+- id: MC-c3-im-includes-i
+  title: חושבים שהחלק המדומה כולל את i
+  belief: >-
+    $\operatorname{Im}(3-4i)=-4i$.
+  truth: >-
+    $\operatorname{Re}z$ ו-$\operatorname{Im}z$ הם שני מספרים **ממשיים**: $z=a+bi$ עם $\operatorname{Re}z=a$
+    ו-$\operatorname{Im}z=b$. לכן $\operatorname{Im}(3-4i)=-4$, ו-$z=\operatorname{Re}z+i\operatorname{Im}z$.
+  remedy: { lesson: '3.1', label: 'החלק הממשי והחלק המדומה' }
+
+- id: MC-c3-i-power-cycle
+  title: חושבים שכל חזקה זוגית של i היא 1
+  belief: >-
+    $i^{102}=1$, כי 102 זוגי.
+  truth: >-
+    החזקות של $i$ חוזרות במחזור של 4: $i,-1,-i,1$. $i^n$ נקבע לפי השארית של $n$ בחלוקה ב-4: $102=4\cdot25+2$,
+    ולכן $i^{102}=i^2=-1$. רק חזקות שמתחלקות ב-4 נותנות 1.
+  remedy: { lesson: '3.1', label: 'החזקות של i' }
+
+- id: MC-c3-divide-componentwise
+  title: כופלים או מחלקים מספרים מרוכבים רכיב ברכיב
+  belief: >-
+    $(a+bi)(c+di)=ac+bdi$, $\frac{a+bi}{c+di}=\frac{a}{c}+\frac{b}{d}i$, או $\operatorname{Re}\frac1z=\frac{1}{\operatorname{Re}z}$.
+  truth: >-
+    חילוק אינו פועל רכיב ברכיב. כופלים את המונה ואת המכנה בצמוד של המכנה:
+    $\frac{a+bi}{c+di}=\frac{(a+bi)(c-di)}{c^2+d^2}$. למשל $\frac{1}{x+iy}=\frac{x-iy}{x^2+y^2}$, ולכן
+    $\operatorname{Re}\frac1z=\frac{x}{x^2+y^2}$.
+  remedy: { lesson: '3.1', label: 'חילוק בעזרת הצמוד' }
+
+- id: MC-c3-conjugate-is-inverse
+  title: חושבים שהצמוד הוא ההפכי
+  belief: >-
+    $\bar z=\frac1z$ לכל $z\ne0$, ולכן כפל בצמוד "מבטל" את המכנה.
+  truth: >-
+    $z\bar z=|z|^2$, ולכן $\frac1z=\frac{\bar z}{|z|^2}$. הצמוד שווה להפכי רק כש-$|z|=1$. כופלים בצמוד כי
+    $(c+di)(c-di)=c^2+d^2$ הוא מספר **ממשי**, ובו אפשר לחלק רכיב ברכיב.
+  remedy: { lesson: '3.1', label: 'למה כופלים בצמוד' }
+
+- id: MC-c3-conjugate-root-any-coeffs
+  title: חושבים ששורשים של כל משוואה ריבועית באים בזוגות צמודים
+  belief: >-
+    אם $z_0$ שורש של משוואה ריבועית, גם $\bar z_0$ שורש, תמיד.
+  truth: >-
+    זה נכון כשהמקדמים **ממשיים**: אז $\overline{p(z)}=p(\bar z)$. עם מקדמים מרוכבים זה נכשל: ל-$z^2-iz=0$ השורשים
+    $0$ ו-$i$, ו-$-i$ אינו שורש.
+  remedy: { lesson: '3.1', label: 'שורשים צמודים ומקדמים ממשיים' }
+
+- id: MC-c3-square-termwise
+  title: מעלים בריבוע כל איבר בנפרד
+  belief: >-
+    $(3-i)^2=9+i^2=8$, או $(z^2+2)^2=z^4+4$.
+  truth: >-
+    $(a+b)^2=a^2+2ab+b^2$ גם במרוכבים: $(3-i)^2=9-6i+i^2=8-6i$. האיבר האמצעי הוא בדיוק החלק המדומה.
+  remedy: { lesson: '3.1', label: 'פתיחת סוגריים במרוכבים' }
+
+- id: MC-c3-quadratic-forget-2a
+  title: שוכחים לחלק ב-2a בנוסחת השורשים
+  belief: >-
+    השורשים של $z^2-4z+13=0$ הם $4\pm6i$, או שהחלק המדומה הוא $\sqrt{|\Delta|}$.
+  truth: >-
+    $z=\frac{-b\pm\sqrt{\Delta}}{2a}$, ו-$\sqrt{-36}=6i$, ולכן $z=\frac{4\pm6i}{2}=2\pm3i$. בדיקה: סכום השורשים
+    $-\frac{b}{a}=4$ ומכפלתם $\frac{c}{a}=13=2^2+3^2$.
+  remedy: { lesson: '3.1', label: 'משוואה ריבועית עם דיסקרימיננטה שלילית' }

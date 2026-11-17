@@ -1,0 +1,293 @@
+# Lesson 12.6 — general change of variables (notes pp. 75–76, 86).
+# Objectives (src/course.ts):
+#   OBJ-12.6-1  change variables in a double integral with the absolute value of the Jacobian
+#   OBJ-12.6-2  choose a substitution that turns an awkward region into a rectangle
+#   OBJ-12.6-3  use that the Jacobian of the inverse map is the reciprocal
+# Recomputed with sympy (screens/tools/recompute-ch12.py). From the notes: the region between y = 3x, y = x/2, y = 1/x,
+# y = 5/x with u = y/x, v = xy (pp. 75–76). The notes convert x²y as if it were xy² and drop the factor ∫₁⁵ v^{3/2} dv;
+# the right value of ∬ x²y dA is (√2 − 1/√3)(10√5 − 2/5) ≈ 18.378, checked here also by direct quadrature in x, y.
+chapter: 12
+questions:
+  - id: Q-12.6-jacobian-uv
+    type: numeric
+    objectives: [OBJ-12.6-1]
+    level: basic
+    prompt: >-
+      $x=u+v$, $y=u-v$. חשבו את $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|$, המקדם שבו מכפילים: $dx\,dy=\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv$.
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{\partial(x,y)}{\partial(u,v)}=\det\begin{pmatrix}1&1\\1&-1\end{pmatrix}=-1-1=-2$, והערך המוחלט 2.
+    wrongFeedback: >-
+      הדטרמיננטה של מטריצת הנגזרות $\begin{pmatrix}x_u&x_v\\y_u&y_v\end{pmatrix}$, ואחר כך ערך מוחלט.
+    commonWrong:
+      - value: -2
+        feedback: >-
+          $-2$ הוא היעקוביאן עצמו. אלמנט שטח הוא חיובי, ולכן באינטגרל משתמשים בערך המוחלט.
+        misconception: MC-c12-jacobian-no-abs
+    hints: ['$x_u=1$, $x_v=1$, $y_u=1$, $y_v=-1$.']
+
+  - id: Q-12.6-ellipse-area
+    type: numeric
+    objectives: [OBJ-12.6-1, OBJ-12.6-2]
+    level: basic
+    prompt: >-
+      חשבו את השטח של האליפסה $\frac{x^2}{9}+\frac{y^2}{4}\le1$ בעזרת ההחלפה $x=3u$, $y=2v$, שהופכת אותה לעיגול היחידה
+      $u^2+v^2\le1$.
+    answer: 18.8495559215388
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{\partial(x,y)}{\partial(u,v)}=3\cdot2=6$, ולכן השטח $\iint_{u^2+v^2\le1}6\,du\,dv=6\pi$ (באופן כללי
+      $\pi ab$).
+    wrongFeedback: >-
+      $dx\,dy=|J|\,du\,dv$ עם $J=\det\begin{pmatrix}3&0\\0&2\end{pmatrix}$, והשטח של עיגול היחידה $\pi$.
+    commonWrong:
+      - value: 3.14159265358979
+        feedback: >-
+          $\pi$ הוא השטח של עיגול היחידה במישור $uv$. ההעתקה מותחת פי 3 ופי 2, ולכן השטח גדל פי 6.
+        misconception: MC-c12-change-no-jacobian
+      - value: 0.523598775598299
+        feedback: >-
+          $\frac\pi6$ יוצא כשמחלקים ב-6 במקום להכפיל: זה המקדם של ההעתקה ההפוכה, $u=\frac x3$, $v=\frac y2$.
+        misconception: MC-c12-jacobian-inverse-direction
+    hints: ['אליפסה גדולה מעיגול היחידה: האם השטח צריך לגדול או לקטון?']
+
+  - id: Q-12.6-inverse
+    type: numeric
+    objectives: [OBJ-12.6-3]
+    level: basic
+    prompt: >-
+      נתון $u=2x+y$, $v=x-3y$. חשבו את $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|$ בלי לפתור את $x,y$ במפורש.
+    answer: 0.142857142857143
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{\partial(u,v)}{\partial(x,y)}=\det\begin{pmatrix}2&1\\1&-3\end{pmatrix}=-7$, וההעתקה ההפוכה מקיימת
+      $\frac{\partial(x,y)}{\partial(u,v)}=\frac{1}{-7}$. הערך המוחלט $\frac17$.
+    wrongFeedback: >-
+      חשבו את $\frac{\partial(u,v)}{\partial(x,y)}$ (קל: $u,v$ נתונים כפונקציות של $x,y$), ואז קחו את ההופכי ואת הערך המוחלט.
+    commonWrong:
+      - value: 7
+        feedback: >-
+          7 הוא $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|$. הנדרש הוא היעקוביאן של ההעתקה ההפוכה, ההופכי שלו.
+        misconception: MC-c12-jacobian-inverse-direction
+      - value: -0.142857142857143
+        feedback: >-
+          זה $\frac{\partial(x,y)}{\partial(u,v)}$ עצמו. השאלה מבקשת ערך מוחלט, המקדם שנכנס לאינטגרל.
+        misconception: MC-c12-jacobian-no-abs
+    hints: ['$\frac{\partial(x,y)}{\partial(u,v)}\cdot\frac{\partial(u,v)}{\partial(x,y)}=1$.']
+
+  - id: Q-12.6-abs
+    type: twotier
+    objectives: [OBJ-12.6-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      ב-$x=u+v$, $y=u-v$ היעקוביאן הוא $\frac{\partial(x,y)}{\partial(u,v)}=-2$. נכון או לא נכון: לכן
+      $\iint_Df\,dx\,dy=\iint_{D^*}f\cdot(-2)\,du\,dv$.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: 'נכון. המקדם הוא $|-2|=2$.'
+      - text: נכון
+        feedback: >-
+          לפי זה השטח של $D$ ($f\equiv1$) היה יוצא שלילי. באינטגרל כפול משתמשים בערך המוחלט של היעקוביאן.
+        misconception: MC-c12-jacobian-no-abs
+    reasons:
+      - text: 'היעקוביאן הוא מקדם שינוי שטח; הסימן השלילי רק אומר שההעתקה הופכת כיוון, ושטח תמיד חיובי'
+        correct: true
+        feedback: 'בדיוק. $dx\,dy=\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv=2\,du\,dv$.'
+      - text: 'צריך $\frac{1}{-2}$, כי היעקוביאן מתהפך'
+        feedback: >-
+          כאן $x,y$ נתונים כפונקציות של $u,v$, ולכן $\frac{\partial(x,y)}{\partial(u,v)}$ הוא בדיוק המקדם. ההופכי נדרש רק
+          כשנתונים $u,v$ כפונקציות של $x,y$.
+        misconception: MC-c12-jacobian-inverse-direction
+      - text: 'אין צורך במקדם: $dx\,dy=du\,dv$'
+        feedback: >-
+          ההעתקה מכפילה שטחים פי 2: הריבוע $[0,1]^2$ במישור $uv$ הופך לריבוע מסובב שאורך צלעו $\sqrt2$.
+        misconception: MC-c12-change-no-jacobian
+
+  - id: Q-12.6-parallelogram
+    type: numeric
+    objectives: [OBJ-12.6-1, OBJ-12.6-2]
+    level: mid
+    prompt: >-
+      $D$ הוא הריבוע המסובב שחסום על ידי הישרים $x+y=0$, $x+y=2$, $x-y=0$, $x-y=2$. חשבו את $\iint_D(x+y)^2\,dA$ בעזרת
+      $u=x+y$, $v=x-y$.
+    answer: 2.66666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $D^*=[0,2]\times[0,2]$, $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|=|-2|=2$, ולכן $dx\,dy=\frac12du\,dv$.
+      $\frac12\int_0^2\!\int_0^2u^2\,dv\,du=\frac12\cdot\frac83\cdot2=\frac83$.
+    wrongFeedback: >-
+      במשתנים החדשים התחום מלבן והאינטגרנד $u^2$. המקדם הוא ההופכי של $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|$.
+    commonWrong:
+      - value: 10.6666666666667
+        feedback: >-
+          $\frac{32}{3}$: הכפלתם ב-$\left|\frac{\partial(u,v)}{\partial(x,y)}\right|=2$ במקום ב-$\frac12$. הריבוע $D$
+          קטן מהמלבן $[0,2]^2$ במישור $uv$ (שטחו 2 לעומת 4).
+        misconception: MC-c12-jacobian-inverse-direction
+      - value: 5.33333333333333
+        feedback: >-
+          $\frac{16}{3}$ יוצא בלי יעקוביאן. אבל השטח של $D$ הוא 2, חצי מהשטח של $[0,2]^2$.
+        misconception: MC-c12-change-no-jacobian
+    hints: ['מה השטח של $D$? ומה השטח של $[0,2]^2$?']
+
+  - id: Q-12.6-choose-sub
+    type: mc
+    objectives: [OBJ-12.6-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $D$ הוא התחום ברביע הראשון שבין הישרים $y=\frac x2$ ו-$y=3x$ ובין ההיפרבולות $xy=1$ ו-$xy=5$. איזו החלפה הופכת את $D$
+      למלבן?
+    choices:
+      - text: '$u=\frac yx$, $v=xy$'
+        correct: true
+        feedback: >-
+          נכון. על הישרים $\frac yx$ קבוע ($\frac12$ או 3), ועל ההיפרבולות $xy$ קבוע (1 או 5). לכן $D^*$ הוא
+          $\frac12\le u\le3$, $1\le v\le5$.
+      - text: 'קואורדינטות קוטביות'
+        feedback: >-
+          הישרים הם אכן $\theta$ קבוע, אבל ההיפרבולה $xy=1$ היא $r^2\sin\theta\cos\theta=1$: הגבול של $r$ תלוי ב-$\theta$.
+          כל השפה צריכה להפוך ל"קואורדינטה = קבוע".
+        misconception: MC-c12-coords-mismatch
+      - text: '$u=x+y$, $v=x-y$'
+        feedback: >-
+          ההחלפה הזאת מיישרת ישרים בשיפועים $\pm1$, ולא אחד מהעקומים כאן. בוחרים $u,v$ כך שכל עקום בשפה יהיה "$u$ קבוע" או
+          "$v$ קבוע".
+        misconception: MC-c12-coords-mismatch
+
+  - id: Q-12.6-hyperbola-J
+    type: expr
+    objectives: [OBJ-12.6-1, OBJ-12.6-3]
+    level: mid
+    prompt: >-
+      עם $u=\frac yx$ ו-$v=xy$ (ברביע הראשון), חשבו את $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|$ כפונקציה של
+      $u$ (ו/או $v$).
+    answer: '1/(2*u)'
+    answerTex: '$\left|\frac{\partial(x,y)}{\partial(u,v)}\right|=\frac{1}{2u}$'
+    variables: [u, v]
+    domain: [0.5, 3]
+    correctFeedback: >-
+      נכון. הדרך הקצרה: $\frac{\partial(u,v)}{\partial(x,y)}=\det\begin{pmatrix}-y/x^2&1/x\\y&x\end{pmatrix}=-\frac{2y}{x}=-2u$,
+      וההופכי $\frac{-1}{2u}$; הערך המוחלט $\frac{1}{2u}$. (או: $x=\sqrt{v/u}$, $y=\sqrt{uv}$, וגוזרים.)
+    wrongFeedback: >-
+      חשבו את $\frac{\partial(u,v)}{\partial(x,y)}$, כתבו אותו בעזרת $u$, וקחו הופכי וערך מוחלט.
+    commonWrong:
+      - expr: '2*u'
+        feedback: >-
+          $2u$ הוא $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|$. המקדם של $du\,dv$ הוא ההופכי שלו.
+        misconception: MC-c12-jacobian-inverse-direction
+      - expr: '-1/(2*u)'
+        feedback: >-
+          זה היעקוביאן עם הסימן. מקדם השטח הוא הערך המוחלט.
+        misconception: MC-c12-jacobian-no-abs
+    hints: ['$\frac{2y}{x}$ בעזרת $u$ הוא $2u$.']
+
+  - id: Q-12.6-inverse-twotier
+    type: twotier
+    objectives: [OBJ-12.6-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: כדי להחליף משתנים עם $u=\frac yx$, $v=xy$ חייבים קודם לפתור ולמצוא את $x(u,v)$ ו-$y(u,v)$, אחרת אי-אפשר
+      לחשב את היעקוביאן.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: 'נכון. אפשר לחשב את היעקוביאן ההפוך ולקחת הופכי.'
+      - text: נכון
+        feedback: >-
+          את $\frac{\partial(u,v)}{\partial(x,y)}$ מחשבים ישר מהנוסחאות הנתונות, ו-$\frac{\partial(x,y)}{\partial(u,v)}$ הוא
+          ההופכי שלו. צריך רק לכתוב את התוצאה בעזרת $u,v$.
+        misconception: MC-c12-jacobian-inverse-direction
+    reasons:
+      - text: '$\frac{\partial(x,y)}{\partial(u,v)}=1\Big/\frac{\partial(u,v)}{\partial(x,y)}$, ואת המנה $-\frac{2y}{x}$ אפשר לכתוב כ-$-2u$'
+        correct: true
+        feedback: 'בדיוק. ההעתקה ההפוכה הופכת את מקדם השטח: אם $u,v$ מותחים פי $2u$, החזרה מכווצת פי $2u$.'
+      - text: 'אפשר להשתמש ישר ב-$\left|\frac{\partial(u,v)}{\partial(x,y)}\right|$ במקום $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|$, הם שווים'
+        feedback: >-
+          הם הופכיים זה לזה, לא שווים. כאן $2u$ לעומת $\frac{1}{2u}$.
+        misconception: MC-c12-jacobian-inverse-direction
+      - text: 'אפשר לוותר על היעקוביאן כשההחלפה הופכת את התחום למלבן'
+        feedback: >-
+          המלבן במישור $uv$ אינו בעל אותו שטח כמו $D$. המקדם תמיד נדרש.
+        misconception: MC-c12-change-no-jacobian
+
+  - id: Q-12.6-rank
+    type: rank
+    objectives: [OBJ-12.6-1, OBJ-12.6-2]
+    level: mid
+    prompt: >-
+      סדרו את שלבי החלפת המשתנים באינטגרל כפול $\iint_Df\,dx\,dy$.
+    help: סדרו את שלבי השיטה מהראשון לאחרון.
+    items:
+      - id: a
+        label: 'מסתכלים על השפה של $D$ ובוחרים $u(x,y)$, $v(x,y)$ כך שכל עקום בשפה יהיה $u$ קבוע או $v$ קבוע.'
+      - id: b
+        label: 'כותבים את התחום החדש $D^*$ במישור $uv$ (לרוב מלבן).'
+      - id: c
+        label: 'מחשבים את $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|$, ישירות או כהופכי של $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|$.'
+      - id: d
+        label: 'מתרגמים את האינטגרנד $f(x,y)$ לביטוי ב-$u$ וב-$v$.'
+      - id: e
+        label: 'כותבים $\iint_{D^*}f\,\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv$ ומחשבים.'
+    order: [a, b, [c, d], e]
+    correctFeedback: >-
+      נכון. הבחירה של $u,v$ נקבעת לפי השפה, ושלושת המרכיבים (תחום, מקדם, אינטגרנד) מתורגמים לפני החישוב. את המקדם ואת
+      האינטגרנד אפשר לתרגם בכל סדר.
+    wrongFeedback: >-
+      בלי $u,v$ אין תחום חדש ואין יעקוביאן. מתחילים בבחירה לפי השפה, ומחשבים רק אחרי שהכול כתוב ב-$u,v$.
+
+  - id: Q-12.6-hyperbola-value
+    type: numeric
+    objectives: [OBJ-12.6-1, OBJ-12.6-2]
+    level: exam
+    prompt: >-
+      $D$ הוא התחום ברביע הראשון שבין הישרים $y=\frac x2$, $y=3x$ וההיפרבולות $xy=1$, $xy=5$. חשבו את $\iint_Dx^2y\,dA$
+      בעזרת $u=\frac yx$, $v=xy$.
+    answer: 18.3780867970524
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $D^*$: $\frac12\le u\le3$, $1\le v\le5$; $dA=\frac{1}{2u}du\,dv$; $x^2y=x\cdot xy=\sqrt{v/u}\cdot v$. לכן
+      $\iint_Dx^2y\,dA=\frac12\int_{1/2}^3u^{-3/2}du\int_1^5v^{3/2}dv=\left(\sqrt2-\frac1{\sqrt3}\right)\left(10\sqrt5-\frac25\right)\approx18.378$.
+    wrongFeedback: >-
+      תרגמו: $x=\sqrt{v/u}$, ולכן $x^2y=x\cdot(xy)=v^{3/2}u^{-1/2}$; הכפילו ב-$\frac1{2u}$, והאינטגרל מתפרק למכפלה.
+    commonWrong:
+      - value: 22.5084675506793
+        feedback: >-
+          זה האינטגרל של $xy^2=v^{3/2}u^{1/2}$, לא של $x^2y$ (הטעות שבסיכומים). $x^2y=x\cdot xy$, ו-$x=\sqrt{v/u}$.
+        misconception: MC-c12-integrand-not-converted
+      - value: 45.0169351013587
+        feedback: >-
+          זה יוצא בלי המקדם $\frac{1}{2u}$, כאילו $dx\,dy=du\,dv$.
+        misconception: MC-c12-change-no-jacobian
+      - value: 141.795688830608
+        feedback: >-
+          הכפלתם ב-$2u=\left|\frac{\partial(u,v)}{\partial(x,y)}\right|$ במקום ב-$\frac1{2u}$.
+        misconception: MC-c12-jacobian-inverse-direction
+    hints: ['$\int_{1/2}^3u^{-3/2}du=2\sqrt2-\frac{2}{\sqrt3}$ ו-$\int_1^5v^{3/2}dv=\frac25\left(5^{5/2}-1\right)$.']
+
+  - id: Q-12.6-exam-parallelogram
+    type: numeric
+    objectives: [OBJ-12.6-2, OBJ-12.6-3]
+    level: exam
+    prompt: >-
+      $P$ הוא המקבילית $0\le2x-y\le4$, $1\le x+y\le3$. חשבו את $\iint_P(x+y)\,dA$.
+    answer: 5.33333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $u=2x-y$, $v=x+y$: $P^*=[0,4]\times[1,3]$, $\frac{\partial(u,v)}{\partial(x,y)}=\det\begin{pmatrix}2&-1\\1&1\end{pmatrix}=3$,
+      ולכן $dA=\frac13du\,dv$. $\frac13\int_0^4\!\int_1^3v\,dv\,du=\frac13\cdot4\cdot4=\frac{16}{3}$.
+    wrongFeedback: >-
+      בחרו $u=2x-y$, $v=x+y$. היעקוביאן הנדרש הוא ההופכי של $\frac{\partial(u,v)}{\partial(x,y)}$.
+    commonWrong:
+      - value: 48
+        feedback: >-
+          הכפלתם ב-$\left|\frac{\partial(u,v)}{\partial(x,y)}\right|=3$ במקום ב-$\frac13$.
+        misconception: MC-c12-jacobian-inverse-direction
+      - value: 16
+        feedback: >-
+          16 יוצא בלי יעקוביאן. השטח של $P$ הוא $\frac{8}{3}$, ולא 8 כמו המלבן במישור $uv$.
+        misconception: MC-c12-change-no-jacobian
+    hints: ['$\int_1^3v\,dv=4$.']

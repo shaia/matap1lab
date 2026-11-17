@@ -1,0 +1,245 @@
+# Lesson 10.9 — Lagrange multipliers.
+# Objectives (src/course.ts):
+#   OBJ-10.9-1  find a constrained extremum by Lagrange multipliers and interpret the condition geometrically
+#   OBJ-10.9-2  solve constrained extremum problems from geometry and physics
+#   OBJ-10.9-3  use Lagrange multipliers with two constraints
+# The two examples of the notes pp. 65–67 are recomputed in screens/tools/recompute-ch10.py: x² + y² + xy on
+# x² + 4y² = 1 has max (5 + √13)/8 and min (5 − √13)/8; 5x + y on the same ellipse has max √101/2 ≈ 5.025 (the
+# notes' rounded point (1, 0.05) is not on the ellipse and gives 5.05).
+chapter: 10
+questions:
+  - id: Q-10.9-geometry
+    type: mc
+    objectives: [OBJ-10.9-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $(x_0,y_0)$ היא נקודת מקסימום של $f$ על העקום $g(x,y)=0$, ו-$\nabla g(x_0,y_0)\ne0$. מה נכון בנקודה הזו?
+    choices:
+      - text: '$\nabla f$ מקביל ל-$\nabla g$, כלומר קו הגובה של $f$ משיק לעקום $g=0$'
+        correct: true
+        feedback: >-
+          נכון. לאורך העקום $f$ מקסימלית, ולכן הנגזרת שלה לאורך העקום 0: $\nabla f\perp\vec T$. גם $\nabla g\perp\vec T$ (העקום
+          הוא קו גובה של $g$), ולכן $\nabla f=\lambda\nabla g$.
+      - text: '$\nabla f=0$'
+        feedback: >-
+          זה התנאי לקיצון חופשי. על העקום $f$ צריכה להיות קיצונית רק לאורכו: $5x+y$ על אליפסה מקבלת מקסימום, ו-$\nabla f=(5,1)$
+          אף פעם לא 0.
+        misconception: MC-c10-lagrange-gradient-zero
+      - text: '$\nabla f$ מאונך ל-$\nabla g$'
+        feedback: 'שניהם מאונכים לווקטור המשיק לעקום, ולכן הם מקבילים זה לזה, לא מאונכים.'
+        misconception: MC-c10-lagrange-perp
+      - text: '$\nabla f$ משיק לעקום $g=0$'
+        feedback: 'אם ל-$\nabla f$ היה רכיב משיק, אפשר היה להמשיך לעלות לאורך העקום. בנקודת קיצון הרכיב המשיק 0.'
+        misconception: MC-c10-lagrange-perp
+
+  - id: Q-10.9-two-count
+    type: mc
+    objectives: [OBJ-10.9-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      מחפשים קיצון של $f(x,y,z)$ על העקום שבו נחתכים שני משטחים, $g(x,y,z)=0$ ו-$h(x,y,z)=0$. כמה משוואות יש במערכת של
+      לגרנז׳, ובכמה נעלמים?
+    choices:
+      - text: '5 משוואות ב-5 נעלמים: $x,y,z,\lambda,\mu$'
+        correct: true
+        feedback: 'נכון. $\nabla f=\lambda\nabla g+\mu\nabla h$ הן 3 משוואות (רכיב לכל משתנה), ועוד $g=0$ ו-$h=0$.'
+      - text: '4 משוואות ב-4 נעלמים: $x,y,z,\lambda$'
+        feedback: 'לכל אילוץ כופל משלו. עם כופל אחד אי אפשר לכתוב את $\nabla f$ כצירוף של שני הנורמלים.'
+        misconception: MC-c10-one-lambda-two-constraints
+      - text: '6 משוואות: $\nabla f=\lambda\nabla g$ ו-$\nabla f=\mu\nabla h$'
+        feedback: '$\nabla f$ לא חייב להיות מקביל לכל אחד מהנורמלים לחוד, אלא להיות צירוף שלהם: $\lambda\nabla g+\mu\nabla h$.'
+        misconception: MC-c10-one-lambda-two-constraints
+      - text: '3 משוואות: $\nabla f=0$'
+        feedback: 'על העקום $f$ צריכה להיות קיצונית רק לאורכו, ולכן $\nabla f$ לא חייב להתאפס.'
+        misconception: MC-c10-lagrange-gradient-zero
+
+  - id: Q-10.9-linear-ellipse
+    type: numeric
+    objectives: [OBJ-10.9-1]
+    level: mid
+    prompt: >-
+      מצאו את המקסימום של $f(x,y)=5x+y$ על האליפסה $x^2+4y^2=1$. (אפשר לכתוב תשובה עם שורש.)
+    answer: 5.02493781056
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{\sqrt{101}}{2}$. $5=2\lambda x$, $1=8\lambda y$, ולכן $x=\frac{5}{2\lambda}$, $y=\frac{1}{8\lambda}$. הצבה
+      באילוץ: $\frac{25}{4\lambda^2}+\frac{1}{16\lambda^2}=1$, $\lambda^2=\frac{101}{16}$. עם $\lambda>0$: $x=\frac{10}{\sqrt{101}}$,
+      $y=\frac{1}{2\sqrt{101}}$, ו-$f=\frac{100+1}{2\sqrt{101}}$.
+    wrongFeedback: >-
+      כתבו $\nabla f=\lambda\nabla g$, בטאו את $x$ ואת $y$ בעזרת $\lambda$, והציבו באילוץ כדי למצוא את $\lambda$.
+    commonWrong:
+      - value: 5.05
+        feedback: >-
+          זה הערך בנקודה המעוגלת $(1,0.05)$, שאינה על האליפסה: $1+4\cdot0.05^2=1.01$. הציבו את הערכים המדויקים.
+        misconception: MC-c10-lagrange-check-constraint
+
+  - id: Q-10.9-recipe
+    type: rank
+    objectives: [OBJ-10.9-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סדרו את שלבי השיטה של כופלי לגרנז׳ למציאת מקסימום ומינימום של $f(x,y)$ על עקום סגור וחסום $g(x,y)=0$.
+    help: 'סדרו מהשלב הראשון לאחרון.'
+    items:
+      - { id: grad, label: 'מחשבים את $\nabla f$ ואת $\nabla g$' }
+      - { id: system, label: 'כותבים את המערכת $f_x=\lambda g_x$, $f_y=\lambda g_y$, $g=0$' }
+      - { id: solve, label: 'פותרים אותה בלי לחלק במשתנה שעשוי להתאפס, ומוצאים את כל הנקודות' }
+      - { id: degenerate, label: 'בודקים גם נקודות על העקום שבהן $\nabla g=0$, אם יש כאלה' }
+      - { id: compare, label: 'מחשבים את $f$ בכל המועמדים ומשווים: הגדול מקסימום, הקטן מינימום' }
+    order: [grad, system, solve, degenerate, compare]
+    correctFeedback: >-
+      נכון. מערכת לגרנז׳ נותנת מועמדים, ועל עקום סגור וחסום יש מקסימום ומינימום: ההשוואה בסוף מכריעה.
+    wrongFeedback: >-
+      קודם בונים את המערכת ופותרים אותה; רק אחרי שכל המועמדים נאספו משווים את ערכי $f$.
+
+  - id: Q-10.9-candidates
+    type: twotier
+    objectives: [OBJ-10.9-1, OBJ-10.9-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מערכת לגרנז׳ של $f$ על המעגל $x^2+y^2=1$ נתנה ארבע נקודות. נכון או לא נכון: בכל אחת מהן $f$ מקבלת מקסימום או מינימום
+      על המעגל.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. התנאי $\nabla f=\lambda\nabla g$ הכרחי, לא מספיק. על המעגל יש מקסימום ומינימום מוחלטים, והם בין המועמדים, אבל
+          מועמד יכול להיות גם נקודה שבה $f$ לאורך המעגל רק נעצרת, או קיצון מקומי בלבד.
+      - text: 'נכון'
+        feedback: 'למשל ל-$f=y^3$ על המעגל, הנקודות $(\pm1,0)$ פותרות את המערכת, ו-$f$ שם 0, בין $-1$ ל-$1$.'
+        misconception: MC-c10-lagrange-all-extrema
+    reasons:
+      - text: 'המערכת נותנת מועמדים; משווים את ערכי $f$ בהם כדי למצוא את המקסימום והמינימום'
+        correct: true
+        feedback: 'בדיוק: כמו "נקודה קריטית" במשתנה אחד, שגם היא רק מועמדת.'
+      - text: 'בכל פתרון הגרדיאנטים מקבילים, וזה מבטיח קיצון'
+        feedback: >-
+          ההקבלה רק אומרת שהנגזרת של $f$ לאורך העקום 0. כמו $x^3$ ב-0, נגזרת 0 אינה מבטיחה קיצון. ל-$y^3$ על מעגל היחידה,
+          ב-$(1,0)$: $\nabla f=(0,0)=0\cdot\nabla g$, ואין שם קיצון.
+        misconception: MC-c10-lagrange-all-extrema
+      - text: 'ארבע נקודות הן תמיד שני מקסימומים ושני מינימומים'
+        feedback: 'אין כלל כזה: מספר המקסימומים והמינימומים תלוי ב-$f$. משווים ערכים.'
+        misconception: MC-c10-lagrange-all-extrema
+
+  - id: Q-10.9-distance
+    type: numeric
+    objectives: [OBJ-10.9-2]
+    level: mid
+    prompt: >-
+      מצאו בכופלי לגרנז׳ את המרחק הקטן ביותר מהראשית למישור $x+2y+2z=9$. (מומלץ למזער את $x^2+y^2+z^2$.)
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $2x=\lambda$, $2y=2\lambda$, $2z=2\lambda$, ולכן $(x,y,z)=\frac\lambda2(1,2,2)$. הצבה: $\frac\lambda2\cdot9=9$, $\lambda=2$,
+      והנקודה $(1,2,2)$. $d^2=9$ ו-$d=3$, כמו בנוסחת המרחק ממישור $\frac{9}{\sqrt{1+4+4}}$.
+    wrongFeedback: >-
+      $\nabla(x^2+y^2+z^2)=\lambda(1,2,2)$; בטאו את $x,y,z$ בעזרת $\lambda$ והציבו במשוואת המישור. בסוף זכרו שמזערתם את
+      ריבוע המרחק.
+    commonWrong:
+      - value: 9
+        feedback: '$9$ הוא הערך המינימלי של $x^2+y^2+z^2$, ריבוע המרחק. המרחק הוא השורש: 3.'
+        misconception: MC-c10-lagrange-squared-objective
+
+  - id: Q-10.9-ring
+    type: numeric
+    objectives: [OBJ-10.9-2]
+    level: mid
+    prompt: >-
+      הטמפרטורה על טבעת דקה בצורת מעגל היחידה $x^2+y^2=1$ היא $T(x,y)=x^2+2y^2-x$. מצאו בכופלי לגרנז׳ את הטמפרטורה
+      **הנמוכה** ביותר על הטבעת.
+    answer: 0
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $2x-1=2\lambda x$ ו-$4y=2\lambda y$, כלומר $y(4-2\lambda)=0$. אם $y=0$: $x=\pm1$, $T(1,0)=0$ ו-$T(-1,0)=2$. אם
+      $\lambda=2$: $x=-\frac12$, $y=\pm\frac{\sqrt3}{2}$, $T=\frac94$. המינימום $0$ ב-$(1,0)$, המקסימום $\frac94$.
+    wrongFeedback: >-
+      במשוואה $4y=2\lambda y$ אל תחלקו ב-$y$: כתבו $y(4-2\lambda)=0$ ובדקו את שני המקרים.
+    commonWrong:
+      - value: 2.25
+        feedback: >-
+          חילקתם ב-$y$ וקיבלתם רק $\lambda=2$, עם $T=\frac94$, שהוא דווקא המקסימום. המקרה $y=0$ אבד, ובו המינימום $T(1,0)=0$.
+        misconception: MC-c10-lagrange-divide-by-zero
+      - value: 2
+        feedback: '$2=T(-1,0)$, אבל ב-$(1,0)$ הטמפרטורה $0$. השוו את כל המועמדים.'
+        misconception: MC-c10-lagrange-all-extrema
+
+  - id: Q-10.9-two-system
+    type: mc
+    objectives: [OBJ-10.9-3]
+    level: mid
+    prompt: >-
+      מחפשים את הערך הקטן ביותר של $z$ על המעגל שבו נחתכים הספירה $x^2+y^2+z^2=1$ והמישור $x+y+z=1$. איזו מערכת נכונה?
+    choices:
+      - text: '$(0,0,1)=\lambda(2x,2y,2z)+\mu(1,1,1)$, ועוד שני האילוצים'
+        correct: true
+        feedback: 'נכון. $f=z$ ו-$\nabla f=(0,0,1)$; $\nabla g=(2x,2y,2z)$; $\nabla h=(1,1,1)$.'
+      - text: '$(0,0,1)=\lambda(2x,2y,2z)$ וגם $(0,0,1)=\mu(1,1,1)$'
+        feedback: 'המשוואה השנייה לבדה כבר בלתי אפשרית ($0=\mu$ ו-$1=\mu$). דורשים צירוף אחד של שני הנורמלים.'
+        misconception: MC-c10-one-lambda-two-constraints
+      - text: '$(0,0,1)=\lambda\big((2x,2y,2z)+(1,1,1)\big)$'
+        feedback: 'כופל אחד משותף מכריח משקלים שווים לשני הנורמלים. לכל אילוץ כופל משלו.'
+        misconception: MC-c10-one-lambda-two-constraints
+      - text: '$(0,0,1)=\lambda(2x,2y,2z)$ ו-$x^2+y^2+z^2=1$'
+        feedback: 'זו בעיה עם אילוץ אחד, על כל הספירה. המישור נשכח, והנקודות שמתקבלות, $(0,0,\pm1)$, לא כולן עליו.'
+        misconception: MC-c10-two-constraints-drop-one
+
+  - id: Q-10.9-quadratic-ellipse
+    type: numeric
+    objectives: [OBJ-10.9-1]
+    level: exam
+    prompt: >-
+      מצאו את המקסימום של $f(x,y)=x^2+y^2+xy$ על האליפסה $x^2+4y^2=1$. (אפשר לכתוב ביטוי עם שורש.)
+    answer: 1.0756939094
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{5+\sqrt{13}}{8}$. $2x+y=2\lambda x$ ו-$x+2y=8\lambda y$. הנקודות עם $x=0$ או $y=0$ אינן פותרות את
+      המערכת, ולכן אפשר להשוות $\lambda$: $\frac{2x+y}{2x}=\frac{x+2y}{8y}$, כלומר $x^2-6xy-4y^2=0$. עם $s=\frac xy$:
+      $s^2-6s-4=0$, $s=3\pm\sqrt{13}$. מהאילוץ $y^2=\frac{1}{s^2+4}$, ו-$f=\frac{s^2+s+1}{s^2+4}$: $\frac{5\pm\sqrt{13}}{8}$.
+    wrongFeedback: >-
+      אחרי $\nabla f=\lambda\nabla g$ חלקו כדי לסלק את $\lambda$, וקבלו משוואה הומוגנית ב-$x,y$. הציבו $x=sy$.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          $1=f(\pm1,0)$, הערך בקודקוד של האליפסה. המקסימום מתקבל על הישר $x=(3+\sqrt{13})y$, לא על ציר, והוא קצת יותר מ-1.
+        misconception: MC-c10-ellipse-vertices-only
+    hints: ['הראו שאין פתרון עם $y=0$: אז $x=\pm1$ והמשוואה השנייה נותנת $x=0$.']
+
+  - id: Q-10.9-box
+    type: numeric
+    objectives: [OBJ-10.9-2]
+    level: exam
+    prompt: >-
+      קופסה פתוחה מלמעלה (בסיס מלבני בגודל $x\times y$ וגובה $z$) צריכה להכיל נפח $32$. מה שטח הפנים הקטן ביותר האפשרי,
+      $S=xy+2xz+2yz$?
+    answer: 48
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\nabla S=\lambda\nabla(xyz)$: $y+2z=\lambda yz$, $x+2z=\lambda xz$, $2x+2y=\lambda xy$. מחלוקת הראשונה בשנייה (כל
+      המשתנים חיוביים) $x=y$, ומהשלישית $z=\frac x2$. אז $\frac{x^3}{2}=32$, $x=y=4$, $z=2$, ו-$S=16+16+16=48$.
+    wrongFeedback: >-
+      כתבו את שלוש משוואות לגרנז׳ ואת האילוץ $xyz=32$. השוו בין המשוואות כדי לקשר בין $x$, $y$ ו-$z$ (כאן כולם חיוביים,
+      ומותר לחלק בהם).
+    hints: ['הכפילו את המשוואה הראשונה ב-$x$ ואת השנייה ב-$y$: מה מקבלים?']
+
+  - id: Q-10.9-two-min
+    type: numeric
+    objectives: [OBJ-10.9-3]
+    level: exam
+    prompt: >-
+      פתרו את הבעיה מהשאלה הקודמת: מהו הערך הקטן ביותר של $z$ על המעגל $x^2+y^2+z^2=1$, $x+y+z=1$?
+    answer: -0.333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\frac13$. מהרכיבים של $x$ ו-$y$: $2\lambda x+\mu=0=2\lambda y+\mu$, ולכן $x=y$ (אם $\lambda=0$ הרכיב השלישי נותן
+      $\mu=1$ והראשון $\mu=0$, סתירה). אז $z=1-2x$ ו-$2x^2+(1-2x)^2=1$, כלומר $6x^2-4x=0$: $x=0$ ($z=1$) או $x=\frac23$
+      ($z=-\frac13$). המינימום ב-$\left(\frac23,\frac23,-\frac13\right)$.
+    wrongFeedback: >-
+      הראו מהמשוואות של $x$ ו-$y$ ש-$x=y$, והציבו בשני האילוצים.
+    commonWrong:
+      - value: -1
+        feedback: '$-1$ הוא המינימום של $z$ על כל הספירה, ב-$(0,0,-1)$. אבל הנקודה הזו אינה על המישור: $0+0-1\ne1$.'
+        misconception: MC-c10-two-constraints-drop-one

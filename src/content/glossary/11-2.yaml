@@ -1,0 +1,25 @@
+# Terms first defined in lesson 11.2 (parametrised surfaces).
+- id: parametrized-surface
+  term: משטח בפרמטריזציה
+  en: parametrized surface
+  symbol: '\vec r(u,v)=\big(x(u,v),\,y(u,v),\,z(u,v)\big)'
+  definition: >-
+    משטח במרחב שמתואר על ידי פונקציה של שני פרמטרים, $\vec r(u,v)$, כש-$(u,v)$ עוברים על תחום במישור. דוגמאות: גרף
+    $(u,v,f(u,v))$, ספירה $(R\sin\theta\cos\varphi,R\sin\theta\sin\varphi,R\cos\theta)$, גליל $(R\cos v,R\sin v,u)$.
+  lesson: '11.2'
+- id: surface-tangent-vectors
+  term: וקטורים משיקים למשטח
+  en: tangent vectors of a parametrized surface
+  symbol: '\vec r_u,\ \vec r_v'
+  definition: >-
+    הנגזרות החלקיות $\vec r_u=\frac{\partial\vec r}{\partial u}$ ו-$\vec r_v=\frac{\partial\vec r}{\partial v}$: וקטורי
+    המהירות של העקומים שמתקבלים כשמקבעים פרמטר אחד. שניהם שוכבים במישור המשיק.
+  lesson: '11.2'
+- id: surface-normal
+  term: נורמל למשטח
+  en: normal vector to a surface
+  symbol: '\vec n=\vec r_u\times\vec r_v'
+  definition: >-
+    וקטור שמאונך למישור המשיק. במשטח בפרמטריזציה $\vec n=\vec r_u\times\vec r_v$; החלפת הסדר הופכת את הכיוון. במשטח
+    גובה $F(x,y,z)=c$ הנורמל הוא $\nabla F$.
+  lesson: '11.2'

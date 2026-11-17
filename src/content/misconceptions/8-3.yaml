@@ -1,0 +1,53 @@
+# Misconceptions first detected in lesson 8.3 (improper integrals).
+- id: MC-c8-improper-hidden-singularity
+  title: מפעילים את המשפט היסודי מעל נקודה שבה האינטגרנד אינו חסום
+  belief: >-
+    $\int_a^bf\,dx=F(b)-F(a)$ תמיד, גם כש-$f$ אינה מוגדרת או אינה חסומה בנקודה בתוך הקטע.
+  truth: >-
+    המשפט היסודי דורש $f$ רציפה בכל $[a,b]$. נקודה פנימית שבה $f$ אינה חסומה הופכת את האינטגרל ללא אמיתי: מפצלים
+    בה ובודקים כל חלק כגבול. $\int_{-1}^1\frac{dx}{x^2}$ מתבדר, ולא $-2$.
+  remedy: { lesson: '8.3', label: 'אינטגרל של פונקציה לא חסומה' }
+
+- id: MC-c8-improper-symmetric-cancel
+  title: מאפסים אינטגרל לא אמיתי בגלל סימטריה
+  belief: >-
+    $\int_{-\infty}^{\infty}x\,dx=0$ כי האינטגרנד אי-זוגי, או ש-$\int_{-R}^{R}$ קובע את האינטגרל על כל הישר.
+  truth: >-
+    $\int_{-\infty}^{\infty}f\,dx$ קיים רק כש-$\int_{-\infty}^0f$ ו-$\int_0^\infty f$ מתכנסים **כל אחד בנפרד**. אם
+    אחד מהם מתבדר, הסימטריה לא מצילה: $\infty-\infty$ אינו מספר.
+  remedy: { lesson: '8.3', label: 'אינטגרל על כל הישר: שני חלקים' }
+
+- id: MC-c8-integrand-to-zero-converges
+  title: חושבים שאינטגרנד ששואף לאפס נותן אינטגרל מתכנס
+  belief: >-
+    אם $f(x)\to0$ כש-$x\to\infty$, אז $\int_1^\infty f\,dx$ מתכנס.
+  truth: >-
+    $f$ צריכה לשאוף ל-0 **מהר מספיק**. $\int_1^\infty\frac{dx}{x}=\lim\ln R=\infty$ אף ש-$\frac1x\to0$; חזקה
+    $x^{-p}$ נותנת אינטגרל מתכנס באינסוף רק כש-$p>1$.
+  remedy: { lesson: '8.3', label: 'מתי אינטגרל על קטע אינסופי מתכנס' }
+
+- id: MC-c8-p-test-direction
+  title: מבלבלים בין התנאי באינסוף לבין התנאי ליד אפס
+  belief: >-
+    $\int x^{-p}dx$ מתכנס כש-$p>1$, גם ליד 0; או ש-$p=1$ מתכנס.
+  truth: >-
+    באינסוף: $\int_1^\infty x^{-p}dx$ מתכנס כש-$p>1$. ליד 0: $\int_0^1x^{-p}dx$ מתכנס כש-$p<1$. ב-$p=1$ שניהם
+    מתבדרים. באינסוף צריך דעיכה מהירה, וליד 0 צריך שהפונקציה "תתפוצץ" לאט.
+  remedy: { lesson: '8.3', label: 'אינטגרלים סטנדרטיים של חזקות' }
+
+- id: MC-c8-exp-rate-inverted
+  title: חושבים שהשטח מתחת לאקספוננט הדועך שווה לקצב הדעיכה
+  belief: >-
+    $\int_0^\infty e^{-ax}dx=a$.
+  truth: >-
+    $\int_0^\infty e^{-ax}dx=\frac1a$ ל-$a>0$: דעיכה איטית (a קטן) משאירה שטח גדול.
+  remedy: { lesson: '8.3', label: 'האינטגרל הסטנדרטי של האקספוננט' }
+
+- id: MC-c8-comparison-wrong-direction
+  title: משתמשים במבחן ההשוואה בכיוון הלא נכון
+  belief: >-
+    אם $0\le f\le g$ ו-$\int g$ מתבדר, אז גם $\int f$ מתבדר; או שחסם מלמטה בפונקציה מתכנסת מוכיח התכנסות.
+  truth: >-
+    ל-$0\le f\le g$: אם $\int g$ **מתכנס**, גם $\int f$ מתכנס; אם $\int f$ **מתבדר**, גם $\int g$ מתבדר. חסם עליון
+    מתבדר או חסם תחתון מתכנס אינם אומרים דבר.
+  remedy: { lesson: '8.3', label: 'מבחן ההשוואה' }

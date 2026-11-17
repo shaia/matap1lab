@@ -1,0 +1,48 @@
+# Terms first defined in lesson 2.5 (surfaces in space and their sections).
+- id: quadric-surface
+  term: משטח ריבועי
+  en: quadric surface
+  definition: >-
+    משטח במרחב שמשוואתו ממעלה שנייה ב-$x,y,z$. הבסיסיים: אליפסואיד, חרוט, פרבולואיד (סיבובי והיפרבולי) והיפרבולואיד
+    (חד-יריעתי ודו-יריעתי), וגם גלילים מעל חתכי חרוט. מזהים אותו לפי החתכים שלו.
+  lesson: '2.5'
+- id: section
+  term: חתך
+  en: section (trace)
+  definition: >-
+    החיתוך של משטח עם מישור, לרוב מישור מקביל לאחד ממישורי הצירים ($z=c$, $x=c$, $y=c$): מציבים את הקבוע במשוואה
+    ומקבלים עקום בשני המשתנים האחרים.
+  lesson: '2.5'
+- id: ellipsoid
+  term: אליפסואיד
+  en: ellipsoid
+  symbol: '\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1'
+  definition: >-
+    המשטח $\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1$: כל חתך שלו במישור מקביל למישור צירים הוא אליפסה (או
+    נקודה, או ריק). ספירה היא המקרה $a=b=c$.
+  reject: [אליפסואידה]
+  lesson: '2.5'
+- id: paraboloid
+  term: פרבולואיד
+  en: paraboloid
+  symbol: 'z=\frac{x^2}{a^2}+\frac{y^2}{b^2}'
+  definition: >-
+    פרבולואיד אליפטי (או סיבובי, כש-$a=b$): $z=\frac{x^2}{a^2}+\frac{y^2}{b^2}$, "קערה" שחתכיה האופקיים אליפסות והאנכיים
+    פרבולות. פרבולואיד היפרבולי ("אוכף"): $z=\frac{x^2}{a^2}-\frac{y^2}{b^2}$, שחתכיו האופקיים היפרבולות.
+  lesson: '2.5'
+- id: hyperboloid
+  term: היפרבולואיד
+  en: hyperboloid
+  definition: >-
+    חד-יריעתי: $\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=1$, שחתכיו האופקיים אליפסות לכל $z$. דו-יריעתי:
+    $\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=-1$, שאין לו חתך כש-$|z|<c$. החתכים האנכיים של שניהם היפרבולות.
+  reject: [היפרבולויד]
+  lesson: '2.5'
+- id: cone-surface
+  term: חרוט
+  en: cone (double cone)
+  symbol: 'z^2=x^2+y^2'
+  definition: >-
+    המשטח $\frac{x^2}{a^2}+\frac{y^2}{b^2}=\frac{z^2}{c^2}$, שהחתכים שלו במישורים דרך ציר $z$ הם זוגות ישרים דרך
+    הראשית והחתכים האופקיים אליפסות שגדלות לינארית עם $|z|$. בכדוריות החרוט $z=\sqrt{x^2+y^2}$ הוא $\theta=\frac{\pi}{4}$.
+  lesson: '2.5'

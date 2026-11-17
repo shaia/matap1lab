@@ -1,0 +1,28 @@
+# Terms first defined in lesson 6.3 (the expansions of the elementary functions).
+- id: taylor-series
+  term: טור טיילור
+  en: Taylor series
+  symbol: '\sum_{k=0}^{\infty}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k'
+  definition: >-
+    הטור האינסופי $\sum_{k\ge0}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k$, שפולינומי טיילור הם הסכומים החלקיים שלו. לפונקציות
+    האלמנטריות הוא מתכנס לפונקציה בתחום ההתכנסות שלו, למשל $e^x=\sum\frac{x^k}{k!}$ לכל $x$.
+  reject: [טור טיילר]
+  lesson: '6.3'
+- id: binomial-series
+  term: הטור הבינומי
+  en: binomial series
+  symbol: '(1+x)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}{2!}x^2+\dots'
+  definition: >-
+    טור טיילור של $(1+x)^\alpha$ סביב 0, לכל מעריך ממשי $\alpha$:
+    $1+\alpha x+\frac{\alpha(\alpha-1)}{2!}x^2+\frac{\alpha(\alpha-1)(\alpha-2)}{3!}x^3+\dots$; מתכנס כש-$|x|<1$. כש-$\alpha$
+    טבעי הוא נעצר ונותן את הבינום של ניוטון.
+  reject: []
+  lesson: '6.3'
+- id: leading-term
+  term: האיבר המוביל
+  en: leading term
+  definition: >-
+    האיבר הראשון שאינו אפס בפיתוח של פונקציה סביב נקודה, $a_k(x-x_0)^k$. ליד $x_0$ הפונקציה מתנהגת כמוהו (היחס ביניהם
+    שואף ל-1), ולכן הוא קובע גבולות של מנות ואת צורת הגרף ליד הנקודה.
+  reject: []
+  lesson: '6.3'

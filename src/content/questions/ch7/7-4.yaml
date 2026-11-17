@@ -1,0 +1,296 @@
+# Lesson 7.4 — partial fractions.
+# Objectives (src/course.ts):
+#   OBJ-7.4-1  decompose a rational function into partial fractions, with repeated and quadratic factors
+#   OBJ-7.4-2  integrate a rational function after polynomial division and decomposition
+#   OBJ-7.4-3  integrals that give a logarithm and arctan
+# Notes p. 14: (3x−1)/((x−1)(x−2)) = A₁/(x−1) + A₂/(x−2) with A₁ = −2, A₂ = 5 (recomputed: correct); p. 15: ∫dx/(x+a).
+# Keys recomputed in screens/tools/recompute-ch7.py.
+chapter: 7
+questions:
+  - id: Q-7.4-notes-A
+    type: numeric
+    objectives: [OBJ-7.4-1]
+    level: basic
+    prompt: >-
+      מפרקים (עמ׳ 14 במחברת): $\frac{3x-1}{(x-1)(x-2)}=\frac{A}{x-1}+\frac{B}{x-2}$. מהו $A$?
+    answer: -2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. כופלים ב-$(x-1)(x-2)$: $3x-1=A(x-2)+B(x-1)$. מציבים $x=1$: $2=A\cdot(1-2)$, ולכן $A=-2$. (ו-$x=2$ נותן $B=5$.)
+    wrongFeedback: 'כפלו במכנה המשותף והציבו $x=1$: המחובר עם $B$ נעלם.'
+    commonWrong:
+      - value: 2
+        feedback: 'ב-$x=1$ הגורם $x-2$ שווה $1-2$, שלילי: $A=\frac{3\cdot1-1}{1-2}$.'
+        misconception: MC-c7-coverup-sign
+      - value: 5
+        feedback: '5 הוא $B$, המקדם של $\frac{1}{x-2}$ (מציבים $x=2$). $A$ שייך ל-$\frac{1}{x-1}$.'
+    hints: ['הציבו $x=1$ ב-$3x-1=A(x-2)+B(x-1)$.']
+
+  - id: Q-7.4-notes-int
+    type: expr
+    objectives: [OBJ-7.4-2]
+    level: basic
+    prompt: 'חשבו $\int\frac{3x-1}{x^2-3x+2}\,dx$ בתחום $x>2$.'
+    answer: '-2*log(abs(x-1)) + 5*log(abs(x-2))'
+    answerTex: '$-2\ln|x-1|+5\ln|x-2|+C$'
+    variables: [x]
+    domain: [2.2, 4]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $x^2-3x+2=(x-1)(x-2)$, הפירוק $\frac{-2}{x-1}+\frac{5}{x-2}$, וכל שבר נותן לוגריתם (עמ׳ 15 במחברת:
+      $\int\frac{dx}{x+a}=\ln|x+a|+C$).
+    wrongFeedback: 'פרקו את המכנה לגורמים, מצאו $A$ ו-$B$, ובצעו אינטגרציה לכל שבר.'
+    commonWrong:
+      - expr: '3/2*log(abs(x^2-3*x+2))'
+        feedback: >-
+          $\ln|Q|$ מתאים רק כשהמונה הוא הנגזרת של המכנה. כאן $(x^2-3x+2)'=2x-3$, והמונה $3x-1$ אינו כפולה שלו.
+        misconception: MC-c7-log-of-denominator
+      - expr: '2*log(abs(x-1)) + 5*log(abs(x-2))'
+        feedback: '$A=\frac{3-1}{1-2}=-2$: הסימן של $1-2$.'
+        misconception: MC-c7-coverup-sign
+    hints: ['$x^2-3x+2=(x-1)(x-2)$.']
+
+  - id: Q-7.4-form
+    type: mc
+    objectives: [OBJ-7.4-1]
+    qualitative: true
+    level: basic
+    prompt: 'מהי הצורה הנכונה של הפירוק לשברים חלקיים של $\frac{x+5}{(x-1)^2(x^2+1)}$?'
+    choices:
+      - text: '$\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{Cx+D}{x^2+1}$'
+        correct: true
+        feedback: >-
+          נכון. גורם חוזר $(x-1)^2$ נותן שני שברים, לכל חזקה עד 2; וגורם ריבועי שאין לו שורשים ממשיים מקבל מונה לינארי.
+          ארבעה נעלמים, כמו המעלה של המכנה.
+      - text: '$\frac{A}{(x-1)^2}+\frac{Cx+D}{x^2+1}$'
+        feedback: 'לגורם חוזר צריך שבר לכל חזקה: גם $\frac{A}{x-1}$ וגם $\frac{B}{(x-1)^2}$. בלי זה יש רק שלושה נעלמים למעלה 4.'
+        misconception: MC-c7-repeated-factor-once
+      - text: '$\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{C}{x^2+1}$'
+        feedback: 'מעל גורם ריבועי המונה לינארי, $Cx+D$: מונה קבוע לא מספיק באופן כללי.'
+        misconception: MC-c7-quadratic-numerator-const
+      - text: '$\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{C}{x-1}+\frac{D}{x+1}$'
+        feedback: '$x^2+1$ אינו מתפרק ל-$(x-1)(x+1)$: זה $x^2-1$. ל-$x^2+1$ אין שורשים ממשיים.'
+        misconception: MC-c7-quadratic-factor-wrong
+    hints: ['כמה שברים נותן גורם בריבוע? ומה המונה מעל גורם ריבועי?']
+
+  - id: Q-7.4-coverup-C
+    type: numeric
+    objectives: [OBJ-7.4-1]
+    level: mid
+    prompt: >-
+      $\frac{x+5}{(x-1)^2(x+2)}=\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{C}{x+2}$. מהו $C$?
+    answer: 0.333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. כופלים ב-$x+2$ ומציבים $x=-2$: $C=\frac{-2+5}{(-2-1)^2}=\frac39=\frac13$. (ובאותה דרך $B=\frac{1+5}{1+2}=2$,
+      ו-$A=-\frac13$ מהשוואת מקדמים.)
+    wrongFeedback: 'הציבו $x=-2$ במה שנשאר אחרי שמכסים את $x+2$: $\frac{x+5}{(x-1)^2}$.'
+    commonWrong:
+      - value: -1
+        feedback: 'שכחתם את הריבוע: $(x-1)^2$ ב-$x=-2$ הוא $(-3)^2=9$, לא $-3$.'
+        misconception: MC-c7-coverup-drop-square
+    hints: ['$C=\left.\frac{x+5}{(x-1)^2}\right|_{x=-2}$.']
+
+  - id: Q-7.4-repeated
+    type: expr
+    objectives: [OBJ-7.4-1, OBJ-7.4-2]
+    level: mid
+    prompt: 'חשבו $\int\frac{dx}{x(x+1)^2}$ ל-$x>0$.'
+    answer: 'log(abs(x)) - log(abs(x+1)) + 1/(x+1)'
+    answerTex: '$\ln|x|-\ln|x+1|+\frac{1}{x+1}+C$'
+    variables: [x]
+    domain: [0.3, 3]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $\frac{1}{x(x+1)^2}=\frac1x-\frac{1}{x+1}-\frac{1}{(x+1)^2}$, ו-$-\int\frac{dx}{(x+1)^2}=+\frac{1}{x+1}$.
+    wrongFeedback: 'הפירוק: $\frac Ax+\frac{B}{x+1}+\frac{C}{(x+1)^2}$. השבר האחרון נותן חזקה, לא לוגריתם.'
+    commonWrong:
+      - expr: 'log(abs(x)) - log(abs(x+1)) - 1/(x+1)'
+        feedback: '$\int(x+1)^{-2}dx=-(x+1)^{-1}$, ולכן $-\int\frac{dx}{(x+1)^2}=+\frac{1}{x+1}$.'
+        misconception: MC-c7-power-negative-exponent
+      - expr: 'log(abs(x)) - 2*log(abs(x+1))'
+        feedback: '$\int\frac{dx}{(x+1)^2}$ אינו לוגריתם: זו חזקה, $\int u^{-2}du=-u^{-1}$.'
+        misconception: MC-c7-repeated-as-log
+    hints: ['$A=1$, $C=-1$ (כיסוי), ו-$B=-1$ ממקדם $x^2$.']
+
+  - id: Q-7.4-division
+    type: expr
+    objectives: [OBJ-7.4-2]
+    level: mid
+    prompt: 'חשבו $\int\frac{x^2}{x+1}\,dx$ ל-$x>-1$.'
+    answer: 'x^2/2 - x + log(abs(x+1))'
+    answerTex: '$\frac{x^2}{2}-x+\ln|x+1|+C$'
+    variables: [x]
+    domain: [0, 3]
+    upToConstant: true
+    correctFeedback: 'נכון. חילוק: $\frac{x^2}{x+1}=x-1+\frac{1}{x+1}$ (בדיקה: $(x-1)(x+1)+1=x^2$).'
+    wrongFeedback: 'מעלת המונה לא קטנה ממעלת המכנה: קודם מחלקים פולינומים.'
+    commonWrong:
+      - expr: 'x^2/2 - x - log(abs(x+1))'
+        feedback: 'השארית: $(x-1)(x+1)=x^2-1$, וחסר $+1$ כדי לקבל $x^2$. לכן $+\frac{1}{x+1}$.'
+        misconception: MC-c7-division-remainder-sign
+      - expr: 'x^2*log(abs(x+1))'
+        feedback: 'אי אפשר להוציא את $x^2$ מהאינטגרל כאילו הוא קבוע. קודם מחלקים.'
+        misconception: MC-c7-skip-division
+    hints: ['$x^2=(x-1)(x+1)+1$.']
+
+  - id: Q-7.4-need-division
+    type: twotier
+    objectives: [OBJ-7.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא: אפשר לכתוב ישר $\frac{x^3+1}{x^2-4}=\frac{A}{x-2}+\frac{B}{x+2}$ ולמצוא $A$ ו-$B$.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. אגף ימין שואף ל-0 כש-$x\to\infty$, ואגף שמאל גדל כמו $x$: אין $A,B$ כאלה. קודם מחלקים:
+          $\frac{x^3+1}{x^2-4}=x+\frac{4x+1}{x^2-4}$, ורק את השבר האמיתי מפרקים.
+      - text: נכון
+        feedback: >-
+          פירוק לשברים חלקיים קיים רק לשבר אמיתי, שמעלת המונה שלו קטנה ממעלת המכנה. כאן 3 ו-2: חסר החלק הפולינומי.
+        misconception: MC-c7-skip-division
+    reasons:
+      - text: 'מעלת המונה (3) אינה קטנה ממעלת המכנה (2), ולכן צריך קודם חילוק פולינומים'
+        correct: true
+        feedback: 'בדיוק. החילוק נותן פולינום ועוד שבר אמיתי, ואת השבר מפרקים.'
+      - text: 'כי $x^2-4$ אינו מתפרק לגורמים'
+        feedback: '$x^2-4=(x-2)(x+2)$. הבעיה היא במעלות, לא במכנה.'
+        misconception: MC-c7-quadratic-factor-wrong
+      - text: 'אפשר, אבל צריך גם שבר $\frac{C}{x^2-4}$'
+        feedback: 'שום צירוף של שברים עם מכנים אלה לא גדל כמו $x$. חסר החלק הפולינומי מהחילוק.'
+        misconception: MC-c7-skip-division
+    hints: ['מה קורה לשני האגפים כש-$x\to\infty$?']
+
+  - id: Q-7.4-arctan-basic
+    type: expr
+    objectives: [OBJ-7.4-3]
+    level: basic
+    prompt: 'חשבו $\int\frac{dx}{x^2+9}$.'
+    answer: 'atan(x/3)/3'
+    answerTex: '$\frac13\arctan\frac x3+C$'
+    variables: [x]
+    domain: [-3, 3]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $\int\frac{dx}{x^2+a^2}=\frac1a\arctan\frac xa+C$, עם $a=3$. (הצבה $x=3t$ מחזירה ל-$\int\frac{dt}{1+t^2}$.)
+    wrongFeedback: 'הוציאו 9 מהמכנה: $x^2+9=9\left(\left(\frac x3\right)^2+1\right)$, והציבו $t=\frac x3$.'
+    commonWrong:
+      - expr: 'atan(x/3)'
+        feedback: 'גזרו: $\left(\arctan\frac x3\right)''=\frac{1/3}{1+x^2/9}=\frac{3}{x^2+9}$, פי 3 מהנדרש. חסר $\frac13$.'
+        misconception: MC-c7-inverse-trig-scale
+      - expr: 'log(x^2+9)'
+        feedback: 'זה היה מתאים ל-$\frac{2x}{x^2+9}$. בלי $x$ במונה מקבלים $\arctan$.'
+        misconception: MC-c7-log-of-denominator
+    hints: ['$\int\frac{dx}{x^2+a^2}=\frac1a\arctan\frac xa+C$.']
+
+  - id: Q-7.4-complete-square
+    type: expr
+    objectives: [OBJ-7.4-3]
+    level: mid
+    prompt: 'חשבו $\int\frac{dx}{x^2+2x+5}$.'
+    answer: 'atan((x+1)/2)/2'
+    answerTex: '$\frac12\arctan\frac{x+1}{2}+C$'
+    variables: [x]
+    domain: [-3, 3]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. השלמה לריבוע: $x^2+2x+5=(x+1)^2+4$. עם $u=x+1$ ו-$a=2$: $\frac12\arctan\frac{x+1}{2}+C$.
+    wrongFeedback: 'למכנה אין שורשים ממשיים (דיסקרימיננטה $4-20<0$). השלימו לריבוע.'
+    commonWrong:
+      - expr: 'atan((x+1)/2)'
+        feedback: 'חסר $\frac1a=\frac12$ לפני ה-$\arctan$.'
+        misconception: MC-c7-inverse-trig-scale
+      - expr: 'atan(x/2)/2'
+        feedback: 'אחרי ההשלמה לריבוע המשתנה הוא $u=x+1$: בתוך ה-$\arctan$ צריך $\frac{x+1}{2}$.'
+        misconception: MC-c7-complete-square-shift
+    hints: ['$x^2+2x+5=(x+1)^2+4$.']
+
+  - id: Q-7.4-which-arctan
+    type: multi
+    objectives: [OBJ-7.4-3]
+    qualitative: true
+    level: mid
+    prompt: 'בתשובה לאילו מהאינטגרלים הבאים מופיע $\arctan$? סמנו את כולם.'
+    choices:
+      - text: '$\int\frac{dx}{x^2+4}$'
+        correct: true
+        feedback: 'נכון: $\frac12\arctan\frac x2+C$.'
+      - text: '$\int\frac{dx}{x^2+x+1}$'
+        correct: true
+        feedback: 'נכון. הדיסקרימיננטה $1-4<0$, ו-$x^2+x+1=\left(x+\frac12\right)^2+\frac34$: מתקבל $\arctan$.'
+      - text: '$\int\frac{x\,dx}{x^2+4}$'
+        feedback: 'המונה הוא חצי הנגזרת של המכנה: $\frac12\ln(x^2+4)$, בלי $\arctan$.'
+        misconception: MC-c7-atan-vs-log
+      - text: '$\int\frac{dx}{x^2-4}$'
+        feedback: '$x^2-4=(x-2)(x+2)$ מתפרק: שברים חלקיים ושני לוגריתמים, $\frac14\ln\left|\frac{x-2}{x+2}\right|$.'
+        misconception: MC-c7-atan-vs-log
+      - text: '$\int\frac{dx}{x^2+4x+4}$'
+        feedback: '$x^2+4x+4=(x+2)^2$, ריבוע שלם: $\int(x+2)^{-2}dx=-\frac{1}{x+2}$.'
+        misconception: MC-c7-atan-vs-log
+    hints: ['בדקו בכל מכנה את הדיסקרימיננטה, ובכל מונה אם הוא הנגזרת של המכנה.']
+
+  - id: Q-7.4-mixed
+    type: expr
+    objectives: [OBJ-7.4-3, OBJ-7.4-2]
+    level: mid
+    prompt: 'חשבו $\int\frac{2x+3}{x^2+1}\,dx$.'
+    answer: 'log(x^2+1) + 3*atan(x)'
+    answerTex: '$\ln\left(x^2+1\right)+3\arctan x+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: 'נכון. מפצלים: $\frac{2x}{x^2+1}+\frac{3}{x^2+1}$. הראשון הוא נגזרת המכנה חלקי המכנה, השני $\arctan$.'
+    wrongFeedback: 'פצלו את המונה: החלק שהוא הנגזרת של המכנה, והחלק הקבוע.'
+    commonWrong:
+      - expr: 'log(x^2+1)'
+        feedback: 'רק $2x$ הוא הנגזרת של המכנה. נשאר $\frac{3}{x^2+1}$, שנותן $3\arctan x$.'
+        misconception: MC-c7-numerator-not-derivative
+      - expr: 'log(x^2+1)/2 + 3*atan(x)'
+        feedback: 'כאן המונה הוא $2x$, בדיוק הנגזרת של $x^2+1$: אין חצי. (החצי מופיע ב-$\frac{x}{x^2+1}$.)'
+        misconception: MC-c7-subst-forget-factor
+    hints: ['$\frac{2x+3}{x^2+1}=\frac{2x}{x^2+1}+\frac{3}{x^2+1}$.']
+
+  - id: Q-7.4-rank-recipe
+    type: rank
+    objectives: [OBJ-7.4-1, OBJ-7.4-2]
+    qualitative: true
+    level: mid
+    prompt: 'סדרו את שלבי השיטה לחישוב $\int\frac{P(x)}{Q(x)}\,dx$ כש-$P,Q$ פולינומים.'
+    help: סדרו את שלבי השיטה מהראשון לאחרון.
+    items:
+      - id: a
+        label: 'משווים מעלות; אם מעלת $P$ אינה קטנה ממעלת $Q$, מחלקים: פולינום ועוד שבר אמיתי.'
+      - id: b
+        label: 'מפרקים את $Q$ לגורמים לינאריים וריבועיים בלי שורשים ממשיים.'
+      - id: c
+        label: 'כותבים את צורת הפירוק: שבר לכל חזקה של גורם חוזר, ומונה לינארי מעל גורם ריבועי.'
+      - id: d
+        label: 'מוצאים את המקדמים: הצבת שורשים, והשוואת מקדמים למה שנשאר.'
+      - id: e
+        label: 'מבצעים אינטגרציה לכל שבר (לוגריתם, חזקה או $\arctan$), ובודקים בגזירה.'
+    order: [a, b, c, d, e]
+    correctFeedback: >-
+      נכון. החילוק בא ראשון כי פירוק קיים רק לשבר אמיתי, והצורה נקבעת לפי הגורמים לפני שמחפשים מקדמים.
+    wrongFeedback: >-
+      אי אפשר לכתוב צורת פירוק לפני שיודעים את הגורמים, ואי אפשר לפרק שבר שאינו אמיתי. התחילו מהשוואת המעלות.
+
+  - id: Q-7.4-definite
+    type: numeric
+    objectives: [OBJ-7.4-2, OBJ-7.4-3]
+    level: exam
+    prompt: 'חשבו $\int_0^1\frac{x+2}{(x+1)\left(x^2+1\right)}\,dx$. (אפשר לכתוב ביטוי עם ln ו-π)'
+    answer: 1.35138404024
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{\ln2}{4}+\frac{3\pi}{8}$. הפירוק $\frac{1/2}{x+1}+\frac{-\frac12x+\frac32}{x^2+1}$, והקדומה
+      $\frac12\ln(x+1)-\frac14\ln(x^2+1)+\frac32\arctan x$. בין 0 ל-1: $\frac12\ln2-\frac14\ln2+\frac32\cdot\frac\pi4$.
+    wrongFeedback: 'כיסוי ב-$x=-1$ נותן את המקדם של $\frac{1}{x+1}$; את $B,C$ של $\frac{Bx+C}{x^2+1}$ מוצאים בהשוואת מקדמים.'
+    commonWrong:
+      - value: 1.52467083538
+        feedback: >-
+          זה $\frac{\ln2}{2}+\frac{3\pi}{8}$, בלי האיבר $-\frac12x$ במונה של $\frac{Bx+C}{x^2+1}$. מעל גורם ריבועי המונה לינארי,
+          והאיבר $-\frac{x}{2(x^2+1)}$ תורם $-\frac14\ln2$.
+        misconception: MC-c7-quadratic-numerator-const
+    hints: ['$A=\frac{-1+2}{(-1)^2+1}=\frac12$.']

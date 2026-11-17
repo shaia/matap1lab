@@ -1,0 +1,54 @@
+# Misconceptions first detected in lesson 10.7 (critical points, second-order Taylor, the second-derivative test).
+- id: MC-c10-critical-means-extremum
+  title: חושבים שכל נקודה קריטית היא נקודת קיצון
+  belief: >-
+    אם $\nabla f(x_0,y_0)=0$, אז $(x_0,y_0)$ היא נקודת מינימום או מקסימום מקומי.
+  truth: >-
+    $\nabla f=0$ הוא תנאי **הכרחי** לקיצון מקומי בנקודה פנימית, לא מספיק: ל-$x^2-y^2$ הגרדיאנט מתאפס בראשית, אבל לאורך
+    ציר $x$ הראשית מינימום ולאורך ציר $y$ מקסימום. זו נקודת אוכף.
+  remedy: { lesson: '10.7', label: 'נקודה קריטית אינה בהכרח קיצון' }
+
+- id: MC-c10-taylor-forget-half
+  title: שוכחים את החצי באיברים מסדר שני של טיילור
+  belief: >-
+    $f\approx f_0+f_x\Delta x+f_y\Delta y+f_{xx}\Delta x^2+2f_{xy}\Delta x\Delta y+f_{yy}\Delta y^2$.
+  truth: >-
+    כמו במשתנה אחד, $\frac{1}{2!}$ מול האיברים מסדר שני:
+    $f\approx f_0+f_x\Delta x+f_y\Delta y+\tfrac12\left(f_{xx}\Delta x^2+2f_{xy}\Delta x\Delta y+f_{yy}\Delta y^2\right)$.
+  remedy: { lesson: '10.7', label: 'פולינום טיילור מסדר שני בשני משתנים' }
+
+- id: MC-c10-taylor-mixed-factor
+  title: טועים במקדם של האיבר המעורב בטיילור
+  belief: >-
+    המקדם של $\Delta x\Delta y$ בפולינום טיילור מסדר שני הוא $\tfrac12f_{xy}$, או שאין איבר מעורב בכלל.
+  truth: >-
+    האיבר המעורב מופיע פעמיים ($f_{xy}$ ו-$f_{yx}$, שוות), ולכן
+    $\tfrac12\cdot2f_{xy}\Delta x\Delta y=f_{xy}\Delta x\Delta y$: המקדם הוא $f_{xy}$ עצמה.
+  remedy: { lesson: '10.7', label: 'האיבר המעורב בטיילור' }
+
+- id: MC-c10-hessian-formula
+  title: טועים בנוסחה של D במבחן הנגזרות השניות
+  belief: >-
+    $D=f_{xx}f_{yy}-f_{xy}$, או $D=f_{xx}f_{yy}+f_{xy}^2$.
+  truth: >-
+    $D=f_{xx}f_{yy}-f_{xy}^2$: הדטרמיננטה של הטבלה $\begin{pmatrix}f_{xx}&f_{xy}\\f_{xy}&f_{yy}\end{pmatrix}$. הריבוע והמינוס
+    באים מהשלמה לריבוע של $A\Delta x^2+2B\Delta x\Delta y+C\Delta y^2$.
+  remedy: { lesson: '10.7', label: 'מבחן הנגזרות השניות' }
+
+- id: MC-c10-disc-zero-saddle
+  title: חושבים ש-D=0 מכריע את סוג הנקודה
+  belief: >-
+    אם $D=0$ בנקודה קריטית, היא נקודת אוכף (או: היא מינימום).
+  truth: >-
+    כש-$D=0$ המבחן אינו מכריע. ל-$x^4+y^4$, ל-$-x^4-y^4$ ול-$x^4-y^4$ יש $D=0$ בראשית, והראשית היא מינימום, מקסימום
+    ונקודת אוכף בהתאמה. צריך לבדוק ישירות את הפונקציה ליד הנקודה.
+  remedy: { lesson: '10.7', label: 'כשהמבחן אינו מכריע' }
+
+- id: MC-c10-closed-contours-everywhere
+  title: חושבים שקווי הגובה סביב כל נקודה קריטית הם עקומים סגורים
+  belief: >-
+    ליד כל נקודה קריטית קווי הגובה הם אליפסות קטנות שמקיפות אותה.
+  truth: >-
+    עקומים סגורים סביב הנקודה מופיעים ליד מינימום או מקסימום מקומי. ליד נקודת אוכף קו הגובה שעובר בנקודה נראה כמו
+    שני עקומים שנחתכים בה (כמו $x^2-y^2=0$), ומסביבו היפרבולות.
+  remedy: { lesson: '10.7', label: 'קווי גובה ליד נקודה קריטית' }

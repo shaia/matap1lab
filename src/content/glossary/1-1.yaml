@@ -1,0 +1,47 @@
+# Terms first defined in lesson 1.1 (vectors: arrow and coordinates).
+- id: vector
+  term: וקטור
+  en: vector
+  symbol: '\vec v=(v_1,v_2,v_3)'
+  definition: >-
+    גודל שיש לו גם אורך וגם כיוון, כמו העתק, מהירות או כוח. מציירים אותו כחץ, ובמערכת צירים רושמים אותו כרשימת רכיבים
+    $(v_1,v_2,v_3)=v_1\hat\imath+v_2\hat\jmath+v_3\hat k$. שני חצים עם אותו אורך ואותו כיוון הם אותו וקטור, בלי קשר למקום
+    שבו הם מתחילים.
+  lesson: '1.1'
+- id: scalar
+  term: סקלר
+  en: scalar
+  definition: >-
+    מספר ממשי, להבדיל מווקטור: גודל בלי כיוון (מסה, טמפרטורה, עבודה). כפל וקטור בסקלר $\lambda$ מותח את החץ פי $|\lambda|$,
+    והופך את כיוונו כש-$\lambda<0$.
+  lesson: '1.1'
+- id: position-vector
+  term: וקטור מקום
+  en: position vector
+  symbol: '\vec r=(x,y,z)'
+  definition: >-
+    הווקטור מהראשית אל נקודה $(x,y,z)$; רכיביו הם הקואורדינטות של הנקודה. הוא תלוי בבחירת הראשית.
+  lesson: '1.1'
+- id: displacement
+  term: וקטור העתק
+  en: displacement vector
+  symbol: '\vec{AB}=B-A'
+  definition: >-
+    הווקטור מנקודה $A$ לנקודה $B$: $\vec{AB}=B-A$, "סוף פחות התחלה", כך ש-$A+\vec{AB}=B$. הוא אינו תלוי בבחירת הראשית.
+  lesson: '1.1'
+- id: vector-length
+  term: אורך של וקטור
+  en: length (magnitude) of a vector
+  symbol: '|\vec v|=\sqrt{v_1^2+v_2^2+v_3^2}'
+  definition: >-
+    האורך של החץ, מפיתגורס: $|\vec v|=\sqrt{v_1^2+v_2^2+v_3^2}$. המרחק בין שתי נקודות הוא $|\vec{AB}|$. תמיד אי-שלילי, ו-0
+    רק לווקטור האפס.
+  lesson: '1.1'
+- id: unit-vector
+  term: וקטור יחידה
+  en: unit vector
+  symbol: '\hat u=\frac{\vec v}{|\vec v|}'
+  definition: >-
+    וקטור שאורכו 1; הוא מייצג כיוון בלבד. וקטור היחידה בכיוון $\vec v\ne\vec0$ הוא $\hat u=\frac{\vec v}{|\vec v|}$. וקטורי
+    היחידה בכיווני הצירים: $\hat\imath=(1,0,0)$, $\hat\jmath=(0,1,0)$, $\hat k=(0,0,1)$.
+  lesson: '1.1'

@@ -1,0 +1,40 @@
+# Terms first defined in lesson 5.2 (tangent line, linear approximation, differentials, notation).
+- id: tangent-line
+  term: ישר משיק
+  en: tangent line
+  symbol: "y=f(a)+f'(a)(x-a)"
+  definition: >-
+    הישר דרך $(a,f(a))$ שהשיפוע שלו $f'(a)$: $y=f(a)+f'(a)(x-a)$. זה הגבול של המיתרים דרך $(a,f(a))$ כשהנקודה השנייה
+    מתקרבת אליה.
+  lesson: '5.2'
+- id: linear-approximation
+  term: קירוב לינארי
+  en: linear approximation (linearization)
+  symbol: "f(a+h)\\approx f(a)+f'(a)h"
+  definition: >-
+    קירוב הפונקציה ליד $a$ על ידי הישר המשיק: $f(x)\approx f(a)+f'(a)(x-a)$. השגיאה קטנה מהר יותר מ-$x-a$ כש-$x\to a$,
+    ולכן הקירוב טוב רק ליד $a$.
+  lesson: '5.2'
+- id: differential
+  term: דיפרנציאל
+  en: differential
+  symbol: "dy=f'(x)\\,dx"
+  definition: >-
+    לשינוי קטן $dx$ במשתנה, $dy=f'(x)\,dx$: השינוי לאורך המשיק. הוא מעריך את השינוי האמיתי
+    $\Delta y=f(x+dx)-f(x)$, ומשמש להערכת שגיאות מדידה.
+  lesson: '5.2'
+- id: relative-error
+  term: שגיאה יחסית
+  en: relative error
+  symbol: '\frac{dy}{y}'
+  definition: >-
+    השגיאה חלקי הגודל עצמו, $\frac{dy}{y}$, לרוב באחוזים. ל-$y=x^n$ הדיפרנציאל נותן $\frac{dy}{y}=n\frac{dx}{x}$.
+  lesson: '5.2'
+- id: leibniz-notation
+  term: סימון לייבניץ
+  en: Leibniz notation
+  symbol: '\frac{dy}{dx},\ \left.\frac{dy}{dx}\right|_{x=a}'
+  definition: >-
+    כתיבת הנגזרת של $y=f(x)$ כ-$\frac{dy}{dx}$ או $\frac{df}{dx}$, ובנקודה $\left.\frac{dy}{dx}\right|_{x=a}=f'(a)$.
+    הסימון מזכיר שהנגזרת היא גבול של מנה $\frac{\Delta y}{\Delta x}$, ולכן יחידותיה יחידות $y$ חלקי יחידות $x$.
+  lesson: '5.2'

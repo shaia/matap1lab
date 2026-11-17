@@ -1,0 +1,39 @@
+# Misconceptions first detected in lesson 12.8 (Green's theorem, enrichment).
+- id: MC-c12-green-sign
+  title: מחליפים את הסדר או את הסימן באגף הימני של משפט גרין
+  belief: >-
+    $\oint_CP\,dx+Q\,dy=\iint_D\left(\frac{\partial P}{\partial y}-\frac{\partial Q}{\partial x}\right)dA$, או שגוזרים
+    כל רכיב לפי המשתנה של עצמו.
+  truth: >-
+    $\oint_CP\,dx+Q\,dy=\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA$: הרכיב
+    שליד $dy$ נגזר לפי $x$, פחות הרכיב שליד $dx$ נגזר לפי $y$. בדיקה: לשדה $(-y,x)$ מתקבל $2$, וזה הסיבוב נגד כיוון
+    השעון.
+  remedy: { lesson: '12.8', label: 'הנוסחה של משפט גרין' }
+
+- id: MC-c12-green-orientation
+  title: מתעלמים מכיוון ההקפה במשפט גרין
+  belief: >-
+    משפט גרין נותן את אותה תוצאה לכל כיוון הקפה של העקום.
+  truth: >-
+    המשפט מנוסח לשפה בכיוון החיובי, נגד כיוון השעון (התחום משמאל להולך). הקפה עם כיוון השעון הופכת את הסימן של
+    האינטגרל הקווי, ולכן אז $\oint_CP\,dx+Q\,dy=-\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA$.
+  remedy: { lesson: '12.8', label: 'הכיוון החיובי של השפה' }
+
+- id: MC-c12-green-hypotheses
+  title: משתמשים במשפט גרין כשהתנאים שלו אינם מתקיימים
+  belief: >-
+    משפט גרין חל על כל עקום ועל כל שדה: גם על עקום שאינו סגור, וגם כשהשדה אינו מוגדר בנקודה בתוך התחום.
+  truth: >-
+    צריך עקום סגור פשוט שהוא השפה של $D$, ו-$P,Q$ עם נגזרות חלקיות רציפות **בכל** $D$. לשדה
+    $\frac{(-y,x)}{x^2+y^2}$ על מעגל היחידה $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=0$ מחוץ לראשית,
+    אבל האינטגרל הקווי $2\pi$: הראשית, שבה השדה אינו מוגדר, נמצאת בתוך התחום.
+  remedy: { lesson: '12.8', label: 'התנאים של משפט גרין' }
+
+- id: MC-c12-green-area-form
+  title: חושבים שכל אינטגרל קווי פשוט על השפה נותן שטח
+  belief: >-
+    $\oint_Cy\,dx$ או $\oint_Cx\,dx$ נותנים את השטח של $D$, כמו $\oint_Cx\,dy$.
+  truth: >-
+    שטח מתקבל כש-$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=1$: $\oint_Cx\,dy$, $-\oint_Cy\,dx$ או
+    $\frac12\oint_C(x\,dy-y\,dx)$. ל-$\oint_Cy\,dx$ ההפרש הוא $-1$ (מינוס השטח), ול-$\oint_Cx\,dx$ הוא 0.
+  remedy: { lesson: '12.8', label: 'שטח כאינטגרל קווי' }

@@ -1,0 +1,33 @@
+# Terms first defined in lesson 3.3 (polar form and Euler's formula).
+- id: polar-form
+  term: הצורה הקוטבית
+  en: polar form
+  symbol: 'z=r\operatorname{cis}\theta=re^{i\theta}'
+  definition: >-
+    כתיבה של $z\ne0$ כ-$z=r\operatorname{cis}\theta$ עם $r=|z|>0$ ו-$\theta$ ארגומנט של $z$. בצורה הזו כופלים ערכים
+    מוחלטים ומחברים ארגומנטים.
+  lesson: '3.3'
+- id: cis
+  term: cis
+  en: cis
+  symbol: '\operatorname{cis}\theta=\cos\theta+i\sin\theta'
+  definition: 'קיצור ל-$\cos\theta+i\sin\theta$: הנקודה על מעגל היחידה בזווית $\theta$. לפי נוסחת אוילר זה $e^{i\theta}$.'
+  lesson: '3.3'
+- id: euler-formula
+  term: נוסחת אוילר
+  en: Euler's formula
+  symbol: 'e^{i\theta}=\cos\theta+i\sin\theta'
+  definition: >-
+    $e^{i\theta}=\cos\theta+i\sin\theta$ לכל $\theta$ ממשי. בפרט $e^{i\pi}=-1$, ו-$e^{i\alpha}e^{i\beta}=e^{i(\alpha+\beta)}$
+    הוא נוסחאות הסכום של סינוס וקוסינוס.
+  reject: [נוסחת אויילר]
+  lesson: '3.3'
+- id: de-moivre-formula
+  term: נוסחת דה-מואבר
+  en: de Moivre's formula
+  symbol: '(\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta'
+  definition: >-
+    לכל $n$ שלם: $(r\operatorname{cis}\theta)^n=r^n\operatorname{cis}n\theta$. משמשת לחישוב חזקות, ובהשוואת חלקים ממשיים
+    ומדומים, לזהויות כמו $\cos3\theta=4\cos^3\theta-3\cos\theta$.
+  reject: [דה מואבר, דמואבר]
+  lesson: '3.3'

@@ -1,0 +1,29 @@
+# Terms first defined in lesson 6.1 (higher derivatives and the Taylor polynomial).
+- id: higher-order-derivative
+  term: נגזרת מסדר גבוה
+  en: higher-order derivative
+  symbol: "f'',\ f''',\ f^{(n)}"
+  definition: >-
+    הנגזרת של הנגזרת: $f''=(f')'$, $f'''=(f'')'$, ובאופן כללי $f^{(n)}=\left(f^{(n-1)}\right)'$, הנגזרת מסדר $n$. לפולינום
+    ממעלה $m$ כל הנגזרות מסדר גדול מ-$m$ הן אפס.
+  reject: []
+  lesson: '6.1'
+- id: taylor-polynomial
+  term: פולינום טיילור
+  en: Taylor polynomial
+  symbol: 'T_n(x)'
+  definition: >-
+    פולינום טיילור מסדר $n$ של $f$ סביב $x_0$:
+    $T_n(x)=\sum_{k=0}^{n}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k$. זה הפולינום היחיד ממעלה $\le n$ שיש לו אותו ערך ואותן $n$
+    נגזרות ראשונות כמו ל-$f$ בנקודה $x_0$. סביב $x_0=0$ קוראים לו לפעמים פולינום מקלורן.
+  reject: [פולינום טיילר, פולינום טיילורי]
+  lesson: '6.1'
+- id: osculating-parabola
+  term: פרבולה צמודה
+  en: osculating parabola
+  symbol: 'y=T_2(x)'
+  definition: >-
+    הגרף של $T_2$, פולינום טיילור מסדר 2 סביב $x_0$ (כש-$f''(x_0)\ne0$): הפרבולה שיש לה אותו ערך, אותו שיפוע ואותה נגזרת
+    שנייה כמו ל-$f$ ב-$x_0$, ולכן היא מתעקמת כמו הגרף ובאותו כיוון. המשיק הוא הגרף של $T_1$.
+  reject: []
+  lesson: '6.1'

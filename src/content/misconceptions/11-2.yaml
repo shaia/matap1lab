@@ -1,0 +1,74 @@
+# Misconceptions first detected in lesson 11.2 (parametrised surfaces, tangent vectors, normal, tangent plane).
+- id: MC-c11-sphere-angle-convention
+  title: מחליפים את תפקידי הזוויות בקואורדינטות כדוריות
+  belief: >-
+    בספירה $z=R\sin\theta$, או ש-$\theta$ היא זווית במישור $xy$ ו-$\varphi$ הזווית מציר $z$.
+  truth: >-
+    בקורס הזה $\theta$ היא הזווית מהציר החיובי של $z$ ($0\le\theta\le\pi$) ו-$\varphi$ הזווית במישור $xy$
+    ($0\le\varphi\le2\pi$): $(x,y,z)=(R\sin\theta\cos\varphi,\ R\sin\theta\sin\varphi,\ R\cos\theta)$. בספרים
+    שמשתמשים במוסכמה של תומס (Thomas) האותיות מתחלפות, ואז גם הנוסחאות.
+  remedy: { lesson: '11.2', label: 'פרמטריזציה של ספירה לפי מוסכמת הקורס' }
+
+- id: MC-c11-cone-vs-cylinder
+  title: מבלבלים בין הפרמטריזציה של חרוט לזו של גליל
+  belief: >-
+    $(u\cos v,\ u\sin v,\ u)$ הוא גליל, כי מופיעים בו קוסינוס וסינוס.
+  truth: >-
+    בגליל המרחק מציר $z$ קבוע: $(R\cos v,\ R\sin v,\ u)$. בחרוט המרחק מהציר גדל עם הגובה: ב-$(u\cos v,\ u\sin v,\ u)$
+    המרחק מהציר הוא $u$ והגובה $u$, ולכן $z=\sqrt{x^2+y^2}$.
+  remedy: { lesson: '11.2', label: 'גליל וחרוט: מה קבוע ומה משתנה' }
+
+- id: MC-c11-cylinder-axis
+  title: מניחים שהציר של כל גליל הוא ציר z
+  belief: >-
+    לכל גליל הפרמטריזציה היא $(R\cos u,\ R\sin u,\ v)$.
+  truth: >-
+    הקואורדינטה ש**חסרה** במשוואה היא כיוון הציר. $x^2+z^2=4$ הוא גליל סביב ציר $y$:
+    $(2\cos u,\ v,\ 2\sin u)$. בודקים בהצבה במשוואה.
+  remedy: { lesson: '11.2', label: 'גליל: הציר הוא המשתנה החופשי' }
+
+- id: MC-c11-cross-order
+  title: חושבים שסדר הגורמים במכפלה הווקטורית של הנורמל לא משנה
+  belief: >-
+    $\vec r_u\times\vec r_v$ ו-$\vec r_v\times\vec r_u$ הם אותו נורמל.
+  truth: >-
+    $\vec r_v\times\vec r_u=-\,\vec r_u\times\vec r_v$: אותו ישר, כיוון הפוך. למישור המשיק זה לא משנה, אבל זה קובע את
+    הסימן של כל רכיב, ובהמשך את הסימן של שטף (פרק 13).
+  remedy: { lesson: '11.2', label: 'הנורמל למשטח והכיוון שלו' }
+
+- id: MC-c11-normal-not-cross
+  title: מחשבים נורמל למשטח בלי מכפלה וקטורית
+  belief: >-
+    הנורמל למשטח הוא $\vec r_u+\vec r_v$, או המכפלה הסקלרית $\vec r_u\cdot\vec r_v$.
+  truth: >-
+    $\vec r_u$ ו-$\vec r_v$ משיקים למשטח; הסכום שלהם משיק גם הוא, והמכפלה הסקלרית היא מספר. וקטור שמאונך **לשניהם**
+    הוא $\vec r_u\times\vec r_v$, והוא הנורמל.
+  remedy: { lesson: '11.2', label: 'וקטורים משיקים ונורמל' }
+
+- id: MC-c11-tangent-vector-as-normal
+  title: לוקחים וקטור משיק כנורמל של המישור המשיק
+  belief: >-
+    את המישור המשיק אפשר לכתוב עם $\vec r_u$ (או $\vec r_v$) בתפקיד הנורמל.
+  truth: >-
+    $\vec r_u$ ו-$\vec r_v$ **שוכבים** במישור המשיק. הנורמל שלו הוא $\vec n=\vec r_u\times\vec r_v$, והמישור הוא
+    $\vec n\cdot\big((x,y,z)-P\big)=0$.
+  remedy: { lesson: '11.2', label: 'המישור המשיק למשטח בפרמטריזציה' }
+
+- id: MC-c11-sphere-normal-no-sin
+  title: שוכחים את הגורם סינוס תטא באורך הנורמל של ספירה
+  belief: >-
+    בפרמטריזציה הכדורית של ספירה ברדיוס $R$, האורך של $\vec r_\theta\times\vec r_\varphi$ הוא $R^2$ (או $R$), ולכן
+    $dS=R^2\,d\theta\,d\varphi$.
+  truth: >-
+    $\vec r_\theta\times\vec r_\varphi=R\sin\theta\cdot\vec r$, ולכן $|\vec r_\theta\times\vec r_\varphi|=R^2\sin\theta$ ו-
+    $dS=R^2\sin\theta\,d\theta\,d\varphi$. הגורם $\sin\theta$ מתאפס בקטבים: שם קווי האורך מתכנסים לנקודה.
+  remedy: { lesson: '11.2', label: 'הנורמל של הספירה' }
+
+- id: MC-c11-plane-through-point-enough
+  title: חושבים שמישור שעובר בנקודה של המשטח משיק לו בה
+  belief: >-
+    כדי לבדוק שמישור משיק למשטח בנקודה $P$ מספיק לבדוק ש-$P$ נמצאת על המישור.
+  truth: >-
+    דרך $P$ עוברים אינסוף מישורים. המישור המשיק הוא היחיד שהנורמל שלו מאונך לכל הווקטורים המשיקים, כלומר מקביל
+    ל-$\vec r_u\times\vec r_v$ (או לגרדיאנט, במשטח גובה).
+  remedy: { lesson: '11.2', label: 'מישור משיק: נקודה וגם נורמל' }

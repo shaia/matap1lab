@@ -1,0 +1,20 @@
+# Terms first defined in lesson 9.3 (arc length).
+- id: arc-length
+  term: אורך עקום
+  en: arc length
+  symbol: 'L=\int_a^b|\vec r\,''(t)|\,dt'
+  definition: >-
+    האורך של עקום שעוברים עליו פעם אחת: $L=\int_a^b|\vec r\,'(t)|\,dt$, הגבול של אורכי קווים שבורים שקודקודיהם על
+    העקום. הוא אינו תלוי בפרמטריזציה. לגרף $y=f(x)$: $\int_a^b\sqrt{1+f'^2}\,dx$; לעקום קוטבי $r=f(\theta)$:
+    $\int\sqrt{r^2+r'^2}\,d\theta$.
+  reject: []
+  lesson: '9.3'
+- id: arc-length-parametrisation
+  term: פרמטריזציה לפי אורך
+  en: arc-length parametrisation
+  symbol: '|\vec\rho\,''(s)|=1'
+  definition: >-
+    פרמטריזציה $\vec\rho(s)$ שבה הפרמטר $s$ הוא הדרך שנעברה מנקודת ההתחלה, ולכן $|\vec\rho\,'(s)|=1$. מקבלים אותה
+    מ-$s(t)=\int_{t_0}^t|\vec r\,'|$: הופכים ל-$t(s)$ ומציבים.
+  reject: []
+  lesson: '9.3'

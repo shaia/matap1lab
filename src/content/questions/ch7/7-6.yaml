@@ -1,0 +1,289 @@
+# Lesson 7.6 — tables and strategy.
+# Objectives (src/course.ts):
+#   OBJ-7.6-1  use a table of integrals after completing the square or a substitution that brings the integral to a form in the table
+#   OBJ-7.6-2  choose the right method for a given integral
+#   OBJ-7.6-3  check an answer by differentiation
+# This lesson is the rehearsal for the computerised gateway test: mixed integrals, method choice, checking by differentiation.
+# Keys recomputed in screens/tools/recompute-ch7.py.
+chapter: 7
+questions:
+  - id: Q-7.6-complete-atan
+    type: expr
+    objectives: [OBJ-7.6-1]
+    level: basic
+    prompt: 'חשבו $\int\frac{dx}{x^2-6x+13}$, בהשלמה לריבוע ובטבלה $\int\frac{du}{u^2+a^2}=\frac1a\arctan\frac ua+C$.'
+    answer: 'atan((x-3)/2)/2'
+    answerTex: '$\frac12\arctan\frac{x-3}{2}+C$'
+    variables: [x]
+    domain: [0, 6]
+    upToConstant: true
+    correctFeedback: 'נכון. $x^2-6x+13=(x-3)^2+4$; $u=x-3$, $a=2$.'
+    wrongFeedback: 'השלימו לריבוע: $x^2-6x+9+4$. מה $u$ ומה $a$?'
+    commonWrong:
+      - expr: 'atan((x-3)/2)'
+        feedback: 'בטבלה יש $\frac1a$ לפני ה-$\arctan$: חסר $\frac12$.'
+        misconception: MC-c7-inverse-trig-scale
+      - expr: 'atan(x/2)/2'
+        feedback: 'המשתנה בטבלה הוא $u=x-3$, לא $x$.'
+        misconception: MC-c7-complete-square-shift
+    hints: ['$x^2-6x+13=(x-3)^2+4$.']
+
+  - id: Q-7.6-complete-qual
+    type: mc
+    objectives: [OBJ-7.6-1]
+    qualitative: true
+    level: basic
+    prompt: 'כדי להשתמש בשורה $\int\frac{du}{u^2+a^2}$ של הטבלה לחישוב $\int\frac{dx}{x^2+4x+8}$, מה בוחרים?'
+    choices:
+      - text: '$u=x+2$ ו-$a=2$'
+        correct: true
+        feedback: 'נכון. $x^2+4x+8=(x+2)^2+4$, ו-$du=dx$. התשובה $\frac12\arctan\frac{x+2}{2}+C$.'
+      - text: '$u=x$ ו-$a=\sqrt8$'
+        feedback: 'המכנה אינו $x^2+8$: האיבר $4x$ מחייב השלמה לריבוע, ואחריה המשתנה הוא $x+2$.'
+        misconception: MC-c7-complete-square-shift
+      - text: '$u=x+4$ ו-$a=2$'
+        feedback: 'בהשלמה לריבוע לוקחים חצי מהמקדם של $x$: $x^2+4x=(x+2)^2-4$.'
+        misconception: MC-c7-complete-square-shift
+    hints: ['$x^2+4x=(x+2)^2-4$.']
+
+  - id: Q-7.6-complete-asin
+    type: expr
+    objectives: [OBJ-7.6-1]
+    level: mid
+    prompt: 'חשבו $\int\frac{dx}{\sqrt{3+2x-x^2}}$ ל-$-1<x<3$, בעזרת $\int\frac{du}{\sqrt{a^2-u^2}}=\arcsin\frac ua+C$.'
+    answer: 'asin((x-1)/2)'
+    answerTex: '$\arcsin\frac{x-1}{2}+C$'
+    variables: [x]
+    domain: [-0.5, 2.5]
+    upToConstant: true
+    correctFeedback: 'נכון. $3+2x-x^2=4-(x-1)^2$; $u=x-1$, $a=2$, ובשורה של $\arcsin$ אין $\frac1a$.'
+    wrongFeedback: 'כתבו $3+2x-x^2=-(x^2-2x)+3$ והשלימו לריבוע בתוך הסוגריים.'
+    commonWrong:
+      - expr: 'asin(x-1)'
+        feedback: 'אחרי ההשלמה $a^2=4$, כלומר $a=2$: בתוך ה-$\arcsin$ צריך $\frac{x-1}{2}$.'
+        misconception: MC-c7-inverse-trig-scale
+      - expr: 'asin(x/2)'
+        feedback: 'המשתנה בטבלה הוא $u=x-1$, לא $x$.'
+        misconception: MC-c7-complete-square-shift
+    hints: ['$3+2x-x^2=4-(x-1)^2$.']
+
+  - id: Q-7.6-table-log
+    type: expr
+    objectives: [OBJ-7.6-1]
+    level: mid
+    prompt: >-
+      בטבלה: $\int\frac{du}{\sqrt{u^2+a^2}}=\ln\left(u+\sqrt{u^2+a^2}\right)+C$. חשבו $\int\frac{dx}{\sqrt{x^2+2x+5}}$.
+    answer: 'log(x+1+sqrt(x^2+2*x+5))'
+    answerTex: '$\ln\left(x+1+\sqrt{x^2+2x+5}\right)+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $x^2+2x+5=(x+1)^2+4$, ועם $u=x+1$: $\ln\left(x+1+\sqrt{(x+1)^2+4}\right)$, ו-$(x+1)^2+4$ הוא שוב $x^2+2x+5$.
+    wrongFeedback: 'השלימו לריבוע והציבו $u=x+1$ בשני המקומות של הנוסחה.'
+    commonWrong:
+      - expr: 'log(x+sqrt(x^2+2*x+5))'
+        feedback: 'בנוסחה מופיע $u$ גם מחוץ לשורש: $u=x+1$, ולא $x$.'
+        misconception: MC-c7-complete-square-shift
+    hints: ['$x^2+2x+5=(x+1)^2+4$.']
+
+  - id: Q-7.6-method-sub
+    type: mc
+    objectives: [OBJ-7.6-2]
+    qualitative: true
+    level: basic
+    prompt: 'באיזו שיטה כדאי לחשב את $\int xe^{x^2}\,dx$?'
+    choices:
+      - text: 'הצבה $u=x^2$'
+        correct: true
+        feedback: 'נכון. $du=2x\,dx$ והגורם $x$ קיים: $\frac12\int e^u\,du=\frac12e^{x^2}+C$.'
+      - text: 'אינטגרציה בחלקים עם $u=x$, $v''=e^{x^2}$'
+        feedback: 'אין קדומה אלמנטרית ל-$e^{x^2}$, ולכן אי אפשר לבצע לו אינטגרציה. מכפלה אינה תמיד סימן לחלקים.'
+        misconception: MC-c7-parts-wrong-choice
+      - text: 'שברים חלקיים'
+        feedback: 'זו שיטה לפונקציות רציונליות. כאן יש הרכבה, $e^{x^2}$, עם הנגזרת הפנימית לידה.'
+        misconception: MC-c7-parts-wrong-choice
+    hints: ['האם הנגזרת של הביטוי הפנימי מופיעה כגורם?']
+
+  - id: Q-7.6-method-xlnx
+    type: mc
+    objectives: [OBJ-7.6-2]
+    qualitative: true
+    level: mid
+    prompt: 'באיזו שיטה כדאי לחשב את $\int x\ln x\,dx$?'
+    choices:
+      - text: 'בחלקים: גוזרים את $\ln x$ ומבצעים אינטגרציה ל-$x$'
+        correct: true
+        feedback: 'נכון. $\frac{x^2}{2}\ln x-\int\frac{x^2}{2}\cdot\frac1x\,dx=\frac{x^2}{2}\ln x-\frac{x^2}{4}+C$.'
+      - text: 'בחלקים: גוזרים את $x$ ומבצעים אינטגרציה ל-$\ln x$'
+        feedback: 'אז צריך קודם $\int\ln x\,dx$, וגם אחר כך נשאר אינטגרל מסובך יותר. גוזרים את הלוגריתם.'
+        misconception: MC-c7-parts-wrong-choice
+      - text: 'הצבה $u=\ln x$'
+        feedback: '$du=\frac{dx}{x}$, אבל באינטגרל יש $x$ במונה ולא במכנה: נשאר $\int ue^{2u}\,du$, שוב בחלקים.'
+        misconception: MC-c7-subst-no-du
+    hints: ['איזה גורם נעשה פשוט בגזירה?']
+
+  - id: Q-7.6-method-cancel
+    type: mc
+    objectives: [OBJ-7.6-2]
+    qualitative: true
+    level: mid
+    prompt: 'מה הצעד הראשון הנכון ב-$\int\frac{x+1}{x^2-1}\,dx$, ומה התשובה?'
+    choices:
+      - text: 'לצמצם: $\frac{x+1}{(x-1)(x+1)}=\frac{1}{x-1}$, והתשובה $\ln|x-1|+C$'
+        correct: true
+        feedback: 'נכון. לפני כל שיטה מפשטים. (שברים חלקיים היו מגיעים לאותה תשובה בדרך ארוכה.)'
+      - text: 'המונה הוא נגזרת המכנה, והתשובה $\ln\left|x^2-1\right|+C$'
+        feedback: 'הנגזרת של $x^2-1$ היא $2x$, לא $x+1$. בדקו בגזירה: $\frac{2x}{x^2-1}$.'
+        misconception: MC-c7-log-of-denominator
+      - text: 'יש $x^2$ במכנה, והתשובה כוללת $\arctan x$'
+        feedback: '$\arctan$ בא מסכום ריבועים, $x^2+1$. $x^2-1$ מתפרק לגורמים.'
+        misconception: MC-c7-atan-vs-log
+    hints: ['$x^2-1=(x-1)(x+1)$.']
+
+  - id: Q-7.6-check-true
+    type: twotier
+    objectives: [OBJ-7.6-3]
+    qualitative: true
+    level: basic
+    prompt: 'נכון או לא: $\int xe^{2x}\,dx=\left(\frac x2-\frac14\right)e^{2x}+C$.'
+    choices:
+      - text: נכון
+        correct: true
+        feedback: >-
+          נכון. גוזרים: $\frac12e^{2x}+\left(\frac x2-\frac14\right)2e^{2x}=\frac12e^{2x}+xe^{2x}-\frac12e^{2x}=xe^{2x}$.
+      - text: לא נכון
+        feedback: 'גזרו את התשובה בכלל המכפלה: מתקבל בדיוק $xe^{2x}$. כך בודקים כל אינטגרל לא מסוים.'
+        misconception: MC-c7-unique-antiderivative-form
+    reasons:
+      - text: 'הנגזרת של אגף ימין היא בדיוק $xe^{2x}$'
+        correct: true
+        feedback: 'בדיוק. זו הבדיקה הכי מהירה, והיא לא דורשת לפתור את האינטגרל מחדש.'
+      - text: 'כי אינטגרציה בחלקים תמיד נותנת תשובה מהצורה (פולינום)$\cdot e^{2x}$'
+        feedback: 'צורה נכונה אינה מבטיחה מקדמים נכונים: $\left(\frac x2+\frac14\right)e^{2x}$ באותה צורה ושגוי. בודקים בגזירה.'
+        misconception: MC-c7-unique-antiderivative-form
+      - text: 'אי אפשר לדעת בלי לחשב את האינטגרל בעצמנו'
+        feedback: 'אפשר: מספיק לגזור את התשובה המוצעת. גזירה תמיד קלה יותר מאינטגרציה.'
+        misconception: MC-c7-unique-antiderivative-form
+    hints: ['גזרו את אגף ימין.']
+
+  - id: Q-7.6-find-slip
+    type: mc
+    objectives: [OBJ-7.6-3]
+    qualitative: true
+    level: mid
+    prompt: 'סטודנטית כתבה $\int\frac{dx}{2x+3}=\ln|2x+3|+C$. מה מגלה בדיקה בגזירה?'
+    choices:
+      - text: 'הנגזרת יוצאת $\frac{2}{2x+3}$, פי 2 מהנדרש; הנכון $\frac12\ln|2x+3|+C$'
+        correct: true
+        feedback: 'נכון. כלל השרשרת מוסיף את הנגזרת הפנימית 2, ולכן באינטגרל מחלקים בה.'
+      - text: 'התשובה נכונה, כי $\int\frac{du}{u}=\ln|u|$'
+        feedback: 'עם $u=2x+3$, $dx=\frac{du}{2}$: החצי חסר. בגזירה רואים את זה מיד.'
+        misconception: MC-c7-subst-forget-factor
+      - text: 'צריך $\ln(2x+3)$ בלי ערך מוחלט'
+        feedback: 'הערך המוחלט נכון (כשהביטוי שלילי). הבעיה בקבוע $\frac12$.'
+        misconception: MC-c7-subst-forget-factor
+    hints: ['גזרו את $\ln|2x+3|$ בכלל השרשרת.']
+
+  - id: Q-7.6-check-numeric
+    type: numeric
+    objectives: [OBJ-7.6-3]
+    level: mid
+    prompt: >-
+      מישהו טוען ש-$F(x)=x\arctan x-\ln\left(1+x^2\right)$ היא קדומה של $\arctan x$. חשבו את $F'(1)$ והשוו ל-$\arctan1=\frac\pi4$.
+    answer: 0.285398163397
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון: $F'(x)=\arctan x+\frac{x}{1+x^2}-\frac{2x}{1+x^2}=\arctan x-\frac{x}{1+x^2}$, ולכן $F'(1)=\frac\pi4-\frac12\ne\frac\pi4$. הטענה
+      שגויה: צריך $\frac12\ln(1+x^2)$.
+    wrongFeedback: 'גזרו את $F$: כלל מכפלה ל-$x\arctan x$, וכלל שרשרת ל-$\ln(1+x^2)$.'
+    hints: ['$\left(\ln(1+x^2)\right)''=\frac{2x}{1+x^2}$.']
+
+  - id: Q-7.6-x-x4
+    type: expr
+    objectives: [OBJ-7.6-2]
+    level: mid
+    prompt: 'חשבו $\int\frac{x}{x^4+1}\,dx$.'
+    answer: 'atan(x^2)/2'
+    answerTex: '$\frac12\arctan\left(x^2\right)+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: 'נכון. $u=x^2$, $du=2x\,dx$: $\frac12\int\frac{du}{u^2+1}=\frac12\arctan u$.'
+    wrongFeedback: 'שימו לב: $x^4=(x^2)^2$, ו-$x$ במונה הוא חצי הנגזרת של $x^2$.'
+    commonWrong:
+      - expr: 'log(x^4+1)/4'
+        feedback: 'זו הקדומה של $\frac{x^3}{x^4+1}$. כאן המונה $x$, לא $x^3$: הוא הנגזרת של $x^2$, לא של $x^4+1$.'
+        misconception: MC-c7-log-of-denominator
+      - expr: 'atan(x^2)'
+        feedback: '$x\,dx=\frac{du}{2}$: חסר החצי.'
+        misconception: MC-c7-subst-forget-factor
+    hints: ['$u=x^2$.']
+
+  - id: Q-7.6-rank-strategy
+    type: rank
+    objectives: [OBJ-7.6-2]
+    qualitative: true
+    level: mid
+    prompt: 'סדרו את רשימת הבדיקה לאינטגרל שלא מופיע ישר בטבלה, מהשאלה הראשונה שכדאי לשאול ועד האחרונה.'
+    help: סדרו את שלבי השיטה מהראשון לאחרון.
+    items:
+      - id: a
+        label: 'אפשר לפשט? (צמצום, פיצול לסכום, זהות טריגונומטרית, חילוק פולינומים)'
+      - id: b
+        label: 'יש ביטוי פנימי שנגזרתו מופיעה כגורם? הצבה.'
+      - id: c
+        label: 'מכפלה של שני סוגי פונקציות (פולינום כפול $e^x$, $\sin x$ או $\ln x$)? אינטגרציה בחלקים.'
+      - id: d
+        label: 'פונקציה רציונלית? שברים חלקיים; שורש של ביטוי ריבועי? השלמה לריבוע והצבה טריגונומטרית.'
+      - id: e
+        label: 'גוזרים את התוצאה ובודקים שמתקבל האינטגרנד.'
+    order: [a, b, [c, d], e]
+    correctFeedback: >-
+      נכון. קודם מפשטים והצבה (הן הכי זולות), אחר כך השיטות לפי סוג האינטגרנד, ובסוף תמיד בדיקה בגזירה.
+    wrongFeedback: >-
+      הבדיקה בגזירה באה אחרונה, והפישוט ראשון: לפעמים הוא חוסך את כל השאר (כמו $\frac{x+1}{x^2-1}=\frac{1}{x-1}$).
+
+  - id: Q-7.6-exp-ratio
+    type: expr
+    objectives: [OBJ-7.6-2]
+    level: exam
+    prompt: 'חשבו $\int\frac{e^{2x}}{e^x+1}\,dx$.'
+    answer: 'exp(x) - log(exp(x)+1)'
+    answerTex: '$e^x-\ln\left(e^x+1\right)+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $u=e^x$, $du=e^x\,dx$: $\int\frac{u\,du}{u+1}=\int\left(1-\frac{1}{u+1}\right)du=u-\ln(u+1)+C$.
+    wrongFeedback: 'הציבו $u=e^x$ (אז $e^{2x}\,dx=u\,du$), וחלקו את $\frac{u}{u+1}$.'
+    commonWrong:
+      - expr: 'log(exp(x)+1)'
+        feedback: 'הנגזרת של $e^x+1$ היא $e^x$, לא $e^{2x}$: זו הקדומה של $\frac{e^x}{e^x+1}$.'
+        misconception: MC-c7-log-of-denominator
+      - expr: 'exp(x) + log(exp(x)+1)'
+        feedback: '$\frac{u}{u+1}=1-\frac{1}{u+1}$: השארית בחילוק שלילית.'
+        misconception: MC-c7-division-remainder-sign
+    hints: ['$u=e^x$.']
+
+  - id: Q-7.6-sqrtx-lnx
+    type: expr
+    objectives: [OBJ-7.6-2]
+    level: exam
+    prompt: 'חשבו $\int\sqrt x\,\ln x\,dx$ ל-$x>0$.'
+    answer: '2/3*x^(3/2)*log(x) - 4/9*x^(3/2)'
+    answerTex: '$\frac23x^{3/2}\ln x-\frac49x^{3/2}+C$'
+    variables: [x]
+    domain: [0.3, 3]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. בחלקים, גוזרים את $\ln x$: $\frac23x^{3/2}\ln x-\int\frac23x^{3/2}\cdot\frac1x\,dx=\frac23x^{3/2}\ln x-\frac23\cdot\frac23x^{3/2}$.
+    wrongFeedback: 'גזרו את $\ln x$ ובצעו אינטגרציה ל-$x^{1/2}$; האינטגרל שנשאר הוא $\frac23\int x^{1/2}\,dx$.'
+    commonWrong:
+      - expr: '2/3*x^(3/2)*log(x)'
+        feedback: 'חסר האינטגרל שנשאר, $-\frac23\int x^{1/2}\,dx=-\frac49x^{3/2}$.'
+        misconception: MC-c7-parts-drop-integral
+      - expr: '2/3*x^(3/2)*log(x) - 2/3*x^(3/2)'
+        feedback: '$\frac23\int x^{1/2}\,dx=\frac23\cdot\frac23x^{3/2}=\frac49x^{3/2}$: את $\frac23$ מקבלים פעמיים.'
+        misconception: MC-c7-power-rule-multiply
+    hints: ['$u=\ln x$, $v''=x^{1/2}$, $v=\frac23x^{3/2}$.']

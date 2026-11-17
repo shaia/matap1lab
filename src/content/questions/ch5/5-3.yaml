@@ -1,0 +1,399 @@
+# Lesson 5.3 — the rules of differentiation and the chain rule (notes pp. 8–9).
+# Objectives (src/course.ts):
+#   OBJ-5.3-1  differentiate a sum, a product and a quotient
+#   OBJ-5.3-2  differentiate a composition by the chain rule, also in several layers
+#   OBJ-5.3-3  differentiate functions that combine all the rules, and check a result by substituting a point
+# The derivatives of sin, cos, tan, e^x and ln x are known from high school (chapter 0); a^x, log_a, the hyperbolic
+# and the inverse trigonometric functions come in 5.4–5.5. Every key is recomputed in screens/tools/checks_ch5.py.
+# This lesson feeds the gateway test on differentiation: most questions ask for a derivative as a formula.
+chapter: 5
+questions:
+  - id: Q-5.3-product-basic
+    type: expr
+    objectives: [OBJ-5.3-1]
+    level: basic
+    prompt: 'גזרו: $f(x)=x^2\sin x$. כתבו את $f''(x)$.'
+    answer: '2*x*sin(x) + x^2*cos(x)'
+    answerTex: '$f''(x)=2x\sin x+x^2\cos x$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. כלל המכפלה: $(uv)'=u'v+uv'$ עם $u=x^2$, $v=\sin x$, ולכן $2x\cdot\sin x+x^2\cdot\cos x$.
+    wrongFeedback: >-
+      זו מכפלה של שתי פונקציות: גזרו כל גורם פעם אחת, כשהגורם השני נשאר כמו שהוא, וחברו.
+    commonWrong:
+      - expr: '2*x*cos(x)'
+        feedback: >-
+          גזרתם כל גורם לחוד וכפלתם: $u'v'$. הנגזרת של מכפלה אינה מכפלת הנגזרות; בדיקה: $u=v=x$ היה נותן $(x^2)'=1$.
+        misconception: MC-c5-product-of-derivatives
+    hints: ['$(uv)''=u''v+uv''$']
+
+  - id: Q-5.3-quotient-rational
+    type: expr
+    objectives: [OBJ-5.3-1]
+    level: basic
+    prompt: 'גזרו: $f(x)=\dfrac{x}{x^2+1}$. כתבו את $f''(x)$.'
+    answer: '(1 - x^2)/(x^2 + 1)^2'
+    answerTex: '$f''(x)=\dfrac{1\cdot(x^2+1)-x\cdot2x}{(x^2+1)^2}=\dfrac{1-x^2}{(x^2+1)^2}$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. כלל המנה עם $u=x$, $v=x^2+1$: $\frac{u'v-uv'}{v^2}=\frac{(x^2+1)-2x^2}{(x^2+1)^2}$.
+    wrongFeedback: >-
+      כלל המנה: נגזרת המונה כפול המכנה, **פחות** המונה כפול נגזרת המכנה, הכול חלקי המכנה בריבוע.
+    commonWrong:
+      - expr: '(3*x^2 + 1)/(x^2 + 1)^2'
+        feedback: >-
+          כתבתם פלוס במונה: $\frac{u'v+uv'}{v^2}$. כך נכתב בטעות גם בסיכומים (עמ׳ 8). בכלל המנה יש **מינוס**.
+        misconception: MC-c5-quotient-plus
+      - expr: '(x^2 - 1)/(x^2 + 1)^2'
+        feedback: >-
+          הפכתם את הסדר במונה, $uv'-u'v$, וקיבלתם את הנגזרת עם סימן הפוך. הסדר: קודם $u'v$.
+        misconception: MC-c5-quotient-order
+      - expr: '1/(2*x)'
+        feedback: >-
+          זה $\frac{u'}{v'}=\frac{1}{2x}$: גזרתם את המונה ואת המכנה לחוד. נגזרת של מנה אינה מנת הנגזרות.
+        misconception: MC-c5-product-of-derivatives
+    hints: ['$\left(\frac uv\right)''=\frac{u''v-uv''}{v^2}$']
+
+  - id: Q-5.3-quotient-check
+    type: mc
+    objectives: [OBJ-5.3-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      בסיכומים (עמ׳ 8) כלל המנה כתוב כך: $\left(\frac uv\right)'=\frac{u'v+uv'}{v^2}$. איזו בדיקה פשוטה מראה שהנוסחה
+      הזו שגויה?
+    choices:
+      - text: 'להציב $u=1$, $v=x$: הנוסחה נותנת $\left(\frac1x\right)''=\frac{1}{x^2}$, אבל $\frac1x$ יורדת ונגזרתה $-\frac{1}{x^2}$'
+        correct: true
+        feedback: >-
+          נכון. מקרה פשוט שהתשובה שלו ידועה מגלה את הטעות: עם מינוס במונה מתקבל $\frac{0\cdot x-1\cdot1}{x^2}=-\frac1{x^2}$.
+          התאמה במקרה פרטי לא הייתה מוכיחה את הנוסחה, אבל אי-התאמה מפריכה אותה.
+      - text: 'להציב $u=v$: שני הצדדים צריכים לתת 0, והנוסחה נותנת $\frac{2uu''}{u^2}$, ולכן הטעות היא במכנה'
+        feedback: >-
+          ההצבה $u=v$ אכן מגלה טעות ($\frac uv=1$ ונגזרתו 0), אבל המכנה $v^2$ נכון: מה שצריך לתקן הוא הסימן במונה, ואז
+          מתקבל $\frac{u'u-uu'}{u^2}=0$.
+        misconception: MC-c5-quotient-order
+      - text: 'אין צורך לבדוק: כלל המנה נובע מכלל המכפלה, ושם יש פלוס'
+        feedback: >-
+          כשכותבים $\frac uv=u\cdot v^{-1}$, כלל השרשרת נותן $(v^{-1})'=-v^{-2}v'$, ומשם בא המינוס. הפלוס של כלל המכפלה
+          אינו עובר כמו שהוא.
+        misconception: MC-c5-quotient-plus
+      - text: 'לגזור את המונה ואת המכנה לחוד ולהשוות ל-$\frac{u''}{v''}$'
+        feedback: >-
+          $\frac{u'}{v'}$ אינו הנגזרת של מנה בכלל (ל-$\frac xx=1$ הוא נותן 1 במקום 0), ולכן אינו יכול לשמש בדיקה.
+        misconception: MC-c5-product-of-derivatives
+
+  - id: Q-5.3-chain-meaning
+    type: mc
+    objectives: [OBJ-5.3-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $f(x)=u\big(v(x)\big)$, כש-$u$ ו-$v$ גזירות. מהי $f'(x)$?
+    choices:
+      - text: "$u'\\big(v(x)\\big)\\cdot v'(x)$"
+        correct: true
+        feedback: >-
+          נכון. גוזרים את השכבה החיצונית **בערך של הפנימית**, וכופלים בנגזרת הפנימית. בסימון לייבניץ, עם $y=v(x)$:
+          $\frac{df}{dx}=\frac{du}{dy}\cdot\frac{dy}{dx}$.
+      - text: "$u'(x)\\cdot v'(x)$"
+        feedback: >-
+          הנגזרת החיצונית מחושבת ב-$v(x)$, לא ב-$x$ (בסיכומים, עמ׳ 9, נכתב בשורה אחת $u'(x)$ במקום $u'(y)$). למשל
+          $\big(\sin(x^3)\big)'$ אינו $\cos x\cdot3x^2$.
+        misconception: MC-c5-chain-outer-at-x
+      - text: "$u'\\big(v'(x)\\big)$"
+        feedback: >-
+          הפנימית נשארת **כמו שהיא** בתוך $u'$, ונגזרתה באה ככופל. $\big(\sin(x^3)\big)'$ אינו $\cos(3x^2)$.
+        misconception: MC-c5-chain-inner-inside
+      - text: "$u'\\big(v(x)\\big)$"
+        feedback: >-
+          חסרה הנגזרת הפנימית $v'(x)$. ל-$\sin(2x)$ זה היה נותן $\cos(2x)$, אבל הגרף של $\sin(2x)$ תלול פי 2.
+        misconception: MC-c5-chain-missing-inner
+
+  - id: Q-5.3-sin-x3
+    type: expr
+    objectives: [OBJ-5.3-2]
+    level: basic
+    prompt: '(מהסיכומים, עמ׳ 9) גזרו: $f(x)=\sin(x^3)$. כתבו את $f''(x)$.'
+    answer: '3*x^2*cos(x^3)'
+    answerTex: '$f''(x)=\cos(x^3)\cdot3x^2$'
+    variables: [x]
+    domain: [-1.5, 1.5]
+    correctFeedback: >-
+      נכון. השכבה החיצונית $\sin y$ נגזרת ל-$\cos y$ בערך $y=x^3$, והפנימית $x^3$ ל-$3x^2$. (בסיכומים נכתב
+      $-\cos(x^3)\cdot3x^2$: הסימן שם שגוי.)
+    wrongFeedback: >-
+      זיהו את השכבות: בחוץ $\sin y$, בפנים $y=x^3$. גזרו את החיצונית בערך של הפנימית, וכפלו בנגזרת הפנימית.
+    commonWrong:
+      - expr: 'cos(x^3)'
+        feedback: >-
+          חסרה הנגזרת הפנימית $3x^2$. אחרי $\cos(x^3)$ כופלים בנגזרת של מה שבתוך הסינוס.
+        misconception: MC-c5-chain-missing-inner
+      - expr: '-3*x^2*cos(x^3)'
+        feedback: >-
+          $(\sin y)'=+\cos y$; המינוס שייך לנגזרת של קוסינוס. זו בדיוק הטעות שבסיכומים, עמ׳ 9.
+        misconception: MC-c5-trig-derivative-sign
+      - expr: 'cos(3*x^2)'
+        feedback: >-
+          הכנסתם את הנגזרת הפנימית לתוך הקוסינוס. הפנימית נשארת $x^3$ בתוך $\cos$, ו-$3x^2$ בא ככופל.
+        misconception: MC-c5-chain-inner-inside
+
+  - id: Q-5.3-sqrt-chain
+    type: expr
+    objectives: [OBJ-5.3-2]
+    level: basic
+    prompt: 'גזרו: $f(x)=\sqrt{1+x^2}$. כתבו את $f''(x)$.'
+    answer: 'x/sqrt(1 + x^2)'
+    answerTex: '$f''(x)=\dfrac{1}{2\sqrt{1+x^2}}\cdot2x=\dfrac{x}{\sqrt{1+x^2}}$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. $(\sqrt y)'=\frac{1}{2\sqrt y}$ בערך $y=1+x^2$, כפול $(1+x^2)'=2x$, והשתיים מצטמצמות.
+    wrongFeedback: >-
+      בחוץ שורש, בפנים $1+x^2$. אחרי $\frac{1}{2\sqrt{1+x^2}}$ חסר עוד כופל.
+    commonWrong:
+      - expr: '1/(2*sqrt(1 + x^2))'
+        feedback: >-
+          זו רק הנגזרת החיצונית. כופלים בנגזרת הפנימית $2x$. בדיקה: ב-$x=0$ הגרף של $\sqrt{1+x^2}$ בנקודת מינימום, ושם
+          הנגזרת חייבת להיות 0, לא $\frac12$.
+        misconception: MC-c5-chain-missing-inner
+
+  - id: Q-5.3-tan-quotient
+    type: expr
+    objectives: [OBJ-5.3-1]
+    level: mid
+    prompt: >-
+      גזרו את $\tan x=\frac{\sin x}{\cos x}$ בכלל המנה, בקטע $\left(-\frac\pi2,\frac\pi2\right)$, ופשטו. כתבו את התוצאה
+      (השתמשו ב-cos).
+    answer: '1/cos(x)^2'
+    answerTex: '$(\tan x)''=\dfrac{\cos x\cos x-\sin x(-\sin x)}{\cos^2x}=\dfrac{1}{\cos^2x}$'
+    variables: [x]
+    domain: [-1.2, 1.2]
+    correctFeedback: >-
+      נכון. המונה הוא $\cos^2x+\sin^2x=1$. זו הנוסחה מהטבלה, $(\tan x)'=\frac{1}{\cos^2x}=1+\tan^2x$.
+    wrongFeedback: >-
+      $u=\sin x$, $v=\cos x$, $u'=\cos x$, $v'=-\sin x$. הציבו ב-$\frac{u'v-uv'}{v^2}$ והשתמשו ב-$\sin^2x+\cos^2x=1$.
+    commonWrong:
+      - expr: 'cos(2*x)/cos(x)^2'
+        feedback: >-
+          המונה יצא $\cos^2x-\sin^2x=\cos2x$: כתבתם פלוס בכלל המנה (או שכחתם את המינוס של $(\cos x)'$). עם שני המינוסים
+          במקומם מתקבל $\cos^2x+\sin^2x=1$.
+        misconception: MC-c5-quotient-plus
+      - expr: '-1/cos(x)^2'
+        feedback: >-
+          הסימן הפוך: הפכתם את הסדר במונה. $\tan x$ עולה בקטע, ולכן נגזרתו חיובית.
+        misconception: MC-c5-quotient-order
+
+  - id: Q-5.3-chain-table
+    type: numeric
+    objectives: [OBJ-5.3-2]
+    level: mid
+    prompt: >-
+      נתון: $g(1)=3$, $g'(1)=2$, $f'(1)=4$, $f'(3)=-1$. תהי $h(x)=f\big(g(x)\big)$. חשבו את $h'(1)$.
+    answer: -2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $h'(1)=f'\big(g(1)\big)\cdot g'(1)=f'(3)\cdot2=-2$. הנתון $f'(1)=4$ הוא מלכודת.
+    wrongFeedback: >-
+      הנגזרת החיצונית מחושבת בערך של הפנימית: באיזו נקודה $f'$ צריכה להיות מחושבת?
+    commonWrong:
+      - value: 8
+        feedback: >-
+          $8=f'(1)\cdot g'(1)$: חישבתם את $f'$ ב-1 במקום ב-$g(1)=3$.
+        misconception: MC-c5-chain-outer-at-x
+      - value: -1
+        feedback: >-
+          $-1=f'(3)$ בלבד: חסר הכופל $g'(1)=2$.
+        misconception: MC-c5-chain-missing-inner
+
+  - id: Q-5.3-gauss
+    type: expr
+    objectives: [OBJ-5.3-2]
+    level: mid
+    prompt: 'גזרו: $f(x)=e^{-x^2}$ (פעמון גאוס). כתבו את $f''(x)$.'
+    answer: '-2*x*exp(-x^2)'
+    answerTex: '$f''(x)=-2x\,e^{-x^2}$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. $(e^y)'=e^y$ בערך $y=-x^2$, כפול $(-x^2)'=-2x$. סימן הנגזרת מתאים לגרף: עולה כש-$x<0$, יורד כש-$x>0$.
+    wrongFeedback: >-
+      הנגזרת של $e^y$ היא $e^y$. מה השכבה הפנימית, ומה נגזרתה?
+    commonWrong:
+      - expr: 'exp(-x^2)'
+        feedback: >-
+          חסרה הנגזרת הפנימית $-2x$. הנגזרת של $e^{g(x)}$ היא $g'(x)e^{g(x)}$; רק ל-$g(x)=x$ הכופל הוא 1.
+        misconception: MC-c5-chain-missing-inner
+      - expr: '-x^2*exp(-x^2 - 1)'
+        feedback: >-
+          גזרתם כאילו זו חזקה עם מעריך קבוע: "מורידים את המעריך ומקטינים ב-1". כאן הבסיס $e$ קבוע והמעריך משתנה.
+        misconception: MC-c5-power-rule-on-exponential
+
+  - id: Q-5.3-three-layers
+    type: expr
+    objectives: [OBJ-5.3-2]
+    level: mid
+    prompt: 'גזרו: $f(x)=\cos^3(2x)$, כלומר $\big(\cos(2x)\big)^3$. כתבו את $f''(x)$.'
+    answer: '-6*cos(2*x)^2*sin(2*x)'
+    answerTex: '$f''(x)=3\cos^2(2x)\cdot\big(-\sin(2x)\big)\cdot2=-6\cos^2(2x)\sin(2x)$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. שלוש שכבות: החזקה $y^3$, הקוסינוס, ו-$2x$. כל שכבה נגזרת בערך של מה שבתוכה, והנגזרות מוכפלות.
+    wrongFeedback: >-
+      פרקו: $f=y^3$, $y=\cos w$, $w=2x$. כפלו $3y^2\cdot(-\sin w)\cdot2$ והציבו בחזרה.
+    commonWrong:
+      - expr: '-3*cos(2*x)^2*sin(2*x)'
+        feedback: >-
+          חסר הכופל 2 מהשכבה הפנימית ביותר, $(2x)'=2$. בכמה שכבות כופלים בנגזרת של **כל** שכבה.
+        misconception: MC-c5-chain-missing-inner
+      - expr: '6*cos(2*x)^2*sin(2*x)'
+        feedback: >-
+          הסימן הפוך: $(\cos w)'=-\sin w$. בדיקה: ב-$x$ קטן וחיובי $\cos^3(2x)$ יורדת מ-1, ולכן הנגזרת שלילית.
+        misconception: MC-c5-trig-derivative-sign
+      - expr: '3*cos(2*x)^2'
+        feedback: >-
+          גזרתם רק את השכבה החיצונית (החזקה). אחריה באות עוד שתי שכבות: $-\sin(2x)$ ו-2.
+        misconception: MC-c5-chain-missing-inner
+
+  - id: Q-5.3-one-point
+    type: twotier
+    objectives: [OBJ-5.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סטודנטית גזרה את $f(x)=x^2e^x$ וקיבלה $f'(x)=2xe^x$. כדי לבדוק, הציבה $x=0$: הנוסחה שלה נותנת 0, ומנת ההפרשים
+      של $f$ ב-0 עם $h$ קטן מאוד יוצאת קרובה ל-0. האם הבדיקה מראה שהנגזרת שלה נכונה?
+    choices:
+      - text: 'לא'
+        correct: true
+        feedback: >-
+          נכון. הנכון הוא $f'(x)=2xe^x+x^2e^x$, והאיבר החסר $x^2e^x$ מתאפס בדיוק ב-0. ב-$x=1$ הנוסחה שלה נותנת $2e$,
+          והנגזרת האמיתית $3e$.
+      - text: 'כן'
+        feedback: >-
+          ההתאמה ב-0 מקרית: האיבר $x^2e^x$ שנשכח (כלל המכפלה) שווה 0 שם. נקודה אחת יכולה לגלות טעות, לא להוכיח נכונות.
+        misconception: MC-c5-one-point-proves
+    reasons:
+      - text: 'בנקודה אחת שתי נוסחאות שונות יכולות להסכים, ו-0 נקודה מיוחדת שבה איברים רבים מתאפסים; צריך לבדוק בנקודה "רגילה" כמו $x=1$'
+        correct: true
+        feedback: >-
+          בדיוק. בוחרים נקודת בדיקה שבה אף גורם לא מתאפס, ועדיף כמה נקודות.
+      - text: 'אם הנוסחה נכונה בנקודה אחת, היא נכונה בכל מקום'
+        feedback: >-
+          לא: $2xe^x$ ו-$2xe^x+x^2e^x$ שוות ב-0 ושונות ב-1. התאמה בנקודה היא עדות חלשה, לא הוכחה.
+        misconception: MC-c5-one-point-proves
+      - text: 'מנת הפרשים אינה יכולה לבדוק נגזרת, כי היא רק קירוב'
+        feedback: >-
+          מנת הפרשים עם $h$ קטן היא בדיקה טובה **לגילוי** טעות; הבעיה כאן היא בחירת הנקודה, לא הכלי.
+        misconception: MC-c5-one-point-proves
+
+  - id: Q-5.3-find-slip
+    type: mc
+    objectives: [OBJ-5.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      הנה גזירה של $f(x)=x\sin(x^2)$ בשלושה צעדים. באיזה צעד הטעות?
+
+      (1) כלל המכפלה: $f'(x)=1\cdot\sin(x^2)+x\cdot\big(\sin(x^2)\big)'$.
+
+      (2) $\big(\sin(x^2)\big)'=\cos(x^2)$.
+
+      (3) לכן $f'(x)=\sin(x^2)+x\cos(x^2)$.
+    shuffle: false
+    choices:
+      - text: 'בצעד (1)'
+        feedback: >-
+          צעד (1) נכון: $u=x$, $v=\sin(x^2)$, $(uv)'=u'v+uv'$. כלל המכפלה אינו $u'v'$.
+        misconception: MC-c5-product-of-derivatives
+      - text: 'בצעד (2)'
+        correct: true
+        feedback: >-
+          נכון. חסרה הנגזרת הפנימית: $\big(\sin(x^2)\big)'=2x\cos(x^2)$, ולכן $f'(x)=\sin(x^2)+2x^2\cos(x^2)$.
+      - text: 'בצעד (3)'
+        feedback: >-
+          צעד (3) רק מציב את (2) ב-(1), בלי טעות חדשה. הטעות נכנסה לפניו.
+        misconception: MC-c5-chain-missing-inner
+      - text: 'אין טעות'
+        feedback: >-
+          בדקו את צעד (2): $x^2$ הוא שכבה פנימית, ואחרי $\cos(x^2)$ חייב לבוא הכופל $(x^2)'=2x$.
+        misconception: MC-c5-chain-missing-inner
+
+  - id: Q-5.3-exp-sin
+    type: expr
+    objectives: [OBJ-5.3-3]
+    level: mid
+    prompt: 'גזרו: $f(x)=e^{2x}\sin(3x)$ (תנודה שהולכת וגדלה). כתבו את $f''(x)$.'
+    answer: 'exp(2*x)*(2*sin(3*x) + 3*cos(3*x))'
+    answerTex: '$f''(x)=e^{2x}\big(2\sin(3x)+3\cos(3x)\big)$'
+    variables: [x]
+    domain: [-1.5, 1.5]
+    correctFeedback: >-
+      נכון. כלל המכפלה, ובכל גורם כלל השרשרת: $(e^{2x})'=2e^{2x}$, $(\sin3x)'=3\cos3x$.
+    wrongFeedback: >-
+      מכפלה של שני גורמים, וכל אחד מהם הרכבה. גזרו כל גורם עם הנגזרת הפנימית שלו, ואז כלל המכפלה.
+    commonWrong:
+      - expr: '6*exp(2*x)*cos(3*x)'
+        feedback: >-
+          זו מכפלת הנגזרות $(e^{2x})'(\sin3x)'$. כלל המכפלה הוא סכום של שני איברים.
+        misconception: MC-c5-product-of-derivatives
+      - expr: 'exp(2*x)*(2*sin(3*x) + cos(3*x))'
+        feedback: >-
+          חסר הכופל 3 בנגזרת של $\sin(3x)$: $(\sin3x)'=3\cos3x$.
+        misconception: MC-c5-chain-missing-inner
+      - expr: 'exp(2*x)*(sin(3*x) + 3*cos(3*x))'
+        feedback: >-
+          חסר הכופל 2 בנגזרת של $e^{2x}$: $(e^{2x})'=2e^{2x}$.
+        misconception: MC-c5-chain-missing-inner
+
+  - id: Q-5.3-value-at-2
+    type: numeric
+    objectives: [OBJ-5.3-3]
+    level: exam
+    prompt: >-
+      תהי $f(x)=x\sqrt{x^2+5}$. חשבו את $f'(2)$.
+    answer: 4.33333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{13}{3}$. $f'(x)=\sqrt{x^2+5}+x\cdot\frac{x}{\sqrt{x^2+5}}$, וב-$x=2$: $3+\frac43$.
+    wrongFeedback: >-
+      כלל המכפלה עם $u=x$ ו-$v=\sqrt{x^2+5}$, ו-$v'$ בכלל השרשרת. הציבו $x=2$ רק בסוף ($\sqrt{9}=3$).
+    commonWrong:
+      - value: 3.33333333333333
+        feedback: >-
+          $\frac{10}{3}=3+2\cdot\frac{1}{2\cdot3}$: בנגזרת של השורש חסר הכופל $(x^2+5)'=2x$.
+        misconception: MC-c5-chain-missing-inner
+      - value: 0.666666666666667
+        feedback: >-
+          $\frac23=1\cdot\frac{x}{\sqrt{x^2+5}}$ ב-2: כפלתם את הנגזרות של שני הגורמים במקום להשתמש בכלל המכפלה.
+        misconception: MC-c5-product-of-derivatives
+
+  - id: Q-5.3-nested-exp
+    type: expr
+    objectives: [OBJ-5.3-2]
+    level: exam
+    prompt: 'גזרו: $f(x)=\sin\!\big(e^{x^2}\big)$. כתבו את $f''(x)$.'
+    answer: '2*x*exp(x^2)*cos(exp(x^2))'
+    answerTex: '$f''(x)=\cos\!\big(e^{x^2}\big)\cdot e^{x^2}\cdot2x$'
+    variables: [x]
+    domain: [-1.2, 1.2]
+    correctFeedback: >-
+      נכון. שלוש שכבות: $\sin$, האקספוננט ו-$x^2$. כל אחת נגזרת בערך של מה שבתוכה: $\cos(e^{x^2})$, $e^{x^2}$, $2x$.
+    wrongFeedback: >-
+      כתבו $f=\sin w$, $w=e^{y}$, $y=x^2$, וכפלו $\cos w\cdot e^y\cdot2x$.
+    commonWrong:
+      - expr: 'exp(x^2)*cos(exp(x^2))'
+        feedback: >-
+          חסרה הנגזרת של השכבה הפנימית ביותר, $(x^2)'=2x$.
+        misconception: MC-c5-chain-missing-inner
+      - expr: 'cos(exp(x^2))'
+        feedback: >-
+          גזרתם רק את הסינוס. אחריו באות הנגזרות של $e^{x^2}$ ושל $x^2$.
+        misconception: MC-c5-chain-missing-inner
+      - expr: 'cos(2*x*exp(x^2))'
+        feedback: >-
+          הכנסתם את הנגזרת של הפנימית לתוך הקוסינוס. בתוך $\cos$ נשאר $e^{x^2}$ כמו שהוא.
+        misconception: MC-c5-chain-inner-inside

@@ -1,0 +1,33 @@
+# Terms first defined in lesson 2.2 (parabola and hyperbolas).
+- id: conic-section
+  term: חתך חרוט
+  en: conic section
+  definition: >-
+    עקום שמתקבל מחיתוך של חרוט כפול עם מישור: אליפסה (ובפרט מעגל), פרבולה או היפרבולה, ובמקרים מנוונים נקודה, ישר
+    או זוג ישרים. במישור אלה בדיוק העקומים של משוואה ממעלה שנייה ב-$x$ ו-$y$ (או קבוצה ריקה).
+  reject: []
+  lesson: '2.2'
+- id: hyperbola
+  term: היפרבולה
+  en: hyperbola
+  symbol: '\frac{x^2}{a^2}-\frac{y^2}{b^2}=1'
+  definition: >-
+    העקום $\frac{x^2}{a^2}-\frac{y^2}{b^2}=1$, וכל הזזה או סיבוב שלו, למשל $xy=1$. יש לו שני ענפים ושתי אסימפטוטות,
+    $y=\pm\frac{b}{a}x$. סימן מינוס בין הריבועים מבדיל אותו מאליפסה.
+  reject: [היפרבלה]
+  lesson: '2.2'
+- id: asymptote
+  term: אסימפטוטה
+  en: asymptote
+  definition: >-
+    ישר שהעקום מתקרב אליו ככל שמתרחקים לאינסוף לאורך העקום. להיפרבולה $\frac{x^2}{a^2}-\frac{y^2}{b^2}=1$ האסימפטוטות
+    $y=\pm\frac{b}{a}x$, ול-$xy=1$ הן שני הצירים.
+  reject: [אסימטוטה]
+  lesson: '2.2'
+- id: degenerate-conic
+  term: חתך חרוט מנוון
+  en: degenerate conic
+  definition: >-
+    קבוצה שמשוואה ממעלה שנייה מתארת ושאינה אליפסה, פרבולה או היפרבולה: נקודה ($x^2+y^2=0$), זוג ישרים ($x^2-y^2=0$),
+    ישר ($x^2=0$). מתקבל מחיתוך החרוט במישור שעובר דרך הקודקוד.
+  lesson: '2.2'

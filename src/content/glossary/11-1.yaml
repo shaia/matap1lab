@@ -1,0 +1,42 @@
+# Terms first defined in lesson 11.1 (vector fields).
+- id: vector-field
+  term: שדה וקטורי
+  en: vector field
+  symbol: '\vec F(x,y)=\big(P(x,y),\,Q(x,y)\big)'
+  definition: >-
+    התאמה של וקטור לכל נקודה בתחום במישור או במרחב: $\vec F(x,y)=(P,Q)$ או $\vec F(x,y,z)=(P,Q,R)$. משרטטים אותו
+    כחץ שיוצא מכל נקודה; דוגמאות מהפיזיקה: שדה מהירות של זורם, שדה כוח הכבידה, שדה חשמלי.
+  reject: []
+  lesson: '11.1'
+- id: radial-field
+  term: שדה רדיאלי
+  en: radial field
+  symbol: '\vec F=(x,y)'
+  definition: >-
+    שדה שבכל נקודה מצביע לאורך הקו מהראשית, החוצה או פנימה, כמו $(x,y)$ או
+    $\frac{(x,y)}{\sqrt{x^2+y^2}}$. האורך יכול להשתנות עם המרחק מהראשית.
+  lesson: '11.1'
+- id: rotational-field
+  term: שדה סיבובי
+  en: rotational (circulating) field
+  symbol: '\vec F=(-y,x)'
+  definition: >-
+    שדה שמשיק בכל נקודה למעגל סביב הראשית, כמו $(-y,x)$, שמאונך לווקטור המקום $(x,y)$ ומסתובב נגד כיוון השעון.
+    $(y,-x)$ מסתובב עם כיוון השעון.
+  lesson: '11.1'
+- id: gradient-field
+  term: שדה גרדיאנט
+  en: gradient field
+  symbol: '\nabla f=\left(f_x,f_y,f_z\right)'
+  definition: >-
+    השדה הווקטורי $\nabla f$ של פונקציה סקלרית $f$: בכל נקודה הוא מצביע לכיוון העלייה המהירה ביותר של $f$, ומאונך לקו
+    הגובה או למשטח הגובה שעובר בה.
+  lesson: '11.1'
+- id: flow-line
+  term: קו זרימה
+  en: flow line (integral curve)
+  symbol: '\vec r\,''(t)=\vec F(\vec r(t))'
+  definition: >-
+    עקום $\vec r(t)$ שוקטור המהירות שלו שווה בכל רגע לשדה בנקודה שבה הוא נמצא: $\vec r\,'(t)=\vec F(\vec r(t))$. זה
+    המסלול של חלקיק שנסחף בזרם שהשדה הוא המהירות שלו.
+  lesson: '11.1'

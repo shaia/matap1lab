@@ -1,0 +1,246 @@
+# Lesson 9.4 — tangential and normal acceleration (notes pp. 21–23; enrichment: the notes only, not the 80114 syllabus).
+# Understanding questions only: no core review or exam question uses these objectives.
+# Objectives (src/course.ts):
+#   OBJ-9.4-1  compute the unit tangent and the unit normal of a curve
+#   OBJ-9.4-2  split the acceleration into a tangential and a normal component and interpret each
+#   OBJ-9.4-3  compute the curvature and the radius of the osculating circle
+# Conventions (notes p. 22–23): T = v/|v|, N = T'/|T'|, a = a_T T + a_N N, a_T = d|v|/dt = v·a/|v|,
+# a_N = sqrt(|a|^2 - a_T^2) = κ|v|^2 ≥ 0, κ = |v×a|/|v|^3. Numbers recomputed in screens/tools/recompute-ch9.py.
+chapter: 9
+questions:
+  - id: Q-9.4-unit-tangent
+    type: mc
+    objectives: [OBJ-9.4-1]
+    level: basic
+    prompt: >-
+      $\vec r(t)=\left(t,t^2\right)$. מהו וקטור היחידה המשיק $\vec T$ בנקודה שבה $t=1$?
+    choices:
+      - text: '$\frac{1}{\sqrt5}(1,2)$'
+        correct: true
+        feedback: 'נכון. $\vec v(1)=(1,2)$, $|\vec v|=\sqrt5$, ו-$\vec T=\frac{\vec v}{|\vec v|}$.'
+      - text: '$(1,2)$'
+        feedback: 'זה וקטור המהירות. $\vec T$ הוא וקטור **יחידה**: מחלקים באורך $\sqrt5$.'
+        misconception: MC-c9-T-not-normalized
+      - text: '$\frac{1}{\sqrt2}(1,1)$'
+        feedback: 'זה הכיוון של $\vec r(1)=(1,1)$, וקטור המקום. המשיק הולך בכיוון המהירות $(1,2)$.'
+        misconception: MC-c9-velocity-parallel-position
+      - text: '$\frac{1}{5}(1,2)$'
+        feedback: 'חילקתם ב-$|\vec v|^2=5$ במקום ב-$|\vec v|=\sqrt5$: האורך של התוצאה $\frac{1}{\sqrt5}$, לא 1.'
+        misconception: MC-c9-T-not-normalized
+
+  - id: Q-9.4-normal-circle
+    type: mc
+    objectives: [OBJ-9.4-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      נקודה נעה על מעגל. לאן מצביע וקטור היחידה הנורמלי $\vec N=\frac{\vec T\,'}{|\vec T\,'|}$?
+    choices:
+      - text: 'אל מרכז המעגל'
+        correct: true
+        feedback: >-
+          נכון. $\vec N$ מצביע לצד שאליו העקום מתעקל, ובמעגל זה המרכז. (בכל כיוון תנועה: $\vec T\,'$ מצביע לשם.)
+      - text: 'החוצה מהמרכז'
+        feedback: '$\vec T$ מסתובב לכיוון שאליו העקום פונה, ולכן $\vec T\,''$ מצביע פנימה, אל המרכז.'
+        misconception: MC-c9-N-outward
+      - text: 'בכיוון התנועה'
+        feedback: 'בכיוון התנועה מצביע $\vec T$. $\vec N$ מאונך לו, כי $|\vec T|=1$ גורר $\vec T\cdot\vec T\,''=0$.'
+        misconception: MC-c9-accel-vs-velocity
+      - text: 'תלוי בכיוון התנועה: פנימה נגד כיוון השעון, החוצה בכיוון השעון'
+        feedback: >-
+          היפוך הכיוון הופך את $\vec T$, אבל גם את $\vec T\,'$ פעמיים, ו-$\vec N$ נשאר מצביע פנימה.
+        misconception: MC-c9-N-outward
+
+  - id: Q-9.4-helix-tangent
+    type: expr
+    objectives: [OBJ-9.4-1]
+    level: mid
+    prompt: >-
+      לסליל $\vec r(t)=\left(3\cos t,\ 3\sin t,\ 4t\right)$. כתבו את הרכיב הראשון של $\vec T(t)$.
+    answer: '-3*sin(t)/5'
+    answerTex: '$\vec T(t)=\frac15\left(-3\sin t,\ 3\cos t,\ 4\right)$'
+    variables: [t]
+    domain: [-3, 3]
+    correctFeedback: >-
+      נכון. $|\vec v|=5$, ולכן $\vec T=\frac{\vec v}{5}$. (וגם $\vec N=(-\cos t,-\sin t,0)$: אופקי, אל ציר הסליל.)
+    wrongFeedback: 'חשבו $\vec v=\vec r\,''(t)$ ואת אורכו, וחלקו.'
+    commonWrong:
+      - expr: '-3*sin(t)'
+        feedback: 'זה הרכיב של $\vec v$. $\vec T$ הוא $\vec v$ חלקי האורך 5.'
+        misconception: MC-c9-T-not-normalized
+      - expr: '-sin(t)'
+        feedback: 'חילקתם ברדיוס 3 במקום בגודל המהירות 5: האורך של $(-3\sin t,3\cos t,4)$ הוא 5.'
+        misconception: MC-c9-T-not-normalized
+    hints: ['$|\vec v|=\sqrt{9\sin^2t+9\cos^2t+16}$.']
+
+  - id: Q-9.4-normal-component
+    type: numeric
+    objectives: [OBJ-9.4-2]
+    level: mid
+    prompt: >-
+      $\vec r(t)=\left(t,t^2\right)$. ב-$t=1$, חשבו את רכיב התאוצה הנורמלי $a_N$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 0.89442719099992
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{2}{\sqrt5}$. $\vec v=(1,2)$, $\vec a=(0,2)$, $a_T=\frac{\vec v\cdot\vec a}{|\vec v|}=\frac{4}{\sqrt5}$, ולכן
+      $a_N=\sqrt{|\vec a|^2-a_T^2}=\sqrt{4-\frac{16}{5}}$.
+    wrongFeedback: >-
+      חשבו קודם את $a_T=\frac{\vec v\cdot\vec a}{|\vec v|}$, ואז $a_N=\sqrt{|\vec a|^2-a_T^2}$.
+    commonWrong:
+      - value: 1.7888543820
+        feedback: 'זה $a_T=\frac{4}{\sqrt5}$, הרכיב המשיקי. הנורמלי הוא מה שנשאר מ-$\vec a$ בניצב ל-$\vec T$.'
+        misconception: MC-c9-aT-aN-swap
+      - value: 2
+        feedback: '2 הוא $|\vec a|$. התאוצה מתחלקת לשני רכיבים, ו-$a_N$ הוא רק אחד מהם: $a_T^2+a_N^2=|\vec a|^2$.'
+        misconception: MC-c9-aN-is-a
+    hints: ['$a_T^2+a_N^2=|\vec a|^2$.']
+
+  - id: Q-9.4-tangential-sign
+    type: mc
+    objectives: [OBJ-9.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      ברגע מסוים רכיב התאוצה המשיקי של רכב הוא $a_T=-3$ (מטרים לשנייה בריבוע). מה אפשר לומר?
+    choices:
+      - text: 'הרכב מאט באותו רגע: $\frac{d|\vec v|}{dt}=-3$'
+        correct: true
+        feedback: 'נכון. $a_T=\frac{d|\vec v|}{dt}$: הרכיב המשיקי משנה את **גודל** המהירות, וסימן שלילי פירושו האטה.'
+      - text: 'הרכב פונה שמאלה'
+        feedback: 'פנייה קשורה לרכיב הנורמלי $a_N$, שמשנה את כיוון המהירות. $a_T$ משנה את הגודל.'
+        misconception: MC-c9-aT-aN-swap
+      - text: 'הרכב נוסע אחורה'
+        feedback: '$a_T<0$ אומר שגודל המהירות קטן, לא שהמהירות שלילית. רכב שנוסע קדימה ובולם מקיים $a_T<0$.'
+        misconception: MC-c9-aT-sign
+      - text: 'גם $a_N$ שלילי'
+        feedback: '$a_N=|\vec v|\,|\vec T\,''|\ge0$ תמיד; הכיוון שלו נקבע על ידי $\vec N$.'
+        misconception: MC-c9-aT-sign
+
+  - id: Q-9.4-uniform-circle
+    type: twotier
+    objectives: [OBJ-9.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      גוף נע במעגל ברדיוס $R$ בגודל מהירות קבוע $v$. נכון או לא נכון: $a_T=0$ ו-$a_N=\frac{v^2}{R}$.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. גודל המהירות קבוע, ולכן $a_T=\frac{d|\vec v|}{dt}=0$, וכל התאוצה נורמלית: $a_N=\kappa v^2=\frac{v^2}{R}$.'
+      - text: 'לא נכון: התאוצה אפס כי המהירות קבועה'
+        feedback: 'רק **גודל** המהירות קבוע. הכיוון מסתובב, וזה בדיוק $a_N$.'
+        misconception: MC-c9-constant-speed-zero-accel
+    reasons:
+      - text: '$a_T$ משנה את גודל המהירות ו-$a_N$ את כיוונה; כאן משתנה רק הכיוון'
+        correct: true
+        feedback: 'בדיוק: $a_N=\kappa|\vec v|^2$, ובמעגל $\kappa=\frac1R$.'
+      - text: '$a_T$ ו-$a_N$ שווים בתנועה מעגלית'
+        feedback: 'בתנועה מעגלית אחידה $a_T=0$ ו-$a_N=\frac{v^2}{R}>0$.'
+        misconception: MC-c9-aT-aN-swap
+      - text: '$a_N=vR$, כי הנקודה רחוקה $R$ מהמרכז'
+        feedback: 'בדיקת ממדים: $\frac{v^2}{R}$ הוא מטר לשנייה בריבוע, ו-$vR$ לא.'
+        misconception: MC-c9-curvature-equals-radius
+
+  - id: Q-9.4-circle-curvature
+    type: numeric
+    objectives: [OBJ-9.4-3]
+    level: basic
+    prompt: >-
+      מהי העקמומיות של מעגל ברדיוס 4?
+    answer: 0.25
+    tolerance: 0.001
+    correctFeedback: 'נכון. במעגל $\kappa=\frac1R$: מעגל גדול מתעקל לאט.'
+    wrongFeedback: 'העקמומיות היא $\left|\frac{d\vec T}{ds}\right|$: כמה מהר $\vec T$ מסתובב לכל יחידת אורך. במעגל זה $\frac1R$.'
+    commonWrong:
+      - value: 4
+        feedback: '4 הוא הרדיוס. העקמומיות היא ההפכי שלו: רדיוס גדול פירושו עקום כמעט ישר.'
+        misconception: MC-c9-curvature-equals-radius
+    hints: ['ישר הוא "מעגל ברדיוס אינסופי", ועקמומיותו 0.']
+
+  - id: Q-9.4-osculating
+    type: numeric
+    objectives: [OBJ-9.4-3]
+    level: mid
+    prompt: >-
+      מהו הרדיוס של המעגל הצמוד לפרבולה $y=x^2$ בקודקוד $(0,0)$? (העקמומיות $\kappa=\frac{|\vec v\times\vec a|}{|\vec v|^3}$
+      עם $\vec r(t)=(t,t^2,0)$.)
+    answer: 0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. ב-$t=0$: $\vec v=(1,0,0)$, $\vec a=(0,2,0)$, $|\vec v\times\vec a|=2$, ולכן $\kappa=2$ והרדיוס $\frac1\kappa=\frac12$.
+    wrongFeedback: 'חשבו את $\kappa$ בנוסחה, והרדיוס של המעגל הצמוד הוא $\frac1\kappa$.'
+    commonWrong:
+      - value: 2
+        feedback: '2 הוא העקמומיות. רדיוס המעגל הצמוד הוא ההפכי שלה.'
+        misconception: MC-c9-curvature-equals-radius
+    hints: ['$\vec v\times\vec a=(0,0,2)$.']
+
+  - id: Q-9.4-constant-curvature
+    type: twotier
+    objectives: [OBJ-9.4-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: כל עקום **במרחב** שהעקמומיות שלו קבועה וחיובית הוא מעגל (או קשת של מעגל).
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. לסליל $(3\cos t,3\sin t,4t)$ העקמומיות קבועה, $\frac{3}{25}$, והוא אינו מעגל.'
+      - text: 'נכון'
+        feedback: 'במישור זה נכון, אבל במרחב העקום יכול גם לעלות: הסליל מתעקל באותו קצב לאורך כל הדרך.'
+        misconception: MC-c9-constant-curvature-circle
+    reasons:
+      - text: 'לסליל העקמומיות קבועה, אבל הוא עולה ואינו נשאר במישור'
+        correct: true
+        feedback: 'בדיוק. עקמומיות מודדת רק כמה מהר $\vec T$ מסתובב, לא אם העקום נשאר במישור אחד.'
+      - text: 'עקמומיות קבועה פירושה רדיוס קבוע, ולכן מעגל'
+        feedback: 'רדיוס המעגל הצמוד קבוע לאורך הסליל ($\frac{25}{3}$), אבל המעגל הצמוד משתנה ממקום למקום.'
+        misconception: MC-c9-constant-curvature-circle
+      - text: 'לסליל העקמומיות אינה קבועה, ולכן אין סתירה'
+        feedback: 'היא קבועה: $\frac{|\vec v\times\vec a|}{|\vec v|^3}=\frac{15}{125}$ לכל $t$.'
+        misconception: MC-c9-helix-curvature-projection
+
+  - id: Q-9.4-helix-curvature
+    type: numeric
+    objectives: [OBJ-9.4-3]
+    level: exam
+    prompt: >-
+      חשבו את העקמומיות של הסליל $\vec r(t)=\left(3\cos t,\ 3\sin t,\ 4t\right)$. (אפשר לכתוב שבר.)
+    answer: 0.12
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{3}{25}$. $|\vec v|=5$, $\vec a=(-3\cos t,-3\sin t,0)$, $a_T=0$, ולכן $a_N=|\vec a|=3$ ולכן
+      $\kappa=\frac{a_N}{|\vec v|^2}=\frac{3}{25}$. הסליל מתעקל פחות מהמעגל ברדיוס 3 שמתחתיו.
+    wrongFeedback: >-
+      השתמשו ב-$\kappa=\frac{|\vec v\times\vec a|}{|\vec v|^3}$, או ב-$\kappa=\frac{a_N}{|\vec v|^2}$.
+    commonWrong:
+      - value: 0.3333333333
+        feedback: '$\frac13$ היא העקמומיות של המעגל ברדיוס 3, ההיטל. העלייה "מיישרת" את הסליל.'
+        misconception: MC-c9-helix-curvature-projection
+      - value: 3
+        feedback: '3 הוא $a_N=|\vec a|$. העקמומיות היא $\frac{a_N}{|\vec v|^2}$.'
+        misconception: MC-c9-aN-is-a
+    hints: ['$a_N=\kappa|\vec v|^2$.']
+
+  - id: Q-9.4-projectile-top
+    type: numeric
+    objectives: [OBJ-9.4-2, OBJ-9.4-3]
+    level: exam
+    prompt: >-
+      כדור נע לפי $\vec r(t)=\left(10t,\ 10t-5t^2\right)$ (מטרים, שניות). בשיא המסלול, $t=1$, מהו רדיוס המעגל הצמוד,
+      במטרים?
+    answer: 10
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. ב-$t=1$: $\vec v=(10,0)$ ו-$\vec a=(0,-10)$, מאונכת למהירות. לכן $a_T=0$, $a_N=10$,
+      $\kappa=\frac{a_N}{|\vec v|^2}=\frac{10}{100}$, והרדיוס $\frac1\kappa=10$ מטרים.
+    wrongFeedback: >-
+      בשיא המהירות אופקית והתאוצה אנכית, כך ש-$a_N=|\vec a|$. אחר כך $\kappa=\frac{a_N}{|\vec v|^2}$, והרדיוס $\frac1\kappa$.
+    commonWrong:
+      - value: 0.1
+        feedback: '$0.1$ הוא העקמומיות. הרדיוס הוא ההפכי שלה.'
+        misconception: MC-c9-curvature-equals-radius
+      - value: 1
+        feedback: '$\frac{|\vec v|}{a_N}=1$: הנוסחה היא $R=\frac{|\vec v|^2}{a_N}$, עם המהירות **בריבוע**.'
+        misconception: MC-c9-aN-is-a
+    hints: ['$a_N=\frac{|\vec v|^2}{R}$, כמו בתנועה מעגלית.']

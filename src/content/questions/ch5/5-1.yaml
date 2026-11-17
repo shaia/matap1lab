@@ -1,0 +1,309 @@
+# Lesson 5.1 — velocity and the difference quotient (notes pp. 7–8).
+# Objectives (src/course.ts):
+#   OBJ-5.1-1  relate a position-time graph to a velocity-time graph; read velocity as a slope
+#   OBJ-5.1-2  define the derivative as the limit of the difference quotient; compute it from the definition
+#   OBJ-5.1-3  recognise points where a function is not differentiable (a corner, a vertical tangent)
+# Every number is recomputed in screens/tools/checks_ch5.py.
+chapter: 5
+questions:
+  - id: Q-5.1-slope-reading
+    type: mc
+    objectives: [OBJ-5.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $x(t)$ הוא המקום של גוף שנע על ישר, ונתון הגרף של $x$ כפונקציה של הזמן $t$. איך קוראים מהגרף את המהירות של
+      הגוף ברגע $t_0$?
+    choices:
+      - text: 'השיפוע של המשיק לגרף בנקודה $(t_0,x(t_0))$'
+        correct: true
+        feedback: >-
+          נכון. המהירות הרגעית היא $x'(t_0)$, הגבול של שיפועי המיתרים, כלומר שיפוע המשיק.
+      - text: 'הגובה $x(t_0)$ של הגרף ברגע $t_0$'
+        feedback: >-
+          הגובה הוא **המקום**. גוף יכול לעמוד במקום רחוק ($x$ גדול, מהירות 0). המהירות היא קצב השינוי של הגובה.
+        misconception: MC-c5-position-height-is-velocity
+      - text: 'השיפוע של הישר מהראשית $(0,x(0))$ אל $(t_0,x(t_0))$'
+        feedback: >-
+          זה שיפוע של מיתר: המהירות **הממוצעת** בין $0$ ל-$t_0$. המהירות ברגע $t_0$ היא הגבול של מיתרים קצרים יותר ויותר.
+        misconception: MC-c5-avg-vs-instant
+      - text: 'השטח מתחת לגרף בין $0$ ל-$t_0$'
+        feedback: >-
+          שטח מתחת לגרף **מהירות** נותן העתק (פרק 8). מגרף המקום קוראים מהירות בשיפוע, לא בגובה ולא בשטח.
+        misconception: MC-c5-position-height-is-velocity
+
+  - id: Q-5.1-avg-velocity
+    type: numeric
+    objectives: [OBJ-5.1-1]
+    level: basic
+    prompt: >-
+      גוף נע על ישר, ומקומו (במטרים) ברגע $t$ (בשניות) הוא $x(t)=t^2+t$. מהי המהירות הממוצעת שלו (במטר לשנייה) בין
+      $t=1$ ל-$t=3$?
+    answer: 5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x(1)=2$, $x(3)=12$, ולכן $\frac{12-2}{3-1}=5$: השיפוע של המיתר בגרף המקום.
+    wrongFeedback: >-
+      מהירות ממוצעת היא ההעתק חלקי הזמן: $\frac{x(3)-x(1)}{3-1}$.
+    commonWrong:
+      - value: 7
+        feedback: >-
+          7 הוא $x'(3)=2\cdot3+1$, המהירות **הרגעית** בסוף הקטע. השאלה שואלת על הממוצע: שיפוע המיתר, לא שיפוע המשיק.
+        misconception: MC-c5-avg-vs-instant
+
+  - id: Q-5.1-def-x3
+    type: expr
+    objectives: [OBJ-5.1-2]
+    level: basic
+    prompt: >-
+      (מהסיכומים, עמ׳ 7) תהי $f(x)=x^3$. פשטו את מנת ההפרשים $\frac{f(x+h)-f(x)}{h}$ ל-$h\ne0$, וכתבו אותה כפולינום
+      במשתנים $x$ ו-$h$ (השתמשו באותיות x ו-h).
+    answer: '3*x^2 + 3*x*h + h^2'
+    answerTex: '$\frac{(x+h)^3-x^3}{h}=3x^2+3xh+h^2$'
+    variables: [x, h]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. $(x+h)^3-x^3=3x^2h+3xh^2+h^3$, ומצמצמים ב-$h$. כש-$h\to0$ נשאר $3x^2$: זו $f'(x)$.
+    wrongFeedback: >-
+      פתחו $(x+h)^3=x^3+3x^2h+3xh^2+h^3$, חסרו $x^3$, וחלקו ב-$h$.
+    commonWrong:
+      - expr: '3*x^2*h + 3*x*h^2 + h^3'
+        feedback: >-
+          זה המונה $f(x+h)-f(x)$ לפני החילוק ב-$h$. מנת ההפרשים היא המונה **חלקי** $h$.
+        misconception: MC-c5-def-quotient-algebra
+      - expr: '3*x^2'
+        feedback: >-
+          $3x^2$ הוא הגבול כש-$h\to0$, כלומר הנגזרת. המנה עצמה, ל-$h\ne0$, עוד תלויה ב-$h$.
+        misconception: MC-c5-plug-h-zero
+    hints: ['כמה איברים יש בפיתוח של $(x+h)^3$?']
+
+  - id: Q-5.1-abs-corner
+    type: mc
+    objectives: [OBJ-5.1-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      תהי $f(x)=|x|$. מה נכון לגבי הנגזרת של $f$ ב-$x=0$?
+    choices:
+      - text: 'אינה קיימת: מנת ההפרשים $\frac{|h|}{h}$ שואפת ל-1 מימין ומשמאל לערך אחר'
+        correct: true
+        feedback: >-
+          נכון. מימין $\frac{|h|}{h}=1$, משמאל המנה שווה ל-$(-1)$. שתי נגזרות חד-צדדיות שונות: נקודת פינה.
+      - text: 'היא 0, כי $f(0)=0$'
+        feedback: >-
+          $f(0)=0$ הוא הערך, לא השיפוע. וגם אין שיפוע אחד: מימין 1 ומשמאל $(-1)$.
+        misconception: MC-c5-value-vs-derivative
+      - text: 'היא 1, כי $f$ רציפה ועולה מימין'
+        feedback: >-
+          1 הוא השיפוע מימין בלבד. רציפות אינה מספיקה לגזירות: משמאל השיפוע $(-1)$.
+        misconception: MC-c5-continuous-implies-differentiable
+      - text: 'אינה קיימת, כי $f$ אינה רציפה ב-0'
+        feedback: >-
+          $f$ רציפה ב-0 (הגרף לא נקטע). היא אינה גזירה שם מסיבה אחרת: פינה.
+        misconception: MC-c5-continuous-implies-differentiable
+
+  - id: Q-5.1-cuberoot
+    type: twotier
+    objectives: [OBJ-5.1-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      נכון או לא נכון: $f(x)=\sqrt[3]{x}$ רציפה ב-0, ולכן היא גזירה ב-0.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $f$ רציפה ב-0, אבל מנת ההפרשים שם שואפת לאינסוף: למשיק יש שיפוע אינסופי, הוא אנכי.
+      - text: 'נכון'
+        feedback: >-
+          רציפות אינה גוררת גזירות. כאן $\frac{f(h)-f(0)}{h}=\frac{h^{1/3}}{h}=h^{-2/3}$, וזה שואף ל-$\infty$.
+        misconception: MC-c5-continuous-implies-differentiable
+    reasons:
+      - text: '$\frac{f(h)-f(0)}{h}=h^{-2/3}\to\infty$ כש-$h\to0$: לגרף יש משיק אנכי בראשית'
+        correct: true
+        feedback: >-
+          בדיוק. גבול אינסופי של המנה אינו נגזרת. הגרף חלק, אבל המשיק הוא הציר $x=0$.
+      - text: 'כל פונקציה רציפה גזירה, ולכן אין מה לבדוק'
+        feedback: >-
+          לא: $|x|$ רציפה ב-0 ואינה גזירה שם. הכיוון הנכון: גזירה גוררת רציפות.
+        misconception: MC-c5-continuous-implies-differentiable
+      - text: 'לגרף אין פינה בראשית, ולכן $f$ גזירה שם'
+        feedback: >-
+          פינה היא רק דרך אחת להיכשל. כאן הגרף חלק, אבל המשיק בראשית אנכי, ולמשיק אנכי אין שיפוע סופי.
+        misconception: MC-c5-continuous-implies-differentiable
+
+  - id: Q-5.1-velocity-graph
+    type: multi
+    objectives: [OBJ-5.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      הגרף של המקום $x(t)$ של גוף בזמנים $0\le t\le6$: עולה בקטע $[0,2]$, מגיע לשיא ב-$t=2$, יורד בקטע $[2,5]$, ואופקי
+      (קבוע) בקטע $[5,6]$, שם $x=3$. אילו טענות על המהירות $v(t)=x'(t)$ נכונות? סמנו את כולן.
+    choices:
+      - text: '$v(t)>0$ כש-$0<t<2$'
+        correct: true
+        feedback: 'נכון. המקום עולה, השיפוע חיובי.'
+      - text: '$v(2)=0$'
+        correct: true
+        feedback: 'נכון. בשיא המשיק אופקי: הגוף עוצר לרגע ומסתובב.'
+      - text: '$v(t)=0$ כש-$5<t<6$'
+        correct: true
+        feedback: 'נכון. גרף מקום אופקי פירושו שהגוף עומד.'
+      - text: 'המהירות מקסימלית ב-$t=2$, כי שם הגוף הכי רחוק'
+        feedback: >-
+          ב-$t=2$ הגוף הכי רחוק, אבל מהירותו 0. המרחק הוא הגובה של הגרף, המהירות היא השיפוע.
+        misconception: MC-c5-position-height-is-velocity
+      - text: '$v(t)=3$ כש-$5<t<6$'
+        feedback: >-
+          3 הוא **המקום** בקטע הזה. הגרף אופקי, ולכן המהירות 0.
+        misconception: MC-c5-position-height-is-velocity
+
+  - id: Q-5.1-ball
+    type: numeric
+    objectives: [OBJ-5.1-1, OBJ-5.1-2]
+    level: mid
+    prompt: >-
+      כדור נזרק כלפי מעלה, וגובהו (במטרים) אחרי $t$ שניות הוא $h(t)=20t-5t^2$. כתבו את מנת ההפרשים
+      $\frac{h(1+\Delta)-h(1)}{\Delta}$, פשטו אותה, ומצאו את המהירות הרגעית (במטר לשנייה) ב-$t=1$.
+    answer: 10
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $h(1+\Delta)-h(1)=20\Delta-10\Delta-5\Delta^2=10\Delta-5\Delta^2$, המנה $10-5\Delta$, והגבול כש-$\Delta\to0$ הוא 10.
+    wrongFeedback: >-
+      פתחו את $h(1+\Delta)$, חסרו $h(1)=15$, חלקו ב-$\Delta$, ורק אז שלחו את $\Delta$ ל-0.
+    commonWrong:
+      - value: 15
+        feedback: >-
+          15 הוא $h(1)$, הגובה ברגע $t=1$, לא המהירות.
+        misconception: MC-c5-position-height-is-velocity
+      - value: 5
+        feedback: >-
+          5 הוא המנה עם $\Delta=1$: המהירות הממוצעת בין $t=1$ ל-$t=2$. המהירות הרגעית היא הגבול כש-$\Delta\to0$.
+        misconception: MC-c5-avg-vs-instant
+
+  - id: Q-5.1-recip
+    type: expr
+    objectives: [OBJ-5.1-2]
+    level: mid
+    prompt: >-
+      תהי $f(x)=\frac1x$. חשבו מההגדרה את $f'(x)$ ל-$x>0$: כתבו את מנת ההפרשים במכנה משותף, צמצמו את $h$ ושלחו אותו
+      ל-0. כתבו את $f'(x)$.
+    answer: '-1/x^2'
+    answerTex: "$f'(x)=\\lim_{h\\to0}\\frac{-1}{x(x+h)}=-\\frac{1}{x^2}$"
+    variables: [x]
+    domain: [0.5, 3]
+    correctFeedback: >-
+      נכון. $\frac{1}{x+h}-\frac1x=\frac{x-(x+h)}{x(x+h)}=\frac{-h}{x(x+h)}$; חלוקה ב-$h$ נותנת $\frac{-1}{x(x+h)}$, והגבול
+      $-\frac1{x^2}$. הסימן שלילי כי $\frac1x$ יורדת.
+    wrongFeedback: >-
+      $\frac{1}{x+h}-\frac1x=\frac{x-(x+h)}{x(x+h)}$. מה נשאר במונה?
+    commonWrong:
+      - expr: '1/x^2'
+        feedback: >-
+          הסימן הפוך: במונה $x-(x+h)=-h$, לא $+h$. בדיקה: $\frac1x$ יורדת ל-$x>0$, ולכן השיפוע שלילי.
+        misconception: MC-c5-def-quotient-algebra
+      - expr: '-1/x'
+        feedback: >-
+          המכנה $x(x+h)$ שואף ל-$x\cdot x=x^2$, לא ל-$x$.
+        misconception: MC-c5-def-quotient-algebra
+
+  - id: Q-5.1-plug-h0
+    type: twotier
+    objectives: [OBJ-5.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      כדי לחשב מההגדרה את $f'(2)$ ל-$f(x)=x^2$, תלמיד הציב $h=0$ במנה $\frac{(2+h)^2-4}{h}$, קיבל $\frac00$, והסיק
+      ש-$f$ אינה גזירה ב-2. האם המסקנה נכונה?
+    choices:
+      - text: 'לא: $f''(2)=4$'
+        correct: true
+        feedback: >-
+          נכון. $\frac{(2+h)^2-4}{h}=\frac{4h+h^2}{h}=4+h\to4$.
+      - text: 'כן, $\frac00$ אינו מוגדר ולכן גם הנגזרת'
+        feedback: >-
+          **כל** מנת הפרשים נותנת $\frac00$ בהצבת $h=0$, גם לפונקציה הכי חלקה. לכן מצמצמים קודם.
+        misconception: MC-c5-plug-h-zero
+      - text: 'לא: $f''(2)=0$, כי המונה מתאפס'
+        feedback: >-
+          גם המכנה מתאפס. הגבול של מנה כזו נקבע אחרי צמצום, ואז הוא 4.
+        misconception: MC-c5-plug-h-zero
+    reasons:
+      - text: 'בהגדרה $h\ne0$; מפשטים ל-$4+h$ ורק אז שולחים $h\to0$'
+        correct: true
+        feedback: >-
+          בדיוק. הגבול לא תלוי בערך ב-$h=0$ (שם המנה אינה מוגדרת), אלא בערכים ליד 0.
+      - text: 'הגבול של מנה הוא מנת הגבולות, $\frac{0}{0}$'
+        feedback: >-
+          כלל "גבול המנה" דורש שהגבול של המכנה **אינו** 0. כאן הוא 0, ולכן צריך לפשט קודם.
+        misconception: MC-c5-plug-h-zero
+      - text: 'פונקציה גזירה רק אם הצבת $h=0$ במנה נותנת מספר'
+        feedback: >-
+          ההצבה לעולם לא נותנת מספר (תמיד $\frac00$). זו לא בדיקה של גזירות.
+        misconception: MC-c5-plug-h-zero
+
+  - id: Q-5.1-sqrt-steps
+    type: rank
+    objectives: [OBJ-5.1-2]
+    level: mid
+    prompt: >-
+      סדרו את שלבי החישוב של $f'(x)$ ל-$f(x)=\sqrt x$, $x>0$, לפי ההגדרה.
+    help: 'גררו את השלבים לסדר שבו מבצעים אותם, הראשון למעלה.'
+    items:
+      - { id: quotient, label: 'כותבים את המנה $\frac{\sqrt{x+h}-\sqrt x}{h}$' }
+      - { id: conjugate, label: 'כופלים מונה ומכנה ב-$\sqrt{x+h}+\sqrt x$' }
+      - { id: cancel, label: 'המונה נעשה $(x+h)-x=h$, ומצמצמים ב-$h$: נשאר $\frac{1}{\sqrt{x+h}+\sqrt x}$' }
+      - { id: limit, label: 'שולחים $h\to0$ ומקבלים $\frac{1}{2\sqrt x}$' }
+    order: [quotient, conjugate, cancel, limit]
+    correctFeedback: >-
+      נכון. הכפל בצמוד הוא מה שמאפשר לצמצם את $h$; בלעדיו ההצבה נותנת $\frac00$.
+    wrongFeedback: >-
+      את $h$ אפשר לשלוח ל-0 רק אחרי שהוא צומצם מהמכנה, ואת זה מאפשר הכפל בצמוד.
+
+  - id: Q-5.1-which-not
+    type: multi
+    objectives: [OBJ-5.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      אילו מהפונקציות הבאות **אינן** גזירות ב-$x=0$? סמנו את כולן.
+    choices:
+      - text: '$|x|$'
+        correct: true
+        feedback: 'נכון. פינה: השיפוע 1 מימין ו-$(-1)$ משמאל.'
+      - text: '$\sqrt[3]{x}$'
+        correct: true
+        feedback: 'נכון. משיק אנכי: המנה $h^{-2/3}\to\infty$.'
+      - text: '$|\sin x|$'
+        correct: true
+        feedback: 'נכון. ליד 0 היא מתנהגת כמו $|x|$: המנה $\frac{|\sin h|}{h}$ שואפת ל-1 מימין ול-$(-1)$ משמאל.'
+      - text: '$x|x|$'
+        feedback: >-
+          היא **גזירה** ב-0: $\frac{h|h|-0}{h}=|h|\to0$. ערך מוחלט בנוסחה לא מבטיח פינה; צריך לבדוק את השיפועים.
+        misconception: MC-c5-abs-never-differentiable
+      - text: '$x^2$'
+        feedback: 'גזירה ב-0, עם $f''(0)=0$: המנה היא $h\to0$.'
+        misconception: MC-c5-abs-never-differentiable
+
+  - id: Q-5.1-glue
+    type: numeric
+    objectives: [OBJ-5.1-3]
+    level: exam
+    prompt: >-
+      $f(x)=x^2$ כש-$x\le1$ ו-$f(x)=ax+b$ כש-$x>1$. מצאו את $a$ ו-$b$ שבשבילם $f$ גזירה ב-$x=1$ (רציפה, ובלי פינה), וכתבו
+      את $b$.
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. גזירות דורשת שהשיפוע מימין, $a$, ישווה לשיפוע משמאל, $(x^2)'=2$ ב-1: $a=2$. רציפות: $a+b=1^2=1$, ולכן
+      $b=-1$. הישר $y=2x-1$ הוא המשיק ל-$x^2$ ב-1.
+    wrongFeedback: >-
+      שני תנאים: רציפות ($a\cdot1+b=1$) ושוויון השיפועים החד-צדדיים ($a=2$).
+    commonWrong:
+      - value: 0
+        feedback: >-
+          זה מתקבל עם $a=1$: לקחתם כשיפוע את הערך $f(1)=1$ במקום הנגזרת $2$. עם $a=1$, $b=0$, הפונקציה רציפה אבל יש בה
+          פינה.
+        misconception: MC-c5-value-vs-derivative
+    hints: ['מה השיפוע של $x^2$ ב-$x=1$? ואיזה ישר דרך $(1,1)$ יש לו את השיפוע הזה?']

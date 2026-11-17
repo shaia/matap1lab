@@ -1,0 +1,226 @@
+# Lesson 3.4 — the complex exponential and logarithm.
+# Objectives (src/course.ts):
+#   OBJ-3.4-1  compute the exponential of a complex number; it is periodic in the imaginary direction
+#   OBJ-3.4-2  all the values of the logarithm of a complex number, and the principal value
+#   OBJ-3.4-3  sine and cosine through the complex exponential, and computations with them
+# Conventions: Log w = ln|w| + i Arg w with Arg in (-π, π]; hyperbolic functions are chapter 4, so cos(i) is
+# written (e + 1/e)/2 here.
+# Every number recomputed in screens/tools/recompute-ch3.py.
+chapter: 3
+questions:
+  - id: Q-3.4-exp-value
+    type: numeric
+    objectives: [OBJ-3.4-1]
+    level: basic
+    prompt: 'חשבו את $\operatorname{Re}\left(e^{1+i\pi}\right)$.'
+    answer: -2.718281828459045
+    tolerance: 0.001
+    correctFeedback: 'נכון, $-e$. $e^{1+i\pi}=e\cdot e^{i\pi}=e(\cos\pi+i\sin\pi)=-e$.'
+    wrongFeedback: '$e^{a+ib}=e^a(\cos b+i\sin b)$.'
+    commonWrong:
+      - value: 1.718281828459045
+        feedback: '$e-1=e+e^{i\pi}$: פירקתם את האקספוננט של סכום לסכום. אקספוננט של סכום הוא **מכפלה**.'
+        misconception: MC-c3-exp-sum-additive
+      - value: 2.718281828459045
+        feedback: '$e^{i\pi}=\cos\pi+i\sin\pi=-1$, ולכן הסימן מתהפך.'
+        misconception: MC-c3-cis-swap
+
+  - id: Q-3.4-exp-modulus
+    type: numeric
+    objectives: [OBJ-3.4-1]
+    level: basic
+    prompt: 'חשבו את $\left|e^{3-4i}\right|$.'
+    answer: 20.085536923187668
+    tolerance: 0.001
+    correctFeedback: 'נכון, $e^3\approx20.09$. $|e^{x+iy}|=e^x\cdot|e^{iy}|=e^x$: החלק המדומה של המעריך רק מסובב.'
+    wrongFeedback: 'פרקו: $e^{3-4i}=e^3\cdot e^{-4i}$. מה הערך המוחלט של $e^{-4i}$?'
+    commonWrong:
+      - value: 148.4131591025766
+        feedback: '$e^5=e^{|3-4i|}$: הגודל של $e^z$ תלוי רק ב-$\operatorname{Re}z$, לא ב-$|z|$.'
+        misconception: MC-c3-exp-modulus-of-exponent
+
+  - id: Q-3.4-log-principal
+    type: numeric
+    objectives: [OBJ-3.4-2]
+    level: basic
+    prompt: 'מהו $\operatorname{Im}\operatorname{Log}(-ei)$ (הערך הראשי)?'
+    answer: -1.5707963267948966
+    tolerance: 0.001
+    correctFeedback: 'נכון, $-\frac{\pi}{2}$. $-ei=e\operatorname{cis}\left(-\frac{\pi}{2}\right)$, ולכן $\operatorname{Log}(-ei)=1-\frac{\pi}{2}i$.'
+    wrongFeedback: '$\operatorname{Log}w=\ln|w|+i\operatorname{Arg}w$. איפה $-ei$ במישור גאוס?'
+    commonWrong:
+      - value: 4.71238898038469
+        feedback: '$\frac{3\pi}{2}$ מצביע לאותו כיוון, אבל הערך הראשי משתמש ב-$\operatorname{Arg}\in(-\pi,\pi]$.'
+        misconception: MC-c3-principal-arg-range
+      - value: 1
+        feedback: '1 הוא החלק **הממשי**, $\ln|-ei|=\ln e$.'
+        misconception: MC-c3-log-componentwise
+
+  - id: Q-3.4-cos-exp
+    type: mc
+    objectives: [OBJ-3.4-3]
+    level: basic
+    prompt: 'איזו נוסחה נכונה לכל $\theta$ ממשי?'
+    choices:
+      - text: '$\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2}$'
+        correct: true
+        feedback: 'נכון. $e^{\pm i\theta}=\cos\theta\pm i\sin\theta$, ובסכום המדומים מתבטלים.'
+      - text: '$\cos\theta=\frac{e^{i\theta}-e^{-i\theta}}{2}$'
+        feedback: 'בהפרש הממשיים מתבטלים: $e^{i\theta}-e^{-i\theta}=2i\sin\theta$. זה קשור לסינוס.'
+        misconception: MC-c3-sin-cos-exp-swap
+      - text: '$\cos\theta=e^{i\theta}+e^{-i\theta}$'
+        feedback: 'בסכום שני החלקים הממשיים מצטרפים: $2\cos\theta$. חסר חילוק ב-2.'
+        misconception: MC-c3-exp-pair-factor
+      - text: '$\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2}$'
+        feedback: 'ההפרש הוא $2i\sin\theta$: מחלקים ב-$2i$. בלי ה-$i$ הנוסחה נותנת מספר מדומה.'
+        misconception: MC-c3-sin-cos-exp-swap
+
+  - id: Q-3.4-exp-periodic
+    type: twotier
+    objectives: [OBJ-3.4-1]
+    qualitative: true
+    level: mid
+    prompt: 'נכון או לא: הפתרון היחיד של $e^z=1$ במספרים המרוכבים הוא $z=0$.'
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $e^{2\pi i}=\cos2\pi+i\sin2\pi=1$, ובאופן כללי $e^{2\pi ki}=1$ לכל $k$ שלם.'
+      - text: 'נכון'
+        feedback: 'בממשיים כן, אבל $e^{2\pi i}=1$. האקספוננט המרוכב מחזורי בכיוון המדומה.'
+        misconception: MC-c3-exp-injective
+    reasons:
+      - text: '$e^{x+iy}=e^x\operatorname{cis}y$, והוא 1 בדיוק כש-$x=0$ ו-$y$ כפולה של $2\pi$'
+        correct: true
+        feedback: 'בדיוק: הפתרונות הם $z=2\pi ki$, $k$ שלם.'
+      - text: 'כי $e^z$ עולה ממש, ולכן חד-חד-ערכי'
+        feedback: 'אין סדר על המרוכבים, ו-$e^{iy}$ מסתובב על מעגל היחידה וחוזר לעצמו כל $2\pi$.'
+        misconception: MC-c3-exp-injective
+      - text: 'כי $|e^z|=1$ רק כש-$z=0$'
+        feedback: '$|e^z|=e^{\operatorname{Re}z}=1$ כש-$\operatorname{Re}z=0$, לכל ציר מדומה: $|e^{iy}|=1$.'
+        misconception: MC-c3-exp-modulus-of-exponent
+
+  - id: Q-3.4-solve-exp
+    type: numeric
+    objectives: [OBJ-3.4-1, OBJ-3.4-2]
+    level: mid
+    prompt: >-
+      לכל הפתרונות של $e^z=-2$ אותו חלק ממשי. מהו?
+    answer: 0.6931471805599453
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\ln2$. $e^{x+iy}=e^x\operatorname{cis}y=2\operatorname{cis}\pi$, ולכן $e^x=2$ ו-$y=\pi+2\pi k$:
+      $z=\ln2+i(\pi+2\pi k)$.
+    wrongFeedback: 'השוו ערכים מוחלטים: $|e^z|=e^{\operatorname{Re}z}$ ו-$|-2|=2$.'
+    commonWrong:
+      - value: 3.141592653589793
+        feedback: '$\pi$ הוא החלק **המדומה** של הפתרון הראשי. החלק הממשי נקבע מהערך המוחלט: $e^x=2$.'
+        misconception: MC-c3-log-componentwise
+
+  - id: Q-3.4-log-all
+    type: mc
+    objectives: [OBJ-3.4-2]
+    qualitative: true
+    level: mid
+    prompt: 'מהם כל הערכים של $\log(1+i)$?'
+    choices:
+      - text: '$\ln\sqrt2+i\left(\frac{\pi}{4}+2\pi k\right)$, $k$ שלם'
+        correct: true
+        feedback: 'נכון. כל $z$ עם $e^z=1+i=\sqrt2\operatorname{cis}\frac{\pi}{4}$. הערך הראשי ($k=0$) הוא $\ln\sqrt2+\frac{\pi}{4}i$.'
+      - text: 'רק $\ln\sqrt2+\frac{\pi}{4}i$'
+        feedback: 'זה הערך הראשי. בגלל ש-$e^z$ מחזורי עם מחזור $2\pi i$, לכל $w\ne0$ יש אינסוף לוגריתמים.'
+        misconception: MC-c3-log-single-valued
+      - text: '$\ln2+i\left(\frac{\pi}{4}+2\pi k\right)$'
+        feedback: '$\ln|1+i|=\ln\sqrt2$, לא $\ln2$: $|1+i|=\sqrt2$.'
+        misconception: MC-c3-modulus-no-root
+      - text: '$\ln1+\ln i=\frac{\pi}{2}i$'
+        feedback: 'הלוגריתם אינו פועל רכיב ברכיב על $1+i$. כותבים בצורה קוטבית ולוקחים $\ln$ של הערך המוחלט.'
+        misconception: MC-c3-log-componentwise
+
+  - id: Q-3.4-log-rule
+    type: twotier
+    objectives: [OBJ-3.4-2]
+    qualitative: true
+    level: mid
+    prompt: 'נכון או לא: $\operatorname{Log}(zw)=\operatorname{Log}z+\operatorname{Log}w$ לכל $z,w\ne0$.'
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $z=w=-1$: $\operatorname{Log}1=0$, ואילו $\operatorname{Log}(-1)+\operatorname{Log}(-1)=2\pi i$.'
+      - text: 'נכון'
+        feedback: 'בממשיים החיוביים כן. במרוכבים הארגומנטים מתחברים, והסכום עלול לצאת מהקטע $(-\pi,\pi]$.'
+        misconception: MC-c3-log-rules-hold
+    reasons:
+      - text: 'הסכום $\operatorname{Arg}z+\operatorname{Arg}w$ יכול לצאת מ-$(-\pi,\pi]$, ואז הוא שונה מ-$\operatorname{Arg}(zw)$ ב-$2\pi$'
+        correct: true
+        feedback: 'בדיוק. השוויון נכון רק עד כדי $2\pi ki$, כלומר כשוויון בין קבוצות הערכים של $\log$.'
+      - text: 'כי $\operatorname{Log}$ של מספר שלילי אינו מוגדר'
+        feedback: 'במרוכבים $\operatorname{Log}(-1)=i\pi$, מוגדר היטב. הבעיה בחיבור הארגומנטים.'
+        misconception: MC-c3-log-single-valued
+      - text: 'כי $\ln|zw|\ne\ln|z|+\ln|w|$'
+        feedback: '$|zw|=|z||w|$, ולכן החלקים הממשיים כן מסתדרים. ההפרש כולו בחלק המדומה.'
+        misconception: MC-c3-log-rules-hold
+
+  - id: Q-3.4-re-log
+    type: expr
+    objectives: [OBJ-3.4-2]
+    level: mid
+    prompt: >-
+      יהי $z=x+iy\ne0$. כתבו את $\operatorname{Re}\operatorname{Log}z$ כפונקציה של $x$ ו-$y$. (השתמשו במשתנים $x,y$;
+      כתבו $\ln$ כ-ln או log)
+    answer: 'log(x^2+y^2)/2'
+    answerTex: '$\operatorname{Re}\operatorname{Log}z=\ln|z|=\frac12\ln(x^2+y^2)$'
+    variables: [x, y]
+    domain: [0.3, 2]
+    correctFeedback: 'נכון. $\operatorname{Log}z=\ln|z|+i\operatorname{Arg}z$, ו-$\ln\sqrt{x^2+y^2}=\frac12\ln(x^2+y^2)$.'
+    wrongFeedback: 'בצורה קוטבית $z=|z|e^{i\operatorname{Arg}z}$. מהו החלק הממשי של הלוגריתם?'
+    commonWrong:
+      - expr: 'log(x)'
+        feedback: 'הלוגריתם אינו פועל רכיב ברכיב: החלק הממשי שלו הוא $\ln|z|$, לא $\ln\operatorname{Re}z$.'
+        misconception: MC-c3-log-componentwise
+      - expr: 'log(x^2+y^2)'
+        feedback: 'זה $\ln|z|^2=2\ln|z|$: חסר שורש, או חסר החילוק ב-2.'
+        misconception: MC-c3-modulus-no-root
+
+  - id: Q-3.4-cos-i
+    type: twotier
+    objectives: [OBJ-3.4-3]
+    qualitative: true
+    level: mid
+    prompt: 'נכון או לא: $|\cos z|\le1$ לכל מספר מרוכב $z$.'
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $\cos i=\frac{e^{-1}+e}{2}\approx1.543$.'
+      - text: 'נכון'
+        feedback: 'זה נכון לממשיים. מהנוסחה $\cos z=\frac{e^{iz}+e^{-iz}}{2}$, ב-$z=i$ מקבלים $\frac{e^{-1}+e}{2}>1$.'
+        misconception: MC-c3-cos-bounded-complex
+    reasons:
+      - text: 'ל-$z=iy$, $\cos z=\frac{e^{-y}+e^{y}}{2}$, וזה גדל ללא חסם כש-$|y|$ גדל'
+        correct: true
+        feedback: 'בדיוק. החסם בממשיים בא מ-$|e^{ix}|=1$, שאינו נכון כש-$x$ מרוכב.'
+      - text: 'כי $|e^{iz}|=1$ לכל $z$, ולכן $|\cos z|\le\frac{1+1}{2}$'
+        feedback: '$|e^{iz}|=e^{-\operatorname{Im}z}$: שווה 1 רק כש-$z$ ממשי. זה בדיוק מה שנשבר.'
+        misconception: MC-c3-eiz-unit-modulus
+      - text: 'כי $\cos^2z+\sin^2z=1$, ולכן כל אחד מהם קטן מ-1'
+        feedback: 'הזהות נכונה גם במרוכבים, אבל $\cos^2z$ ו-$\sin^2z$ יכולים להיות מרוכבים או שליליים, ואז אין חסם.'
+        misconception: MC-c3-cos-bounded-complex
+
+  - id: Q-3.4-cos-cubed
+    type: numeric
+    objectives: [OBJ-3.4-3]
+    level: exam
+    prompt: >-
+      בעזרת $\cos t=\frac{e^{it}+e^{-it}}{2}$ כתבו $\cos^3t=a\cos t+b\cos3t$. מהו $a$?
+    answer: 0.75
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $a=\frac34$ ו-$b=\frac14$. $\cos^3t=\frac{(e^{it}+e^{-it})^3}{8}=\frac{e^{3it}+3e^{it}+3e^{-it}+e^{-3it}}{8}=\frac{2\cos3t+6\cos t}{8}$.
+      בדיקה ב-$t=0$: $\frac34+\frac14=1$.
+    wrongFeedback: 'פתחו את $(e^{it}+e^{-it})^3$ בבינום וצרפו כל זוג $e^{ikt}+e^{-ikt}=2\cos kt$.'
+    commonWrong:
+      - value: 0.375
+        feedback: '$\frac38$ מתקבל אם $3e^{it}+3e^{-it}$ נחשב $3\cos t$: הזוג הוא $2\cdot3\cos t$.'
+        misconception: MC-c3-exp-pair-factor
+      - value: 0.25
+        feedback: '$\frac14$ הוא $b$, המקדם של $\cos3t$.'
+        misconception: MC-c3-demoivre-trig-linear

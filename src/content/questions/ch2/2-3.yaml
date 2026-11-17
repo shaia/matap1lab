@@ -1,0 +1,300 @@
+# Lesson 2.3 — polar coordinates (notes p. 17: x = r cos θ, y = r sin θ, r = sqrt(x^2 + y^2)).
+# Objectives (src/course.ts):
+#   OBJ-2.3-1  Cartesian <-> polar in both directions, the angle in the right quadrant
+#   OBJ-2.3-2  sketch curves given by a polar equation, translate a Cartesian equation to polar
+#   OBJ-2.3-3  regions such as an annulus or a sector in polar coordinates
+# Convention in these questions: r >= 0, and each question states the range of θ it wants.
+# Every number recomputed in screens/tools/recompute-ch2.py.
+chapter: 2
+questions:
+  - id: Q-2.3-to-cartesian
+    type: numeric
+    objectives: [OBJ-2.3-1]
+    level: basic
+    prompt: >-
+      לנקודה הקואורדינטות הקוטביות $(r,\theta)=\left(4,\frac{2\pi}{3}\right)$. מהי קואורדינטת $x$ שלה?
+    answer: -2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x=r\cos\theta=4\cos\frac{2\pi}{3}=4\cdot\left(-\frac12\right)$, כלומר $x=-2$, ו-$y=4\sin\frac{2\pi}{3}=2\sqrt3$.
+      הנקודה ברביע השני, כמו שהזווית אומרת.
+    wrongFeedback: >-
+      $x=r\cos\theta$. הזווית $\frac{2\pi}{3}$ ברביע השני: מה הסימן של הקוסינוס שם?
+    commonWrong:
+      - value: 2
+        feedback: >-
+          ברביע השני הקוסינוס שלילי: $\cos\frac{2\pi}{3}=-\frac12$. הנקודה משמאל לציר $y$.
+        misconception: MC-c2-arctan-quadrant
+      - value: 3.4641016151377544
+        feedback: >-
+          זה $y=r\sin\theta=2\sqrt3$. הקואורדינטה $x$ באה עם קוסינוס.
+        misconception: MC-c2-polar-r-theta-roles
+
+  - id: Q-2.3-angle-quadrant
+    type: numeric
+    objectives: [OBJ-2.3-1]
+    level: basic
+    prompt: >-
+      מצאו את הזווית הקוטבית $\theta\in[0,2\pi)$ של הנקודה $(-1,-\sqrt3)$. (אפשר לכתוב למשל 3pi/4)
+    answer: 4.1887902047863905
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\theta=\frac{4\pi}{3}$. הנקודה ברביע השלישי, $r=2$, ו-$\cos\theta=-\frac12$, $\sin\theta=-\frac{\sqrt3}{2}$.
+    wrongFeedback: >-
+      קבעו קודם את הרביע לפי הסימנים של $x$ ו-$y$, ורק אחר כך את הזווית. $\arctan\frac{y}{x}$ לבדו אינו יודע באיזה רביע
+      הנקודה.
+    commonWrong:
+      - value: 1.0471975511965976
+        feedback: >-
+          $\arctan\frac{-\sqrt3}{-1}=\arctan\sqrt3=\frac{\pi}{3}$, אבל זו הזווית של $(1,\sqrt3)$ ברביע הראשון. לנקודה
+          $(-1,-\sqrt3)$ מוסיפים $\pi$.
+        misconception: MC-c2-arctan-quadrant
+      - value: -2.0943951023931957
+        feedback: >-
+          $-\frac{2\pi}{3}$ מגיע לאותה נקודה, אבל השאלה מבקשת $\theta\in[0,2\pi)$: מוסיפים $2\pi$.
+        misconception: MC-c2-angle-range
+
+  - id: Q-2.3-same-point
+    type: twotier
+    objectives: [OBJ-2.3-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      האם $(r,\theta)=\left(2,\frac{\pi}{3}\right)$ ו-$(r,\theta)=\left(2,\frac{7\pi}{3}\right)$ הן אותה נקודה במישור?
+    choices:
+      - text: 'כן'
+        correct: true
+        feedback: 'נכון. $\frac{7\pi}{3}=\frac{\pi}{3}+2\pi$: סיבוב שלם נוסף מחזיר לאותה נקודה.'
+      - text: 'לא'
+        feedback: >-
+          לנקודה אחת יש אינסוף זוויות, שנבדלות בכפולות של $2\pi$. לכן שאלות קובעות קטע, כמו $[0,2\pi)$, כשהן רוצות
+          תשובה אחת.
+        misconception: MC-c2-polar-unique
+    reasons:
+      - text: '$\cos$ ו-$\sin$ מחזוריות עם מחזור $2\pi$, ולכן $x$ ו-$y$ יוצאים זהים'
+        correct: true
+        feedback: 'בדיוק: $x=2\cos\frac{7\pi}{3}=1$ ו-$y=2\sin\frac{7\pi}{3}=\sqrt3$, כמו ב-$\frac{\pi}{3}$.'
+      - text: 'כי הזוויות שונות, ולכל נקודה יש זווית אחת'
+        feedback: >-
+          הזווית נקבעת רק עד כדי כפולה של $2\pi$. הנקודה $(1,\sqrt3)$ מתקבלת מ-$\frac{\pi}{3}$, מ-$\frac{7\pi}{3}$
+          ומ-$-\frac{5\pi}{3}$.
+        misconception: MC-c2-polar-unique
+      - text: 'כי $r$ זהה, ו-$r$ לבדו קובע את הנקודה'
+        feedback: >-
+          $r$ קובע רק את המעגל שעליו הנקודה; הזווית קובעת איפה על המעגל. כאן גם הזוויות מתאימות, וזו הסיבה.
+        misconception: MC-c2-polar-r-theta-roles
+
+  - id: Q-2.3-circle-to-polar
+    type: mc
+    objectives: [OBJ-2.3-2]
+    level: basic
+    prompt: >-
+      מהי המשוואה הקוטבית של המעגל $x^2+y^2=4x$?
+    choices:
+      - text: '$r=4\cos\theta$'
+        correct: true
+        feedback: >-
+          נכון. $r^2=4r\cos\theta$, ומחלקים ב-$r$ (הראשית, $r=0$, מתקבלת גם כך ב-$\theta=\frac{\pi}{2}$). זה מעגל
+          שמרכזו $(2,0)$ ורדיוסו 2, ועובר בראשית.
+      - text: '$r=4\sin\theta$'
+        feedback: >-
+          $4x=4r\cos\theta$, עם קוסינוס. $r=4\sin\theta$ הוא המעגל $x^2+y^2=4y$, שמרכזו על ציר $y$.
+        misconception: MC-c2-polar-r-theta-roles
+      - text: '$r=2$'
+        feedback: >-
+          $r=2$ הוא מעגל ברדיוס 2 **סביב הראשית**. המעגל כאן מרכזו $(2,0)$: $(x-2)^2+y^2=4$.
+        misconception: MC-c2-polar-region-center
+      - text: '$r^2=4\cos\theta$'
+        feedback: >-
+          $4x=4r\cos\theta$ ולא $4\cos\theta$: גם $x$ צריך להיות מתורגם עם $r$.
+        misconception: MC-c2-polar-r-theta-roles
+
+  - id: Q-2.3-annulus
+    type: mc
+    objectives: [OBJ-2.3-3]
+    level: basic
+    prompt: >-
+      איך מתארים בקואורדינטות קוטביות את התחום $1\le x^2+y^2\le4$, $y\ge0$?
+    choices:
+      - text: '$1\le r\le2$, $0\le\theta\le\pi$'
+        correct: true
+        feedback: 'נכון. חצי טבעת עליונה בין המעגלים ברדיוס 1 ו-2.'
+      - text: '$1\le r\le4$, $0\le\theta\le\pi$'
+        feedback: '$x^2+y^2=r^2$, ולכן $1\le r^2\le4$, כלומר $1\le r\le2$.'
+        misconception: MC-c2-square-not-root
+      - text: '$1\le r\le2$, $0\le\theta\le\frac{\pi}{2}$'
+        feedback: >-
+          $y\ge0$ כולל גם את הרביע השני ($x<0$), כלומר $\frac{\pi}{2}\le\theta\le\pi$. הרביע הראשון לבדו הוא רק חצי
+          מהתחום.
+        misconception: MC-c2-arctan-quadrant
+
+  - id: Q-2.3-arctan-trap
+    type: mc
+    objectives: [OBJ-2.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סטודנטית מחשבת את הזווית הקוטבית של $(-2,2)$ כך: $\theta=\arctan\frac{2}{-2}=\arctan(-1)=-\frac{\pi}{4}$. מה
+      נכון?
+    choices:
+      - text: 'החישוב שגוי: הנקודה ברביע השני, ו-$\theta=\frac{3\pi}{4}$'
+        correct: true
+        feedback: >-
+          נכון. $\arctan$ מחזיר ערכים רק בין $-\frac{\pi}{2}$ ל-$\frac{\pi}{2}$, כלומר ברביעים הראשון והרביעי. כש-$x<0$
+          מוסיפים $\pi$: $-\frac{\pi}{4}+\pi=\frac{3\pi}{4}$.
+      - text: 'החישוב נכון, כי $\tan\left(-\frac{\pi}{4}\right)=\frac{y}{x}$'
+        feedback: >-
+          גם $\tan\frac{3\pi}{4}=-1$. ל-$\tan\theta=-1$ יש שני פתרונות במחזור, ו-$-\frac{\pi}{4}$ מצביע לרביע הרביעי,
+          אל $(2,-2)$.
+        misconception: MC-c2-arctan-quadrant
+      - text: 'החישוב נכון אחרי שמוסיפים $2\pi$: $\theta=\frac{7\pi}{4}$'
+        feedback: >-
+          $\frac{7\pi}{4}$ היא אותה זווית כמו $-\frac{\pi}{4}$, ברביע הרביעי. הוספת $2\pi$ אינה מתקנת רביע שגוי.
+        misconception: MC-c2-angle-range
+
+  - id: Q-2.3-line-to-polar
+    type: mc
+    objectives: [OBJ-2.3-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      איך נכתב הישר $y=3$ בקואורדינטות קוטביות?
+    choices:
+      - text: '$r=\frac{3}{\sin\theta}$, עם $0<\theta<\pi$'
+        correct: true
+        feedback: >-
+          נכון. $r\sin\theta=3$. ככל ש-$\theta$ מתקרב ל-0 או ל-$\pi$ הנקודה מתרחקת לאורך הישר, ו-$r\to\infty$.
+      - text: '$r=3$'
+        feedback: >-
+          $r=3$ אומר "מרחק 3 מהראשית": זה מעגל, לא ישר. בישר $y=3$ המרחק מהראשית משתנה.
+        misconception: MC-c2-polar-r-theta-roles
+      - text: '$\theta=3$'
+        feedback: >-
+          $\theta$ קבוע הוא קרן מהראשית בזווית קבועה. הישר $y=3$ אינו עובר בראשית.
+        misconception: MC-c2-polar-r-theta-roles
+
+  - id: Q-2.3-identify
+    type: mc
+    objectives: [OBJ-2.3-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מה העקום $r=2\sin\theta$, $0\le\theta\le\pi$?
+    choices:
+      - text: 'מעגל שמרכזו $(0,1)$ ורדיוסו 1'
+        correct: true
+        feedback: >-
+          נכון. כפלו ב-$r$: $x^2+y^2=2y$, כלומר $x^2+(y-1)^2=1$. העקום עובר בראשית ב-$\theta=0$ וב-$\theta=\pi$.
+      - text: 'גל סינוס בגובה 2'
+        feedback: >-
+          זה הגרף של $y=2\sin x$ במישור $(x,y)$. במשוואה קוטבית $\theta$ הוא זווית ו-$r$ מרחק: לכל כיוון $\theta$
+          משרטטים נקודה במרחק $2\sin\theta$ מהראשית.
+        misconception: MC-c2-polar-graph-as-cartesian
+      - text: 'מעגל שמרכזו בראשית ורדיוסו 2'
+        feedback: >-
+          $r$ אינו קבוע: ב-$\theta=0$ הוא 0 וב-$\theta=\frac{\pi}{2}$ הוא 2. המעגל הזה עובר דרך הראשית.
+        misconception: MC-c2-polar-region-center
+
+  - id: Q-2.3-intersection
+    type: numeric
+    objectives: [OBJ-2.3-2]
+    level: mid
+    prompt: >-
+      המעגלים $r=1$ ו-$r=2\cos\theta$ נחתכים בשתי נקודות. מהי קואורדינטת $y$ של נקודת החיתוך העליונה?
+    answer: 0.8660254037844386
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{\sqrt3}{2}$. $2\cos\theta=1$ נותן $\theta=\pm\frac{\pi}{3}$, והנקודה העליונה
+      $\left(\cos\frac{\pi}{3},\sin\frac{\pi}{3}\right)=\left(\frac12,\frac{\sqrt3}{2}\right)$.
+    wrongFeedback: >-
+      השוו את שני הביטויים ל-$r$ ומצאו את $\theta$, ואז $y=r\sin\theta$.
+    commonWrong:
+      - value: 1.0471975511965976
+        feedback: >-
+          $\frac{\pi}{3}$ היא הזווית של הנקודה, לא קואורדינטת ה-$y$ שלה: $y=r\sin\theta=\sin\frac{\pi}{3}$.
+        misconception: MC-c2-polar-r-theta-roles
+      - value: 0.5
+        feedback: >-
+          $\frac12$ היא קואורדינטת $x$: $x=r\cos\theta$.
+        misconception: MC-c2-polar-r-theta-roles
+
+  - id: Q-2.3-sector-points
+    type: multi
+    objectives: [OBJ-2.3-3, OBJ-2.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      התחום $D$ נתון בקואורדינטות קוטביות: $0\le r\le2$, $\frac{\pi}{4}\le\theta\le\frac{\pi}{2}$. אילו מהנקודות
+      (בקואורדינטות קרטזיות) נמצאות ב-$D$? סמנו את כולן.
+    choices:
+      - text: '$(1,1)$'
+        correct: true
+        feedback: 'נכון. $r=\sqrt2\le2$ ו-$\theta=\frac{\pi}{4}$, על השפה של הגזרה.'
+      - text: '$\left(0,\frac32\right)$'
+        correct: true
+        feedback: 'נכון. $r=\frac32$ ו-$\theta=\frac{\pi}{2}$, על ציר $y$, השפה השנייה.'
+      - text: '$(1,2)$'
+        feedback: >-
+          הזווית $\arctan2$ בין $\frac{\pi}{4}$ ל-$\frac{\pi}{2}$, אבל $r=\sqrt5>2$: הנקודה מחוץ לגזרה, רחוקה מדי.
+        misconception: MC-c2-square-not-root
+      - text: '$(2,1)$'
+        feedback: >-
+          $r=\sqrt5$, וגם הזווית $\arctan\frac12<\frac{\pi}{4}$: הנקודה מתחת לישר $y=x$.
+        misconception: MC-c2-polar-r-theta-roles
+      - text: '$(-1,1)$'
+        feedback: >-
+          $r=\sqrt2$, אבל הנקודה ברביע השני: $\theta=\frac{3\pi}{4}$, מחוץ לגזרה. ($\arctan\frac{1}{-1}=-\frac{\pi}{4}$
+          טועה ברביע.)
+        misconception: MC-c2-arctan-quadrant
+
+  - id: Q-2.3-offcenter-disk
+    type: mc
+    objectives: [OBJ-2.3-3, OBJ-2.3-2]
+    level: exam
+    prompt: >-
+      איך מתארים בקואורדינטות קוטביות את העיגול $(x-1)^2+y^2\le1$?
+    choices:
+      - text: '$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}$, $0\le r\le2\cos\theta$'
+        correct: true
+        feedback: >-
+          נכון. $(x-1)^2+y^2\le1$ שקול ל-$r^2\le2r\cos\theta$, כלומר $r\le2\cos\theta$. כדי שיהיו נקודות עם $r>0$ צריך
+          $\cos\theta\ge0$: העיגול כולו מימין לציר $y$.
+      - text: '$0\le\theta\le2\pi$, $0\le r\le1$'
+        feedback: >-
+          זה העיגול ברדיוס 1 **סביב הראשית**. העיגול כאן מרכזו $(1,0)$, והראשית על השפה שלו.
+        misconception: MC-c2-polar-region-center
+      - text: '$0\le\theta\le2\pi$, $0\le r\le2\cos\theta$'
+        feedback: >-
+          כש-$\frac{\pi}{2}<\theta<\frac{3\pi}{2}$ הקוסינוס שלילי, ואין $r\ge0$ עם $r\le2\cos\theta$. הקטע של $\theta$
+          הוא הכיוונים שבהם יש נקודות של התחום.
+        misconception: MC-c2-arctan-quadrant
+      - text: '$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}$, $0\le r\le\cos\theta$'
+        feedback: >-
+          $r^2\le2r\cos\theta$ נותן $r\le2\cos\theta$. ב-$\theta=0$ הנקודה הרחוקה ביותר היא $(2,0)$, לא $(1,0)$.
+        misconception: MC-c2-polar-region-center
+
+  - id: Q-2.3-cardioid-left
+    type: numeric
+    objectives: [OBJ-2.3-2]
+    level: exam
+    prompt: >-
+      על הקרדיואידה $r=1+\cos\theta$, $0\le\theta<2\pi$, מהי קואורדינטת $x$ הקטנה ביותר? (רמז: כתבו את $x$ כפונקציה
+      של $c=\cos\theta$.)
+    answer: -0.25
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\frac14$. $x=r\cos\theta=(1+c)c=c^2+c=\left(c+\frac12\right)^2-\frac14$, והמינימום ב-$c=-\frac12$,
+      כלומר ב-$\theta=\frac{2\pi}{3}$ ו-$\frac{4\pi}{3}$. הנקודה השמאלית ביותר אינה הראשית!
+    wrongFeedback: >-
+      $x=r\cos\theta=(1+\cos\theta)\cos\theta$. זו פונקציה ריבועית של $c=\cos\theta$ בקטע $[-1,1]$: השלימו לריבוע.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          ב-$\theta=\pi$ אכן $r=0$ והעקום בראשית, אבל הנקודה השמאלית ביותר אינה דווקא שם. ב-$\theta=\frac{2\pi}{3}$:
+          $r=\frac12$ ו-$x=\frac12\cdot\left(-\frac12\right)=-\frac14<0$.
+        misconception: MC-c2-polar-extreme-r
+      - value: -2
+        feedback: >-
+          $-2$ היה נכון אילו ב-$\theta=\pi$ היה $r=2$; אבל שם $r=1+\cos\pi=0$. $r$ הגדול ביותר, 2, הוא ב-$\theta=0$,
+          בצד ימין.
+        misconception: MC-c2-polar-extreme-r

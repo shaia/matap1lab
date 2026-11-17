@@ -1,0 +1,262 @@
+# Lesson 6.2 — Taylor's formula with the Lagrange remainder.
+# Objectives (src/course.ts):
+#   OBJ-6.2-1  write Taylor's formula with the remainder in Lagrange form
+#   OBJ-6.2-2  bound the error of a Taylor approximation on a given interval
+#   OBJ-6.2-3  choose the order needed for a given accuracy
+# R_n(x) = f^{(n+1)}(c)/(n+1)! (x-x_0)^{n+1}, c between x_0 and x. Keys recomputed in screens/tools/recompute-ch6.py.
+chapter: 6
+questions:
+  - id: Q-6.2-formula
+    type: mc
+    objectives: [OBJ-6.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $f$ גזירה $n+1$ פעמים בקטע שמכיל את $x_0$ ואת $x$, ו-$f(x)=T_n(x)+R_n(x)$. מהי השארית בצורת לגרנז׳?
+    choices:
+      - text: '$R_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}$ עבור $c$ כלשהו בין $x_0$ ל-$x$'
+        correct: true
+        feedback: >-
+          נכון. השארית נראית כמו האיבר הבא בפולינום, $\frac{f^{(n+1)}}{(n+1)!}(x-x_0)^{n+1}$, אלא שהנגזרת מחושבת בנקודה לא
+          ידועה $c$ ולא ב-$x_0$.
+      - text: '$R_n(x)=\frac{f^{(n+1)}(x_0)}{(n+1)!}(x-x_0)^{n+1}$'
+        feedback: >-
+          זה רק האיבר הבא של פולינום טיילור, $T_{n+1}-T_n$. השארית כוללת את כל מה שאחריו, ולכן הנגזרת נלקחת בנקודה $c$
+          שבין $x_0$ ל-$x$, שאיננה ידועה.
+        misconception: MC-c6-remainder-at-center
+      - text: '$R_n(x)=\frac{f^{(n)}(c)}{n!}(x-x_0)^{n}$ עבור $c$ כלשהו בין $x_0$ ל-$x$'
+        feedback: >-
+          הסדר: $T_n$ כבר כולל את הנגזרת ה-$n$. השארית מתחילה בנגזרת ה-$(n+1)$ ובחזקה $n+1$.
+        misconception: MC-c6-remainder-order
+    hints: ['השארית של $T_n$ "מתחילה" במקום שבו $T_n$ נגמר.']
+
+  - id: Q-6.2-exp-bound
+    type: numeric
+    objectives: [OBJ-6.2-2]
+    level: basic
+    prompt: >-
+      מקרבים את $e^x$ ב-$T_3(x)=1+x+\frac{x^2}{2}+\frac{x^3}{6}$ בקטע $[0,1]$. לפי שארית לגרנז׳,
+      $|R_3(x)|=\frac{e^c}{4!}x^4$ עם $c$ בין 0 ל-$x$. מהו החסם $\max\frac{e^c x^4}{24}$ כש-$0\le c\le x\le1$? (מותר לכתוב
+      ביטוי עם e.)
+    answer: 0.113261742852
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון: $\frac{e}{24}\approx0.113$. הגורם $e^c$ מקסימלי ב-$c=1$ והגורם $x^4$ ב-$x=1$. (השגיאה האמיתית ב-$x=1$ היא
+      $e-\frac{8}{3}\approx0.0516$, מתחת לחסם.)
+    wrongFeedback: >-
+      חסמו כל גורם בנפרד: $e^c\le e^1$ כי $c\le1$, ו-$x^4\le1$. החסם הוא המכפלה חלקי $4!$.
+    commonWrong:
+      - value: 0.0416666666667
+        feedback: >-
+          זה $\frac{1}{24}$, עם $e^c$ ב-$c=0$, הערך **הקטן** ביותר של הגורם. כדי לחסום את השגיאה בכל הקטע לוקחים את
+          הערך הגדול ביותר, $e^1$.
+        misconception: MC-c6-max-wrong-end
+      - value: 0.45304697141
+        feedback: 'זה $\frac{e}{3!}$. השארית של $T_3$ משתמשת בנגזרת הרביעית ובחלוקה ב-$4!=24$.'
+        misconception: MC-c6-remainder-order
+    hints: ['באיזה $c$ בקטע $e^c$ הכי גדול?']
+
+  - id: Q-6.2-c-depends
+    type: twotier
+    objectives: [OBJ-6.2-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא: בנוסחת טיילור עם שארית לגרנז׳ סביב $x_0$, הנקודה $c$ היא אותה נקודה לכל $x$, ולכן אם מוצאים אותה פעם
+      אחת אפשר לחשב את $f$ בדיוק בכל מקום.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. $c$ תלויה ב-$x$ (וגם ב-$n$), ואין לנו נוסחה בשבילה. המשפט מבטיח רק שהיא קיימת בין $x_0$ ל-$x$, וזה מספיק
+          כדי לחסום את השגיאה.
+      - text: נכון
+        feedback: >-
+          אילו $c$ הייתה קבועה, $R_n(x)$ היה פולינום ממעלה $n+1$, ו-$f$ הייתה פולינום. ל-$e^x$ זה בלתי אפשרי.
+        misconception: MC-c6-c-fixed
+    reasons:
+      - text: 'המשפט אומר רק ש-$c$ קיימת בין $x_0$ ל-$x$; כש-$x$ משתנה, גם $c$ משתנה'
+        correct: true
+        feedback: >-
+          בדיוק. לכן משתמשים בשארית לחסם: מחליפים את $|f^{(n+1)}(c)|$ במקסימום שלה על כל הקטע.
+      - text: '$c$ היא תמיד אמצע הקטע בין $x_0$ ל-$x$'
+        feedback: >-
+          אין נוסחה כזאת. ל-$e^x$ עם $n=0$ ו-$x=1$: $e-1=e^c$, ולכן $c=\ln(e-1)\approx0.541$, לא $0.5$.
+        misconception: MC-c6-c-fixed
+      - text: '$c=x_0$, ולכן השארית היא האיבר הבא בטור'
+        feedback: >-
+          אם $c=x_0$, השארית הייתה האיבר הבא בלבד, וכל שאר האיברים היו נעלמים. הנקודה $c$ היא בדיוק מה שסופג אותם.
+        misconception: MC-c6-remainder-at-center
+    hints: ['מה היה קורה אילו $c$ הייתה אותה נקודה לכל $x$?']
+
+  - id: Q-6.2-ln-bound
+    type: numeric
+    objectives: [OBJ-6.2-2]
+    level: mid
+    prompt: >-
+      מקרבים את $\ln(1+x)$ ב-$x-\frac{x^2}{2}$ ל-$0\le x\le0.2$. חסמו את השגיאה בשארית לגרנז׳: מצאו את המקסימום של
+      $\frac{|f'''(c)|}{3!}x^3$ כש-$0\le c\le x\le0.2$.
+    answer: 0.00266666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f'''(x)=\frac{2}{(1+x)^3}$, והיא מקסימלית ב-$c=0$, שם היא 2. לכן $|R_2|\le\frac{2}{6}(0.2)^3=\frac{0.008}{3}\approx0.00267$.
+    wrongFeedback: >-
+      גזרו שלוש פעמים: $f'=\frac{1}{1+x}$, $f''=-\frac{1}{(1+x)^2}$, $f'''=\frac{2}{(1+x)^3}$. מצאו את המקסימום של
+      $|f'''|$ בקטע ושל $x^3$.
+    commonWrong:
+      - value: 0.00154320987654
+        feedback: >-
+          לקחתם $c=0.2$, אבל $f'''$ **יורדת**, והמקסימום שלה ב-$c=0$. חסם צריך לכסות את המקרה הגרוע.
+        misconception: MC-c6-max-wrong-end
+    hints: ['האם $\frac{2}{(1+c)^3}$ עולה או יורדת ב-$c$?']
+
+  - id: Q-6.2-sign
+    type: twotier
+    objectives: [OBJ-6.2-1, OBJ-6.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא: לכל $x>0$ מתקיים $e^x>1+x+\frac{x^2}{2}$.
+    choices:
+      - text: נכון
+        correct: true
+        feedback: >-
+          נכון. $e^x-T_2(x)=R_2(x)=\frac{e^c}{6}x^3$, וכל הגורמים חיוביים כש-$x>0$.
+      - text: לא נכון
+        feedback: >-
+          השארית יודעת יותר מגודל: גם סימן. כאן $R_2(x)=\frac{e^c}{6}x^3>0$ ל-$x>0$, ולכן הפולינום תמיד מתחת.
+        misconception: MC-c6-remainder-sign-unknown
+    reasons:
+      - text: 'השארית $\frac{e^c}{3!}x^3$ חיובית, כי $e^c>0$ ו-$x^3>0$'
+        correct: true
+        feedback: 'בדיוק. אמנם $c$ לא ידועה, אבל הסימן של $e^c$ ידוע לכל $c$.'
+      - text: 'אי אפשר לדעת, כי $c$ לא ידועה'
+        feedback: >-
+          לא צריך לדעת את $c$ כדי לדעת סימן: $e^c>0$ לכל $c$. זה בדיוק השימוש בשארית לאי-שוויונות.
+        misconception: MC-c6-remainder-sign-unknown
+      - text: 'כי האיבר הבא בטור, $\frac{x^3}{6}$, חיובי'
+        feedback: >-
+          הטיעון לא שלם: אחרי האיבר הבא באים עוד איברים. כאן הם אמנם כולם חיוביים, אבל ל-$\sin x$ למשל הסימנים מתחלפים.
+          השארית בצורת לגרנז׳ מטפלת בכולם יחד.
+        misconception: MC-c6-remainder-at-center
+    hints: ['כתבו את $R_2(x)$ בצורת לגרנז׳.']
+
+  - id: Q-6.2-sqrt-bound
+    type: numeric
+    objectives: [OBJ-6.2-2]
+    level: mid
+    prompt: >-
+      $\sqrt{1.1}\approx1+\frac{0.1}{2}-\frac{(0.1)^2}{8}=1.04875$ (פולינום טיילור מסדר 2 של $\sqrt{1+x}$ סביב 0). חסמו
+      את השגיאה: מצאו את המקסימום של $\frac{|f'''(c)|}{3!}(0.1)^3$ כש-$0\le c\le0.1$, עם $f(x)=\sqrt{1+x}$.
+    answer: 0.0000625
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f'''(x)=\frac38(1+x)^{-5/2}$, מקסימלית ב-$c=0$: $\frac{3/8}{6}\cdot0.001=6.25\cdot10^{-5}$. (השגיאה האמיתית
+      כ-$5.9\cdot10^{-5}$.)
+    wrongFeedback: >-
+      $f'=\frac12(1+x)^{-1/2}$, $f''=-\frac14(1+x)^{-3/2}$, $f'''=\frac38(1+x)^{-5/2}$. היא יורדת ב-$x$; מצאו איפה
+      המקסימום.
+    commonWrong:
+      - value: 0.0000492491006842
+        feedback: >-
+          לקחתם $c=0.1$, שם $f'''$ הכי **קטנה**. החסם צריך את הערך הגדול ביותר, ב-$c=0$.
+        misconception: MC-c6-max-wrong-end
+    hints: ['$(1+c)^{-5/2}\le1$ כש-$c\ge0$.']
+
+  - id: Q-6.2-order-e
+    type: numeric
+    objectives: [OBJ-6.2-3]
+    level: mid
+    prompt: >-
+      רוצים לחשב את $e=e^1$ בעזרת $T_n(1)=\sum_{k=0}^n\frac1{k!}$ בשגיאה קטנה מ-0.001, ומשתמשים בחסם
+      $|R_n(1)|\le\frac{3}{(n+1)!}$ (כי $e^c<3$). מהו ה-$n$ הקטן ביותר שהחסם מבטיח בשבילו את הדיוק?
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{3}{6!}=\frac{3}{720}\approx0.0042$ עוד גדול מדי, ו-$\frac{3}{7!}=\frac{3}{5040}\approx0.0006<0.001$. לכן
+      $n=6$.
+    wrongFeedback: 'חשבו $\frac{3}{(n+1)!}$ ל-$n=4,5,6,7$ ועצרו בראשון שקטן מ-0.001.'
+    commonWrong:
+      - value: 7
+        feedback: >-
+          פתרתם $\frac{3}{n!}<0.001$. בשארית של $T_n$ מופיעה $(n+1)!$, ולכן $n=6$ כבר מספיק.
+        misconception: MC-c6-remainder-order
+    hints: ['$6!=720$, $7!=5040$.']
+
+  - id: Q-6.2-skip-zero
+    type: twotier
+    objectives: [OBJ-6.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      רוצים את $\sin(0.1)$ בשגיאה קטנה מ-$10^{-6}$. נכון או לא: הקירוב $\sin x\approx x-\frac{x^3}{6}$ מספיק.
+    choices:
+      - text: נכון
+        correct: true
+        feedback: >-
+          נכון. המקדם של $x^4$ אפס, כך ש-$x-\frac{x^3}{6}=T_4(x)$, והשארית $R_4$ חסומה ב-$\frac{(0.1)^5}{5!}\approx8.3\cdot10^{-8}$.
+      - text: לא נכון
+        feedback: >-
+          אם חוסמים בעזרת $R_3$ מקבלים $\frac{(0.1)^4}{4!}\approx4.2\cdot10^{-6}$, וזה נראה לא מספיק. אבל $T_3=T_4$ לסינוס,
+          ולכן מותר להשתמש ב-$R_4$ ולקבל $8.3\cdot10^{-8}$.
+        misconception: MC-c6-remainder-order
+    reasons:
+      - text: 'המקדם של $x^4$ בפיתוח של $\sin x$ אפס, ולכן הפולינום הוא גם $T_4$ והשגיאה חסומה ב-$\frac{|x|^5}{5!}$'
+        correct: true
+        feedback: >-
+          בדיוק. כשהאיבר הבא אפס, מקבלים חסם טוב יותר "בחינם": השארית מתחילה בחזקה החמישית.
+      - text: 'השגיאה היא בערך האיבר הראשון שהושמט, $\frac{x^3}{6}$'
+        feedback: >-
+          $\frac{x^3}{6}$ אינו מושמט: הוא חלק מהקירוב. האיבר הראשון שהושמט הוא $\frac{x^5}{120}$.
+        misconception: MC-c6-remainder-order
+      - text: 'כי $0.1$ קטן, וכל קירוב טיילור של מספר קטן מדויק עד $10^{-6}$'
+        feedback: >-
+          הדיוק תלוי גם בסדר: $T_1(0.1)=0.1$ שוגה ב-$1.7\cdot10^{-4}$. את הסדר הנדרש קובעים לפי חסם על השארית.
+        misconception: MC-c6-taylor-global
+    hints: ['מהו המקדם של $x^4$ בפיתוח של $\sin x$?']
+
+  - id: Q-6.2-rank-recipe
+    type: rank
+    objectives: [OBJ-6.2-2, OBJ-6.2-3]
+    level: mid
+    prompt: >-
+      סדרו את שלבי השיטה לבחירת סדר הקירוב: "מצאו $n$ כך ש-$T_n$ מקרב את $f$ בקטע $|x-x_0|\le d$ בשגיאה קטנה מ-$\varepsilon$".
+    help: סדרו את שלבי השיטה מהראשון לאחרון.
+    items:
+      - id: a
+        label: 'כותבים את השארית: $R_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}$.'
+      - id: b
+        label: 'מוצאים חסם $M_{n+1}$ ל-$|f^{(n+1)}|$ על כל הקטע (בדרך כלל נוסחה ב-$n$).'
+      - id: c
+        label: 'חוסמים: $|R_n(x)|\le\frac{M_{n+1}}{(n+1)!}d^{n+1}$.'
+      - id: d
+        label: 'מחפשים את ה-$n$ הקטן ביותר שבו החסם קטן מ-$\varepsilon$.'
+      - id: e
+        label: 'מחשבים את $T_n$ באותו $n$.'
+    order: [a, b, c, d, e]
+    correctFeedback: >-
+      נכון. החסם צריך להחזיק לכל $c$ בקטע, ולכן הנגזרת נחסמת לפני שבוחרים $n$, ורק אז מחשבים את הקירוב.
+    wrongFeedback: >-
+      לא מחשבים את $T_n$ לפני שיודעים איזה $n$ צריך. מתחילים מהשארית, חוסמים את מה שלא ידוע ($c$ ו-$x$), ורק אז בוחרים
+      $n$.
+
+  - id: Q-6.2-order-sin
+    type: numeric
+    objectives: [OBJ-6.2-3]
+    level: exam
+    prompt: >-
+      רוצים את $\sin(0.5)$ בשגיאה קטנה מ-$10^{-6}$ בעזרת $T_n(0.5)$ סביב 0, עם החסם $|R_n(0.5)|\le\frac{(0.5)^{n+1}}{(n+1)!}$
+      (כל נגזרת של סינוס חסומה ב-1). מהו ה-$n$ הקטן ביותר שהחסם מבטיח בשבילו את הדיוק?
+    answer: 7
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. ב-$n=6$: $\frac{(0.5)^7}{7!}\approx1.55\cdot10^{-6}$, עוד גדול מדי. ב-$n=7$: $\frac{(0.5)^8}{8!}\approx9.7\cdot10^{-8}$.
+      ($T_6=T_5$ לסינוס, והשגיאה האמיתית שלו באמת כ-$1.55\cdot10^{-6}$, כך ש-$T_7$ נחוץ.)
+    wrongFeedback: 'חשבו $\frac{(0.5)^{n+1}}{(n+1)!}$ ל-$n=5,6,7,8$.'
+    commonWrong:
+      - value: 8
+        feedback: >-
+          פתרתם $\frac{(0.5)^n}{n!}<10^{-6}$, עם החזקה והעצרת של $T_n$ במקום של השארית. בשארית של $T_n$ מופיעים
+          $(0.5)^{n+1}$ ו-$(n+1)!$.
+        misconception: MC-c6-remainder-order
+    hints: ['$7!=5040$ ו-$(0.5)^7=0.0078125$.']

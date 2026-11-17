@@ -1,0 +1,289 @@
+# Lesson 2.1 — circle and ellipse: equation and parametrisation (notes p. 17).
+# Objectives (src/course.ts):
+#   OBJ-2.1-1  the unit circle by cos/sin and by its Cartesian equation, and moving between the two
+#   OBJ-2.1-2  the ellipse in standard form: semi-axes and a parametrisation
+#   OBJ-2.1-3  shifting and stretching a circle or an ellipse, and the new equation
+# Every number recomputed in screens/tools/recompute-ch2.py.
+chapter: 2
+questions:
+  - id: Q-2.1-unit-circle-eq
+    type: mc
+    objectives: [OBJ-2.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      הנקודה $(x,y)=(\cos t,\sin t)$ נעה כש-$t$ עובר על הקטע $[0,2\pi)$. איזו משוואה קרטזית מתארת את כל המסלול שלה?
+    choices:
+      - text: '$x^2+y^2=1$'
+        correct: true
+        feedback: >-
+          נכון. לכל $t$ מתקיים $\cos^2t+\sin^2t=1$, ולהפך: כל נקודה על מעגל היחידה היא $(\cos t,\sin t)$ ל-$t$ אחד
+          בקטע. זה מעגל היחידה כולו.
+      - text: '$y=\sqrt{1-x^2}$'
+        feedback: >-
+          זה רק חצי המעגל העליון, כי שורש אינו שלילי. כש-$\pi<t<2\pi$ הנקודה נמצאת מתחת לציר $x$, ושם
+          $y=-\sqrt{1-x^2}$. המשוואה $x^2+y^2=1$ תופסת את שני החצאים יחד.
+        misconception: MC-c2-sqrt-half-curve
+      - text: '$x^2-y^2=1$'
+        feedback: >-
+          זו היפרבולה. ב-$t=\frac{\pi}{2}$ הנקודה $(0,1)$ נותנת $0-1=-1$. הזהות היא $\cos^2t+\sin^2t=1$, עם פלוס.
+        misconception: MC-c2-conic-by-sign
+
+  - id: Q-2.1-param-point
+    type: numeric
+    objectives: [OBJ-2.1-1]
+    level: basic
+    prompt: >-
+      בפרמטריזציה $(\cos t,\sin t)$ של מעגל היחידה, $0\le t<2\pi$, לאיזה ערך של $t$ מגיעים לנקודה $(0,-1)$?
+      (אפשר לכתוב למשל pi/2)
+    answer: 4.71238898038469
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $t=\frac{3\pi}{2}$: שם $\cos t=0$ ו-$\sin t=-1$. הפרמטר הוא הזווית מהכיוון החיובי של ציר $x$, נגד כיוון
+      השעון.
+    wrongFeedback: >-
+      צריך $\cos t=0$ וגם $\sin t=-1$. היכן על מעגל היחידה, בזווית שנמדדת נגד כיוון השעון מ-$(1,0)$, נמצאת הנקודה
+      התחתונה?
+    commonWrong:
+      - value: -1.5707963267948966
+        feedback: >-
+          $t=-\frac{\pi}{2}$ מגיע לאותה נקודה, אבל הוא אינו בקטע $[0,2\pi)$ שנתון בשאלה. מוסיפים $2\pi$.
+        misconception: MC-c2-angle-range
+
+  - id: Q-2.1-circle-param
+    type: expr
+    objectives: [OBJ-2.1-1, OBJ-2.1-3]
+    level: basic
+    prompt: >-
+      כתבו פרמטריזציה $(x(t),y(t))$, $0\le t<2\pi$, של המעגל $(x-2)^2+(y+1)^2=9$, שמתחילה ב-$(5,-1)$ ונעה נגד כיוון
+      השעון. מהו $x(t)$? (השתמשו במשתנה $t$)
+    answer: '2+3*cos(t)'
+    answerTex: '$x(t)=2+3\cos t,\quad y(t)=-1+3\sin t$'
+    variables: [t]
+    domain: [0, 6]
+    correctFeedback: >-
+      נכון. מעגל עם מרכז $(2,-1)$ ורדיוס 3: מותחים את מעגל היחידה פי 3 ומזיזים את המרכז. ב-$t=0$ מקבלים $(5,-1)$.
+    wrongFeedback: >-
+      קראו מהמשוואה את המרכז (שימו לב לסימנים) ואת הרדיוס (שורש של אגף ימין). אחר כך $x=x_0+R\cos t$.
+    commonWrong:
+      - expr: '-2+3*cos(t)'
+        feedback: >-
+          $(x-2)^2$ פירושו מרכז ב-$x=2$, לא $-2$: המשוואה מתאפסת כש-$x=2$.
+        misconception: MC-c2-shift-sign
+      - expr: '2+9*cos(t)'
+        feedback: >-
+          9 הוא $R^2$. הרדיוס הוא $\sqrt9=3$.
+        misconception: MC-c2-square-not-root
+      - expr: '2+3*sin(t)'
+        feedback: >-
+          עם $x=2+3\sin t$ ב-$t=0$ הנקודה היא $(2,\cdot)$ ולא $(5,-1)$. ההתחלה ב-$(5,-1)$ והכיוון נגד השעון קובעים
+          $x=2+3\cos t$.
+        misconception: MC-c2-param-vs-curve
+    hints: ['מהו המרכז ומהו הרדיוס של המעגל?']
+
+  - id: Q-2.1-ellipse-axes
+    type: numeric
+    objectives: [OBJ-2.1-2]
+    level: basic
+    prompt: >-
+      מה אורך חצי הציר של האליפסה $4x^2+9y^2=36$ בכיוון ציר $x$?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. מחלקים ב-36: $\frac{x^2}{9}+\frac{y^2}{4}=1$. חצי הציר בכיוון $x$ הוא $\sqrt9=3$ (האליפסה חותכת את ציר
+      $x$ ב-$\pm3$), ובכיוון $y$ הוא 2.
+    wrongFeedback: >-
+      הביאו קודם לצורה $\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$ (אגף ימין 1), ואז הציבו $y=0$.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          2 הוא חצי הציר בכיוון $y$. המקדם 4 ליד $x^2$ אינו חצי הציר: $\frac{4x^2}{36}=\frac{x^2}{9}$, ובדיקה ישירה
+          נותנת את אותו דבר: $y=0$ גורר $4x^2=36$, כלומר $x=\pm3$.
+        misconception: MC-c2-ellipse-axes-swap
+      - value: 9
+        feedback: >-
+          9 הוא $a^2$. חצי הציר הוא $a=\sqrt9=3$.
+        misconception: MC-c2-square-not-root
+      - value: 0.5
+        feedback: >-
+          זה מתקבל מ-$4x^2=\frac{x^2}{1/4}$ בלי לחלק קודם ב-36. הקריאה $a^2$ מהמכנה נכונה רק כשאגף ימין הוא 1.
+        misconception: MC-c2-ellipse-rhs-not-one
+
+  - id: Q-2.1-ellipse-param
+    type: expr
+    objectives: [OBJ-2.1-2]
+    level: basic
+    prompt: >-
+      בפרמטריזציה של האליפסה $\frac{x^2}{16}+\frac{y^2}{9}=1$ בוחרים $x(t)=4\cos t$, $0\le t<2\pi$. מהו $y(t)$, כך
+      שהנקודה נעה נגד כיוון השעון? (השתמשו במשתנה $t$)
+    answer: '3*sin(t)'
+    answerTex: '$y(t)=3\sin t$'
+    variables: [t]
+    domain: [0, 6]
+    correctFeedback: >-
+      נכון. $\frac{16\cos^2t}{16}+\frac{9\sin^2t}{9}=\cos^2t+\sin^2t=1$. כל רכיב הוא חצי הציר שלו כפול $\cos t$ או
+      $\sin t$.
+    wrongFeedback: >-
+      הציבו את התשובה במשוואה: צריך לקבל $\cos^2t+\sin^2t=1$.
+    commonWrong:
+      - expr: '9*sin(t)'
+        feedback: >-
+          עם $y=9\sin t$ מקבלים $\frac{81\sin^2t}{9}=9\sin^2t$, לא $\sin^2t$. חצי הציר הוא $\sqrt9=3$.
+        misconception: MC-c2-square-not-root
+      - expr: '4*sin(t)'
+        feedback: >-
+          זה חצי הציר של $x$. בכיוון $y$ האליפסה מגיעה רק עד $\pm3$.
+        misconception: MC-c2-ellipse-axes-swap
+      - expr: '-3*sin(t)'
+        feedback: >-
+          זו אותה אליפסה, אבל עם $y=-3\sin t$ הנקודה יורדת מ-$(4,0)$, כלומר נעה עם כיוון השעון.
+        misconception: MC-c2-param-vs-curve
+
+  - id: Q-2.1-shift
+    type: mc
+    objectives: [OBJ-2.1-3]
+    level: basic
+    prompt: >-
+      מזיזים את המעגל $x^2+y^2=4$ כך שהמרכז שלו עובר מהראשית לנקודה $(3,-1)$. מהי המשוואה החדשה?
+    choices:
+      - text: '$(x-3)^2+(y+1)^2=4$'
+        correct: true
+        feedback: >-
+          נכון. נקודה $(x,y)$ על המעגל החדש אם $(x-3,y+1)$, ההפרש שלה מהמרכז, על המעגל הישן.
+      - text: '$(x+3)^2+(y-1)^2=4$'
+        feedback: >-
+          זו הזזה בכיוון ההפוך, למרכז $(-3,1)$: הביטוי מתאפס ב-$x=-3$. מזיזים ב-$(3,-1)$ על ידי הצבת $x-3$ ו-$y+1$.
+        misconception: MC-c2-shift-sign
+      - text: '$(x-3)^2+(y+1)^2=2$'
+        feedback: >-
+          הזזה אינה משנה את הרדיוס: אגף ימין נשאר $4=2^2$.
+        misconception: MC-c2-square-not-root
+      - text: '$x^2+y^2=4+3^2+1^2$'
+        feedback: >-
+          זה מעגל שמרכזו עדיין בראשית, רק גדול יותר. הזזה משנה את המרכז ולא את הרדיוס.
+        misconception: MC-c2-shift-sign
+
+  - id: Q-2.1-same-circle
+    type: twotier
+    objectives: [OBJ-2.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      האם המסילה $(x,y)=(\sin t,\cos t)$, $0\le t<2\pi$, מתארת את מעגל היחידה?
+    choices:
+      - text: 'כן, את כל מעגל היחידה'
+        correct: true
+        feedback: >-
+          נכון. $x^2+y^2=\sin^2t+\cos^2t=1$, וכל נקודה של המעגל מתקבלת. היא מתחילה ב-$(0,1)$ ונעה עם כיוון השעון: אותו
+          עקום, פרמטריזציה אחרת.
+      - text: 'לא, זה עקום אחר, כי החליפו בין סינוס לקוסינוס'
+        feedback: >-
+          לעקום אחד יש הרבה פרמטריזציות. ההחלפה משנה את נקודת ההתחלה ואת כיוון התנועה, לא את קבוצת הנקודות.
+        misconception: MC-c2-param-vs-curve
+    reasons:
+      - text: 'כל הנקודות מקיימות $x^2+y^2=1$, ו-$t$ עובר על מחזור שלם'
+        correct: true
+        feedback: 'בדיוק. המשוואה הקרטזית קובעת את העקום; הפרמטריזציה קובעת גם איך עוברים עליו.'
+      - text: 'כי $x$ צריך להיות $\cos t$ כדי שהעקום יהיה מעגל'
+        feedback: >-
+          המעגל הוא קבוצת הנקודות שמקיימות $x^2+y^2=1$. כל זוג פונקציות שמקיים את הזהות ועובר על כל הנקודות מתאר אותו.
+        misconception: MC-c2-param-vs-curve
+      - text: 'כי ב-$t=0$ הנקודה $(0,1)$ אינה על המעגל'
+        feedback: '$(0,1)$ דווקא על מעגל היחידה: $0^2+1^2=1$.'
+        misconception: MC-c2-param-vs-curve
+
+  - id: Q-2.1-param-angle
+    type: twotier
+    objectives: [OBJ-2.1-2, OBJ-2.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      על האליפסה $(x,y)=(\cos t,2\sin t)$ לוקחים $t=\frac{\pi}{4}$. האם הזווית בין הקטע מהראשית לנקודה לבין ציר $x$
+      החיובי שווה $\frac{\pi}{4}$?
+    choices:
+      - text: 'לא, היא גדולה יותר'
+        correct: true
+        feedback: >-
+          נכון. הנקודה היא $\left(\frac{\sqrt2}{2},\sqrt2\right)$, והזווית שלה היא $\arctan2\approx1.107$, יותר מ-$\frac{\pi}{4}\approx0.785$.
+      - text: 'כן, $t$ הוא תמיד הזווית של הנקודה'
+        feedback: >-
+          זה נכון רק במעגל. באליפסה $y$ נמתח פי 2, והנקודה "עולה" לזווית גדולה יותר. $t$ הוא הפרמטר, לא הזווית
+          הקוטבית.
+        misconception: MC-c2-param-angle-polar
+    reasons:
+      - text: 'שיפוע הקטע הוא $\frac{2\sin t}{\cos t}=2\tan t=2$ ב-$t=\frac{\pi}{4}$'
+        correct: true
+        feedback: 'בדיוק: הזווית הקוטבית היא $\arctan(2\tan t)$, והיא שווה ל-$t$ רק ב-$t=0$, ב-$t=\frac{\pi}{2}$ ובכפולות שלהן.'
+      - text: 'כי $\cos^2t+\sin^2t=1$'
+        feedback: >-
+          הזהות מראה שהנקודה על האליפסה, ולא אומרת דבר על הזווית שלה.
+        misconception: MC-c2-param-angle-polar
+      - text: 'כי מתיחה בכיוון $y$ אינה משנה זוויות'
+        feedback: >-
+          מתיחה בכיוון אחד דווקא משנה זוויות: היא מכפילה את שיפוע הקטע פי 2.
+        misconception: MC-c2-param-angle-polar
+
+  - id: Q-2.1-stretch
+    type: mc
+    objectives: [OBJ-2.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מותחים את מעגל היחידה $x^2+y^2=1$ פי 2 בכיוון ציר $x$: כל נקודה $(x,y)$ עוברת ל-$(2x,y)$. מהי משוואת העקום
+      שמתקבל?
+    choices:
+      - text: '$\frac{x^2}{4}+y^2=1$'
+        correct: true
+        feedback: >-
+          נכון. נקודה $(X,Y)$ על העקום החדש אם $\left(\frac{X}{2},Y\right)$ על המעגל: $\frac{X^2}{4}+Y^2=1$. זו
+          אליפסה עם חצאי צירים 2 ו-1, והיא חותכת את ציר $x$ ב-$\pm2$, כמצופה.
+      - text: '$4x^2+y^2=1$'
+        feedback: >-
+          כאן הציבו את ההעתקה $x\mapsto2x$ במקום את ההפוכה לה. בדקו: ב-$y=0$ מקבלים $x=\pm\frac12$, כלומר כיווץ ולא
+          מתיחה. כדי לקבל את המשוואה של העקום החדש מציבים $\frac{X}{2}$.
+        misconception: MC-c2-stretch-direction
+      - text: '$x^2+y^2=4$'
+        feedback: >-
+          זה מעגל ברדיוס 2: מתיחה פי 2 בשני הכיוונים. כאן רק $x$ נמתח.
+        misconception: MC-c2-stretch-direction
+    hints: ['בדקו את התשובה בנקודה $(1,0)$: לאן היא עוברת?']
+
+  - id: Q-2.1-complete-square
+    type: numeric
+    objectives: [OBJ-2.1-3, OBJ-2.1-2]
+    level: mid
+    prompt: >-
+      העקום $4x^2+y^2-8x+6y+9=0$ הוא אליפסה מוזזת. מהי קואורדינטת $y$ של המרכז שלה?
+    answer: -3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. השלמה לריבוע: $4(x^2-2x)+(y^2+6y)+9=4(x-1)^2-4+(y+3)^2-9+9$, ולכן $4(x-1)^2+(y+3)^2=4$, כלומר
+      $(x-1)^2+\frac{(y+3)^2}{4}=1$. המרכז $(1,-3)$, חצאי הצירים 1 ו-2.
+    wrongFeedback: >-
+      קבצו את איברי $y$: $y^2+6y=(y+3)^2-9$. היכן הביטוי $(y+3)^2$ מתאפס?
+    commonWrong:
+      - value: 3
+        feedback: >-
+          $(y+3)^2$ מתאפס ב-$y=-3$, ולכן המרכז ב-$y=-3$. הסימן בתוך הסוגריים הפוך לסימן של המרכז.
+        misconception: MC-c2-shift-sign
+
+  - id: Q-2.1-rotated
+    type: numeric
+    objectives: [OBJ-2.1-3, OBJ-2.1-2]
+    level: exam
+    prompt: >-
+      בסיכומי ההרצאות מסובבים את הצירים ב-$45^\circ$: $s=\frac{x+y}{\sqrt2}$, $t=\frac{x-y}{\sqrt2}$. האליפסה
+      $\frac{s^2}{4}+\frac{t^2}{9}=1$ נכתבת אז $\frac{(x+y)^2}{8}+\frac{(x-y)^2}{18}=1$. בנקודה שבה היא חותכת את
+      ציר $x$ החיובי, מהו $x$?
+    answer: 2.35339362165821
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. ב-$y=0$: $\frac{x^2}{8}+\frac{x^2}{18}=\frac{13x^2}{72}=1$, ולכן $x=\sqrt{\frac{72}{13}}\approx2.353$.
+      שימו לב שזה לא 2 ולא 3: ציר $x$ אינו אחד מצירי האליפסה המסובבת, ולכן הוא חותך אותה בין שני חצאי הצירים.
+    wrongFeedback: >-
+      הציבו $y=0$ במשוואה בקואורדינטות $x,y$, חברו את השברים, ופתרו.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          2 הוא חצי הציר לאורך ציר $s$, כלומר לאורך הישר $y=x$. ציר $x$ הוא כיוון אחר, באמצע בין שני צירי האליפסה.
+        misconception: MC-c2-ellipse-axes-swap

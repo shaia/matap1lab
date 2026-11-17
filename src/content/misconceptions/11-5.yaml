@@ -1,0 +1,63 @@
+# Misconceptions first detected in lesson 11.5 (conservative fields and potentials).
+- id: MC-c11-mixed-partials-wrong-pair
+  title: משווים את הנגזרות הלא נכונות בבדיקה אם שדה משמר
+  belief: >-
+    השדה $(P,Q)$ משמר כש-$\frac{\partial P}{\partial x}=\frac{\partial Q}{\partial y}$.
+  truth: >-
+    אם $(P,Q)=\nabla\varphi$, אז $P_y=\varphi_{xy}$ ו-$Q_x=\varphi_{yx}$, והן שוות. לכן התנאי הוא
+    $\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$: גוזרים כל רכיב לפי המשתנה **השני**.
+  remedy: { lesson: '11.5', label: 'תנאי הנגזרות המעורבות' }
+
+- id: MC-c11-potential-overlap
+  title: סופרים פעמיים איבר משותף כשבונים פוטנציאל
+  belief: >-
+    את הפוטנציאל מקבלים מחיבור של $\int P\,dx$ ושל $\int Q\,dy$.
+  truth: >-
+    איבר כמו $x^2y$ מופיע בשני האינטגרלים, וחיבור נותן $2x^2y$. אחרי $\varphi=\int P\,dx+g(y)$ גוזרים לפי $y$, משווים
+    ל-$Q$, ומוסיפים רק את מה **שחסר**. תמיד בודקים ש-$\nabla\varphi=\vec F$.
+  remedy: { lesson: '11.5', label: 'מציאת פוטנציאל בשלבים' }
+
+- id: MC-c11-potential-forgot-g
+  title: שוכחים את הפונקציה של y שנוספת אחרי אינטגרציה לפי x
+  belief: >-
+    $\int P\,dx$ הוא כבר הפוטנציאל.
+  truth: >-
+    כשמבצעים אינטגרציה לפי $x$, "הקבוע" יכול להיות כל פונקציה $g(y)$. היא נקבעת מהדרישה $\varphi_y=Q$. ל-
+    $\vec F=(2xy+1,\ x^2+3y^2)$: $\int P\,dx=x^2y+x$, והגזירה לפי $y$ מראה שחסר $y^3$.
+  remedy: { lesson: '11.5', label: 'הפונקציה g(y) בבניית פוטנציאל' }
+
+- id: MC-c11-ftli-order
+  title: מחסרים את הפוטנציאל בסדר הפוך
+  belief: >-
+    העבודה מ-$A$ ל-$B$ היא $\varphi(A)-\varphi(B)$.
+  truth: >-
+    $\int_C\nabla\varphi\cdot d\vec r=\varphi(B)-\varphi(A)$, "סוף פחות התחלה", בדיוק כמו
+    $\int_a^bF'(t)\,dt=F(b)-F(a)$. (בפיזיקה האנרגיה הפוטנציאלית היא $U=-\varphi$, ולכן שם העבודה היא $U(A)-U(B)$.)
+  remedy: { lesson: '11.5', label: 'המשפט היסודי לאינטגרלים קוויים' }
+
+- id: MC-c11-longer-path-more-work
+  title: חושבים שבשדה משמר מסלול ארוך נותן יותר עבודה
+  belief: >-
+    גם בשדה גרדיאנט, עקום ארוך ומפותל בין $A$ ל-$B$ נותן עבודה גדולה יותר מהקטע הישר.
+  truth: >-
+    בשדה גרדיאנט העבודה היא $\varphi(B)-\varphi(A)$, ולא תלויה במסלול: בקטעים שבהם העקום "עולה" ב-$\varphi$ הוא
+    צובר עבודה, ובקטעים שבהם הוא "יורד" הוא מחזיר אותה.
+  remedy: { lesson: '11.5', label: 'אי-תלות במסלול' }
+
+- id: MC-c11-curl-test-sufficient
+  title: חושבים שתנאי הנגזרות המעורבות מבטיח שדה משמר בכל תחום
+  belief: >-
+    אם $P_y=Q_x$ בכל נקודה של התחום, השדה משמר שם, גם כשבתחום יש חור.
+  truth: >-
+    התנאי הכרחי, ומספיק בתחום בלי חורים (כמו כל המישור). ל-$\vec F=\frac{(-y,x)}{x^2+y^2}$ מתקיים $P_y=Q_x$ מחוץ לראשית,
+    אבל העבודה על מעגל סביב הראשית היא $2\pi\ne0$, ולכן אין לו פוטנציאל במישור בלי הראשית.
+  remedy: { lesson: '11.5', label: 'שדה עם חור: התנאי לא מספיק' }
+
+- id: MC-c11-hole-kills-all
+  title: חושבים ששדה שאינו מוגדר בנקודה לא יכול להיות משמר
+  belief: >-
+    כל שדה שאינו מוגדר בראשית אינו משמר במישור בלי הראשית.
+  truth: >-
+    החור רק מבטל את ה**ערובה** שהתנאי $P_y=Q_x$ נותן. $\frac{(x,y)}{x^2+y^2}=\nabla\left(\tfrac12\ln(x^2+y^2)\right)$
+    משמר במישור בלי הראשית; $\frac{(-y,x)}{x^2+y^2}$ אינו. מכריעים בפוטנציאל מפורש או בעקום סגור עם עבודה שונה מאפס.
+  remedy: { lesson: '11.5', label: 'שדות בתחום עם חור' }

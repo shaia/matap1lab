@@ -1,0 +1,18 @@
+# Terms first defined in lesson 2.3 (polar coordinates).
+- id: polar-coordinates
+  term: קואורדינטות קוטביות
+  en: polar coordinates
+  symbol: '(r,\theta)'
+  definition: >-
+    תיאור נקודה במישור על ידי המרחק שלה מהראשית $r=\sqrt{x^2+y^2}\ge0$ והזווית $\theta$ מהכיוון החיובי של ציר $x$, נגד
+    כיוון השעון: $x=r\cos\theta$, $y=r\sin\theta$. הזווית נקבעת עד כדי כפולה של $2\pi$, ולכן קובעים קטע, $[0,2\pi)$
+    או $(-\pi,\pi]$.
+  reject: [קואורדינאטות קוטביות, קורדינטות קוטביות]
+  lesson: '2.3'
+- id: cardioid
+  term: קרדיואידה
+  en: cardioid
+  symbol: 'r=1+\cos\theta'
+  definition: >-
+    העקום הקוטבי $r=a(1+\cos\theta)$, בצורת לב: הוא עובר דרך הראשית ב-$\theta=\pi$ ומגיע הכי רחוק, $2a$, ב-$\theta=0$.
+  lesson: '2.3'

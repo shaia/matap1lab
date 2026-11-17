@@ -1,0 +1,79 @@
+# Misconceptions first detected in lesson 7.5 (trigonometric integrals and substitutions).
+- id: MC-c7-power-rule-on-trig
+  title: מפעילים את כלל החזקה על חזקה של סינוס בלי הנגזרת הפנימית
+  belief: >-
+    $\int\sin^2x\,dx=\frac{\sin^3x}{3}$, כמו $\int u^2\,du=\frac{u^3}{3}$.
+  truth: >-
+    $\int u^n\,du$ דורש את $du=\cos x\,dx$ באינטגרל. בלעדיו מורידים חזקה בזהות ($\sin^2x=\frac{1-\cos2x}{2}$), או מפרידים
+    גורם אחד כשהחזקה אי-זוגית.
+  remedy: { lesson: '7.5', label: 'חזקות של סינוס וקוסינוס' }
+
+- id: MC-c7-double-angle-sign
+  title: מחליפים את הסימנים בזהויות הורדת החזקה
+  belief: >-
+    $\sin^2x=\frac{1+\cos2x}{2}$ ו-$\cos^2x=\frac{1-\cos2x}{2}$.
+  truth: >-
+    $\cos^2x=\frac{1+\cos2x}{2}$ ו-$\sin^2x=\frac{1-\cos2x}{2}$. בדיקה ב-$x=0$: $\sin^20=0$, ולכן בזהות של סינוס חייב להופיע
+    $1-\cos0=0$.
+  remedy: { lesson: '7.5', label: 'זהויות הזווית הכפולה' }
+
+- id: MC-c7-double-angle-half
+  title: שוכחים לחלק ב-2 בזהויות הורדת החזקה
+  belief: >-
+    $\cos^2x=1+\cos2x$, ולכן $\int_0^{\pi/2}\cos^2x\,dx=\frac\pi2$.
+  truth: >-
+    $\cos^2x=\frac{1+\cos2x}{2}$: הממוצע של $\cos^2$ הוא $\frac12$, ולא 1. בדיקת שפיות: $\cos^2x\le1$, ולכן האינטגרל קטן מאורך
+    הקטע.
+  remedy: { lesson: '7.5', label: 'זהויות הזווית הכפולה' }
+
+- id: MC-c7-even-odd-strategy
+  title: לא מבחינים בין חזקה זוגית לאי-זוגית בבחירת הדרך
+  belief: >-
+    לכל $\int\sin^mx\cos^nx\,dx$ מורידים חזקות בזהויות הזווית הכפולה, או שההצבה האוניברסלית מחייבת זוגיות.
+  truth: >-
+    אם אחת החזקות אי-זוגית, מפרידים גורם אחד שלה ומציבים את הפונקציה השנייה: מתקבל פולינום. רק כשבשתיהן החזקה
+    זוגית מורידים חזקות. ההצבה $t=\tan\frac x2$ עובדת תמיד, בלי קשר לזוגיות.
+  remedy: { lesson: '7.5', label: 'איזו דרך לחזקות של סינוס וקוסינוס' }
+
+- id: MC-c7-unique-antiderivative-form
+  title: חושבים שלאינטגרל יש צורת תשובה אחת נכונה
+  belief: >-
+    $\frac{\sin^2x}{2}$ ו-$-\frac{\cos^2x}{2}$ לא יכולות להיות שתיהן קדומות של $\sin x\cos x$, כי הן נראות שונות.
+  truth: >-
+    קדומות נבדלות בקבוע, וזהויות טריגונומטריות מסתירות קבועים: $\frac{\sin^2x}{2}=-\frac{\cos^2x}{2}+\frac12$. בודקים תשובה
+    בגזירה, לא בהשוואה לצורה של תשובון.
+  remedy: { lesson: '7.5', label: 'כמה צורות לאותה תשובה' }
+
+- id: MC-c7-weierstrass-dx
+  title: שוכחים את הגורם 2 ב-dx של הצבת טנגנס חצי הזווית
+  belief: >-
+    בהצבה $t=\tan\frac x2$: $dx=\frac{dt}{1+t^2}$.
+  truth: >-
+    $x=2\arctan t$, ולכן $dx=\frac{2\,dt}{1+t^2}$. הגורם 2 בא מהחצי שבתוך הטנגנס.
+  remedy: { lesson: '7.5', label: 'הצבת טנגנס חצי הזווית' }
+
+- id: MC-c7-weierstrass-formulas
+  title: מבלבלים את הנוסחאות של הצבת טנגנס חצי הזווית
+  belief: >-
+    $\sin x=\frac{2t}{1-t^2}$, או שההצבה עובדת רק לחלק מהפונקציות הרציונליות של סינוס וקוסינוס.
+  truth: >-
+    עם $t=\tan\frac x2$: $\sin x=\frac{2t}{1+t^2}$, $\cos x=\frac{1-t^2}{1+t^2}$ ($\frac{2t}{1-t^2}$ הוא $\tan x$), ו-$dx=\frac{2\,dt}{1+t^2}$.
+    כולם רציונליים ב-$t$, ולכן כל פונקציה רציונלית של $\sin x,\cos x$ הופכת לפונקציה רציונלית של $t$.
+  remedy: { lesson: '7.5', label: 'הצבת טנגנס חצי הזווית' }
+
+- id: MC-c7-trig-sub-wrong-identity
+  title: בוחרים פונקציה טריגונומטרית שלא מבטלת את השורש
+  belief: >-
+    ל-$\sqrt{4-x^2}$ מציבים $x=2\tan\theta$, או ל-$\sqrt{4+x^2}$ מציבים $x=2\sin\theta$.
+  truth: >-
+    $\sqrt{a^2-x^2}$: $x=a\sin\theta$ (כי $1-\sin^2=\cos^2$). $\sqrt{a^2+x^2}$: $x=a\tan\theta$ (כי $1+\tan^2=\frac{1}{\cos^2}$).
+    הזהות קובעת את ההצבה.
+  remedy: { lesson: '7.5', label: 'הצבות טריגונומטריות' }
+
+- id: MC-c7-trig-sub-radius
+  title: מציבים את המספר שמתחת לשורש במקום את השורש שלו
+  belief: >-
+    ל-$\sqrt{4-x^2}$ מציבים $x=4\sin\theta$.
+  truth: >-
+    כותבים $4-x^2=a^2-x^2$ עם $a=2$, ומציבים $x=a\sin\theta=2\sin\theta$; אז $a^2-x^2=a^2\cos^2\theta$.
+  remedy: { lesson: '7.5', label: 'הצבות טריגונומטריות' }

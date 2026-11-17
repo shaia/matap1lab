@@ -1,0 +1,26 @@
+# Terms first defined in lesson 10.7 (critical points, second-order Taylor, the second-derivative test).
+- id: critical-point
+  term: נקודה קריטית
+  en: critical point
+  symbol: '\nabla f(x_0,y_0)=0'
+  definition: >-
+    נקודה פנימית של התחום שבה $f_x=f_y=0$ (בכמה משתנים: כל הנגזרות החלקיות מתאפסות). בנקודת קיצון מקומי פנימית שבה $f$
+    דיפרנציאבילית הגרדיאנט מתאפס, ולכן הנקודות הקריטיות הן המועמדות לקיצון; לא כל נקודה קריטית היא קיצון.
+  lesson: '10.7'
+- id: saddle-point
+  term: נקודת אוכף
+  en: saddle point
+  definition: >-
+    נקודה קריטית שאינה קיצון מקומי: בכל סביבה שלה יש נקודות שבהן $f$ גדולה מ-$f(x_0,y_0)$ ונקודות שבהן היא קטנה ממנו.
+    הדוגמה $x^2-y^2$ בראשית: מינימום לאורך ציר $x$, מקסימום לאורך ציר $y$. קו הגובה דרך הנקודה נראה לידה כמו שני עקומים
+    שנחתכים בה.
+  lesson: '10.7'
+- id: second-derivative-test
+  term: מבחן הנגזרות השניות
+  en: second-derivative test (two variables)
+  symbol: 'D=f_{xx}f_{yy}-f_{xy}^2'
+  definition: >-
+    בנקודה קריטית של $f$ שנגזרותיה השניות רציפות: אם $D>0$ ו-$f_{xx}>0$, מינימום מקומי; אם $D>0$ ו-$f_{xx}<0$, מקסימום
+    מקומי; אם $D<0$, נקודת אוכף; אם $D=0$, המבחן אינו מכריע. המבחן בא מפולינום טיילור מסדר שני, שבנקודה קריטית הוא
+    $f_0+\frac12\left(f_{xx}\Delta x^2+2f_{xy}\Delta x\Delta y+f_{yy}\Delta y^2\right)$.
+  lesson: '10.7'

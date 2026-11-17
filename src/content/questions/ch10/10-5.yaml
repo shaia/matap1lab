@@ -1,0 +1,228 @@
+# Lesson 10.5 — the chain rule in several variables.
+# Objectives (src/course.ts):
+#   OBJ-10.5-1  differentiate a function of several variables along a curve with the chain rule
+#   OBJ-10.5-2  use the chain rule in a change of variables, such as to polar coordinates
+#   OBJ-10.5-3  draw a dependency tree and write the chain rule from it in a general case
+# From the notes pp. 45–48, 50, 56 (the tree mnemonic, the thermometer on a rod T(x,t), dρ/dt along a line),
+# recomputed in screens/tools/recompute-ch10.py.
+chapter: 10
+questions:
+  - id: Q-10.5-along-circle
+    type: numeric
+    objectives: [OBJ-10.5-1]
+    level: basic
+    prompt: >-
+      תהי $z=x^2y$, ונקודה נעה על מעגל היחידה: $x=\cos t$, $y=\sin t$. חשבו את $\frac{dz}{dt}$ ב-$t=\frac{\pi}{4}$. (אפשר
+      לכתוב שורש.)
+    answer: -0.353553390593
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\frac{\sqrt2}{4}$. $\frac{dz}{dt}=z_x\dot x+z_y\dot y=2xy(-\sin t)+x^2\cos t$. ב-$t=\frac\pi4$, $x=y=\frac{1}{\sqrt2}$:
+      $-\frac{1}{\sqrt2}+\frac{1}{2\sqrt2}=-\frac{1}{2\sqrt2}$. בדיקה: $z=\cos^2t\sin t$, וגזירה ישירה נותנת אותו מספר.
+    wrongFeedback: >-
+      $\frac{dz}{dt}=z_x\frac{dx}{dt}+z_y\frac{dy}{dt}$: חשבו כל גורם בנקודה $t=\frac\pi4$.
+    commonWrong:
+      - value: 1.5
+        feedback: >-
+          $\frac32=z_x+z_y$ בנקודה: חסרות הנגזרות $\frac{dx}{dt}=-\sin t$ ו-$\frac{dy}{dt}=\cos t$ בכל ענף.
+        misconception: MC-c10-chain-forget-inner
+
+  - id: Q-10.5-along-power
+    type: expr
+    objectives: [OBJ-10.5-1]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=xy^2$ והעקום $x=t^2$, $y=t^3$. חשבו בכלל השרשרת את $\frac{d}{dt}f\big(x(t),y(t)\big)$ כנוסחה ב-$t$.
+    answer: '8*t^7'
+    answerTex: '$\frac{df}{dt}=y^2\cdot2t+2xy\cdot3t^2=8t^7$'
+    variables: [t]
+    correctFeedback: >-
+      נכון. $f_x\dot x+f_y\dot y=t^6\cdot2t+2t^5\cdot3t^2=2t^7+6t^7$. בדיקה: $f=t^2\cdot t^6=t^8$, ונגזרתה $8t^7$.
+    wrongFeedback: >-
+      $f_x=y^2$, $f_y=2xy$, $\dot x=2t$, $\dot y=3t^2$. הציבו $x=t^2$, $y=t^3$ וסכמו את שני הענפים.
+    commonWrong:
+      - expr: '2*t^7'
+        feedback: 'זה רק הענף דרך $x$. גם $y$ תלוי ב-$t$, והענף שלו תורם $2xy\cdot3t^2=6t^7$.'
+        misconception: MC-c10-chain-one-branch
+
+  - id: Q-10.5-tree-count
+    type: mc
+    objectives: [OBJ-10.5-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $w=f(x,y,z)$, כש-$x=x(s,t)$, $y=y(s,t)$ ו-$z=z(t)$. כמה מחוברים יש בנוסחה של $\frac{\partial w}{\partial s}$ לפי עץ
+      התלויות?
+    choices:
+      - text: '2'
+        correct: true
+        feedback: >-
+          נכון. המסלולים מ-$w$ אל $s$ עוברים דרך $x$ ודרך $y$: $w_s=f_xx_s+f_yy_s$. ל-$z$ אין חץ אל $s$.
+      - text: '3'
+        feedback: '$z$ תלוי רק ב-$t$, ולכן אין מסלול מ-$w$ דרך $z$ אל $s$. שלושה מחוברים יש ב-$\frac{\partial w}{\partial t}$.'
+        misconception: MC-c10-chain-extra-branch
+      - text: '1'
+        feedback: 'גם $x$ וגם $y$ תלויים ב-$s$: שני מסלולים, ובכל אחד מכפלה של שתי נגזרות.'
+        misconception: MC-c10-chain-one-branch
+      - text: '6'
+        feedback: 'סופרים מסלולים מ-$w$ אל $s$, לא את כל החצים בעץ.'
+        misconception: MC-c10-chain-extra-branch
+
+  - id: Q-10.5-thermometer
+    type: numeric
+    objectives: [OBJ-10.5-1]
+    level: mid
+    prompt: >-
+      הטמפרטורה לאורך מוט היא $T(x,t)=50+10x^2e^{-t}$ (המוט מתקרר). מדחום זז לאורך המוט, ומיקומו $x(t)=1+2t$. מה קצב
+      השינוי של הטמפרטורה שהמדחום מראה ב-$t=0$?
+    answer: 30
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{dT}{dt}=T_x\dot x+T_t=20xe^{-t}\cdot2-10x^2e^{-t}$, וב-$t=0$, $x=1$: $40-10=30$. התנועה לאזור חם
+      מנצחת את ההתקררות.
+    wrongFeedback: >-
+      ל-$T(x(t),t)$ שני מסלולים בעץ: דרך $x$, וישירות דרך $t$. חשבו את שניהם.
+    commonWrong:
+      - value: -10
+        feedback: >-
+          $-10=\frac{\partial T}{\partial t}$: זה מה שמראה מדחום שעומד במקום. המדחום זז, ולכן מתווסף $T_x\dot x=40$.
+        misconception: MC-c10-partial-vs-total
+      - value: 40
+        feedback: 'זה רק הענף דרך $x$. גם $T$ תלויה ישירות ב-$t$ (המוט מתקרר), ו-$T_t=-10$.'
+        misconception: MC-c10-chain-one-branch
+
+  - id: Q-10.5-total-partial
+    type: twotier
+    objectives: [OBJ-10.5-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      ל-$T(x,t)$ ולמסלול $x(t)$: נכון או לא נכון, $\frac{dT}{dt}=\frac{\partial T}{\partial t}$.
+    choices:
+      - text: 'לא נכון באופן כללי'
+        correct: true
+        feedback: 'נכון. $\frac{dT}{dt}=\frac{\partial T}{\partial x}\frac{dx}{dt}+\frac{\partial T}{\partial t}$, ושני הצדדים שווים רק כשהמחובר הראשון 0.'
+      - text: 'נכון תמיד'
+        feedback: 'זה נכון רק כשהמדחום עומד ($\dot x=0$) או כש-$T$ לא תלויה במקום ($T_x=0$).'
+        misconception: MC-c10-partial-vs-total
+    reasons:
+      - text: '$\frac{\partial T}{\partial t}$ מחזיקה את $x$ קבוע, ואילו לאורך המסלול גם $x$ משתנה'
+        correct: true
+        feedback: 'בדיוק: הנגזרת החלקית שייכת למדחום שעומד, הנגזרת המלאה למדחום שזז.'
+      - text: 'שתיהן נגזרות לפי $t$, ולכן הן אותו דבר'
+        feedback: 'הן נגזרות לפי $t$ של פונקציות שונות: $T(x,t)$ עם $x$ קבוע, לעומת $T(x(t),t)$.'
+        misconception: MC-c10-partial-vs-total
+      - text: 'ב-$\frac{dT}{dt}$ מחשבים רק את הענף דרך $x$'
+        feedback: 'הנגזרת המלאה כוללת את כל הענפים, גם את התלות הישירה ב-$t$.'
+        misconception: MC-c10-chain-one-branch
+
+  - id: Q-10.5-polar-theta
+    type: numeric
+    objectives: [OBJ-10.5-2]
+    level: mid
+    prompt: >-
+      תהי $f(x,y)=x^2+xy$, ונעבור לקואורדינטות קוטביות $x=r\cos\theta$, $y=r\sin\theta$. חשבו בכלל השרשרת את
+      $\frac{\partial f}{\partial\theta}$ בנקודה $r=2$, $\theta=\frac{\pi}{4}$.
+    answer: -4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f_\theta=f_x\cdot(-r\sin\theta)+f_y\cdot r\cos\theta$. בנקודה $x=y=\sqrt2$: $f_x=2x+y=3\sqrt2$, $f_y=x=\sqrt2$, ולכן
+      $3\sqrt2\cdot(-\sqrt2)+\sqrt2\cdot\sqrt2=-6+2$. בדיקה: $f=r^2\left(\cos^2\theta+\tfrac12\sin2\theta\right)$.
+    wrongFeedback: >-
+      $\frac{\partial x}{\partial\theta}=-r\sin\theta$ ו-$\frac{\partial y}{\partial\theta}=r\cos\theta$. חשבו את $f_x,f_y$ בנקודה
+      $(x,y)=(\sqrt2,\sqrt2)$.
+    commonWrong:
+      - value: -2
+        feedback: >-
+          חסר הגורם $r=2$: $\frac{\partial x}{\partial\theta}=-r\sin\theta$, לא $-\sin\theta$.
+        misconception: MC-c10-polar-forget-r
+
+  - id: Q-10.5-distance-rate
+    type: numeric
+    objectives: [OBJ-10.5-1, OBJ-10.5-2]
+    level: mid
+    prompt: >-
+      חלקיק נמצא ברגע מסוים בנקודה $(3,4)$, ומהירותו $(\dot x,\dot y)=(1,2)$. באיזה קצב משתנה באותו רגע המרחק שלו
+      מהראשית, $\rho=\sqrt{x^2+y^2}$?
+    answer: 2.2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\rho_x=\frac{x}{\rho}$, $\rho_y=\frac{y}{\rho}$, ולכן $\dot\rho=\frac{x\dot x+y\dot y}{\rho}=\frac{3+8}{5}=\frac{11}{5}$.
+      זה הרכיב של המהירות בכיוון $\frac{(3,4)}{5}$.
+    wrongFeedback: >-
+      $\dot\rho=\rho_x\dot x+\rho_y\dot y$, עם $\rho_x=\frac{x}{\sqrt{x^2+y^2}}$.
+    commonWrong:
+      - value: 2.2360679775
+        feedback: >-
+          $\sqrt5$ הוא גודל המהירות. רק הרכיב שלה בכיוון מהראשית החוצה משנה את המרחק: $\vec v\cdot\hat\rho=\frac{11}{5}$.
+        misconception: MC-c10-radial-rate-is-speed
+      - value: 11
+        feedback: 'שכחתם לחלק ב-$\rho=5$: $\rho_x=\frac{x}{\rho}$, לא $x$.'
+        misconception: MC-c10-chain-forget-inner
+
+  - id: Q-10.5-tree-steps
+    type: rank
+    objectives: [OBJ-10.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סדרו את שלבי הכתיבה של כלל השרשרת בעזרת עץ תלויות, למשל ל-$\frac{\partial w}{\partial t}$.
+    help: 'סדרו מהשלב הראשון לאחרון.'
+    items:
+      - { id: vars, label: 'מזהים את המשתנה התלוי, את משתני הביניים ואת המשתנים הסופיים' }
+      - { id: draw, label: 'משרטטים את העץ: חץ מכל משתנה לכל משתנה שהוא תלוי בו ישירות' }
+      - { id: label, label: 'כותבים על כל חץ את הנגזרת החלקית המתאימה' }
+      - { id: paths, label: 'לכל מסלול מ-$w$ אל $t$ כופלים את הנגזרות שלאורכו' }
+      - { id: sum, label: 'סוכמים את המכפלות של כל המסלולים' }
+      - { id: eval, label: 'מציבים את הנקודה, אם מבקשים ערך מספרי' }
+    order: [vars, draw, label, paths, sum, eval]
+    correctFeedback: >-
+      נכון. ככה לא שוכחים ענף ולא מוסיפים ענף שלא קיים: המסלולים בעץ הם בדיוק המחוברים בנוסחה.
+    wrongFeedback: >-
+      קודם בונים את העץ (משתנים, חצים, נגזרות על החצים), ורק אז קוראים ממנו את הנוסחה: מכפלה לאורך מסלול, סכום על
+      המסלולים.
+
+  - id: Q-10.5-polar-identity
+    type: mc
+    objectives: [OBJ-10.5-2]
+    qualitative: true
+    level: exam
+    prompt: >-
+      מכלל השרשרת $f_r=f_x\cos\theta+f_y\sin\theta$ ו-$f_\theta=-f_xr\sin\theta+f_yr\cos\theta$. איזו זהות נכונה לכל $f$
+      דיפרנציאבילית ולכל $r>0$?
+    choices:
+      - text: '$f_x^2+f_y^2=f_r^2+\frac{1}{r^2}f_\theta^2$'
+        correct: true
+        feedback: >-
+          נכון. $f_r^2+\frac{f_\theta^2}{r^2}=(f_x\cos\theta+f_y\sin\theta)^2+(-f_x\sin\theta+f_y\cos\theta)^2$, והאיברים
+          המעורבים מתבטלים: $f_x^2+f_y^2$. זה $|\nabla f|^2$ בקוטביות.
+      - text: '$f_x^2+f_y^2=f_r^2+f_\theta^2$'
+        feedback: >-
+          ב-$f_\theta$ יש גורם $r$, ולכן $f_\theta^2$ מכיל $r^2$. בלי החלוקה ב-$r^2$ הזהות נכשלת כש-$r\ne1$.
+        misconception: MC-c10-polar-forget-r
+      - text: '$f_x^2+f_y^2=f_r^2+\frac1r f_\theta^2$'
+        feedback: 'בדקו ממדים: $f_\theta^2$ מכיל $r^2$, ולכן צריך לחלק ב-$r^2$ כדי לבטל אותו.'
+        misconception: MC-c10-polar-forget-r
+      - text: '$f_x+f_y=f_r+f_\theta$'
+        feedback: 'לא: ל-$f=x$, $f_x+f_y=1$, אבל $f_r+f_\theta=\cos\theta-r\sin\theta$.'
+        misconception: MC-c10-chain-forget-inner
+
+  - id: Q-10.5-three-branches
+    type: expr
+    objectives: [OBJ-10.5-3]
+    level: exam
+    prompt: >-
+      $w=xyz$, כש-$x=s+t$, $y=s-t$, $z=st^2$. חשבו בכלל השרשרת את $\frac{\partial w}{\partial t}$ כנוסחה ב-$s$ וב-$t$.
+    answer: '2*s^3*t - 4*s*t^3'
+    answerTex: '$\frac{\partial w}{\partial t}=yz\cdot1+xz\cdot(-1)+xy\cdot2st=2s^3t-4st^3$'
+    variables: [s, t]
+    correctFeedback: >-
+      נכון. שלושה מסלולים: $yz\cdot1=(s-t)st^2$, $xz\cdot(-1)=-(s+t)st^2$, $xy\cdot2st=(s^2-t^2)2st$. הסכום
+      $-2st^3+2s^3t-2st^3$. בדיקה: $w=(s^2-t^2)st^2=s^3t^2-st^4$, ו-$w_t=2s^3t-4st^3$.
+    wrongFeedback: >-
+      ציירו עץ: $w$ תלוי ב-$x,y,z$, וכל אחד מהם תלוי ב-$t$. יש שלושה מסלולים.
+    commonWrong:
+      - expr: '-2*s*t^3'
+        feedback: 'חסר המסלול דרך $z$: גם $z=st^2$ תלוי ב-$t$, ותורם $xy\cdot2st$.'
+        misconception: MC-c10-chain-one-branch
+    hints: ['$w_x=yz$, $w_y=xz$, $w_z=xy$; $x_t=1$, $y_t=-1$, $z_t=2st$.']

@@ -1,0 +1,317 @@
+# Chapter 8 review — the definite integral (lessons 8.1–8.5), easy to hard. The end of the midterm material, so some
+# questions reach back to chapters 0–7. Every lesson is touched; most questions combine two lessons; each hint names
+# the lesson to go back to. Numbers recomputed in screens/tools/recompute-ch8.py.
+chapter: 8
+questions:
+  - id: Q-8-review-01
+    type: mc
+    objectives: [OBJ-8.1-2, OBJ-7.1-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      מה הערך של $\int_0^1 2x\,dx$?
+    choices:
+      - text: '$1$'
+        correct: true
+        feedback: >-
+          נכון. לפי המשפט היסודי, $\left[x^2\right]_0^1=1-0$. זה גם שטח המשולש שמתחת ל-$y=2x$: בסיס 1, גובה 2.
+      - text: '$x^2+C$'
+        feedback: >-
+          זה האינטגרל ה**לא מסוים**, משפחה של פונקציות. אינטגרל מסוים הוא מספר: מציבים את הגבולות, והקבוע מתבטל בהפרש.
+        misconception: MC-c8-definite-plus-c
+      - text: '$x^2$'
+        feedback: >-
+          $x^2$ היא פונקציה קדומה. השאלה מבקשת $F(1)-F(0)$, מספר.
+        misconception: MC-c8-definite-plus-c
+      - text: '$-1$'
+        feedback: >-
+          זה $F(0)-F(1)$: הגבולות התהפכו. $\int_a^bf\,dx=F(b)-F(a)$, הגבול העליון ראשון, ואינטגרנד חיובי על $[0,1]$ נותן
+          מספר חיובי.
+        misconception: MC-c8-reverse-limits
+    hints: ['חזרו לשיעור 7.1 (המשפט היסודי) ולשיעור 8.1 (אינטגרל מסוים כשטח).']
+
+  - id: Q-8-review-02
+    type: numeric
+    objectives: [OBJ-8.4-1, OBJ-8.1-1]
+    level: basic
+    prompt: >-
+      המהירות של רכבת נמדדה כל 2 שניות: ב-$t=0,2,4,6$ היא $0,6,10,12$ מטרים לשנייה. העריכו בכלל הטרפז את המרחק,
+      במטרים, שעברה בין $t=0$ ל-$t=6$.
+    answer: 44
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $h=2$: $\tfrac22\left(0+2\cdot6+2\cdot10+12\right)=44$. זה הממוצע של הסכום השמאלי (32) והימני (56).
+    wrongFeedback: >-
+      $T_3=\frac h2\left(v_0+2v_1+2v_2+v_3\right)$ עם $h=2$.
+    commonWrong:
+      - value: 32
+        feedback: >-
+          זה סכום רימן השמאלי $2(0+6+10)$: הוא מתעלם מהמדידה האחרונה, ומעריך בחסר כשהמהירות עולה.
+        misconception: MC-c8-left-right-endpoints
+      - value: 56
+        feedback: 'זה סכום רימן הימני $2(6+10+12)$. הטרפז לוקח את הממוצע של שני הקצוות בכל קטע.'
+        misconception: MC-c8-left-right-endpoints
+      - value: 88
+        feedback: 'זה $h(v_0+2v_1+2v_2+v_3)$: חסר החצי ב-$\frac h2$.'
+        misconception: MC-c8-trap-weights
+    hints: ['חזרו לשיעור 8.4 (כלל הטרפז) ולשיעור 8.1 (סכומי רימן).']
+
+  - id: Q-8-review-03
+    type: numeric
+    objectives: [OBJ-8.2-2, OBJ-4.5-1]
+    level: basic
+    prompt: >-
+      חשבו את $\int_{-1}^{1}\left(\sinh x+\cosh x\right)dx$ בעזרת זוגיות. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 2.3504023872876
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\sinh$ אי-זוגית ונעלמת, ו-$\cosh$ זוגית: $2\int_0^1\cosh x\,dx=2\sinh1=e-e^{-1}$. בדיקה: $\sinh x+\cosh x=e^x$,
+      ו-$\int_{-1}^{1}e^xdx=e-e^{-1}$.
+    wrongFeedback: >-
+      מהי הזוגיות של $\sinh x=\frac{e^x-e^{-x}}{2}$ ושל $\cosh x=\frac{e^x+e^{-x}}{2}$?
+    commonWrong:
+      - value: 0
+        feedback: >-
+          רק $\sinh$ אי-זוגית. $\cosh$ זוגית וחיובית, והאינטגרל שלה אינו מתאפס.
+        misconception: MC-c8-odd-whole
+      - value: 1.1752011936
+        feedback: >-
+          זה $\sinh1=\int_0^1\cosh x\,dx$. בקטע סימטרי פונקציה זוגית תורמת **פעמיים** את החצי.
+        misconception: MC-c8-even-forget-double
+    hints: ['חזרו לשיעור 8.2 (סימטריה) ולשיעור 4.5 (הפונקציות ההיפרבוליות).']
+
+  - id: Q-8-review-04
+    type: expr
+    objectives: [OBJ-8.2-3, OBJ-5.3-2]
+    level: mid
+    prompt: >-
+      $F(x)=\int_0^{\sin x}\sqrt{1+t^2}\,dt$. כתבו את $F'(x)$.
+    answer: 'cos(x)*sqrt(1+sin(x)^2)'
+    answerTex: '$F''(x)=\cos x\,\sqrt{1+\sin^2x}$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. $F=G(\sin x)$ כש-$G(y)=\int_0^y\sqrt{1+t^2}\,dt$ ו-$G'(y)=\sqrt{1+y^2}$. בכלל השרשרת:
+      $G'(\sin x)\cdot\cos x$.
+    wrongFeedback: >-
+      הציבו את הגבול העליון באינטגרנד, וכפלו בנגזרת של הגבול העליון.
+    commonWrong:
+      - expr: 'sqrt(1+sin(x)^2)'
+        feedback: 'חסרה הנגזרת הפנימית $(\sin x)''=\cos x$.'
+        misconception: MC-c8-ftc-forget-chain
+      - expr: 'cos(x)*sqrt(1+x^2)'
+        feedback: 'הצבתם באינטגרנד $x$ במקום את הגבול $\sin x$.'
+        misconception: MC-c8-ftc-forget-chain
+    hints: ['חזרו לשיעור 8.2 (גבול עליון משתנה) ולשיעור 5.3 (כלל השרשרת).']
+
+  - id: Q-8-review-05
+    type: numeric
+    objectives: [OBJ-8.2-1, OBJ-7.5-3]
+    level: mid
+    prompt: >-
+      חשבו את $\int_0^1\sqrt{1-x^2}\,dx$ בהצבה $x=\sin\theta$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.) מה המשמעות הגיאומטרית?
+    answer: 0.78539816339745
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac\pi4$: רבע מעגל היחידה. $dx=\cos\theta\,d\theta$, הגבולות $\theta=0$ עד $\theta=\frac\pi2$, ולכן
+      $\int_0^{\pi/2}\cos^2\theta\,d\theta=\left[\tfrac\theta2+\tfrac{\sin2\theta}{4}\right]_0^{\pi/2}=\tfrac\pi4$.
+    wrongFeedback: >-
+      הגבולות החדשים הם ערכי $\theta$: $\sin\theta=0$ ו-$\sin\theta=1$. ו-$\cos^2\theta=\frac{1+\cos2\theta}{2}$.
+    commonWrong:
+      - value: 0.72732435670642
+        feedback: >-
+          זה $\int_0^1\cos^2\theta\,d\theta=\tfrac12+\tfrac{\sin2}{4}$: השארתם את הגבולות 0 ו-1 של $x$. כש-$x=1$,
+          $\theta=\frac\pi2$.
+        misconception: MC-c8-sub-keep-limits
+    hints: ['חזרו לשיעור 8.2 (הצבה עם גבולות חדשים) ולשיעור 7.5 (הצבות טריגונומטריות).']
+
+  - id: Q-8-review-06
+    type: numeric
+    objectives: [OBJ-8.3-1, OBJ-7.4-2]
+    level: mid
+    prompt: >-
+      חשבו את $\int_1^\infty\frac{dx}{x(x+1)}$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 0.69314718055995
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\ln2$. $\frac{1}{x(x+1)}=\frac1x-\frac1{x+1}$, ולכן
+      $\int_1^R=\left[\ln\frac{x}{x+1}\right]_1^R=\ln\frac{R}{R+1}-\ln\frac12\to0+\ln2$.
+    wrongFeedback: >-
+      פרקו לשברים חלקיים, **אחדו** את שני הלוגריתמים ל-$\ln\frac{x}{x+1}$ לפני שלוקחים גבול, ואז $R\to\infty$.
+    commonWrong:
+      - value: -0.6931471806
+        feedback: >-
+          חישבתם $F(1)-F(\infty)$ במקום $F(\infty)-F(1)$. אינטגרנד חיובי נותן אינטגרל חיובי.
+        misconception: MC-c8-reverse-limits
+    hints: ['חזרו לשיעור 8.3 (אינטגרל על קטע אינסופי) ולשיעור 7.4 (שברים חלקיים).']
+
+  - id: Q-8-review-07
+    type: twotier
+    objectives: [OBJ-8.3-2, OBJ-4.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      האם $\int_1^\infty\frac{\ln x}{x^2}\,dx$ מתכנס?
+    choices:
+      - text: 'כן'
+        correct: true
+        feedback: >-
+          נכון. $\ln x$ גדל לאט מכל חזקה: $\ln x\le\sqrt x$ ל-$x\ge1$, ולכן $0\le\frac{\ln x}{x^2}\le x^{-3/2}$, ו-$p=\frac32>1$.
+          (הערך 1, באינטגרציה בחלקים.)
+      - text: 'לא'
+        feedback: >-
+          $\ln x\to\infty$, אבל לאט מכל חזקה חיובית של $x$; החזקה $x^2$ במכנה מנצחת בהרבה.
+        misconception: MC-c8-comparison-wrong-direction
+    reasons:
+      - text: '$\ln x\le\sqrt x$, ולכן האינטגרנד חסום על ידי $x^{-3/2}$, שהאינטגרל שלה מתכנס'
+        correct: true
+        feedback: 'בדיוק: השוואה לחזקה עם $p>1$, אחרי שמשתמשים בקצב הגידול האיטי של הלוגריתם.'
+      - text: '$\frac{\ln x}{x^2}\ge\frac{1}{x^2}$ כש-$x\ge e$, ו-$\int\frac{dx}{x^2}$ מתכנס'
+        feedback: >-
+          חסם **מלמטה** בפונקציה מתכנסת אינו מוכיח דבר. צריך חסם מלמעלה.
+        misconception: MC-c8-comparison-wrong-direction
+      - text: 'האינטגרנד שואף ל-0 באינסוף'
+        feedback: 'גם $\frac1x$ שואפת ל-0, ו-$\int_1^\infty\frac{dx}{x}$ מתבדר. צריך השוואה.'
+        misconception: MC-c8-integrand-to-zero-converges
+    hints: ['חזרו לשיעור 8.3 (מבחן ההשוואה) ולשיעור 4.3 (קצבי גידול).']
+
+  - id: Q-8-review-08
+    type: numeric
+    objectives: [OBJ-8.4-3, OBJ-6.1-1]
+    level: exam
+    prompt: >-
+      רוצים לחשב את $\int_0^1e^{2x}\,dx$ בכלל סימפסון בטעות של לכל היותר $10^{-6}$. לפי החסם
+      $|E_S|\le\frac{(b-a)^5M_4}{180n^4}$ עם $M_4=\max_{[0,1]}\left|f^{(4)}\right|$, מהו ה-$n$ הקטן ביותר שמבטיח זאת?
+    answer: 30
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f^{(4)}(x)=16e^{2x}$, והמקסימום ב-$x=1$: $M_4=16e^2\approx118.2$. צריך $n^4\ge\frac{16e^2}{180}\cdot10^6\approx656{,}805$,
+      כלומר $n\ge28.47$. $n=29$ אי-זוגי, ולכן $n=30$.
+    wrongFeedback: >-
+      גזרו ארבע פעמים (כל גזירה מכפילה ב-2), מצאו את המקסימום בקטע, פתרו עבור $n$, ועגלו למעלה למספר זוגי.
+    commonWrong:
+      - value: 29
+        feedback: '29 עומד בחסם, אבל סימפסון דורש מספר זוגי של קטעים.'
+        misconception: MC-c8-simpson-odd-n
+      - value: 18
+        feedback: >-
+          לקחתם $M_4=|f^{(4)}(0)|=16$. $16e^{2x}$ עולה, והמקסימום שלה ב-$x=1$.
+        misconception: MC-c8-max-wrong-end
+      - value: 28
+        feedback: '$n\ge28.47$: עם $n=28$ החסם $\approx1.07\cdot10^{-6}$, מעט מדי גדול. מעגלים למעלה.'
+        misconception: MC-c8-round-down-n
+    hints: ['חזרו לשיעור 8.4 (בחירת n) ולשיעור 6.1 (נגזרות מסדר גבוה).']
+
+  - id: Q-8-review-09
+    type: numeric
+    objectives: [OBJ-8.5-1, OBJ-0.2-3]
+    level: mid
+    prompt: >-
+      חשבו את השטח הכלוא בין $y=\sin x$ ו-$y=\cos x$ בקטע $\left[0,\frac\pi2\right]$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 0.82842712474619
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2\sqrt2-2$. הגרפים נחתכים ב-$x=\frac\pi4$. ב-$\left[0,\frac\pi4\right]$ הקוסינוס עליון, ואחר כך הסינוס:
+      $\int_0^{\pi/4}(\cos x-\sin x)\,dx+\int_{\pi/4}^{\pi/2}(\sin x-\cos x)\,dx=2(\sqrt2-1)$.
+    wrongFeedback: >-
+      פתרו $\sin x=\cos x$ בקטע, פצלו שם, ובכל חלק חסרו מהעליון את התחתון.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          $\int_0^{\pi/2}(\sin x-\cos x)\,dx=0$: שני החלקים זהים בשטח ומתקזזים. שטח בין גרפים שנחתכים מחייב פיצול.
+        misconception: MC-c8-area-crossing
+      - value: 0.41421356237
+        feedback: 'זה רק אחד משני החלקים, $\sqrt2-1$. גם החלק השני כלוא בין הגרפים.'
+        misconception: MC-c8-area-crossing
+    hints: ['חזרו לשיעור 8.5 (שטח בין גרפים) ולשיעור 0.2 (משוואות טריגונומטריות).']
+
+  - id: Q-8-review-10
+    type: numeric
+    objectives: [OBJ-8.5-2, OBJ-2.1-2]
+    level: mid
+    prompt: >-
+      האליפסה $\frac{x^2}{9}+\frac{y^2}{4}=1$ מסתובבת סביב ציר $x$ ויוצרת אליפסואיד. חשבו את נפחו. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 50.265482457437
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $16\pi$. הדיסקה בנקודה $x$ ברדיוס $y$, ו-$y^2=4\left(1-\frac{x^2}{9}\right)$:
+      $V=\pi\int_{-3}^{3}4\left(1-\tfrac{x^2}{9}\right)dx=16\pi$, כלומר $\frac43\pi\cdot3\cdot2^2$.
+    wrongFeedback: >-
+      בטאו את $y^2$ מהמשוואה, ובצעו אינטגרציה ל-$\pi y^2$ על $[-3,3]$, ציר הסיבוב.
+    commonWrong:
+      - value: 75.398223686155
+        feedback: >-
+          זה $\frac43\pi\cdot3^2\cdot2=24\pi$, הסיבוב סביב ציר $y$: שם הדיסקות ברדיוס $x$. כאן הציר הוא ציר $x$
+          (חצי ציר 3), והרדיוס הוא $y$.
+        misconception: MC-c8-axis-confusion
+    hints: ['חזרו לשיעור 8.5 (שיטת הדיסקות) ולשיעור 2.1 (אליפסה).']
+
+  - id: Q-8-review-11
+    type: numeric
+    objectives: [OBJ-8.5-3, OBJ-8.2-1]
+    level: exam
+    prompt: >-
+      התחום שמתחת ל-$y=e^{-x^2}$, $0\le x\le1$, מסתובב סביב ציר $y$. חשבו את הנפח. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 1.9858653037989
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\pi\left(1-e^{-1}\right)$. בקליפות $V=2\pi\int_0^1xe^{-x^2}dx$, ובהצבה $u=x^2$ (גבולות 0 עד 1):
+      $\pi\int_0^1e^{-u}du$. כאן הקליפות נוחות: בדיסקות אופקיות צריך את ההפוכה $x=\sqrt{-\ln y}$ ולפצל ב-$y=e^{-1}$, ואילו ל-$xe^{-x^2}$ יש פונקציה קדומה מיידית.
+    wrongFeedback: >-
+      בשיטת הקליפות הרדיוס $x$ והגובה $e^{-x^2}$. הגורם $x$ הוא מה שמאפשר הצבה.
+    commonWrong:
+      - value: 3.9717306075977
+        feedback: >-
+          זה $2\pi(1-e^{-1})$: חסר הגורם $\frac12$ מ-$x\,dx=\frac12du$.
+        misconception: MC-c8-sub-forget-factor
+    hints: ['חזרו לשיעור 8.5 (קליפות) ולשיעור 8.2 (הצבה באינטגרל מסוים).']
+
+  - id: Q-8-review-12
+    type: twotier
+    objectives: [OBJ-8.5-2, OBJ-8.3-3]
+    qualitative: true
+    level: exam
+    prompt: >-
+      התחום שמתחת ל-$y=\frac1x$, $x\ge1$, מסתובב סביב ציר $x$. נכון או לא נכון: לגוף יש נפח אינסופי, כי לתחום יש
+      שטח אינסופי.
+    choices:
+      - text: 'לא נכון: הנפח $\pi$'
+        correct: true
+        feedback: >-
+          נכון. $V=\pi\int_1^\infty\frac{dx}{x^2}=\pi$, אף ש-$\int_1^\infty\frac{dx}{x}=\infty$. זה "הצופר של גבריאל".
+      - text: 'נכון'
+        feedback: >-
+          הנפח הוא אינטגרל של $\pi f^2$, לא של $f$. $\frac1{x^2}$ דועכת מהר מספיק ($p=2>1$), גם כש-$\frac1x$ לא
+          ($p=1$).
+        misconception: MC-c8-infinite-area-infinite-volume
+    reasons:
+      - text: 'בנפח מופיעה $f^2=\frac{1}{x^2}$, עם $p=2>1$, ובשטח $f=\frac1x$, עם $p=1$'
+        correct: true
+        feedback: 'בדיוק. השטח והנפח הם שני אינטגרלים לא אמיתיים שונים, ולכל אחד מבחן משלו.'
+      - text: 'הנפח הוא $\pi$ כפול השטח'
+        feedback: 'אין קשר כזה: $\pi\int f^2$ ו-$\int f$ הם אינטגרלים של פונקציות שונות.'
+        misconception: MC-c8-disc-no-square
+      - text: 'גוף אינסופי באורכו תמיד בנפח אינסופי'
+        feedback: 'הרדיוס של הצופר קטן כמו $\frac1x$, והחתכים קטנים כמו $\frac{1}{x^2}$: סכום הנפחים סופי.'
+        misconception: MC-c8-infinite-area-infinite-volume
+    hints: ['חזרו לשיעור 8.5 (שיטת הדיסקות) ולשיעור 8.3 (אינטגרלים סטנדרטיים של חזקות).']
+
+  - id: Q-8-review-13
+    type: rank
+    objectives: [OBJ-8.5-1, OBJ-0.1-2]
+    level: mid
+    prompt: >-
+      סדרו את שלבי החישוב של השטח הכלוא בין שני גרפים $y=f(x)$ ו-$y=g(x)$.
+    help: 'גררו את השלבים לסדר הנכון, מהראשון לאחרון.'
+    items:
+      - { id: solve, label: 'פותרים $f(x)=g(x)$ ומוצאים את כל נקודות החיתוך' }
+      - { id: split, label: 'מחלקים את הקטע בנקודות החיתוך' }
+      - { id: top, label: 'בכל תת-קטע קובעים מי עליון, בהצבה של נקודה אחת' }
+      - { id: integrate, label: 'מחשבים בכל תת-קטע את האינטגרל של העליון פחות התחתון' }
+      - { id: sum, label: 'מחברים את התוצאות, ובודקים שכל אחת חיובית' }
+    order: [solve, split, top, integrate, sum]
+    correctFeedback: >-
+      נכון. החיתוכים קובעים גם את הגבולות וגם את המקומות שבהם הגרפים מחליפים תפקיד; בלי הפיצול שטחים מתקזזים.
+    wrongFeedback: >-
+      אי אפשר לדעת מי עליון לפני שיודעים איפה הגרפים נחתכים, ואי אפשר לחשב אינטגרל לפני שיודעים מה מחסרים ממה.
+    hints: ['חזרו לשיעור 8.5 (שטח בין גרפים) ולשיעור 0.1 (פתרון משוואות).']

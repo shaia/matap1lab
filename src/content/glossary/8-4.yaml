@@ -1,0 +1,20 @@
+# Terms first defined in lesson 8.4 (numerical methods).
+- id: trapezoid-rule
+  term: כלל הטרפז
+  en: trapezoid rule
+  symbol: 'T_n=\frac h2\left(f_0+2f_1+\dots+2f_{n-1}+f_n\right)'
+  definition: >-
+    קירוב של $\int_a^bf\,dx$ בחלוקה ל-$n$ קטעים ברוחב $h=\frac{b-a}{n}$: בכל קטע מחליפים את הגרף במיתר, ומחברים את
+    שטחי הטרפזים. הטעות לכל היותר $\frac{(b-a)^3M_2}{12n^2}$ כש-$M_2=\max|f''|$: היא קטנה פי 4 כשמכפילים את $n$.
+  reject: []
+  lesson: '8.4'
+- id: simpson-rule
+  term: כלל סימפסון
+  en: Simpson's rule
+  symbol: 'S_n=\frac h3\left(f_0+4f_1+2f_2+\dots+4f_{n-1}+f_n\right)'
+  definition: >-
+    קירוב של $\int_a^bf\,dx$ בחלוקה למספר **זוגי** $n$ של קטעים: על כל זוג קטעים מחליפים את הגרף בפרבולה דרך שלוש
+    הנקודות. הטעות לכל היותר $\frac{(b-a)^5M_4}{180n^4}$ כש-$M_4=\max|f^{(4)}|$: היא קטנה פי 16 כשמכפילים את $n$,
+    והכלל מדויק לכל פולינום ממעלה $\le3$.
+  reject: [סימפסן]
+  lesson: '8.4'

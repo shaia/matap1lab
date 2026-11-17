@@ -1,0 +1,72 @@
+# Misconceptions first detected in lesson 9.4 (tangential and normal acceleration; enrichment).
+- id: MC-c9-T-not-normalized
+  title: לוקחים את וקטור המהירות בתור וקטור היחידה המשיק
+  belief: >-
+    $\vec T=\vec v$, או $\vec v$ חלקי מספר שאינו אורכו.
+  truth: >-
+    $\vec T=\frac{\vec v}{|\vec v|}$, ואורכו 1. בדיקה: $|\vec T|=1$. (וקטור מאונך ל-$\vec v$ הוא בכיוון הנורמל, לא
+    המשיק.)
+  remedy: { lesson: '9.4', label: 'וקטור היחידה המשיק' }
+
+- id: MC-c9-N-outward
+  title: חושבים שוקטור הנורמל מצביע החוצה מהעיקול
+  belief: >-
+    $\vec N$ מצביע לצד הקמור של העקום, החוצה מהמרכז, או שכיוונו תלוי בכיוון התנועה.
+  truth: >-
+    $\vec N=\frac{\vec T\,'}{|\vec T\,'|}$ מצביע לצד שאליו העקום מתעקל: במעגל, אל המרכז. הוא אינו תלוי בכיוון התנועה.
+  remedy: { lesson: '9.4', label: 'וקטור היחידה הנורמלי' }
+
+- id: MC-c9-aN-is-a
+  title: מזהים את רכיב התאוצה הנורמלי עם גודל התאוצה, או עם העקמומיות
+  belief: >-
+    $a_N=|\vec a|$ תמיד, או $\kappa=a_N$, או $R=\frac{|\vec v|}{a_N}$.
+  truth: >-
+    $|\vec a|^2=a_T^2+a_N^2$, ולכן $a_N=|\vec a|$ רק כש-$a_T=0$. והקשר לעקמומיות: $a_N=\kappa|\vec v|^2$, כלומר
+    $R=\frac1\kappa=\frac{|\vec v|^2}{a_N}$.
+  remedy: { lesson: '9.4', label: 'פירוק התאוצה ועקמומיות' }
+
+- id: MC-c9-aT-aN-swap
+  title: מחליפים בין תפקידי התאוצה המשיקית והנורמלית
+  belief: >-
+    $a_T$ קשור לפנייה, ו-$a_N$ לשינוי בגודל המהירות; או ש-$a_T=\frac{\vec v\cdot\vec a}{|\vec v|}$ הוא הרכיב
+    הנורמלי.
+  truth: >-
+    $a_T=\frac{d|\vec v|}{dt}=\frac{\vec v\cdot\vec a}{|\vec v|}$ משנה את **גודל** המהירות; $a_N=\kappa|\vec v|^2$
+    משנה את **כיוונה**.
+  remedy: { lesson: '9.4', label: 'מה עושה כל רכיב של התאוצה' }
+
+- id: MC-c9-aT-sign
+  title: מפרשים לא נכון את הסימן של רכיבי התאוצה
+  belief: >-
+    $a_T<0$ פירושו תנועה אחורה, ו-$a_N$ יכול להיות שלילי.
+  truth: >-
+    $a_T<0$ פירושו שגודל המהירות קטן (האטה), בכל כיוון תנועה. $a_N=|\vec v|\,|\vec T\,'|\ge0$ תמיד; הכיוון נמצא
+    ב-$\vec N$.
+  remedy: { lesson: '9.4', label: 'הסימן של התאוצה המשיקית' }
+
+- id: MC-c9-curvature-equals-radius
+  title: מבלבלים בין עקמומיות לבין רדיוס העקמומיות
+  belief: >-
+    עקמומיות של מעגל ברדיוס $R$ היא $R$, או $a_N=vR$.
+  truth: >-
+    $\kappa=\frac1R$ ורדיוס המעגל הצמוד $\frac1\kappa$: עקום שמתעקל חזק הוא בעל עקמומיות גדולה ורדיוס קטן. בתנועה
+    מעגלית $a_N=\frac{v^2}{R}$.
+  remedy: { lesson: '9.4', label: 'עקמומיות ומעגל צמוד' }
+
+- id: MC-c9-constant-curvature-circle
+  title: חושבים שכל עקום במרחב עם עקמומיות קבועה הוא מעגל
+  belief: >-
+    עקמומיות קבועה $\kappa>0$ גוררת שהעקום הוא קשת של מעגל ברדיוס $\frac1\kappa$.
+  truth: >-
+    במישור זה נכון; במרחב לא: לסליל $(3\cos t,3\sin t,4t)$ העקמומיות $\frac{3}{25}$ בכל נקודה. העקמומיות אינה מודדת
+    יציאה מהמישור.
+  remedy: { lesson: '9.4', label: 'עקמומיות של סליל' }
+
+- id: MC-c9-helix-curvature-projection
+  title: מחשבים את העקמומיות של סליל לפי המעגל שמתחתיו
+  belief: >-
+    העקמומיות של סליל ברדיוס $R$ היא $\frac1R$, כמו של המעגל שהוא מקיף; או שהיא משתנה לאורכו.
+  truth: >-
+    לסליל $(R\cos t,R\sin t,ct)$: $\kappa=\frac{R}{R^2+c^2}<\frac1R$, קבועה. העלייה מותחת את העקום ומקטינה את
+    העקמומיות.
+  remedy: { lesson: '9.4', label: 'עקמומיות של סליל' }

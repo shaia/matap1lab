@@ -1,0 +1,33 @@
+# Terms first defined in lesson 11.5 (conservative fields and potentials).
+- id: conservative-field
+  term: שדה משמר
+  en: conservative field
+  symbol: '\vec F=\nabla\varphi'
+  definition: >-
+    שדה שהוא גרדיאנט של פונקציה סקלרית בתחום. שקול לכך שהאינטגרל הקווי שלו בין שתי נקודות לא תלוי במסלול, ולכך שעל
+    כל עקום סגור בתחום הוא 0. בתחום בלי חורים (כמו כל המישור) שקול גם לתנאי $P_y=Q_x$.
+  lesson: '11.5'
+- id: potential
+  term: פוטנציאל
+  en: potential (function)
+  symbol: '\varphi,\ \nabla\varphi=\vec F'
+  definition: >-
+    פונקציה סקלרית $\varphi$ שהגרדיאנט שלה הוא השדה: $\nabla\varphi=\vec F$. נקבעת עד כדי קבוע. בפיזיקה האנרגיה
+    הפוטנציאלית היא $U=-\varphi$, כך ש-$\vec F=-\nabla U$.
+  lesson: '11.5'
+- id: fundamental-theorem-line-integrals
+  term: המשפט היסודי לאינטגרלים קוויים
+  en: fundamental theorem for line integrals
+  symbol: '\int_C\nabla\varphi\cdot d\vec r=\varphi(B)-\varphi(A)'
+  definition: >-
+    אם $C$ עקום מ-$A$ ל-$B$ ו-$\vec F=\nabla\varphi$, העבודה היא $\varphi(B)-\varphi(A)$, בלי קשר למסלול. ההוכחה: לאורך
+    העקום $\frac{d}{dt}\varphi(\vec r(t))=\nabla\varphi\cdot\vec r\,'(t)$ (כלל השרשרת), ואז המשפט היסודי במשתנה אחד.
+  lesson: '11.5'
+- id: mixed-partials-test
+  term: תנאי הנגזרות המעורבות
+  en: cross-partials test
+  symbol: '\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}'
+  definition: >-
+    תנאי הכרחי לכך ש-$(P,Q)$ משמר, כי $\varphi_{xy}=\varphi_{yx}$. בתחום בלי חורים הוא גם מספיק. במרחב: הרוטור של
+    השדה הוא אפס.
+  lesson: '11.5'

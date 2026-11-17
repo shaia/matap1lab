@@ -1,0 +1,304 @@
+# Lesson 12.2 — regions that are not rectangles, changing the order of integration (notes pp. 72–75).
+# Objectives (src/course.ts):
+#   OBJ-12.2-1  describe a plane region as a region between two graphs, by x or by y
+#   OBJ-12.2-2  compute a double integral over a general region
+#   OBJ-12.2-3  change the order of integration, including when only one order can be computed
+# Recomputed with sympy (screens/tools/recompute-ch12.py). From the notes: the triangle of p. 73 (value -2/105, not
+# written there), the region under y = x^2 of p. 74 (80/3; the notes' reversed order changes the integrand, see the
+# index), and e^{y^2} of p. 75 ((e-1)/2).
+chapter: 12
+questions:
+  - id: Q-12.2-describe-triangle
+    type: mc
+    objectives: [OBJ-12.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $T$ הוא המשולש עם הקודקודים $(0,0)$, $(2,0)$ ו-$(2,1)$. איזה תיאור "לפי $x$" (רצועות אנכיות) מתאר בדיוק את $T$?
+    choices:
+      - text: '$0\le x\le2$, $0\le y\le\frac x2$'
+        correct: true
+        feedback: >-
+          נכון. הצלעות הן ציר $x$ (למטה), הישר $x=2$ (מימין) והישר דרך $(0,0)$ ו-$(2,1)$, כלומר $y=\frac x2$ (למעלה). כל
+          רצועה אנכית עולה מ-$y=0$ עד $y=\frac x2$.
+      - text: '$0\le x\le2$, $\frac x2\le y\le1$'
+        feedback: >-
+          זה המשולש האחר, מעל הישר $y=\frac x2$ (קודקודים $(0,0)$, $(0,1)$, $(2,1)$). בדקו נקודה בתוך $T$, למשל
+          $(1.5,0.2)$: היא מתחת לישר.
+        misconception: MC-c12-region-wrong-side
+      - text: '$0\le x\le2$, $0\le y\le1$'
+        feedback: >-
+          גבולות קבועים מתארים את המלבן $[0,2]\times[0,1]$, כפול מהמשולש. הגבול העליון של $y$ תלוי ב-$x$.
+        misconception: MC-c12-bounding-rectangle
+
+  - id: Q-12.2-y-type
+    type: mc
+    objectives: [OBJ-12.2-1]
+    level: basic
+    prompt: >-
+      אותו משולש $T$, עם הקודקודים $(0,0)$, $(2,0)$ ו-$(2,1)$. איזה אינטגרל נשנה בסדר $dx\,dy$ שווה ל-$\iint_Tf\,dA$?
+    choices:
+      - text: '$\int_0^1\!\int_{2y}^{2}f\,dx\,dy$'
+        correct: true
+        feedback: >-
+          נכון. $y$ נע מ-0 עד 1 (גובה הקודקוד $(2,1)$), ורצועה אופקית בגובה $y$ נכנסת ל-$T$ בישר $x=2y$ ויוצאת ב-$x=2$.
+      - text: '$\int_0^1\!\int_{0}^{2y}f\,dx\,dy$'
+        feedback: >-
+          הרצועה האופקית בגובה $y$ נמצאת **מימין** לישר $x=2y$ (בין הישר לצלע $x=2$). $0\le x\le2y$ הוא המשולש שמשמאל
+          לישר.
+        misconception: MC-c12-region-wrong-side
+      - text: '$\int_{2y}^{2}\!\int_0^1f\,dy\,dx$'
+        feedback: >-
+          לאינטגרל החיצוני יש גבול $2y$, אבל $y$ כבר "נבלע" באינטגרל הפנימי: התוצאה תלויה ב-$y$ ואינה מספר. הגבולות
+          החיצוניים הם מספרים.
+        misconception: MC-c12-outer-limit-variable
+      - text: '$\int_0^1\!\int_0^2f\,dx\,dy$'
+        feedback: >-
+          גבולות קבועים מתארים את המלבן $[0,2]\times[0,1]$. בתחום שאינו מלבן הגבול הפנימי תלוי במשתנה החיצוני.
+        misconception: MC-c12-bounding-rectangle
+
+  - id: Q-12.2-rect-limits
+    type: twotier
+    objectives: [OBJ-12.2-1, OBJ-12.2-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $D$ הוא התחום שמתחת לפרבולה $y=x^2$ ומעל ציר $x$, כש-$0\le x\le2$. סטודנטית כתבה:
+      $\iint_Df\,dA=\int_0^2\!\int_0^4f\,dy\,dx$, "כי ב-$D$ הערכים של $y$ בין 0 ל-4". האם זה נכון?
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: 'נכון. האינטגרל שכתבה הוא על המלבן $[0,2]\times[0,4]$ כולו, גם מעל הפרבולה.'
+      - text: נכון
+        feedback: >-
+          ב-$D$ אמנם $0\le y\le4$, אבל לא כל זוג כזה נמצא ב-$D$: הנקודה $(1,3)$ מקיימת $0\le y\le4$ ונמצאת מעל הפרבולה.
+        misconception: MC-c12-bounding-rectangle
+    reasons:
+      - text: 'לכל $x$ קבוע הרצועה האנכית ב-$D$ היא $0\le y\le x^2$: הגבול הפנימי תלוי ב-$x$'
+        correct: true
+        feedback: 'בדיוק. הנכון הוא $\int_0^2\!\int_0^{x^2}f\,dy\,dx$.'
+      - text: 'הטווח של $y$ ב-$D$ הוא אכן $[0,4]$, ולכן הגבולות נכונים'
+        feedback: >-
+          טווח הערכים של $y$ בכל התחום אינו הרצועה מעל $x$ מסוים. מעל $x=1$ הרצועה היא רק $0\le y\le1$.
+        misconception: MC-c12-bounding-rectangle
+      - text: 'הסדר שגוי: צריך לכתוב $dx\,dy$ ואז הגבולות נכונים'
+        feedback: >-
+          עם $dx\,dy$ והגבולות $\int_0^4\!\int_0^2$ זה עדיין המלבן כולו. הבעיה בגבולות, לא בסדר.
+        misconception: MC-c12-swap-keep-limits
+
+  - id: Q-12.2-area-between
+    type: numeric
+    objectives: [OBJ-12.2-2]
+    level: basic
+    prompt: >-
+      חשבו את השטח של התחום שבין הישר $y=x$ לפרבולה $y=x^2$, כ-$\iint_D1\,dA$.
+    answer: 0.166666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. העקומים נחתכים ב-$x=0$ וב-$x=1$, ובין לבין $x\ge x^2$ (למשל ב-$x=\frac12$: $\frac12>\frac14$). לכן
+      $\int_0^1\!\int_{x^2}^{x}1\,dy\,dx=\int_0^1\left(x-x^2\right)dx=\frac12-\frac13=\frac16$.
+    wrongFeedback: >-
+      מצאו את נקודות החיתוך, בדקו איזה עקום עליון בין לבין, וכתבו $\int_0^1\!\int_{g_1(x)}^{g_2(x)}1\,dy\,dx$ עם $g_1$ העקום התחתון ו-$g_2$ העליון.
+    commonWrong:
+      - value: -0.166666666666667
+        feedback: >-
+          שטח שלילי: הגבולות הפוכים. בין 0 ל-1 הישר $y=x$ **מעל** הפרבולה, ולכן הוא הגבול העליון.
+        misconception: MC-c12-region-wrong-side
+    hints: ['מה גדול יותר ב-$x=\tfrac12$: $x$ או $x^2$?']
+
+  - id: Q-12.2-parabola-inner
+    type: expr
+    objectives: [OBJ-12.2-2]
+    level: basic
+    prompt: >-
+      $D$ הוא התחום שמתחת ל-$y=x^2$ ומעל ציר $x$, כש-$0\le x\le2$. כותבים
+      $\iint_D\left(xy^2+x^3y\right)dA=\int_0^2\left(\int_0^{x^2}\left(xy^2+x^3y\right)dy\right)dx$. חשבו את האינטגרל הפנימי,
+      כפונקציה של $x$.
+    answer: '5*x^7/6'
+    answerTex: '$\int_0^{x^2}\left(xy^2+x^3y\right)dy=\frac{x^7}{3}+\frac{x^7}{2}=\frac{5x^7}{6}$'
+    variables: [x]
+    domain: [0, 2]
+    correctFeedback: >-
+      נכון. $\left[\frac{xy^3}{3}+\frac{x^3y^2}{2}\right]_{y=0}^{y=x^2}=\frac{x\cdot x^6}{3}+\frac{x^3\cdot x^4}{2}$.
+    wrongFeedback: >-
+      חשבו פונקציה קדומה לפי $y$ ($x$ קבוע), והציבו את הגבול העליון $y=x^2$: כל $y$ הופך ל-$x^2$.
+    commonWrong:
+      - expr: '64*x/3 + 8*x^3'
+        feedback: >-
+          הצבתם $y=4$, כאילו התחום הוא המלבן $[0,2]\times[0,4]$. הגבול העליון של $y$ מעל $x$ מסוים הוא $x^2$.
+        misconception: MC-c12-bounding-rectangle
+    hints: ['$y^3$ ב-$y=x^2$ הוא $x^6$.']
+
+  - id: Q-12.2-triangle-value
+    type: numeric
+    objectives: [OBJ-12.2-2]
+    level: mid
+    prompt: >-
+      חשבו את $\iint_T\left(xy^2-x^2y^3\right)dA$, כש-$T$ המשולש $0\le x\le2$, $0\le y\le\frac x2$.
+    answer: -0.019047619047619
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. האינטגרל הפנימי: $\left[\frac{xy^3}{3}-\frac{x^2y^4}{4}\right]_0^{x/2}=\frac{x^4}{24}-\frac{x^6}{64}$. ואז
+      $\int_0^2\left(\frac{x^4}{24}-\frac{x^6}{64}\right)dx=\frac{4}{15}-\frac27=\frac{-2}{105}$. הסימן השלילי בסדר:
+      האינטגרנד שלילי בחלק מהמשולש.
+    wrongFeedback: >-
+      לפי $y$ קודם, מ-0 עד $\frac x2$; הציבו, וחשבו את האינטגרל של הפולינום שיוצא מ-0 עד 2.
+    commonWrong:
+      - value: 0.019047619047619
+        feedback: >-
+          זה הערך המוחלט. האינטגרל הוא נפח מסומן: ליד $(2,1)$ האינטגרנד שלילי ($xy^2-x^2y^3=xy^2(1-xy)$ ו-$xy$ מגיע ל-2),
+          והתוצאה $\frac{-2}{105}$.
+        misconception: MC-c12-signed-volume
+    hints: ['$\int_0^2\frac{x^4}{24}dx=\frac{32}{120}$ ו-$\int_0^2\frac{x^6}{64}dx=\frac{128}{448}$.']
+
+  - id: Q-12.2-parabola-value
+    type: numeric
+    objectives: [OBJ-12.2-2]
+    level: mid
+    prompt: >-
+      חשבו את $\iint_D\left(xy^2+x^3y\right)dA$, כש-$D$ התחום שמתחת ל-$y=x^2$ ומעל ציר $x$, $0\le x\le2$.
+    answer: 26.6666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. האינטגרל הפנימי הוא $\frac{5x^7}{6}$, ו-$\int_0^2\frac{5x^7}{6}\,dx=\frac{5}{6}\cdot\frac{256}{8}=\frac{80}{3}$.
+      בסדר ההפוך, $\int_0^4\!\int_{\sqrt y}^{2}\left(xy^2+x^3y\right)dx\,dy$, יוצא אותו מספר.
+    wrongFeedback: >-
+      לפי $y$ קודם, מ-0 עד $x^2$, ואחר כך לפי $x$ מ-0 עד 2.
+    commonWrong:
+      - value: 74.6666666666667
+        feedback: >-
+          $\frac{224}{3}$ הוא האינטגרל על המלבן $[0,2]\times[0,4]$ (גבול פנימי 4 במקום $x^2$), כולל החלק שמעל הפרבולה.
+        misconception: MC-c12-bounding-rectangle
+    hints: ['$\int_0^2x^7\,dx=\frac{2^8}{8}$.']
+
+  - id: Q-12.2-reverse-limits
+    type: mc
+    objectives: [OBJ-12.2-3]
+    level: mid
+    prompt: >-
+      החליפו את סדר האינטגרציה ב-$\int_0^2\!\int_0^{x^2}f(x,y)\,dy\,dx$.
+    choices:
+      - text: '$\int_0^4\!\int_{\sqrt y}^{2}f(x,y)\,dx\,dy$'
+        correct: true
+        feedback: >-
+          נכון. התחום: מתחת ל-$y=x^2$, מעל ציר $x$, משמאל ל-$x=2$. $y$ נע מ-0 עד 4, ורצועה אופקית בגובה $y$ מתחילה על
+          הפרבולה, $x=\sqrt y$, ונגמרת ב-$x=2$.
+      - text: '$\int_0^4\!\int_0^{\sqrt y}f(x,y)\,dx\,dy$'
+        feedback: >-
+          $0\le x\le\sqrt y$ הוא החלק **משמאל** לפרבולה, כלומר מעליה. בדקו את הנקודה $(1.5,1)$, שנמצאת בתחום: $1.5>\sqrt1$.
+        misconception: MC-c12-region-wrong-side
+      - text: '$\int_0^2\!\int_0^{x^2}f(x,y)\,dx\,dy$'
+        feedback: >-
+          רק הדיפרנציאלים הוחלפו. עכשיו האינטגרל הפנימי לפי $x$ הוא עד $x^2$: גבול שתלוי במשתנה של האינטגרציה עצמו. צריך
+          לתאר את התחום מחדש.
+        misconception: MC-c12-swap-keep-limits
+      - text: '$\int_0^{x^2}\!\int_0^2f(x,y)\,dx\,dy$'
+        feedback: >-
+          הגבול של האינטגרל החיצוני תלוי ב-$x$, אבל $x$ כבר עבר אינטגרציה בפנים. הגבולות החיצוניים חייבים להיות מספרים.
+        misconception: MC-c12-outer-limit-variable
+
+  - id: Q-12.2-rank-swap
+    type: rank
+    objectives: [OBJ-12.2-3]
+    level: mid
+    prompt: >-
+      סדרו את שלבי החלפת הסדר ב-$\int_0^1\!\int_x^1e^{y^2}\,dy\,dx$.
+    help: סדרו את שלבי השיטה מהראשון לאחרון.
+    items:
+      - id: a
+        label: 'קוראים את התחום מהגבולות: $0\le x\le1$ ו-$x\le y\le1$.'
+      - id: b
+        label: 'משרטטים: המשולש עם הקודקודים $(0,0)$, $(0,1)$, $(1,1)$, מעל הישר $y=x$.'
+      - id: c
+        label: 'קובעים את הטווח של המשתנה החיצוני החדש, במספרים: $0\le y\le1$.'
+      - id: d
+        label: 'לכל $y$ קבוע קוראים את הרצועה האופקית: $0\le x\le y$.'
+      - id: e
+        label: 'כותבים $\int_0^1\!\int_0^ye^{y^2}\,dx\,dy$ ומחשבים את הפנימי: $ye^{y^2}$.'
+    order: [a, b, c, d, e]
+    correctFeedback: >-
+      נכון. השרטוט הוא לב השיטה: הגבולות החדשים נקראים ממנו, ולא מהגבולות הישנים. התוצאה $\int_0^1ye^{y^2}dy=\frac{e-1}{2}$.
+    wrongFeedback: >-
+      אי-אפשר לכתוב גבולות חדשים לפני שיודעים מהו התחום. מתחילים מקריאת התחום ושרטוטו; קודם הגבולות החיצוניים (מספרים),
+      ואחר כך הפנימיים.
+
+  - id: Q-12.2-ey2
+    type: numeric
+    objectives: [OBJ-12.2-3]
+    level: mid
+    prompt: >-
+      חשבו את $\int_0^1\!\int_x^1e^{y^2}\,dy\,dx$. (ל-$e^{y^2}$ אין פונקציה קדומה אלמנטרית.)
+    answer: 0.859140914229523
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. בסדר ההפוך: $\int_0^1\!\int_0^ye^{y^2}\,dx\,dy=\int_0^1ye^{y^2}\,dy=\frac12e^{y^2}\Big|_0^1=\frac{e-1}{2}$.
+    wrongFeedback: >-
+      החליפו את הסדר: התחום הוא המשולש $0\le x\le y\le1$. האינטגרל הפנימי לפי $x$ של $e^{y^2}$ נותן גורם $y$.
+    hints: ['אחרי החלפת הסדר, הציבו $t=y^2$.']
+
+  - id: Q-12.2-only-one-order
+    type: twotier
+    objectives: [OBJ-12.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: "את $\int_0^1\!\int_x^1e^{y^2}\,dy\,dx$ אי-אפשר לחשב במדויק, כי ל-$e^{y^2}$ אין פונקציה קדומה
+      אלמנטרית."
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: 'נכון. הקושי שייך לסדר האינטגרציה, לא לאינטגרל הכפול. התוצאה $\frac{e-1}{2}$.'
+      - text: נכון
+        feedback: >-
+          בסדר $dy\,dx$ באמת נתקעים, אבל האינטגרל הכפול הוא אותו מספר בכל סדר. בסדר השני הוא ניתן לחישוב.
+        misconception: MC-c12-stuck-means-impossible
+    reasons:
+      - text: 'בסדר $dx\,dy$ האינטגרל הפנימי $\int_0^ye^{y^2}\,dx=ye^{y^2}$, ול-$ye^{y^2}$ יש פונקציה קדומה $\frac12e^{y^2}$'
+        correct: true
+        feedback: 'בדיוק. הגורם $y$, שמגיע מאורך הרצועה האופקית, הוא בדיוק מה שחסר כדי להציב $t=y^2$.'
+      - text: 'אפשר רק לקרב נומרית, למשל בכלל סימפסון'
+        feedback: >-
+          קירוב נומרי אפשרי, אבל לא הכרחי: החלפת סדר נותנת ערך מדויק.
+        misconception: MC-c12-stuck-means-impossible
+      - text: 'אפשר להחליף את הסדר כך: $\int_0^1\!\int_x^1e^{y^2}\,dx\,dy$, ואז הפנימי קל'
+        feedback: >-
+          זו החלפה של הדיפרנציאלים בלבד. הגבול הפנימי $x$ תלוי עכשיו במשתנה של האינטגרציה. צריך לתאר מחדש את התחום:
+          $0\le y\le1$, $0\le x\le y$.
+        misconception: MC-c12-swap-keep-limits
+
+  - id: Q-12.2-tent
+    type: numeric
+    objectives: [OBJ-12.2-1, OBJ-12.2-2]
+    level: exam
+    prompt: >-
+      $T$ הוא המשולש עם הקודקודים $(0,0)$, $(2,0)$ ו-$(1,1)$. חשבו את $\iint_Ty\,dA$. בחרו את הסדר שבו מספיק אינטגרל נשנה
+      אחד.
+    answer: 0.333333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. לפי $y$: $0\le y\le1$, והרצועה האופקית בגובה $y$ היא $y\le x\le2-y$, באורך $2-2y$. לכן
+      $\int_0^1y(2-2y)\,dy=1-\frac23=\frac13$. בסדר $dy\,dx$ השפה העליונה מתחלפת ב-$x=1$, וצריך שני אינטגרלים.
+    wrongFeedback: >-
+      השפה העליונה מורכבת משני ישרים: $y=x$ ו-$y=2-x$. תארו את $T$ ברצועות אופקיות: מאיזה $x$ עד איזה $x$ בגובה $y$?
+    commonWrong:
+      - value: 1.33333333333333
+        feedback: >-
+          $\frac43$ הוא $\int_0^2\!\int_0^xy\,dy\,dx$: השתמשתם רק בישר $y=x$ כגבול עליון, ולכן חישבתם על משולש גדול יותר עם
+          הקודקוד $(2,2)$. מימין ל-$x=1$ הגבול העליון הוא $y=2-x$.
+        misconception: MC-c12-region-wrong-side
+    hints: ['ברצועה אופקית בגובה $y$: הצלע השמאלית $x=y$, והימנית $x=2-y$.']
+
+  - id: Q-12.2-sin-y
+    type: numeric
+    objectives: [OBJ-12.2-3]
+    level: exam
+    prompt: >-
+      חשבו את $\int_0^\pi\!\int_x^\pi\frac{\sin y}{y}\,dy\,dx$.
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. ל-$\frac{\sin y}{y}$ אין פונקציה קדומה אלמנטרית, לכן מחליפים סדר. התחום: $0\le x\le y\le\pi$, כלומר
+      $0\le y\le\pi$ ו-$0\le x\le y$. $\int_0^\pi\!\int_0^y\frac{\sin y}{y}\,dx\,dy=\int_0^\pi\sin y\,dy=2$.
+    wrongFeedback: >-
+      לפי $y$ קודם נתקעים. שרטטו את התחום וכתבו אותו ברצועות אופקיות; האינטגרל הפנימי לפי $x$ נותן גורם $y$ שמצטמצם.
+    hints: ['התחום הוא המשולש מעל הישר $y=x$ בתוך הריבוע $[0,\pi]^2$.']

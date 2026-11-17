@@ -1,0 +1,81 @@
+# Misconceptions first detected in lesson 0.2 (trigonometry).
+- id: MC-c0-deg-rad-inverse
+  title: הופכים את המרה ממעלות לרדיאנים
+  belief: >-
+    כדי להמיר מעלות לרדיאנים כופלים ב-$\frac{180}{\pi}$.
+  truth: >-
+    $180^\circ=\pi$, ולכן מעלות לרדיאנים: כופלים ב-$\frac{\pi}{180}$, ורדיאנים למעלות: ב-$\frac{180}{\pi}$. בדיקה: זווית
+    ישרה, $90^\circ$, צריכה לצאת $\frac\pi2\approx1.57$ ולא אלפי רדיאנים.
+  remedy: { lesson: '0.2', label: 'מעלות ורדיאנים' }
+
+- id: MC-c0-radians-as-degrees
+  title: קוראים מספר רדיאנים כאילו היה מעלות
+  belief: >-
+    $\sin 2$ הוא הסינוס של זווית קטנה, קרוב ל-0, וזווית שהתבקשה ברדיאנים אפשר לכתוב במעלות.
+  truth: >-
+    בקורס הזה זווית בלי סימן מעלות היא ברדיאנים. $2$ רדיאנים הם בערך $114.6^\circ$, ברביע השני, ולכן $\sin2\approx0.909$.
+    כשמבקשים זווית ברדיאנים, $60$ אינו $\frac\pi3$.
+  remedy: { lesson: '0.2', label: 'רדיאן: אורך הקשת על מעגל היחידה' }
+
+- id: MC-c0-quadrant-sign
+  title: מתעלמים מהרביע כשקובעים סימן
+  belief: >-
+    $\cos\theta=\sqrt{1-\sin^2\theta}$ תמיד, ו-$\cos\frac{2\pi}{3}=\cos\frac{\pi}{3}=\frac12$.
+  truth: >-
+    השורש נותן רק את הגודל; הסימן נקבע לפי הרביע במעגל היחידה. ברביע השני $x<0$, ולכן $\cos\theta<0$ ו-$\sin\theta>0$:
+    $\cos\frac{2\pi}{3}=-\frac12$.
+  remedy: { lesson: '0.2', label: 'מעגל היחידה: סימנים לפי רביע' }
+
+- id: MC-c0-sin-cos-swap
+  title: מחליפים בין סינוס לקוסינוס
+  belief: >-
+    במעגל היחידה סינוס הוא שיעור ה-$x$ וקוסינוס שיעור ה-$y$, או: הרכיב של כוח לאורך הכיוון הוא $F\sin\alpha$.
+  truth: >-
+    הנקודה על מעגל היחידה בזווית $\theta$ היא $(\cos\theta,\sin\theta)$: קוסינוס הוא השיעור האופקי, סינוס האנכי. הרכיב
+    הצמוד לזווית הוא $F\cos\alpha$, והרכיב שמול הזווית $F\sin\alpha$.
+  remedy: { lesson: '0.2', label: 'סינוס וקוסינוס במעגל היחידה' }
+
+- id: MC-c0-sin-linear
+  title: מתייחסים לסינוס ולקוסינוס כאל פונקציות לינאריות
+  belief: >-
+    $\sin(a+b)=\sin a+\sin b$, $\sin2x=2\sin x$, ו-$\tan(\alpha+\beta)=\tan\alpha+\tan\beta$.
+  truth: >-
+    הפונקציות הטריגונומטריות אינן לינאריות. $\sin(a+b)=\sin a\cos b+\cos a\sin b$ ו-$\sin2x=2\sin x\cos x$. בדיקה:
+    $\sin\frac{\pi}{2}+\sin\frac{\pi}{2}=2$, וסינוס אף פעם אינו גדול מ-1.
+  remedy: { lesson: '0.2', label: 'נוסחאות הסכום והזווית הכפולה' }
+
+- id: MC-c0-sum-formula-sign
+  title: טועים בסימן בנוסחת הקוסינוס של סכום
+  belief: >-
+    $\cos(a+b)=\cos a\cos b+\sin a\sin b$.
+  truth: >-
+    $\cos(a+b)=\cos a\cos b-\sin a\sin b$, ובהפרש הסימן מתהפך: $\cos(a-b)=\cos a\cos b+\sin a\sin b$. בדיקה ב-$a=b=\frac{\pi}{2}$:
+    $\cos\pi=-1$, ורק הנוסחה עם המינוס נותנת $0-1=-1$.
+  remedy: { lesson: '0.2', label: 'נוסחאות הסכום: בדיקה בזווית מיוחדת' }
+
+- id: MC-c0-arcsin-only
+  title: מוצאים פתרון אחד של משוואה טריגונומטרית ושוכחים את השאר
+  belief: >-
+    הפתרון של $\sin x=\frac12$ הוא $x=\frac\pi6$, כלומר מה שהמחשבון נותן.
+  truth: >-
+    למשוואה טריגונומטרית יש בדרך כלל שני פתרונות בכל מחזור: $\sin x=\frac12$ גם ב-$x=\pi-\frac\pi6=\frac{5\pi}{6}$, ו-$\cos x=c$
+    גם ב-$-x$. על כל אלה מוסיפים כפולות של המחזור ($2\pi$, ול-$\tan$ המחזור $\pi$).
+  remedy: { lesson: '0.2', label: 'כל הפתרונות של משוואה טריגונומטרית' }
+
+- id: MC-c0-period-wrong
+  title: מוסיפים מחזור לא נכון לפתרון הכללי
+  belief: >-
+    הפתרון הכללי של $\cos x=-\frac12$ הוא $\frac{2\pi}{3}+\pi k$.
+  truth: >-
+    המחזור של $\sin$ ושל $\cos$ הוא $2\pi$; רק ל-$\tan$ המחזור $\pi$. ב-$x=\frac{2\pi}{3}+\pi=\frac{5\pi}{3}$ מתקבל
+    $\cos x=\frac12$, לא $-\frac12$.
+  remedy: { lesson: '0.2', label: 'מחזוריות של הפונקציות הטריגונומטריות' }
+
+- id: MC-c0-divide-lose-roots
+  title: מחלקים משוואה בביטוי שעלול להתאפס ומאבדים פתרונות
+  belief: >-
+    במשוואה $\sin2x=\cos x$, כלומר $2\sin x\cos x=\cos x$, אפשר לחלק ב-$\cos x$ ולקבל $\sin x=\frac12$.
+  truth: >-
+    חילוק ב-$\cos x$ מותר רק כש-$\cos x\ne0$, ולכן הוא מאבד את הפתרונות שבהם $\cos x=0$. במקום לחלק, מוציאים גורם משותף:
+    $\cos x\,(2\sin x-1)=0$, ומכפלה מתאפסת כשאחד הגורמים מתאפס.
+  remedy: { lesson: '0.2', label: 'משוואות: מוציאים גורם משותף, לא מחלקים' }

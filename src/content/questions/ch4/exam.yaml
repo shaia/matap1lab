@@ -1,0 +1,332 @@
+# Chapter 4 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# Every number is recomputed in screens/tools/checks_ch4.py.
+chapter: 4
+questions:
+  - id: Q-4-exam-1
+    type: exam
+    title: כוס קפה מתקררת
+    prompt: >-
+      כוס קפה בטמפרטורה $80^\circ$ מונחת בחדר שהטמפרטורה בו $20^\circ$. לפי חוק הקירור של ניוטון, הטמפרטורה אחרי $t$ דקות
+      היא $T(t)=20+60e^{-kt}$, עם קבוע $k>0$. אחרי 10 דקות נמדדה טמפרטורה של $50^\circ$.
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-4.3-2]
+        prompt: >-
+          מצאו את $k$ (ביחידות של 1 לדקה). (אפשר לכתוב ערך מדויק, כמו ln 3 או 3√2)
+        answer: 0.06931471805599453
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $20+60e^{-10k}=50$ נותן $e^{-10k}=\frac12$, ולכן $k=\frac{\ln2}{10}\approx0.0693$: הפרש הטמפרטורות מהחדר נחצה כל
+          10 דקות.
+        wrongFeedback: >-
+          הציבו $t=10$, בודדו את $e^{-10k}$ (קודם מחסירים 20 ומחלקים ב-60), ואז קחו $\ln$.
+        commonWrong:
+          - value: 0.047000362924573554
+            feedback: >-
+              זה $\frac{1}{10}\ln\frac{80}{50}$: חילקתם את הטמפרטורות עצמן. האקספוננט הוא רק החלק $T-20$, ולכן
+              $e^{-10k}=\frac{50-20}{80-20}$.
+            misconception: MC-c4-vertical-shift-ignored
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-4.3-2]
+        standalone: false
+        prompt: >-
+          אחרי כמה דקות תגיע הטמפרטורה ל-$30^\circ$?
+        answer: 25.84962500721156
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, בערך $25.8$ דקות. $60e^{-kt}=10$, ולכן $t=\frac{\ln6}{k}=\frac{10\ln6}{\ln2}$.
+        wrongFeedback: >-
+          פתרו $20+60e^{-kt}=30$ עם $k$ מסעיף א.
+        commonWrong:
+          - value: 16.666666666666668
+            feedback: >-
+              זה $\frac{50}{3}$: הנחתם קצב קבוע של $3^\circ$ לדקה, כמו ב-10 הדקות הראשונות. הקירור מעריכי ומאט: הפרש של $10^\circ$
+              מהחדר הוא שישית מההפרש ההתחלתי, ולכן לוקח $\log_26\approx2.58$ "מחציות" של 10 דקות.
+            misconception: MC-c4-exp-as-linear
+
+      - label: ג
+        points: 11
+        type: open
+        objectives: [OBJ-4.1-1, OBJ-4.3-1, OBJ-4.3-2]
+        prompt: >-
+          מצאו את התמונה של $T$ על $[0,\infty)$, הסבירו למה הקפה לעולם לא יגיע ל-$20^\circ$, ומצאו נוסחה לפונקציה ההפוכה
+          $t(T)$, הזמן שבו הקפה מגיע לטמפרטורה $T$, עם תחום ההגדרה שלה.
+        solution:
+          - kind: given
+            text: '$T(t)=20+60e^{-kt}$ ל-$t\ge0$, עם $k=\frac{\ln2}{10}>0$.'
+          - kind: goal
+            text: 'התמונה של $T$; למה $T(t)\ne20$; הנוסחה של $T^{-1}$ ותחומה.'
+          - kind: idea
+            text: >-
+              $T$ היא הגרף של $e^{-t}$ אחרי מתיחות והזזה. כל התכונות באות מ-$e^{-kt}$: יורדת, חיובית, שואפת ל-0. את ההפוכה
+              מוצאים מפתרון $T=20+60e^{-kt}$ לפי $t$.
+          - kind: step
+            text: >-
+              $e^{-kt}$ יורדת מ-1 (ב-$t=0$) ושואפת ל-0 כש-$t\to\infty$, ולעולם אינה 0. לכן $60e^{-kt}$ מקבלת כל ערך ב-$(0,60]$
+              בדיוק פעם אחת, ו-$T(t)$ מקבלת כל ערך ב-$(20,80]$.
+          - kind: result
+            text: >-
+              התמונה $(20,80]$. $T(t)-20=60e^{-kt}>0$ לכל $t$, ולכן הקפה מתקרב ל-$20^\circ$ (אסימפטוטה אופקית $T=20$) ולא מגיע.
+          - kind: computation
+            text: >-
+              $e^{-kt}=\frac{T-20}{60}$, ולכן $-kt=\ln\frac{T-20}{60}$ ו-$t=\frac1k\ln\frac{60}{T-20}=\frac{10}{\ln2}\ln\frac{60}{T-20}$.
+          - kind: check
+            text: >-
+              $T=80$ נותן $\ln1=0$, כלומר $t=0$; $T=50$ נותן $\frac{10}{\ln2}\ln2=10$, כמו בנתון; $T=30$ נותן את התשובה של
+              סעיף ב. כש-$T\to20^+$, $t\to\infty$.
+          - kind: result
+            text: >-
+              $t(T)=\frac{10}{\ln2}\ln\frac{60}{T-20}$, מוגדרת על $(20,80]$: התחום של ההפוכה הוא התמונה של $T$.
+        rubric:
+          - text: 'התמונה $(20,80]$, עם נימוק: $e^{-kt}$ יורדת, חיובית ושואפת ל-0'
+            weight: 3
+          - text: 'הסבר שהערך 20 אינו מתקבל ($60e^{-kt}>0$) ושהוא אסימפטוטה'
+            weight: 2
+          - text: 'פתרון נכון לפי $t$: הפרדת $e^{-kt}$ (חיסור 20 וחלוקה ב-60) ואז $\ln$'
+            weight: 4
+          - text: 'תחום ההפוכה $(20,80]$, ובדיקה באחת הנקודות הידועות'
+            weight: 2
+
+      - label: ד
+        points: 4
+        type: mc
+        objectives: [OBJ-4.2-1]
+        qualitative: true
+        prompt: >-
+          איך מתקבל הגרף של $T(t)=20+60e^{-kt}$ מהגרף של $y=e^{-t}$?
+        choices:
+          - text: 'מתיחה לרוחב פי $\frac1k$, מתיחה לגובה פי 60, ואז הזזה למעלה ב-20'
+            correct: true
+            feedback: >-
+              נכון. $e^{-kt}=e^{-t/(1/k)}$ היא מתיחה לרוחב פי $\frac1k\approx14.4$; הכפל ב-60 מותח לגובה, וה-20 מזיז.
+          - text: 'הזזה למעלה ב-20 ואז מתיחה לגובה פי 60'
+            feedback: >-
+              בסדר הזה מתקבל $60\left(e^{-kt}+20\right)=60e^{-kt}+1200$. המתיחה האנכית צריכה לבוא לפני ההזזה.
+            misconception: MC-c4-transform-order
+          - text: 'כיווץ לרוחב פי $\frac1k$, מתיחה לגובה פי 60, והזזה למעלה ב-20'
+            feedback: >-
+              $k<1$, ולכן $e^{-kt}$ דועכת **לאט** יותר מ-$e^{-t}$: הגרף נמתח לרוחב, לא מתכווץ.
+            misconception: MC-c4-stretch-direction
+
+  - id: Q-4-exam-2
+    type: exam
+    title: פונקציה מוגדרת בחלקים
+    prompt: >-
+      $$f(x)=\begin{cases}\dfrac{x^2-x-2}{x-2}, & x<2\\[4pt] a, & x=2\\[4pt] \ln(x-1)+b, & x>2\end{cases}$$
+      כאשר $a$ ו-$b$ קבועים.
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-4.6-1]
+        prompt: >-
+          חשבו את $\lim_{x\to2^-}f(x)$.
+        answer: 3
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $x^2-x-2=(x-2)(x+1)$, ולכן ל-$x<2$, $f(x)=x+1\to3$.
+        wrongFeedback: >-
+          הצבה נותנת $\frac00$: פרקו את המונה.
+        commonWrong:
+          - value: 0
+            feedback: >-
+              $\frac00$ אינו 0: אחרי צמצום $(x-2)$ נשאר $x+1$.
+            misconception: MC-c4-zero-over-zero
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-4.6-2]
+        prompt: >-
+          מצאו את $b$ שעבורו לשני הגבולות החד-צדדיים ב-$x=2$ יש אותו ערך.
+        answer: 3
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\lim_{x\to2^+}\left(\ln(x-1)+b\right)=\ln1+b=b$, והגבול משמאל 3. עם $b=3$ ו-$a=3$ הפונקציה רציפה ב-2.
+        wrongFeedback: >-
+          חשבו את הגבול מימין: מה $\ln(x-1)$ כש-$x\to2$?
+        commonWrong:
+          - value: 2.3068528194400546
+            feedback: >-
+              זה $3-\ln2$: הצבתם $x=2$ בלוגריתם במקום $x-1=1$. הקלט של $\ln$ הוא $x-1$, ו-$\ln1=0$.
+            misconception: MC-c4-composition-skip-inner
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-4.6-3, OBJ-4.6-2]
+        prompt: >-
+          נניח $a=b=3$. הוכיחו שלמשוואה $f(x)=x$ יש פתרון בקטע $(2,6)$.
+        solution:
+          - kind: given
+            text: '$a=b=3$: ל-$x\ge2$, $f(x)=\ln(x-1)+3$ (וב-$x=2$ גם הנוסחה נותנת $\ln1+3=3=a$).'
+          - kind: goal
+            text: 'יש $x_0\in(2,6)$ עם $f(x_0)=x_0$.'
+          - kind: idea
+            text: >-
+              מעבירים לאגף אחד: $g(x)=f(x)-x$, ומחפשים לה שורש בעזרת משפט ערך הביניים. צריך רציפות בקטע הסגור $[2,6]$ והחלפת
+              סימן בקצוות.
+          - kind: step
+            text: >-
+              על $[2,6]$, $f(x)=\ln(x-1)+3$: ב-$(2,6]$ זו הרכבה של פונקציות אלמנטריות שמוגדרת שם ($x-1>0$), וב-2 הגבול מימין
+              $\ln1+3=3=f(2)$. לכן $f$, ואיתה $g(x)=\ln(x-1)+3-x$, רציפה ב-$[2,6]$.
+          - kind: computation
+            text: '$g(2)=0+3-2=1>0$, ו-$g(6)=\ln5+3-6=\ln5-3\approx-1.39<0$ (כי $5<e^3\approx20.1$).'
+          - kind: theorem
+            text: 'משפט ערך הביניים: פונקציה רציפה בקטע סגור שמחליפה סימן בקצותיו מתאפסת בו.'
+          - kind: result
+            text: >-
+              יש $x_0\in(2,6)$ עם $g(x_0)=0$, כלומר $f(x_0)=x_0$ (בקצוות $g\ne0$, ולכן $x_0$ פנימי). (מספרית $x_0\approx4.15$.)
+        rubric:
+          - text: 'מעבר לפונקציה $g(x)=f(x)-x$ ושימוש במשפט ערך הביניים'
+            weight: 2
+          - text: 'נימוק לרציפות ב-$[2,6]$, כולל הנקודה $x=2$ (התאמת $a=b=3$)'
+            weight: 3
+          - text: 'חישוב נכון של הסימנים: $g(2)=1>0$ ו-$g(6)=\ln5-3<0$, עם נימוק לסימן של $\ln5-3$'
+            weight: 3
+          - text: 'מסקנה מנוסחת: קיים פתרון בקטע הפתוח'
+            weight: 2
+
+      - label: ד
+        points: 5
+        type: mc
+        objectives: [OBJ-4.6-2]
+        qualitative: true
+        prompt: >-
+          נניח $b=0$ ו-$a=3$. איזו אי-רציפות יש ל-$f$ ב-$x=2$?
+        choices:
+          - text: 'קפיצה: משמאל 3, מימין 0'
+            correct: true
+            feedback: >-
+              נכון. שני הגבולות החד-צדדיים סופיים ושונים, ולכן אף ערך של $a$ לא יסלק אותה.
+          - text: 'סליקה, כי $f(2)=a=3$ שווה לגבול משמאל'
+            feedback: >-
+              הגבול הדו-צדדי אינו קיים (3 משמאל, 0 מימין). אי-רציפות סליקה דורשת גבול דו-צדדי.
+            misconception: MC-c4-removable-vs-jump
+          - text: 'אינסופית, כי $\ln(x-1)\to-\infty$'
+            feedback: >-
+              $\ln(x-1)\to-\infty$ כש-$x\to1^+$, לא כש-$x\to2$. ליד 2, $\ln(x-1)\to\ln1=0$.
+            misconception: MC-c4-ln-near-zero
+
+  - id: Q-4-exam-3
+    type: exam
+    title: כבל תלוי
+    prompt: >-
+      כבל תלוי בין שני עמודים שעומדים ב-$x=-10$ וב-$x=10$ (מטרים). צורתו היא הגרף של $y=10\cosh\frac{x}{10}$, כאשר $y$ הגובה
+      במטרים.
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-4.5-1]
+        prompt: >-
+          בכמה מטרים גבוהה נקודת התלייה בעמוד מהנקודה הנמוכה ביותר של הכבל?
+        answer: 5.430806348152437
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, בערך $5.43$ מ׳. הנקודה הנמוכה ב-$x=0$, בגובה $10\cosh0=10$; בעמוד $10\cosh1\approx15.43$.
+        wrongFeedback: >-
+          איפה המינימום של $\cosh$, ומה ערכו שם?
+        commonWrong:
+          - value: 15.430806348152437
+            feedback: >-
+              זה הגובה בעמוד, $10\cosh1$, כאילו הנקודה הנמוכה בגובה 0. אבל $\cosh0=1$, ולכן התחתית בגובה 10.
+            misconception: MC-c4-sinh-cosh-swap
+
+      - label: ב
+        points: 10
+        type: open
+        objectives: [OBJ-4.5-3]
+        prompt: >-
+          מצאו את כל הנקודות $x$ שבהן הכבל בגובה 12 מ׳. תנו תשובה מדויקת עם לוגריתם, וגם ערך מקורב.
+        solution:
+          - kind: given
+            text: '$10\cosh\frac x{10}=12$, כלומר $\cosh\frac x{10}=\frac65$.'
+          - kind: goal
+            text: 'כל ה-$x$ שמקיימים את המשוואה.'
+          - kind: idea
+            text: >-
+              מציבים $s=\frac x{10}$ ו-$u=e^s>0$. ההגדרה $\cosh s=\frac{u+u^{-1}}2$ הופכת את המשוואה למשוואה ריבועית ב-$u$.
+          - kind: computation
+            text: >-
+              $u+\frac1u=\frac{12}5$, כלומר $5u^2-12u+5=0$, ולכן $u=\frac{12\pm\sqrt{144-100}}{10}=\frac{6\pm\sqrt{11}}5$.
+          - kind: step
+            text: >-
+              שני השורשים חיוביים, ומכפלתם 1 (המקדם החופשי חלקי המוביל: $\frac55$). לכן $s=\pm\ln\frac{6+\sqrt{11}}5$: שני פתרונות
+              סימטריים, כמצופה מפונקציה זוגית.
+          - kind: check
+            text: >-
+              $\frac{6+\sqrt{11}}5\approx1.863$ ו-$\ln1.863\approx0.622$; ואכן $\cosh0.622\approx1.2$. וגם $|x|\approx6.22<10$: הנקודות
+              בין העמודים.
+          - kind: result
+            text: '$x=\pm10\ln\frac{6+\sqrt{11}}{5}\approx\pm6.22$ מ׳.'
+        rubric:
+          - text: 'הצבה $u=e^{x/10}$ והגעה למשוואה ריבועית נכונה'
+            weight: 3
+          - text: 'פתרון המשוואה הריבועית ובדיקה ששני השורשים חיוביים'
+            weight: 3
+          - text: 'מעבר ל-$x$ בעזרת $\ln$, כולל שני הסימנים (סימטריה)'
+            weight: 2
+          - text: 'ערך מקורב נכון ובדיקה שהנקודות בין העמודים'
+            weight: 2
+
+      - label: ג
+        points: 6
+        type: expr
+        objectives: [OBJ-4.5-3]
+        prompt: >-
+          כתבו את המרחק האופקי $x\ge0$ מהנקודה הנמוכה כפונקציה של הגובה $y\ge10$: הפונקציה ההפוכה של $y=10\cosh\frac x{10}$ על
+          $x\ge0$ (במשתנה y).
+        answer: '10*log(y/10 + sqrt((y/10)^2 - 1))'
+        answerTex: '$x=10\ln\left(\frac{y}{10}+\sqrt{\frac{y^2}{100}-1}\right)$'
+        variables: [y]
+        domain: [11, 15]
+        correctFeedback: >-
+          נכון. עם $u=e^{x/10}$: $u^2-\frac{y}{5}u+1=0$, $u=\frac y{10}\pm\sqrt{\frac{y^2}{100}-1}$; ל-$x\ge0$ צריך $u\ge1$, כלומר הסימן
+          פלוס. בדיקה: $y=10$ נותן $\ln1=0$.
+        wrongFeedback: >-
+          חזרו על החישוב של סעיף ב עם $y$ כללי במקום 12, ובחרו את השורש שנותן $x\ge0$.
+        commonWrong:
+          - expr: '10*log(y/10 - sqrt((y/10)^2 - 1))'
+            feedback: >-
+              השורש עם המינוס קטן מ-1, ולכן נותן $x\le0$: זו הנקודה הסימטרית בצד השני. ביקשו $x\ge0$.
+            misconception: MC-c4-quadratic-root-choice
+          - expr: '10*log(y/10 + sqrt((y/10)^2 + 1))'
+            feedback: >-
+              זה המבנה של ההפוכה של $\sinh$, שבה מקבלים $u^2-\frac y5u-1=0$. ל-$\cosh$ המשוואה $u^2-\frac y5u+1=0$, ולכן
+              $\sqrt{\frac{y^2}{100}-1}$.
+            misconception: MC-c4-sinh-cosh-swap
+
+      - label: ד
+        points: 4
+        type: twotier
+        objectives: [OBJ-4.2-3, OBJ-4.5-1]
+        qualitative: true
+        prompt: >-
+          נכון או לא נכון: הכבל בגובה זהה ב-$x=-7$ וב-$x=7$.
+        choices:
+          - text: 'נכון'
+            correct: true
+            feedback: 'נכון. $10\cosh\frac{-7}{10}=10\cosh\frac7{10}$: הגרף סימטרי ביחס לציר $y$.'
+          - text: 'לא נכון'
+            feedback: >-
+              $\cosh(-s)=\frac{e^{-s}+e^{s}}2=\cosh s$. הגבהים שווים.
+            misconception: MC-c4-sinh-cosh-swap
+        reasons:
+          - text: '$\cosh$ זוגית: החלפת $s$ ב-$-s$ מחליפה בין $e^s$ ל-$e^{-s}$ והסכום לא משתנה'
+            correct: true
+            feedback: 'בדיוק. וזו גם הסיבה שהפתרונות בסעיף ב באו בזוג $\pm x$.'
+          - text: '$\cosh$ מחזורית, כמו הקוסינוס'
+            feedback: >-
+              $\cosh$ אינה מחזורית. השוויון נובע מזוגיות, לא ממחזוריות.
+            misconception: MC-c4-hyperbolic-periodic
+          - text: 'כל פונקציה שגרפה נראה כמו שוקת היא זוגית'
+            feedback: >-
+              $\cosh(x-1)$ נראית כמו שוקת ואינה זוגית: הסימטריה שלה סביב $x=1$. בודקים $f(-x)=f(x)$.
+            misconception: MC-c4-parity-by-exponents

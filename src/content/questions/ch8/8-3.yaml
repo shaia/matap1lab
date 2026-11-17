@@ -1,0 +1,319 @@
+# Lesson 8.3 — improper integrals.
+# Objectives (src/course.ts):
+#   OBJ-8.3-1  compute an improper integral over an infinite interval and of an unbounded function
+#   OBJ-8.3-2  decide convergence by comparison with a power
+#   OBJ-8.3-3  the standard improper integrals of powers and of the exponential
+# Every number recomputed in screens/tools/recompute-ch8.py.
+chapter: 8
+questions:
+  - id: Q-8.3-infinite
+    type: numeric
+    objectives: [OBJ-8.3-1]
+    level: basic
+    prompt: >-
+      חשבו את $\int_0^\infty x\,e^{-x^2}\,dx$, כלומר $\lim_{R\to\infty}\int_0^Rx\,e^{-x^2}\,dx$.
+    answer: 0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^Rxe^{-x^2}dx=\left[-\tfrac12e^{-x^2}\right]_0^R=\tfrac12-\tfrac12e^{-R^2}\to\tfrac12$.
+    wrongFeedback: >-
+      מצאו פונקציה קדומה (הצבה $u=x^2$), חשבו את האינטגרל עד $R$, ורק אז שלחו את $R$ לאינסוף.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          חסר הגורם $\frac12$ מההצבה: הקדומה היא $-\tfrac12e^{-x^2}$, לא $-e^{-x^2}$. בדקו בגזירה.
+        misconception: MC-c8-sub-forget-factor
+    hints: ['$\frac{d}{dx}e^{-x^2}=-2xe^{-x^2}$.']
+
+  - id: Q-8.3-log-unbounded
+    type: numeric
+    objectives: [OBJ-8.3-1]
+    level: basic
+    prompt: >-
+      $\ln x$ אינה חסומה ליד 0. חשבו את $\int_0^1\ln x\,dx=\lim_{\varepsilon\to0^+}\int_\varepsilon^1\ln x\,dx$. (פונקציה
+      קדומה: $x\ln x-x$, ונתון ש-$x\ln x\to0$ כש-$x\to0^+$.)
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_\varepsilon^1\ln x\,dx=(0-1)-(\varepsilon\ln\varepsilon-\varepsilon)\to-1$. השטח הלא חסום נותן מספר
+      סופי, שלילי כי $\ln x<0$ בקטע.
+    wrongFeedback: >-
+      הציבו את 1 ואת $\varepsilon$ בפונקציה הקדומה, ואז קחו גבול. מה הסימן של $\ln x$ ב-$(0,1)$?
+    commonWrong:
+      - value: 1
+        feedback: >-
+          הגודל נכון, אבל $\ln x<0$ בכל $(0,1)$: האינטגרל הוא שטח עם סימן, והשטח כולו מתחת לציר.
+        misconception: MC-c8-signed-vs-geometric
+    hints: ['$\left[x\ln x-x\right]_\varepsilon^1$.']
+
+  - id: Q-8.3-hidden-singularity
+    type: mc
+    objectives: [OBJ-8.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סטודנט כתב: $\int_{-1}^{1}\frac{dx}{x^2}=\left[-\frac1x\right]_{-1}^{1}=-1-1=-2$. מה נכון?
+    choices:
+      - text: 'האינטגרל מתבדר: $\frac{1}{x^2}$ אינה חסומה ב-$x=0$, ו-$\int_0^1\frac{dx}{x^2}$ כבר מתבדר'
+        correct: true
+        feedback: >-
+          נכון. המשפט היסודי דורש אינטגרנד רציף בכל הקטע. כאן צריך לפצל ב-0, ו-$\int_\varepsilon^1x^{-2}dx=\frac1\varepsilon-1\to\infty$.
+          (וגם בלי חישוב: אינטגרנד חיובי לא יכול לתת $-2$.)
+      - text: 'החישוב נכון, והתשובה $-2$'
+        feedback: >-
+          אינטגרנד חיובי ותשובה שלילית: סימן לכך שמשהו נשבר. $\frac1{x^2}$ אינה מוגדרת ב-0, בתוך הקטע, ושם המשפט
+          היסודי אינו חל.
+        misconception: MC-c8-improper-hidden-singularity
+      - text: 'התשובה 0, כי הקטע סימטרי'
+        feedback: >-
+          $\frac1{x^2}$ זוגית, לא אי-זוגית, וחוץ מזה סימטריה אינה מצילה אינטגרל לא אמיתי שמתבדר.
+        misconception: MC-c8-improper-symmetric-cancel
+      - text: 'התשובה 2: לוקחים ערך מוחלט כי האינטגרנד חיובי'
+        feedback: >-
+          "תיקון" הסימן אינו פותר את הבעיה: הנקודה $x=0$ בתוך הקטע, והאינטגרל מתבדר.
+        misconception: MC-c8-improper-hidden-singularity
+
+  - id: Q-8.3-odd-improper
+    type: twotier
+    objectives: [OBJ-8.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $\int_{-\infty}^{\infty}x\,dx=0$, כי $x$ אי-זוגית.
+    choices:
+      - text: 'לא נכון: האינטגרל מתבדר'
+        correct: true
+        feedback: >-
+          נכון. $\int_{-\infty}^{\infty}$ מוגדר כ-$\int_{-\infty}^{0}+\int_0^{\infty}$, וכל חלק צריך להתכנס **בנפרד**.
+          $\int_0^Rx\,dx=\frac{R^2}{2}\to\infty$.
+      - text: 'נכון'
+        feedback: >-
+          הסימטריה מאפסת אינטגרל של פונקציה אי-זוגית רק כשהאינטגרל קיים. כאן כל אחד משני החצאים אינסופי, ו-$\infty-\infty$
+          אינו מספר.
+        misconception: MC-c8-improper-symmetric-cancel
+    reasons:
+      - text: 'שני החלקים, על $(-\infty,0]$ ועל $[0,\infty)$, צריכים להתכנס בנפרד, ו-$\int_0^\infty x\,dx$ מתבדר'
+        correct: true
+        feedback: 'בדיוק. (הגבול $\int_{-R}^{R}x\,dx=0$ קיים, אבל זו לא ההגדרה.)'
+      - text: '$\int_{-R}^{R}x\,dx=0$ לכל $R$, ולכן גם הגבול 0'
+        feedback: >-
+          ההגדרה אינה מאפשרת לקשור את שני הקצוות לאותו $R$. ב-$\int_{-R}^{2R}x\,dx=\frac{3R^2}{2}$ מתקבל אינסוף: התוצאה
+          תלויה באיך מתקרבים.
+        misconception: MC-c8-improper-symmetric-cancel
+      - text: 'כי $x$ אינה פונקציה אי-זוגית'
+        feedback: >-
+          $x$ אי-זוגית: $(-x)=-x$. הבעיה אינה בזוגיות אלא בכך שכל אחד משני החצאים מתבדר, ולסימטריה אין מה לקזז.
+        misconception: MC-c8-improper-symmetric-cancel
+
+  - id: Q-8.3-which-converge
+    type: multi
+    objectives: [OBJ-8.3-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      אילו מהאינטגרלים מתכנסים? סמנו את כולם.
+    choices:
+      - text: '$\int_1^\infty\frac{dx}{x^2}$'
+        correct: true
+        feedback: 'נכון. $\int_1^\infty x^{-p}dx$ מתכנס בדיוק כש-$p>1$, וכאן $p=2$; הערך $1$.'
+      - text: '$\int_1^\infty\frac{dx}{\sqrt x}$'
+        feedback: >-
+          $p=\frac12\le1$: באינסוף החזקה צריכה לרדת **מהר**. $\int_1^R x^{-1/2}dx=2\sqrt R-2\to\infty$.
+        misconception: MC-c8-p-test-direction
+      - text: '$\int_0^1\frac{dx}{\sqrt x}$'
+        correct: true
+        feedback: 'נכון. ליד 0 התנאי הפוך: $\int_0^1x^{-p}dx$ מתכנס כש-$p<1$. הערך $2$.'
+      - text: '$\int_0^1\frac{dx}{x^2}$'
+        feedback: >-
+          ליד 0 צריך $p<1$, וכאן $p=2$: $\int_\varepsilon^1x^{-2}dx=\frac1\varepsilon-1\to\infty$.
+        misconception: MC-c8-p-test-direction
+      - text: '$\int_1^\infty\frac{dx}{x}$'
+        feedback: >-
+          $\frac1x\to0$, ובכל זאת $\int_1^R\frac{dx}{x}=\ln R\to\infty$. $p=1$ הוא הגבול, והוא מתבדר בשני הקצוות.
+        misconception: MC-c8-integrand-to-zero-converges
+      - text: '$\int_0^\infty e^{-2x}\,dx$'
+        correct: true
+        feedback: 'נכון. $\int_0^\infty e^{-ax}dx=\frac1a$ ל-$a>0$; כאן $\frac12$.'
+
+  - id: Q-8.3-exp
+    type: numeric
+    objectives: [OBJ-8.3-3]
+    level: basic
+    prompt: >-
+      חשבו את $\int_0^\infty e^{-x/4}\,dx$.
+    answer: 4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^\infty e^{-ax}dx=\frac1a$, וכאן $a=\frac14$. (בפיזיקה: זמן החיים הממוצע בדעיכה עם קבוע $a$ הוא
+      $\frac1a$.)
+    wrongFeedback: >-
+      $\int_0^Re^{-x/4}dx=\left[-4e^{-x/4}\right]_0^R=4-4e^{-R/4}$. מה הגבול?
+    commonWrong:
+      - value: 0.25
+        feedback: >-
+          $\frac14$ הוא הקצב $a$, אבל האינטגרל הוא $\frac1a$: דעיכה איטית יותר נותנת שטח **גדול** יותר.
+        misconception: MC-c8-exp-rate-inverted
+    hints: ['$\int e^{-x/4}dx=-4e^{-x/4}+C$.']
+
+  - id: Q-8.3-power-unbounded
+    type: numeric
+    objectives: [OBJ-8.3-3]
+    level: basic
+    prompt: >-
+      חשבו את $\int_0^8\frac{dx}{x^{2/3}}$.
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $p=\frac23<1$, ולכן האינטגרל ליד 0 מתכנס: $\int_\varepsilon^8x^{-2/3}dx=\left[3x^{1/3}\right]_\varepsilon^8=6-3\varepsilon^{1/3}\to6$.
+    wrongFeedback: >-
+      פונקציה קדומה של $x^{-2/3}$ היא $3x^{1/3}$. הציבו 8 ו-$\varepsilon$ וקחו גבול.
+    hints: ['$\sqrt[3]{8}=2$.']
+
+  - id: Q-8.3-harmonic
+    type: twotier
+    objectives: [OBJ-8.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $\int_1^\infty\frac{dx}{x}$ מתכנס, כי $\frac1x\to0$ כש-$x\to\infty$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $\int_1^R\frac{dx}{x}=\ln R\to\infty$.'
+      - text: 'נכון'
+        feedback: >-
+          אינטגרנד ששואף ל-0 הוא תנאי הכרחי בערך, לא מספיק: הוא צריך לשאוף ל-0 **מהר מספיק**. $\frac1x$ איטית מדי.
+        misconception: MC-c8-integrand-to-zero-converges
+    reasons:
+      - text: 'הפונקציה הקדומה $\ln R$ שואפת לאינסוף; התכנסות דורשת חזקה $p>1$'
+        correct: true
+        feedback: 'בדיוק. $\frac1{x^{1.01}}$ כבר מתכנס, ו-$\frac1x$ הוא בדיוק הגבול שבין התכנסות להתבדרות.'
+      - text: 'כל פונקציה ששואפת ל-0 באינסוף נותנת שטח סופי'
+        feedback: '$\frac1{\sqrt x}$ ו-$\frac1x$ שתיהן שואפות ל-0, ושני האינטגרלים מתבדרים.'
+        misconception: MC-c8-integrand-to-zero-converges
+      - text: 'האינטגרל מתבדר, כי $\frac1x$ אינה מוגדרת ב-0'
+        feedback: '0 אינו בקטע $[1,\infty)$: הבעיה היחידה כאן היא באינסוף.'
+        misconception: MC-c8-improper-hidden-singularity
+
+  - id: Q-8.3-compare-mc
+    type: mc
+    objectives: [OBJ-8.3-2]
+    level: mid
+    prompt: >-
+      האם $\int_1^\infty\frac{dx}{x^2+\sqrt x}$ מתכנס, ולמה?
+    choices:
+      - text: 'מתכנס: $0<\frac{1}{x^2+\sqrt x}\le\frac1{x^2}$, ו-$\int_1^\infty\frac{dx}{x^2}$ מתכנס'
+        correct: true
+        feedback: 'נכון. הגדלנו את המכנה ולכן הקטנו את השבר, והשווינו לחזקה מתכנסת שגדולה ממנו.'
+      - text: 'מתבדר: $\frac{1}{x^2+\sqrt x}\le\frac1{\sqrt x}$, ו-$\int_1^\infty\frac{dx}{\sqrt x}$ מתבדר'
+        feedback: >-
+          להיות **קטן** מפונקציה עם אינטגרל מתבדר לא אומר כלום (גם 0 קטן ממנה). התבדרות מוכיחים בחסם **מלמטה**.
+        misconception: MC-c8-comparison-wrong-direction
+      - text: 'מתכנס, כי האינטגרנד שואף ל-0'
+        feedback: '$\frac1x$ שואפת ל-0 ו-$\int_1^\infty\frac{dx}{x}$ מתבדר. צריך השוואה, לא רק גבול 0.'
+        misconception: MC-c8-integrand-to-zero-converges
+      - text: 'אי אפשר לדעת בלי פונקציה קדומה'
+        feedback: >-
+          זה בדיוק מה שמבחן ההשוואה חוסך: מספיק חסם בחזקה שהאינטגרל שלה ידוע.
+        misconception: MC-c8-comparison-wrong-direction
+
+  - id: Q-8.3-compare-sin
+    type: twotier
+    objectives: [OBJ-8.3-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      האם $\int_1^\infty\frac{\sin^2x}{x^2}\,dx$ מתכנס?
+    choices:
+      - text: 'כן'
+        correct: true
+        feedback: 'נכון. $0\le\frac{\sin^2x}{x^2}\le\frac1{x^2}$, ו-$\int_1^\infty\frac{dx}{x^2}=1$.'
+      - text: 'לא'
+        feedback: >-
+          $\sin^2x$ לא שואפת לגבול, אבל היא חסומה ב-1, וזה כל מה שההשוואה צריכה.
+        misconception: MC-c8-comparison-wrong-direction
+    reasons:
+      - text: 'האינטגרנד אי-שלילי וחסום על ידי $\frac{1}{x^2}$, שהאינטגרל שלה מתכנס'
+        correct: true
+        feedback: 'בדיוק: חסם עליון באינטגרנד מתכנס, ואינטגרנד אי-שלילי.'
+      - text: 'האינטגרנד שואף ל-0 באינסוף'
+        feedback: 'זה לא מספיק: $\frac1x\to0$ ו-$\int_1^\infty\frac{dx}{x}$ מתבדר.'
+        misconception: MC-c8-integrand-to-zero-converges
+      - text: 'האינטגרנד חסום מלמטה על ידי 0, שהאינטגרל שלו מתכנס'
+        feedback: >-
+          חסם **מלמטה** בפונקציה מתכנסת אינו אומר דבר על התכנסות. צריך חסם מלמעלה.
+        misconception: MC-c8-comparison-wrong-direction
+
+  - id: Q-8.3-compare-multi
+    type: multi
+    objectives: [OBJ-8.3-2]
+    level: mid
+    prompt: >-
+      השוו לחזקה מתאימה. אילו מהאינטגרלים מתכנסים? סמנו את כולם.
+    choices:
+      - text: '$\int_1^\infty\frac{x}{x^3+1}\,dx$'
+        correct: true
+        feedback: 'נכון. $\frac{x}{x^3+1}\le\frac{x}{x^3}=\frac1{x^2}$, ו-$p=2>1$.'
+      - text: '$\int_1^\infty\frac{x^2}{x^3+1}\,dx$'
+        feedback: >-
+          באינסוף זה מתנהג כמו $\frac1x$: ל-$x\ge1$, $\frac{x^2}{x^3+1}\ge\frac{x^2}{2x^3}=\frac1{2x}$, ו-$\int_1^\infty\frac{dx}{2x}$
+          מתבדר.
+        misconception: MC-c8-integrand-to-zero-converges
+      - text: '$\int_1^\infty\frac{dx}{\sqrt{x^3+1}}$'
+        correct: true
+        feedback: 'נכון. $\frac1{\sqrt{x^3+1}}\le x^{-3/2}$, ו-$p=\frac32>1$.'
+      - text: '$\int_0^1\frac{dx}{x^2+x}$'
+        feedback: >-
+          ליד 0, $x^2+x\le2x$, ולכן $\frac1{x^2+x}\ge\frac1{2x}$, ו-$\int_0^1\frac{dx}{2x}$ מתבדר. הבעיה כאן ליד 0, לא
+          באינסוף.
+        misconception: MC-c8-p-test-direction
+
+  - id: Q-8.3-parts-exp
+    type: numeric
+    objectives: [OBJ-8.3-1]
+    level: exam
+    prompt: >-
+      חשבו את $\int_0^\infty x\,e^{-2x}\,dx$ (אינטגרציה בחלקים, ואחר כך גבול; נתון ש-$xe^{-2x}\to0$ כש-$x\to\infty$).
+    answer: 0.25
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^Rxe^{-2x}dx=\left[-\tfrac x2e^{-2x}\right]_0^R+\tfrac12\int_0^Re^{-2x}dx$. האיבר הראשון שואף ל-0,
+      והשני ל-$\tfrac12\cdot\tfrac12=\tfrac14$.
+    wrongFeedback: >-
+      גזרו את $x$ ובצעו אינטגרציה ל-$e^{-2x}$. אחרי החלקים נשאר $\frac12\int_0^\infty e^{-2x}dx$: מהו?
+    commonWrong:
+      - value: 1
+        feedback: >-
+          חישבתם $\int_0^\infty e^{-2x}dx=2$. הערך הוא $\frac12$: קצב דעיכה 2 נותן שטח $\frac12$.
+        misconception: MC-c8-exp-rate-inverted
+      - value: 0.5
+        feedback: >-
+          זה $\int_0^\infty e^{-2x}dx$ לבד. אחרי האינטגרציה בחלקים הוא מוכפל ב-$\frac12$, הגורם מהפונקציה הקדומה של
+          $e^{-2x}$.
+        misconception: MC-c8-sub-forget-factor
+    hints: ['$u=x$, $dv=e^{-2x}dx$, $v=-\frac12e^{-2x}$.']
+
+  - id: Q-8.3-parameter
+    type: mc
+    objectives: [OBJ-8.3-2]
+    level: exam
+    prompt: >-
+      לאילו ערכים של $a$ מתכנס $\int_1^\infty\frac{x^a}{1+x^3}\,dx$?
+    choices:
+      - text: '$a<2$'
+        correct: true
+        feedback: >-
+          נכון. ל-$x\ge1$: $\frac{x^a}{2x^3}\le\frac{x^a}{1+x^3}\le\frac{x^a}{x^3}$, ולכן האינטגרנד מתנהג כמו $x^{a-3}$.
+          התכנסות כש-$3-a>1$.
+      - text: '$a<3$'
+        feedback: >-
+          כש-$a<3$ האינטגרנד שואף ל-0, אבל זה לא מספיק: ב-$a=2$ הוא מתנהג כמו $\frac1x$ ומתבדר.
+        misconception: MC-c8-integrand-to-zero-converges
+      - text: '$a\le2$'
+        feedback: >-
+          ב-$a=2$ החזקה המשווה היא $x^{-1}$, ובה $p=1$: מתבדר. הגבול אינו כלול.
+        misconception: MC-c8-p-test-direction
+      - text: '$a>2$'
+        feedback: >-
+          זה הכיוון ההפוך: $a$ גדול יותר מגדיל את האינטגרנד באינסוף. החזקה $x^{a-3}$ צריכה לרדת מהר, כלומר $a-3<-1$.
+        misconception: MC-c8-p-test-direction

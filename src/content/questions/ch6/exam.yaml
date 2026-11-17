@@ -1,0 +1,339 @@
+# Chapter 6 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# Keys recomputed in screens/tools/recompute-ch6.py.
+chapter: 6
+questions:
+  - id: Q-6-exam-1
+    type: exam
+    title: אנרגיה קינטית יחסותית
+    prompt: >-
+      לפי תורת היחסות, האנרגיה הקינטית של גוף במסה $m$ ובמהירות $v$ היא $K=mc^2\left(\frac{1}{\sqrt{1-v^2/c^2}}-1\right)$,
+      כש-$c$ מהירות האור. נסמן $u=\frac{v^2}{c^2}$ ו-$f(u)=(1-u)^{-1/2}$, כך ש-$K=mc^2\left(f(u)-1\right)$.
+    parts:
+      - label: א
+        points: 5
+        type: expr
+        objectives: [OBJ-6.3-1, OBJ-6.3-2]
+        prompt: 'כתבו את פולינום טיילור מסדר 2 של $f(u)$ סביב $u=0$ (במשתנה $u$).'
+        answer: '1 + u/2 + 3*u^2/8'
+        answerTex: '$f(u)\approx1+\frac u2+\frac38u^2$'
+        variables: [u]
+        domain: [-0.5, 0.5]
+        correctFeedback: >-
+          נכון. בטור הבינומי $(1+x)^\alpha$ עם $\alpha=-\frac12$ ו-$x=-u$: $\alpha x=\frac u2$, ו-$\frac{\alpha(\alpha-1)}{2}x^2=\frac38u^2$.
+        wrongFeedback: 'הציבו $\alpha=-\frac12$ ו-$x=-u$ ב-$1+\alpha x+\frac{\alpha(\alpha-1)}{2}x^2$.'
+        commonWrong:
+          - expr: '1 - u/2 + 3*u^2/8'
+            feedback: 'זה הפיתוח של $(1+u)^{-1/2}$. כאן $x=-u$, והמינוס הופך את הסימן של האיבר הלינארי.'
+            misconception: MC-c6-alternating-sign-lost
+          - expr: '1 + u/2 + 3*u^2/4'
+            feedback: 'המקדם הריבועי הוא $\frac{\alpha(\alpha-1)}{2!}$: חסרה החלוקה ב-2.'
+            misconception: MC-c6-forget-factorial
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-6.3-2]
+        standalone: false
+        prompt: >-
+          מסעיף א, $K\approx\frac12mv^2+a\,\frac{mv^4}{c^2}$. מהו $a$?
+        answer: 0.375
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $K=mc^2\left(\frac u2+\frac38u^2+\dots\right)=\frac12mv^2+\frac38\frac{mv^4}{c^2}+\dots$: האיבר הראשון הוא
+          האנרגיה הקינטית הניוטונית, והשני התיקון היחסותי הראשון.
+        wrongFeedback: 'הציבו $u=\frac{v^2}{c^2}$ באיבר $\frac38u^2$ וכפלו ב-$mc^2$.'
+        commonWrong:
+          - value: 0.75
+            feedback: 'זה מקדם בלי החלוקה ב-$2!$; $\frac{\alpha(\alpha-1)}{2}=\frac38$.'
+            misconception: MC-c6-forget-factorial
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-6.2-1, OBJ-6.2-2]
+        prompt: >-
+          הוכיחו בעזרת שארית לגרנז׳ שלכל $0<u\le0.01$ (כלומר $v\le0.1c$) מתקיים
+          $$0\le K-\tfrac12mv^2\le\tfrac38(0.99)^{-5/2}\,mc^2u^2,$$
+          והסיקו שהשגיאה היחסית של $\frac12mv^2$ קטנה מ-$0.8\%$.
+        solution:
+          - kind: given
+            text: '$f(u)=(1-u)^{-1/2}$, $K=mc^2(f(u)-1)$, $\frac12mv^2=\frac12mc^2u$, ו-$0<u\le0.01$.'
+          - kind: goal
+            text: 'לחסום את $K-\frac12mv^2=mc^2\left(f(u)-1-\frac u2\right)=mc^2R_1(u)$ מלמטה ב-0 ומלמעלה.'
+          - kind: idea
+            text: >-
+              $1+\frac u2$ הוא $T_1$ של $f$ סביב 0, ולכן ההפרש הוא השארית $R_1(u)$. בצורת לגרנז׳ היא תלויה ב-$f''(c)$, שאת
+              הסימן ואת המקסימום שלה בקטע אפשר למצוא.
+          - kind: computation
+            text: >-
+              $f'(u)=\frac12(1-u)^{-3/2}$, $f''(u)=\frac34(1-u)^{-5/2}$. לכן $R_1(u)=\frac{f''(c)}{2!}u^2=\frac38(1-c)^{-5/2}u^2$
+              עם $c$ כלשהו בין 0 ל-$u$.
+          - kind: step
+            text: >-
+              $(1-c)^{-5/2}>0$, ולכן $R_1(u)\ge0$. הפונקציה $(1-c)^{-5/2}$ עולה ב-$c$, ו-$c\le u\le0.01$, ולכן
+              $(1-c)^{-5/2}\le(0.99)^{-5/2}$, ו-$R_1(u)\le\frac38(0.99)^{-5/2}u^2$. כפל ב-$mc^2>0$ נותן את אי-השוויון.
+          - kind: computation
+            text: >-
+              שגיאה יחסית: $\frac{K-\frac12mv^2}{\frac12mv^2}\le\frac{\frac38(0.99)^{-5/2}mc^2u^2}{\frac12mc^2u}=\frac34(0.99)^{-5/2}u\le\frac34\cdot1.0254\cdot0.01\approx0.0077$.
+          - kind: check
+            text: >-
+              ב-$u=0.01$ החישוב הישיר נותן $f(u)-1-\frac u2\approx3.8\cdot10^{-5}$, ואילו החסם $\frac38(0.99)^{-5/2}(0.01)^2\approx3.85\cdot10^{-5}$: החסם מעליו, וקרוב.
+          - kind: result
+            text: >-
+              $0\le K-\frac12mv^2\le\frac38(0.99)^{-5/2}mc^2u^2$, והשגיאה היחסית של הקירוב הניוטוני קטנה מ-$0.77\%$ כש-$v\le0.1c$.
+        rubric:
+          - text: 'זיהוי $K-\frac12mv^2$ כ-$mc^2R_1(u)$ וכתיבת השארית בצורת לגרנז׳ עם $c$ בין 0 ל-$u$'
+            weight: 3
+          - text: 'חישוב נכון של $f''''(u)=\frac34(1-u)^{-5/2}$'
+            weight: 2
+          - text: 'נימוק לסימן ($R_1\ge0$) ולחסם העליון: $(1-c)^{-5/2}$ עולה, ולכן מקסימלית ב-$c=0.01$'
+            weight: 3
+          - text: 'מעבר לשגיאה היחסית וקבלת ערך מתחת ל-0.8%'
+            weight: 2
+
+      - label: ד
+        points: 5
+        type: twotier
+        objectives: [OBJ-6.4-1]
+        qualitative: true
+        prompt: >-
+          נכון או לא: הטור של $\frac{1}{\sqrt{1-v^2/c^2}}$ בחזקות של $\frac{v^2}{c^2}$ מתכנס לכל מהירות $0\le v<c$.
+        choices:
+          - text: נכון
+            correct: true
+            feedback: 'נכון. הטור הבינומי ב-$x=-u$ מתכנס כש-$|u|<1$, כלומר $v^2<c^2$.'
+          - text: לא נכון
+            feedback: >-
+              רדיוס ההתכנסות של הטור הבינומי הוא 1 במשתנה $u$, ו-$u=\frac{v^2}{c^2}<1$ לכל $v<c$. רק ההתכנסות איטית כש-$v$
+              קרוב ל-$c$.
+            misconception: MC-c6-radius-substitution
+        reasons:
+          - text: 'רדיוס ההתכנסות של $(1-u)^{-1/2}$ הוא 1, ו-$u=\frac{v^2}{c^2}<1$'
+            correct: true
+            feedback: 'בדיוק. ב-$v=c$ הפונקציה עצמה מתבדרת, וזו הנקודה שקובעת את הרדיוס.'
+          - text: 'הטור מתכנס רק כש-$v<\frac c2$, כי צריך $|u|<\frac12$'
+            feedback: 'אין סיבה לחצי: התנאי לטור הבינומי הוא $|u|<1$.'
+            misconception: MC-c6-radius-substitution
+          - text: 'הטור מתכנס לכל $v$, כי הפונקציה חלקה'
+            feedback: 'ב-$v>c$ הביטוי אינו מוגדר כלל, ו-$u>1$ מחוץ לתחום ההתכנסות.'
+            misconception: MC-c6-smooth-means-infinite-radius
+
+  - id: Q-6-exam-2
+    type: exam
+    title: חקירה מלאה של חבילת גל
+    prompt: >-
+      נתונה $f(x)=xe^{-x^2/2}$ (צורה שמופיעה, למשל, בפונקציית הגל של המצב המעורר הראשון של מתנד הרמוני).
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-6.5-1]
+        prompt: 'מהו הערך המקסימלי של $f$ על כל הישר? (אפשר לכתוב ביטוי עם e)'
+        answer: 0.606530659713
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $e^{-1/2}=\frac{1}{\sqrt e}$. $f'(x)=(1-x^2)e^{-x^2/2}$ חיובית בין $-1$ ל-1 ושלילית מחוץ, ו-$f\to0$ באינסוף,
+          ולכן ב-$x=1$ מקסימום מוחלט.
+        wrongFeedback: 'גזרו בכלל המכפלה ובכלל השרשרת, מצאו את הנקודות הקריטיות והציבו.'
+        commonWrong:
+          - value: 0.367879441171
+            feedback: 'זה $e^{-1}$. ב-$x=1$ המעריך הוא $-\frac{x^2}{2}=-\frac12$.'
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-6.5-1, OBJ-6.1-1]
+        prompt: 'כמה נקודות פיתול יש ל-$f$?'
+        answer: 3
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $f''(x)=x(x^2-3)e^{-x^2/2}$ מתאפסת ומחליפה סימן ב-$x=0$ וב-$x=\pm\sqrt3$.
+        wrongFeedback: 'גזרו פעמיים ופרקו את $f''''$ לגורמים.'
+        commonWrong:
+          - value: 2
+            feedback: >-
+              2 הוא מספר הנקודות הקריטיות ($\pm1$), או מספר השורשים של $x^2-3$ בלבד. $f''=x(x^2-3)e^{-x^2/2}$, ו-$x=0$ הוא
+              שורש שלישי שמחליף סימן.
+            misconception: MC-c6-inflection-is-critical
+
+      - label: ג
+        points: 11
+        type: open
+        objectives: [OBJ-6.5-1, OBJ-6.5-2]
+        prompt: >-
+          חקרו את $f$: זוגיות, אסימפטוטות, תחומי עלייה וירידה, קיצון, קמירות ונקודות פיתול. תארו את הגרף, ובדקו את התיאור
+          מול שלושה ערכים מחושבים.
+        solution:
+          - kind: given
+            text: '$f(x)=xe^{-x^2/2}$, מוגדרת ורציפה על כל הישר.'
+          - kind: goal
+            text: 'חקירה מלאה ותיאור הגרף, עם בדיקה מול ערכים.'
+          - kind: idea
+            text: >-
+              $f$ אי-זוגית, ולכן מספיק לחקור את $x\ge0$ ולשקף דרך הראשית. הגורם $e^{-x^2/2}>0$ אינו משפיע על סימנים, כך
+              שהסימנים של $f'$ ו-$f''$ הם הסימנים של הפולינומים שלפניו.
+          - kind: step
+            text: >-
+              זוגיות: $f(-x)=-f(x)$. אסימפטוטות: אין אנכיות; $f(x)\to0$ כש-$x\to\pm\infty$ (האקספוננט דועך מהר מכל חזקה),
+              ולכן $y=0$ אסימפטוטה אופקית בשני הכיוונים.
+          - kind: computation
+            text: >-
+              $f'(x)=(1-x^2)e^{-x^2/2}$: עולה ב-$(-1,1)$, יורדת ב-$x<-1$ וב-$x>1$. מקסימום $\left(1,e^{-1/2}\right)\approx(1,0.607)$,
+              מינימום $\left(-1,-e^{-1/2}\right)$.
+          - kind: computation
+            text: >-
+              $f''(x)=x(x^2-3)e^{-x^2/2}$: קמורה ב-$(-\sqrt3,0)$ וב-$(\sqrt3,\infty)$, קעורה ב-$(-\infty,-\sqrt3)$ וב-$(0,\sqrt3)$.
+              נקודות פיתול: $(0,0)$ ו-$\left(\pm\sqrt3,\pm\sqrt3e^{-3/2}\right)\approx(\pm1.73,\pm0.386)$.
+          - kind: step
+            text: >-
+              תיאור: הגרף יוצא מ-0 משמאל מלמטה, יורד עד המינימום ב-$-1$, עולה דרך הראשית בשיפוע $f'(0)=1$ עם החלפת קמירות,
+              מגיע למקסימום ב-1, ויורד אל 0 מלמעלה, עם פיתול ב-$\sqrt3$.
+          - kind: check
+            text: >-
+              $f(0.5)\approx0.441$, $f(1)\approx0.607$, $f(2)\approx0.271$: עולה עד 1 ויורדת אחריו, כמו בתיאור; ו-$f(3)\approx0.033$
+              קרוב לאסימפטוטה.
+          - kind: result
+            text: >-
+              גל אי-זוגי אחד: מינימום ב-$-1$, מקסימום ב-1 בגובה $e^{-1/2}$, שלוש נקודות פיתול (0 ו-$\pm\sqrt3$), ואסימפטוטה
+              $y=0$ בשני הכיוונים.
+        rubric:
+          - text: 'אי-זוגיות ואסימפטוטה אופקית $y=0$ עם נימוק (ואין אנכיות)'
+            weight: 2
+          - text: '$f''$ נכונה, תחומי עלייה וירידה וסוג שתי נקודות הקיצון'
+            weight: 3
+          - text: '$f''''$ נכונה, תחומי קמירות ושלוש נקודות הפיתול'
+            weight: 3
+          - text: 'תיאור גרף עקבי עם החקירה ובדיקה מול ערכים מחושבים'
+            weight: 3
+
+      - label: ד
+        points: 4
+        type: mc
+        objectives: [OBJ-6.5-3, OBJ-6.3-2]
+        prompt: 'איך נראה הגרף של $f$ ליד $x=0$, לפי טור טיילור?'
+        choices:
+          - text: 'כמו $x-\frac{x^3}{2}$: עולה בשיפוע 1 ועובר מקמירות לקעירות בראשית'
+            correct: true
+            feedback: >-
+              נכון. $xe^{-x^2/2}=x\left(1-\frac{x^2}{2}+\dots\right)=x-\frac{x^3}{2}+\dots$; האיבר $-\frac{x^3}{2}$ ממעלה אי-זוגית,
+              ולכן הגרף חוצה את המשיק $y=x$ בנקודת פיתול.
+          - text: 'כמו הישר $y=x$, בלי שום עיקום'
+            feedback: 'הישר הוא רק המשיק. האיבר הבא, $-\frac{x^3}{2}$, קובע מאיזה צד של המשיק נמצא הגרף.'
+            misconception: MC-c6-truncate-too-early
+          - text: 'כמו $x-\frac{x^3}{4}$'
+            feedback: '$e^{-x^2/2}=1-\frac{x^2}{2}+\dots$ (הצבת $u=-\frac{x^2}{2}$ באיבר $u$), ולכן המקדם $-\frac12$.'
+            misconception: MC-c6-subst-match-powers
+
+  - id: Q-6-exam-3
+    type: exam
+    title: חישוב arctan של חצי בטור
+    prompt: >-
+      $\arctan x=x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\dots$
+    parts:
+      - label: א
+        points: 6
+        type: numeric
+        objectives: [OBJ-6.3-3]
+        prompt: 'חשבו: $\lim_{x\to0}\frac{\arctan x-\sin x}{x^3}$.'
+        answer: -0.166666666667
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\arctan x-\sin x=\left(-\frac13+\frac16\right)x^3+\dots=-\frac{x^3}{6}+\dots$, והגבול $-\frac16$.
+        wrongFeedback: 'פתחו את שתי הפונקציות עד $x^3$.'
+        commonWrong:
+          - value: 0
+            feedback: >-
+              0 מתקבל אם כותבים $\arctan x\approx x-\frac{x^3}{3!}$, כמו סינוס, ואז הכול מתבטל. בטור של $\arctan$ המכנה 3.
+            misconception: MC-c6-arctan-factorials
+          - value: -0.5
+            feedback: 'זה $-\frac13-\frac16$: בחיסור של $\sin x$ האיבר $-\frac{x^3}{6}$ הופך ל-$+\frac{x^3}{6}$.'
+            misconception: MC-c6-alternating-sign-lost
+
+      - label: ב
+        points: 6
+        type: numeric
+        objectives: [OBJ-6.4-2]
+        prompt: >-
+          כמה איברים של הטור, ב-$x=\frac12$, צריך לסכם כדי שהשגיאה ב-$\arctan\frac12$ תהיה בוודאות קטנה מ-$10^{-3}$ לפי חסם
+          לייבניץ?
+        answer: 4
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. האיברים בערכם המוחלט: $0.5$, $0.0417$, $0.00625$, $0.00112$, $0.000217$. האיבר הראשון שקטן מ-$10^{-3}$ הוא
+          החמישי, ולכן מסכמים ארבעה.
+        wrongFeedback: 'חשבו את $\frac{(1/2)^{2k+1}}{2k+1}$ ל-$k=0,1,2,3,4$.'
+        commonWrong:
+          - value: 5
+            feedback: 'דרשתם שגם האיבר האחרון שנכלל יהיה קטן מ-$10^{-3}$. מספיק שהאיבר הראשון שהושמט קטן.'
+            misconception: MC-c6-leibniz-last-included
+          - value: 3
+            feedback: >-
+              אחרי שלושה איברים, האיבר הראשון שהושמט הוא $\frac{(1/2)^7}{7}\approx0.00112$, עוד גדול מ-$10^{-3}$.
+            misconception: MC-c6-leibniz-count
+
+      - label: ג
+        points: 9
+        type: open
+        objectives: [OBJ-6.4-1, OBJ-6.4-2]
+        prompt: >-
+          הסבירו למה הטור מתכנס ב-$x=\frac12$ ולמה חסם לייבניץ חל עליו. חשבו את סכום ארבעת האיברים הראשונים, $S_4$, ותנו
+          קטע באורך פחות מ-$10^{-3}$ שבוודאות מכיל את $\arctan\frac12$.
+        solution:
+          - kind: given
+            text: '$\arctan x=\sum_{k\ge0}\frac{(-1)^kx^{2k+1}}{2k+1}$, ו-$x=\frac12$.'
+          - kind: goal
+            text: 'התכנסות, תנאי לייבניץ, $S_4$, וקטע שמכיל את הסכום.'
+          - kind: idea
+            text: >-
+              הטור בא מאינטגרציה של הטור ההנדסי של $\frac{1}{1+t^2}$, ולכן רדיוס ההתכנסות 1. ב-$x=\frac12$ הוא מתחלף ואיבריו
+              יורדים לאפס: טור לייבניץ, שהשגיאה שלו קטנה מהאיבר הראשון שהושמט ובסימן שלו.
+          - kind: step
+            text: >-
+              $\frac12$ בתוך תחום ההתכנסות ($|x|<1$). האיברים $a_k=\frac{(1/2)^{2k+1}}{2k+1}$ חיוביים, יורדים (גם המונה קטן
+              וגם המכנה גדל) ושואפים ל-0, והסימנים מתחלפים.
+          - kind: computation
+            text: >-
+              $S_4=\frac12-\frac{1}{24}+\frac{1}{160}-\frac{1}{896}\approx0.5-0.041667+0.00625-0.001116=0.463467$.
+          - kind: step
+            text: >-
+              האיבר הראשון שהושמט הוא $+a_4=\frac{(1/2)^9}{9}\approx0.000217$, חיובי. לכן $S_4<\arctan\frac12<S_4+a_4$.
+          - kind: check
+            text: >-
+              $S_4+a_4\approx0.463684$, והקטע $(0.463467,\,0.463684)$ באורך $2.2\cdot10^{-4}$. מחשבון: $\arctan0.5\approx0.463648$, בתוך
+              הקטע.
+          - kind: result
+            text: '$0.46346<\arctan\frac12<0.46369$.'
+        rubric:
+          - text: 'רדיוס התכנסות 1 (ומקורו בטור ההנדסי), ולכן התכנסות ב-$\frac12$'
+            weight: 2
+          - text: 'בדיקת שלושת תנאי לייבניץ: סימנים מתחלפים, איברים יורדים, שואפים ל-0'
+            weight: 2
+          - text: 'חישוב נכון של $S_4$'
+            weight: 2
+          - text: 'קטע נכון לפי האיבר הראשון שהושמט, כולל הצד הנכון לפי הסימן שלו'
+            weight: 3
+
+      - label: ד
+        points: 4
+        type: twotier
+        objectives: [OBJ-6.4-1]
+        qualitative: true
+        prompt: 'נכון או לא: הצבת $x=2$ באותו טור נותנת את $\arctan2$.'
+        choices:
+          - text: לא נכון
+            correct: true
+            feedback: 'נכון. ב-$x=2$ האיברים $\frac{2^{2k+1}}{2k+1}$ גדלים לאינסוף, והטור מתבדר.'
+          - text: נכון
+            feedback: '$\arctan2$ מוגדר היטב, אבל הטור מייצג את $\arctan$ רק כש-$|x|\le1$.'
+            misconception: MC-c6-series-beyond-radius
+        reasons:
+          - text: 'רדיוס ההתכנסות 1, ו-2 מחוץ לו: האיברים אינם שואפים ל-0'
+            correct: true
+            feedback: 'בדיוק.'
+          - text: '$\arctan$ חלקה על כל הישר, ולכן הטור מתכנס בכל מקום'
+            feedback: 'זו בדיוק הדוגמה שבה חלקות על הישר לא מספיקה: הרדיוס 1, בגלל $\pm i$.'
+            misconception: MC-c6-smooth-means-infinite-radius
+          - text: 'הטור מתכנס ב-2, אבל לאט'
+            feedback: 'טור שאיבריו אינם שואפים ל-0 אינו מתכנס, לא לאט ולא מהר.'
+            misconception: MC-c6-series-beyond-radius

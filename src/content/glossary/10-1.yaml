@@ -1,0 +1,28 @@
+# Terms first defined in lesson 10.1 (graphs, level curves and sections; domain; limits in two variables).
+- id: function-of-several-variables
+  term: פונקציה של כמה משתנים
+  en: function of several variables
+  symbol: 'z=f(x,y)'
+  definition: >-
+    כלל שמתאים לכל נקודה $(x,y)$ (או $(x,y,z)$) בתחום ההגדרה מספר אחד. המשתנים $x,y$ בלתי תלויים, ו-$z$ הוא המשתנה
+    התלוי. תחום ההגדרה הוא קבוצה במישור (או במרחב), והגרף של $f(x,y)$ הוא משטח במרחב.
+  lesson: '10.1'
+- id: level-curve
+  term: קו גובה
+  en: level curve
+  symbol: 'f(x,y)=c'
+  definition: >-
+    לפונקציה $f(x,y)$ ולמספר $c$: קבוצת הנקודות במישור $xy$ שבהן $f(x,y)=c$. זה החיתוך של הגרף עם המישור האופקי
+    $z=c$, מוטל על מישור $xy$, כמו קו גובה במפה טופוגרפית. כשמשרטטים קווי גובה בהפרשי $c$ שווים, קווים צפופים מסמנים
+    מקום תלול.
+  reject: [קו רמה]
+  lesson: '10.1'
+- id: limit-several-variables
+  term: גבול של פונקציה של כמה משתנים
+  en: limit of a function of several variables
+  symbol: '\lim_{(x,y)\to(x_0,y_0)}f(x,y)=L'
+  definition: >-
+    $f(x,y)$ מתקרבת ל-$L$ כש-$(x,y)$ מתקרבת ל-$(x_0,y_0)$ **מכל כיוון ובכל מסלול**, כלומר כשהמרחק
+    $\sqrt{(x-x_0)^2+(y-y_0)^2}$ שואף ל-0. שני מסלולים עם גבולות שונים מראים שהגבול לא קיים; חסם שתלוי רק במרחק מראה
+    שהוא קיים. $f$ רציפה ב-$(x_0,y_0)$ אם הגבול שם שווה ל-$f(x_0,y_0)$.
+  lesson: '10.1'

@@ -1,0 +1,36 @@
+# Terms first defined in lesson 4.4 (trigonometric functions and their inverses).
+- id: amplitude
+  term: אמפליטודה
+  en: amplitude
+  definition: >-
+    ב-$A\sin(kx-c)+d$: המספר $|A|$, חצי המרחק בין הערך הגבוה לנמוך. הגרף מתנודד בין $d-|A|$ ל-$d+|A|$.
+  lesson: '4.4'
+- id: phase-shift
+  term: הזזת מופע
+  en: phase shift
+  definition: >-
+    ב-$\sin(kx-c)=\sin\!\left(k\left(x-\frac ck\right)\right)$: ההזזה האופקית $\frac ck$ של הגרף ביחס ל-$\sin(kx)$.
+  lesson: '4.4'
+- id: arcsin
+  term: ארקסינוס
+  en: arcsine
+  symbol: '\arcsin:[-1,1]\to\left[-\tfrac\pi2,\tfrac\pi2\right]'
+  definition: >-
+    ההפוכה של הסינוס המצומצם לקטע $\left[-\frac\pi2,\frac\pi2\right]$: $\arcsin y$ היא הזווית היחידה בקטע הזה שהסינוס שלה
+    $y$. מוגדרת ל-$y\in[-1,1]$. נכתבת גם $\sin^{-1}y$, ואינה $\frac1{\sin y}$.
+  lesson: '4.4'
+- id: arccos
+  term: ארקקוסינוס
+  en: arccosine
+  symbol: '\arccos:[-1,1]\to[0,\pi]'
+  definition: >-
+    ההפוכה של הקוסינוס המצומצם לקטע $[0,\pi]$: $\arccos y$ היא הזווית היחידה ב-$[0,\pi]$ שהקוסינוס שלה $y$.
+  lesson: '4.4'
+- id: arctan
+  term: ארקטנגנס
+  en: arctangent
+  symbol: '\arctan:\mathbb{R}\to\left(-\tfrac\pi2,\tfrac\pi2\right)'
+  definition: >-
+    ההפוכה של הטנגנס המצומצם לקטע $\left(-\frac\pi2,\frac\pi2\right)$: מוגדרת לכל $y$ ממשי, עולה, ושואפת ל-$\pm\frac\pi2$
+    כש-$y\to\pm\infty$.
+  lesson: '4.4'

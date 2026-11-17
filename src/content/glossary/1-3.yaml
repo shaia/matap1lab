@@ -1,0 +1,25 @@
+# Terms first defined in lesson 1.3 (lines and planes).
+- id: parametric-line
+  term: הצגה פרמטרית של ישר
+  en: parametric equations of a line
+  symbol: '\vec r(t)=P_0+t\vec v'
+  definition: >-
+    הישר דרך הנקודה $P_0$ בכיוון $\vec v\ne\vec0$: $\vec r(t)=P_0+t\vec v$, כלומר $x=x_0+at$, $y=y_0+bt$, $z=z_0+ct$, כש-$t$
+    עובר על כל המספרים. אפשר לחשוב על $t$ כזמן ועל $\vec v$ כמהירות קבועה. ישר דרך $A$ ו-$B$: $P_0=A$, $\vec v=\vec{AB}$.
+  lesson: '1.3'
+- id: canonical-line
+  term: הצגה קנונית של ישר
+  en: symmetric (canonical) equations of a line
+  symbol: '\frac{x-x_0}{a}=\frac{y-y_0}{b}=\frac{z-z_0}{c}'
+  definition: >-
+    מה שמתקבל כשמבודדים את $t$ מכל אחת מהמשוואות הפרמטריות (כש-$a,b,c\ne0$). אם רכיב כיוון מתאפס, הקואורדינטה המתאימה
+    קבועה: לכיוון $(0,b,c)$ כותבים $x=x_0$ ו-$\frac{y-y_0}{b}=\frac{z-z_0}{c}$.
+  lesson: '1.3'
+- id: normal-vector
+  term: וקטור נורמל
+  en: normal vector
+  symbol: '\vec n=(a,b,c)'
+  definition: >-
+    וקטור שמאונך למישור, כלומר לכל וקטור שמחבר שתי נקודות במישור. המישור דרך $P_0$ עם נורמל $\vec n=(a,b,c)$ הוא
+    $\vec n\cdot(\vec r-P_0)=0$, כלומר $ax+by+cz=d$ עם $d=\vec n\cdot P_0$: המקדמים של $x,y,z$ הם רכיבי הנורמל.
+  lesson: '1.3'

@@ -1,0 +1,27 @@
+# Terms first defined in lesson 7.5 (trigonometric integrals and substitutions).
+- id: power-reduction
+  term: הורדת חזקה
+  en: power reduction
+  symbol: '\cos^2x=\frac{1+\cos2x}{2},\ \sin^2x=\frac{1-\cos2x}{2}'
+  definition: >-
+    שימוש בזהויות הזווית הכפולה כדי לכתוב חזקה זוגית של סינוס או קוסינוס כביטוי בקוסינוס של זווית כפולה, שאת האינטגרל
+    שלו יודעים לחשב.
+  reject: []
+  lesson: '7.5'
+- id: weierstrass-substitution
+  term: הצבת טנגנס חצי הזווית
+  en: tangent half-angle (Weierstrass) substitution
+  symbol: 't=\tan\frac x2'
+  definition: >-
+    ההצבה $t=\tan\frac x2$, שבה $\sin x=\frac{2t}{1+t^2}$, $\cos x=\frac{1-t^2}{1+t^2}$ ו-$dx=\frac{2\,dt}{1+t^2}$. היא הופכת כל
+    פונקציה רציונלית של $\sin x$ ו-$\cos x$ לפונקציה רציונלית של $t$, ולכן נקראת גם ההצבה האוניברסלית.
+  reject: []
+  lesson: '7.5'
+- id: trigonometric-substitution
+  term: הצבה טריגונומטרית
+  en: trigonometric substitution
+  definition: >-
+    הצבה שמבטלת שורש של ביטוי ריבועי בעזרת זהות טריגונומטרית: ל-$\sqrt{a^2-x^2}$ מציבים $x=a\sin\theta$, ל-$\sqrt{a^2+x^2}$
+    מציבים $x=a\tan\theta$. אחרי השלמה לריבוע היא חלה על כל ביטוי ריבועי.
+  reject: []
+  lesson: '7.5'

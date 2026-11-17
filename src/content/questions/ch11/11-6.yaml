@@ -1,0 +1,292 @@
+# Lesson 11.6 — divergence and curl.
+# Objectives (src/course.ts):
+#   OBJ-11.6-1  compute the divergence and the curl of a vector field
+#   OBJ-11.6-2  read divergence as a source and curl as rotation, on flow fields
+#   OBJ-11.6-3  use the identities: the curl of a gradient is zero and the divergence of a curl is zero
+# Keys recomputed in screens/tools/recompute-ch11.py.
+chapter: 11
+questions:
+  - id: Q-11.6-div
+    type: numeric
+    objectives: [OBJ-11.6-1]
+    level: basic
+    prompt: >-
+      $\vec F(x,y,z)=\big(x^2y,\ yz,\ xz^2\big)$. חשבו $\nabla\cdot\vec F$ בנקודה $(1,2,3)$.
+    answer: 13
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\nabla\cdot\vec F=2xy+z+2xz$, וב-$(1,2,3)$: $4+3+6=13$.
+    wrongFeedback: >-
+      גזרו את הרכיב הראשון לפי $x$, השני לפי $y$, השלישי לפי $z$, חברו והציבו.
+
+
+  - id: Q-11.6-div-expr
+    type: expr
+    objectives: [OBJ-11.6-1]
+    level: basic
+    prompt: >-
+      $\vec F(x,y,z)=\big(xy^2,\ yz^2,\ zx^2\big)$. כתבו את $\nabla\cdot\vec F$ במשתנים $x,y,z$.
+    answer: 'x^2 + y^2 + z^2'
+    answerTex: '$\nabla\cdot\vec F=y^2+z^2+x^2$'
+    variables: [x, y, z]
+    correctFeedback: >-
+      נכון. $\partial_x(xy^2)=y^2$, $\partial_y(yz^2)=z^2$, $\partial_z(zx^2)=x^2$.
+    wrongFeedback: >-
+      כל רכיב נגזר לפי המשתנה שלו: $P$ לפי $x$, $Q$ לפי $y$, $R$ לפי $z$.
+    commonWrong:
+      - expr: '2*x*y + 2*y*z + 2*z*x'
+        feedback: >-
+          זה $P_y+Q_z+R_x$: כל רכיב נגזר לפי המשתנה **הבא**. בדיברגנץ $P$ נגזר לפי $x$, $Q$ לפי $y$ ו-$R$ לפי $z$.
+        misconception: MC-c11-div-wrong-variables
+
+
+  - id: Q-11.6-scalar-curl
+    type: numeric
+    objectives: [OBJ-11.6-1]
+    level: basic
+    prompt: >-
+      לשדה במישור $\vec F=(P,Q)$ הרוטור הוא בכיוון $z$, עם הרכיב $Q_x-P_y$. חשבו אותו לשדה $\vec F=(-y,x)$.
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $Q_x=1$ ו-$P_y=-1$, ולכן $Q_x-P_y=2$, חיובי: סיבוב נגד כיוון השעון, בכל נקודה באותה עוצמה.
+    wrongFeedback: >-
+      $P=-y$ ו-$Q=x$. גזרו את $Q$ לפי $x$ ואת $P$ לפי $y$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 הוא $P_x+Q_y$, הדיברגנץ. לשדה הזה אין מקורות, אבל יש לו סיבוב: הרוטור הוא $Q_x-P_y$.
+        misconception: MC-c11-div-curl-confuse
+      - value: -2
+        feedback: >-
+          זה $P_y-Q_x$, בסדר ההפוך. $(-y,x)$ מסתובב נגד כיוון השעון, ולכן הרכיב ה-$z$ חיובי.
+        misconception: MC-c11-curl-sign
+
+
+  - id: Q-11.6-scalar-vector
+    type: mc
+    objectives: [OBJ-11.6-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $\vec F$ שדה וקטורי במרחב. מה סוג האובייקטים $\nabla\cdot\vec F$ ו-$\nabla\times\vec F$?
+    choices:
+      - text: '$\nabla\cdot\vec F$ פונקציה סקלרית, $\nabla\times\vec F$ שדה וקטורי'
+        correct: true
+        feedback: >-
+          נכון, כמו מכפלה סקלרית (מספר) ומכפלה וקטורית (וקטור) של $\nabla$ עם $\vec F$.
+      - text: 'שניהם שדות וקטוריים'
+        feedback: >-
+          הדיברגנץ הוא **סכום** $P_x+Q_y+R_z$: מספר בכל נקודה. הווקטור $(P_x,Q_y,R_z)$ אינו הדיברגנץ.
+        misconception: MC-c11-div-is-vector
+      - text: '$\nabla\cdot\vec F$ שדה וקטורי, $\nabla\times\vec F$ פונקציה סקלרית'
+        feedback: >-
+          הפוך. רק במישור נוח לכתוב את הרוטור כמספר, $Q_x-P_y$, וגם אז הוא הרכיב ה-$z$ של וקטור.
+        misconception: MC-c11-div-is-vector
+
+
+  - id: Q-11.6-radial
+    type: mc
+    objectives: [OBJ-11.6-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      שדה המהירות של זורם במישור הוא $\vec v=(x,y)$. מה נכון?
+    choices:
+      - text: 'יש מקור: $\nabla\cdot\vec v=2>0$, ואין סיבוב: הרוטור 0'
+        correct: true
+        feedback: >-
+          נכון. מכל ריבוע קטן יוצא יותר משנכנס (החצים מתארכים כלפי חוץ), וגלגל משוטים קטן לא מסתובב: הזרימה רדיאלית.
+      - text: 'יש סיבוב ואין מקור'
+        feedback: >-
+          זה התיאור של $(-y,x)$: דיברגנץ 0 ורוטור 2. כאן $P_x+Q_y=2$ ו-$Q_x-P_y=0$.
+        misconception: MC-c11-div-curl-confuse
+      - text: 'יש גם מקור וגם סיבוב'
+        feedback: >-
+          $Q_x-P_y=0-0=0$. הזרימה החוצה בקווים ישרים מהראשית, בלי שום מרכיב שמסובב.
+        misconception: MC-c11-div-curl-confuse
+
+
+  - id: Q-11.6-curl-grad
+    type: twotier
+    objectives: [OBJ-11.6-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $f(x,y,z)$ פונקציה עם נגזרות שניות רציפות. מה $\nabla\times(\nabla f)$?
+    choices:
+      - text: '$\vec 0$ בכל נקודה'
+        correct: true
+        feedback: 'נכון, לכל $f$ כזו.'
+      - text: 'תלוי ב-$f$'
+        feedback: >-
+          כל רכיב של $\nabla\times\nabla f$ הוא הפרש של שתי נגזרות מעורבות, כמו $f_{zy}-f_{yz}$, ולכן אפס לכל $f$.
+        misconception: MC-c11-div-grad-zero
+    reasons:
+      - text: 'כל רכיב הוא הפרש של נגזרות מעורבות שוות, למשל $f_{zy}-f_{yz}=0$'
+        correct: true
+        feedback: 'בדיוק. זו הסיבה שלשדה משמר יש רוטור אפס.'
+      - text: 'כי $\nabla f$ תמיד שדה קבוע'
+        feedback: '$\nabla(x^2)=(2x,0,0)$ אינו קבוע. האפס בא משוויון הנגזרות המעורבות.'
+        misconception: MC-c11-gradient-vs-value
+      - text: 'כי $\nabla\cdot\nabla f=0$'
+        feedback: >-
+          $\nabla\cdot\nabla f=f_{xx}+f_{yy}+f_{zz}$ אינו אפס בדרך כלל (ל-$x^2+y^2+z^2$ הוא 6), וגם אינו קשור לרוטור.
+        misconception: MC-c11-div-grad-zero
+
+
+  - id: Q-11.6-curl-expr
+    type: expr
+    objectives: [OBJ-11.6-1]
+    level: mid
+    prompt: >-
+      $\vec F(x,y,z)=\big(yz,\ xz^2,\ xy\big)$. כתבו את הרכיב **השלישי** (רכיב ה-$z$) של $\nabla\times\vec F$.
+    answer: 'z^2 - z'
+    answerTex: '$\nabla\times\vec F=\big(x-2xz,\ 0,\ z^2-z\big)$'
+    variables: [x, y, z]
+    correctFeedback: >-
+      נכון. הרכיב ה-$z$ הוא $Q_x-P_y=z^2-z$. כל הרוטור: $(R_y-Q_z,\ P_z-R_x,\ Q_x-P_y)=(x-2xz,\ y-y,\ z^2-z)$.
+    wrongFeedback: >-
+      הרכיב ה-$z$ של $\nabla\times(P,Q,R)$ הוא $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}$.
+    commonWrong:
+      - expr: 'z - z^2'
+        feedback: >-
+          זה $P_y-Q_x$, בסדר ההפוך. כמו במכפלה וקטורית: $(\nabla\times\vec F)_z=\partial_xQ-\partial_yP$.
+        misconception: MC-c11-curl-sign
+
+
+  - id: Q-11.6-incompressible
+    type: numeric
+    objectives: [OBJ-11.6-1, OBJ-11.6-2]
+    level: mid
+    prompt: >-
+      לאיזה ערך של $a$ שדה המהירות $\vec v=\big(3x+y^2,\ x^2-5y,\ az\big)$ מתאר זרימה שאינה נדחסת ($\nabla\cdot\vec v=0$
+      בכל מקום)?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\nabla\cdot\vec v=3-5+a$, ואפס כש-$a=2$. האיברים $y^2$ ו-$x^2$ לא תורמים: $y^2$ ברכיב ה-$x$ לא תלוי ב-$x$.
+    wrongFeedback: >-
+      חשבו $P_x+Q_y+R_z$ והשוו לאפס.
+
+
+  - id: Q-11.6-shear
+    type: twotier
+    objectives: [OBJ-11.6-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      זרם במישור עם שדה מהירות $\vec v=(y,0)$: הכול זורם ימינה (מעל ציר $x$), מהר יותר ככל ש-$y$ גדול. נכון או לא נכון:
+      הרוטור של $\vec v$ הוא אפס, כי קווי הזרימה ישרים.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $Q_x-P_y=0-1=-1$: גלגל משוטים קטן מסתובב עם כיוון השעון, כי המים מעליו מהירים מאלה שמתחתיו.
+      - text: 'נכון'
+        feedback: >-
+          הרוטור מודד סיבוב מקומי, לא את צורת הקווים. ההבדל במהירות בין צד אחד של הגלגל לצד השני מסובב אותו.
+        misconception: MC-c11-curl-means-circling
+    reasons:
+      - text: 'מהירות הזרם משתנה בניצב לכיוון הזרימה, ולכן $Q_x-P_y=-1\ne0$'
+        correct: true
+        feedback: 'בדיוק. זה זרם "גזירה", כמו בנהר שזורם מהר באמצע ולאט ליד הגדה.'
+      - text: 'קווי זרימה ישרים פירושם רוטור אפס'
+        feedback: >-
+          ל-$(1,0)$ קווים ישרים ורוטור 0, אבל ל-$(y,0)$ קווים ישרים ורוטור $-1$. צורת הקווים לא מכריעה.
+        misconception: MC-c11-curl-means-circling
+      - text: 'הדיברגנץ של $\vec v$ הוא 0, ולכן גם הרוטור'
+        feedback: >-
+          הדיברגנץ באמת 0, אבל הוא מודד מקור, לא סיבוב. שני המספרים בלתי תלויים: ל-$(-y,x)$ דיברגנץ 0 ורוטור 2.
+        misconception: MC-c11-div-curl-confuse
+
+
+  - id: Q-11.6-vortex
+    type: mc
+    objectives: [OBJ-11.6-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec v=\dfrac{(-y,x)}{x^2+y^2}$ (מערבולת סביב הראשית, כמו מים שמתרוקנים מאמבטיה). קווי הזרימה הם מעגלים. מה הרכיב ה-$z$
+      של הרוטור מחוץ לראשית?
+    choices:
+      - text: '0'
+        correct: true
+        feedback: >-
+          נכון. $Q_x-P_y=\frac{y^2-x^2}{(x^2+y^2)^2}-\frac{y^2-x^2}{(x^2+y^2)^2}=0$. גלגל קטן שנסחף במעגל לא מסתובב סביב עצמו:
+          הזרם בצד הפנימי שלו מהיר יותר, וזה מקזז את הסיבוב.
+      - text: 'חיובי, כי הזרימה מסתובבת נגד כיוון השעון'
+        feedback: >-
+          הזרימה מקיפה את הראשית, אבל הרוטור מודד סיבוב **מקומי**. חשבו $Q_x-P_y$: הוא יוצא 0 בכל נקודה מחוץ לראשית.
+        misconception: MC-c11-curl-means-circling
+      - text: 'שלילי'
+        feedback: 'הציבו: $Q_x-P_y=0$ מחוץ לראשית. אין כאן סיבוב מקומי בשום כיוון.'
+        misconception: MC-c11-curl-sign
+
+
+  - id: Q-11.6-identities
+    type: multi
+    objectives: [OBJ-11.6-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f$ פונקציה סקלרית ו-$\vec F$ שדה, שניהם עם נגזרות שניות רציפות. אילו ביטויים הם **תמיד** אפס? סמנו את כולם.
+    choices:
+      - text: '$\nabla\times(\nabla f)$'
+        correct: true
+        feedback: 'נכון: הרכיבים הם הפרשים של נגזרות מעורבות שוות.'
+      - text: '$\nabla\cdot(\nabla\times\vec F)$'
+        correct: true
+        feedback: >-
+          נכון: $(R_y-Q_z)_x+(P_z-R_x)_y+(Q_x-P_y)_z$, ושש הנגזרות המעורבות מתקזזות בזוגות.
+      - text: '$\nabla\cdot(\nabla f)$'
+        feedback: 'זה הלפלסיאן $f_{xx}+f_{yy}+f_{zz}$; ל-$f=x^2+y^2+z^2$ הוא 6.'
+        misconception: MC-c11-div-grad-zero
+      - text: '$\nabla\times\vec F$'
+        feedback: 'ל-$(-y,x,0)$ הרוטור $(0,0,2)$. רק לשדה גרדיאנט הרוטור תמיד אפס.'
+        misconception: MC-c11-curl-means-circling
+
+
+  - id: Q-11.6-find-a
+    type: numeric
+    objectives: [OBJ-11.6-1, OBJ-11.6-3]
+    level: mid
+    prompt: >-
+      לאיזה ערך של $a$ הרוטור של $\vec F=\big(2xz+y,\ x+az,\ x^2+3y\big)$ הוא $\vec 0$ בכל המרחב?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\nabla\times\vec F=(R_y-Q_z,\ P_z-R_x,\ Q_x-P_y)=(3-a,\ 2x-2x,\ 1-1)$. ב-$a=3$ הוא אפס, ואז
+      $\vec F=\nabla(x^2z+xy+3yz)$.
+    wrongFeedback: >-
+      חשבו את שלושת הרכיבים של הרוטור; רק אחד מהם תלוי ב-$a$.
+
+
+  - id: Q-11.6-no-potential-vector
+    type: twotier
+    objectives: [OBJ-11.6-3, OBJ-11.6-1]
+    qualitative: true
+    level: exam
+    prompt: >-
+      האם קיים שדה $\vec G$ (עם נגזרות שניות רציפות בכל המרחב) כך ש-$\nabla\times\vec G=(x,\ y,\ z)$?
+    choices:
+      - text: 'לא'
+        correct: true
+        feedback: >-
+          נכון. אילו היה, אז $\nabla\cdot(x,y,z)=\nabla\cdot(\nabla\times\vec G)=0$, אבל $\nabla\cdot(x,y,z)=3$.
+      - text: 'כן'
+        feedback: >-
+          כל רוטור הוא שדה עם דיברגנץ אפס, ול-$(x,y,z)$ הדיברגנץ 3. לכן הוא לא יכול להיות רוטור של שום שדה.
+        misconception: MC-c11-div-grad-zero
+    reasons:
+      - text: 'הדיברגנץ של כל רוטור הוא 0, והדיברגנץ של $(x,y,z)$ הוא 3'
+        correct: true
+        feedback: 'בדיוק: הזהות $\nabla\cdot(\nabla\times\vec G)=0$ היא תנאי הכרחי.'
+      - text: 'הרוטור של $(x,y,z)$ הוא 0'
+        feedback: >-
+          זה נכון, אבל לא רלוונטי: השאלה היא אם $(x,y,z)$ **הוא** רוטור, ולא מה הרוטור **שלו**.
+        misconception: MC-c11-div-curl-confuse
+      - text: '$(x,y,z)$ הוא שדה רדיאלי, ושדה רדיאלי אינו מסתובב'
+        feedback: >-
+          זה טיעון על הרוטור **של** $(x,y,z)$. כדי להראות שהוא אינו רוטור של שדה אחר צריך את הדיברגנץ שלו.
+        misconception: MC-c11-div-curl-confuse

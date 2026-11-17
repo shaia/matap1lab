@@ -1,0 +1,19 @@
+# Terms first defined in lesson 10.9 (Lagrange multipliers).
+- id: constraint
+  term: אילוץ
+  en: constraint
+  symbol: 'g(x,y)=0'
+  definition: >-
+    משוואה שהנקודות המותרות חייבות לקיים, למשל $x^2+4y^2=1$: מחפשים קיצון של $f$ רק על הקבוצה $g=0$ (עקום במישור, משטח
+    או עקום במרחב), ולא בכל התחום.
+  lesson: '10.9'
+- id: lagrange-multiplier
+  term: כופל לגרנז׳
+  en: Lagrange multiplier
+  symbol: '\nabla f=\lambda\nabla g'
+  definition: >-
+    בנקודת קיצון של $f$ על האילוץ $g=0$, שבה $\nabla g\ne0$, הגרדיאנטים מקבילים: $\nabla f=\lambda\nabla g$ עבור מספר
+    $\lambda$, כופל לגרנז׳. גיאומטרית, קו הגובה של $f$ משיק לעקום האילוץ. עם שני אילוצים: $\nabla f=\lambda\nabla g+\mu\nabla h$.
+    הפתרונות של המערכת הם מועמדים, ומשווים את ערכי $f$ בהם.
+  reject: [לגראנז׳]
+  lesson: '10.9'

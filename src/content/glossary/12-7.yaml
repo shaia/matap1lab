@@ -1,0 +1,20 @@
+# Terms first defined in lesson 12.7 (area, volume, centre of mass, moment of inertia).
+- id: centre-of-mass
+  term: מרכז מסה
+  en: centre of mass
+  symbol: '\bar x=\frac{1}{M}\iint_D x\,\rho\,dA'
+  definition: >-
+    הנקודה $(\bar x,\bar y)$ (או $(\bar x,\bar y,\bar z)$) שכל קואורדינטה שלה היא ממוצע משוקלל לפי הצפיפות:
+    $\bar x=\frac1M\iint_Dx\,\rho\,dA$, $\bar y=\frac1M\iint_Dy\,\rho\,dA$, עם $M=\iint_D\rho\,dA$. בצפיפות אחידה היא תלויה
+    רק בצורה, ואז קוראים לה גם מרכז הכובד של הצורה.
+  reject: []
+  lesson: '12.7'
+- id: moment-of-inertia
+  term: מומנט התמד
+  en: moment of inertia
+  symbol: 'I=\iint_D d^2\rho\,dA'
+  definition: >-
+    סביב ציר נתון: $I=\iint_Dd^2\rho\,dA$ (או $\iiint_Ed^2\rho\,dV$), כש-$d$ המרחק של הנקודה מהציר. סביב ציר $x$ במישור
+    $d^2=y^2$; סביב ציר $z$ במרחב $d^2=x^2+y^2$. הוא מודד כמה קשה לסובב את הגוף סביב הציר.
+  reject: []
+  lesson: '12.7'

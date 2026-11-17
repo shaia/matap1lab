@@ -1,0 +1,299 @@
+# Lesson 2.2 — parabola and hyperbolas (notes p. 17: y - x^2 = 0, xy = 1).
+# Objectives (src/course.ts):
+#   OBJ-2.2-1  sketch the basic parabola and the hyperbolas xy = c and x^2 - y^2 = c
+#   OBJ-2.2-2  identify a conic by its equation, completing the square when needed
+#   OBJ-2.2-3  asymptotes of a hyperbola, and a parametrisation of each curve
+# Hyperbolic functions are chapter 4: the hyperbola is parametrised here as a graph (x = sqrt(1 + t^2), y = t).
+# Every number recomputed in screens/tools/recompute-ch2.py.
+chapter: 2
+questions:
+  - id: Q-2.2-xy-quadrants
+    type: mc
+    objectives: [OBJ-2.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      באילו רביעים של המישור נמצאת ההיפרבולה $xy=1$?
+    choices:
+      - text: 'ברביע הראשון וברביע השלישי'
+        correct: true
+        feedback: >-
+          נכון. $xy=1>0$ פירושו ש-$x$ ו-$y$ באותו סימן. לכן יש שני ענפים: $y=\frac1x$ עם $x>0$ ועם $x<0$.
+      - text: 'בכל ארבעת הרביעים'
+        feedback: >-
+          זה נכון ל-$x^2-y^2=1$, שהענפים שלה פתוחים ימינה ושמאלה. ב-$xy=1$ המכפלה חיובית, ולכן אין נקודות ברביעים
+          השני והרביעי.
+        misconception: MC-c2-hyperbola-opening
+      - text: 'ברביע הראשון וברביע השני'
+        feedback: >-
+          ברביע השני $x<0<y$, והמכפלה שלילית. כך נראית פרבולה כמו $y=x^2$, לא ההיפרבולה $xy=1$.
+        misconception: MC-c2-hyperbola-opening
+
+  - id: Q-2.2-opening
+    type: mc
+    objectives: [OBJ-2.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      היכן ההיפרבולה $y^2-x^2=1$ חותכת את הצירים?
+    choices:
+      - text: 'רק את ציר $y$, בנקודות $(0,\pm1)$'
+        correct: true
+        feedback: >-
+          נכון. $x=0$ נותן $y^2=1$, ו-$y=0$ נותן $x^2=-1$, שאין לו פתרון. הענפים פתוחים למעלה ולמטה, והאסימפטוטות
+          $y=\pm x$.
+      - text: 'רק את ציר $x$, בנקודות $(\pm1,0)$'
+        feedback: >-
+          זה המצב של $x^2-y^2=1$. כאן המשתנה עם הפלוס הוא $y$, ולכן הענפים חותכים את ציר $y$. הציבו $y=0$: $-x^2=1$.
+        misconception: MC-c2-hyperbola-opening
+      - text: 'את שני הצירים, בארבע נקודות'
+        feedback: >-
+          כך נראה מעגל או אליפסה. בהיפרבולה ההצבה באחד הצירים נותנת ריבוע שווה למספר שלילי.
+        misconception: MC-c2-conic-by-sign
+
+  - id: Q-2.2-vertex
+    type: numeric
+    objectives: [OBJ-2.2-1, OBJ-2.2-2]
+    level: basic
+    prompt: >-
+      מהי קואורדינטת $y$ של הקודקוד של הפרבולה $y=x^2-4x+1$?
+    answer: -3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x^2-4x+1=(x-2)^2-3$: הפרבולה $y=x^2$ מוזזת ב-2 ימינה וב-3 למטה, והקודקוד $(2,-3)$.
+    wrongFeedback: >-
+      השלימו לריבוע: $x^2-4x=(x-2)^2-4$.
+    commonWrong:
+      - value: 5
+        feedback: >-
+          $x^2-4x=(x-2)^2-4$, כי $(x-2)^2=x^2-4x+4$: את ה-4 שנוסף **מחסירים**. כאן הוסיפו אותו.
+        misconception: MC-c2-complete-square-sign
+
+  - id: Q-2.2-identify
+    type: mc
+    objectives: [OBJ-2.2-2]
+    level: basic
+    prompt: >-
+      איזה עקום מתאר $9x^2-4y^2=36$?
+    choices:
+      - text: 'היפרבולה שחותכת את ציר $x$ ב-$\pm2$'
+        correct: true
+        feedback: >-
+          נכון. מחלקים ב-36: $\frac{x^2}{4}-\frac{y^2}{9}=1$. סימן מינוס בין הריבועים: היפרבולה; $y=0$ נותן $x=\pm2$.
+      - text: 'אליפסה עם חצאי צירים 2 ו-3'
+        feedback: >-
+          באליפסה שני הריבועים באותו סימן. כאן יש מינוס, ולכן $y=0$ נותן נקודות אבל $x=0$ נותן $-4y^2=36$, בלי פתרון.
+        misconception: MC-c2-conic-by-sign
+      - text: 'היפרבולה שחותכת את ציר $y$ ב-$\pm3$'
+        feedback: >-
+          הציבו $x=0$: $-4y^2=36$, אין פתרון. הענפים חותכים את ציר $x$, של המשתנה שבא עם פלוס.
+        misconception: MC-c2-hyperbola-opening
+      - text: 'שני ישרים'
+        feedback: >-
+          שני ישרים מתקבלים כשאגף ימין 0: $9x^2-4y^2=0$, כלומר $y=\pm\frac32x$. אלה האסימפטוטות של העקום הזה.
+        misconception: MC-c2-degenerate-conic
+
+  - id: Q-2.2-asymptote-slope
+    type: numeric
+    objectives: [OBJ-2.2-3]
+    level: basic
+    prompt: >-
+      מהו השיפוע החיובי של האסימפטוטות של ההיפרבולה $\frac{x^2}{9}-\frac{y^2}{4}=1$?
+    answer: 0.6666666666666666
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac23$. לערכים גדולים של $|x|$ ה-1 זניח, ו-$\frac{x^2}{9}\approx\frac{y^2}{4}$, כלומר
+      $y\approx\pm\frac23x$. האסימפטוטות הן $y=\pm\frac{b}{a}x$ עם $a=3$, $b=2$.
+    wrongFeedback: >-
+      החליפו את 1 ב-0 ופתרו את $\frac{x^2}{9}=\frac{y^2}{4}$ עבור $y$.
+    commonWrong:
+      - value: 1.5
+        feedback: >-
+          $\frac32$ הוא $\frac{a}{b}$: זה השיפוע של $x$ כפונקציה של $y$. פתרו עבור $y$: $y^2=\frac49x^2$.
+        misconception: MC-c2-asymptote-swap
+      - value: 0.4444444444444444
+        feedback: >-
+          $\frac49$ הוא $\frac{b^2}{a^2}$. צריך שורש: $y=\pm\sqrt{\frac49}\,x=\pm\frac23x$.
+        misconception: MC-c2-square-not-root
+
+  - id: Q-2.2-which-hyperbola
+    type: multi
+    objectives: [OBJ-2.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      אילו מהמשוואות מתארות היפרבולה? סמנו את כולן.
+    choices:
+      - text: '$xy=4$'
+        correct: true
+        feedback: 'נכון. זו $y=\frac4x$: היפרבולה ברביעים הראשון והשלישי, עם הצירים כאסימפטוטות.'
+      - text: '$y^2-x^2=-3$'
+        correct: true
+        feedback: 'נכון. כפלו ב-$-1$: $x^2-y^2=3$, היפרבולה שפתוחה ימינה ושמאלה.'
+      - text: '$y=\frac1x+2$'
+        correct: true
+        feedback: 'נכון. $(y-2)x=1$: ההיפרבולה $xy=1$ מוזזת ב-2 למעלה, עם האסימפטוטות $x=0$ ו-$y=2$.'
+      - text: '$x^2-y^2=0$'
+        feedback: >-
+          $(x-y)(x+y)=0$: זוג הישרים $y=\pm x$. זה חתך חרוט "מנוון", והוא האסימפטוטות של ההיפרבולות $x^2-y^2=c$
+          עם $c\ne0$.
+        misconception: MC-c2-degenerate-conic
+      - text: '$x^2+2y^2=-1$'
+        feedback: >-
+          אגף שמאל אינו שלילי, ולכן אין אף נקודה: הקבוצה ריקה. הסימן השלילי באגף ימין אינו הופך עקום להיפרבולה;
+          ההיפרבולה צריכה סימנים שונים **בין הריבועים**.
+        misconception: MC-c2-conic-by-sign
+
+  - id: Q-2.2-complete-square
+    type: mc
+    objectives: [OBJ-2.2-2]
+    level: mid
+    prompt: >-
+      מה מתאר העקום $x^2-y^2+2x+4y-4=0$?
+    choices:
+      - text: 'היפרבולה שמרכזה $(-1,2)$'
+        correct: true
+        feedback: >-
+          נכון. $(x^2+2x)-(y^2-4y)-4=(x+1)^2-1-(y-2)^2+4-4$, ולכן $(x+1)^2-(y-2)^2=1$: ההיפרבולה $x^2-y^2=1$ מוזזת
+          למרכז $(-1,2)$.
+      - text: 'היפרבולה שמרכזה $(1,-2)$'
+        feedback: >-
+          $(x+1)^2$ מתאפס ב-$x=-1$ ו-$(y-2)^2$ ב-$y=2$: המרכז $(-1,2)$.
+        misconception: MC-c2-shift-sign
+      - text: 'מעגל שמרכזו $(-1,2)$'
+        feedback: >-
+          המקדמים של $x^2$ ושל $y^2$ הם 1 ו-$-1$, בסימנים שונים: היפרבולה. במעגל המקדמים שווים.
+        misconception: MC-c2-conic-by-sign
+      - text: 'שני ישרים דרך $(-1,2)$'
+        feedback: >-
+          שני ישרים מתקבלים רק כשאחרי השלמת הריבוע אגף ימין הוא 0. כאן $-(y^2-4y)=-(y-2)^2+4$, ובסוף נשאר
+          $(x+1)^2-(y-2)^2=1$. מי ששוכח לפצות על מה שנוסף בהשלמה מקבל אגף ימין שגוי.
+        misconception: MC-c2-complete-square-sign
+
+  - id: Q-2.2-recipe
+    type: rank
+    objectives: [OBJ-2.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סדרו את השלבים לזיהוי עקום מהצורה $Ax^2+Cy^2+Dx+Ey+F=0$ (בלי איבר $xy$).
+    help: 'גררו את השלבים לסדר הנכון: הראשון למעלה.'
+    items:
+      - { id: group, label: 'מקבצים את האיברים של $x$ ואת האיברים של $y$, ומוציאים את $A$ ואת $C$ מחוץ לסוגריים' }
+      - { id: square, label: 'משלימים כל סוגריים לריבוע, ומפצים על מה שנוסף' }
+      - { id: move, label: 'מעבירים את הקבוע לאגף ימין ומחלקים בו, כדי לקבל 1' }
+      - { id: read, label: 'קוראים לפי הסימנים של $A$ ו-$C$: אותו סימן אליפסה, סימנים שונים היפרבולה, אחד מהם 0 פרבולה' }
+      - { id: center, label: 'קוראים את המרכז (או הקודקוד) מהביטויים שבסוגריים ואת חצאי הצירים מהמכנים' }
+    order: [group, square, move, read, center]
+    correctFeedback: >-
+      נכון. השלמת הריבוע מעבירה את המרכז לראשית; אחרי שאגף ימין הוא 1 אפשר לקרוא את סוג העקום ואת המידות שלו.
+    wrongFeedback: >-
+      אי אפשר לקרוא את חצאי הצירים לפני שאגף ימין הוא 1, ואי אפשר להשלים לריבוע לפני שמקבצים את איברי כל משתנה.
+
+  - id: Q-2.2-xy-asymptotes
+    type: mc
+    objectives: [OBJ-2.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מהן האסימפטוטות של ההיפרבולה $xy=1$?
+    choices:
+      - text: 'שני הצירים, $x=0$ ו-$y=0$'
+        correct: true
+        feedback: >-
+          נכון. $y=\frac1x\to0$ כש-$|x|\to\infty$, ו-$|y|\to\infty$ כש-$x\to0$. זו ההיפרבולה $x^2-y^2=2$ מסובבת
+          ב-$45^\circ$, והאסימפטוטות $y=\pm x$ שלה מסתובבות לצירים.
+      - text: 'הישרים $y=x$ ו-$y=-x$'
+        feedback: >-
+          אלה האסימפטוטות של $x^2-y^2=c$. ההיפרבולה $xy=1$ נמצאת ברביעים הראשון והשלישי וחוצה את $y=x$ ב-$(1,1)$, ולכן
+          $y=x$ אינו אסימפטוטה שלה.
+        misconception: MC-c2-xy-asymptotes
+      - text: 'אין לה אסימפטוטות'
+        feedback: >-
+          ל-$y=\frac1x$ יש אסימפטוטה אנכית ב-$x=0$ ואופקית ב-$y=0$. לכל היפרבולה יש שתי אסימפטוטות.
+        misconception: MC-c2-xy-asymptotes
+
+  - id: Q-2.2-param-hyperbola
+    type: expr
+    objectives: [OBJ-2.2-3]
+    level: mid
+    prompt: >-
+      רוצים פרמטריזציה של הענף **הימני** של ההיפרבולה $x^2-y^2=1$ עם $y(t)=t$, $t\in\mathbb{R}$. מהו $x(t)$? (השתמשו
+      במשתנה $t$)
+    answer: 'sqrt(1+t^2)'
+    answerTex: '$x(t)=\sqrt{1+t^2},\quad y(t)=t$'
+    variables: [t]
+    domain: [-3, 3]
+    correctFeedback: >-
+      נכון. $x^2=1+y^2=1+t^2$, ובענף הימני $x>0$, ולכן לוקחים את השורש החיובי. כש-$t$ עובר על כל הממשיים, הנקודה
+      עוברת על כל הענף.
+    wrongFeedback: >-
+      פתרו את $x^2-t^2=1$ עבור $x$, ובחרו את הסימן שמתאים לענף הימני.
+    commonWrong:
+      - expr: '-sqrt(1+t^2)'
+        feedback: >-
+          זה הענף **השמאלי**: שם $x\le-1$. לענף הימני צריך את השורש החיובי.
+        misconception: MC-c2-sqrt-half-curve
+      - expr: 'sqrt(t^2-1)'
+        feedback: >-
+          $x^2-y^2=1$ נותן $x^2=1+y^2$, עם פלוס. עם $\sqrt{t^2-1}$ מקבלים $x^2-t^2=-1$, היפרבולה אחרת, וגם הנוסחה אינה
+          מוגדרת כש-$|t|<1$.
+        misconception: MC-c2-hyperbola-opening
+      - expr: '1+t^2'
+        feedback: >-
+          זה $x^2$. צריך $x=\sqrt{1+t^2}$.
+        misconception: MC-c2-square-not-root
+
+  - id: Q-2.2-param-range
+    type: twotier
+    objectives: [OBJ-2.2-3, OBJ-2.2-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      האם המסילה $(x,y)=(t^2,t^4)$, $t\in\mathbb{R}$, עוברת על כל הפרבולה $y=x^2$?
+    choices:
+      - text: 'לא, רק על החצי $x\ge0$'
+        correct: true
+        feedback: >-
+          נכון. כל הנקודות מקיימות $y=(t^2)^2=x^2$, אבל $x=t^2\ge0$: הענף השמאלי של הפרבולה לעולם אינו מתקבל.
+      - text: 'כן, כי $y=x^2$ לכל $t$'
+        feedback: >-
+          זה מראה שהמסילה **בתוך** הפרבולה, לא שהיא מכסה את כולה. צריך לבדוק גם אילו ערכים $x$ מקבל.
+        misconception: MC-c2-param-range
+    reasons:
+      - text: '$x=t^2$ אינו שלילי לאף $t$, ולכן נקודה כמו $(-1,1)$ אינה מתקבלת'
+        correct: true
+        feedback: 'בדיוק. פרמטריזציה של הפרבולה כולה היא $(t,t^2)$.'
+      - text: 'כי $t^4$ גדל מהר יותר מ-$t^2$'
+        feedback: >-
+          קצב הגידול אינו משנה את קבוצת הנקודות; כל הנקודות מקיימות $y=x^2$ בדיוק. השאלה היא אילו $x$ מתקבלים.
+        misconception: MC-c2-param-range
+      - text: 'כי כל נקודה מתקבלת פעמיים, מ-$t$ ומ-$-t$'
+        feedback: >-
+          זה נכון, אבל זה לא מה שמחסיר נקודות. מעבר כפול על אותן נקודות אינו מוסיף את הענף השמאלי.
+        misconception: MC-c2-param-vs-curve
+
+  - id: Q-2.2-asymptote-shifted
+    type: numeric
+    objectives: [OBJ-2.2-3, OBJ-2.2-2]
+    level: exam
+    prompt: >-
+      העקום $4x^2-y^2-8x-4y-4=0$ הוא היפרבולה. מצאו את האסימפטוטה שלה בעלת השיפוע החיובי, וכתבו את נקודת החיתוך שלה
+      עם ציר $y$ (את ערך $y$).
+    answer: -4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $4(x-1)^2-4-(y+2)^2+4-4=0$, כלומר $4(x-1)^2-(y+2)^2=4$, או $(x-1)^2-\frac{(y+2)^2}{4}=1$. המרכז $(1,-2)$,
+      והאסימפטוטות $y+2=\pm2(x-1)$. עם השיפוע החיובי: $y=2x-4$, שחותכת את ציר $y$ ב-$-4$.
+    wrongFeedback: >-
+      השלימו לריבוע, מצאו את המרכז, ואז האסימפטוטות עוברות דרך המרכז בשיפועים $\pm\frac{b}{a}$.
+    commonWrong:
+      - value: 4
+        feedback: >-
+          זה מתקבל מהמרכז $(-1,2)$, עם סימנים הפוכים: $y-2=2(x+1)$. $(x-1)^2$ מתאפס ב-$x=1$ ו-$(y+2)^2$ ב-$y=-2$.
+        misconception: MC-c2-shift-sign
+      - value: -2.5
+        feedback: >-
+          זה מתקבל משיפוע $\frac12$ במקום 2: $y+2=\frac12(x-1)$. המשוואה $(x-1)^2-\frac{(y+2)^2}{4}=1$ נותנת
+          $|y+2|\approx2|x-1|$ רחוק מהמרכז, כלומר שיפוע $\frac{b}{a}=\frac21$.
+        misconception: MC-c2-asymptote-swap

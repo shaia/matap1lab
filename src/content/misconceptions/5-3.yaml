@@ -1,0 +1,78 @@
+# Misconceptions first detected in lesson 5.3 (the rules of differentiation and the chain rule).
+- id: MC-c5-product-of-derivatives
+  title: גוזרים מכפלה או מנה גורם-גורם
+  belief: >-
+    $(uv)'=u'v'$ ו-$\left(\frac uv\right)'=\frac{u'}{v'}$.
+  truth: >-
+    $(uv)'=u'v+uv'$ ו-$\left(\frac uv\right)'=\frac{u'v-uv'}{v^2}$. בדיקה מהירה: $u=v=x$ נותן $(x^2)'=2x$, ולא $1\cdot1$.
+  remedy: { lesson: '5.3', label: 'כלל המכפלה וכלל המנה' }
+
+- id: MC-c5-quotient-plus
+  title: כותבים את כלל המנה עם פלוס
+  belief: >-
+    $\left(\frac uv\right)'=\frac{u'v+uv'}{v^2}$ (כך נכתב בטעות בסיכומים, עמ׳ 8).
+  truth: >-
+    $\left(\frac uv\right)'=\frac{u'v-uv'}{v^2}$. בדיקה: $u=1$, $v=x$ חייב לתת $\left(\frac1x\right)'=-\frac1{x^2}$, והפלוס
+    נותן $+\frac1{x^2}$.
+  remedy: { lesson: '5.3', label: 'כלל המנה: מינוס במונה' }
+
+- id: MC-c5-quotient-order
+  title: הופכים את הסדר במונה של כלל המנה
+  belief: >-
+    $\left(\frac uv\right)'=\frac{uv'-u'v}{v^2}$.
+  truth: >-
+    הסדר הוא "נגזרת המונה כפול המכנה, פחות המונה כפול נגזרת המכנה": $\frac{u'v-uv'}{v^2}$. הסדר ההפוך נותן את
+    הנגזרת עם סימן הפוך.
+  remedy: { lesson: '5.3', label: 'כלל המנה: הסדר במונה' }
+
+- id: MC-c5-chain-missing-inner
+  title: שוכחים את הנגזרת הפנימית בכלל השרשרת
+  belief: >-
+    $\big(\sin(x^3)\big)'=\cos(x^3)$: גוזרים רק את הפונקציה החיצונית.
+  truth: >-
+    $\big(f(g(x))\big)'=f'(g(x))\cdot g'(x)$: אחרי הנגזרת החיצונית כופלים בנגזרת הפנימית, ובכמה שכבות בנגזרת של
+    כל שכבה. $\big(\sin(x^3)\big)'=3x^2\cos(x^3)$.
+  remedy: { lesson: '5.3', label: 'כלל השרשרת: שכבה אחרי שכבה' }
+
+- id: MC-c5-trig-derivative-sign
+  title: טועים בסימן של הנגזרת של קוסינוס או סינוס
+  belief: >-
+    $(\cos x)'=\sin x$, או $(\sin x)'=-\cos x$.
+  truth: >-
+    $(\sin x)'=\cos x$ ו-$(\cos x)'=-\sin x$. בדיקה בגרף: ליד $x=0^+$ הקוסינוס יורד, ו-$\sin x>0$ שם, ולכן צריך מינוס.
+    (בסיכומים עמ׳ 9 נכתב בטעות $(\sin x^3)'=-\cos(x^3)\cdot3x^2$.)
+  remedy: { lesson: '5.3', label: 'הנגזרות של סינוס וקוסינוס' }
+
+- id: MC-c5-chain-inner-inside
+  title: מכניסים את הנגזרת הפנימית לתוך הפונקציה החיצונית
+  belief: >-
+    $\big(\sin(x^3)\big)'=\cos(3x^2)$: גוזרים את הפנימית ומשאירים אותה בתוך הנגזרת החיצונית.
+  truth: >-
+    הפונקציה הפנימית נשארת **כמו שהיא** בתוך $f'$, ונגזרתה באה ככופל: $\cos(x^3)\cdot3x^2$.
+  remedy: { lesson: '5.3', label: 'כלל השרשרת: הפנימית נשארת בפנים' }
+
+- id: MC-c5-chain-outer-at-x
+  title: מציבים x במקום הפונקציה הפנימית בנגזרת החיצונית
+  belief: >-
+    $(f\circ g)'(a)=f'(a)\,g'(a)$.
+  truth: >-
+    הנגזרת החיצונית מחושבת **בערך של הפנימית**: $(f\circ g)'(a)=f'\big(g(a)\big)\,g'(a)$.
+  remedy: { lesson: '5.3', label: 'כלל השרשרת בנקודה' }
+
+- id: MC-c5-power-rule-on-exponential
+  title: גוזרים פונקציה מעריכית לפי כלל החזקה
+  belief: >-
+    $(a^x)'=x\,a^{x-1}$, או $\big(e^{g(x)}\big)'=g(x)\,e^{g(x)-1}$: מורידים את המעריך ומקטינים אותו ב-1.
+  truth: >-
+    כלל החזקה $(x^n)'=nx^{n-1}$ הוא לבסיס משתנה ומעריך **קבוע**. כשהמעריך משתנה: $(e^x)'=e^x$, $(a^x)'=a^x\ln a$,
+    ו-$\big(e^{g}\big)'=g'e^{g}$.
+  remedy: { lesson: '5.3', label: 'חזקה מול אקספוננט' }
+
+- id: MC-c5-one-point-proves
+  title: חושבים שהתאמה בנקודה אחת מוכיחה נוסחה לנגזרת
+  belief: >-
+    אם הנוסחה שקיבלתי לנגזרת נותנת את הערך הנכון בנקודה אחת, היא נכונה.
+  truth: >-
+    נקודה אחת יכולה **לגלות** טעות (ערך שונה), אבל לא להוכיח נכונות: שתי נוסחאות שונות יכולות להסכים בנקודה אחת.
+    בודקים בנקודה "לא מיוחדת" (לא 0), ובכמה נקודות.
+  remedy: { lesson: '5.3', label: 'בדיקה בהצבת נקודה' }

@@ -1,0 +1,71 @@
+# Misconceptions first detected in lesson 10.5 (the chain rule in several variables).
+- id: MC-c10-chain-forget-inner
+  title: שוכחים את הנגזרות של הפונקציות הפנימיות בכלל השרשרת
+  belief: >-
+    אם $z=f(x(t),y(t))$ אז $\frac{dz}{dt}=f_x+f_y$.
+  truth: >-
+    כל ענף בעץ התלויות נושא את הנגזרת הפנימית שלו: $\frac{dz}{dt}=f_x\frac{dx}{dt}+f_y\frac{dy}{dt}=\nabla f\cdot\vec r\,'(t)$.
+  remedy: { lesson: '10.5', label: 'כלל השרשרת לאורך עקום' }
+
+- id: MC-c10-chain-one-branch
+  title: משמיטים ענף מעץ התלויות
+  belief: >-
+    מספיק לגזור דרך המשתנה ה"עיקרי": ל-$T(x(t),t)$, $\frac{dT}{dt}=\frac{\partial T}{\partial x}\frac{dx}{dt}$.
+  truth: >-
+    סוכמים על **כל** המסלולים מהמשתנה התלוי אל $t$. ל-$T(x(t),t)$ יש שני מסלולים: דרך $x$ וישירות, ולכן
+    $\frac{dT}{dt}=\frac{\partial T}{\partial x}\frac{dx}{dt}+\frac{\partial T}{\partial t}$.
+  remedy: { lesson: '10.5', label: 'עץ התלויות: כל המסלולים' }
+
+- id: MC-c10-partial-vs-total
+  title: מבלבלים בין הנגזרת החלקית לנגזרת המלאה לפי t
+  belief: >-
+    ל-$T(x,t)$ לאורך מסלול $x(t)$ מתקיים $\frac{dT}{dt}=\frac{\partial T}{\partial t}$.
+  truth: >-
+    $\frac{\partial T}{\partial t}$ הוא קצב השינוי של מדחום **שעומד** במקום; $\frac{dT}{dt}$ הוא מה שמודד מדחום שזז, וכולל
+    גם את התרומה $\frac{\partial T}{\partial x}\frac{dx}{dt}$ של התנועה.
+  remedy: { lesson: '10.5', label: 'נגזרת חלקית ונגזרת מלאה' }
+
+- id: MC-c10-polar-forget-r
+  title: שוכחים את r בנגזרות של המעבר לקוטביות
+  belief: >-
+    $\frac{\partial x}{\partial\theta}=-\sin\theta$ ו-$\frac{\partial y}{\partial\theta}=\cos\theta$.
+  truth: >-
+    $x=r\cos\theta$, ולכן $\frac{\partial x}{\partial\theta}=-r\sin\theta$ ו-$\frac{\partial y}{\partial\theta}=r\cos\theta$.
+    שינוי של זווית $d\theta$ מזיז נקודה מרחק $r\,d\theta$, יותר ככל שהיא רחוקה מהראשית.
+  remedy: { lesson: '10.5', label: 'כלל השרשרת בקואורדינטות קוטביות' }
+
+- id: MC-c10-radial-rate-is-speed
+  title: חושבים שקצב השינוי של המרחק מהראשית הוא המהירות
+  belief: >-
+    חלקיק שנע במהירות $|\vec v|$ מתרחק מהראשית בקצב $|\vec v|$.
+  truth: >-
+    $\frac{d\rho}{dt}=\frac{x\dot x+y\dot y}{\rho}=\vec v\cdot\hat\rho$: רק הרכיב של המהירות בכיוון מהראשית החוצה משנה את
+    המרחק. בתנועה על מעגל סביב הראשית $\frac{d\rho}{dt}=0$ למרות שהמהירות אינה 0.
+  remedy: { lesson: '10.5', label: 'קצב השינוי של המרחק מהראשית' }
+
+- id: MC-c10-chain-extra-branch
+  title: מוסיפים לכלל השרשרת ענף של משתנה שאינו תלוי במשתנה הגזירה
+  belief: >-
+    ל-$w=f(x,y,z)$ עם $x(s,t)$, $y(s,t)$, $z(t)$ יש ב-$\frac{\partial w}{\partial s}$ שלושה מחוברים.
+  truth: >-
+    $z$ תלוי רק ב-$t$, ולכן $\frac{\partial z}{\partial s}=0$ ואין מסלול מ-$w$ דרך $z$ אל $s$: ב-$\frac{\partial w}{\partial s}$ שני
+    מחוברים, ב-$\frac{\partial w}{\partial t}$ שלושה.
+  remedy: { lesson: '10.5', label: 'עץ התלויות: רק מסלולים שקיימים' }
+
+- id: MC-c10-chain-position-not-velocity
+  title: כופלים את הגרדיאנט בווקטור המקום במקום בווקטור המהירות
+  belief: >-
+    $\frac{d}{dt}f(\vec r(t))=\nabla f\cdot\vec r(t)$.
+  truth: >-
+    כלל השרשרת כופל בנגזרות של הפונקציות הפנימיות: $\frac{d}{dt}f(\vec r(t))=\nabla f(\vec r(t))\cdot\vec r\,'(t)$, הגרדיאנט
+    במקום הנוכחי כפול וקטור המהירות.
+  remedy: { lesson: '10.5', label: 'כלל השרשרת: גרדיאנט כפול מהירות' }
+
+- id: MC-c10-rate-vs-directional
+  title: מבלבלים בין קצב השינוי לאורך תנועה לבין הנגזרת הכיוונית
+  belief: >-
+    גוף שנע במהירות $\vec v$ מודד קצב שינוי $D_{\hat u}T$, כש-$\hat u$ וקטור היחידה בכיוון התנועה.
+  truth: >-
+    $\frac{dT}{dt}=\nabla T\cdot\vec v=|\vec v|\,D_{\hat u}T$: הנגזרת הכיוונית היא שינוי ליחידת **מרחק**, וקצב השינוי בזמן
+    כופל אותה בגודל המהירות.
+  remedy: { lesson: '10.5', label: 'קצב שינוי בזמן ונגזרת כיוונית' }

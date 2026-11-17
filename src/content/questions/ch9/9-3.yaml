@@ -1,0 +1,301 @@
+# Lesson 9.3 — arc length (notes pp. 23–24).
+# Objectives (src/course.ts):
+#   OBJ-9.3-1  arc length as the integral of the speed
+#   OBJ-9.3-2  arc length does not depend on the parametrisation; the arc-length parametrisation
+#   OBJ-9.3-3  length of the graph of a function and of a curve given in polar coordinates
+# Numbers recomputed in screens/tools/recompute-ch9.py.
+chapter: 9
+questions:
+  - id: Q-9.3-helix-length
+    type: numeric
+    objectives: [OBJ-9.3-1]
+    level: basic
+    prompt: >-
+      חשבו את האורך של סיבוב אחד של הסליל $\vec r(t)=\left(3\cos t,\ 3\sin t,\ 4t\right)$, $0\le t\le2\pi$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 31.415926535898
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $10\pi$. $\vec v=(-3\sin t,3\cos t,4)$ ו-$|\vec v|=\sqrt{9+16}=5$ קבוע, ולכן $L=\int_0^{2\pi}5\,dt$.
+    wrongFeedback: >-
+      $L=\int_a^b|\vec r\,'(t)|\,dt$. חשבו את גודל המהירות (הוא יוצא קבוע).
+    commonWrong:
+      - value: 18.849555921539
+        feedback: >-
+          $6\pi$ הוא היקף המעגל ברדיוס 3, ההיטל של הסליל על מישור $xy$. הסליל גם עולה, ולכן הוא ארוך יותר.
+        misconception: MC-c9-length-projection
+      - value: 25.132741228718
+        feedback: '$8\pi$ הוא רק העלייה האנכית, $4\cdot2\pi$. האורך משלב את שתי התנועות: $\sqrt{3^2+4^2}=5$ לכל יחידת $t$.'
+        misconception: MC-c9-length-projection
+    hints: ['$\sin^2t+\cos^2t=1$.']
+
+  - id: Q-9.3-segment-length
+    type: numeric
+    objectives: [OBJ-9.3-1]
+    level: basic
+    prompt: >-
+      $\vec r(t)=\left(1+2t,\ 3-t,\ 2t\right)$, $0\le t\le3$. חשבו את אורך העקום.
+    answer: 9
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $|\vec v|=|(2,-1,2)|=3$, ולכן $L=3\cdot3=9$. בדיקה: זה קטע, ו-$|\vec r(3)-\vec r(0)|=|(6,-3,6)|=9$.
+    wrongFeedback: >-
+      גודל המהירות קבוע; כפלו אותו באורך קטע הזמן.
+    commonWrong:
+      - value: 3
+        feedback: '3 הוא גודל המהירות. האורך הוא המהירות כפול משך התנועה, 3 יחידות זמן.'
+        misconception: MC-c9-length-parameter-interval
+      - value: 9.2195444573
+        feedback: >-
+          $\sqrt{85}=|\vec r(3)|=|(7,0,6)|$, המרחק של נקודת הסיום מהראשית. אורך העקום הוא המרחק **לאורך** העקום, מ-$\vec r(0)$
+          ל-$\vec r(3)$.
+        misconception: MC-c9-speed-is-position-length
+    hints: ['$|(2,-1,2)|=\sqrt{4+1+4}$.']
+
+  - id: Q-9.3-setup
+    type: mc
+    objectives: [OBJ-9.3-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      איזה אינטגרל נותן את האורך של חצי האליפסה $\vec r(t)=(\cos t,\ 2\sin t)$, $0\le t\le\pi$?
+    choices:
+      - text: '$\int_0^\pi\sqrt{\sin^2t+4\cos^2t}\,dt$'
+        correct: true
+        feedback: >-
+          נכון. $\vec r\,'=(-\sin t,2\cos t)$. (את האינטגרל הזה אין לחשב בנוסחה סגורה: אורך של אליפסה מחשבים נומרית,
+          למשל בסימפסון.)
+      - text: '$\int_0^\pi\sqrt{\cos^2t+4\sin^2t}\,dt$'
+        feedback: 'זה $\int|\vec r(t)|\,dt$: האורך של וקטור המקום, לא של המהירות.'
+        misconception: MC-c9-speed-is-position-length
+      - text: '$\int_0^\pi\left(-\sin t+2\cos t\right)dt$'
+        feedback: 'זה סכום הרכיבים של המהירות (ואף יוצא שלילי). אורך הוא אינטגרל של $\sqrt{x''^2+y''^2}$.'
+        misconception: MC-c9-speed-sum-components
+      - text: '$\int_0^\pi\sqrt{1+4\cos^2t}\,dt$'
+        feedback: 'זו נוסחת האורך של **גרף** עם $f''(t)=2\cos t$, אבל העקום אינו הגרף של $2\sin t$: $x=\cos t$, לא $t$.'
+        misconception: MC-c9-graph-param-swap
+
+  - id: Q-9.3-cusp-length
+    type: numeric
+    objectives: [OBJ-9.3-1]
+    level: mid
+    prompt: >-
+      חשבו את אורך העקום $\vec r(t)=\left(t^2,t^3\right)$, $0\le t\le1$. (תשובה עשרונית.)
+    answer: 1.4397098733716
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{13\sqrt{13}-8}{27}\approx1.4397$. $|\vec v|=t\sqrt{4+9t^2}$, ובהצבה $u=4+9t^2$:
+      $\frac1{18}\int_4^{13}\sqrt u\,du=\frac1{27}\left(13^{3/2}-8\right)$. בדיקה: קצת יותר מהמיתר $\sqrt2\approx1.414$.
+    wrongFeedback: >-
+      $|\vec v|=\sqrt{4t^2+9t^4}=t\sqrt{4+9t^2}$ (כי $t\ge0$), ואז הצבה $u=4+9t^2$ עם גבולות חדשים.
+    commonWrong:
+      - value: 2
+        feedback: '$\int_0^1(2t+3t^2)\,dt=2$: סכום רכיבי המהירות במקום האורך שלה.'
+        misconception: MC-c9-speed-sum-components
+      - value: 1.4142135624
+        feedback: '$\sqrt2$ הוא אורך המיתר מ-$(0,0)$ ל-$(1,1)$. העקום מתעקל, ולכן הוא ארוך יותר.'
+        misconception: MC-c9-length-chord
+    hints: ['$\int t\sqrt{4+9t^2}\,dt$ בהצבה $u=4+9t^2$.']
+
+  - id: Q-9.3-twice-around
+    type: twotier
+    objectives: [OBJ-9.3-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec r_1(t)=(\cos t,\sin t)$, $0\le t\le2\pi$, ו-$\vec r_2(t)=(\cos2t,\sin2t)$, $0\le t\le2\pi$. נכון או לא נכון:
+      האינטגרלים $\int|\vec r_1\,'|\,dt$ ו-$\int|\vec r_2\,'|\,dt$ שווים, כי שתיהן מתארות את מעגל היחידה.
+    choices:
+      - text: 'לא נכון: הראשון $2\pi$ והשני $4\pi$'
+        correct: true
+        feedback: >-
+          נכון. $|\vec r_2\,'|=2$ על קטע באורך $2\pi$: $\vec r_2$ מקיפה את המעגל **פעמיים**. אי-התלות בפרמטריזציה נכונה
+          כשכל נקודה נעברת פעם אחת.
+      - text: 'נכון: אורך אינו תלוי בפרמטריזציה'
+        feedback: >-
+          המשפט חל על פרמטריזציות שעוברות על העקום **פעם אחת**. האינטגרל מודד את הדרך שהנקודה עברה, ו-$\vec r_2$ עוברת
+          כל נקודה פעמיים.
+        misconception: MC-c9-length-of-trace
+    reasons:
+      - text: '$\vec r_2$ עוברת את המעגל פעמיים, והאינטגרל סופר את הדרך שעברה'
+        correct: true
+        feedback: 'בדיוק. על $[0,\pi]$ גם $\vec r_2$ הייתה נותנת $2\pi$.'
+      - text: 'המהירות של $\vec r_2$ כפולה, ולכן כל אורך שהיא נותנת כפול'
+        feedback: >-
+          מהירות כפולה לבדה אינה משנה את האורך: היא מקצרת את הזמן באותו יחס. כאן הזמן **לא** קוצר, ולכן נעבר סיבוב
+          נוסף.
+        misconception: MC-c9-length-parameter-interval
+      - text: 'האורך תלוי בפרמטריזציה תמיד'
+        feedback: 'לא: $(\cos2t,\sin2t)$ על $[0,\pi]$ נותנת בדיוק $2\pi$, כמו $\vec r_1$.'
+        misconception: MC-c9-curve-is-formula
+
+  - id: Q-9.3-same-length
+    type: numeric
+    objectives: [OBJ-9.3-2]
+    level: mid
+    prompt: >-
+      $\vec r(s)=\left(\cos(s^2),\ \sin(s^2)\right)$, $0\le s\le\sqrt\pi$. חשבו את אורך העקום. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 3.1415926535898
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\pi$. $|\vec r\,'(s)|=2s$, ו-$\int_0^{\sqrt\pi}2s\,ds=\pi$. העקום הוא חצי מעגל היחידה (הזווית $s^2$ עוברת
+      מ-0 עד $\pi$), ואורכו $\pi$ בכל פרמטריזציה.
+    wrongFeedback: >-
+      גזרו בכלל השרשרת: $(\cos s^2)'=-2s\sin s^2$. מה האורך של $\vec r\,'(s)$?
+    commonWrong:
+      - value: 1.7724538509
+        feedback: '$\sqrt\pi$ הוא אורך קטע הפרמטר. האורך הוא אינטגרל של גודל המהירות, $2s$, לא של 1.'
+        misconception: MC-c9-length-parameter-interval
+    hints: ['$|\vec r\,''(s)|=2s\sqrt{\sin^2s^2+\cos^2s^2}$.']
+
+  - id: Q-9.3-arclength-param
+    type: expr
+    objectives: [OBJ-9.3-2]
+    level: mid
+    prompt: >-
+      לסליל $\vec r(t)=\left(3\cos t,\ 3\sin t,\ 4t\right)$ האורך מ-$t=0$ הוא $s=5t$. כתבו את הפרמטריזציה לפי אורך,
+      $\vec\rho(s)=\vec r\left(\frac s5\right)$. הקלידו את הרכיב השלישי, $z(s)$.
+    answer: '4*s/5'
+    answerTex: '$\vec\rho(s)=\left(3\cos\tfrac s5,\ 3\sin\tfrac s5,\ \tfrac{4s}{5}\right)$'
+    variables: [s]
+    domain: [0, 10]
+    correctFeedback: >-
+      נכון. בדיקה: $\vec\rho\,'(s)=\left(-\tfrac35\sin\tfrac s5,\ \tfrac35\cos\tfrac s5,\ \tfrac45\right)$, שאורכו
+      $\sqrt{\tfrac{9}{25}+\tfrac{16}{25}}=1$.
+    wrongFeedback: >-
+      הציבו $t=\frac s5$ ב-$z(t)=4t$.
+    commonWrong:
+      - expr: '4*s'
+        feedback: >-
+          כתבתם $s$ במקום $t$ בלי להמיר. אז המהירות $|\vec r\,'|=5$, לא 1: פרמטריזציה לפי אורך דורשת $t=\frac s5$.
+        misconception: MC-c9-arclength-param-not-rescaled
+      - expr: '4*s/3'
+        feedback: 'חילקתם ברדיוס 3 ולא במהירות 5. $s=5t$ כי גודל המהירות הוא $\sqrt{3^2+4^2}$.'
+        misconception: MC-c9-length-projection
+    hints: ['$t=\frac s5$.']
+
+  - id: Q-9.3-unit-speed
+    type: mc
+    objectives: [OBJ-9.3-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מה מאפיין פרמטריזציה לפי אורך, $\vec\rho(s)$?
+    choices:
+      - text: '$|\vec\rho\,''(s)|=1$ לכל $s$: הפרמטר $s$ הוא בדיוק הדרך שנעברה'
+        correct: true
+        feedback: 'נכון. אז האורך מ-$s=a$ עד $s=b$ הוא $\int_a^b1\,ds=b-a$.'
+      - text: '$\vec\rho\,''''(s)=\vec 0$: אין תאוצה'
+        feedback: >-
+          מהירות בגודל 1 עדיין יכולה להחליף כיוון: במעגל ברדיוס $R$ לפי אורך $|\vec\rho\,''|=\frac1R$. תאוצה אפס הייתה
+          אומרת שהעקום ישר.
+        misconception: MC-c9-unit-speed-means-straight
+      - text: 'הפרמטר $s$ עובר על $[0,1]$'
+        feedback: 'הפרמטר עובר על $[0,L]$, כש-$L$ אורך העקום. נרמול הוא של המהירות, לא של הקטע.'
+        misconception: MC-c9-length-parameter-interval
+      - text: '$|\vec\rho(s)|=1$: העקום על מעגל היחידה'
+        feedback: 'זה תנאי על וקטור המקום. התנאי הוא על **הנגזרת**: גודל מהירות 1.'
+        misconception: MC-c9-speed-is-position-length
+
+  - id: Q-9.3-graph-length
+    type: numeric
+    objectives: [OBJ-9.3-3]
+    level: mid
+    prompt: >-
+      חשבו את אורך הגרף של $y=\frac23x^{3/2}$, $0\le x\le3$. (אפשר לכתוב שבר.)
+    answer: 4.6666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{14}{3}$. $y'=\sqrt x$, ו-$L=\int_0^3\sqrt{1+x}\,dx=\left[\tfrac23(1+x)^{3/2}\right]_0^3=\tfrac23(8-1)$.
+    wrongFeedback: >-
+      $L=\int_a^b\sqrt{1+f'(x)^2}\,dx$, הפרמטריזציה $(x,f(x))$ עם מהירות $(1,f'(x))$.
+    commonWrong:
+      - value: 6.4641016151
+        feedback: '$\int_0^3(1+\sqrt x)\,dx=3+2\sqrt3$: חסר השורש. גודל המהירות $(1,f'')$ הוא $\sqrt{1+f''^2}$, לא $1+f''$.'
+        misconception: MC-c9-graph-length-no-root
+    hints: ['$\left(\sqrt x\right)^2=x$.']
+
+  - id: Q-9.3-graph-formula
+    type: mc
+    objectives: [OBJ-9.3-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      מהי נוסחת האורך של הגרף של $y=f(x)$, $a\le x\le b$, ומאיפה היא באה?
+    choices:
+      - text: '$\int_a^b\sqrt{1+f''(x)^2}\,dx$: גודל המהירות של הפרמטריזציה $(x,f(x))$'
+        correct: true
+        feedback: 'נכון. $\vec r(x)=(x,f(x))$, $\vec r\,''=(1,f''(x))$, וזה מקרה פרטי של $\int|\vec r\,''|$.'
+      - text: '$\int_a^b\sqrt{1+f(x)^2}\,dx$'
+        feedback: 'בנוסחה מופיעה הנגזרת, לא הפונקציה: הוספה של קבוע ל-$f$ אינה משנה את האורך.'
+        misconception: MC-c9-graph-length-f-not-fprime
+      - text: '$\int_a^b\left(1+f''(x)^2\right)dx$'
+        feedback: 'חסר השורש: אורך הווקטור $(1,f'')$ הוא $\sqrt{1+f''^2}$.'
+        misconception: MC-c9-graph-length-no-root
+      - text: '$\int_a^b|f''(x)|\,dx$'
+        feedback: 'זה סופר רק את השינוי האנכי. לישר אופקי $f''=0$, והאורך שלו בכל זאת $b-a$.'
+        misconception: MC-c9-length-projection
+
+  - id: Q-9.3-polar-circle
+    type: numeric
+    objectives: [OBJ-9.3-3]
+    level: basic
+    prompt: >-
+      חשבו את אורך העקום הקוטבי $r=2\sin\theta$, $0\le\theta\le\pi$, לפי $L=\int\sqrt{r^2+\left(\frac{dr}{d\theta}\right)^2}\,d\theta$.
+      (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 6.2831853071796
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2\pi$. $r^2+r'^2=4\sin^2\theta+4\cos^2\theta=4$, ולכן $L=\int_0^\pi2\,d\theta=2\pi$. זה מעגל ברדיוס 1 (מרכזו
+      $(0,1)$), וההיקף שלו אכן $2\pi$.
+    wrongFeedback: >-
+      חשבו $\frac{dr}{d\theta}=2\cos\theta$, הציבו בנוסחה ופשטו.
+    commonWrong:
+      - value: 4
+        feedback: '$\int_0^\pi2\sin\theta\,d\theta=4$: אינטגרל של $r$ לבדו. בנוסחה יש גם $r''$, תחת שורש.'
+        misconception: MC-c9-polar-length-r-only
+    hints: ['$\sin^2\theta+\cos^2\theta=1$.']
+
+  - id: Q-9.3-cardioid
+    type: numeric
+    objectives: [OBJ-9.3-3]
+    level: exam
+    prompt: >-
+      חשבו את אורך הקרדיואידה $r=1+\cos\theta$, $0\le\theta\le2\pi$. (רמז: $1+\cos\theta=2\cos^2\frac\theta2$.)
+    answer: 8
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $r^2+r'^2=(1+\cos\theta)^2+\sin^2\theta=2+2\cos\theta=4\cos^2\frac\theta2$, ולכן
+      $L=\int_0^{2\pi}2\left|\cos\tfrac\theta2\right|d\theta=2\int_0^\pi2\cos\tfrac\theta2\,d\theta=8$ (סימטריה).
+    wrongFeedback: >-
+      פשטו את $r^2+r'^2$ לפי הרמז, וזכרו ש-$\sqrt{u^2}=|u|$: $\cos\frac\theta2$ שלילי כש-$\theta>\pi$.
+    commonWrong:
+      - value: 6.2831853072
+        feedback: '$\int_0^{2\pi}(1+\cos\theta)\,d\theta=2\pi$: אינטגרל של $r$ לבדו.'
+        misconception: MC-c9-polar-length-r-only
+      - value: 0
+        feedback: >-
+          $\int_0^{2\pi}2\cos\tfrac\theta2\,d\theta=0$: השמטתם את הערך המוחלט. $\sqrt{4\cos^2\frac\theta2}=2\left|\cos\frac\theta2\right|$,
+          ואורך אינו מתאפס.
+        misconception: MC-c9-speed-abs-dropped
+    hints: ['$\sqrt{4\cos^2\frac\theta2}=2\left|\cos\frac\theta2\right|$.']
+
+  - id: Q-9.3-astroid
+    type: numeric
+    objectives: [OBJ-9.3-1]
+    level: exam
+    prompt: >-
+      חשבו את ההיקף של האסטרואידה $\vec r(t)=\left(\cos^3t,\ \sin^3t\right)$, $0\le t\le2\pi$.
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec r\,'=3\sin t\cos t\,(-\cos t,\sin t)$, ולכן $|\vec r\,'|=3|\sin t\cos t|$. בגלל הסימטריה:
+      $L=4\int_0^{\pi/2}3\sin t\cos t\,dt=4\cdot\tfrac32=6$.
+    wrongFeedback: >-
+      גודל המהירות הוא $3|\sin t\cos t|$, עם ערך מוחלט. חשבו את הרבע הראשון וכפלו ב-4.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          $\int_0^{2\pi}3\sin t\cos t\,dt=0$: השמטתם את הערך המוחלט, והחלקים "השליליים" קיזזו את החיוביים. גודל מהירות
+          אינו שלילי.
+        misconception: MC-c9-speed-abs-dropped
+    hints: ['$\sqrt{9\sin^2t\cos^2t}=3|\sin t\cos t|$.']

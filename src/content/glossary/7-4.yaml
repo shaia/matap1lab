@@ -1,0 +1,26 @@
+# Terms first defined in lesson 7.4 (partial fractions).
+- id: proper-rational-function
+  term: שבר רציונלי אמיתי
+  en: proper rational function
+  definition: >-
+    מנה של פולינומים $\frac{P}{Q}$ שבה מעלת $P$ קטנה ממעלת $Q$. שבר שאינו אמיתי מחלקים קודם (חילוק פולינומים) לפולינום
+    ועוד שבר אמיתי.
+  reject: []
+  lesson: '7.4'
+- id: irreducible-quadratic
+  term: גורם ריבועי אי-פריק
+  en: irreducible quadratic factor
+  symbol: 'x^2+bx+c,\ b^2-4c<0'
+  definition: >-
+    ביטוי ריבועי בלי שורשים ממשיים (דיסקרימיננטה שלילית), כמו $x^2+1$ או $x^2+2x+5$, ולכן אינו מתפרק לגורמים לינאריים
+    ממשיים. בפירוק לשברים חלקיים מעליו מונה לינארי, והאינטגרל נותן לוגריתם ו-$\arctan$.
+  reject: []
+  lesson: '7.4'
+- id: partial-fractions
+  term: שברים חלקיים
+  en: partial fractions
+  definition: >-
+    כתיבה של שבר רציונלי אמיתי כסכום של שברים פשוטים לפי הגורמים של המכנה: $\frac{A}{x-a}$ לכל גורם לינארי, שבר לכל
+    חזקה של גורם חוזר, ו-$\frac{Bx+C}{x^2+bx+c}$ לכל גורם ריבועי אי-פריק (עמ׳ 14 במחברת). לכל שבר כזה יש קדומה מהטבלה.
+  reject: [שברים חלקים]
+  lesson: '7.4'

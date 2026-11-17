@@ -1,0 +1,56 @@
+# Misconceptions first detected in lesson 11.3 (the derivative matrix of a map and the Jacobian).
+- id: MC-c11-jacobian-transpose
+  title: מחליפים שורות ועמודות במטריצת הנגזרות
+  belief: >-
+    השורה הראשונה של מטריצת הנגזרות של $F=(F_1,F_2)$ היא $\left(\frac{\partial F_1}{\partial x},\frac{\partial F_2}{\partial x}\right)$.
+  truth: >-
+    השורה ה-$i$ היא הגרדיאנט של הרכיב $F_i$, והעמודה ה-$j$ היא הנגזרת לפי המשתנה ה-$j$:
+    $J=\begin{pmatrix}\partial_xF_1&\partial_yF_1\\ \partial_xF_2&\partial_yF_2\end{pmatrix}$. כך $J\,\Delta\vec x$ נותן
+    בשורה הראשונה את השינוי הקירובי של $F_1$.
+  remedy: { lesson: '11.3', label: 'מטריצת הנגזרות: שורה לכל רכיב' }
+
+- id: MC-c11-jacobian-matrix-vs-det
+  title: מבלבלים בין מטריצת הנגזרות לבין היעקוביאן
+  belief: >-
+    מטריצת הנגזרות והיעקוביאן הם אותו דבר, ואת הקירוב הלינארי של $F$ מקבלים מכפל במספר אחד.
+  truth: >-
+    מטריצת הנגזרות $J$ היא טבלה של כל הנגזרות החלקיות, והיא נותנת את הקירוב $F(\vec x+\Delta\vec x)\approx F(\vec x)+J\Delta\vec x$.
+    היעקוביאן $\frac{\partial(x,y)}{\partial(u,v)}=\det J$ הוא מספר אחד: מקדם שינוי השטח.
+  remedy: { lesson: '11.3', label: 'מטריצה מול דטרמיננטה' }
+
+- id: MC-c11-polar-jacobian-one
+  title: שוכחים את הגורם r במעבר לקואורדינטות קוטביות
+  belief: >-
+    במעבר לקוטביות $dx\,dy=dr\,d\theta$, כמו החלפה של שמות המשתנים.
+  truth: >-
+    $\frac{\partial(x,y)}{\partial(r,\theta)}=r$, ולכן $dx\,dy=r\,dr\,d\theta$: "מלבן" קטן $\Delta r\times\Delta\theta$ הוא
+    קשת באורך $r\Delta\theta$ ברוחב $\Delta r$, ושטחו בערך $r\,\Delta r\,\Delta\theta$. רחוק מהראשית אותו $\Delta\theta$ מכסה
+    יותר שטח.
+  remedy: { lesson: '11.3', label: 'היעקוביאן של קוטביות: הגורם r' }
+
+- id: MC-c11-spherical-jacobian-no-sin
+  title: שוכחים את הגורם סינוס תטא ביעקוביאן הכדורי
+  belief: >-
+    היעקוביאן של הקואורדינטות הכדוריות הוא $r^2$.
+  truth: >-
+    $\frac{\partial(x,y,z)}{\partial(r,\theta,\varphi)}=r^2\sin\theta$ (עם $\theta$ מציר $z$): התיבה הקטנה היא
+    $\Delta r\times r\Delta\theta\times r\sin\theta\,\Delta\varphi$, כי מעגל הרוחב שבו נע $\varphi$ הוא ברדיוס $r\sin\theta$.
+  remedy: { lesson: '11.3', label: 'היעקוביאן הכדורי' }
+
+- id: MC-c11-jacobian-sign-area
+  title: חושבים שיעקוביאן שלילי נותן שטח שלילי
+  belief: >-
+    כשהיעקוביאן שלילי, ההעתקה הופכת שטחים לשליליים, או שצריך להכפיל את השטח במספר שלילי.
+  truth: >-
+    מקדם שינוי השטח הוא $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|$. הסימן אומר רק אם ההעתקה שומרת על הכיוון
+    (נגד כיוון השעון נשאר נגד כיוון השעון) או הופכת אותו, כמו שיקוף.
+  remedy: { lesson: '11.3', label: 'היעקוביאן: גודל וסימן' }
+
+- id: MC-c11-jacobian-direction
+  title: לוקחים את היעקוביאן של ההעתקה בכיוון ההפוך
+  belief: >-
+    כדי לדעת פי כמה משתנה השטח כשעוברים מ-$(u,v)$ ל-$(x,y)$, מחשבים $\frac{\partial(u,v)}{\partial(x,y)}$.
+  truth: >-
+    אם $(x,y)$ נתונים כפונקציה של $(u,v)$, תא $du\,dv$ הופך לתא בשטח $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv$.
+    $\frac{\partial(u,v)}{\partial(x,y)}$ הוא המקדם של ההעתקה ההפוכה, וברוב הדוגמאות הוא ההופכי שלו.
+  remedy: { lesson: '11.3', label: 'איזה יעקוביאן: מאיפה לאן' }

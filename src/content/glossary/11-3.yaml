@@ -1,0 +1,19 @@
+# Terms first defined in lesson 11.3 (the derivative matrix of a map and the Jacobian).
+- id: jacobian-matrix
+  term: מטריצת הנגזרות
+  en: Jacobian matrix (derivative matrix)
+  symbol: 'J=\begin{pmatrix}\partial_x F_1 & \partial_y F_1\\ \partial_x F_2 & \partial_y F_2\end{pmatrix}'
+  definition: >-
+    לפונקציה $F=(F_1,\dots,F_m)$ של $n$ משתנים: הטבלה של כל הנגזרות החלקיות, שורה לכל רכיב ועמודה לכל משתנה. השורה
+    ה-$i$ היא $\nabla F_i$. היא נותנת את הקירוב הלינארי $F(\vec x+\Delta\vec x)\approx F(\vec x)+J\,\Delta\vec x$. נקראת גם
+    מטריצת יעקובי.
+  lesson: '11.3'
+- id: jacobian
+  term: יעקוביאן
+  en: Jacobian (determinant)
+  symbol: '\frac{\partial(x,y)}{\partial(u,v)}=x_uy_v-x_vy_u'
+  definition: >-
+    הדטרמיננטה של מטריצת הנגזרות של מעבר קואורדינטות $(u,v)\mapsto(x,y)$. הערך המוחלט שלו הוא מקדם שינוי השטח:
+    תא קטן $\Delta u\,\Delta v$ הופך לתא בשטח $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\Delta u\,\Delta v$ בקירוב.
+    בקוטביות הוא $r$, בגליליות $r$, ובכדוריות $r^2\sin\theta$.
+  lesson: '11.3'

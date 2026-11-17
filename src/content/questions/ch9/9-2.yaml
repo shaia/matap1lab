@@ -1,0 +1,305 @@
+# Lesson 9.2 — the velocity vector and the tangent line (notes pp. 16, 21–22).
+# Objectives (src/course.ts):
+#   OBJ-9.2-1  differentiate a vector function componentwise and read the derivative as the velocity vector
+#   OBJ-9.2-2  find the tangent line to a curve at a point as a linear approximation
+#   OBJ-9.2-3  compute acceleration and use the differential of a vector function
+# Numbers recomputed in screens/tools/recompute-ch9.py.
+chapter: 9
+questions:
+  - id: Q-9.2-speed
+    type: numeric
+    objectives: [OBJ-9.2-1]
+    level: basic
+    prompt: >-
+      נקודה נעה לפי $\vec r(t)=\left(t^2,\ 2t,\ \ln t\right)$, $t>0$. מהו גודל המהירות שלה ב-$t=1$?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec v(t)=\vec r\,'(t)=\left(2t,\ 2,\ \tfrac1t\right)$, וב-$t=1$: $(2,2,1)$, שאורכו $\sqrt{4+4+1}=3$.
+    wrongFeedback: >-
+      גזרו כל רכיב לפי $t$, הציבו $t=1$, וחשבו את אורך הווקטור.
+    commonWrong:
+      - value: 2.2360679775
+        feedback: >-
+          זה $|\vec r(1)|=|(1,2,0)|=\sqrt5$, המרחק מהראשית. גודל המהירות הוא האורך של **הנגזרת** $\vec r\,'(1)$.
+        misconception: MC-c9-speed-is-position-length
+      - value: 5
+        feedback: 'זה $2+2+1$, סכום הרכיבים. אורך של וקטור הוא שורש סכום הריבועים.'
+        misconception: MC-c9-speed-sum-components
+    hints: ['$|\vec v|=\sqrt{v_1^2+v_2^2+v_3^2}$.']
+
+  - id: Q-9.2-velocity-direction
+    type: mc
+    objectives: [OBJ-9.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      נקודה נעה על מעגל היחידה, $\vec r(t)=(\cos t,\sin t)$. לאן מצביע וקטור המהירות שלה ב-$t=\frac\pi2$, כשהיא בנקודה
+      $(0,1)$?
+    choices:
+      - text: 'שמאלה: $\vec v=(-1,0)$'
+        correct: true
+        feedback: >-
+          נכון. $\vec v=(-\sin t,\cos t)$, וב-$t=\frac\pi2$: $(-1,0)$. המהירות משיקה למעגל, בכיוון התנועה (נגד כיוון
+          השעון).
+      - text: 'למעלה, כמו וקטור המקום: $\vec v=(0,1)$'
+        feedback: >-
+          $(0,1)$ הוא וקטור המקום $\vec r\left(\tfrac\pi2\right)$. המהירות היא הנגזרת שלו, וכאן היא מאונכת לו:
+          $\vec r\cdot\vec v=0$ במעגל.
+        misconception: MC-c9-velocity-parallel-position
+      - text: 'למטה, אל המרכז: $\vec v=(0,-1)$'
+        feedback: >-
+          אל המרכז מצביעה **התאוצה** $\vec a=-\vec r$ בתנועה מעגלית. המהירות משיקה למעגל.
+        misconception: MC-c9-accel-vs-velocity
+      - text: 'ימינה: $\vec v=(1,0)$'
+        feedback: 'זה המשיק בכיוון ההפוך: $(\cos t,\sin t)$ נע נגד כיוון השעון, ומ-$(0,1)$ זה שמאלה.'
+        misconception: MC-c9-orientation-ignored
+
+  - id: Q-9.2-speed-expr
+    type: expr
+    objectives: [OBJ-9.2-1]
+    level: mid
+    prompt: >-
+      $\vec r(t)=\left(t^2,\ t^3\right)$. כתבו את גודל המהירות $|\vec v(t)|$ כש-$t>0$.
+    answer: 't*sqrt(4+9*t^2)'
+    answerTex: '$|\vec v(t)|=\sqrt{4t^2+9t^4}=t\sqrt{4+9t^2}$'
+    variables: [t]
+    domain: [0.2, 2]
+    correctFeedback: >-
+      נכון. $\vec v=(2t,3t^2)$, $|\vec v|^2=4t^2+9t^4$, ומוציאים $t^2$ מהשורש (כש-$t>0$).
+    wrongFeedback: >-
+      גזרו כל רכיב, וחשבו $\sqrt{x'(t)^2+y'(t)^2}$.
+    commonWrong:
+      - expr: 'sqrt(t^4+t^6)'
+        feedback: 'זה $|\vec r(t)|$, אורך וקטור המקום. גודל המהירות הוא אורך הנגזרת.'
+        misconception: MC-c9-speed-is-position-length
+      - expr: '2*t+3*t^2'
+        feedback: 'זה $x''+y''$. האורך הוא $\sqrt{x''^2+y''^2}$, לא סכום הרכיבים.'
+        misconception: MC-c9-speed-sum-components
+    hints: ['$\vec v(t)=(2t,\,3t^2)$.']
+
+  - id: Q-9.2-tangent-line
+    type: expr
+    objectives: [OBJ-9.2-2]
+    level: mid
+    prompt: >-
+      כתבו את הישר המשיק לעקום $\vec r(t)=\left(t^2,t^3\right)$ בנקודה שבה $t=1$, בצורה
+      $\vec L(s)=\vec r(1)+s\,\vec r\,'(1)$. הקלידו את הרכיב השני, $L_y(s)$.
+    answer: '1+3*s'
+    answerTex: '$\vec L(s)=(1,1)+s\,(2,3)=(1+2s,\ 1+3s)$'
+    variables: [s]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. הנקודה $\vec r(1)=(1,1)$ והכיוון $\vec r\,'(1)=(2,3)$. ליד $s=0$ הישר מקרב את העקום: $\vec r(1+s)\approx\vec L(s)$.
+    wrongFeedback: >-
+      ישר משיק = נקודה על העקום + $s$ כפול וקטור המהירות בנקודה.
+    commonWrong:
+      - expr: '3*s'
+        feedback: 'שכחתם את הנקודה: ישר דרך הראשית בכיוון $(2,3)$ אינו עובר ב-$(1,1)$.'
+        misconception: MC-c9-tangent-missing-point
+      - expr: '3+s'
+        feedback: 'החלפתם בין הנקודה לכיוון: $(2,3)+s(1,1)$. הנקודה היא $\vec r(1)$ והכיוון $\vec r\,''(1)$.'
+        misconception: MC-c9-tangent-missing-point
+    hints: ['$\vec r(1)=(1,1)$ ו-$\vec r\,''(t)=(2t,3t^2)$.']
+
+  - id: Q-9.2-slope
+    type: numeric
+    objectives: [OBJ-9.2-2]
+    level: mid
+    prompt: >-
+      העקום $x=t^2$, $y=t^3$. מהו השיפוע $\frac{dy}{dx}$ של הישר המשיק בנקודה שבה $t=2$?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{dy}{dx}=\frac{dy/dt}{dx/dt}=\frac{3t^2}{2t}$, וב-$t=2$: $\frac{12}{4}=3$. וקטור המהירות $(4,12)$
+      מקביל ל-$(1,3)$.
+    wrongFeedback: >-
+      השיפוע הוא היחס בין רכיב $y$ לרכיב $x$ של וקטור המהירות: $\frac{y'(t)}{x'(t)}$.
+    commonWrong:
+      - value: 0.3333333333
+        feedback: 'זה $\frac{x''}{y''}=\frac{dx}{dy}$, השיפוע ההפוך. השיפוע הוא שינוי ב-$y$ חלקי שינוי ב-$x$.'
+        misconception: MC-c9-slope-inverted
+      - value: 12
+        feedback: >-
+          12 הוא $\frac{dy}{dt}$: קצב השינוי של $y$ בזמן. השיפוע בגרף משווה את $y$ ל-$x$, ולכן מחלקים ב-$\frac{dx}{dt}=4$.
+        misconception: MC-c9-slope-dydt
+    hints: ['$\dfrac{dy}{dx}=\dfrac{dy/dt}{dx/dt}$.']
+
+  - id: Q-9.2-linear-approx
+    type: numeric
+    objectives: [OBJ-9.2-2]
+    level: mid
+    prompt: >-
+      רחפן נמצא ב-$t=2$ בנקודה $\vec r(2)=(1,4,-1)$ ומהירותו $\vec v(2)=(3,0,2)$. בעזרת הישר המשיק (קירוב לינארי), מהו
+      בקירוב רכיב ה-$z$ של מקומו ב-$t=2.05$?
+    answer: -0.9
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec r(2+\Delta t)\approx\vec r(2)+\Delta t\,\vec v(2)$ עם $\Delta t=0.05$: $z\approx-1+0.05\cdot2=-0.9$.
+    wrongFeedback: >-
+      הקירוב הוא $\vec r(t_0)+(t-t_0)\,\vec v(t_0)$: כופלים במרווח הזמן, לא בזמן עצמו.
+    commonWrong:
+      - value: 3.1
+        feedback: 'כפלתם את המהירות ב-$t=2.05$ במקום במרווח $\Delta t=0.05$.'
+        misconception: MC-c9-tangent-uses-t-not-dt
+    hints: ['$\Delta t=2.05-2$.']
+
+  - id: Q-9.2-cusp
+    type: twotier
+    objectives: [OBJ-9.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec r(t)=\left(t^2,t^3\right)$. נכון או לא נכון: ב-$t=0$ וקטור המהירות קובע את כיוון הישר המשיק.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $\vec r\,'(0)=(0,0)$: לווקטור האפס אין כיוון. לעקום יש שם חוד (הוא $y^2=x^3$), והנקודה עוצרת בו לרגע.
+      - text: 'נכון'
+        feedback: >-
+          חשבו את $\vec r\,'(0)$: הוא $(0,0)$. $\vec r(t_0)+s\,\vec 0$ היא נקודה, לא ישר. המתכון של הישר המשיק דורש
+          $\vec r\,'(t_0)\ne\vec 0$.
+        misconception: MC-c9-zero-velocity-tangent
+    reasons:
+      - text: 'המהירות ב-$t=0$ היא וקטור האפס, ולכן אין לה כיוון'
+        correct: true
+        feedback: 'בדיוק. במקומות כאלה העקום יכול להיות חד, גם כשהרכיבים גזירים.'
+      - text: 'וקטור המהירות תמיד משיק לעקום'
+        feedback: 'רק כשהוא שונה מאפס. כאן $\vec v(0)=\vec 0$, ומאפס אי אפשר לקרוא כיוון.'
+        misconception: MC-c9-zero-velocity-tangent
+      - text: 'העקום אינו גזיר ב-$t=0$'
+        feedback: 'הרכיבים $t^2$ ו-$t^3$ גזירים בכל מקום. הבעיה היא שהנגזרת מתאפסת.'
+        misconception: MC-c9-zero-velocity-tangent
+
+  - id: Q-9.2-accel
+    type: numeric
+    objectives: [OBJ-9.2-3]
+    level: basic
+    prompt: >-
+      $\vec r(t)=\left(t^3,\ 2t^2,\ 5t\right)$. מהו גודל התאוצה $|\vec a(1)|$? (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 7.2111025509280
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2\sqrt{13}$. $\vec v=(3t^2,4t,5)$, $\vec a=\vec v\,'=(6t,4,0)$, וב-$t=1$: $|(6,4,0)|=\sqrt{52}$.
+    wrongFeedback: >-
+      התאוצה היא הנגזרת **השנייה** של המקום: גזרו כל רכיב פעמיים.
+    commonWrong:
+      - value: 7.0710678119
+        feedback: 'זה $|\vec v(1)|=|(3,4,5)|=5\sqrt2$, גודל המהירות. התאוצה היא נגזרת של המהירות.'
+        misconception: MC-c9-accel-vs-velocity
+      - value: 10
+        feedback: '$6+4+0$: סכום הרכיבים במקום שורש סכום הריבועים.'
+        misconception: MC-c9-speed-sum-components
+    hints: ['$\vec a(t)=\vec r\,''''(t)$.']
+
+  - id: Q-9.2-circular-accel
+    type: mc
+    objectives: [OBJ-9.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      גוף נע במעגל ברדיוס $R$ במהירות זוויתית קבועה $\omega$: $\vec r(t)=R(\cos\omega t,\sin\omega t)$. מה נכון לגבי
+      התאוצה?
+    choices:
+      - text: 'היא מצביעה אל המרכז, וגודלה $R\omega^2$'
+        correct: true
+        feedback: >-
+          נכון. $\vec a=\vec r\,''=-\omega^2\vec r$: בכיוון ההפוך לווקטור המקום, כלומר אל המרכז. זו התאוצה הצנטריפטלית
+          $\frac{v^2}{R}$, עם $v=R\omega$.
+      - text: 'היא אפס, כי גודל המהירות קבוע'
+        feedback: >-
+          גודל המהירות קבוע, אבל **הכיוון** שלה משתנה כל הזמן, ותאוצה היא נגזרת של הווקטור כולו.
+        misconception: MC-c9-constant-speed-zero-accel
+      - text: 'היא משיקה למעגל, בכיוון התנועה'
+        feedback: 'משיקה למעגל היא המהירות. התאוצה כאן מאונכת לה.'
+        misconception: MC-c9-accel-vs-velocity
+      - text: 'היא מצביעה החוצה מהמרכז, וגודלה $R\omega^2$'
+        feedback: >-
+          הגודל נכון, הכיוון לא: $\vec a=-\omega^2\vec r$, עם מינוס. "הכוח הצנטריפוגלי" שמרגישים ברכב הוא תחושה במערכת
+          המסתובבת.
+        misconception: MC-c9-accel-outward
+
+  - id: Q-9.2-accel-expr
+    type: expr
+    objectives: [OBJ-9.2-3]
+    level: mid
+    prompt: >-
+      $\vec r(t)=\left(\cos t,\ t\,e^t\right)$. כתבו את הרכיב השני של התאוצה, $a_y(t)$.
+    answer: '(t+2)*exp(t)'
+    answerTex: '$a_y(t)=\dfrac{d^2}{dt^2}\left(te^t\right)=(t+2)e^t$'
+    variables: [t]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. $(te^t)'=(t+1)e^t$ (כלל המכפלה), ו-$\left((t+1)e^t\right)'=(t+2)e^t$.
+    wrongFeedback: >-
+      גזרו את $te^t$ פעמיים, בכל פעם בכלל המכפלה.
+    commonWrong:
+      - expr: '(t+1)*exp(t)'
+        feedback: 'זו הנגזרת הראשונה, רכיב המהירות. התאוצה היא נגזרת שנייה.'
+        misconception: MC-c9-accel-vs-velocity
+    hints: ['$(te^t)''=e^t+te^t$.']
+
+  - id: Q-9.2-differential
+    type: numeric
+    objectives: [OBJ-9.2-3]
+    level: mid
+    prompt: >-
+      מהירותו של חלקיק ב-$t=3$ היא $\vec v=(2,-2,1)$ מטרים לשנייה. בעזרת הדיפרנציאל $d\vec r=\vec v\,dt$, העריכו את
+      אורך ההעתק שלו, במטרים, בפרק הזמן $dt=0.01$ שניות.
+    answer: 0.03
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $d\vec r=(0.02,-0.02,0.01)$, ואורכו $|\vec v|\,dt=3\cdot0.01$.
+    wrongFeedback: >-
+      $|d\vec r|=|\vec v|\,dt$. חשבו את $|\vec v|=\sqrt{4+4+1}$.
+    commonWrong:
+      - value: 0.05
+        feedback: '$(2+2+1)\cdot0.01$: חיברתם את גודלי הרכיבים במקום לחשב אורך.'
+        misconception: MC-c9-speed-sum-components
+      - value: 0.01
+        feedback: '$(2-2+1)\cdot0.01$: סכום הרכיבים אינו האורך. האורך הוא שורש סכום הריבועים.'
+        misconception: MC-c9-speed-sum-components
+    hints: ['$|\vec v|=\sqrt{2^2+(-2)^2+1^2}$.']
+
+  - id: Q-9.2-tangent-axis
+    type: numeric
+    objectives: [OBJ-9.2-2]
+    level: exam
+    prompt: >-
+      העקום $\vec r(t)=\left(t^2,\ t^3-3t\right)$. הישר המשיק בנקודה שבה $t=2$ חותך את ציר $x$. באיזה $x$? (אפשר לכתוב
+      שבר.)
+    answer: 3.1111111111111
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{28}{9}$. $\vec r(2)=(4,2)$, $\vec r\,'(t)=(2t,3t^2-3)$, $\vec r\,'(2)=(4,9)$. הישר $(4+4s,\ 2+9s)$
+      פוגש את $y=0$ ב-$s=-\frac29$, ושם $x=4-\frac89$.
+    wrongFeedback: >-
+      כתבו את הישר המשיק בצורה פרמטרית, מצאו את $s$ שבו הרכיב השני 0, והציבו אותו ברכיב הראשון.
+    commonWrong:
+      - value: -0.5
+        feedback: 'השתמשתם בשיפוע $\frac49$, ההפוך. השיפוע הוא $\frac{y''}{x''}=\frac94$.'
+        misconception: MC-c9-slope-inverted
+    hints: ['$\vec L(s)=(4,2)+s\,(4,9)$.']
+
+  - id: Q-9.2-landing
+    type: numeric
+    objectives: [OBJ-9.2-1, OBJ-9.2-3]
+    level: exam
+    prompt: >-
+      אבן נזרקת אופקית מצוק בגובה 20 מטר: $\vec r(t)=\left(15t,\ 20-5t^2\right)$ (מטרים, שניות). חשבו את התאוצה, מצאו
+      מתי האבן פוגעת בקרקע, ומהו גודל המהירות שלה ברגע הפגיעה, במטרים לשנייה?
+    answer: 25
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec a=(0,-10)$ קבועה (כובד). $20-5t^2=0$ ב-$t=2$, ו-$\vec v(2)=(15,-10\cdot2)=(15,-20)$, שאורכו 25.
+    wrongFeedback: >-
+      מצאו את $t$ שבו $y=0$, גזרו את $\vec r$, והציבו. גודל המהירות הוא אורך הווקטור.
+    commonWrong:
+      - value: 15
+        feedback: 'זה רק הרכיב האופקי. ברגע הפגיעה לאבן יש גם מהירות אנכית, $-20$.'
+        misconception: MC-c9-speed-sum-components
+      - value: 35
+        feedback: '$15+20$: חיברתם גדלים של רכיבים. האורך הוא $\sqrt{15^2+20^2}$.'
+        misconception: MC-c9-speed-sum-components
+    hints: ['$\vec v(t)=(15,\,-10t)$.']

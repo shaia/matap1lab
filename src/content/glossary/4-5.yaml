@@ -1,0 +1,33 @@
+# Terms first defined in lesson 4.5 (hyperbolic functions).
+- id: hyperbolic-cosine
+  term: קוסינוס היפרבולי
+  en: hyperbolic cosine
+  symbol: '\cosh x=\frac{e^x+e^{-x}}2'
+  definition: >-
+    $\cosh x=\frac{e^x+e^{-x}}2$: פונקציה זוגית, $\cosh x\ge1$ ו-$\cosh0=1$. הגרף שלה הוא צורת שרשרת תלויה.
+  lesson: '4.5'
+- id: hyperbolic-sine
+  term: סינוס היפרבולי
+  en: hyperbolic sine
+  symbol: '\sinh x=\frac{e^x-e^{-x}}2'
+  definition: >-
+    $\sinh x=\frac{e^x-e^{-x}}2$: פונקציה אי-זוגית ועולה, $\sinh0=0$, והתמונה שלה כל $\mathbb{R}$. מתקיים
+    $\cosh^2x-\sinh^2x=1$.
+  lesson: '4.5'
+- id: hyperbolic-tangent
+  term: טנגנס היפרבולי
+  en: hyperbolic tangent
+  symbol: '\tanh x=\frac{\sinh x}{\cosh x}'
+  definition: >-
+    $\tanh x=\frac{\sinh x}{\cosh x}=\frac{e^x-e^{-x}}{e^x+e^{-x}}$: מוגדרת לכל $x$, אי-זוגית ועולה, ו-$|\tanh x|<1$ עם
+    אסימפטוטות אופקיות $y=\pm1$.
+  lesson: '4.5'
+- id: inverse-hyperbolic
+  term: פונקציות היפרבוליות הפוכות
+  en: inverse hyperbolic functions
+  symbol: '\operatorname{arsinh}y=\ln\left(y+\sqrt{y^2+1}\right)'
+  definition: >-
+    ההפוכות של $\sinh$ ושל $\cosh$ המצומצם ל-$x\ge0$, שמתקבלות מפתרון משוואה ריבועית ב-$e^x$:
+    $\operatorname{arsinh}y=\ln\left(y+\sqrt{y^2+1}\right)$ לכל $y$, ו-$\operatorname{arcosh}y=\ln\left(y+\sqrt{y^2-1}\right)$
+    ל-$y\ge1$.
+  lesson: '4.5'

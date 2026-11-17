@@ -1,0 +1,39 @@
+# Terms first defined in lesson 8.1 (Riemann sums and area).
+- id: partition
+  term: חלוקה
+  en: partition (of an interval)
+  symbol: 'a=x_0<x_1<\dots<x_n=b'
+  definition: >-
+    חלוקה של הקטע $[a,b]$ היא בחירה של נקודות $a=x_0<x_1<\dots<x_n=b$, שמפרקות אותו ל-$n$ קטעים. בחלוקה לקטעים
+    שווים, רוחב כל קטע הוא $\Delta x=\frac{b-a}{n}$ ו-$x_i=a+i\,\Delta x$.
+  reject: []
+  lesson: '8.1'
+- id: riemann-sum
+  term: סכום רימן
+  en: Riemann sum
+  symbol: '\sum_{i=1}^{n}f(c_i)\,\Delta x_i'
+  definition: >-
+    לחלוקה של $[a,b]$ ולנקודה $c_i$ בכל קטע: $\sum_i f(c_i)\,\Delta x_i$, סכום השטחים (עם סימן) של מלבנים בגובה
+    $f(c_i)$ וברוחב הקטע. בסכום **השמאלי** $c_i$ הוא הקצה השמאלי של הקטע, ב**ימני** הקצה הימני, ובסכום
+    **האמצעים** אמצע הקטע. הסכום הוא קירוב לאינטגרל המסוים.
+  reject: [סכום רימאן]
+  lesson: '8.1'
+- id: definite-integral
+  term: אינטגרל מסוים
+  en: definite integral
+  symbol: '\int_a^b f(x)\,dx'
+  definition: >-
+    הגבול של סכומי רימן של $f$ ב-$[a,b]$ כשרוחב הקטעים שואף ל-0: מספר, השטח **עם הסימן** שבין הגרף לציר $x$. לפי
+    המשפט היסודי, אם $F$ קדומה ל-$f$ הרציפה, אז $\int_a^bf(x)\,dx=F(b)-F(a)$. אם $f$ היא מהירות, האינטגרל הוא
+    ההעתק.
+  reject: [אינטגרל מסויים]
+  lesson: '8.1'
+- id: signed-area
+  term: שטח עם סימן
+  en: signed area
+  symbol: '\int_a^b f(x)\,dx'
+  definition: >-
+    השטח שבין הגרף לציר $x$, כשחלקים מעל הציר נספרים בחיוב וחלקים מתחתיו בשלילה. זה מה שהאינטגרל המסוים מודד.
+    השטח הגיאומטרי הוא $\int_a^b|f(x)|\,dx$.
+  reject: []
+  lesson: '8.1'

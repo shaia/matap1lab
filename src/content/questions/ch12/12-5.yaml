@@ -1,0 +1,322 @@
+# Lesson 12.5 — cylindrical and spherical coordinates in triple integrals (notes pp. 85–86).
+# Objectives (src/course.ts):
+#   OBJ-12.5-1  pass to cylindrical coordinates in a triple integral, with the Jacobian
+#   OBJ-12.5-2  pass to spherical coordinates in a triple integral, with the Jacobian
+#   OBJ-12.5-3  choose the coordinate system that fits a given solid
+# Convention (CLAUDE.md): spherical (r, θ, φ), θ from the positive z-axis, 0 ≤ θ ≤ π, φ the azimuth, 0 ≤ φ ≤ 2π,
+# dV = r² sin θ dr dθ dφ. The notes (p. 85) measure the angle from the xy-plane (ρ² cos φ); the ball volume of p. 86
+# (4πR³/3) is recomputed here in the course's letters. Recomputed with sympy (screens/tools/recompute-ch12.py).
+chapter: 12
+questions:
+  - id: Q-12.5-cyl-element
+    type: mc
+    objectives: [OBJ-12.5-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      בקואורדינטות גליליות $x=r\cos\theta$, $y=r\sin\theta$, $z=z$. מהו אלמנט הנפח $dV$?
+    choices:
+      - text: '$r\,dr\,d\theta\,dz$'
+        correct: true
+        feedback: >-
+          נכון. בכל גובה $z$ זה אלמנט השטח הקוטבי $r\,dr\,d\theta$, כפול העובי $dz$. היעקוביאן של המעבר הוא $r$.
+      - text: '$dr\,d\theta\,dz$'
+        feedback: >-
+          חסר הגורם $r$ של הקוטביות: התא בגובה קבוע הוא $dr$ על $r\,d\theta$.
+        misconception: MC-c12-polar-no-r
+      - text: '$r^2\sin\theta\,dr\,d\theta\,dz$'
+        feedback: >-
+          זה דומה לאלמנט הנפח בכדוריות, אבל שם אין $dz$. בגליליות $z$ נשאר $z$, והגורם היחיד הוא $r$.
+        misconception: MC-c12-spherical-element
+
+  - id: Q-12.5-cyl-z
+    type: numeric
+    objectives: [OBJ-12.5-1]
+    level: basic
+    prompt: >-
+      $E$ הוא הגליל $x^2+y^2\le9$, $0\le z\le2$. חשבו את $\iiint_Ez\,dV$.
+    answer: 56.5486677646163
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^{2\pi}\!\int_0^3\!\int_0^2z\,r\,dz\,dr\,d\theta=2\pi\cdot\frac92\cdot2=18\pi$.
+    wrongFeedback: >-
+      בגליליות: $0\le r\le3$, $0\le\theta\le2\pi$, $0\le z\le2$, ו-$dV=r\,dr\,d\theta\,dz$. האינטגרל מתפרק למכפלה.
+    commonWrong:
+      - value: 37.6991118430775
+        feedback: >-
+          $12\pi$ יוצא בלי הגורם $r$: $\int_0^3dr=3$ במקום $\int_0^3r\,dr=\frac92$.
+        misconception: MC-c12-polar-no-r
+    hints: ['$\int_0^3r\,dr=\frac92$ ו-$\int_0^2z\,dz=2$.']
+
+  - id: Q-12.5-cyl-paraboloid
+    type: numeric
+    objectives: [OBJ-12.5-1]
+    level: mid
+    prompt: >-
+      חשבו בקואורדינטות גליליות את הנפח של הגוף שבין הפרבולואיד $z=x^2+y^2$ למישור $z=4$.
+    answer: 25.1327412287183
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $r^2\le z\le4$, $0\le r\le2$: $\int_0^{2\pi}\!\int_0^2\left(4-r^2\right)r\,dr\,d\theta=2\pi(8-4)=8\pi$.
+    wrongFeedback: >-
+      בגליליות הפרבולואיד הוא $z=r^2$, והוא פוגש את המישור ב-$r=2$. הגובה של העמודה $4-r^2$, כפול $r$.
+    commonWrong:
+      - value: 33.5103216382911
+        feedback: >-
+          $\frac{32\pi}{3}$ יוצא בלי הגורם $r$: $\int_0^2\left(4-r^2\right)dr=\frac{16}{3}$.
+        misconception: MC-c12-polar-no-r
+      - value: 50.2654824574367
+        feedback: >-
+          $16\pi$ הוא הנפח של הגליל $r\le2$, $0\le z\le4$: לא החסרתם את מה שמתחת לפרבולואיד.
+        misconception: MC-c12-volume-top-only
+    hints: ['$\int_0^2\left(4r-r^3\right)dr=8-4$.']
+
+  - id: Q-12.5-cyl-mass
+    type: numeric
+    objectives: [OBJ-12.5-1]
+    level: exam
+    prompt: >-
+      גליל מלא $x^2+y^2\le1$, $0\le z\le2$ עשוי מחומר שצפיפותו שווה למרחק מציר הגליל: $\rho=\sqrt{x^2+y^2}$. חשבו את המסה.
+    answer: 4.18879020478639
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\rho=r$ ו-$dV=r\,dr\,d\theta\,dz$: $M=\int_0^2\!\int_0^{2\pi}\!\int_0^1r\cdot r\,dr\,d\theta\,dz=2\cdot2\pi\cdot\frac13=\frac{4\pi}{3}$.
+      בדיקה: הנפח $2\pi$, והצפיפות בין 0 ל-1, ולכן המסה קטנה מ-$2\pi$.
+    wrongFeedback: >-
+      תרגמו את הצפיפות לגליליות ($\rho=r$) והכפילו באלמנט הנפח, שגם בו יש $r$.
+    commonWrong:
+      - value: 6.28318530717959
+        feedback: >-
+          $2\pi$ יוצא מ-$\int_0^1r\,dr$ בלי הגורם $r$ של אלמנט הנפח (וזה במקרה גם הנפח של הגליל). האינטגרנד הוא
+          $r\cdot r=r^2$.
+        misconception: MC-c12-polar-no-r
+    hints: ['$\int_0^1r^2\,dr=\frac13$.']
+
+  - id: Q-12.5-sph-element
+    type: mc
+    objectives: [OBJ-12.5-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      בקואורדינטות כדוריות $x=r\sin\theta\cos\varphi$, $y=r\sin\theta\sin\varphi$, $z=r\cos\theta$ ($\theta$ נמדדת מציר
+      $z$). מהו אלמנט הנפח $dV$?
+    choices:
+      - text: '$r^2\sin\theta\,dr\,d\theta\,d\varphi$'
+        correct: true
+        feedback: >-
+          נכון. התיבה הקטנה היא בקירוב $dr$ על $r\,d\theta$ (קשת על מעגל אורך) על $r\sin\theta\,d\varphi$ (קשת על מעגל רוחב
+          שהרדיוס שלו $r\sin\theta$).
+      - text: '$r^2\,dr\,d\theta\,d\varphi$'
+        feedback: >-
+          ליד הקטבים ($\theta$ קרוב ל-0 או ל-$\pi$) מעגלי הרוחב קטנים, והתיבות צרות. הגורם $\sin\theta$ סופר את זה.
+        misconception: MC-c12-spherical-element
+      - text: '$r^2\cos\theta\,dr\,d\theta\,d\varphi$'
+        feedback: >-
+          זה אלמנט הנפח כשהזווית נמדדת מהמישור $xy$ (כמו בסיכומים). בקורס $\theta$ נמדדת מציר $z$, ואז הרדיוס של מעגל הרוחב
+          $r\sin\theta$. עם $\cos$ האלמנט אף יוצא שלילי בחצי הכדור התחתון.
+        misconception: MC-c12-spherical-element
+      - text: '$r\,dr\,d\theta\,d\varphi$'
+        feedback: >-
+          שתי הצלעות הזוויתיות של התיבה גדלות עם $r$, ולכן יש $r^2$, ועוד $\sin\theta$ מהרוחב.
+        misconception: MC-c12-spherical-element
+
+  - id: Q-12.5-ball-volume
+    type: numeric
+    objectives: [OBJ-12.5-2]
+    level: basic
+    prompt: >-
+      חשבו בקואורדינטות כדוריות את הנפח של הכדור $x^2+y^2+z^2\le4$.
+    answer: 33.5103216382911
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\int_0^{2\pi}\!\int_0^\pi\!\int_0^2r^2\sin\theta\,dr\,d\theta\,d\varphi=\frac83\cdot2\cdot2\pi=\frac{32\pi}{3}$, כמו
+      $\frac43\pi R^3$ עם $R=2$.
+    wrongFeedback: >-
+      $0\le r\le2$, $0\le\theta\le\pi$, $0\le\varphi\le2\pi$, ו-$dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$.
+    commonWrong:
+      - value: 52.6378901391432
+        feedback: >-
+          $\frac{16\pi^2}{3}$ יוצא בלי $\sin\theta$: $\int_0^\pi d\theta=\pi$ במקום $\int_0^\pi\sin\theta\,d\theta=2$.
+        misconception: MC-c12-spherical-element
+    hints: ['$\int_0^\pi\sin\theta\,d\theta=2$.']
+
+  - id: Q-12.5-sph-limits
+    type: mc
+    objectives: [OBJ-12.5-2]
+    level: mid
+    prompt: >-
+      אילו גבולות מתארים בקואורדינטות כדוריות את חצי הכדור העליון $x^2+y^2+z^2\le R^2$, $z\ge0$?
+    choices:
+      - text: '$0\le r\le R$, $0\le\theta\le\frac\pi2$, $0\le\varphi\le2\pi$'
+        correct: true
+        feedback: >-
+          נכון. $z=r\cos\theta\ge0$ בדיוק כש-$\theta\le\frac\pi2$: מהקוטב הצפוני עד קו המשווה. $\varphi$ מקיפה את כל הציר.
+      - text: '$0\le r\le R$, $\frac\pi2\le\theta\le\pi$, $0\le\varphi\le2\pi$'
+        feedback: >-
+          ב-$\theta>\frac\pi2$, $\cos\theta<0$ ולכן $z<0$: זה חצי הכדור התחתון.
+        misconception: MC-c12-spherical-ranges
+      - text: '$0\le r\le R$, $0\le\theta\le\pi$, $0\le\varphi\le\pi$'
+        feedback: >-
+          $0\le\varphi\le\pi$ חותך את הכדור לפי הסימן של $y$, לא של $z$. החצי העליון נקבע על ידי $\theta$, הזווית מציר $z$.
+        misconception: MC-c12-spherical-ranges
+      - text: '$0\le r\le R^2$, $0\le\theta\le\frac\pi2$, $0\le\varphi\le2\pi$'
+        feedback: >-
+          $x^2+y^2+z^2=r^2$, ולכן הספרה $x^2+y^2+z^2=R^2$ היא $r=R$, לא $r=R^2$.
+        misconception: MC-c12-polar-limits
+
+  - id: Q-12.5-sph-integrand
+    type: expr
+    objectives: [OBJ-12.5-2]
+    level: mid
+    prompt: >-
+      חשבו את $\iiint_B\left(x^2+y^2+z^2\right)dV$, כש-$B$ הכדור $x^2+y^2+z^2\le a^2$. כתבו את התשובה כביטוי ב-$a$.
+    answer: '4*pi*a^5/5'
+    answerTex: '$\iiint_B\left(x^2+y^2+z^2\right)dV=\frac{4\pi a^5}{5}$'
+    variables: [a]
+    domain: [0.2, 3]
+    correctFeedback: >-
+      נכון. האינטגרנד $r^2$, ועם אלמנט הנפח: $\int_0^{2\pi}\!\int_0^\pi\!\int_0^ar^4\sin\theta\,dr\,d\theta\,d\varphi=\frac{a^5}{5}\cdot2\cdot2\pi$.
+    wrongFeedback: >-
+      בכדוריות $x^2+y^2+z^2=r^2$, ו-$dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$. האינטגרל מתפרק למכפלה.
+    commonWrong:
+      - expr: '2*pi^2*a^5/5'
+        feedback: >-
+          זה מה שיוצא בלי $\sin\theta$: $\int_0^\pi d\theta=\pi$ במקום 2.
+        misconception: MC-c12-spherical-element
+      - expr: '4*pi*a^3/3'
+        feedback: >-
+          זה הנפח של הכדור, $\iiint_B1\,dV$. כאן האינטגרנד $r^2$.
+        misconception: MC-c12-integral-is-size
+    hints: ['$\int_0^ar^4\,dr=\frac{a^5}{5}$.']
+
+  - id: Q-12.5-ranges-zero
+    type: twotier
+    objectives: [OBJ-12.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סטודנט חישב את נפח כדור היחידה כך: $\int_0^{\pi}\!\int_0^{2\pi}\!\int_0^1r^2\sin\theta\,dr\,d\theta\,d\varphi$ (כלומר
+      $0\le\theta\le2\pi$ ו-$0\le\varphi\le\pi$), וקיבל 0. איפה הטעות?
+    choices:
+      - text: 'בטווחים של הזוויות'
+        correct: true
+        feedback: 'נכון. $\theta$ (מציר $z$) רצה רק מ-0 עד $\pi$, ו-$\varphi$ מ-0 עד $2\pi$.'
+      - text: 'באלמנט הנפח: צריך $r^2\cos\theta$'
+        feedback: >-
+          עם $\theta$ מציר $z$ האלמנט הוא $r^2\sin\theta$. הבעיה היא שהטווחים של $\theta$ ו-$\varphi$ הוחלפו.
+        misconception: MC-c12-spherical-element
+    reasons:
+      - text: '$\int_0^{2\pi}\sin\theta\,d\theta=0$: על הטווח הזה $\sin\theta$ שלילי בחצי, ונקודות נספרות פעמיים בסימנים מנוגדים'
+        correct: true
+        feedback: >-
+          בדיוק. עם $0\le\theta\le\pi$ מתקבל $\int_0^\pi\sin\theta\,d\theta=2$, והנפח $\frac13\cdot2\cdot2\pi=\frac{4\pi}{3}$.
+      - text: 'הטווחים לא משנים: כל כיסוי של הכדור נותן אותו נפח'
+        feedback: >-
+          $\theta\in[0,2\pi]$ עם $\varphi\in[0,\pi]$ מכסה כל נקודה פעמיים, פעם עם $\sin\theta<0$. אלמנט הנפח $r^2\sin\theta$
+          חיובי רק כש-$0\le\theta\le\pi$.
+        misconception: MC-c12-spherical-ranges
+      - text: 'האינטגרל לפי $r$ צריך להיות מ-$-1$ עד 1'
+        feedback: >-
+          $r$ הוא מרחק, ולכן $r\ge0$. כל הכיוונים נספרים על ידי הזוויות, לא על ידי סימן של $r$.
+        misconception: MC-c12-spherical-ranges
+
+  - id: Q-12.5-choose
+    type: multi
+    objectives: [OBJ-12.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סמנו את כל הזוגות שבהם מערכת הקואורדינטות מתאימה לחישוב.
+    choices:
+      - text: '$\iiint\sqrt{x^2+y^2+z^2}\,dV$ על הכדור $x^2+y^2+z^2\le1$: כדוריות'
+        correct: true
+        feedback: 'נכון. הכדור הוא $r\le1$ והאינטגרנד $r$.'
+      - text: '$\iiint z\,dV$ על הגליל $x^2+y^2\le4$, $0\le z\le3$: גליליות'
+        correct: true
+        feedback: 'נכון. הגליל הוא תיבה בגליליות: $0\le r\le2$, $0\le\theta\le2\pi$, $0\le z\le3$.'
+      - text: '$\iiint xyz\,dV$ על התיבה $[0,1]^3$: כדוריות'
+        feedback: >-
+          הפאות של התיבה הן $x=1$, $y=1$, $z=1$, ובכדוריות הן נעשות משוואות מסובכות ב-$r,\theta,\varphi$. בקרטזיות זו מכפלה
+          על תיבה: $\frac18$.
+        misconception: MC-c12-coords-mismatch
+      - text: 'הנפח בין $z=x^2+y^2$ ל-$z=4$: כדוריות'
+        feedback: >-
+          הפרבולואיד אינו "קואורדינטה כדורית קבועה". בגליליות הוא $z=r^2$ והמישור $z=4$, כלומר גבולות פשוטים ל-$z$.
+        misconception: MC-c12-coords-mismatch
+
+  - id: Q-12.5-choose-twotier
+    type: twotier
+    objectives: [OBJ-12.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $E$ הוא החלק של הכדור $x^2+y^2+z^2\le4$ שנמצא בתוך הגליל $x^2+y^2\le1$. נכון או לא נכון: נוח לחשב את הנפח שלו
+      בקואורדינטות גליליות.
+    choices:
+      - text: נכון
+        correct: true
+        feedback: >-
+          נכון. $0\le r\le1$, $0\le\theta\le2\pi$, $-\sqrt{4-r^2}\le z\le\sqrt{4-r^2}$, והנפח
+          $2\pi\int_0^12r\sqrt{4-r^2}\,dr$, אינטגרל בהצבה.
+      - text: 'לא נכון: יש כדור, ולכן צריך כדוריות'
+        feedback: >-
+          בכדוריות דופן הגליל היא $r\sin\theta=1$, ואז הגבול של $r$ תלוי ב-$\theta$ ומתחלף באמצע. הדופן הישרה מתאימה
+          לגליליות, והספרה רק נותנת את הגבולות של $z$.
+        misconception: MC-c12-coords-mismatch
+    reasons:
+      - text: 'בגליליות דופן הגליל היא $r=1$ והספרה נותנת גבולות ל-$z$: $z=\pm\sqrt{4-r^2}$'
+        correct: true
+        feedback: 'בדיוק. כל חלק של השפה הוא גבול פשוט של קואורדינטה אחת.'
+      - text: 'גליליות תמיד עדיפות על כדוריות'
+        feedback: >-
+          לכדור שלם, או לגוף שבין כדור לחרוט, כדוריות טובות יותר. בוחרים לפי השפה.
+        misconception: MC-c12-coords-mismatch
+      - text: 'כי בגליליות אין יעקוביאן'
+        feedback: >-
+          יש: $dV=r\,dr\,d\theta\,dz$. הבחירה נעשית לפי הגבולות, לא לפי היעקוביאן.
+        misconception: MC-c12-polar-no-r
+
+  - id: Q-12.5-cone-ice
+    type: numeric
+    objectives: [OBJ-12.5-2, OBJ-12.5-3]
+    level: exam
+    prompt: >-
+      "גביע גלידה": הגוף שבתוך הכדור $x^2+y^2+z^2\le1$ ומעל החרוט $z=\sqrt{x^2+y^2}$. חשבו את הנפח שלו.
+    answer: 0.613434123007073
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. החרוט $z=\sqrt{x^2+y^2}$ הוא $\theta=\frac\pi4$, והגוף: $0\le r\le1$, $0\le\theta\le\frac\pi4$,
+      $0\le\varphi\le2\pi$. הנפח $\frac13\cdot\left(1-\cos\frac\pi4\right)\cdot2\pi=\frac{\pi\left(2-\sqrt2\right)}{3}$.
+    wrongFeedback: >-
+      בכדוריות החרוט הוא זווית קבועה מציר $z$. מצאו אותה ($\tan\theta=1$), וחשבו עם $dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$.
+    commonWrong:
+      - value: 1.48096097938612
+        feedback: >-
+          $\frac{\sqrt2\pi}{3}$ יוצא עם $\cos\theta$ במקום $\sin\theta$ באלמנט הנפח (המוסכמה של הזווית מהמישור). עם $\theta$
+          מציר $z$: $\int_0^{\pi/4}\sin\theta\,d\theta=1-\frac{\sqrt2}{2}$.
+        misconception: MC-c12-spherical-element
+    hints: ['על החרוט $z=\sqrt{x^2+y^2}$, כלומר $r\cos\theta=r\sin\theta$.']
+
+  - id: Q-12.5-shell
+    type: numeric
+    objectives: [OBJ-12.5-2, OBJ-12.5-3]
+    level: exam
+    prompt: >-
+      קליפה כדורית עבה $1\le x^2+y^2+z^2\le4$ עשויה מחומר שצפיפותו הפוכה למרחק מהמרכז: $\rho=\frac{1}{\sqrt{x^2+y^2+z^2}}$.
+      חשבו את המסה.
+    answer: 18.8495559215388
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. בכדוריות $\rho=\frac1r$ והקליפה $1\le r\le2$: $\int_0^{2\pi}\!\int_0^\pi\!\int_1^2\frac1r\,r^2\sin\theta\,dr\,d\theta\,d\varphi=\frac32\cdot2\cdot2\pi=6\pi$.
+    wrongFeedback: >-
+      הגבולות: $1\le r\le2$ ושתי הזוויות על כל הטווח. האינטגרנד $\frac1r\cdot r^2\sin\theta$.
+    commonWrong:
+      - value: 29.6088132032681
+        feedback: >-
+          $3\pi^2$ יוצא בלי $\sin\theta$ באלמנט הנפח.
+        misconception: MC-c12-spherical-element
+      - value: 29.3215314335047
+        feedback: >-
+          $\frac{28\pi}{3}$ הוא הנפח של הקליפה. המסה היא האינטגרל של הצפיפות, שקטנה מ-1 בקליפה.
+        misconception: MC-c12-integral-is-size
+    hints: ['$\int_1^2r\,dr=\frac32$.']

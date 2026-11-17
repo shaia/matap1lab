@@ -1,0 +1,280 @@
+# Lesson 11.4 — line integrals of a function and of a field (notes pp. 87–92).
+# Objectives (src/course.ts):
+#   OBJ-11.4-1  compute the line integral of a scalar function with respect to arc length
+#   OBJ-11.4-2  compute the line integral of a vector field, as work, also in differential notation
+#   OBJ-11.4-3  reversing the curve changes the sign of a field's line integral, and not of an arc-length integral
+# The two examples of notes p. 92 are recomputed: the first is 290/3 (the notes drop the factor dz = 2t dt), the
+# second 1. No Green's theorem here (lesson 12.8, enrichment). Keys recomputed in screens/tools/recompute-ch11.py.
+chapter: 11
+questions:
+  - id: Q-11.4-ds-segment
+    type: numeric
+    objectives: [OBJ-11.4-1]
+    level: basic
+    prompt: >-
+      $C$ הקטע מ-$(0,0)$ ל-$(3,4)$. חשבו $\int_C(x+y)\,ds$ בעזרת הפרמטריזציה $\vec r(t)=(3t,4t)$, $0\le t\le1$.
+    answer: 17.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $|\vec r\,'(t)|=|(3,4)|=5$, ולכן $\int_0^1(3t+4t)\cdot5\,dt=35\cdot\frac12=\frac{35}{2}$.
+    wrongFeedback: >-
+      $ds=|\vec r\,'(t)|\,dt$. הציבו $x=3t$, $y=4t$ בפונקציה, הכפילו ב-$|\vec r\,'(t)|$ ובצעו אינטגרציה מ-0 עד 1.
+    commonWrong:
+      - value: 3.5
+        feedback: >-
+          זה $\int_0^17t\,dt$, בלי $|\vec r\,'(t)|=5$. הפרמטר $t$ רץ על קטע באורך 1, אבל העקום באורך 5.
+        misconception: MC-c11-ds-forgot-speed
+
+  - id: Q-11.4-ds-circle
+    type: numeric
+    objectives: [OBJ-11.4-1]
+    level: basic
+    prompt: >-
+      $C$ המעגל ברדיוס 2 סביב הראשית. חשבו $\int_Cx^2\,ds$.
+    answer: 25.1327412287183
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $8\pi$. עם $\vec r(t)=(2\cos t,2\sin t)$: $|\vec r\,'|=2$, ו-$\int_0^{2\pi}4\cos^2t\cdot2\,dt=8\pi$.
+    wrongFeedback: >-
+      פרמטרו את המעגל, חשבו $|\vec r\,'(t)|$, והשתמשו ב-$\int_0^{2\pi}\cos^2t\,dt=\pi$.
+    commonWrong:
+      - value: 12.5663706143592
+        feedback: >-
+          $4\pi$ הוא $\int_0^{2\pi}4\cos^2t\,dt$ בלי $|\vec r\,'(t)|=2$. בדיקה מהירה: $\int_C1\,ds$ צריך לצאת ההיקף $4\pi$, ובלי
+          הגורם 2 יוצא $2\pi$.
+        misconception: MC-c11-ds-forgot-speed
+
+  - id: Q-11.4-work-meaning
+    type: mc
+    objectives: [OBJ-11.4-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      חלקיק נע לאורך עקום $C$ בשדה כוח $\vec F$. מה אומר $\int_C\vec F\cdot d\vec r$?
+    choices:
+      - text: 'הסכום, לאורך הדרך, של הרכיב של $\vec F$ בכיוון התנועה כפול אורך כל קטע: העבודה של הכוח'
+        correct: true
+        feedback: >-
+          נכון. $\vec F\cdot\Delta\vec r=|\vec F|\,|\Delta\vec r|\cos\alpha$: רק הרכיב המשיק לעקום עושה עבודה.
+      - text: 'גודל הכוח כפול אורך הדרך'
+        feedback: >-
+          זה נכון רק כשהכוח תמיד בכיוון התנועה. כוח מרכזי בתנועה מעגלית מאונך למהירות ועושה עבודה 0, למרות שהוא לא אפס.
+        misconception: MC-c11-work-magnitude
+      - text: 'הסכום של הרכיב של $\vec F$ **הניצב** לעקום כפול אורך כל קטע'
+        feedback: >-
+          הרכיב הניצב לתנועה לא עושה עבודה: $\cos90^\circ=0$. הסכום של הרכיב הניצב הוא "שטף דרך העקום", מושג אחר.
+        misconception: MC-c11-work-magnitude
+
+  - id: Q-11.4-work-param
+    type: numeric
+    objectives: [OBJ-11.4-2]
+    level: basic
+    prompt: >-
+      $\vec F(x,y)=(y,\ x^2)$, ו-$C$ הפרבולה $\vec r(t)=(t,t^2)$, $0\le t\le1$. חשבו $\int_C\vec F\cdot d\vec r$.
+    answer: 0.833333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac56$. $\vec F(\vec r(t))=(t^2,t^2)$ ו-$\vec r\,'(t)=(1,2t)$, לכן המכפלה $t^2+2t^3$ ו-
+      $\int_0^1(t^2+2t^3)\,dt=\frac13+\frac12$.
+    wrongFeedback: >-
+      הציבו את העקום בשדה, הכפילו סקלרית ב-$\vec r\,'(t)$, ובצעו אינטגרציה.
+    commonWrong:
+      - value: 0.666666666666667
+        feedback: >-
+          $\frac23=\int_0^1(t^2+t^2)\,dt$: חיברתם את רכיבי השדה בלי להכפיל ב-$\vec r\,'(t)=(1,2t)$. $d\vec r$ הוא וקטור
+          המהירות כפול $dt$.
+        misconception: MC-c11-work-forgot-rprime
+
+  - id: Q-11.4-reverse
+    type: twotier
+    objectives: [OBJ-11.4-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      ידוע ש-$\int_C\vec F\cdot d\vec r=5$. מה $\int_{-C}\vec F\cdot d\vec r$, כש-$-C$ הוא אותו עקום בכיוון ההפוך?
+    choices:
+      - text: '$-5$'
+        correct: true
+        feedback: 'נכון: הליכה הפוכה הופכת את כל $\Delta\vec r$, וכל מחובר $\vec F\cdot\Delta\vec r$ מחליף סימן.'
+      - text: '$5$'
+        feedback: >-
+          העקום כקבוצת נקודות זהה, אבל הכיוון התהפך: אם הכוח עזר לתנועה בכיוון אחד, הוא מפריע לה בכיוון השני.
+        misconception: MC-c11-reverse-work-same
+    reasons:
+      - text: 'וקטור המהירות מתהפך, $d\vec r\to-d\vec r$, ו-$\vec F$ בכל נקודה נשאר אותו דבר'
+        correct: true
+        feedback: 'בדיוק. בפרמטריזציה $\vec r(a+b-t)$ הנגזרת היא $-\vec r\,''(a+b-t)$.'
+      - text: 'האינטגרל תלוי רק בנקודות של העקום'
+        feedback: 'זה נכון לאינטגרל לפי אורך, לא לאינטגרל של שדה: כאן גם הכיוון נכנס, דרך $d\vec r$.'
+        misconception: MC-c11-reverse-work-same
+      - text: 'גבולות האינטגרציה מתחלפים, וגם $ds$ מחליף סימן'
+        feedback: >-
+          $ds=|\vec r\,'|\,dt$ הוא אורך ואינו מחליף סימן. מה שמחליף סימן כאן הוא $d\vec r$, הווקטור.
+        misconception: MC-c11-reverse-scalar-sign
+
+  - id: Q-11.4-differentials
+    type: numeric
+    objectives: [OBJ-11.4-2]
+    level: mid
+    prompt: >-
+      חשבו $\displaystyle\int_C(x+z)\,dx+xz\,dy+(z+y^2)\,dz$, כש-$C$ הוא $\vec r(t)=(t,\ 3t,\ t^2)$, $0\le t\le2$
+      (סיכומי ההרצאות, עמ׳ 92).
+    answer: 96.6666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{290}{3}$. $dx=dt$, $dy=3\,dt$, $dz=2t\,dt$, ולכן האינטגרנד הוא
+      $(t+t^2)+t\cdot t^2\cdot3+(t^2+9t^2)\cdot2t=t+t^2+23t^3$, ו-$\int_0^2=2+\frac83+92$.
+    wrongFeedback: >-
+      כתבו $dx$, $dy$, $dz$ בעזרת $dt$ (כל אחד עם הנגזרת שלו), הציבו $x=t$, $y=3t$, $z=t^2$ בכל המקדמים, ואספו.
+    commonWrong:
+      - value: 43.3333333333333
+        feedback: >-
+          $\frac{130}{3}$ מתקבל מ-$dz=dt$ במקום $dz=2t\,dt$. הנגזרת של $z=t^2$ היא $2t$. (בסיכומים נשמט כאן הגורם $2t$.)
+        misconception: MC-c11-differential-missing-factor
+      - value: 16.6666666666667
+        feedback: >-
+          $\frac{50}{3}$ הוא $\int_0^2(t+t^2+3t^3)\,dt$: האיבר של $dz$ נשמט כולו (כמו בשורה האחרונה בסיכומים). גם
+          $(z+y^2)\,dz$ תורם.
+        misconception: MC-c11-differential-missing-factor
+
+  - id: Q-11.4-differentials-ellipse
+    type: numeric
+    objectives: [OBJ-11.4-2]
+    level: mid
+    prompt: >-
+      חשבו $\int_Cx^2\,dx+xy\,dy$, כש-$C$ הוא $x=\cos t$, $y=2\sin t$, $0\le t\le\frac{\pi}{2}$ (סיכומי ההרצאות, עמ׳ 92).
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $dx=-\sin t\,dt$, $dy=2\cos t\,dt$, והאינטגרנד $-\cos^2t\sin t+4\sin t\cos^2t=3\cos^2t\sin t$. עם $w=\cos t$:
+      $\int_0^{\pi/2}3\cos^2t\sin t\,dt=\big[-\cos^3t\big]_0^{\pi/2}=1$.
+    wrongFeedback: >-
+      $dy$ הוא $y'(t)\,dt$ עם $y=2\sin t$. אחרי ההצבה האינטגרנד הוא כפולה של $\cos^2t\sin t$.
+    commonWrong:
+      - value: 0.333333333333333
+        feedback: >-
+          $\frac13$ מתקבל מ-$dy=\cos t\,dt$, בלי הגורם 2 של $y=2\sin t$.
+        misconception: MC-c11-differential-missing-factor
+
+  - id: Q-11.4-rank
+    type: rank
+    objectives: [OBJ-11.4-2]
+    level: mid
+    prompt: >-
+      סדרו את שלבי החישוב של $\int_C\vec F\cdot d\vec r$.
+    help: 'גררו את השלבים לפי הסדר: הראשון למעלה.'
+    items:
+      - { id: param, label: 'בוחרים פרמטריזציה $\vec r(t)$, $a\le t\le b$, שעוברת על $C$ בכיוון הנתון' }
+      - { id: deriv, label: 'גוזרים: $\vec r\,''(t)$' }
+      - { id: subst, label: 'מציבים את העקום בשדה: $\vec F(\vec r(t))$' }
+      - { id: dot, label: 'מכפילים סקלרית: $\vec F(\vec r(t))\cdot\vec r\,''(t)$' }
+      - { id: integrate, label: 'מבצעים אינטגרציה מ-$a$ עד $b$' }
+    order: [param, [deriv, subst], dot, integrate]
+    correctFeedback: >-
+      נכון. את $\vec r\,'(t)$ ואת $\vec F(\vec r(t))$ אפשר לחשב בכל סדר; את הכיוון קובעים כבר בפרמטריזציה, ולכן
+      האינטגרציה היא תמיד מ-$a$ ל-$b$.
+    wrongFeedback: >-
+      הכול מתחיל בפרמטריזציה: בלעדיה אין $\vec r\,'(t)$ ואין מה להציב בשדה. האינטגרציה היא הצעד האחרון.
+
+  - id: Q-11.4-reverse-scalar
+    type: mc
+    objectives: [OBJ-11.4-3, OBJ-11.4-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      תיל בצורת עקום $C$, עם צפיפות $\rho(x,y)$, והמסה שלו $\int_C\rho\,ds=7$. מה $\int_{-C}\rho\,ds$?
+    choices:
+      - text: '$7$'
+        correct: true
+        feedback: >-
+          נכון. $ds=|\vec r\,'(t)|\,dt$ הוא אורך, חיובי בכל כיוון. מסה של תיל לא תלויה בכיוון שבו סופרים אותה.
+      - text: '$-7$'
+        feedback: >-
+          רק אינטגרל של **שדה**, עם $d\vec r$, מחליף סימן. ב-$\int f\,ds$ אין וקטור שמתהפך: מסה שלילית לא הגיונית.
+        misconception: MC-c11-reverse-scalar-sign
+      - text: 'אי אפשר לדעת בלי לדעת את $\rho$'
+        feedback: >-
+          לא צריך: בכל פרמטריזציה של $-C$ סוכמים את אותם $\rho\,\Delta s$ חיוביים, רק בסדר אחר.
+        misconception: MC-c11-reverse-scalar-sign
+
+  - id: Q-11.4-semicircle
+    type: numeric
+    objectives: [OBJ-11.4-3, OBJ-11.4-2]
+    level: mid
+    prompt: >-
+      $\vec F(x,y)=(-y,x)$. חשבו את העבודה של $\vec F$ לאורך חצי מעגל היחידה העליון, **מ-$(-1,0)$ ל-$(1,0)$**.
+    answer: -3.14159265358979
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\pi$. הליכה מ-$(-1,0)$ ל-$(1,0)$ דרך החלק העליון היא עם כיוון השעון, נגד השדה. עם $\vec r(t)=(\cos t,\sin t)$
+      מ-$t=\pi$ ל-$t=0$: $\int_\pi^0(\sin^2t+\cos^2t)\,dt=-\pi$.
+    wrongFeedback: >-
+      $\vec F$ משיק למעגל ומסתובב נגד כיוון השעון, באורך 1 על מעגל היחידה. באיזה כיוון אתם הולכים?
+    commonWrong:
+      - value: 3.14159265358979
+        feedback: >-
+          $\pi$ היא העבודה בכיוון נגד השעון, מ-$(1,0)$ ל-$(-1,0)$. כאן הכיוון הפוך, ולכן הסימן הפוך.
+        misconception: MC-c11-reverse-work-same
+
+  - id: Q-11.4-helix-mass
+    type: numeric
+    objectives: [OBJ-11.4-1]
+    level: mid
+    prompt: >-
+      תיל בצורת סליל $\vec r(t)=(\cos t,\ \sin t,\ t)$, $0\le t\le2\pi$, עם צפיפות $\rho=z$. חשבו את המסה $\int_Cz\,ds$.
+    answer: 27.9154567985555
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2\sqrt2\,\pi^2$. $|\vec r\,'|=|(-\sin t,\cos t,1)|=\sqrt2$, ו-$\int_0^{2\pi}t\sqrt2\,dt=\sqrt2\cdot2\pi^2$.
+    wrongFeedback: >-
+      $z=t$ על הסליל, ו-$ds=|\vec r\,'(t)|\,dt$. חשבו את גודל המהירות לפני האינטגרציה.
+    commonWrong:
+      - value: 19.7392088021787
+        feedback: >-
+          $2\pi^2=\int_0^{2\pi}t\,dt$, בלי $|\vec r\,'|=\sqrt2$. הסליל עולה תוך כדי סיבוב, ולכן הוא ארוך יותר מהקטע של $t$.
+        misconception: MC-c11-ds-forgot-speed
+
+  - id: Q-11.4-wire
+    type: numeric
+    objectives: [OBJ-11.4-1]
+    level: exam
+    prompt: >-
+      תיל בצורת חצי המעגל העליון $x^2+y^2=4$, $y\ge0$, עם צפיפות $\rho(x,y)=y$. חשבו את המסה שלו.
+    answer: 8
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec r(t)=(2\cos t,2\sin t)$, $0\le t\le\pi$, $|\vec r\,'|=2$, ו-$\int_0^\pi2\sin t\cdot2\,dt=8$. (מרכז המסה:
+      $\bar y=\frac{1}{8}\int_Cy^2\,ds=\frac{4\pi}{8}=\frac{\pi}{2}$.)
+    wrongFeedback: >-
+      פרמטרו את חצי המעגל, $ds=|\vec r\,'(t)|\,dt$, והציבו $y=2\sin t$.
+    commonWrong:
+      - value: 4
+        feedback: >-
+          $4=\int_0^\pi2\sin t\,dt$, בלי $|\vec r\,'|=2$. על מעגל ברדיוס 2, שינוי של $dt$ בזווית הוא קשת באורך $2\,dt$.
+        misconception: MC-c11-ds-forgot-speed
+
+  - id: Q-11.4-triangle
+    type: numeric
+    objectives: [OBJ-11.4-2, OBJ-11.4-3]
+    level: exam
+    prompt: >-
+      $\vec F(x,y)=(xy,\ x-y)$. $C$ הוא שפת המשולש עם הקודקודים $(0,0)$, $(1,0)$, $(1,1)$, בכיוון
+      $(0,0)\to(1,0)\to(1,1)\to(0,0)$. חשבו $\oint_C\vec F\cdot d\vec r$ (שלושה קטעים).
+    answer: 0.166666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac16$. על $y=0$: $xy\,dx=0$. על $x=1$ מ-$y=0$ ל-$y=1$: $\int_0^1(1-y)\,dy=\frac12$. מ-$(1,1)$ ל-$(0,0)$,
+      עם $x=y=1-t$: $dx=dy=-dt$ והאינטגרנד $-(1-t)^2$, כלומר $-\frac13$. סך הכול $0+\frac12-\frac13$.
+    wrongFeedback: >-
+      פרמטרו כל צלע בכיוון של המסלול, חשבו כל אחת לחוד, וחברו. שימו לב לכיוון של הצלע האלכסונית.
+    commonWrong:
+      - value: 0.833333333333333
+        feedback: >-
+          $\frac56=\frac12+\frac13$: את הצלע האלכסונית חישבתם מ-$(0,0)$ ל-$(1,1)$. המסלול עובר עליה מ-$(1,1)$ חזרה ל-$(0,0)$,
+          והתרומה שלה $-\frac13$.
+        misconception: MC-c11-reverse-work-same
+      - value: 0
+        feedback: >-
+          העקום סגור, אבל זה לא הופך את העבודה לאפס: מה שהשדה נותן בצלע אחת הוא לא בהכרח מה שהוא לוקח בצלע אחרת. חשבו כל
+          צלע.
+        misconception: MC-c11-closed-zero-always

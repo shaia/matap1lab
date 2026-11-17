@@ -1,0 +1,241 @@
+# Lesson 10.2 — partial and directional derivatives, second-order partials.
+# Objectives (src/course.ts):
+#   OBJ-10.2-1  compute partial derivatives and read them as slopes of sections
+#   OBJ-10.2-2  compute a directional derivative from the definition and from the gradient
+#   OBJ-10.2-3  compute second-order partials and check that the mixed ones agree
+# Examples from the notes pp. 41, 43, 57 (x² + 4xy³ + 3y²x⁴; D_v f = ∇f·v), recomputed in screens/tools/recompute-ch10.py.
+# Convention: D_û f with û a unit vector; f_xy = (f_x)_y. The formula D_û f = ∇f·û is used for polynomials and other
+# functions with continuous partials (lesson 10.3 says why).
+chapter: 10
+questions:
+  - id: Q-10.2-fx-poly
+    type: expr
+    objectives: [OBJ-10.2-1]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=x^2+4xy^3+3y^2x^4$. חשבו את $f_x$. כתבו נוסחה ב-$x$ וב-$y$.
+    answer: '2*x + 4*y^3 + 12*x^3*y^2'
+    answerTex: '$f_x=2x+4y^3+12x^3y^2$'
+    variables: [x, y]
+    correctFeedback: >-
+      נכון. $y$ קבוע: $x^2\mapsto2x$, $4y^3\cdot x\mapsto4y^3$, $3y^2\cdot x^4\mapsto12y^2x^3$.
+    wrongFeedback: >-
+      גזרו כל איבר לפי $x$, והתייחסו ל-$y$ כאל מספר: $4xy^3$ הוא "מספר כפול $x$".
+    commonWrong:
+      - expr: '2*x'
+        feedback: >-
+          מחקתם את האיברים שמופיע בהם $y$. אבל $y$ הוא רק מקדם: $\frac{\partial}{\partial x}\left(4xy^3\right)=4y^3$, לא 0.
+        misconception: MC-c10-mixed-term-constant
+      - expr: '2*x + 12*x*y^2 + 12*x^3*y^2'
+        feedback: >-
+          את האיבר $4xy^3$ גזרתם לפי $y$ ($12xy^2$). בגזירה לפי $x$ הוא נותן $4y^3$.
+        misconception: MC-c10-partial-wrong-variable
+
+  - id: Q-10.2-fy-exp
+    type: expr
+    objectives: [OBJ-10.2-1]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=x\,e^{xy}$. חשבו את $f_y$.
+    answer: 'x^2*exp(x*y)'
+    answerTex: '$f_y=x^2e^{xy}$'
+    variables: [x, y]
+    correctFeedback: >-
+      נכון. $x$ קבוע, כך ש-$f$ היא "מספר כפול $e^{xy}$", והנגזרת הפנימית של $xy$ לפי $y$ היא $x$: $x\cdot x\,e^{xy}$.
+    wrongFeedback: >-
+      $x$ קבוע. גזרו את $e^{xy}$ לפי $y$ בכלל השרשרת, ואל תשכחו את הגורם $x$ שמחוץ לאקספוננט.
+    commonWrong:
+      - expr: 'x*exp(x*y)'
+        feedback: >-
+          חסרה הנגזרת הפנימית: $\frac{\partial}{\partial y}(xy)=x$, ולכן $\frac{\partial}{\partial y}e^{xy}=xe^{xy}$.
+        misconception: MC-c10-partial-chain-inner
+      - expr: 'exp(x*y) + x*y*exp(x*y)'
+        feedback: >-
+          זו $f_x$: גזרתם לפי $x$ (כלל מכפלה). בגזירה לפי $y$ הגורם $x$ הוא קבוע, ואין כלל מכפלה.
+        misconception: MC-c10-partial-wrong-variable
+
+  - id: Q-10.2-slope-section
+    type: numeric
+    objectives: [OBJ-10.2-1]
+    level: basic
+    prompt: >-
+      הגרף של $f(x,y)=10-x^2-4y^2$ נחתך במישור $y=1$, ומתקבל עקום. מה השיפוע של העקום הזה בנקודה שבה $x=1$?
+    answer: -2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. על החתך $y=1$ קבוע, והשיפוע הוא $f_x(1,1)=-2x\big|_{x=1}$, כלומר $-2$. החתך הוא $z=6-x^2$.
+    wrongFeedback: >-
+      במישור $y=1$ רק $x$ משתנה. השיפוע של החתך הוא הנגזרת החלקית לפי $x$ בנקודה $(1,1)$.
+    commonWrong:
+      - value: -8
+        feedback: >-
+          זו $f_y(1,1)=-8y$: השיפוע של החתך במישור $x=1$, שבו $y$ משתנה. בחתך $y=1$ המשתנה הוא $x$.
+        misconception: MC-c10-partial-wrong-variable
+
+  - id: Q-10.2-dir-grad
+    type: numeric
+    objectives: [OBJ-10.2-2]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=x^2+3xy$. חשבו את הנגזרת הכיוונית של $f$ בנקודה $(1,-1)$ בכיוון הווקטור $(1,2)$. (אפשר לכתוב שורש,
+      למשל √7.)
+    answer: 2.2360679775
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\sqrt5$. $\nabla f=(2x+3y,\ 3x)=(-1,3)$ בנקודה, וקטור היחידה הוא $\frac{(1,2)}{\sqrt5}$, ולכן
+      $D_{\hat u}f=\frac{-1+6}{\sqrt5}=\sqrt5$.
+    wrongFeedback: >-
+      חשבו את הגרדיאנט בנקודה, נרמלו את $(1,2)$ (אורכו $\sqrt5$), והכפילו סקלרית.
+    commonWrong:
+      - value: 5
+        feedback: >-
+          זה $\nabla f\cdot(1,2)$ בלי לחלק באורך. נגזרת כיוונית נלקחת עם וקטור יחידה: $\frac{5}{\sqrt5}=\sqrt5$.
+        misconception: MC-c10-nonunit-direction
+
+  - id: Q-10.2-fxy-product
+    type: expr
+    objectives: [OBJ-10.2-3]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=x^3y^2+\sin(xy)$. חשבו את $f_{xy}=(f_x)_y$.
+    answer: '6*x^2*y + cos(x*y) - x*y*sin(x*y)'
+    answerTex: '$f_{xy}=6x^2y+\cos(xy)-xy\sin(xy)$'
+    variables: [x, y]
+    correctFeedback: >-
+      נכון. $f_x=3x^2y^2+y\cos(xy)$. גוזרים לפי $y$: $6x^2y$, ובאיבר השני כלל מכפלה:
+      $\cos(xy)+y\cdot\big(-x\sin(xy)\big)$.
+    wrongFeedback: >-
+      חשבו קודם את $f_x$, ואז גזרו אותה לפי $y$. באיבר $y\cos(xy)$ המשתנה $y$ מופיע בשני גורמים.
+    commonWrong:
+      - expr: '6*x^2*y + cos(x*y)'
+        feedback: >-
+          בגזירה של $y\cos(xy)$ לפי $y$ חסר כלל המכפלה: גם $\cos(xy)$ תלוי ב-$y$, ותורם $-xy\sin(xy)$.
+        misconception: MC-c10-partial-product-rule
+
+  - id: Q-10.2-contour-sign
+    type: mc
+    objectives: [OBJ-10.2-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      קווי הגובה של טמפרטורה $T(x,y)$ על לוח הם ישרים אנכיים ($x$ קבוע על כל קו), והערכים עליהם עולים משמאל לימין. מה
+      נכון בכל נקודה?
+    choices:
+      - text: '$T_x>0$ ו-$T_y=0$'
+        correct: true
+        feedback: >-
+          נכון. כשזזים אנכית ($y$ משתנה) נשארים על אותו קו גובה, ולכן $T_y=0$. כשזזים ימינה חוצים קווים עם ערכים עולים,
+          ולכן $T_x>0$.
+      - text: '$T_x=0$ ו-$T_y>0$'
+        feedback: >-
+          על כל קו $x$ קבוע, אבל זה אומר שלאורך הקו (בכיוון $y$) $T$ לא משתנה. השינוי הוא בכיוון $x$, שחוצה את הקווים.
+        misconception: MC-c10-partial-along-level
+      - text: '$T_x>0$ ו-$T_y>0$'
+        feedback: 'בתנועה אנכית נשארים על אותו קו גובה, ולכן $T$ לא משתנה: $T_y=0$.'
+        misconception: MC-c10-partial-along-level
+      - text: '$T_x<0$ ו-$T_y=0$'
+        feedback: 'הערכים עולים ימינה, ולכן הנגזרת בכיוון $x$ החיובי חיובית.'
+        misconception: MC-c10-partial-wrong-variable
+
+  - id: Q-10.2-dir-def
+    type: numeric
+    objectives: [OBJ-10.2-2]
+    level: mid
+    prompt: >-
+      תהי $f(x,y)=x^2y$, הנקודה $(1,2)$ והכיוון $\hat u=\left(\tfrac35,\tfrac45\right)$. חשבו את $D_{\hat u}f(1,2)$ לפי
+      ההגדרה: גזרו את $\varphi(t)=f\left(1+\tfrac35t,\ 2+\tfrac45t\right)$ ב-$t=0$.
+    answer: 3.2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{16}{5}$. $\varphi(t)=\left(1+\tfrac35t\right)^2\left(2+\tfrac45t\right)$, ובכלל המכפלה
+      $\varphi'(0)=2\cdot\tfrac35\cdot2+1\cdot\tfrac45=\tfrac{16}{5}$. בדיקה בגרדיאנט: $\nabla f(1,2)=(2xy,x^2)=(4,1)$, ו-$(4,1)\cdot\left(\tfrac35,\tfrac45\right)=\tfrac{16}{5}$.
+    wrongFeedback: >-
+      כתבו את $\varphi(t)$ במפורש, גזרו בכלל המכפלה והציבו $t=0$.
+    commonWrong:
+      - value: 16
+        feedback: >-
+          זה $\nabla f\cdot(3,4)$: השתמשתם בווקטור $(3,4)$, שאורכו 5, במקום בווקטור היחידה. התוצאה גדולה פי 5.
+        misconception: MC-c10-nonunit-direction
+      - value: 5
+        feedback: >-
+          $5=f_x+f_y$, הנגזרת "בכיוון" $(1,1)$, שאינו הכיוון הנתון ואינו באורך 1.
+        misconception: MC-c10-nonunit-direction
+
+  - id: Q-10.2-dir-opposite
+    type: twotier
+    objectives: [OBJ-10.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      ידוע ש-$D_{\hat u}f(a)=3$. נכון או לא נכון: $D_{-\hat u}f(a)=-3$.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. מה שעולה בכיוון אחד יורד באותו קצב בכיוון ההפוך.'
+      - text: 'לא נכון, $D_{-\hat u}f(a)=3$'
+        feedback: >-
+          שני הכיוונים על אותו ישר, אבל הולכים בהם בכיוונים הפוכים: עלייה בקצב 3 בכיוון אחד היא ירידה בקצב 3 בכיוון השני.
+        misconception: MC-c10-directional-sign
+    reasons:
+      - text: 'הפונקציה $t\mapsto f(a-t\hat u)$ היא $\varphi(-t)$, ונגזרתה ב-0 היא $-\varphi''(0)$'
+        correct: true
+        feedback: 'בדיוק. ובשפת הגרדיאנט: $\nabla f\cdot(-\hat u)=-\nabla f\cdot\hat u$.'
+      - text: 'נגזרת כיוונית היא קצב, וקצב הוא תמיד חיובי'
+        feedback: 'נגזרת כיוונית יכולה להיות שלילית: היא שלילית בדיוק כש-$f$ יורדת בכיוון הזה.'
+        misconception: MC-c10-directional-sign
+      - text: 'הגרדיאנט בנקודה לא השתנה, ולכן גם הנגזרת הכיוונית'
+        feedback: 'הגרדיאנט אותו גרדיאנט, אבל כופלים אותו סקלרית בכיוון אחר: $-\hat u$.'
+        misconception: MC-c10-directional-sign
+
+  - id: Q-10.2-mixed-check
+    type: twotier
+    objectives: [OBJ-10.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      תלמיד חישב ל-$f(x,y)=e^x\sin y+x^5y^3$ וקיבל $f_{xy}=e^x\cos y+15x^4y^2$ ו-$f_{yx}=e^x\cos y+15x^4y^3$. נכון או לא
+      נכון: לפחות אחת מהתוצאות שגויה, עוד לפני שבודקים את החישוב.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. הנגזרות השניות של $f$ רציפות בכל המישור, ולכן $f_{xy}=f_{yx}$. התוצאות שונות, ולכן יש טעות; הנכונה היא
+          $15x^4y^2$ בשתיהן ($f_y=e^x\cos y+3x^5y^2$, ו-$(3x^5y^2)_x=15x^4y^2$).
+      - text: 'לא נכון'
+        feedback: >-
+          לפונקציה עם נגזרות שניות רציפות הנגזרות המעורבות שוות, ולכן שתי תוצאות שונות לא יכולות להיות נכונות יחד.
+        misconception: MC-c10-partial-wrong-variable
+    reasons:
+      - text: 'הנגזרות השניות של $f$ רציפות, ולכן לפי המשפט $f_{xy}=f_{yx}$'
+        correct: true
+        feedback: 'בדיוק. זו בדיקה מהירה לכל חישוב של נגזרות מעורבות.'
+      - text: 'סדר הגזירה משנה, ולכן התוצאות אמורות להיות שונות'
+        feedback: >-
+          המשפט אומר את ההפך לפונקציות עם נגזרות שניות רציפות, כמו כל הפונקציות האלמנטריות בתחום ההגדרה שלהן.
+        misconception: MC-c10-partial-wrong-variable
+      - text: 'האיבר $e^x\sin y$ נותן תוצאות שונות בשני הסדרים'
+        feedback: 'בשני הסדרים הוא נותן $e^x\cos y$, וכך כתב גם התלמיד. ההבדל באיבר הפולינומי.'
+        misconception: MC-c10-partial-product-rule
+
+  - id: Q-10.2-laplace
+    type: expr
+    objectives: [OBJ-10.2-3]
+    level: exam
+    prompt: >-
+      הפוטנציאל של תיל טעון ארוך הוא (עד כדי קבוע) $f(x,y)=\ln\left(x^2+y^2\right)$. חשבו את $f_{xx}$. (אחר כך בדקו בעצמכם
+      ש-$f_{xx}+f_{yy}=0$ מחוץ לראשית.)
+    answer: '2*(y^2 - x^2)/(x^2 + y^2)^2'
+    answerTex: '$f_{xx}=\dfrac{2(y^2-x^2)}{(x^2+y^2)^2}$'
+    variables: [x, y]
+    domain: [0.5, 2]
+    correctFeedback: >-
+      נכון. $f_x=\frac{2x}{x^2+y^2}$, ובכלל המנה $f_{xx}=\frac{2(x^2+y^2)-2x\cdot2x}{(x^2+y^2)^2}=\frac{2(y^2-x^2)}{(x^2+y^2)^2}$.
+      מסימטריה $f_{yy}=\frac{2(x^2-y^2)}{(x^2+y^2)^2}$, והסכום 0.
+    wrongFeedback: >-
+      $f_x=\frac{2x}{x^2+y^2}$. גם המכנה תלוי ב-$x$: גזרו בכלל המנה.
+    commonWrong:
+      - expr: '2/(x^2 + y^2)'
+        feedback: >-
+          התייחסתם למכנה $x^2+y^2$ כאל קבוע כי יש בו $y$. אבל יש בו גם $x$, ולכן צריך כלל מנה.
+        misconception: MC-c10-mixed-term-constant
+    hints: ['כתבו את $f_x$ כמנה, וזכרו ש-$x$ מופיע גם במונה וגם במכנה.']

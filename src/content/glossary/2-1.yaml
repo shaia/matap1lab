@@ -1,0 +1,28 @@
+# Terms first defined in lesson 2.1 (circle and ellipse).
+- id: parametrisation
+  term: פרמטריזציה
+  en: parametrisation
+  symbol: '(x(t),y(t)),\ t\in I'
+  definition: >-
+    תיאור של עקום על ידי שתי פונקציות של פרמטר אחד, $x=x(t)$ ו-$y=y(t)$, כש-$t$ עובר על קטע: לכל $t$ נקודה על העקום.
+    לעקום אחד יש הרבה פרמטריזציות, שנבדלות בנקודת ההתחלה, בכיוון ובמהירות. מעגל היחידה: $(\cos t,\sin t)$,
+    $0\le t<2\pi$.
+  reject: [פרמטריזאציה, פרמטריזצייה]
+  lesson: '2.1'
+- id: ellipse
+  term: אליפסה
+  en: ellipse
+  symbol: '\frac{x^2}{a^2}+\frac{y^2}{b^2}=1'
+  definition: >-
+    העקום $\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$ ($a,b>0$), וכל הזזה שלו: מעגל שנמתח בכיוון הצירים. הוא חותך את ציר $x$
+    ב-$\pm a$ ואת ציר $y$ ב-$\pm b$. פרמטריזציה: $(a\cos t,b\sin t)$, $0\le t<2\pi$.
+  reject: [אלפסה, אליפסא]
+  lesson: '2.1'
+- id: semi-axis
+  term: חצי ציר
+  en: semi-axis
+  definition: >-
+    באליפסה $\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$: המספרים $a$ ו-$b$, המרחקים מהמרכז לנקודות שבהן האליפסה חותכת את
+    צירי הסימטריה שלה. הגדול מביניהם הוא חצי הציר הגדול. בהיפרבולה $\frac{x^2}{a^2}-\frac{y^2}{b^2}=1$ באותו שם
+    נקראים $a$ ו-$b$.
+  lesson: '2.1'

@@ -1,0 +1,303 @@
+# Lesson 4.1 — function: domain, graph, image and composition (notes pp. 2–3).
+# Objectives (src/course.ts):
+#   OBJ-4.1-1  find the domain and the image of a given function
+#   OBJ-4.1-2  compose functions, find the domain of a composition, decompose a complicated function
+#   OBJ-4.1-3  read from a graph values, intervals of increase and decrease, intercepts with the axes
+# Every number is recomputed in screens/tools/checks_ch4.py.
+chapter: 4
+questions:
+  - id: Q-4.1-domain-root-frac
+    type: mc
+    objectives: [OBJ-4.1-1]
+    level: basic
+    prompt: >-
+      מהו תחום ההגדרה של $f(x)=\frac{\sqrt{x+2}}{x-1}$?
+    choices:
+      - text: '$[-2,1)\cup(1,\infty)$'
+        correct: true
+        feedback: >-
+          נכון. השורש דורש $x+2\ge0$, כלומר $x\ge-2$, והמכנה דורש $x\ne1$. התחום הוא החיתוך של שני התנאים.
+      - text: '$\mathbb{R}\setminus\{1\}$'
+        feedback: >-
+          בדקתם רק את המכנה. ב-$x=-3$, למשל, מקבלים $\sqrt{-1}$, שאינו ממשי.
+        misconception: MC-c4-domain-one-condition
+      - text: '$[-2,\infty)$'
+        feedback: >-
+          בדקתם רק את השורש. ב-$x=1$ המכנה מתאפס, ולכן הנקודה הזו לא בתחום.
+        misconception: MC-c4-domain-one-condition
+
+  - id: Q-4.1-image-interval
+    type: numeric
+    objectives: [OBJ-4.1-1]
+    level: basic
+    prompt: >-
+      התמונה של $f(x)=x^2$ על הקטע $[-1,2]$ היא קטע. מהו הערך הקטן ביותר בה?
+    answer: 0
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x=0$ נמצא בקטע ו-$f(0)=0$, ו-$x^2\ge0$ תמיד. הערך הגדול ביותר הוא $f(2)=4$, ולכן התמונה $[0,4]$.
+    wrongFeedback: >-
+      שרטטו את הפרבולה על הקטע: היא יורדת עד $x=0$ ואחר כך עולה. מה הערך הנמוך ביותר שהיא מגיעה אליו?
+    commonWrong:
+      - value: 1
+        feedback: >-
+          1 הוא $f(-1)$, הערך בקצה השמאלי. אבל בתוך הקטע הפרבולה יורדת עד $x=0$, ושם הערך 0. לא מספיק לבדוק את הקצוות.
+        misconception: MC-c4-image-endpoints
+
+  - id: Q-4.1-compose-fg
+    type: expr
+    objectives: [OBJ-4.1-2]
+    level: basic
+    prompt: >-
+      $f(x)=x^2+1$ ו-$g(x)=3x-2$. כתבו נוסחה ל-$f(g(x))$ (במשתנה x).
+    answer: '(3*x - 2)^2 + 1'
+    answerTex: '$f(g(x))=(3x-2)^2+1=9x^2-12x+5$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. מציבים את $g(x)=3x-2$ במקום המשתנה של $f$: $(3x-2)^2+1$.
+    wrongFeedback: >-
+      ב-$f(g(x))$ הפלט של $g$ נכנס ל-$f$: בנוסחה $f(u)=u^2+1$ שימו $u=3x-2$.
+    commonWrong:
+      - expr: '3*x^2 + 1'
+        feedback: >-
+          זו $g(f(x))=3(x^2+1)-2$: הפעלתם קודם את $f$. ב-$f(g(x))$ הפנימית היא $g$.
+        misconception: MC-c4-composition-order
+      - expr: '(x^2 + 1)*(3*x - 2)'
+        feedback: >-
+          זו המכפלה $f(x)\cdot g(x)$. בהרכבה הפלט של $g$ הוא הקלט של $f$.
+        misconception: MC-c4-composition-is-product
+    hints: ['כתבו $f(u)=u^2+1$ והציבו $u=g(x)$.']
+
+  - id: Q-4.1-decompose
+    type: mc
+    objectives: [OBJ-4.1-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      (מהסיכומים, עמ׳ 9) כתבו את $h(x)=\sin(x^3)$ כהרכבה $h(x)=f(g(x))$. מהן $f$ ו-$g$?
+    choices:
+      - text: '$f(u)=\sin u$ ו-$g(x)=x^3$'
+        correct: true
+        feedback: >-
+          נכון. קודם מעלים בשלישית ($g$), ועל התוצאה מפעילים סינוס ($f$): $f(g(x))=\sin(x^3)$.
+      - text: '$f(u)=u^3$ ו-$g(x)=\sin x$'
+        feedback: >-
+          זה נותן $f(g(x))=(\sin x)^3=\sin^3x$, פונקציה אחרת: הסדר הפוך. ב-$\sin(x^3)$ החזקה היא הפעולה הראשונה.
+        misconception: MC-c4-composition-order
+      - text: '$h$ היא המכפלה של $\sin x$ ו-$x^3$'
+        feedback: >-
+          המכפלה היא $x^3\sin x$. ב-$\sin(x^3)$ הסינוס פועל **על** $x^3$: זו הרכבה.
+        misconception: MC-c4-composition-is-product
+
+  - id: Q-4.1-intercepts
+    type: numeric
+    objectives: [OBJ-4.1-3]
+    level: basic
+    prompt: >-
+      הגרף של $f(x)=x^2-4x+3$ חותך את ציר $y$ בנקודה אחת. מהו שיעור ה-$y$ שלה?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. על ציר $y$ מתקיים $x=0$, ו-$f(0)=3$. החיתוכים עם ציר $x$ הם השורשים $x=1$ ו-$x=3$.
+    wrongFeedback: >-
+      על ציר $y$ מתקיים $x=0$. הציבו.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          1 הוא שורש של $f$: שם הגרף חותך את ציר $x$ ($y=0$). את ציר $y$ הוא חותך ב-$x=0$.
+        misconception: MC-c4-intercept-axes-swap
+
+  - id: Q-4.1-image-recip
+    type: twotier
+    objectives: [OBJ-4.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: התמונה של $f(x)=\frac1x$ (על כל תחום ההגדרה שלה) היא $\mathbb{R}$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. הערך 0 לעולם אינו מתקבל, ולכן התמונה $\mathbb{R}\setminus\{0\}$.'
+      - text: 'נכון'
+        feedback: >-
+          נסו לפתור $\frac1x=0$: אין פתרון. כל ערך אחר $c\ne0$ מתקבל ב-$x=\frac1c$, אבל 0 לא.
+        misconception: MC-c4-image-all-reals
+    reasons:
+      - text: 'למשוואה $\frac1x=c$ יש פתרון בדיוק כש-$c\ne0$'
+        correct: true
+        feedback: 'בדיוק. כדי למצוא תמונה פותרים $f(x)=c$ ושואלים לאילו $c$ יש פתרון.'
+      - text: 'התחום הוא $\mathbb{R}\setminus\{0\}$, ולכן גם התמונה'
+        feedback: >-
+          כאן במקרה שתי הקבוצות שוות, אבל הנימוק שגוי: תחום ותמונה הם דברים שונים. ל-$x^2$ התחום $\mathbb{R}$ והתמונה
+          $[0,\infty)$.
+        misconception: MC-c4-domain-image-swap
+      - text: '$\frac1x$ מקבלת ערכים גדולים וקטנים כרצוננו, ולכן כל ערך'
+        feedback: >-
+          ערכים גדולים מאוד וקרובים ל-0 אינם "כל ערך": 0 עצמו אינו מתקבל.
+        misconception: MC-c4-image-all-reals
+
+  - id: Q-4.1-compose-domain
+    type: mc
+    objectives: [OBJ-4.1-2]
+    level: mid
+    prompt: >-
+      $f(x)=\sqrt x$ ו-$g(x)=1-x^2$. מהו תחום ההגדרה של $f(g(x))=\sqrt{1-x^2}$?
+    choices:
+      - text: '$[-1,1]$'
+        correct: true
+        feedback: >-
+          נכון. $g$ מוגדרת לכל $x$, אבל צריך גם ש-$g(x)=1-x^2$ יהיה בתחום של $f$, כלומר $1-x^2\ge0$.
+      - text: '$\mathbb{R}$'
+        feedback: >-
+          זה התחום של $g$ לבדה. ב-$x=2$, $g(2)=-3$, ו-$\sqrt{-3}$ אינו מוגדר.
+        misconception: MC-c4-composition-domain-inner-only
+      - text: '$[0,\infty)$'
+        feedback: >-
+          זה התחום של $f$, אבל הוא מגביל את **הקלט של $f$**, כלומר את $g(x)$, לא את $x$. ב-$x=2$ הנוסחה אינה מוגדרת.
+        misconception: MC-c4-composition-domain-inner-only
+
+  - id: Q-4.1-compose-domain-simplify
+    type: twotier
+    objectives: [OBJ-4.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f(x)=x^2$ ו-$g(x)=\sqrt x$. נכון או לא נכון: $f(g(x))=x$, ולכן תחום ההגדרה של $f\circ g$ הוא $\mathbb{R}$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $f(g(x))=x$ רק ל-$x\ge0$, ושם בלבד ההרכבה מוגדרת.'
+      - text: 'נכון'
+        feedback: >-
+          ב-$x=-4$ צריך קודם לחשב $g(-4)=\sqrt{-4}$, שאינו ממשי, ולכן גם $f(g(-4))$ אינו מוגדר.
+        misconception: MC-c4-composition-domain-final-formula
+    reasons:
+      - text: 'כדי לחשב $f(g(x))$ צריך קודם את $g(x)=\sqrt x$, שמוגדרת רק ל-$x\ge0$'
+        correct: true
+        feedback: 'בדיוק. הפישוט $(\sqrt x)^2=x$ תקף רק במקום שבו $\sqrt x$ קיים.'
+      - text: '$f$ מוגדרת על כל $\mathbb{R}$, ולכן ההרכבה מוגדרת על כל $\mathbb{R}$'
+        feedback: >-
+          $f$ מקבלת כל קלט, אבל הקלט שלה הוא $g(x)$, ו-$g$ עצמה אינה מוגדרת ל-$x<0$.
+        misconception: MC-c4-composition-domain-inner-only
+      - text: 'הנוסחה הסופית $x$ מוגדרת לכל $x$'
+        feedback: >-
+          התחום נקבע לפי כל השלבים, לא לפי התוצאה המפושטת.
+        misconception: MC-c4-composition-domain-final-formula
+
+  - id: Q-4.1-compose-three
+    type: expr
+    objectives: [OBJ-4.1-2]
+    level: mid
+    prompt: >-
+      $f(x)=\frac1x$ ו-$g(x)=x+1$. כתבו נוסחה מפושטת ל-$f(g(f(x)))$, ל-$x>0$ (במשתנה x).
+    answer: 'x/(x + 1)'
+    answerTex: '$f(g(f(x)))=\frac{1}{\frac1x+1}=\frac{x}{x+1}$'
+    variables: [x]
+    domain: [0.2, 3]
+    correctFeedback: >-
+      נכון. מבפנים החוצה: $f(x)=\frac1x$, אחר כך $g$: $\frac1x+1=\frac{x+1}{x}$, ולבסוף $f$: $\frac{x}{x+1}$.
+    wrongFeedback: >-
+      עבדו מבפנים החוצה: חשבו $f(x)$, הציבו ב-$g$, ואת התוצאה הציבו ב-$f$.
+    commonWrong:
+      - expr: '1/(x + 1) + 1'
+        feedback: >-
+          זו $g(f(g(x)))$: הסדר הפוך. ב-$f(g(f(x)))$ הפעולה הראשונה היא $f$ (הפנימית ביותר).
+        misconception: MC-c4-composition-order
+    hints: ['התחילו מהסוגריים הפנימיים ביותר: $f(x)=\frac1x$.']
+
+  - id: Q-4.1-increasing-vs-negative
+    type: twotier
+    objectives: [OBJ-4.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f(x)=(x-1)(x-3)$. נכון או לא נכון: בקטע $(1,3)$ הגרף נמצא מתחת לציר $x$, ולכן $f$ יורדת בכל הקטע.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $f<0$ בכל $(1,3)$, אבל הקודקוד של הפרבולה ב-$x=2$: היא יורדת ב-$(1,2)$ ועולה ב-$(2,3)$.
+      - text: 'נכון'
+        feedback: >-
+          $f(1.5)=-0.75$, $f(2)=-1$, $f(2.5)=-0.75$: בחצי השני הערכים **גדלים**, גם אם הם שליליים.
+        misconception: MC-c4-graph-increasing-positive
+    reasons:
+      - text: 'שלילית פירושו גובה מתחת לציר; יורדת פירושו שהגובה קטן כשזזים ימינה, ואחרי הקודקוד $x=2$ הוא גדל'
+        correct: true
+        feedback: 'בדיוק. סימן וכיוון הם שתי שאלות נפרדות על הגרף.'
+      - text: 'פונקציה שלילית תמיד יורדת'
+        feedback: >-
+          $-\frac1x$ ל-$x>0$ שלילית ועולה. הסימן לא קובע את הכיוון.
+        misconception: MC-c4-graph-increasing-positive
+      - text: 'בין שני שורשים פונקציה תמיד מונוטונית'
+        feedback: >-
+          בין שני שורשים פרבולה מגיעה לקודקוד ומחליפה כיוון.
+        misconception: MC-c4-graph-increasing-positive
+
+  - id: Q-4.1-notes-graph
+    type: mc
+    objectives: [OBJ-4.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      (מהסיכומים, עמ׳ 3) ל-$x\ne\pm1$, $\frac{x^2-3x+2}{x^2-1}=\frac{x-2}{x+1}$. בסיכומים הגרף של $\frac{x-2}{x+1}$ צויר יורד ליד
+      $x=1$. מה נכון לגבי $g(x)=\frac{x-2}{x+1}$ בקטע $(-1,\infty)$?
+    choices:
+      - text: '$g$ עולה, כי $g(x)=1-\frac{3}{x+1}$ ו-$\frac3{x+1}$ קטן כש-$x$ גדל'
+        correct: true
+        feedback: >-
+          נכון. למשל $g(0)=-2$, $g(1)=-\frac12$, $g(2)=0$: הערכים גדלים. השרטוט בסיכומים שגוי בכיוון (הנקודה
+          $\left(1,-\frac12\right)$ נכונה).
+      - text: '$g$ יורדת, כי היא שלילית ב-$(-1,2)$'
+        feedback: >-
+          שלילית אינה יורדת: $g(0)=-2<g(1)=-\frac12$. הערכים שליליים אבל גדלים.
+        misconception: MC-c4-graph-increasing-positive
+      - text: '$g$ חותכת את ציר $y$ ב-$y=2$'
+        feedback: >-
+          2 הוא השורש של $g$, החיתוך עם ציר $x$. ציר $y$ נחתך ב-$g(0)=-2$.
+        misconception: MC-c4-intercept-axes-swap
+
+  - id: Q-4.1-domain-sqrt-ln
+    type: mc
+    objectives: [OBJ-4.1-1, OBJ-4.1-2]
+    level: exam
+    prompt: >-
+      מהו תחום ההגדרה של $h(x)=\sqrt{\ln(x-1)}$?
+    choices:
+      - text: '$[2,\infty)$'
+        correct: true
+        feedback: >-
+          נכון. $\ln(x-1)$ מוגדר כש-$x>1$, והשורש דורש $\ln(x-1)\ge0$, כלומר $x-1\ge1$. שני התנאים יחד: $x\ge2$.
+      - text: '$(1,\infty)$'
+        feedback: >-
+          זה רק התנאי של הלוגריתם. ב-$x=1.5$: $\ln0.5<0$, והשורש אינו מוגדר.
+        misconception: MC-c4-domain-one-condition
+      - text: '$[1,\infty)$'
+        feedback: >-
+          $\ln u\ge0$ כש-$u\ge1$, לא כש-$u\ge0$; וב-$x=1$ הלוגריתם אינו מוגדר כלל.
+        misconception: MC-c4-ln-sign
+    hints: ['כתבו את $h$ כהרכבה של שלוש פונקציות, ורשמו את התנאי של כל שלב.']
+
+  - id: Q-4.1-ball
+    type: numeric
+    objectives: [OBJ-4.1-1, OBJ-4.1-3]
+    level: exam
+    prompt: >-
+      כדור נזרק מהקרקע כלפי מעלה, וגובהו במטרים אחרי $t$ שניות הוא $h(t)=20t-5t^2$, כל עוד הוא באוויר. תחום ההגדרה הפיזיקלי
+      של $h$ הוא מהזריקה עד הנחיתה, והתמונה היא קבוצת הגבהים. מהו הערך הגדול ביותר בתמונה (במטרים)?
+    answer: 20
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $h(t)=0$ ב-$t=0$ וב-$t=4$, ולכן התחום $[0,4]$. הקודקוד ב-$t=2$: $h(2)=40-20=20$. התמונה $[0,20]$.
+    wrongFeedback: >-
+      מצאו קודם את התחום (מתי $h=0$), ואז את הקודקוד של הפרבולה, באמצע בין השורשים.
+    commonWrong:
+      - value: 4
+        feedback: >-
+          4 הוא רגע הנחיתה, הקצה של **תחום ההגדרה** (זמן). התמונה היא אוסף הגבהים.
+        misconception: MC-c4-domain-image-swap
+      - value: 2
+        feedback: >-
+          2 הוא **הרגע** שבו הכדור בשיא, ערך בתחום. הגובה באותו רגע הוא $h(2)$.
+        misconception: MC-c4-domain-image-swap

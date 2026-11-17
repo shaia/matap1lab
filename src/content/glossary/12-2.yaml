@@ -1,0 +1,18 @@
+# Terms first defined in lesson 12.2 (regions that are not rectangles, changing the order).
+- id: region-between-graphs
+  term: תחום בין שני גרפים
+  en: region between two graphs (type I / type II region)
+  symbol: 'a\le x\le b,\ g_1(x)\le y\le g_2(x)'
+  definition: >-
+    תחום במישור מהצורה $a\le x\le b$, $g_1(x)\le y\le g_2(x)$ ("לפי $x$": כל רצועה אנכית היא קטע אחד), או
+    $c\le y\le d$, $h_1(y)\le x\le h_2(y)$ ("לפי $y$"). עליו $\iint_Df\,dA=\int_a^b\!\int_{g_1(x)}^{g_2(x)}f\,dy\,dx$.
+  reject: []
+  lesson: '12.2'
+- id: change-of-order
+  term: החלפת סדר האינטגרציה
+  en: changing the order of integration
+  definition: >-
+    כתיבה מחדש של אינטגרל נשנה בסדר ההפוך ($dx\,dy$ במקום $dy\,dx$) על ידי תיאור חדש של אותו תחום: משרטטים את התחום מתוך
+    הגבולות, וקוראים אותו ברצועות בכיוון השני. התוצאה לא משתנה, אבל לפעמים רק סדר אחד מאפשר לחשב.
+  reject: []
+  lesson: '12.2'

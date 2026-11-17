@@ -1,0 +1,10 @@
+# Terms first defined in lesson 8.2 (substitution in a definite integral, symmetry, variable upper limit).
+- id: integral-variable-upper-limit
+  term: אינטגרל עם גבול עליון משתנה
+  en: integral with a variable upper limit (accumulation function)
+  symbol: 'F(x)=\int_a^x f(t)\,dt'
+  definition: >-
+    הפונקציה $F(x)=\int_a^xf(t)\,dt$: השטח עם הסימן מ-$a$ עד $x$. המשתנה $t$ הוא משתנה האינטגרציה, ו-$x$ הוא
+    הגבול. לפי המשפט היסודי, כש-$f$ רציפה, $F'(x)=f(x)$, ובגבול $g(x)$: $\frac{d}{dx}\int_a^{g(x)}f(t)\,dt=f(g(x))\,g'(x)$.
+  reject: []
+  lesson: '8.2'

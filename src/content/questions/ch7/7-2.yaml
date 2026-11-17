@@ -1,0 +1,296 @@
+# Lesson 7.2 — integration by substitution.
+# Objectives (src/course.ts):
+#   OBJ-7.2-1  recognise when a substitution fits and choose it
+#   OBJ-7.2-2  carry out a substitution in an indefinite integral and return to the original variable
+#   OBJ-7.2-3  substitution with the inner derivative, as in f'/f
+# Notes pp. 11 (∫x² cos x³ dx, with the slip −sin y/3 in the middle line), 14 (∫x/(1+x²) dx), 15 (∫dx/(x+a)).
+# Keys recomputed in screens/tools/recompute-ch7.py.
+chapter: 7
+questions:
+  - id: Q-7.2-choose
+    type: mc
+    objectives: [OBJ-7.2-1]
+    qualitative: true
+    level: basic
+    prompt: 'איזו הצבה מתאימה ל-$\int x^2\cos\left(x^3\right)dx$?'
+    choices:
+      - text: '$u=x^3$'
+        correct: true
+        feedback: >-
+          נכון. $du=3x^2\,dx$, והגורם $x^2$ כבר נמצא באינטגרל: הוא הנגזרת הפנימית (עד קבוע). נשאר $\frac13\int\cos u\,du$.
+      - text: '$u=x^2$'
+        feedback: >-
+          $du=2x\,dx$, אבל באינטגרל אין $x$ בודד שיתאים, ו-$x^3=u^{3/2}$ רק מסבך. מציבים את הביטוי ה**פנימי** שנגזרתו מופיעה
+          כגורם.
+        misconception: MC-c7-subst-no-du
+      - text: '$u=\cos\left(x^3\right)$'
+        feedback: >-
+          $du=-3x^2\sin\left(x^3\right)dx$, ובאינטגרל אין $\sin\left(x^3\right)$. בוחרים את הביטוי שנגזרתו מופיעה כגורם.
+        misconception: MC-c7-subst-no-du
+    hints: ['הנגזרת של איזה ביטוי מופיעה כגורם באינטגרל?']
+
+  - id: Q-7.2-notes
+    type: expr
+    objectives: [OBJ-7.2-2]
+    level: basic
+    prompt: 'חשבו $\int x^2\cos\left(x^3\right)dx$ (עמ׳ 11 במחברת).'
+    answer: 'sin(x^3)/3'
+    answerTex: '$\frac{\sin\left(x^3\right)}{3}+C$'
+    variables: [x]
+    domain: [-1.2, 1.2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $u=x^3$, $du=3x^2\,dx$: $\int x^2\cos\left(x^3\right)dx=\frac13\int\cos u\,du=\frac13\sin u+C=\frac{\sin(x^3)}{3}+C$.
+      (בשורת הביניים במחברת כתוב $-\frac{\sin y}{3}$, בטעות; התשובה הסופית שם נכונה.)
+    wrongFeedback: 'הציבו $u=x^3$, החליפו $x^2\,dx=\frac{du}{3}$, בצעו אינטגרציה וחזרו ל-$x$.'
+    commonWrong:
+      - expr: '-sin(x^3)/3'
+        feedback: '$\int\cos u\,du=+\sin u$. (זו בדיוק הטעות בשורת הביניים במחברת.)'
+        misconception: MC-c7-trig-integral-sign
+      - expr: 'sin(x^3)'
+        feedback: 'שכחתם את $\frac13$: $du=3x^2\,dx$, ולכן $x^2\,dx=\frac{du}{3}$.'
+        misconception: MC-c7-subst-forget-factor
+    hints: ['$x^2\,dx=\frac13\,du$.']
+
+  - id: Q-7.2-linear
+    type: expr
+    objectives: [OBJ-7.2-2]
+    level: basic
+    prompt: 'חשבו $\int(2x+1)^5\,dx$.'
+    answer: '(2*x+1)^6/12'
+    answerTex: '$\frac{(2x+1)^6}{12}+C$'
+    variables: [x]
+    domain: [-1, 1]
+    upToConstant: true
+    correctFeedback: 'נכון. $u=2x+1$, $dx=\frac{du}{2}$: $\frac12\cdot\frac{u^6}{6}=\frac{(2x+1)^6}{12}$.'
+    wrongFeedback: 'גזרו את התשובה שלכם בכלל השרשרת: האם מתקבל בדיוק $(2x+1)^5$?'
+    commonWrong:
+      - expr: '(2*x+1)^6/6'
+        feedback: >-
+          הנגזרת של $\frac{(2x+1)^6}{6}$ היא $2(2x+1)^5$, פי 2 מהנדרש: הנגזרת הפנימית 2. מחלקים בה: $\frac{(2x+1)^6}{12}$.
+        misconception: MC-c7-subst-forget-factor
+    hints: ['$u=2x+1$, $du=2\,dx$.']
+
+  - id: Q-7.2-fprime-f
+    type: expr
+    objectives: [OBJ-7.2-3]
+    level: basic
+    prompt: 'חשבו $\int\frac{x}{1+x^2}\,dx$ (עמ׳ 14 במחברת).'
+    answer: 'log(1+x^2)/2'
+    answerTex: '$\frac12\ln\left(1+x^2\right)+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $u=1+x^2$, $du=2x\,dx$: $\frac12\int\frac{du}{u}=\frac12\ln|u|$, ו-$1+x^2>0$, אז אפשר בלי ערך מוחלט.
+    wrongFeedback: 'המונה הוא כמעט הנגזרת של המכנה: $(1+x^2)''=2x$. חסר רק קבוע.'
+    commonWrong:
+      - expr: 'log(1+x^2)'
+        feedback: 'הנגזרת של $\ln(1+x^2)$ היא $\frac{2x}{1+x^2}$, פי 2 מהנדרש. צריך $\frac12$.'
+        misconception: MC-c7-subst-forget-factor
+      - expr: 'atan(x)'
+        feedback: '$\arctan x$ היא הקדומה של $\frac{1}{1+x^2}$, בלי $x$ במונה. כאן המונה הוא (חצי) הנגזרת של המכנה: לוגריתם.'
+        misconception: MC-c7-atan-vs-log
+    hints: ['$u=1+x^2$.']
+
+  - id: Q-7.2-not-fprime
+    type: twotier
+    objectives: [OBJ-7.2-3]
+    qualitative: true
+    level: mid
+    prompt: 'נכון או לא: $\int\frac{dx}{1+x^2}=\ln\left(1+x^2\right)+C$.'
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: 'נכון. גזרו: $\left(\ln(1+x^2)\right)''=\frac{2x}{1+x^2}$. הקדומה הנכונה היא $\arctan x+C$ (עמ׳ 13 במחברת).'
+      - text: נכון
+        feedback: >-
+          הכלל $\int\frac{u'}{u}=\ln|u|$ דורש שהמונה יהיה הנגזרת של המכנה. כאן המונה 1, לא $2x$.
+        misconception: MC-c7-log-of-denominator
+    reasons:
+      - text: 'המונה 1 אינו הנגזרת $2x$ של המכנה, ולכן הכלל של הלוגריתם לא חל'
+        correct: true
+        feedback: 'בדיוק. ובדיקה בגזירה תופסת את זה מיד.'
+      - text: 'כי צריך ערך מוחלט: $\ln\left|1+x^2\right|$'
+        feedback: '$1+x^2>0$, ולכן הערך המוחלט לא משנה. הבעיה היא שהנגזרת של הלוגריתם אינה האינטגרנד.'
+        misconception: MC-c7-log-of-denominator
+      - text: 'כי חסר הגורם $\frac12$'
+        feedback: '$\frac12\ln(1+x^2)$ נגזרתה $\frac{x}{1+x^2}$, עדיין לא $\frac{1}{1+x^2}$: אין $x$ במונה.'
+        misconception: MC-c7-subst-forget-factor
+    hints: ['גזרו את $\ln(1+x^2)$.']
+
+  - id: Q-7.2-tan
+    type: expr
+    objectives: [OBJ-7.2-3]
+    level: mid
+    prompt: 'חשבו $\int\tan x\,dx$ בתחום $|x|<\frac{\pi}{2}$.'
+    answer: '-log(abs(cos(x)))'
+    answerTex: '$-\ln|\cos x|+C$'
+    variables: [x]
+    domain: [-1.2, 1.2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $\tan x=\frac{\sin x}{\cos x}$, ו-$(\cos x)'=-\sin x$: עם $u=\cos x$ מתקבל $-\int\frac{du}{u}=-\ln|\cos x|+C$.
+    wrongFeedback: 'כתבו $\tan x=\frac{\sin x}{\cos x}$ והציבו $u=\cos x$. שימו לב לסימן של $du$.'
+    commonWrong:
+      - expr: 'log(abs(cos(x)))'
+        feedback: '$du=-\sin x\,dx$, ולכן $\sin x\,dx=-du$: חסר מינוס.'
+        misconception: MC-c7-fprime-f-sign
+      - expr: '1/cos(x)^2'
+        feedback: 'זו הנגזרת של $\tan x$, לא הקדומה שלה.'
+        misconception: MC-c7-antideriv-is-derivative
+    hints: ['$\tan x=\frac{\sin x}{\cos x}$.']
+
+  - id: Q-7.2-exp-sqrt
+    type: expr
+    objectives: [OBJ-7.2-2]
+    level: mid
+    prompt: 'חשבו $\int\frac{e^{\sqrt x}}{\sqrt x}\,dx$ ל-$x>0$.'
+    answer: '2*exp(sqrt(x))'
+    answerTex: '$2e^{\sqrt x}+C$'
+    variables: [x]
+    domain: [0.2, 3]
+    upToConstant: true
+    correctFeedback: 'נכון. $u=\sqrt x$, $du=\frac{dx}{2\sqrt x}$, ולכן $\frac{dx}{\sqrt x}=2\,du$ ו-$\int2e^u\,du=2e^{\sqrt x}$.'
+    wrongFeedback: 'הציבו $u=\sqrt x$ וחשבו את $du$ בזהירות.'
+    commonWrong:
+      - expr: 'exp(sqrt(x))'
+        feedback: 'גזרו: $\left(e^{\sqrt x}\right)''=\frac{e^{\sqrt x}}{2\sqrt x}$, חצי מהנדרש. $\frac{dx}{\sqrt x}=2\,du$.'
+        misconception: MC-c7-subst-forget-factor
+    hints: ['$(\sqrt x)''=\frac{1}{2\sqrt x}$.']
+
+  - id: Q-7.2-find-slip
+    type: mc
+    objectives: [OBJ-7.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סטודנט כתב: "$\int x\sqrt{x^2+1}\,dx$; נציב $u=x^2+1$, ולכן $=\int x\sqrt u\,du=x\cdot\frac23u^{3/2}+C=\frac23x\left(x^2+1\right)^{3/2}+C$."
+      מה הטעות?
+    choices:
+      - text: 'הוא החליף $dx$ ב-$du$ בלי $du=2x\,dx$, והשאיר $x$ באינטגרל לפי $u$'
+        correct: true
+        feedback: >-
+          נכון. $du=2x\,dx$, ולכן $x\,dx=\frac{du}{2}$ והגורם $x$ **נבלע** ב-$du$: $\frac12\int\sqrt u\,du=\frac13\left(x^2+1\right)^{3/2}+C$.
+          אחרי הצבה לא נשאר אף $x$ באינטגרל.
+      - text: 'ההצבה לא מתאימה: צריך $u=\sqrt{x^2+1}$'
+        feedback: 'גם זו הצבה אפשרית, אבל $u=x^2+1$ מתאימה מצוין: הנגזרת $2x$ מופיעה כגורם. הבעיה בביצוע.'
+        misconception: MC-c7-subst-no-du
+      - text: 'אין טעות'
+        feedback: >-
+          גזרו את התשובה: $\left(\frac23x(x^2+1)^{3/2}\right)'=\frac23(x^2+1)^{3/2}+2x^2\sqrt{x^2+1}$, לא $x\sqrt{x^2+1}$.
+        misconception: MC-c7-subst-mixed-variables
+    hints: ['אחרי ההצבה, האם מותר שיישאר $x$ באינטגרל לפי $u$?']
+
+  - id: Q-7.2-mixed-expr
+    type: expr
+    objectives: [OBJ-7.2-2]
+    level: mid
+    prompt: 'חשבו $\int x\sqrt{x^2+1}\,dx$.'
+    answer: '(x^2+1)^(3/2)/3'
+    answerTex: '$\frac13\left(x^2+1\right)^{3/2}+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: 'נכון. $u=x^2+1$, $x\,dx=\frac{du}{2}$: $\frac12\cdot\frac23u^{3/2}=\frac13\left(x^2+1\right)^{3/2}$.'
+    wrongFeedback: 'אחרי ההצבה לא נשאר $x$: $x\,dx=\frac{du}{2}$.'
+    commonWrong:
+      - expr: '2/3*x*(x^2+1)^(3/2)'
+        feedback: 'השארתם את $x$ בחוץ והחלפתם $dx$ ב-$du$. הגורם $x$ הוא חלק מ-$du=2x\,dx$.'
+        misconception: MC-c7-subst-mixed-variables
+      - expr: '2/3*(x^2+1)^(3/2)'
+        feedback: 'שכחתם את $\frac12$ שבא מ-$du=2x\,dx$.'
+        misconception: MC-c7-subst-forget-factor
+    hints: ['$u=x^2+1$.']
+
+  - id: Q-7.2-log-power
+    type: expr
+    objectives: [OBJ-7.2-3]
+    level: mid
+    prompt: 'חשבו $\int\frac{\ln x}{x}\,dx$ ל-$x>0$.'
+    answer: 'log(x)^2/2'
+    answerTex: '$\frac{(\ln x)^2}{2}+C$'
+    variables: [x]
+    domain: [1.2, 4]
+    upToConstant: true
+    correctFeedback: 'נכון. $u=\ln x$, $du=\frac{dx}{x}$: $\int u\,du=\frac{u^2}{2}$. האינטגרנד הוא $u\cdot u''$, לא $\frac{u''}{u}$.'
+    wrongFeedback: 'הציבו $u=\ln x$. מה נשאר?'
+    commonWrong:
+      - expr: 'log(log(x))'
+        feedback: >-
+          $\ln|\ln x|$ היא הקדומה של $\frac{1}{x\ln x}=\frac{u'}{u}$. כאן $\ln x$ במונה: $\frac{\ln x}{x}=u\cdot u'$, וזה נותן
+          $\frac{u^2}{2}$.
+        misconception: MC-c7-fprime-f-confuse
+    hints: ['$u=\ln x$, $du=\frac{dx}{x}$.']
+
+  - id: Q-7.2-which-works
+    type: multi
+    objectives: [OBJ-7.2-1]
+    qualitative: true
+    level: mid
+    prompt: 'אילו מהאינטגרלים הבאים נפתרים ישירות בהצבה $u=x^2+1$? סמנו את כולם.'
+    choices:
+      - text: '$\int\frac{x}{x^2+1}\,dx$'
+        correct: true
+        feedback: 'נכון. $x\,dx=\frac{du}{2}$, ונשאר $\frac12\int\frac{du}{u}$.'
+      - text: '$\int x\left(x^2+1\right)^7dx$'
+        correct: true
+        feedback: 'נכון. $\frac12\int u^7\,du=\frac{(x^2+1)^8}{16}+C$.'
+      - text: '$\int\frac{x^3}{x^2+1}\,dx$'
+        correct: true
+        feedback: 'נכון, אף שזה פחות בולט: $x^3\,dx=x^2\cdot x\,dx=(u-1)\frac{du}{2}$, ונשאר $\frac12\int\frac{u-1}{u}\,du$.'
+      - text: '$\int\frac{dx}{x^2+1}$'
+        feedback: 'אין $x$ במונה שיהפוך ל-$du$. זה $\arctan x+C$ מהטבלה.'
+        misconception: MC-c7-subst-no-du
+      - text: '$\int\left(x^2+1\right)^7dx$'
+        feedback: 'בלי הגורם $x$ אין $du$. כאן פותחים סוגריים (בינום) ומבצעים אינטגרציה לפולינום.'
+        misconception: MC-c7-subst-no-du
+    hints: ['בכל אחד: האם $x\,dx$ (או כפולה שלו) מופיע?']
+
+  - id: Q-7.2-sin2x
+    type: expr
+    objectives: [OBJ-7.2-1, OBJ-7.2-3]
+    level: exam
+    prompt: 'חשבו $\int\frac{\sin 2x}{1+\cos^2x}\,dx$.'
+    answer: '-log(1+cos(x)^2)'
+    answerTex: '$-\ln\left(1+\cos^2x\right)+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $u=1+\cos^2x$, $du=-2\cos x\sin x\,dx=-\sin2x\,dx$: המונה הוא בדיוק מינוס הנגזרת של המכנה, ולכן
+      $-\int\frac{du}{u}=-\ln\left(1+\cos^2x\right)+C$.
+    wrongFeedback: 'גזרו את המכנה $1+\cos^2x$ בכלל השרשרת והשוו למונה (זכרו $\sin2x=2\sin x\cos x$).'
+    commonWrong:
+      - expr: 'log(1+cos(x)^2)'
+        feedback: '$(\cos^2x)''=-2\cos x\sin x$: המינוס של הנגזרת של קוסינוס חסר.'
+        misconception: MC-c7-fprime-f-sign
+      - expr: '-atan(cos(x))'
+        feedback: >-
+          זה מתקבל מהצבה $u=\cos x$ ששוכחת את $\cos x$ שבמונה: $\sin2x\,dx=-2u\,du$, ונשאר $\int\frac{-2u}{1+u^2}\,du$,
+          לוגריתם ולא $\arctan$.
+        misconception: MC-c7-atan-vs-log
+    hints: ['מה הנגזרת של $1+\cos^2x$?']
+
+  - id: Q-7.2-sqrt-sub
+    type: expr
+    objectives: [OBJ-7.2-1, OBJ-7.2-2]
+    level: exam
+    prompt: 'חשבו $\int\frac{dx}{1+\sqrt x}$ ל-$x>0$, בהצבה $u=\sqrt x$.'
+    answer: '2*sqrt(x) - 2*log(1+sqrt(x))'
+    answerTex: '$2\sqrt x-2\ln\left(1+\sqrt x\right)+C$'
+    variables: [x]
+    domain: [0.2, 4]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $x=u^2$, $dx=2u\,du$: $\int\frac{2u}{1+u}\,du=\int\left(2-\frac{2}{1+u}\right)du=2u-2\ln(1+u)+C$, וחוזרים
+      ל-$u=\sqrt x$.
+    wrongFeedback: 'כתבו $dx=2u\,du$, חלקו $\frac{2u}{1+u}=2-\frac{2}{1+u}$, וחזרו ל-$x$.'
+    commonWrong:
+      - expr: 'log(1+sqrt(x))'
+        feedback: 'החלפתם $dx$ ב-$du$. כש-$x=u^2$, $dx=2u\,du$, והגורם $2u$ משנה את האינטגרל לגמרי.'
+        misconception: MC-c7-subst-mixed-variables
+      - expr: '2*sqrt(x) + 2*log(1+sqrt(x))'
+        feedback: '$\frac{2u}{1+u}=2-\frac{2}{1+u}$: בחילוק השארית שלילית.'
+        misconception: MC-c7-division-remainder-sign
+    hints: ['$dx=2u\,du$.']

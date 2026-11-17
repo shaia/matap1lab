@@ -1,0 +1,15 @@
+# Terms first defined in lesson 10.8 (absolute extrema on a closed bounded region).
+- id: boundary-point
+  term: נקודת שפה
+  en: boundary point
+  definition: >-
+    נקודה שבכל עיגול סביבה, קטן ככל שיהיה, יש נקודות מהתחום ונקודות מחוצה לו. השפה של העיגול $x^2+y^2\le1$ היא המעגל
+    $x^2+y^2=1$. נקודה של התחום שאינה נקודת שפה היא נקודה פנימית.
+  lesson: '10.8'
+- id: closed-bounded-region
+  term: תחום סגור וחסום
+  en: closed and bounded region
+  definition: >-
+    תחום **סגור** מכיל את כל נקודות השפה שלו ($x^2+y^2\le1$ סגור, $x^2+y^2<1$ לא); תחום **חסום** מוכל בעיגול (או
+    בכדור) ברדיוס סופי. משפט (בקורס בלי הוכחה): פונקציה רציפה בתחום סגור וחסום מקבלת בו מקסימום ומינימום מוחלטים.
+  lesson: '10.8'

@@ -1,0 +1,254 @@
+# Lesson 11.5 — conservative fields and potentials.
+# Objectives (src/course.ts):
+#   OBJ-11.5-1  recognise a conservative field and find a potential for it
+#   OBJ-11.5-2  use the fundamental theorem for line integrals: the work of a gradient field depends only on the endpoints
+#   OBJ-11.5-3  check the cross-partials condition, and know a field that satisfies it and is not conservative on a domain with a hole
+# Keys recomputed in screens/tools/recompute-ch11.py.
+chapter: 11
+questions:
+  - id: Q-11.5-which
+    type: mc
+    objectives: [OBJ-11.5-3, OBJ-11.5-1]
+    level: basic
+    prompt: >-
+      איזה מהשדות הבאים משמר בכל המישור?
+    choices:
+      - text: '$(2xy,\ x^2)$'
+        correct: true
+        feedback: >-
+          נכון. $P_y=2x=Q_x$, והמישור בלי חורים, ולכן השדה משמר. ואכן $(2xy,x^2)=\nabla(x^2y)$.
+      - text: '$(x+y,\ y-x)$'
+        feedback: >-
+          כאן $P_x=1=Q_y$, אבל זו לא הבדיקה. $P_y=1$ ו-$Q_x=-1$ שונים, ולכן השדה אינו משמר.
+        misconception: MC-c11-mixed-partials-wrong-pair
+      - text: '$(y,\ -x)$'
+        feedback: >-
+          $P_y=1$ ו-$Q_x=-1$. זה שדה סיבובי (עם כיוון השעון): העבודה על מעגל סביב הראשית אינה 0.
+        misconception: MC-c11-closed-zero-always
+      - text: '$(x^2,\ xy)$'
+        feedback: >-
+          $P_y=0$ ו-$Q_x=y$: שונים מחוץ לציר $x$, ולכן השדה אינו משמר.
+        misconception: MC-c11-mixed-partials-wrong-pair
+
+  - id: Q-11.5-potential
+    type: expr
+    objectives: [OBJ-11.5-1]
+    level: basic
+    prompt: >-
+      מצאו פוטנציאל $\varphi(x,y)$ לשדה $\vec F=(2xy+1,\ x^2+3y^2)$, כלומר $\nabla\varphi=\vec F$.
+    answer: 'x^2*y + x + y^3'
+    answerTex: '$\varphi=x^2y+x+y^3+C$'
+    variables: [x, y]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $\int(2xy+1)\,dx=x^2y+x+g(y)$; גזירה לפי $y$ נותנת $x^2+g'(y)=x^2+3y^2$, ולכן $g=y^3$. בדיקה: $\nabla\varphi=\vec F$.
+    wrongFeedback: >-
+      בצעו אינטגרציה של $P$ לפי $x$ והוסיפו $g(y)$; גזרו לפי $y$ והשוו ל-$Q$. בדקו בסוף שהגרדיאנט של התשובה הוא $\vec F$.
+    commonWrong:
+      - expr: '2*x^2*y + x + y^3'
+        feedback: >-
+          $x^2y$ הופיע גם ב-$\int P\,dx$ וגם ב-$\int Q\,dy$, ונספר פעמיים. הגרדיאנט של התשובה שלכם הוא $(4xy+1,\ 2x^2+3y^2)$.
+        misconception: MC-c11-potential-overlap
+      - expr: 'x^2*y + x'
+        feedback: >-
+          זה $\int P\,dx$ בלבד. הגזירה שלו לפי $y$ נותנת $x^2$, וחסר $3y^2$: הפונקציה $g(y)=y^3$.
+        misconception: MC-c11-potential-forgot-g
+
+  - id: Q-11.5-find-a
+    type: numeric
+    objectives: [OBJ-11.5-3]
+    level: basic
+    prompt: >-
+      לאיזה ערך של $a$ השדה $\vec F=(3x^2y+ay^2,\ x^3+4xy)$ מקיים את תנאי הנגזרות המעורבות בכל המישור?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $P_y=3x^2+2ay$ ו-$Q_x=3x^2+4y$, שווים בדיוק כש-$2a=4$. אז $\vec F=\nabla(x^3y+2xy^2)$.
+    wrongFeedback: >-
+      גזרו את $P$ לפי $y$ ואת $Q$ לפי $x$, והשוו את המקדמים.
+
+  - id: Q-11.5-ftli
+    type: numeric
+    objectives: [OBJ-11.5-2]
+    level: basic
+    prompt: >-
+      $\vec F=(2xy+1,\ x^2+3y^2)=\nabla(x^2y+x+y^3)$. חשבו את העבודה של $\vec F$ לאורך עקום כלשהו מ-$(0,0)$ ל-$(1,2)$.
+    answer: 11
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\varphi(1,2)-\varphi(0,0)=(2+1+8)-0=11$, לאורך כל עקום בין הנקודות.
+    wrongFeedback: >-
+      העבודה של שדה גרדיאנט היא הערך של $\varphi$ בנקודת הסוף פחות הערך שלה בנקודת ההתחלה.
+    commonWrong:
+      - value: -11
+        feedback: >-
+          חיסרתם בסדר הפוך: $\varphi(A)-\varphi(B)$. העבודה מ-$A$ ל-$B$ היא $\varphi(B)-\varphi(A)$, "סוף פחות התחלה".
+        misconception: MC-c11-ftli-order
+
+  - id: Q-11.5-potential-3d
+    type: expr
+    objectives: [OBJ-11.5-1]
+    level: mid
+    prompt: >-
+      מצאו פוטנציאל לשדה $\vec F(x,y,z)=\big(yz,\ xz+2y,\ xy+\cos z\big)$, במשתנים $x,y,z$.
+    answer: 'x*y*z + y^2 + sin(z)'
+    answerTex: '$\varphi=xyz+y^2+\sin z+C$'
+    variables: [x, y, z]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $\int yz\,dx=xyz+g(y,z)$; גזירה לפי $y$: $xz+g_y=xz+2y$, כלומר $g=y^2+h(z)$; גזירה לפי $z$: $xy+h'=xy+\cos z$,
+      כלומר $h=\sin z$.
+    wrongFeedback: >-
+      אותה שיטה, בשלושה שלבים: אינטגרציה לפי $x$, השוואה לרכיב השני, השוואה לרכיב השלישי. "הקבוע" אחרי השלב הראשון הוא
+      פונקציה של $y$ ושל $z$.
+    commonWrong:
+      - expr: '3*x*y*z + y^2 + sin(z)'
+        feedback: >-
+          $xyz$ מופיע בשלושת האינטגרלים, וחיבור שלהם סופר אותו שלוש פעמים. מוסיפים רק את מה שחסר.
+        misconception: MC-c11-potential-overlap
+
+  - id: Q-11.5-rank
+    type: rank
+    objectives: [OBJ-11.5-1]
+    level: mid
+    prompt: >-
+      סדרו את שלבי השיטה למציאת פוטנציאל לשדה $(P,Q)$ במישור.
+    help: 'גררו את השלבים לפי הסדר: הראשון למעלה.'
+    items:
+      - { id: test, label: 'בודקים ש-$P_y=Q_x$ בתחום בלי חורים (אחרת אין טעם להמשיך)' }
+      - { id: intx, label: 'מבצעים אינטגרציה לפי $x$: $\varphi=\int P\,dx+g(y)$' }
+      - { id: diffy, label: 'גוזרים לפי $y$ ומשווים ל-$Q$, ומקבלים את $g''(y)$' }
+      - { id: intg, label: 'מבצעים אינטגרציה של $g''(y)$ ומציבים ב-$\varphi$' }
+      - { id: verify, label: 'בודקים בגזירה ש-$\nabla\varphi=(P,Q)$' }
+    order: [test, intx, diffy, intg, verify]
+    correctFeedback: >-
+      נכון. הבדיקה הראשונה חוסכת עבודה: אם $P_y\ne Q_x$ אין פוטנציאל. הבדיקה האחרונה תופסת ספירה כפולה ואיבר חסר.
+    wrongFeedback: >-
+      אי אפשר למצוא את $g(y)$ לפני שיש $\int P\,dx$ להשוות ממנו. והבדיקה ש-$P_y=Q_x$ באה לפני הכול.
+
+  - id: Q-11.5-path
+    type: twotier
+    objectives: [OBJ-11.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec F=\nabla\varphi$ בכל המישור. $C_1$ הוא הקטע הישר מ-$A$ ל-$B$, ו-$C_2$ עקום ארוך ומפותל מ-$A$ ל-$B$. נכון או לא
+      נכון: $\int_{C_2}\vec F\cdot d\vec r$ גדול מ-$\int_{C_1}\vec F\cdot d\vec r$.
+    choices:
+      - text: 'לא נכון: שני האינטגרלים שווים'
+        correct: true
+        feedback: 'נכון: שניהם $\varphi(B)-\varphi(A)$.'
+      - text: 'נכון: הדרך ארוכה יותר, ולכן העבודה גדולה יותר'
+        feedback: >-
+          בעליות של $\varphi$ העבודה חיובית ובירידות שלילית, והן מתקזזות. נשאר רק ההפרש בין הקצוות.
+        misconception: MC-c11-longer-path-more-work
+    reasons:
+      - text: 'לפי המשפט היסודי לאינטגרלים קוויים, העבודה של $\nabla\varphi$ תלויה רק בנקודות הקצה'
+        correct: true
+        feedback: >-
+          בדיוק. $\frac{d}{dt}\varphi(\vec r(t))=\nabla\varphi\cdot\vec r\,'(t)$, ולכן האינטגרל הוא $\varphi(\vec r(b))-\varphi(\vec r(a))$.
+      - text: 'העבודה היא גודל הכוח כפול אורך הדרך'
+        feedback: 'רק הרכיב המשיק עושה עבודה, והוא יכול להיות גם שלילי.'
+        misconception: MC-c11-work-magnitude
+      - text: 'העבודה על כל עקום היא 0'
+        feedback: >-
+          רק על עקום **סגור**. בין $A$ ל-$B$ שונות העבודה היא $\varphi(B)-\varphi(A)$, ולא בהכרח 0.
+        misconception: MC-c11-closed-zero-always
+
+  - id: Q-11.5-multi
+    type: multi
+    objectives: [OBJ-11.5-1, OBJ-11.5-2, OBJ-11.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec F=(P,Q)$ גזיר ברציפות **בכל המישור**. אילו מהטענות שקולות לכך ש-$\vec F$ משמר? סמנו את כולן.
+    choices:
+      - text: 'יש $\varphi$ עם $\nabla\varphi=\vec F$'
+        correct: true
+        feedback: 'נכון: זו ההגדרה.'
+      - text: 'העבודה בין כל שתי נקודות לא תלויה במסלול'
+        correct: true
+        feedback: 'נכון: לפי המשפט היסודי, ולהפך: אם אין תלות במסלול, $\varphi(P)=\int_{O}^{P}\vec F\cdot d\vec r$ הוא פוטנציאל.'
+      - text: '$\oint_C\vec F\cdot d\vec r=0$ לכל עקום סגור $C$'
+        correct: true
+        feedback: 'נכון: שני מסלולים מ-$A$ ל-$B$ יחד יוצרים עקום סגור, ולהפך.'
+      - text: '$P_y=Q_x$ בכל המישור'
+        correct: true
+        feedback: >-
+          נכון **כאן**, כי המישור הוא תחום בלי חורים. בתחום עם חור התנאי לא מספיק.
+      - text: '$P_x=Q_y$ בכל המישור'
+        feedback: >-
+          זו לא הבדיקה: $(x+y,\ y-x)$ מקיים $P_x=Q_y=1$ ואינו משמר. התנאי מגיע מ-$\varphi_{xy}=\varphi_{yx}$, כלומר $P_y=Q_x$.
+        misconception: MC-c11-mixed-partials-wrong-pair
+
+  - id: Q-11.5-vortex
+    type: numeric
+    objectives: [OBJ-11.5-3]
+    level: mid
+    prompt: >-
+      $\vec F(x,y)=\left(\dfrac{-y}{x^2+y^2},\ \dfrac{x}{x^2+y^2}\right)$ מחוץ לראשית. חשבו $\oint_C\vec F\cdot d\vec r$ על המעגל
+      ברדיוס 3 סביב הראשית, נגד כיוון השעון.
+    answer: 6.28318530717959
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2\pi$. על המעגל $\vec F(\vec r(t))=\frac13(-\sin t,\cos t)$ ו-$\vec r\,'(t)=3(-\sin t,\cos t)$, והמכפלה 1. הרדיוס
+      מתבטל: על כל מעגל סביב הראשית מתקבל $2\pi$.
+    wrongFeedback: >-
+      פרמטרו $\vec r(t)=(3\cos t,3\sin t)$ והציבו; הכול מתבטל לקבוע.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          כאן אמנם $P_y=Q_x$ בכל נקודה מחוץ לראשית, אבל התחום (המישור בלי הראשית) הוא עם חור, והתנאי לא מבטיח שדה משמר.
+          החישוב הישיר נותן $2\pi$.
+        misconception: MC-c11-curl-test-sufficient
+
+  - id: Q-11.5-hole
+    type: twotier
+    objectives: [OBJ-11.5-3]
+    qualitative: true
+    level: exam
+    prompt: >-
+      $\vec F=\dfrac{(-y,x)}{x^2+y^2}$ מקיים $P_y=Q_x$ בכל $\mathbb{R}^2\setminus\{(0,0)\}$. האם $\vec F$ משמר בתחום הזה?
+    choices:
+      - text: 'לא'
+        correct: true
+        feedback: >-
+          נכון. אילו היה לו פוטנציאל שם, העבודה על מעגל היחידה (עקום סגור בתחום) הייתה 0, אבל היא $2\pi$.
+      - text: 'כן'
+        feedback: >-
+          תנאי הנגזרות המעורבות מבטיח פוטנציאל רק בתחום בלי חורים. כאן יש חור בראשית, והעבודה סביבו $2\pi\ne0$.
+        misconception: MC-c11-curl-test-sufficient
+    reasons:
+      - text: 'העבודה על מעגל סביב הראשית היא $2\pi\ne0$, והתנאי $P_y=Q_x$ מספיק רק בתחום בלי חורים'
+        correct: true
+        feedback: >-
+          בדיוק. (בחצי המישור $x>0$, שאין בו חור, $\vec F=\nabla\arctan\frac{y}{x}$: שם הוא כן משמר. הזווית "קופצת" כשמקיפים
+          את הראשית.)
+      - text: 'כי $P_y\ne Q_x$'
+        feedback: >-
+          חשבו: $P_y=\frac{y^2-x^2}{(x^2+y^2)^2}=Q_x$. התנאי מתקיים, והבעיה היא החור.
+        misconception: MC-c11-mixed-partials-wrong-pair
+      - text: 'כי השדה לא מוגדר בראשית, ושדה כזה אף פעם אינו משמר'
+        feedback: >-
+          $\frac{(x,y)}{x^2+y^2}=\nabla\left(\tfrac12\ln(x^2+y^2)\right)$ גם הוא לא מוגדר בראשית, והוא משמר. צריך נימוק שקשור
+          לשדה הזה: עקום סגור עם עבודה שונה מאפס.
+        misconception: MC-c11-hole-kills-all
+
+  - id: Q-11.5-exam-work
+    type: numeric
+    objectives: [OBJ-11.5-1, OBJ-11.5-2]
+    level: exam
+    prompt: >-
+      $\vec F(x,y)=\big(2x+y\cos(xy),\ x\cos(xy)+e^y\big)$. חשבו את העבודה של $\vec F$ לאורך העקום
+      $\vec r(t)=\big(1+t\sin(\pi t),\ t^2\big)$, $0\le t\le1$.
+    answer: 2.55975281326694
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\sin1+e-1$. $P_y=\cos(xy)-xy\sin(xy)=Q_x$, ופוטנציאל: $\varphi=x^2+\sin(xy)+e^y$. העקום מתחיל ב-$(1,0)$ ונגמר
+      ב-$(1,1)$, ולכן העבודה $\varphi(1,1)-\varphi(1,0)=(1+\sin1+e)-(1+0+1)$.
+    wrongFeedback: >-
+      אל תציבו את העקום: בדקו את תנאי הנגזרות המעורבות, מצאו פוטנציאל, וחשבו אותו בנקודות הקצה $\vec r(0)$ ו-$\vec r(1)$.
+    commonWrong:
+      - value: -2.55975281326694
+        feedback: 'חיסרתם בסדר הפוך. העבודה היא הפוטנציאל בסוף פחות הפוטנציאל בהתחלה.'
+        misconception: MC-c11-ftli-order

@@ -1,0 +1,283 @@
+# Lesson 11.2 — parametrised surfaces.
+# Objectives (src/course.ts):
+#   OBJ-11.2-1  parametrise a plane, a graph, a sphere, a cylinder and a cone
+#   OBJ-11.2-2  find the tangent vectors and the normal of a parametrised surface
+#   OBJ-11.2-3  find the tangent plane of a parametrised surface
+# Spherical convention: θ from the positive z-axis, φ the azimuth. Keys recomputed in screens/tools/recompute-ch11.py.
+chapter: 11
+questions:
+  - id: Q-11.2-identify-cone
+    type: mc
+    objectives: [OBJ-11.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      איזה משטח מתאר $\vec r(u,v)=(u\cos v,\ u\sin v,\ u)$ עם $u\ge0$ ו-$0\le v\le2\pi$?
+    choices:
+      - text: 'החרוט $z=\sqrt{x^2+y^2}$'
+        correct: true
+        feedback: >-
+          נכון. $x^2+y^2=u^2$, כלומר המרחק מציר $z$ הוא $u$, וגם $z=u$. לכן $z=\sqrt{x^2+y^2}$: ככל שעולים, המעגל גדל.
+      - text: 'הגליל $x^2+y^2=1$'
+        feedback: >-
+          בגליל המרחק מהציר קבוע. כאן $\sqrt{x^2+y^2}=u$ גדל יחד עם הגובה $z=u$. גליל הוא $(\cos v,\sin v,u)$.
+        misconception: MC-c11-cone-vs-cylinder
+      - text: 'הפרבולואיד $z=x^2+y^2$'
+        feedback: >-
+          בפרבולואיד הגובה הוא **ריבוע** המרחק מהציר: $(u\cos v,u\sin v,u^2)$. כאן $z=u$, שווה למרחק עצמו.
+        misconception: MC-c11-cone-vs-cylinder
+      - text: 'הספירה $x^2+y^2+z^2=1$'
+        feedback: >-
+          $x^2+y^2+z^2=2u^2$ אינו קבוע, ולכן זו אינה ספירה. בספירה כל הנקודות במרחק קבוע מהראשית.
+        misconception: MC-c11-cone-vs-cylinder
+
+  - id: Q-11.2-sphere-z
+    type: expr
+    objectives: [OBJ-11.2-1]
+    level: basic
+    prompt: >-
+      פרמטריזציה של הספירה ברדיוס 3 סביב הראשית, לפי המוסכמה של הקורס ($\theta$ מציר $z$, $\varphi$ במישור $xy$), עם
+      $u=\theta$ ו-$v=\varphi$: $x=3\sin u\cos v$, $y=3\sin u\sin v$. כתבו את $z$ במשתנים $u,v$.
+    answer: '3*cos(u)'
+    answerTex: '$z=3\cos\theta$'
+    variables: [u, v]
+    domain: [0.2, 2.9]
+    correctFeedback: >-
+      נכון. $z=3\cos\theta$: ב-$\theta=0$ הקוטב הצפוני $(0,0,3)$, וב-$\theta=\pi$ הדרומי. בדיקה:
+      $x^2+y^2+z^2=9\sin^2\theta+9\cos^2\theta=9$.
+    wrongFeedback: >-
+      $\theta$ היא הזווית מציר $z$, ולכן ההיטל על ציר $z$ של וקטור באורך 3 הוא $3\cos\theta$. בדקו ש-$x^2+y^2+z^2=9$.
+    commonWrong:
+      - expr: '3*sin(u)'
+        feedback: >-
+          עם $z=3\sin\theta$ מתקבל $x^2+y^2+z^2=18\sin^2\theta$, לא 9. סינוס של $\theta$ הוא המרחק מציר $z$ (חלקי 3), לא
+          הגובה.
+        misconception: MC-c11-sphere-angle-convention
+      - expr: '3*cos(v)'
+        feedback: >-
+          $\varphi$ היא הזווית **במישור** $xy$; הגובה תלוי רק בזווית מציר $z$, כלומר ב-$u=\theta$.
+        misconception: MC-c11-sphere-angle-convention
+
+  - id: Q-11.2-plane-param
+    type: expr
+    objectives: [OBJ-11.2-1]
+    level: basic
+    prompt: >-
+      המישור $x+y+z=1$ מתואר כגרף מעל המישור $yz$: $\vec r(u,v)=\big(x(u,v),\ u,\ v\big)$. כתבו את $x(u,v)$.
+    answer: '1-u-v'
+    answerTex: '$\vec r(u,v)=(1-u-v,\ u,\ v)$'
+    variables: [u, v]
+    correctFeedback: >-
+      נכון. $x=1-y-z=1-u-v$. אותו מישור אפשר לכתוב גם כ-$(1,0,0)+u(-1,1,0)+v(-1,0,1)$: נקודה ושני וקטורים שבמישור.
+    wrongFeedback: >-
+      הציבו $y=u$ ו-$z=v$ במשוואת המישור ובודדו את $x$.
+
+  - id: Q-11.2-normal-def
+    type: mc
+    objectives: [OBJ-11.2-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      למה $\vec r_u\times\vec r_v$ הוא וקטור נורמל למשטח $\vec r(u,v)$ (כשהוא שונה מאפס)?
+    choices:
+      - text: '$\vec r_u$ ו-$\vec r_v$ משיקים למשטח ופורשים את המישור המשיק, והמכפלה הווקטורית מאונכת לשניהם'
+        correct: true
+        feedback: >-
+          נכון. $\vec r_u$ הוא וקטור המהירות של העקום $u\mapsto\vec r(u,v_0)$ שעל המשטח, וכך גם $\vec r_v$. וקטור שמאונך
+          לשניהם מאונך לכל המישור המשיק.
+      - text: 'כי $\vec r_u\times\vec r_v$ מקביל ל-$\vec r_u+\vec r_v$'
+        feedback: >-
+          המכפלה הווקטורית מאונכת ל-$\vec r_u$ ול-$\vec r_v$, ולכן גם לסכום שלהם. הסכום משיק למשטח, לא נורמל.
+        misconception: MC-c11-normal-not-cross
+      - text: 'כי אורכו $\vec r_u\cdot\vec r_v$'
+        feedback: >-
+          $\vec r_u\cdot\vec r_v$ הוא מספר, ואינו קשור לאורך של המכפלה הווקטורית. האורך הוא שטח המקבילית ש-$\vec r_u$
+          ו-$\vec r_v$ פורשים.
+        misconception: MC-c11-normal-not-cross
+
+  - id: Q-11.2-graph-normal
+    type: expr
+    objectives: [OBJ-11.2-2]
+    level: basic
+    prompt: >-
+      $\vec r(u,v)=(u,\ v,\ u^2v)$. כתבו את הרכיב **הראשון** של $\vec r_u\times\vec r_v$, במשתנים $u,v$.
+    answer: '-2*u*v'
+    answerTex: '$\vec r_u\times\vec r_v=(-2uv,\ -u^2,\ 1)$'
+    variables: [u, v]
+    correctFeedback: >-
+      נכון. $\vec r_u=(1,0,2uv)$, $\vec r_v=(0,1,u^2)$, והרכיב הראשון של המכפלה הוא $0\cdot u^2-2uv\cdot1=-2uv$. לגרף
+      $z=f(u,v)$ תמיד $\vec r_u\times\vec r_v=(-f_u,-f_v,1)$.
+    wrongFeedback: >-
+      חשבו את $\vec r_u$ ואת $\vec r_v$, ואז את הרכיב הראשון $(r_u)_y(r_v)_z-(r_u)_z(r_v)_y$.
+    commonWrong:
+      - expr: '2*u*v'
+        feedback: >-
+          זה הרכיב הראשון של $\vec r_v\times\vec r_u=(2uv,u^2,-1)$, בסדר ההפוך. הסדר קובע את כיוון הנורמל, ולכן את הסימן.
+        misconception: MC-c11-cross-order
+
+  - id: Q-11.2-tplane-rank
+    type: rank
+    objectives: [OBJ-11.2-3]
+    level: basic
+    prompt: >-
+      סדרו את שלבי המציאה של המישור המשיק למשטח $\vec r(u,v)$ בנקודה שמתאימה ל-$(u_0,v_0)$.
+    help: 'גררו את השלבים לפי הסדר: הראשון למעלה.'
+    items:
+      - { id: point, label: 'מחשבים את הנקודה $P=\vec r(u_0,v_0)$' }
+      - { id: tangents, label: 'גוזרים ומציבים: $\vec r_u(u_0,v_0)$ ו-$\vec r_v(u_0,v_0)$' }
+      - { id: normal, label: 'מחשבים את הנורמל $\vec n=\vec r_u\times\vec r_v$' }
+      - { id: plane, label: 'כותבים $\vec n\cdot\big((x,y,z)-P\big)=0$' }
+      - { id: check, label: 'בודקים: $P$ על המישור, ו-$\vec n\cdot\vec r_u=\vec n\cdot\vec r_v=0$' }
+    order: [point, tangents, normal, plane, check]
+    correctFeedback: >-
+      נכון. נקודה ונורמל קובעים מישור; הנורמל מתקבל מהמכפלה הווקטורית של שני הווקטורים המשיקים.
+    wrongFeedback: >-
+      משוואת מישור צריכה נקודה ונורמל. הנורמל בא מהמכפלה הווקטורית, וזו צריכה את הווקטורים המשיקים בנקודה.
+
+  - id: Q-11.2-cylinder
+    type: mc
+    objectives: [OBJ-11.2-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      איזו פרמטריזציה מתארת את הגליל $x^2+z^2=4$?
+    choices:
+      - text: '$(2\cos u,\ v,\ 2\sin u)$, $0\le u\le2\pi$, $v\in\mathbb{R}$'
+        correct: true
+        feedback: >-
+          נכון. $x^2+z^2=4\cos^2u+4\sin^2u=4$, ו-$y$ חופשי: גליל ברדיוס 2 סביב ציר $y$.
+      - text: '$(2\cos u,\ 2\sin u,\ v)$, $0\le u\le2\pi$, $v\in\mathbb{R}$'
+        feedback: >-
+          זה הגליל $x^2+y^2=4$ סביב ציר $z$. במשוואה הנתונה חסר $y$, ולכן הציר הוא ציר $y$.
+        misconception: MC-c11-cylinder-axis
+      - text: '$(2\sin u\cos v,\ 2\sin u\sin v,\ 2\cos u)$'
+        feedback: >-
+          זו ספירה ברדיוס 2: $x^2+y^2+z^2=4$. בגליל קואורדינטה אחת חופשית לגמרי.
+        misconception: MC-c11-cone-vs-cylinder
+      - text: '$(v\cos u,\ v,\ v\sin u)$'
+        feedback: >-
+          כאן $x^2+z^2=v^2$ גדל עם $y=v$: זה חרוט סביב ציר $y$.
+        misconception: MC-c11-cone-vs-cylinder
+
+  - id: Q-11.2-cone-normal
+    type: numeric
+    objectives: [OBJ-11.2-2]
+    level: mid
+    prompt: >-
+      לחרוט $\vec r(u,v)=(u\cos v,\ u\sin v,\ u)$ חשבו את $|\vec r_u\times\vec r_v|$ בנקודות שבהן $u=2$.
+    answer: 2.82842712474619
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2\sqrt2$. $\vec r_u=(\cos v,\sin v,1)$, $\vec r_v=(-u\sin v,u\cos v,0)$, ו-
+      $\vec r_u\times\vec r_v=(-u\cos v,-u\sin v,u)$, שאורכו $u\sqrt2$. בקודקוד ($u=0$) הנורמל מתאפס: שם לחרוט אין
+      מישור משיק.
+    wrongFeedback: >-
+      גזרו לפי $u$ ולפי $v$, חשבו את המכפלה הווקטורית רכיב-רכיב, ואז את האורך.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 הוא $\vec r_u\cdot\vec r_v$: הווקטורים המשיקים מאונכים זה לזה. הנורמל הוא **המכפלה הווקטורית**, ואורכה שטח
+          המקבילית שהם פורשים.
+        misconception: MC-c11-normal-not-cross
+
+  - id: Q-11.2-sphere-normal
+    type: multi
+    objectives: [OBJ-11.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec r(\theta,\varphi)=(R\sin\theta\cos\varphi,\ R\sin\theta\sin\varphi,\ R\cos\theta)$, הספירה ברדיוס $R$. סמנו את
+      כל הטענות הנכונות על $\vec n=\vec r_\theta\times\vec r_\varphi$.
+    choices:
+      - text: '$\vec n$ מקביל לווקטור המקום $\vec r$'
+        correct: true
+        feedback: 'נכון: חישוב רכיב-רכיב נותן $\vec n=R\sin\theta\cdot\vec r$. בספירה הנורמל רדיאלי.'
+      - text: 'כש-$0<\theta<\pi$, $\vec n$ מצביע החוצה מהספירה'
+        correct: true
+        feedback: 'נכון: המקדם $R\sin\theta$ חיובי שם, ולכן $\vec n$ בכיוון של $\vec r$, החוצה.'
+      - text: '$\vec n=\vec0$ בקטבים ($\theta=0$ או $\theta=\pi$)'
+        correct: true
+        feedback: >-
+          נכון: שם $\sin\theta=0$. בקוטב כל קווי האורך נפגשים ו-$\vec r_\varphi=\vec0$: הבעיה בפרמטריזציה, לא בספירה.
+      - text: '$|\vec n|=R^2$ בכל נקודה'
+        feedback: >-
+          $|\vec n|=R\sin\theta\cdot|\vec r|=R^2\sin\theta$. הגורם $\sin\theta$ קטן ליד הקטבים, שם מעגלי הרוחב קטנים.
+        misconception: MC-c11-sphere-normal-no-sin
+
+  - id: Q-11.2-tplane-sphere
+    type: twotier
+    objectives: [OBJ-11.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: המישור המשיק לספירה $x^2+y^2+z^2=9$ בנקודה $(1,2,2)$ הוא $x+2y+2z=9$.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. הנקודה על המישור ($1+4+4=9$), והנורמל $(1,2,2)$ הוא וקטור המקום של הנקודה, שבספירה מאונך למישור המשיק.
+      - text: 'לא נכון'
+        feedback: >-
+          הנקודה מקיימת את המשוואה, והנורמל של המישור, $(1,2,2)$, מקביל ל-$\vec r_\theta\times\vec r_\varphi$, שבספירה
+          רדיאלי. שני התנאים מתקיימים.
+        misconception: MC-c11-plane-through-point-enough
+    reasons:
+      - text: 'המישור עובר בנקודה, והנורמל שלו $(1,2,2)$ מקביל לנורמל של הספירה, שהוא וקטור המקום'
+        correct: true
+        feedback: 'בדיוק: מישור משיק נקבע על ידי נקודה ונורמל, ושניהם נבדקו.'
+      - text: 'המישור עובר בנקודה $(1,2,2)$'
+        feedback: >-
+          זה הכרחי אבל לא מספיק: גם $x=1$ עובר בנקודה, והוא חותך את הספירה. צריך גם שהנורמל יהיה מאונך למשטח.
+        misconception: MC-c11-plane-through-point-enough
+      - text: 'הנורמל של המישור הוא $\vec r_\theta$ בנקודה'
+        feedback: >-
+          $\vec r_\theta$ משיק לספירה (לאורך קו האורך), ולכן שוכב במישור המשיק ואינו הנורמל שלו.
+        misconception: MC-c11-tangent-vector-as-normal
+
+  - id: Q-11.2-tplane-surface
+    type: numeric
+    objectives: [OBJ-11.2-3, OBJ-11.2-2]
+    level: mid
+    prompt: >-
+      $\vec r(u,v)=(u+v,\ u-v,\ uv)$. מצאו את המישור המשיק למשטח בנקודה שמתאימה ל-$(u,v)=(1,1)$. מה גובה המישור הזה
+      ($z$) מעל הנקודה $(x,y)=(3,5)$?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $P=(2,0,1)$, $\vec r_u=(1,1,v)=(1,1,1)$, $\vec r_v=(1,-1,u)=(1,-1,1)$, $\vec n=\vec r_u\times\vec r_v=(2,0,-2)$.
+      המישור: $2(x-2)-2(z-1)=0$, כלומר $z=x-1$, וב-$x=3$ מתקבל 2 (בלי תלות ב-$y$).
+    wrongFeedback: >-
+      הנקודה $P=\vec r(1,1)$; הנורמל הוא $\vec r_u\times\vec r_v$ ב-$(1,1)$; כתבו $\vec n\cdot((x,y,z)-P)=0$ והציבו
+      $x=3$, $y=5$.
+    commonWrong:
+      - value: -5
+        feedback: >-
+          זה המישור $x+y+z=3$, עם $\vec r_u=(1,1,1)$ בתפקיד הנורמל. אבל $\vec r_u$ **משיק** למשטח ושוכב במישור המשיק.
+        misconception: MC-c11-tangent-vector-as-normal
+      - value: 5
+        feedback: >-
+          זה המישור עם $\vec r_v=(1,-1,1)$ בתפקיד הנורמל. וקטור משיק שוכב במישור המשיק; הנורמל הוא המכפלה הווקטורית.
+        misconception: MC-c11-tangent-vector-as-normal
+
+  - id: Q-11.2-helicoid
+    type: numeric
+    objectives: [OBJ-11.2-3, OBJ-11.2-2]
+    level: exam
+    prompt: >-
+      המשטח $\vec r(u,v)=(u\cos v,\ u\sin v,\ v)$ (משטח בורגי: מדרגות לולייניות). מצאו את המישור המשיק לו בנקודה שמתאימה
+      ל-$(u,v)=\left(1,\frac{\pi}{2}\right)$. באיזה ערך של $x$ המישור חותך את ציר $x$?
+    answer: 1.5707963267949
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{\pi}{2}$. $P=\left(0,1,\frac{\pi}{2}\right)$, $\vec r_u=(\cos v,\sin v,0)=(0,1,0)$,
+      $\vec r_v=(-u\sin v,u\cos v,1)=(-1,0,1)$, $\vec n=\vec r_u\times\vec r_v=(1,0,1)$. המישור:
+      $x+\left(z-\frac{\pi}{2}\right)=0$, ועל ציר $x$ ($y=z=0$) מתקבל $x=\frac{\pi}{2}$.
+    wrongFeedback: >-
+      חשבו את $P$, את $\vec r_u$ ו-$\vec r_v$ ב-$\left(1,\frac{\pi}{2}\right)$ ואת המכפלה הווקטורית; אחר כך הציבו $y=z=0$
+      במשוואת המישור.
+    commonWrong:
+      - value: -1.5707963267949
+        feedback: >-
+          זה המישור $-x+\left(z-\frac{\pi}{2}\right)=0$, עם $\vec r_v=(-1,0,1)$ בתפקיד הנורמל. $\vec r_v$ משיק למשטח;
+          הנורמל הוא $\vec r_u\times\vec r_v$.
+        misconception: MC-c11-tangent-vector-as-normal

@@ -1,0 +1,273 @@
+# Chapter 3 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# Every number recomputed in screens/tools/recompute-ch3.py.
+chapter: 3
+questions:
+  - id: Q-3-exam-1
+    type: exam
+    title: חזקות ושורשים של מספר אחד
+    prompt: 'יהי $w=-1+\sqrt3i$.'
+    parts:
+      - label: א
+        points: 4
+        type: numeric
+        objectives: [OBJ-3.2-2]
+        prompt: 'מהו $\operatorname{Arg}w$?'
+        answer: 2.0943951023931957
+        tolerance: 0.001
+        correctFeedback: 'נכון, $\frac{2\pi}{3}$: $|w|=2$, $\cos\theta=-\frac12$, $\sin\theta=\frac{\sqrt3}{2}$, הרביע השני.'
+        wrongFeedback: 'קבעו רביע לפי הסימנים, ואז זווית.'
+        commonWrong:
+          - value: -1.0471975511965976
+            feedback: '$\arctan(-\sqrt3)=-\frac{\pi}{3}$ מצביע לרביע הרביעי. הנקודה ברביע השני: מוסיפים $\pi$.'
+            misconception: MC-c3-arg-arctan
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-3.3-3]
+        prompt: 'חשבו את $w^{12}$ (הוא ממשי).'
+        answer: 4096
+        tolerance: 0.001
+        correctFeedback: 'נכון. $w^{12}=2^{12}\operatorname{cis}(12\cdot\tfrac{2\pi}{3})=4096\operatorname{cis}8\pi=4096$.'
+        wrongFeedback: 'דה-מואבר: $(r\operatorname{cis}\theta)^{12}=r^{12}\operatorname{cis}12\theta$.'
+        commonWrong:
+          - value: 2
+            feedback: 'הזווית נכונה, אבל גם הערך המוחלט מועלה בחזקה: $2^{12}$.'
+            misconception: MC-c3-demoivre-modulus-forget
+          - value: 16777216
+            feedback: '$4^{12}$ מתקבל מ-$|w|=1+3=4$. $|w|=\sqrt{1+3}=2$.'
+            misconception: MC-c3-modulus-no-root
+
+      - label: ג
+        points: 11
+        type: open
+        objectives: [OBJ-3.5-1, OBJ-3.5-2]
+        prompt: >-
+          מצאו את כל הפתרונות של $z^3=w$ בצורה קוטבית, עם ארגומנטים ראשיים, ותארו את מיקומם במישור גאוס.
+        solution:
+          - kind: given
+            text: '$w=-1+\sqrt3i=2\operatorname{cis}\frac{2\pi}{3}$ (סעיף א).'
+          - kind: idea
+            text: 'כותבים $z=\rho\operatorname{cis}\theta$, מציבים, ומשווים ערכים מוחלטים וזוויות, כשזוויות שוות עד כדי $2\pi k$.'
+          - kind: computation
+            text: '$\rho^3\operatorname{cis}3\theta=2\operatorname{cis}\frac{2\pi}{3}$, ולכן $\rho=\sqrt[3]2$ ו-$3\theta=\frac{2\pi}{3}+2\pi k$, כלומר $\theta_k=\frac{2\pi}{9}+\frac{2\pi k}{3}$.'
+          - kind: step
+            text: 'ל-$k=0,1,2$: $\theta=\frac{2\pi}{9},\frac{8\pi}{9},\frac{14\pi}{9}$. ערכי $k$ אחרים חוזרים על אותם שלושה מספרים.'
+          - kind: step
+            text: '$\frac{14\pi}{9}>\pi$, ולכן הארגומנט הראשי שלו $\frac{14\pi}{9}-2\pi=-\frac{4\pi}{9}$.'
+          - kind: check
+            text: 'מכפלת שלושת השורשים: ערך מוחלט $2$, וזווית $\frac{2\pi}{9}+\frac{8\pi}{9}-\frac{4\pi}{9}=\frac{6\pi}{9}=\frac{2\pi}{3}$, כלומר $w$, כפי שווייטה צריך לתת למשוואה $z^3-w=0$.'
+          - kind: result
+            text: >-
+              $z_0=\sqrt[3]2\operatorname{cis}\frac{2\pi}{9}$, $z_1=\sqrt[3]2\operatorname{cis}\frac{8\pi}{9}$,
+              $z_2=\sqrt[3]2\operatorname{cis}\left(-\frac{4\pi}{9}\right)$: קודקודי משולש שווה צלעות שחסום במעגל ברדיוס
+              $\sqrt[3]2\approx1.26$ סביב הראשית, במרווחי זווית של $\frac{2\pi}{3}$.
+        rubric:
+          - text: 'מעבר נכון של $w$ לצורה קוטבית והצבה של $z=\rho\operatorname{cis}\theta$'
+            weight: 2
+          - text: '$\rho=\sqrt[3]2$ (שורש מהערך המוחלט)'
+            weight: 2
+          - text: 'הזוויות $\frac{2\pi}{9}+\frac{2\pi k}{3}$ עם $k=0,1,2$, ושלושה שורשים בדיוק'
+            weight: 3
+          - text: 'ארגומנטים ראשיים: $-\frac{4\pi}{9}$ במקום $\frac{14\pi}{9}$'
+            weight: 2
+          - text: 'תיאור גיאומטרי: משולש שווה צלעות על מעגל ברדיוס $\sqrt[3]2$'
+            weight: 2
+
+      - label: ד
+        points: 5
+        type: numeric
+        objectives: [OBJ-3.5-1, OBJ-3.3-2]
+        standalone: false
+        prompt: 'מהו החלק הממשי של השורש $z_0=\sqrt[3]2\operatorname{cis}\frac{2\pi}{9}$?'
+        answer: 0.9651555190405
+        tolerance: 0.001
+        correctFeedback: 'נכון, $\sqrt[3]2\cos\frac{2\pi}{9}\approx1.26\cdot0.766\approx0.965$.'
+        wrongFeedback: '$\operatorname{Re}(\rho\operatorname{cis}\theta)=\rho\cos\theta$.'
+        commonWrong:
+          - value: 1.5320888862379562
+            feedback: '$2\cos\frac{2\pi}{9}$: הערך המוחלט של השורש הוא $\sqrt[3]2$, לא 2.'
+            misconception: MC-c3-root-modulus
+          - value: -0.6299605249474366
+            feedback: '$\sqrt[3]2\cos\frac{2\pi}{3}$: השארתם את הזווית של $w$ בלי לחלק ב-3.'
+            misconception: MC-c3-root-angle-not-divided
+
+  - id: Q-3-exam-2
+    type: exam
+    title: זהויות טריגונומטריות מאוילר
+    prompt: >-
+      בשאלה זו משתמשים ב-$\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2}$ וב-$\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i}$.
+    parts:
+      - label: א
+        points: 10
+        type: open
+        objectives: [OBJ-3.4-3]
+        prompt: 'הוכיחו ש-$\cos^3\theta=\frac34\cos\theta+\frac14\cos3\theta$ לכל $\theta$ ממשי.'
+        solution:
+          - kind: idea
+            text: 'מעלים את הנוסחה של $\cos\theta$ בחזקה 3, פותחים בבינום, ומצרפים כל זוג אקספוננטים צמודים בחזרה לקוסינוס.'
+          - kind: computation
+            text: '$\cos^3\theta=\frac{(e^{i\theta}+e^{-i\theta})^3}{8}=\frac{e^{3i\theta}+3e^{i\theta}+3e^{-i\theta}+e^{-3i\theta}}{8}$, כי $e^{2i\theta}e^{-i\theta}=e^{i\theta}$.'
+          - kind: step
+            text: '$e^{3i\theta}+e^{-3i\theta}=2\cos3\theta$ ו-$3(e^{i\theta}+e^{-i\theta})=6\cos\theta$.'
+          - kind: computation
+            text: '$\cos^3\theta=\frac{2\cos3\theta+6\cos\theta}{8}=\frac34\cos\theta+\frac14\cos3\theta$.'
+          - kind: check
+            text: 'ב-$\theta=0$: $1=\frac34+\frac14$. ב-$\theta=\frac{\pi}{2}$: $0=0+\frac14\cos\frac{3\pi}{2}=0$.'
+          - kind: result
+            text: '$\cos^3\theta=\frac34\cos\theta+\frac14\cos3\theta$ לכל $\theta$.'
+        rubric:
+          - text: 'הצבת הנוסחה האקספוננציאלית והעלאה בחזקה 3 עם המקדם $\frac18$'
+            weight: 3
+          - text: 'פתיחה נכונה בבינום (מקדמים 1, 3, 3, 1 והמעריכים)'
+            weight: 3
+          - text: 'צירוף הזוגות ל-$2\cos3\theta$ ול-$6\cos\theta$'
+            weight: 3
+          - text: 'בדיקה בערך אחד של $\theta$'
+            weight: 1
+
+      - label: ב
+        points: 6
+        type: numeric
+        objectives: [OBJ-3.4-3]
+        prompt: 'באותה דרך כותבים $\sin^3\theta=a\sin\theta+b\sin3\theta$. מהו $b$?'
+        answer: -0.25
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $b=-\frac14$ ו-$a=\frac34$. $\sin^3\theta=\frac{(e^{i\theta}-e^{-i\theta})^3}{(2i)^3}=\frac{2i\sin3\theta-6i\sin\theta}{-8i}$.
+          בדיקה ב-$\theta=\frac{\pi}{2}$: $1=\frac34+\frac14$.
+        wrongFeedback: '$(2i)^3=-8i$, ו-$(e^{i\theta}-e^{-i\theta})^3=e^{3i\theta}-3e^{i\theta}+3e^{-i\theta}-e^{-3i\theta}$.'
+        commonWrong:
+          - value: 0.25
+            feedback: '$(2i)^3=8i^3=-8i$: הסימן מתהפך. בדיקה ב-$\theta=\frac{\pi}{2}$ עם $b=\frac14$ נותנת $\frac34-\frac14\ne1$.'
+            misconception: MC-c3-i-squared
+
+      - label: ג
+        points: 5
+        type: numeric
+        objectives: [OBJ-3.5-2, OBJ-3.4-3]
+        prompt: 'חשבו את $\cos\frac{2\pi}{5}+\cos\frac{4\pi}{5}+\cos\frac{6\pi}{5}+\cos\frac{8\pi}{5}$.'
+        answer: -1
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. זה $\operatorname{Re}\left(\omega+\omega^2+\omega^3+\omega^4\right)$ עם $\omega=e^{2\pi i/5}$, וסכום כל חמשת
+          שורשי היחידה הוא 0, ולכן הסכום בלי $\omega^0=1$ הוא $-1$.
+        wrongFeedback: 'אלה החלקים הממשיים של שורשי היחידה מסדר 5, חוץ מאחד מהם.'
+        commonWrong:
+          - value: 0
+            feedback: '0 הוא סכום **כל** חמשת השורשים, כולל $1=e^{0}$. כאן חסר המחובר 1.'
+            misconception: MC-c3-roots-sum-n
+          - value: 4
+            feedback: 'שורשי היחידה אינם כולם 1. סכום כולם הוא 0, ובלי 1 הוא $-1$.'
+            misconception: MC-c3-roots-sum-n
+
+      - label: ד
+        points: 4
+        type: twotier
+        objectives: [OBJ-3.4-1, OBJ-3.4-3]
+        qualitative: true
+        prompt: 'נכון או לא: $|\cos z+i\sin z|=1$ לכל $z$ מרוכב.'
+        choices:
+          - text: 'לא נכון'
+            correct: true
+            feedback: 'נכון. $\cos z+i\sin z=e^{iz}$ גם למרוכבים, ו-$|e^{iz}|=e^{-\operatorname{Im}z}$; ב-$z=i$ זה $e^{-1}$.'
+          - text: 'נכון'
+            feedback: 'זה נכון ל-$z$ ממשי. ב-$z=i$: $e^{i\cdot i}=e^{-1}\approx0.37$.'
+            misconception: MC-c3-eiz-unit-modulus
+        reasons:
+          - text: '$\cos z+i\sin z=e^{iz}$, וגודלו $e^{\operatorname{Re}(iz)}=e^{-\operatorname{Im}z}$'
+            correct: true
+            feedback: 'בדיוק. רק החלק הממשי של המעריך קובע גודל.'
+          - text: 'כי $\cos^2z+\sin^2z=1$, ולכן הגודל 1'
+            feedback: '$|a+ib|^2=a^2+b^2$ רק כש-$a,b$ ממשיים. כש-$\cos z$, $\sin z$ מרוכבים, $\cos^2z+\sin^2z=1$ אינו אומר דבר על הגודל.'
+            misconception: MC-c3-cos-bounded-complex
+          - text: 'כי $e^{iz}$ הוא תמיד סיבוב'
+            feedback: 'כפל ב-$e^{iz}$ הוא סיבוב רק כש-$z$ ממשי. אחרת יש גם מתיחה או כיווץ פי $e^{-\operatorname{Im}z}$.'
+            misconception: MC-c3-eiz-unit-modulus
+
+  - id: Q-3-exam-3
+    type: exam
+    title: פולינום עם שורש מדומה
+    prompt: 'יהי $p(z)=z^4-2z^3+6z^2-8z+8$. ידוע ש-$2i$ הוא שורש של $p$.'
+    parts:
+      - label: א
+        points: 4
+        type: mc
+        objectives: [OBJ-3.1-3]
+        qualitative: true
+        prompt: 'למה גם $-2i$ הוא שורש של $p$?'
+        choices:
+          - text: 'כי המקדמים של $p$ ממשיים, ולכן $p(\bar z)=\overline{p(z)}$'
+            correct: true
+            feedback: 'נכון. $p(-2i)=p(\overline{2i})=\overline{p(2i)}=\bar0=0$.'
+          - text: 'כי לכל פולינום השורשים באים בזוגות נגדיים'
+            feedback: 'לא: ל-$z-1$ השורש היחיד 1. והשורשים האחרים של $p$, $1\pm i$, אינם נגדיים.'
+            misconception: MC-c3-roots-plus-minus
+          - text: 'כי השורשים של כל פולינום באים בזוגות צמודים'
+            feedback: 'רק כשהמקדמים ממשיים; ל-$z-i$ השורש היחיד $i$.'
+            misconception: MC-c3-conjugate-root-any-coeffs
+
+      - label: ב
+        points: 11
+        type: open
+        objectives: [OBJ-3.5-3, OBJ-3.1-3]
+        prompt: 'פרקו את $p$ למכפלה של שני פולינומים ריבועיים ממשיים, ומצאו את כל ארבעת השורשים.'
+        solution:
+          - kind: given
+            text: '$p(z)=z^4-2z^3+6z^2-8z+8$, ו-$\pm2i$ שורשים (סעיף א).'
+          - kind: idea
+            text: 'הזוג הצמוד $\pm2i$ נותן את הגורם הממשי $(z-2i)(z+2i)=z^2+4$. מחלקים בו ומקבלים גורם ריבועי שני.'
+          - kind: computation
+            text: 'חילוק ארוך: $z^4-2z^3+6z^2-8z+8=(z^2+4)(z^2-2z+2)$. בדיקה בפתיחה: $z^4-2z^3+2z^2+4z^2-8z+8$.'
+          - kind: computation
+            text: '$z^2-2z+2=0$: $\Delta=4-8=-4$, ולכן $z=\frac{2\pm2i}{2}=1\pm i$.'
+          - kind: check
+            text: 'סכום ארבעת השורשים $2i-2i+(1+i)+(1-i)=2$, כמו מינוס המקדם של $z^3$; מכפלתם $4\cdot2=8$, האיבר החופשי.'
+          - kind: result
+            text: '$p(z)=(z^2+4)(z^2-2z+2)$, והשורשים $2i$, $-2i$, $1+i$, $1-i$.'
+        rubric:
+          - text: 'הגורם $z^2+4$ מהזוג הצמוד'
+            weight: 2
+          - text: 'חילוק פולינומים (או השוואת מקדמים) שנותן $z^2-2z+2$, עם בדיקה'
+            weight: 4
+          - text: 'פתרון $z^2-2z+2=0$ עם דיסקרימיננטה שלילית'
+            weight: 3
+          - text: 'רשימה של ארבעת השורשים'
+            weight: 2
+
+      - label: ג
+        points: 5
+        type: numeric
+        objectives: [OBJ-3.2-2]
+        standalone: false
+        prompt: 'מהו סכום הערכים המוחלטים של ארבעת השורשים?'
+        answer: 6.82842712474619
+        tolerance: 0.001
+        correctFeedback: 'נכון, $4+2\sqrt2$: $|\pm2i|=2$ ו-$|1\pm i|=\sqrt2$.'
+        wrongFeedback: '$|a+bi|=\sqrt{a^2+b^2}$ לכל שורש.'
+        commonWrong:
+          - value: 12
+            feedback: '$12=4+4+2+2$ הוא סכום **ריבועי** הערכים המוחלטים, $|z|^2=a^2+b^2$. צריך שורש: $2+2+\sqrt2+\sqrt2$.'
+            misconception: MC-c3-modulus-no-root
+          - value: 8
+            feedback: '$|1\pm i|$ חושב כ-$1+1$. הערך המוחלט הוא $\sqrt{1+1}$.'
+            misconception: MC-c3-modulus-components-sum
+
+      - label: ד
+        points: 5
+        type: numeric
+        objectives: [OBJ-3.3-2, OBJ-3.2-2]
+        standalone: false
+        prompt: 'מהו $\operatorname{Arg}$ של מכפלת שני השורשים שבחצי המישור העליון, $2i(1+i)$?'
+        answer: 2.356194490192345
+        tolerance: 0.001
+        correctFeedback: 'נכון, $\frac{3\pi}{4}$: $\frac{\pi}{2}+\frac{\pi}{4}$, ובדיקה: $2i(1+i)=-2+2i$.'
+        wrongFeedback: 'בכפל הארגומנטים מתחברים.'
+        commonWrong:
+          - value: 1.2337005501361697
+            feedback: '$\frac{\pi^2}{8}$ הוא מכפלת הארגומנטים. בכפל הם מתחברים.'
+            misconception: MC-c3-multiply-args
+          - value: -0.7853981633974483
+            feedback: '$\arctan\frac{2}{-2}=-\frac{\pi}{4}$ מצביע לרביע הרביעי, אבל $-2+2i$ ברביע השני.'
+            misconception: MC-c3-arg-arctan

@@ -1,0 +1,24 @@
+# Terms first defined in lesson 3.4 (the complex exponential and logarithm).
+- id: complex-exponential
+  term: האקספוננט המרוכב
+  en: complex exponential
+  symbol: 'e^{x+iy}=e^x(\cos y+i\sin y)'
+  definition: >-
+    $e^{x+iy}=e^x(\cos y+i\sin y)$: הגודל $e^x$ והזווית $y$. מתקיים $e^{z+w}=e^ze^w$, $e^z\ne0$, והאקספוננט מחזורי
+    עם מחזור $2\pi i$.
+  lesson: '3.4'
+- id: complex-logarithm
+  term: הלוגריתם המרוכב
+  en: complex logarithm
+  symbol: '\log w=\ln|w|+i(\operatorname{Arg}w+2\pi k)'
+  definition: >-
+    כל $z$ שמקיים $e^z=w$ ($w\ne0$): $\log w=\ln|w|+i(\operatorname{Arg}w+2\pi k)$, $k$ שלם; אינסוף ערכים.
+  lesson: '3.4'
+- id: principal-logarithm
+  term: הערך הראשי של הלוגריתם
+  en: principal value of the logarithm
+  symbol: '\operatorname{Log}w'
+  definition: >-
+    $\operatorname{Log}w=\ln|w|+i\operatorname{Arg}w$, הערך עם החלק המדומה ב-$(-\pi,\pi]$. החוק
+    $\operatorname{Log}(zw)=\operatorname{Log}z+\operatorname{Log}w$ נכון רק עד כדי $2\pi ki$.
+  lesson: '3.4'

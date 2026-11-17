@@ -1,0 +1,469 @@
+# Lesson 5.5 — the derivative table and its uses.
+# Objectives (src/course.ts):
+#   OBJ-5.5-1  differentiate every elementary function in the table, including the hyperbolic ones
+#   OBJ-5.5-2  compute related rates in physical and geometric problems
+#   OBJ-5.5-3  use the derivative to find intervals of increase and decrease and extreme points
+# Every key is recomputed in screens/tools/checks_ch5.py.
+chapter: 5
+questions:
+  - id: Q-5.5-cosh
+    type: expr
+    objectives: [OBJ-5.5-1]
+    level: basic
+    prompt: 'גזרו: $f(x)=\cosh(3x)$. כתבו את $f''(x)$ (אפשר להקליד sinh ו-cosh).'
+    answer: '3*sinh(3*x)'
+    answerTex: '$f''(x)=3\sinh(3x)$'
+    variables: [x]
+    domain: [-1.5, 1.5]
+    correctFeedback: >-
+      נכון. $(\cosh y)'=\sinh y$, בלי מינוס, כפול הנגזרת הפנימית 3.
+    wrongFeedback: >-
+      מההגדרה $\cosh y=\frac{e^y+e^{-y}}{2}$: גזרו לפי $y$, ואחר כך כלל השרשרת עם $y=3x$.
+    commonWrong:
+      - expr: '-3*sinh(3*x)'
+        feedback: >-
+          המינוס שייך ל-$(\cos x)'$. ל-$\cosh$: $\left(\frac{e^y+e^{-y}}{2}\right)'=\frac{e^y-e^{-y}}{2}=\sinh y$.
+        misconception: MC-c5-cosh-sign
+      - expr: 'sinh(3*x)'
+        feedback: >-
+          חסרה הנגזרת הפנימית $(3x)'=3$.
+        misconception: MC-c5-chain-missing-inner
+
+  - id: Q-5.5-two-to-x
+    type: expr
+    objectives: [OBJ-5.5-1]
+    level: basic
+    prompt: 'גזרו: $f(x)=2^x$. כתבו את $f''(x)$ (אפשר להקליד ln).'
+    answer: '2^x*log(2)'
+    answerTex: '$f''(x)=2^x\ln2$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון (כך גם בסיכומים, עמ׳ 13). $2^x=e^{x\ln2}$, ובכלל השרשרת $(2^x)'=e^{x\ln2}\cdot\ln2$.
+    wrongFeedback: >-
+      כתבו $2^x=e^{x\ln 2}$ וגזרו בכלל השרשרת.
+    commonWrong:
+      - expr: 'x*2^(x - 1)'
+        feedback: >-
+          זה כלל החזקה, שמתאים לבסיס משתנה ומעריך קבוע. כאן הבסיס 2 קבוע והמעריך $x$ משתנה.
+        misconception: MC-c5-power-rule-on-exponential
+      - expr: '2^x'
+        feedback: >-
+          רק ל-$e^x$ הנגזרת שווה לפונקציה. לבסיס $a$ יש כופל $\ln a$, וכאן $\ln2\approx0.69$.
+        misconception: MC-c5-base-ignored
+
+  - id: Q-5.5-log10
+    type: numeric
+    objectives: [OBJ-5.5-1]
+    level: basic
+    prompt: >-
+      תהי $f(x)=\log_{10}x$. חשבו את $f'(1)$.
+    answer: 0.434294481903252
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{1}{\ln10}\approx0.434$. $\log_{10}x=\frac{\ln x}{\ln10}$, ולכן $f'(x)=\frac{1}{x\ln10}$.
+    wrongFeedback: >-
+      העבירו לבסיס $e$: $\log_{10}x=\frac{\ln x}{\ln 10}$, ו-$\ln10$ הוא קבוע.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          זו הנגזרת של $\ln x$ ב-1. בבסיס 10 יש כופל $\frac{1}{\ln10}$.
+        misconception: MC-c5-base-ignored
+
+  - id: Q-5.5-balloon
+    type: numeric
+    objectives: [OBJ-5.5-2]
+    level: basic
+    prompt: >-
+      ממלאים בלון כדורי, והרדיוס שלו גדל בקצב קבוע של $2$ ס״מ לשנייה. באיזה קצב (בסמ״ק לשנייה) גדל הנפח
+      $V=\frac43\pi r^3$ ברגע שבו $r=5$ ס״מ?
+    answer: 628.318530717959
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $200\pi\approx628$ סמ״ק לשנייה. גוזרים לפי הזמן: $\frac{dV}{dt}=4\pi r^2\frac{dr}{dt}=4\pi\cdot25\cdot2$.
+    wrongFeedback: >-
+      גזרו את $V=\frac43\pi r^3$ לפי $t$, כש-$r=r(t)$ (כלל השרשרת), ורק אחר כך הציבו $r=5$ ו-$\frac{dr}{dt}=2$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          הצבתם $r=5$ **לפני** הגזירה: $V=\frac{500\pi}{3}$ הוא מספר, ונגזרתו 0. הרדיוס משתנה; מציבים רק בסוף.
+        misconception: MC-c5-related-substitute-early
+      - value: 2
+        feedback: >-
+          הנפח אינו גדל באותו קצב כמו הרדיוס: הקשר ביניהם $\frac{dV}{dt}=4\pi r^2\frac{dr}{dt}$, ויש לו יחידות אחרות.
+        misconception: MC-c5-related-same-rate
+
+  - id: Q-5.5-decreasing
+    type: mc
+    objectives: [OBJ-5.5-3]
+    level: basic
+    prompt: >-
+      באיזה תחום יורדת הפונקציה $f(x)=x^3-3x$?
+    choices:
+      - text: '$[-1,1]$'
+        correct: true
+        feedback: >-
+          נכון. $f'(x)=3x^2-3=3(x-1)(x+1)$, שלילית בדיוק כש-$-1<x<1$.
+      - text: '$(-\infty,-1]$ ו-$[1,\infty)$'
+        feedback: >-
+          שם $f'>0$, ולכן $f$ **עולה**. ירידה היא המקום שבו הנגזרת שלילית.
+        misconception: MC-c5-sign-change-direction
+      - text: '$(-\infty,0]$'
+        feedback: >-
+          זה המקום שבו $x\le0$, אבל הסימן של $f$ או של $x$ לא קובע: מה שקובע הוא הסימן של $f'$.
+        misconception: MC-c5-fprime-graph-is-f
+      - text: '$[-\sqrt3,\sqrt3]$'
+        feedback: >-
+          $\pm\sqrt3$ ו-0 הם האפסים של $f$ עצמה, לא של $f'$. תחומי עלייה וירידה נקבעים לפי האפסים והסימן של $f'$.
+        misconception: MC-c5-fprime-graph-is-f
+
+  - id: Q-5.5-x-cubed
+    type: twotier
+    objectives: [OBJ-5.5-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      ל-$f(x)=x^3$ מתקיים $f'(0)=0$. נכון או לא נכון: ב-$x=0$ יש ל-$f$ נקודת קיצון מקומית.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $f'(x)=3x^2\ge0$ משני הצדדים, ולכן $f$ עולה דרך 0: ערכים שליליים משמאל, חיוביים מימין.
+      - text: 'נכון'
+        feedback: >-
+          $f'(x_0)=0$ הוא תנאי הכרחי לקיצון בנקודה פנימית, לא מספיק. כאן הנגזרת אינה מחליפה סימן.
+        misconception: MC-c5-fprime-zero-extremum
+    reasons:
+      - text: 'הסימן של $f''$ אינו מתחלף ב-0: $f''\ge0$ משני הצדדים'
+        correct: true
+        feedback: 'בדיוק. קיצון דורש החלפת סימן של הנגזרת (או בדיקה אחרת).'
+      - text: 'בכל נקודה שבה $f''=0$ יש קיצון, אז זו נקודת מינימום'
+        feedback: >-
+          לא כל נקודה שבה $f'=0$ היא קיצון. ליד 0 יש ל-$x^3$ גם ערכים קטנים מ-$f(0)=0$ וגם גדולים ממנו.
+        misconception: MC-c5-fprime-zero-extremum
+      - text: 'ל-$x^3$ אין נגזרת ב-0'
+        feedback: >-
+          $x^3$ פולינום, גזירה בכל מקום, ו-$f'(0)=0$. הגרף שטוח שם, ובכל זאת אין קיצון.
+        misconception: MC-c5-continuous-implies-differentiable
+
+  - id: Q-5.5-table
+    type: multi
+    objectives: [OBJ-5.5-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      אילו מהשורות הבאות בטבלת הנגזרות נכונות? סמנו את כולן.
+    choices:
+      - text: "$(\\sinh x)'=\\cosh x$"
+        correct: true
+        feedback: 'נכון: $\left(\frac{e^x-e^{-x}}{2}\right)''=\frac{e^x+e^{-x}}{2}$.'
+      - text: "$(\\ln|x|)'=\\frac1x$ לכל $x\\ne0$"
+        correct: true
+        feedback: >-
+          נכון. ל-$x<0$: $\ln|x|=\ln(-x)$, ובכלל השרשרת $\frac{1}{-x}\cdot(-1)=\frac1x$.
+      - text: "$(\\tan x)'=\\frac{1}{\\cos^2x}$"
+        correct: true
+        feedback: 'נכון: כלל המנה נותן $\frac{\cos^2x+\sin^2x}{\cos^2x}$.'
+      - text: "$(\\cosh x)'=-\\sinh x$"
+        feedback: >-
+          אין מינוס: $(\cosh x)'=\sinh x$. המינוס של $(\cos x)'$ אינו עובר להיפרבוליות.
+        misconception: MC-c5-cosh-sign
+      - text: "$(a^x)'=x\\,a^{x-1}$"
+        feedback: >-
+          זה כלל החזקה, שמתאים למעריך קבוע. $(a^x)'=a^x\ln a$.
+        misconception: MC-c5-power-rule-on-exponential
+      - text: "$(\\arccos x)'=\\frac{1}{\\sqrt{1-x^2}}$"
+        feedback: >-
+          חסר מינוס: $\arccos$ יורדת, ו-$(\arccos x)'=-\frac{1}{\sqrt{1-x^2}}$.
+        misconception: MC-c5-arccos-sign
+
+  - id: Q-5.5-tanh
+    type: expr
+    objectives: [OBJ-5.5-1]
+    level: mid
+    prompt: >-
+      גזרו את $\tanh x=\frac{\sinh x}{\cosh x}$ בכלל המנה ופשטו בעזרת הזהות $\cosh^2x-\sinh^2x=1$. כתבו את התוצאה
+      (השתמשו ב-cosh).
+    answer: '1/cosh(x)^2'
+    answerTex: '$(\tanh x)''=\dfrac{\cosh^2x-\sinh^2x}{\cosh^2x}=\dfrac{1}{\cosh^2x}$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. המונה $\cosh x\cdot\cosh x-\sinh x\cdot\sinh x=1$. הנגזרת חיובית: $\tanh$ עולה מ-$-1$ ל-1.
+    wrongFeedback: >-
+      $u=\sinh x$, $v=\cosh x$, $u'=\cosh x$, $v'=\sinh x$ (בלי מינוס). הציבו ב-$\frac{u'v-uv'}{v^2}$.
+    commonWrong:
+      - expr: '(cosh(x)^2 + sinh(x)^2)/cosh(x)^2'
+        feedback: >-
+          המונה יצא $\cosh^2x+\sinh^2x$: לקחתם $(\cosh x)'=-\sinh x$ (או כתבתם פלוס בכלל המנה). הנגזרת של $\cosh$ היא
+          $+\sinh$, והמונה $\cosh^2x-\sinh^2x=1$.
+        misconception: MC-c5-cosh-sign
+
+  - id: Q-5.5-ladder
+    type: numeric
+    objectives: [OBJ-5.5-2]
+    level: mid
+    prompt: >-
+      סולם באורך 5 מ׳ נשען על קיר אנכי. הקצה התחתון מחליק מהקיר על הרצפה במהירות 1 מ׳ לשנייה. מהי המהירות (במ׳
+      לשנייה, עם סימן) של הקצה העליון ברגע שבו הקצה התחתון במרחק 3 מ׳ מהקיר? (מהירות שלילית: הקצה יורד.)
+    answer: -0.75
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x^2+y^2=25$ בכל רגע; גזירה לפי $t$: $2xx'+2yy'=0$. ברגע הנתון $x=3$, $y=4$, $x'=1$, ולכן
+      $y'=-\frac{3\cdot1}{4}$.
+    wrongFeedback: >-
+      כתבו קשר שנכון בכל רגע ($x^2+y^2=25$), גזרו לפי הזמן, ורק אז הציבו $x=3$, $y=4$, $x'=1$.
+    commonWrong:
+      - value: -1
+        feedback: >-
+          הקצה העליון אינו זז באותה מהירות כמו התחתון: $y'=-\frac xy x'$, והיחס תלוי במצב.
+        misconception: MC-c5-related-same-rate
+      - value: 0
+        feedback: >-
+          הצבתם $x=3$, $y=4$ לפני הגזירה: מספרים קבועים, ונגזרתם 0. גוזרים את הקשר הכללי ומציבים אחר כך.
+        misconception: MC-c5-related-substitute-early
+
+  - id: Q-5.5-related-steps
+    type: rank
+    objectives: [OBJ-5.5-2]
+    level: mid
+    prompt: >-
+      סדרו את שלבי הפתרון של בעיית קצבים קשורים (למשל מים שנשפכים לתוך מיכל חרוטי).
+    help: 'גררו את השלבים לסדר הנכון, מהראשון לאחרון.'
+    items:
+      - id: vars
+        label: 'מסמנים את הגדלים שמשתנים בזמן ואת הקצבים הנתונים והמבוקשים'
+      - id: relation
+        label: 'כותבים משוואה שקושרת את הגדלים ונכונה בכל רגע (גיאומטריה, משולשים דומים)'
+      - id: diff
+        label: 'גוזרים את המשוואה לפי הזמן $t$, בכלל השרשרת'
+      - id: plug
+        label: 'מציבים את ערכי הרגע המבוקש ואת הקצבים הנתונים'
+      - id: solve
+        label: 'פותרים לקצב המבוקש ובודקים סימן ויחידות'
+    order: [vars, relation, diff, plug, solve]
+    correctFeedback: >-
+      נכון. הצעד הקריטי הוא הסדר "גוזרים ואז מציבים": ערכי הרגע הם מספרים, ונגזרתם 0.
+    wrongFeedback: >-
+      מה יקרה לנגזרת אם מציבים את ערכי הרגע לפני הגזירה? ומה צריך להיות כתוב לפני שאפשר לגזור?
+
+  - id: Q-5.5-cone-substitute
+    type: twotier
+    objectives: [OBJ-5.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מים נשפכים למיכל בצורת חרוט הפוך, שהרדיוס שלו בגובה $h$ הוא $r=\frac h2$. כדי למצוא את קצב העלייה של המים, אפשר
+      להציב $r=\frac h2$ בנוסחת הנפח $V=\frac13\pi r^2h$ **לפני** שגוזרים לפי $t$. נכון או לא נכון?
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. $r=\frac h2$ נכון **בכל רגע** (משולשים דומים), ולכן מותר להציב: $V=\frac{\pi h^3}{12}$, ואז לגזור.
+      - text: 'לא נכון'
+        feedback: >-
+          אסור להציב לפני הגזירה **ערכים של רגע מסוים**. $r=\frac h2$ אינו ערך אלא קשר שנכון תמיד, וההצבה שלו מקטינה את
+          מספר המשתנים.
+        misconception: MC-c5-related-substitute-early
+    reasons:
+      - text: 'הקשר $r=\frac h2$ נכון בכל רגע, ולכן גם הנגזרות שלו נכונות: $r''=\frac{h''}2$'
+        correct: true
+        feedback: 'בדיוק. מה שאסור הוא להחליף גודל משתנה במספר, למשל $r=2$, לפני הגזירה.'
+      - text: 'מותר תמיד להציב כל ערך לפני הגזירה'
+        feedback: >-
+          לא: הצבת $h=4$ ו-$r=2$ לפני הגזירה הופכת את $V$ למספר, ונגזרתו 0. מציבים רק קשרים כלליים.
+        misconception: MC-c5-related-substitute-early
+      - text: 'הרדיוס של המים קבוע, כי המיכל לא משנה צורה'
+        feedback: >-
+          המיכל קבוע, אבל הרדיוס של **פני המים** גדל כשהמים עולים. אילו $r$ היה קבוע, היינו מקבלים קצב שגוי.
+        misconception: MC-c5-related-substitute-early
+
+  - id: Q-5.5-closed-max
+    type: numeric
+    objectives: [OBJ-5.5-3]
+    level: mid
+    prompt: >-
+      מהו הערך הגדול ביותר של $f(x)=x^3-3x$ בקטע הסגור $[0,3]$?
+    answer: 18
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. המועמדים: $f'=0$ בקטע רק ב-$x=1$ ($f(1)=-2$, מינימום), והקצוות $f(0)=0$ ו-$f(3)=27-9=18$.
+    wrongFeedback: >-
+      בקטע סגור בודקים את הנקודות הפנימיות שבהן $f'=0$ **ואת קצות הקטע**, ומשווים את הערכים.
+    commonWrong:
+      - value: -2
+        feedback: >-
+          $f(1)=-2$ הוא הערך בנקודה היחידה שבה $f'=0$, וזו בכלל נקודת מינימום. המקסימום כאן בקצה $x=3$.
+        misconception: MC-c5-endpoints-forgotten
+      - value: 2
+        feedback: >-
+          $f(-1)=2$, אבל $-1$ אינו בקטע $[0,3]$. וגם כך: בקצה $x=3$ הערך 18 גדול יותר.
+        misconception: MC-c5-endpoints-forgotten
+
+  - id: Q-5.5-fprime-formula
+    type: mc
+    objectives: [OBJ-5.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      על פונקציה גזירה $f$ ידוע רק ש-$f'(x)=(x-1)^2(x+2)$. מה נכון?
+    choices:
+      - text: 'ב-$x=-2$ יש ל-$f$ מינימום מקומי, וב-$x=1$ אין קיצון'
+        correct: true
+        feedback: >-
+          נכון. $f'$ מחליפה סימן ב-$-2$ ממינוס לפלוס (ירידה ואחריה עלייה), וב-1 היא 0 אבל חיובית משני הצדדים.
+      - text: 'ב-$x=-2$ יש מקסימום מקומי, וב-$x=1$ מינימום מקומי'
+        feedback: >-
+          משמאל ל-$-2$, $f'<0$ ($f$ יורדת), ומימין $f'>0$: זה מינימום. ב-1 הנגזרת אינה מחליפה סימן.
+        misconception: MC-c5-sign-change-direction
+      - text: 'יש ל-$f$ קיצון גם ב-$x=-2$ וגם ב-$x=1$, כי שם $f''=0$'
+        feedback: >-
+          $f'=0$ לא מספיק. ב-$x=1$ הגורם $(x-1)^2$ אינו שלילי, ולכן $f'$ אינה מחליפה סימן שם.
+        misconception: MC-c5-fprime-zero-extremum
+      - text: '$f(1)=0$ ו-$f(-2)=0$'
+        feedback: >-
+          האפסים של $f'$ אינם אפסים של $f$. מ-$f'$ אפשר לדעת איפה $f$ עולה ויורדת, לא את ערכיה.
+        misconception: MC-c5-fprime-graph-is-f
+
+  - id: Q-5.5-unique-root
+    type: twotier
+    objectives: [OBJ-5.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: למשוואה $x^3+x-1=0$ יש בדיוק פתרון ממשי אחד.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. $f(0)=-1<0<1=f(1)$ ו-$f$ רציפה, ולכן יש פתרון ב-$(0,1)$; ו-$f'(x)=3x^2+1>0$, כך ש-$f$ עולה ממש ואינה
+          יכולה לחצות את 0 פעמיים.
+      - text: 'לא נכון'
+        feedback: >-
+          לפולינום ממעלה 3 יכולים להיות עד שלושה שורשים ממשיים, אבל לזה יש אחד בלבד, כי הוא עולה ממש.
+        misconception: MC-c5-ivt-gives-uniqueness
+    reasons:
+      - text: 'ערך הביניים נותן קיום, ו-$f''>0$ נותן יחידות'
+        correct: true
+        feedback: 'בדיוק: שני כלים לשתי שאלות.'
+      - text: 'משפט ערך הביניים לבדו מבטיח פתרון יחיד בין 0 ל-1'
+        feedback: >-
+          משפט ערך הביניים נותן **קיום** בלבד; ל-$x^3-x$ בקטע $[-2,2]$ יש שלושה פתרונות. היחידות באה מהמונוטוניות.
+        misconception: MC-c5-ivt-gives-uniqueness
+      - text: 'כי $f''$ לא מתאפסת, אז ל-$f$ אין אפסים בכלל חוץ מאחד'
+        feedback: >-
+          $f'\ne0$ נותן מונוטוניות, כלומר **לכל היותר** פתרון אחד. קיום דורש עוד נימוק: החלפת סימן וערך הביניים.
+        misconception: MC-c5-ivt-gives-uniqueness
+
+  - id: Q-5.5-arcsin-combo
+    type: expr
+    objectives: [OBJ-5.5-1]
+    level: exam
+    prompt: >-
+      גזרו ופשטו: $f(x)=x\arcsin x+\sqrt{1-x^2}$ בקטע $|x|<1$. כתבו את $f'(x)$ (אפשר להקליד arcsin).
+    answer: 'asin(x)'
+    answerTex: '$f''(x)=\arcsin x+\dfrac{x}{\sqrt{1-x^2}}-\dfrac{x}{\sqrt{1-x^2}}=\arcsin x$'
+    variables: [x]
+    domain: [-0.9, 0.9]
+    correctFeedback: >-
+      נכון. כלל המכפלה נותן $\arcsin x+\frac{x}{\sqrt{1-x^2}}$, והשורש נגזר ל-$\frac{-2x}{2\sqrt{1-x^2}}$: שני האיברים
+      מתבטלים. (כלומר $f$ היא פונקציה קדומה של $\arcsin x$; זה יחזור בפרק 7.)
+    wrongFeedback: >-
+      גזרו את $x\arcsin x$ בכלל המכפלה ואת $\sqrt{1-x^2}$ בכלל השרשרת. צפו לביטול.
+    commonWrong:
+      - expr: 'asin(x) + x/sqrt(1 - x^2) + 1/(2*sqrt(1 - x^2))'
+        feedback: >-
+          בנגזרת של $\sqrt{1-x^2}$ חסר הכופל $(1-x^2)'=-2x$: היא $-\frac{x}{\sqrt{1-x^2}}$, לא $\frac{1}{2\sqrt{1-x^2}}$.
+        misconception: MC-c5-chain-missing-inner
+      - expr: '(1 - x)/sqrt(1 - x^2)'
+        feedback: >-
+          גזרתם את $x\arcsin x$ כמכפלת הנגזרות, $1\cdot\frac{1}{\sqrt{1-x^2}}$. כלל המכפלה הוא סכום של שני איברים.
+        misconception: MC-c5-product-of-derivatives
+
+  - id: Q-5.5-log-cosh
+    type: expr
+    objectives: [OBJ-5.5-1]
+    level: exam
+    prompt: >-
+      גזרו: $f(x)=\ln\big(\cosh(2x)\big)$. כתבו את $f'(x)$ (אפשר להקליד tanh, sinh, cosh).
+    answer: '2*tanh(2*x)'
+    answerTex: '$f''(x)=\dfrac{2\sinh(2x)}{\cosh(2x)}=2\tanh(2x)$'
+    variables: [x]
+    domain: [-1.5, 1.5]
+    correctFeedback: >-
+      נכון. שלוש שכבות: $\ln$, $\cosh$ ו-$2x$: $\frac{1}{\cosh2x}\cdot\sinh2x\cdot2$.
+    wrongFeedback: >-
+      $(\ln w)'=\frac1w$ בערך $w=\cosh(2x)$, כפול הנגזרת של $\cosh(2x)$, שהיא בעצמה הרכבה.
+    commonWrong:
+      - expr: 'tanh(2*x)'
+        feedback: >-
+          חסר הכופל 2 מהשכבה הפנימית ביותר, $(2x)'=2$.
+        misconception: MC-c5-chain-missing-inner
+      - expr: '-2*tanh(2*x)'
+        feedback: >-
+          הסימן הפוך: $(\cosh w)'=+\sinh w$. בדיקה: $\ln\cosh(2x)$ עולה כש-$x>0$.
+        misconception: MC-c5-cosh-sign
+      - expr: '1/cosh(2*x)'
+        feedback: >-
+          גזרתם רק את הלוגריתם. אחריו באה הנגזרת של $\cosh(2x)$, שהיא $2\sinh(2x)$.
+        misconception: MC-c5-chain-missing-inner
+
+  - id: Q-5.5-cone
+    type: numeric
+    objectives: [OBJ-5.5-2]
+    level: exam
+    prompt: >-
+      מים נשפכים בקצב של $2$ מ״ק לדקה לתוך מיכל בצורת חרוט הפוך (הקודקוד למטה), שהרדיוס שלו בגובה $h$ הוא $r=\frac h2$.
+      באיזה קצב (במטר לדקה) עולה פני המים ברגע שבו עומק המים $4$ מ׳?
+    answer: 0.159154943091895
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{1}{2\pi}\approx0.159$ מ׳ לדקה. $V=\frac13\pi\left(\frac h2\right)^2h=\frac{\pi h^3}{12}$, ולכן
+      $\frac{dV}{dt}=\frac{\pi h^2}{4}\frac{dh}{dt}$, ו-$2=4\pi\frac{dh}{dt}$.
+    wrongFeedback: >-
+      בטאו את הנפח בעזרת $h$ בלבד (הציבו $r=\frac h2$, קשר שנכון בכל רגע), גזרו לפי $t$ והציבו $h=4$.
+    commonWrong:
+      - value: 0.477464829275686
+        feedback: >-
+          $\frac{3}{2\pi}$ מתקבל כשמחליפים את $r$ במספר 2 (ערכו ברגע הזה) לפני הגזירה: $V=\frac{4\pi}{3}h$. אבל הרדיוס
+          של פני המים גדל יחד עם $h$.
+        misconception: MC-c5-related-substitute-early
+
+  - id: Q-5.5-distance
+    type: numeric
+    objectives: [OBJ-5.5-3]
+    level: exam
+    prompt: >-
+      גוף נע על ישר, ומקומו ברגע $t$ הוא $x(t)=t^3-6t^2+9t$ (מטרים, שניות). איזו דרך (במטרים) הוא עובר בין $t=0$
+      ל-$t=4$?
+    answer: 12
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $v=3t^2-12t+9=3(t-1)(t-3)$: הגוף מחליף כיוון ב-$t=1$ וב-$t=3$. $x(0)=0$, $x(1)=4$, $x(3)=0$, $x(4)=4$, ולכן
+      הדרך $4+4+4=12$.
+    wrongFeedback: >-
+      מצאו מתי $v=0$: שם הגוף מסתובב. חשבו את המרחק בכל קטע שבו הוא נע בכיוון אחד, וחברו.
+    commonWrong:
+      - value: 4
+        feedback: >-
+          $4=x(4)-x(0)$ הוא ההעתק. הגוף הלך קדימה, חזר לראשית והלך שוב קדימה: הדרך גדולה מההעתק.
+        misconception: MC-c5-displacement-vs-distance
+
+  - id: Q-5.5-box
+    type: numeric
+    objectives: [OBJ-5.5-3]
+    level: exam
+    prompt: >-
+      מגיליון פח ריבועי בגודל $12\times12$ ס״מ חותכים בכל פינה ריבוע בצלע $x$ ומקפלים קופסה פתוחה. מהו הנפח הגדול
+      ביותר (בסמ״ק) שאפשר לקבל?
+    answer: 128
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $V(x)=x(12-2x)^2$ ב-$[0,6]$; $V'(x)=(12-2x)(12-6x)$ מתאפסת ב-2 וב-6. $V(0)=V(6)=0$ ו-$V(2)=2\cdot64=128$.
+    wrongFeedback: >-
+      כתבו את $V(x)$, מצאו את $x$ שבהן $V'=0$ בתחום $0\le x\le6$, והשוו עם הקצוות.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 הוא $V(6)$: גם ב-$x=6$ הנגזרת מתאפסת, אבל שם הנפח מינימלי (אין קופסה). לא כל אפס של $V'$ הוא מקסימום.
+        misconception: MC-c5-fprime-zero-extremum

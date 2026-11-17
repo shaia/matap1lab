@@ -1,0 +1,299 @@
+# Chapter 9 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# Core lessons only (9.1–9.3, and earlier chapters); lesson 9.4 is enrichment. Numbers in screens/tools/recompute-ch9.py.
+chapter: 9
+questions:
+  - id: Q-9-exam-1
+    type: exam
+    title: מסלול של כדור
+    prompt: >-
+      כדור נבעט מהקרקע, והמקום שלו (במטרים, $t$ בשניות, $g=10$) הוא $\vec r(t)=\left(20t,\ 20t-5t^2\right)$, $0\le t\le4$.
+    parts:
+      - label: א
+        points: 5
+        type: expr
+        objectives: [OBJ-9.1-1]
+        prompt: 'בטאו את הגובה $y$ כפונקציה של המרחק האופקי $x$.'
+        answer: 'x-x^2/80'
+        answerTex: '$y=x-\dfrac{x^2}{80},\quad 0\le x\le80$'
+        variables: [x]
+        domain: [0, 80]
+        correctFeedback: 'נכון. $t=\frac{x}{20}$, ו-$5t^2=\frac{5x^2}{400}$. הכדור נוחת ב-$x=80$.'
+        wrongFeedback: 'בודדו את $t$ מהמשוואה של $x$ והציבו במשוואה של $y$.'
+        commonWrong:
+          - expr: '20*x-5*x^2'
+            feedback: 'הצבתם $x$ במקום $t$. צריך $t=\frac{x}{20}$.'
+            misconception: MC-c9-substitute-x-for-t
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-9.2-1]
+        prompt: 'מהו גודל המהירות של הכדור ברגע הנחיתה, במטרים לשנייה? (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)'
+        answer: 28.284271247462
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $20\sqrt2$. $y=0$ ב-$t=4$, ו-$\vec v(t)=(20,\ 20-10t)$, כלומר $\vec v(4)=(20,-20)$. אותו גודל כמו בבעיטה,
+          כמצופה בלי חיכוך.
+        wrongFeedback: 'מצאו את זמן הנחיתה, גזרו את $\vec r$, והציבו. גודל = שורש סכום הריבועים.'
+        commonWrong:
+          - value: 40
+            feedback: '$20+20$: חיברתם את גודלי הרכיבים.'
+            misconception: MC-c9-speed-sum-components
+          - value: 20
+            feedback: 'זה רק הרכיב האופקי. בנחיתה יש גם רכיב אנכי, $-20$.'
+            misconception: MC-c9-speed-sum-components
+
+      - label: ג
+        points: 5
+        type: numeric
+        objectives: [OBJ-9.2-2]
+        prompt: >-
+          ב-$t=1$ הכדור ממשיך, בדמיון, בקו ישר לאורך הישר המשיק. באיזה $x$ הישר המשיק פוגש את הקרקע $y=0$?
+        answer: -10
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\vec r(1)=(20,15)$ ו-$\vec v(1)=(20,10)$. הישר $(20+20s,\ 15+10s)$ פוגש את $y=0$ ב-$s=-1.5$, ושם
+          $x=-10$: מאחורי נקודת הבעיטה, כי הכדור עדיין עולה.
+        wrongFeedback: 'כתבו את הישר המשיק בפרמטר $s$, מצאו מתי $y=0$ והציבו ב-$x$.'
+        commonWrong:
+          - value: 12.5
+            feedback: 'השתמשתם בכיוון $(10,20)$, שיפוע 2 במקום $\frac12$: הרכיבים התחלפו.'
+            misconception: MC-c9-slope-inverted
+
+      - label: ד
+        points: 10
+        type: open
+        objectives: [OBJ-9.3-1, OBJ-8.2-1]
+        prompt: >-
+          חשבו את אורך המסלול של הכדור מהבעיטה עד הנחיתה. אפשר להשתמש בנוסחה מהטבלה
+          $\int\sqrt{a^2+u^2}\,du=\frac u2\sqrt{a^2+u^2}+\frac{a^2}{2}\ln\left(u+\sqrt{a^2+u^2}\right)+C$.
+        solution:
+          - kind: given
+            text: '$\vec r(t)=(20t,\ 20t-5t^2)$, $0\le t\le4$.'
+          - kind: goal
+            text: '$L=\int_0^4|\vec v(t)|\,dt$.'
+          - kind: idea
+            text: >-
+              גודל המהירות הוא שורש של ביטוי ריבועי ב-$t$. הצבה $u=2-t$ מביאה אותו לצורה $\sqrt{4+u^2}$ שבטבלה, והסימטריה
+              של המסלול (עלייה וירידה) חוסכת חצי מהעבודה.
+          - kind: computation
+            text: >-
+              $\vec v=(20,\ 20-10t)$, $|\vec v|=\sqrt{400+100(2-t)^2}=10\sqrt{4+(2-t)^2}$.
+          - kind: step
+            text: >-
+              $u=2-t$, $du=-dt$, גבולות $t=0\mapsto u=2$, $t=4\mapsto u=-2$:
+              $L=10\int_{-2}^{2}\sqrt{4+u^2}\,du=20\int_0^2\sqrt{4+u^2}\,du$ (האינטגרנד זוגי).
+          - kind: computation
+            text: >-
+              לפי הטבלה עם $a=2$: $\int_0^2\sqrt{4+u^2}\,du=\left[\tfrac u2\sqrt{4+u^2}+2\ln\left(u+\sqrt{4+u^2}\right)\right]_0^2=\sqrt8+2\ln\left(2+\sqrt8\right)-2\ln2=2\sqrt2+2\ln\left(1+\sqrt2\right)$.
+          - kind: check
+            text: >-
+              $L=40\sqrt2+40\ln(1+\sqrt2)\approx56.57+35.26=91.82$. זה יותר מהמרחק האופקי 80 ומהמיתר, וגם פחות מ-$80+2\cdot20=120$
+              (הליכה אופקית ועלייה וירידה של 20 מטר): סביר.
+          - kind: result
+            text: '$L=40\sqrt2+40\ln\left(1+\sqrt2\right)\approx91.8$ מטרים.'
+        rubric:
+          - text: 'נוסחת האורך $\int|\vec v|\,dt$ וחישוב נכון של $|\vec v|=10\sqrt{4+(2-t)^2}$'
+            weight: 3
+          - text: 'הצבה נכונה עם החלפת גבולות (ושימוש בזוגיות, או חישוב ישיר על $[-2,2]$)'
+            weight: 3
+          - text: 'שימוש נכון בנוסחה מהטבלה והגעה ל-$40\sqrt2+40\ln(1+\sqrt2)$'
+            weight: 3
+          - text: 'בדיקת סבירות של המספר (בערך 92 מטר)'
+            weight: 1
+
+  - id: Q-9-exam-2
+    type: exam
+    title: ספירלה על חרוט
+    prompt: >-
+      נקודה נעה לפי $\vec r(t)=\left(e^t\cos t,\ e^t\sin t,\ e^t\right)$, $t\in\mathbb{R}$. כש-$t\to-\infty$ היא מתקרבת
+      לראשית.
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-9.2-1]
+        prompt: 'מהו גודל המהירות ב-$t=0$? (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)'
+        answer: 1.7320508075689
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\vec v=e^t\left(\cos t-\sin t,\ \sin t+\cos t,\ 1\right)$, וב-$t=0$: $(1,1,1)$, באורך $\sqrt3$. באופן
+          כללי $|\vec v|^2=e^{2t}(2+1)$, כלומר $|\vec v|=\sqrt3\,e^t$.
+        wrongFeedback: 'גזרו כל רכיב בכלל המכפלה, הציבו $t=0$ וחשבו אורך.'
+        commonWrong:
+          - value: 1.4142135624
+            feedback: '$\sqrt2=|\vec r(0)|=|(1,0,1)|$, המרחק מהראשית. גודל המהירות הוא אורך הנגזרת.'
+            misconception: MC-c9-speed-is-position-length
+
+      - label: ב
+        points: 5
+        type: mc
+        objectives: [OBJ-9.1-1]
+        qualitative: true
+        prompt: 'על איזה משטח נמצא העקום?'
+        choices:
+          - text: 'על החרוט $x^2+y^2=z^2$ (בחלק $z>0$)'
+            correct: true
+            feedback: 'נכון. $x^2+y^2=e^{2t}(\cos^2t+\sin^2t)=e^{2t}=z^2$.'
+          - text: 'על הגליל $x^2+y^2=1$'
+            feedback: 'המרחק מציר $z$ הוא $e^t$, לא קבוע: הספירלה מתרחבת כשהיא עולה. זה לא סליל רגיל.'
+            misconception: MC-c9-semi-axes-squared
+          - text: 'על הספירה $x^2+y^2+z^2=2$'
+            feedback: 'הנקודה $\vec r(0)=(1,0,1)$ אכן על הספירה הזו, אבל באופן כללי $x^2+y^2+z^2=2e^{2t}$, לא קבוע.'
+            misconception: MC-c9-surface-check-one-point
+          - text: 'על המישור $z=1$'
+            feedback: '$z=e^t$ משתנה; רק הנקודה $t=0$ נמצאת במישור הזה.'
+            misconception: MC-c9-surface-check-one-point
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-9.3-1, OBJ-9.3-2, OBJ-8.3-1]
+        prompt: >-
+          (1) חשבו את אורך העקום עבור $-\infty<t\le0$ (מהראשית עד $\vec r(0)$). (2) מצאו את $s(t)$, האורך מהראשית עד
+          $\vec r(t)$, וכתבו פרמטריזציה לפי אורך.
+        solution:
+          - kind: given
+            text: '$|\vec v(t)|=\sqrt3\,e^t$ (מסעיף א).'
+          - kind: goal
+            text: '(1) $\int_{-\infty}^{0}|\vec v|\,dt$. (2) $s(t)=\int_{-\infty}^{t}|\vec v|$, ו-$\vec\rho(s)=\vec r(t(s))$.'
+          - kind: idea
+            text: 'האורך הוא אינטגרל לא אמיתי של גודל המהירות; האקספוננט הדועך כש-$t\to-\infty$ נותן ערך סופי.'
+          - kind: computation
+            text: >-
+              $\int_R^0\sqrt3\,e^t\,dt=\sqrt3\left(1-e^R\right)\to\sqrt3$ כש-$R\to-\infty$. לכן האורך $\sqrt3$: הנקודה מקיפה
+              את הציר אינסוף פעמים, אבל באורך סופי.
+          - kind: computation
+            text: '$s(t)=\lim_{R\to-\infty}\int_R^t\sqrt3\,e^\tau\,d\tau=\sqrt3\,e^t$.'
+          - kind: step
+            text: >-
+              הופכים: $e^t=\frac{s}{\sqrt3}$, $t=\ln\frac{s}{\sqrt3}$, ולכן
+              $\vec\rho(s)=\frac{s}{\sqrt3}\left(\cos\ln\tfrac{s}{\sqrt3},\ \sin\ln\tfrac{s}{\sqrt3},\ 1\right)$, $s>0$.
+          - kind: check
+            text: '$s(0)=\sqrt3$, כמו בחלק (1). ו-$\frac{ds}{dt}=\sqrt3e^t=|\vec v|$, כנדרש.'
+          - kind: result
+            text: '(1) $L=\sqrt3$. (2) $s=\sqrt3\,e^t$ ו-$\vec\rho(s)=\frac{s}{\sqrt3}\left(\cos\ln\frac{s}{\sqrt3},\sin\ln\frac{s}{\sqrt3},1\right)$.'
+        rubric:
+          - text: 'אינטגרל לא אמיתי מוגדר נכון כגבול, והתוצאה $\sqrt3$'
+            weight: 4
+          - text: '$s(t)=\sqrt3e^t$'
+            weight: 2
+          - text: 'היפוך $t=\ln\frac{s}{\sqrt3}$ והצבה ב-$\vec r$'
+            weight: 3
+          - text: 'בדיקה ($s(0)=\sqrt3$, או $|\vec\rho\,''|=1$)'
+            weight: 1
+
+      - label: ד
+        points: 5
+        type: expr
+        objectives: [OBJ-9.2-2]
+        prompt: >-
+          כתבו את הישר המשיק ב-$t=0$ בצורה $\vec L(u)=\vec r(0)+u\,\vec r\,'(0)$. הקלידו את הרכיב השלישי, $L_z(u)$.
+        answer: '1+u'
+        answerTex: '$\vec L(u)=(1,0,1)+u\,(1,1,1)=(1+u,\ u,\ 1+u)$'
+        variables: [u]
+        domain: [-2, 2]
+        correctFeedback: 'נכון: הנקודה $(1,0,1)$ והכיוון $(1,1,1)$.'
+        wrongFeedback: 'נקודה על העקום ועוד $u$ כפול המהירות באותה נקודה.'
+        commonWrong:
+          - expr: 'u'
+            feedback: 'חסרה הנקודה: הישר צריך לעבור ב-$\vec r(0)=(1,0,1)$.'
+            misconception: MC-c9-tangent-missing-point
+
+  - id: Q-9-exam-3
+    type: exam
+    title: הציקלואידה
+    prompt: >-
+      גלגל ברדיוס 1 מתגלגל על ציר $x$ בלי להחליק. נקודה על השפה שלו נעה לפי $\vec r(t)=(t-\sin t,\ 1-\cos t)$; קשת אחת
+      היא $0\le t\le2\pi$.
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-9.2-1]
+        prompt: 'מהו גודל המהירות של הנקודה ב-$t=\pi$, כשהיא בראש הגלגל?'
+        answer: 2
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\vec v=(1-\cos t,\ \sin t)$, וב-$t=\pi$: $(2,0)$. הנקודה העליונה נעה פי 2 ממרכז הגלגל.
+        wrongFeedback: 'גזרו כל רכיב והציבו $t=\pi$.'
+        commonWrong:
+          - value: 3.7241917782
+            feedback: '$\sqrt{\pi^2+4}=|\vec r(\pi)|$, המרחק מהראשית. גודל המהירות הוא האורך של $\vec r\,''(\pi)$.'
+            misconception: MC-c9-speed-is-position-length
+
+      - label: ב
+        points: 5
+        type: twotier
+        objectives: [OBJ-9.2-2]
+        qualitative: true
+        prompt: 'נכון או לא נכון: ב-$t=2\pi$ (הנקודה נוגעת בקרקע) וקטור המהירות קובע את כיוון הישר המשיק.'
+        choices:
+          - text: 'לא נכון'
+            correct: true
+            feedback: 'נכון. $\vec v(2\pi)=(0,0)$: הנקודה שנוגעת בקרקע עומדת לרגע, ולעקום יש שם חוד.'
+          - text: 'נכון'
+            feedback: 'חשבו: $\vec v(2\pi)=(1-1,\ 0)$. לווקטור האפס אין כיוון.'
+            misconception: MC-c9-zero-velocity-tangent
+        reasons:
+          - text: 'המהירות שם היא וקטור האפס'
+            correct: true
+            feedback: 'בדיוק. גלגול בלי החלקה פירושו שנקודת המגע עומדת ברגע המגע.'
+          - text: 'המהירות שם אופקית, כי הגלגל נע אופקית'
+            feedback: 'מרכז הגלגל נע אופקית; נקודת המגע עומדת, $\vec v=\vec 0$.'
+            misconception: MC-c9-zero-velocity-tangent
+          - text: 'הרכיבים אינם גזירים ב-$t=2\pi$'
+            feedback: '$t-\sin t$ ו-$1-\cos t$ גזירים בכל מקום; הנגזרת פשוט מתאפסת.'
+            misconception: MC-c9-zero-velocity-tangent
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-9.3-1]
+        prompt: 'חשבו את אורך קשת אחת של הציקלואידה.'
+        solution:
+          - kind: given
+            text: '$\vec r(t)=(t-\sin t,\ 1-\cos t)$, $0\le t\le2\pi$.'
+          - kind: goal
+            text: '$L=\int_0^{2\pi}|\vec v(t)|\,dt$.'
+          - kind: idea
+            text: 'מפשטים את $|\vec v|^2$ בזהות של חצי זווית, כדי להיפטר מהשורש.'
+          - kind: computation
+            text: >-
+              $\vec v=(1-\cos t,\ \sin t)$, $|\vec v|^2=1-2\cos t+\cos^2t+\sin^2t=2-2\cos t=4\sin^2\tfrac t2$.
+          - kind: step
+            text: >-
+              $|\vec v|=2\left|\sin\tfrac t2\right|=2\sin\tfrac t2$, כי ב-$0\le t\le2\pi$ מתקיים $0\le\frac t2\le\pi$ ושם
+              הסינוס אינו שלילי.
+          - kind: computation
+            text: '$L=\int_0^{2\pi}2\sin\tfrac t2\,dt=\left[-4\cos\tfrac t2\right]_0^{2\pi}=4+4=8$.'
+          - kind: check
+            text: 'הקשת ארוכה מבסיסה $2\pi\approx6.28$ ומהדרך "למעלה, לרוחב ולמטה" $2+2\pi+2$ היא קצרה: סביר.'
+          - kind: result
+            text: 'אורך קשת אחת הוא 8 (פי 4 מקוטר הגלגל).'
+        rubric:
+          - text: 'חישוב נכון של $\vec v$ ושל $|\vec v|^2=2-2\cos t$'
+            weight: 3
+          - text: 'זהות חצי הזווית, $|\vec v|=2\left|\sin\frac t2\right|$, עם נימוק לסימן'
+            weight: 3
+          - text: 'אינטגרציה נכונה ותוצאה 8'
+            weight: 3
+          - text: 'בדיקת סבירות'
+            weight: 1
+
+      - label: ד
+        points: 5
+        type: numeric
+        objectives: [OBJ-8.2-1, OBJ-8.5-1]
+        prompt: >-
+          חשבו את השטח שמתחת לקשת אחת (בין הקשת לציר $x$) בעזרת $\int y\,dx=\int_0^{2\pi}y(t)\,x'(t)\,dt$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+        answer: 9.4247779607694
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $3\pi$: פי 3 משטח הגלגל. $\int_0^{2\pi}(1-\cos t)^2dt=\int_0^{2\pi}\left(1-2\cos t+\cos^2t\right)dt=2\pi+\pi$.
+        wrongFeedback: 'בהצבה $x=t-\sin t$: $dx=(1-\cos t)\,dt$, ולכן האינטגרנד הוא $(1-\cos t)^2$.'
+        commonWrong:
+          - value: 6.2831853072
+            feedback: '$\int_0^{2\pi}(1-\cos t)\,dt=2\pi$: החלפתם $dx$ ב-$dt$ בלי הגורם $x''(t)=1-\cos t$.'
+            misconception: MC-c8-sub-forget-factor

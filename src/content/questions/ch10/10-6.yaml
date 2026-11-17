@@ -1,0 +1,285 @@
+# Lesson 10.6 — implicit functions in two and three variables.
+# Objectives (src/course.ts):
+#   OBJ-10.6-1  differentiate a function defined implicitly by an equation in two and three variables
+#   OBJ-10.6-2  decide when an equation defines one variable as a function of the others near a point
+#   OBJ-10.6-3  find a tangent to a level curve and the partial derivatives of an implicit function
+# The implicit function theorem is used without proof (F of class C¹, F_y ≠ 0 or F_z ≠ 0 at the point).
+# Every key recomputed in screens/tools/recompute-ch10.py.
+chapter: 10
+questions:
+  - id: Q-10.6-folium
+    type: expr
+    objectives: [OBJ-10.6-1]
+    level: basic
+    prompt: >-
+      העקום $x^3+y^3=6xy$ מגדיר ליד רוב הנקודות שלו את $y$ כפונקציה של $x$. חשבו את $\frac{dy}{dx}$ כנוסחה ב-$x$ וב-$y$.
+    answer: '(2*y - x^2)/(y^2 - 2*x)'
+    answerTex: '$\frac{dy}{dx}=-\frac{F_x}{F_y}=-\frac{3x^2-6y}{3y^2-6x}=\frac{2y-x^2}{y^2-2x}$'
+    variables: [x, y]
+    domain: [3, 4]
+    correctFeedback: >-
+      נכון. עם $F=x^3+y^3-6xy$: $F_x=3x^2-6y$, $F_y=3y^2-6x$, ו-$\frac{dy}{dx}=-\frac{F_x}{F_y}$. (כל צורה שקולה מתקבלת.)
+    wrongFeedback: >-
+      העבירו הכול לאגף אחד, $F(x,y)=x^3+y^3-6xy=0$, ו-$\frac{dy}{dx}=-\frac{F_x}{F_y}$. או גזרו את המשוואה לפי $x$ ובודדו את $y'$.
+    commonWrong:
+      - expr: '(x^2 - 2*y)/(y^2 - 2*x)'
+        feedback: 'זה $\frac{F_x}{F_y}$, בלי המינוס. מ-$F_x+F_y\,y''=0$ מקבלים $y''=-\frac{F_x}{F_y}$.'
+        misconception: MC-c10-implicit-sign
+      - expr: '(2*x - y^2)/(x^2 - 2*y)'
+        feedback: 'זה $-\frac{F_y}{F_x}$, המנה ההפוכה (השיפוע של $x$ כפונקציה של $y$). המונה הוא הנגזרת לפי $x$.'
+        misconception: MC-c10-implicit-inverted
+
+  - id: Q-10.6-folium-slope
+    type: numeric
+    objectives: [OBJ-10.6-1, OBJ-10.6-3]
+    level: basic
+    prompt: >-
+      מה השיפוע של הישר המשיק לעקום $x^3+y^3=6xy$ בנקודה $(3,3)$?
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $F_x=27-18=9$ ו-$F_y=27-18=9$, ולכן $\frac{dy}{dx}=-\frac99=-1$. הגיוני: העקום סימטרי ביחס לישר $y=x$, ובנקודה
+      שעליו המשיק מאונך לישר הזה.
+    wrongFeedback: >-
+      $F=x^3+y^3-6xy$; חשבו $F_x$ ו-$F_y$ ב-$(3,3)$, ו-$\frac{dy}{dx}=-\frac{F_x}{F_y}$.
+    commonWrong:
+      - value: 1
+        feedback: 'זה $\frac{F_x}{F_y}$ בלי המינוס. הסימטריה של העקום ביחס ל-$y=x$ מחייבת משיק מאונך ל-$y=x$, בשיפוע $-1$.'
+        misconception: MC-c10-implicit-sign
+
+  - id: Q-10.6-circle-points
+    type: mc
+    objectives: [OBJ-10.6-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      באילו נקודות על המעגל $x^2+y^2=1$ **אי אפשר** לכתוב, בסביבה קטנה של הנקודה, את $y$ כפונקציה של $x$?
+    choices:
+      - text: 'רק ב-$(1,0)$ וב-$(-1,0)$'
+        correct: true
+        feedback: >-
+          נכון. שם $F_y=2y=0$. ליד $(1,0)$ לכל $x$ קצת קטן מ-1 יש שני ערכי $y=\pm\sqrt{1-x^2}$, ולכל $x>1$ אף אחד. בכל נקודה
+          אחרת $F_y\ne0$, ו-$y=\sqrt{1-x^2}$ או $y=-\sqrt{1-x^2}$ ליד הנקודה.
+      - text: 'בשום נקודה: המשוואה מגדירה פונקציה ליד כל נקודה שלה'
+        feedback: 'ליד $(1,0)$ יש לכל $x<1$ קרוב שני ערכים של $y$, ופונקציה נותנת ערך אחד.'
+        misconception: MC-c10-implicit-always-function
+      - text: 'בכל נקודה, כי למעגל יש שני ערכי $y$ לכל $x$'
+        feedback: >-
+          ליד נקודה **מסוימת**, כמו $(0,1)$, לוקחים רק את החלק הסמוך של המעגל, $y=\sqrt{1-x^2}$, וזו פונקציה. השאלה מקומית.
+        misconception: MC-c10-implicit-always-function
+      - text: 'רק ב-$(0,1)$ וב-$(0,-1)$'
+        feedback: 'שם המשיק אופקי ו-$F_y=\pm2\ne0$: $y$ היא פונקציה חלקה של $x$. ב-$(\pm1,0)$ המשיק אנכי, ושם הבעיה.'
+        misconception: MC-c10-implicit-inverted
+
+  - id: Q-10.6-sphere
+    type: numeric
+    objectives: [OBJ-10.6-3]
+    level: basic
+    prompt: >-
+      ליד הנקודה $(1,2,3)$ על הספירה $x^2+y^2+z^2=14$ כותבים $z=z(x,y)$. חשבו את $\frac{\partial z}{\partial y}$ בנקודה.
+    answer: -0.666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\frac23$. $z_y=-\frac{F_y}{F_z}=-\frac{2y}{2z}=-\frac{y}{z}$. הגיוני: בחצי העליון של הספירה, כשמתרחקים מציר
+      $z$ הגובה יורד.
+    wrongFeedback: '$F_y=2y$, $F_z=2z$; הציבו את הנקודה.'
+    commonWrong:
+      - value: 0.666666666667
+        feedback: 'חסר המינוס. בחצי העליון של ספירה $z$ קטן כש-$y$ גדל, ולכן השיפוע שלילי.'
+        misconception: MC-c10-implicit-sign
+      - value: -1.5
+        feedback: 'זה $-\frac{z}{y}$: המנה הפוכה. המכנה הוא הנגזרת לפי המשתנה התלוי, $F_z$.'
+        misconception: MC-c10-implicit-inverted
+
+  - id: Q-10.6-zx-three
+    type: expr
+    objectives: [OBJ-10.6-1]
+    level: mid
+    prompt: >-
+      המשוואה $xz+yz^3+x^2y=3$ מגדירה את $z$ כפונקציה של $x,y$ ליד נקודות שבהן $x+3yz^2\ne0$. חשבו את
+      $\frac{\partial z}{\partial x}$ כנוסחה ב-$x$, $y$ ו-$z$.
+    answer: '-(z + 2*x*y)/(x + 3*y*z^2)'
+    answerTex: '$\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}=-\frac{z+2xy}{x+3yz^2}$'
+    variables: [x, y, z]
+    domain: [1, 2]
+    correctFeedback: >-
+      נכון. $F_x=z+2xy$ ($y,z$ קבועים) ו-$F_z=x+3yz^2$. הנוסחה באה מגזירת $F(x,y,z(x,y))=0$ לפי $x$:
+      $F_x+F_z\frac{\partial z}{\partial x}=0$.
+    wrongFeedback: >-
+      עם $F=xz+yz^3+x^2y-3$: $\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}$. ב-$F_x$ גם $z$ קבוע.
+    commonWrong:
+      - expr: '(z + 2*x*y)/(x + 3*y*z^2)'
+        feedback: 'חסר המינוס: $F_x+F_z z_x=0$ נותן $z_x=-\frac{F_x}{F_z}$.'
+        misconception: MC-c10-implicit-sign
+      - expr: '-(x + 3*y*z^2)/(z + 2*x*y)'
+        feedback: 'המנה הפוכה: הנגזרת לפי $x$ במונה, הנגזרת לפי המשתנה התלוי $z$ במכנה.'
+        misconception: MC-c10-implicit-inverted
+
+  - id: Q-10.6-defines-z
+    type: twotier
+    objectives: [OBJ-10.6-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      הנקודה $(1,0,1)$ מקיימת $xy+z+3xz^5=4$. נכון או לא נכון: ליד הנקודה המשוואה מגדירה את $z$ כפונקציה גזירה של $x,y$.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. $F_z=1+15xz^4=16\ne0$ בנקודה, ו-$F$ פולינום (גזירה ברציפות), ולכן משפט הפונקציה הסתומה חל.'
+      - text: 'לא נכון'
+        feedback: 'התנאי למשתנה $z$ הוא $F_z\ne0$ בנקודה, וכאן $F_z=16$.'
+        misconception: MC-c10-implicit-inverted
+    reasons:
+      - text: '$F_z(1,0,1)=16\ne0$ ו-$F$ גזירה ברציפות'
+        correct: true
+        feedback: 'בדיוק: זה התנאי של המשפט, והוא גם המכנה בנוסחאות $z_x=-\frac{F_x}{F_z}$, $z_y=-\frac{F_y}{F_z}$.'
+      - text: 'הנקודה מקיימת את המשוואה, וזה מספיק'
+        feedback: 'כל נקודה על המשטח מקיימת אותה. על המעגל $x^2+y^2=1$ הנקודה $(1,0)$ מקיימת את המשוואה ובכל זאת $y$ אינה פונקציה של $x$ לידה.'
+        misconception: MC-c10-implicit-always-function
+      - text: '$F_x(1,0,1)=3\ne0$'
+        feedback: '$F_x\ne0$ מבטיח ש-$x$ היא פונקציה של $y,z$. כדי לפתור לפי $z$ צריך $F_z\ne0$.'
+        misconception: MC-c10-implicit-inverted
+
+  - id: Q-10.6-z-partial
+    type: numeric
+    objectives: [OBJ-10.6-3]
+    level: mid
+    prompt: >-
+      המשוואה $xy+z+3xz^5=4$ מגדירה ליד $(1,0,1)$ פונקציה $z(x,y)$. חשבו את $\frac{\partial z}{\partial x}$ בנקודה $(x,y)=(1,0)$.
+    answer: -0.1875
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\frac{3}{16}$. $F_x=y+3z^5=3$ ו-$F_z=1+15xz^4=16$ בנקודה, ו-$z_x=-\frac{F_x}{F_z}$.
+    wrongFeedback: >-
+      חשבו $F_x$ ו-$F_z$ בנקודה $(1,0,1)$ (שימו לב ש-$z=1$ שם), ו-$z_x=-\frac{F_x}{F_z}$.
+    commonWrong:
+      - value: 0.1875
+        feedback: 'חסר המינוס: $z_x=-\frac{F_x}{F_z}$.'
+        misconception: MC-c10-implicit-sign
+      - value: -5.33333333333
+        feedback: 'זה $-\frac{F_z}{F_x}=-\frac{16}{3}$, המנה ההפוכה.'
+        misconception: MC-c10-implicit-inverted
+
+  - id: Q-10.6-tangent-line
+    type: expr
+    objectives: [OBJ-10.6-3]
+    level: mid
+    prompt: >-
+      מצאו את הישר המשיק לקו הגובה $x^2+xy+y^2=7$ בנקודה $(1,2)$. כתבו אותו בצורה $y=\ldots$.
+    answer: '2 - 4*(x - 1)/5'
+    answerTex: '$y=2-\frac45(x-1)$'
+    variables: [x]
+    correctFeedback: >-
+      נכון. $F_x=2x+y=4$, $F_y=x+2y=5$, השיפוע $-\frac45$. (אותו ישר מתקבל מהגרדיאנט: $4(x-1)+5(y-2)=0$.)
+    wrongFeedback: >-
+      השיפוע הוא $-\frac{F_x}{F_y}$ בנקודה, והישר עובר דרך $(1,2)$.
+    commonWrong:
+      - expr: '2 + 4*(x - 1)/5'
+        feedback: 'חסר המינוס בשיפוע: $-\frac{F_x}{F_y}=-\frac45$.'
+        misconception: MC-c10-implicit-sign
+      - expr: '2 - 5*(x - 1)/4'
+        feedback: 'השיפוע הפוך: $-\frac{F_y}{F_x}$ במקום $-\frac{F_x}{F_y}$.'
+        misconception: MC-c10-implicit-inverted
+
+  - id: Q-10.6-sign-check
+    type: twotier
+    objectives: [OBJ-10.6-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      תלמידה גזרה את $x^2+y^2=25$ וכתבה $\frac{dy}{dx}=\frac{x}{y}$. נכון או לא נכון: אפשר לראות שזו טעות בלי לחשב שוב,
+      מהנקודה $(3,4)$.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. ב-$(3,4)$, ברביע הראשון של החלק העליון של המעגל, העקום יורד ימינה, ולכן השיפוע שלילי. הנוסחה שלה נותנת
+          $\frac34>0$. הנכונה: $-\frac{F_x}{F_y}=-\frac xy=-\frac34$.
+      - text: 'לא נכון'
+        feedback: 'בחלק העליון של המעגל, מימין לציר $y$, $y$ קטן כש-$x$ גדל: השיפוע חייב להיות שלילי, ו-$\frac34$ חיובי.'
+        misconception: MC-c10-implicit-sign
+    reasons:
+      - text: 'בנקודה $(3,4)$ המעגל יורד, ו-$\frac xy=\frac34$ חיובי: חסר מינוס'
+        correct: true
+        feedback: 'בדיוק. בדיקת סימן בנקודה אחת תופסת את הטעות הנפוצה ביותר בנוסחה.'
+      - text: 'המנה הפוכה: צריך $\frac yx$'
+        feedback: 'גם $\frac yx=\frac43$ חיובי. הבעיה היא הסימן; הסדר $\frac{F_x}{F_y}=\frac{x}{y}$ נכון.'
+        misconception: MC-c10-implicit-inverted
+      - text: 'אי אפשר לגזור משוואה של מעגל, כי $y$ אינה פונקציה של $x$'
+        feedback: 'ליד $(3,4)$, $y=\sqrt{25-x^2}$ היא פונקציה גזירה, כי $F_y=8\ne0$. רק ב-$(\pm5,0)$ יש בעיה.'
+        misconception: MC-c10-implicit-always-function
+
+  - id: Q-10.6-vertical-tangent
+    type: twotier
+    objectives: [OBJ-10.6-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: לקו הגובה $x^2+y^2=1$ אין ישר משיק בנקודה $(1,0)$, כי $F_y=0$ שם והנוסחה $-\frac{F_x}{F_y}$ אינה מוגדרת.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. יש משיק, והוא אנכי: הישר $x=1$. אין לו שיפוע, ולכן הנוסחה לשיפוע נכשלת, אבל $\nabla F=(2,0)\ne0$ נותן אותו:
+          $2(x-1)+0\cdot(y-0)=0$.
+      - text: 'נכון'
+        feedback: 'הנוסחה מחשבת שיפוע, ומשיק אנכי אין לו שיפוע. המשיק עצמו קיים: $x=1$.'
+        misconception: MC-c10-no-slope-no-tangent
+    reasons:
+      - text: 'הגרדיאנט $(2,0)$ אינו מתאפס, והמשיק הוא הישר דרך הנקודה המאונך לו: $x=1$'
+        correct: true
+        feedback: 'בדיוק: $F_x(x-x_0)+F_y(y-y_0)=0$ עובד גם כש-$F_y=0$.'
+      - text: 'כשהשיפוע אינו מוגדר אין משיק'
+        feedback: 'שיפוע לא מוגדר פירושו ישר אנכי, לא היעדר ישר.'
+        misconception: MC-c10-no-slope-no-tangent
+      - text: 'ליד $(1,0)$ אי אפשר לכתוב $y$ כפונקציה של $x$, ולכן אין משיק'
+        feedback: >-
+          זה נכון ל-$y(x)$, אבל ליד $(1,0)$ אפשר לכתוב $x=\sqrt{1-y^2}$, כי $F_x\ne0$. העקום חלק, והמשיק שלו אנכי.
+        misconception: MC-c10-no-slope-no-tangent
+
+  - id: Q-10.6-cone
+    type: mc
+    objectives: [OBJ-10.6-2]
+    qualitative: true
+    level: exam
+    prompt: >-
+      האם המשוואה $x^2+y^2-z^2=0$ מגדירה, ליד הנקודה $(0,0,0)$, את $z$ כפונקציה של $x,y$?
+    choices:
+      - text: 'לא: לכל $(x,y)\ne(0,0)$ קרוב יש שני ערכים $z=\pm\sqrt{x^2+y^2}$, ובהתאם $F_z(0,0,0)=0$'
+        correct: true
+        feedback: >-
+          נכון. החרוט הכפול נפגש בקודקוד, ושום סביבה של הקודקוד אינה גרף של פונקציה אחת. התנאי $F_z\ne0$ נכשל, כמצופה.
+      - text: 'כן, כי $F(0,0,0)=0$'
+        feedback: 'כל נקודה על המשטח מקיימת $F=0$. השאלה היא מה קורה ליד הנקודה, וכאן יש שתי יריעות.'
+        misconception: MC-c10-implicit-always-function
+      - text: 'כן: $z=\sqrt{x^2+y^2}$'
+        feedback: 'גם $z=-\sqrt{x^2+y^2}$ מקיים את המשוואה, וגם היריעה התחתונה עוברת בכל סביבה של הראשית.'
+        misconception: MC-c10-implicit-always-function
+      - text: 'אי אפשר לדעת, כי המשפט לא חל כש-$F_z=0$'
+        feedback: >-
+          נכון שהמשפט שותק כש-$F_z=0$, אבל כאן אפשר לבדוק ישירות: יש שני ערכים של $z$. כש-$F_z=0$ צריך לבדוק את
+          המשוואה עצמה.
+        misconception: MC-c10-implicit-always-function
+
+  - id: Q-10.6-gas-triple
+    type: numeric
+    objectives: [OBJ-10.6-1]
+    level: exam
+    prompt: >-
+      גז אידיאלי מקיים $PV=kT$ ($k>0$ קבוע): כל אחד משלושת המשתנים הוא פונקציה סתומה של שני האחרים. חשבו את המכפלה
+      $\frac{\partial V}{\partial T}\cdot\frac{\partial T}{\partial P}\cdot\frac{\partial P}{\partial V}$ (כל נגזרת כשהמשתנה
+      השלישי קבוע).
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $V=\frac{kT}{P}$ נותן $\frac{\partial V}{\partial T}=\frac{k}{P}$; $T=\frac{PV}{k}$ נותן $\frac{\partial T}{\partial P}=\frac Vk$;
+      $P=\frac{kT}{V}$ נותן $\frac{\partial P}{\partial V}=-\frac{kT}{V^2}$. המכפלה $-\frac{kT}{PV}=-1$. זה נכון לכל משוואת מצב
+      $F(P,V,T)=0$: כל גורם הוא מנה $-\frac{F_\cdot}{F_\cdot}$, והמינוסים נשארים.
+    wrongFeedback: >-
+      בודדו כל משתנה מהמשוואה וגזרו לפי המשתנה המבוקש כשהשלישי קבוע. אל תצמצמו "שברים".
+    commonWrong:
+      - value: 1
+        feedback: >-
+          זו התוצאה של צמצום ה"מונים" וה"מכנים". אבל כל נגזרת נלקחת כשמשתנה **אחר** קבוע, והם אינם שברים: התוצאה $-1$.
+        misconception: MC-c10-partials-cancel-like-fractions
+    hints: ['$\frac{\partial P}{\partial V}$ כש-$T$ קבוע: $P=\frac{kT}{V}$.']

@@ -1,0 +1,28 @@
+# Terms first defined in lesson 12.1 (double integral over a rectangle, Fubini).
+- id: double-integral
+  term: אינטגרל כפול
+  en: double integral
+  symbol: '\iint_D f\,dA'
+  definition: >-
+    הגבול של סכומי רימן $\sum f(x_i,y_i)\,\Delta A_i$ כשמחלקים את התחום $D$ במישור לתאים קטנים שגודלם שואף ל-0. כש-$f\ge0$
+    זה הנפח בין $D$ לגרף של $f$; באופן כללי זה נפח מסומן. כותבים גם $dA=dx\,dy$.
+  reject: []
+  lesson: '12.1'
+- id: iterated-integral
+  term: אינטגרל נשנה
+  en: iterated integral
+  symbol: '\int_a^b\left(\int_c^d f(x,y)\,dy\right)dx'
+  definition: >-
+    שני אינטגרלים של משתנה אחד זה בתוך זה: קודם מחשבים את האינטגרל הפנימי לפי משתנה אחד כשהשני קבוע, ומקבלים פונקציה של
+    המשתנה השני; אחר כך מחשבים את האינטגרל החיצוני שלה.
+  reject: []
+  lesson: '12.1'
+- id: fubini-theorem
+  term: משפט פוביני
+  en: Fubini's theorem
+  symbol: '\iint_R f\,dA=\int_a^b\!\int_c^d f\,dy\,dx=\int_c^d\!\int_a^b f\,dx\,dy'
+  definition: >-
+    לפונקציה רציפה על המלבן $R=[a,b]\times[c,d]$ האינטגרל הכפול שווה לאינטגרל הנשנה, בכל אחד משני הסדרים. בקורס
+    משתמשים בו בלי הוכחה, וגם בגרסה לתחום בין שני גרפים.
+  reject: []
+  lesson: '12.1'

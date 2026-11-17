@@ -1,0 +1,307 @@
+# Lesson 0.3 — powers, the exponential and logarithms.
+# Objectives (src/course.ts):
+#   OBJ-0.3-1  use the laws of exponents, also with negative and fractional exponents
+#   OBJ-0.3-2  define the logarithm as the inverse of the power; use the laws of logarithms, including change of base
+#   OBJ-0.3-3  solve exponential and logarithmic equations and check that the solution is in the domain
+# ln is the natural logarithm. Every number recomputed in screens/tools/recompute-ch0.py.
+chapter: 0
+questions:
+  - id: Q-0.3-neg-frac
+    type: numeric
+    objectives: [OBJ-0.3-1]
+    level: basic
+    prompt: >-
+      חשבו את $8^{-2/3}$.
+    answer: 0.25
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $8^{-2/3}=\frac{1}{8^{2/3}}=\frac{1}{\left(\sqrt[3]8\right)^2}=\frac{1}{2^2}=\frac14$.
+    wrongFeedback: >-
+      שלושה צעדים: המינוס במעריך פירושו הופכי, המכנה 3 הוא שורש שלישי, המונה 2 הוא ריבוע.
+    commonWrong:
+      - value: -4
+        feedback: >-
+          $8^{2/3}=4$ נכון, אבל המינוס במעריך אינו הופך את הסימן של התוצאה: הוא הופך אותה לשבר. $8^{-2/3}=\frac14$.
+        misconception: MC-c0-negative-exponent-sign
+      - value: 0.0441941738241592
+        feedback: >-
+          זה $8^{-3/2}=\frac{1}{\sqrt{8^3}}$: החלפתם בין המונה למכנה של המעריך. ב-$a^{m/n}$ המכנה $n$ הוא סדר השורש.
+        misconception: MC-c0-fractional-exponent-swap
+    hints: ['$a^{-m/n}=\frac{1}{\left(\sqrt[n]{a}\right)^m}$.']
+
+  - id: Q-0.3-simplify
+    type: numeric
+    objectives: [OBJ-0.3-1]
+    level: basic
+    prompt: >-
+      כתבו את $\frac{x^3\sqrt{x}}{x^{-1}}$ (עבור $x>0$) בצורה $x^k$. מהו $k$?
+    answer: 4.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\sqrt x=x^{1/2}$, במונה $x^{3+\frac12}$, וחילוק ב-$x^{-1}$ מחסר את המעריך: $\frac72-(-1)=\frac92$.
+    wrongFeedback: >-
+      כתבו את השורש כחזקה, חברו את המעריכים במונה, וחסרו את המעריך של המכנה.
+    commonWrong:
+      - value: 2.5
+        feedback: >-
+          זה $\frac72-1$: חיסרתם $1$ במקום $-1$. חילוק ב-$x^{-1}$ הוא כפל ב-$x$, ולכן המעריך **גדל** ב-1.
+        misconception: MC-c0-negative-exponent-sign
+    hints: ['$\frac{x^a}{x^b}=x^{a-b}$, ו-$\sqrt x=x^{1/2}$.']
+
+  - id: Q-0.3-power-sum
+    type: twotier
+    objectives: [OBJ-0.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $2^x+2^x=4^x$ לכל $x$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $2^x+2^x=2^{x+1}$, והוא שווה ל-$4^x=2^{2x}$ רק כש-$x+1=2x$, כלומר ב-$x=1$.'
+      - text: 'נכון'
+        feedback: >-
+          ב-$x=1$ במקרה $2+2=4$, אבל ב-$x=2$: $4+4=8$ מול $16$.
+        misconception: MC-c0-power-sum-rule
+    reasons:
+      - text: '$2^x+2^x=2\cdot2^x=2^{x+1}$, ובמקרה $x=2$ מתקבל 8 מול 16'
+        correct: true
+        feedback: 'בדיוק. החוק $a^ma^n=a^{m+n}$ מדבר על מכפלה; סכום של שתי חזקות שוות הוא פשוט פי 2.'
+      - text: 'כשמחברים חזקות עם אותו מעריך מחברים את הבסיסים'
+        feedback: >-
+          אין חוק כזה: $1^2+1^2=2$, ואילו $(1+1)^2=4$.
+        misconception: MC-c0-power-sum-rule
+      - text: 'ב-$x=1$ שני האגפים 4, ולכן הזהות נכונה'
+        feedback: >-
+          נקודה אחת שבה האגפים שווים אינה מוכיחה זהות. נסו $x=2$ או $x=0$ (שם $2$ מול $1$).
+        misconception: MC-c0-power-sum-rule
+
+  - id: Q-0.3-compare
+    type: mc
+    objectives: [OBJ-0.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מי הגדול ביותר מבין $2^{30}$, $3^{20}$ ו-$5^{12}$? (בלי מחשבון.)
+    choices:
+      - text: '$3^{20}$'
+        correct: true
+        feedback: >-
+          נכון. $2^{30}=(2^3)^{10}=8^{10}$ ו-$3^{20}=(3^2)^{10}=9^{10}$, ולכן $3^{20}>2^{30}$. ו-$5^{12}=(5^3)^4=125^4$ מול
+          $3^{20}=(3^5)^4=243^4$. (בפועל: $3^{20}\approx3.5\cdot10^9$, $2^{30}\approx1.07\cdot10^9$, $5^{12}\approx2.4\cdot10^8$.)
+      - text: '$2^{30}$'
+        feedback: >-
+          המעריך הגדול ביותר אינו מספיק: $2^{30}=8^{10}$ ואילו $3^{20}=9^{10}$. הביאו למעריך משותף לפני שמשווים.
+        misconception: MC-c0-bigger-exponent-bigger
+      - text: '$5^{12}$'
+        feedback: >-
+          הבסיס הגדול אינו מספיק: $5^{12}=125^4$ ואילו $3^{20}=243^4$.
+        misconception: MC-c0-bigger-exponent-bigger
+    hints: ['כתבו שניים מהם עם אותו מעריך, למשל 10.']
+
+  - id: Q-0.3-log-def
+    type: numeric
+    objectives: [OBJ-0.3-2]
+    level: basic
+    prompt: >-
+      חשבו את $\log_2\frac18$.
+    answer: -3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\log_2\frac18$ הוא המעריך שבו צריך להעלות את 2 כדי לקבל $\frac18$, ו-$2^{-3}=\frac18$.
+    wrongFeedback: >-
+      שאלו: בכמה צריך להעלות את 2 כדי לקבל $\frac18$?
+    commonWrong:
+      - value: 3
+        feedback: >-
+          $2^3=8$, לא $\frac18$. כדי לקבל את ההופכי צריך מעריך שלילי: $2^{-3}=\frac18$.
+        misconception: MC-c0-negative-exponent-sign
+    hints: ['$\log_ab=c$ פירושו $a^c=b$.']
+
+  - id: Q-0.3-log-rules
+    type: multi
+    objectives: [OBJ-0.3-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      אילו מהשוויונות נכונים לכל $a,b>0$? סמנו את כולם.
+    choices:
+      - text: '$\ln(ab)=\ln a+\ln b$'
+        correct: true
+        feedback: 'נכון. זה החוק הבסיסי: לוגריתם הופך מכפלה לסכום, כמו ש-$e^{p}e^{q}=e^{p+q}$.'
+      - text: '$\ln(a^3)=3\ln a$'
+        correct: true
+        feedback: 'נכון. $a^3=a\cdot a\cdot a$, ולפי חוק המכפלה $\ln(a^3)=\ln a+\ln a+\ln a$.'
+      - text: '$\ln(a+b)=\ln a+\ln b$'
+        feedback: >-
+          אין חוק לסכום. ב-$a=b=1$: $\ln2\approx0.69$ ואילו $\ln1+\ln1=0$.
+        misconception: MC-c0-log-linear
+      - text: '$\ln\frac ab=\frac{\ln a}{\ln b}$'
+        feedback: >-
+          לוגריתם של מנה הוא **הפרש**: $\ln\frac ab=\ln a-\ln b$. ב-$a=e^2$, $b=e$: $\ln e=1$, ואילו $\frac21=2$.
+        misconception: MC-c0-log-linear
+      - text: '$(\ln a)^2=2\ln a$'
+        feedback: >-
+          המעריך יוצא החוצה רק כשהוא **בתוך** הלוגריתם: $\ln(a^2)=2\ln a$. ב-$a=e^3$: $(\ln a)^2=9$ ואילו $2\ln a=6$.
+        misconception: MC-c0-log-power-outside
+
+  - id: Q-0.3-change-base
+    type: numeric
+    objectives: [OBJ-0.3-2]
+    level: mid
+    prompt: >-
+      חשבו את $\log_4 32$.
+    answer: 2.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\log_432=\frac{\log_232}{\log_24}=\frac52$. בדיקה: $4^{5/2}=\left(\sqrt4\right)^5=2^5=32$.
+    wrongFeedback: >-
+      כתבו את שני המספרים כחזקות של 2, או השתמשו במעבר בסיס $\log_ab=\frac{\ln b}{\ln a}$.
+    commonWrong:
+      - value: 0.4
+        feedback: >-
+          זה $\frac{\ln4}{\ln32}=\frac25$: הפכתם את נוסחת מעבר הבסיס. הבסיס (4) הולך למכנה. בדיקה: $4^{0.4}<4<32$.
+        misconception: MC-c0-change-base-inverted
+      - value: 8
+        feedback: >-
+          $\frac{32}{4}=8$, אבל לוגריתם אינו חילוק: $4^8=65536$. השאלה היא באיזה מעריך להעלות את 4 כדי לקבל 32.
+        misconception: MC-c0-log-linear
+    hints: ['$4=2^2$ ו-$32=2^5$.']
+
+  - id: Q-0.3-log-negative
+    type: twotier
+    objectives: [OBJ-0.3-2, OBJ-0.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: למשוואות $\ln(x^2)=2$ ו-$2\ln x=2$ יש אותה קבוצת פתרונות.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. לראשונה שני פתרונות, $x=\pm e$, ולשנייה רק $x=e$.'
+      - text: 'נכון'
+        feedback: >-
+          ב-$x=-e$: $\ln\left((-e)^2\right)=\ln(e^2)=2$, אבל $\ln(-e)$ אינו מוגדר. הפתרון $-e$ שייך רק למשוואה הראשונה.
+        misconception: MC-c0-domain-check-skip
+    reasons:
+      - text: '$\ln(x^2)=2\ln|x|$, ו-$\ln x$ מוגדר רק כש-$x>0$, ולכן $x=-e$ פותר רק את הראשונה'
+        correct: true
+        feedback: 'בדיוק. "חוק החזקה" $\ln(u^p)=p\ln u$ נכון רק כש-$u>0$.'
+      - text: 'לפי חוקי הלוגריתמים $\ln(x^2)=2\ln x$, ולכן אלה אותה משוואה'
+        feedback: >-
+          הזהות $\ln(x^2)=2\ln x$ נכונה רק כש-$x>0$. כש-$x<0$ אגף שמאל מוגדר ואגף ימין לא.
+        misconception: MC-c0-domain-check-skip
+      - text: '$\ln(-e)=-\ln e=-1$, ולכן $x=-e$ פותר את שתיהן'
+        feedback: >-
+          לוגריתם של מספר שלילי אינו מוגדר: אין מעריך $c$ עם $e^c<0$.
+        misconception: MC-c0-domain-check-skip
+
+  - id: Q-0.3-inverse-exp
+    type: expr
+    objectives: [OBJ-0.3-2]
+    level: mid
+    prompt: >-
+      נתון $y=5e^{3x}$. בטאו את $x$ כפונקציה של $y$ (עבור $y>0$). כתבו ביטוי במשתנה $y$, עם ln.
+    answer: 'log(y/5)/3'
+    answerTex: '$x=\frac13\ln\frac y5$'
+    variables: [y]
+    domain: [0.5, 4]
+    correctFeedback: >-
+      נכון. מבטלים מהסוף להתחלה: $e^{3x}=\frac y5$, ואז $3x=\ln\frac y5$, ו-$x=\frac13\ln\frac y5$ (שזה גם
+      $\frac{\ln y-\ln5}{3}$).
+    wrongFeedback: >-
+      בדקו: הציבו את התשובה שלכם ב-$5e^{3x}$ ובדקו שמתקבל $y$. קודם מחלקים ב-5, אחר כך $\ln$, ובסוף מחלקים ב-3.
+    commonWrong:
+      - expr: 'log(y)/3 - log(5)'
+        feedback: >-
+          חילקתם ב-3 רק את $\ln y$. מ-$3x=\ln y-\ln5$ מתקבל $x=\frac{\ln y-\ln5}{3}$: גם $\ln5$ מתחלק ב-3.
+        misconception: MC-c0-inverse-order
+      - expr: 'log(y)/3 - 5'
+        feedback: >-
+          5 כופל את $e^{3x}$, לא מתווסף אליו. מבטלים אותו בחילוק לפני ה-$\ln$: $e^{3x}=\frac y5$.
+        misconception: MC-c0-inverse-order
+    hints: ['בודדו קודם את $e^{3x}$.']
+
+  - id: Q-0.3-exp-eq
+    type: numeric
+    objectives: [OBJ-0.3-3]
+    level: basic
+    prompt: >-
+      פתרו את $4^x=8$.
+    answer: 1.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $4^x=2^{2x}$ ו-$8=2^3$, ולכן $2x=3$ ו-$x=\frac32$. בדיקה: $4^{3/2}=\left(\sqrt4\right)^3=8$.
+    wrongFeedback: >-
+      כתבו את שני האגפים כחזקות של 2 והשוו מעריכים.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          $\frac84=2$, אבל המשוואה שואלת על מעריך, לא על מנה: $4^2=16\ne8$.
+        misconception: MC-c0-log-linear
+      - value: 0.666666666666667
+        feedback: >-
+          זה $\frac{\ln4}{\ln8}$: הנוסחה הפוכה. $x=\log_48=\frac{\ln8}{\ln4}=\frac32$.
+        misconception: MC-c0-change-base-inverted
+    hints: ['$4=2^2$ ו-$8=2^3$.']
+
+  - id: Q-0.3-exp-quadratic
+    type: numeric
+    objectives: [OBJ-0.3-3]
+    level: mid
+    prompt: >-
+      פתרו את $e^{2x}-3e^x+2=0$. מהו הפתרון הגדול ביותר? (אפשר לכתוב למשל ln 2.)
+    answer: 0.693147180559945
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. עם $t=e^x$: $t^2-3t+2=0$, ולכן $t=1$ או $t=2$. חוזרים ל-$x$: $x=\ln1=0$ או $x=\ln2\approx0.693$.
+    wrongFeedback: >-
+      הציבו $t=e^x$ (אז $e^{2x}=t^2$), פתרו משוואה ריבועית ב-$t$, ואל תשכחו לחזור ל-$x$.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          $t=2$ הוא הפתרון ב-$t=e^x$. צריך עוד צעד: $e^x=2$, כלומר $x=\ln2$.
+        misconception: MC-c0-substitution-back
+    hints: ['$e^{2x}=\left(e^x\right)^2$.']
+
+  - id: Q-0.3-log-eq-domain
+    type: numeric
+    objectives: [OBJ-0.3-3]
+    level: exam
+    prompt: >-
+      פתרו את $\log_2x+\log_2(x-2)=3$. מהו סכום כל הפתרונות? (אם יש פתרון אחד, כתבו אותו.)
+    answer: 4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\log_2\left(x(x-2)\right)=3$ נותן $x^2-2x=8$, כלומר $x=4$ או $x=-2$. תחום ההגדרה דורש $x>2$, ולכן רק $x=4$.
+      בדיקה: $\log_24+\log_22=2+1=3$.
+    wrongFeedback: >-
+      חברו את הלוגריתמים, פתרו את המשוואה הריבועית, ובדקו כל פתרון בתחום ההגדרה של המשוואה המקורית.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          $2=4+(-2)$: השארתם את $x=-2$. שם $\log_2(-2)$ אינו מוגדר, ולכן הוא אינו פתרון.
+        misconception: MC-c0-domain-check-skip
+    hints: ['מה התחום שבו שני הלוגריתמים מוגדרים?']
+
+  - id: Q-0.3-half-life
+    type: numeric
+    objectives: [OBJ-0.3-3, OBJ-0.3-2]
+    level: exam
+    prompt: >-
+      כמות של חומר רדיואקטיבי מקיימת $N(t)=N_0e^{-kt}$, והיא קטנה פי 2 בכל 5 שנים. אחרי כמה שנים תישאר עשירית מהכמות
+      ההתחלתית?
+    answer: 16.6096404744368
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. מזמן מחצית החיים: $e^{-5k}=\frac12$, ולכן $k=\frac{\ln2}{5}$. עשירית: $e^{-kt}=\frac1{10}$ נותן
+      $t=\frac{\ln10}{k}=\frac{5\ln10}{\ln2}\approx16.61$ שנים. בדיקת שפיות: בין 3 מחציות חיים (15 שנה, נשאר $\frac18$) ל-4
+      (20 שנה, נשאר $\frac1{16}$).
+    wrongFeedback: >-
+      מצאו את $k$ מהנתון $N(5)=\frac12N_0$, ואז פתרו $N(t)=\frac1{10}N_0$ בעזרת $\ln$.
+    commonWrong:
+      - value: 1.50514997831991
+        feedback: >-
+          זה $\frac{5\ln2}{\ln10}$: המנה הפוכה. תוך 1.5 שנים, פחות ממחצית חיים אחת, לא תיעלם 90% מהכמות.
+        misconception: MC-c0-change-base-inverted
+    hints: ['$e^{-5k}=\frac12$ נותן $5k=\ln2$.']

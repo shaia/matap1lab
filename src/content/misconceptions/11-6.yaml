@@ -1,0 +1,54 @@
+# Misconceptions first detected in lesson 11.6 (divergence and curl).
+- id: MC-c11-div-wrong-variables
+  title: גוזרים את רכיבי השדה לפי המשתנים הלא נכונים בדיברגנץ
+  belief: >-
+    $\nabla\cdot\vec F$ הוא סכום של נגזרות של הרכיבים, לפי איזה משתנה שמופיע בהם.
+  truth: >-
+    $\nabla\cdot(P,Q,R)=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}$: כל רכיב
+    נגזר לפי **המשתנה שלו**. זו "מכפלה סקלרית" של $\nabla=\left(\partial_x,\partial_y,\partial_z\right)$ עם $\vec F$.
+  remedy: { lesson: '11.6', label: 'חישוב דיברגנץ' }
+
+- id: MC-c11-div-is-vector
+  title: חושבים שהדיברגנץ הוא וקטור
+  belief: >-
+    $\nabla\cdot\vec F$ הוא הווקטור $\left(P_x,\ Q_y,\ R_z\right)$.
+  truth: >-
+    הדיברגנץ הוא **מספר** בכל נקודה (פונקציה סקלרית): הסכום $P_x+Q_y+R_z$. הרוטור $\nabla\times\vec F$ הוא שדה וקטורי.
+  remedy: { lesson: '11.6', label: 'דיברגנץ סקלרי, רוטור וקטורי' }
+
+- id: MC-c11-curl-sign
+  title: הופכים את הסדר ברכיב של הרוטור
+  belief: >-
+    הרכיב ה-$z$ של $\nabla\times(P,Q,R)$ הוא $\frac{\partial P}{\partial y}-\frac{\partial Q}{\partial x}$.
+  truth: >-
+    $\nabla\times\vec F=\left(R_y-Q_z,\ P_z-R_x,\ Q_x-P_y\right)$, כמו בדטרמיננטה של המכפלה הווקטורית. בדיקה מהירה:
+    ל-$(-y,x,0)$, שמסתובב נגד כיוון השעון, הרכיב ה-$z$ צריך לצאת חיובי: $Q_x-P_y=1-(-1)=2$.
+  remedy: { lesson: '11.6', label: 'חישוב רוטור' }
+
+- id: MC-c11-div-curl-confuse
+  title: מבלבלים בין דיברגנץ לרוטור
+  belief: >-
+    שדה סיבובי כמו $(-y,x)$ "מתפשט" ולכן יש לו דיברגנץ, או שהרוטור של שדה רדיאלי שונה מאפס.
+  truth: >-
+    דיברגנץ מודד מקור או בור: כמה זרימה יוצאת מנפח קטן. רוטור מודד סיבוב: אם גלגל משוטים קטן יסתובב. ל-$(-y,x)$
+    דיברגנץ 0 ורוטור (בכיוון $z$) 2; ל-$(x,y)$ דיברגנץ 2 ורוטור 0.
+  remedy: { lesson: '11.6', label: 'דיברגנץ כמקור, רוטור כסיבוב' }
+
+- id: MC-c11-curl-means-circling
+  title: מסיקים את הרוטור מצורת קווי הזרימה
+  belief: >-
+    רוטור שונה מאפס פירושו קווי זרימה מעגליים, וקווי זרימה ישרים פירושם רוטור אפס.
+  truth: >-
+    הרוטור מודד סיבוב **מקומי**: האם גלגל משוטים קטן מסתובב במקום. בזרם $(y,0)$ הקווים ישרים, אבל המהירות מעל הגלגל
+    שונה מזו שמתחתיו, והוא מסתובב: הרכיב ה-$z$ של הרוטור הוא $-1$. ב-$\frac{(-y,x)}{x^2+y^2}$ הקווים מעגלים, אבל
+    מחוץ לראשית הרוטור 0.
+  remedy: { lesson: '11.6', label: 'רוטור: גלגל משוטים קטן' }
+
+- id: MC-c11-div-grad-zero
+  title: חושבים שגם הדיברגנץ של גרדיאנט תמיד אפס
+  belief: >-
+    כמו ש-$\nabla\times\nabla f=0$ ו-$\nabla\cdot(\nabla\times\vec F)=0$, גם $\nabla\cdot\nabla f=0$.
+  truth: >-
+    $\nabla\cdot\nabla f=f_{xx}+f_{yy}+f_{zz}$ (הלפלסיאן), ואינו אפס באופן כללי: ל-$f=x^2+y^2+z^2$ הוא 6. שתי הזהויות
+    של אפס נובעות משוויון הנגזרות המעורבות, ובלפלסיאן אין נגזרות מעורבות.
+  remedy: { lesson: '11.6', label: 'הזהויות: מה תמיד אפס' }

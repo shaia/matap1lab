@@ -1,0 +1,253 @@
+# Lesson 2.5 — surfaces in space and their sections (notes pp. 27–29, 33–34: the ellipsoid x^2/4 + y^2/9 + z^2 = 1
+# and the cone x^2 + y^2 - z^2 = 0 through their sections).
+# Objectives (src/course.ts):
+#   OBJ-2.5-1  identify a surface by its sections with planes parallel to the coordinate planes
+#   OBJ-2.5-2  the basic quadric surfaces: ellipsoid, cone, paraboloid, hyperboloid
+#   OBJ-2.5-3  sketch a quadric from its sections, and find its intersection with a given plane
+# Every number recomputed in screens/tools/recompute-ch2.py.
+chapter: 2
+questions:
+  - id: Q-2.5-name
+    type: mc
+    objectives: [OBJ-2.5-2]
+    level: basic
+    prompt: >-
+      מה המשטח $z=x^2+y^2$?
+    choices:
+      - text: 'פרבולואיד סיבובי, "קערה" שקודקודה בראשית'
+        correct: true
+        feedback: >-
+          נכון. החתכים האופקיים $z=c>0$ הם מעגלים ברדיוס $\sqrt c$, והחתכים האנכיים $x=0$ ו-$y=0$ הם הפרבולות $z=y^2$
+          ו-$z=x^2$.
+      - text: 'חרוט'
+        feedback: >-
+          בחרוט $z^2=x^2+y^2$ החתכים האנכיים דרך הציר הם ישרים, $z=\pm y$. כאן ב-$x=0$ מקבלים את הפרבולה $z=y^2$.
+        misconception: MC-c2-cone-vs-paraboloid
+      - text: 'ספירה'
+        feedback: >-
+          בספירה $x^2+y^2+z^2=R^2$ שלושת המשתנים בריבוע ובאותו סימן, והמשטח חסום. כאן $z$ מופיע בחזקה ראשונה ו-$z$
+          גדל ללא הגבלה.
+        misconception: MC-c2-conic-by-sign
+
+  - id: Q-2.5-ellipsoid-section
+    type: numeric
+    objectives: [OBJ-2.5-1, OBJ-2.5-3]
+    level: basic
+    prompt: >-
+      המישור $z=\frac12$ חותך את האליפסואיד $\frac{x^2}{4}+\frac{y^2}{9}+z^2=1$ באליפסה. מה אורך חצי הציר שלה בכיוון
+      $x$?
+    answer: 1.7320508075688772
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\sqrt3$. מציבים: $\frac{x^2}{4}+\frac{y^2}{9}=\frac34$, ו-$y=0$ נותן $x^2=3$. חצי הציר בכיוון $y$ הוא
+      $\frac{3\sqrt3}{2}$: אליפסה דומה לחתך ב-$z=0$, מוקטנת פי $\frac{\sqrt3}{2}$.
+    wrongFeedback: >-
+      הציבו $z=\frac12$ במשוואה, העבירו לאגף ימין, ואז הציבו $y=0$.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          2 הוא חצי הציר של החתך ב-$z=0$. בגובה $\frac12$ החתך קטן יותר: אגף ימין $1-\frac14$.
+        misconception: MC-c2-section-same-size
+      - value: 1.5
+        feedback: >-
+          $\frac32=2\cdot\frac34$: הכפלתם את חצי הציר הישן ב-$\frac34$ בלי שורש. $x^2=4\cdot\frac34=3$, ולכן חצי הציר
+          $2\sqrt{\frac34}=\sqrt3$.
+        misconception: MC-c2-square-not-root
+
+  - id: Q-2.5-hyperboloid
+    type: mc
+    objectives: [OBJ-2.5-2]
+    level: basic
+    prompt: >-
+      מה המשטח $x^2+y^2-z^2=-1$?
+    choices:
+      - text: 'היפרבולואיד דו-יריעתי'
+        correct: true
+        feedback: >-
+          נכון. $x^2+y^2=z^2-1$: יש חתך רק כש-$|z|\ge1$, ולכן שתי יריעות, מעל $z=1$ ומתחת ל-$z=-1$.
+      - text: 'היפרבולואיד חד-יריעתי'
+        feedback: >-
+          זה $x^2+y^2-z^2=+1$, שבו לכל גובה יש מעגל. כאן ב-$z=0$ מקבלים $x^2+y^2=-1$, בלי נקודות.
+        misconception: MC-c2-hyperboloid-sheets
+      - text: 'חרוט'
+        feedback: >-
+          החרוט הוא $x^2+y^2-z^2=0$, עם אגף ימין 0. אגף ימין $-1$ מרחיק את המשטח מהראשית.
+        misconception: MC-c2-degenerate-conic
+
+  - id: Q-2.5-paraboloid-plane
+    type: numeric
+    objectives: [OBJ-2.5-3]
+    level: basic
+    prompt: >-
+      מה הרדיוס של מעגל החיתוך של הפרבולואיד $z=x^2+y^2$ עם המישור $z=4$?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: 'נכון. $x^2+y^2=4$: מעגל ברדיוס 2 בגובה 4.'
+    wrongFeedback: 'הציבו $z=4$ וקראו את הרדיוס מהמשוואה של המעגל.'
+    commonWrong:
+      - value: 4
+        feedback: '4 הוא $R^2$. הרדיוס $\sqrt4=2$.'
+        misconception: MC-c2-square-not-root
+
+  - id: Q-2.5-sections-identify
+    type: mc
+    objectives: [OBJ-2.5-1, OBJ-2.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      על משטח ידוע: החתך שלו בכל מישור $z=c$ הוא מעגל סביב ציר $z$ ברדיוס $|c|$, והחתך שלו במישור $x=0$ הוא זוג
+      הישרים $z=\pm y$. מה המשטח?
+    choices:
+      - text: 'חרוט כפול, $z^2=x^2+y^2$'
+        correct: true
+        feedback: >-
+          נכון. רדיוס שגדל **לינארית** עם הגובה וחתך אנכי של ישרים: זה החרוט מעמ׳ 28 בסיכומים. ב-$z=0$ המעגל מתנוון
+          לנקודה.
+      - text: 'פרבולואיד, $z=x^2+y^2$'
+        feedback: >-
+          בפרבולואיד הרדיוס בגובה $c$ הוא $\sqrt c$, לא $|c|$, והחתך ב-$x=0$ הוא פרבולה. גם בו החתכים האופקיים
+          מעגלים, ולכן צריך את החתך האנכי כדי להבדיל.
+        misconception: MC-c2-cone-vs-paraboloid
+      - text: 'גליל, $x^2+y^2=1$'
+        feedback: >-
+          בגליל כל החתכים האופקיים שווים ואינם תלויים ב-$c$. כאן הרדיוס $|c|$ משתנה עם הגובה.
+        misconception: MC-c2-section-same-size
+
+  - id: Q-2.5-sheets-why
+    type: twotier
+    objectives: [OBJ-2.5-1, OBJ-2.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      האם המישור $z=0$ חותך את המשטח $x^2+y^2-z^2=-1$?
+    choices:
+      - text: 'לא'
+        correct: true
+        feedback: 'נכון. $z=0$ נותן $x^2+y^2=-1$: אין נקודות. זו הסיבה שהמשטח נחלק לשתי יריעות.'
+      - text: 'כן, במעגל היחידה'
+        feedback: >-
+          מעגל היחידה הוא החתך של $x^2+y^2-z^2=+1$. כאן הסימן של אגף ימין הפוך.
+        misconception: MC-c2-hyperboloid-sheets
+    reasons:
+      - text: 'הצבת $z=0$ נותנת סכום ריבועים ששווה למספר שלילי'
+        correct: true
+        feedback: 'בדיוק. החתכים האופקיים קיימים רק כש-$z^2\ge1$.'
+      - text: 'כי כל היפרבולואיד עובר דרך הראשית'
+        feedback: >-
+          אף היפרבולואיד אינו עובר דרך הראשית: $0+0-0\ne\pm1$. רק החרוט, עם אגף ימין 0, עובר שם.
+        misconception: MC-c2-degenerate-conic
+      - text: 'כי החתכים במישורים $x=0$ ו-$y=0$ הם היפרבולות'
+        feedback: >-
+          זה נכון לשני ההיפרבולואידים, ולכן לא מכריע. ההבדל מתגלה בחתכים האופקיים.
+        misconception: MC-c2-hyperboloid-sheets
+
+  - id: Q-2.5-saddle-sections
+    type: mc
+    objectives: [OBJ-2.5-1, OBJ-2.5-3]
+    level: mid
+    prompt: >-
+      חותכים את המשטח $z=x^2-y^2$ במישורים $y=1$ ו-$x=1$. מה מתקבל?
+    choices:
+      - text: 'ב-$y=1$ פרבולה שפתוחה למעלה, $z=x^2-1$; ב-$x=1$ פרבולה שפתוחה למטה, $z=1-y^2$'
+        correct: true
+        feedback: >-
+          נכון. בכיוון $x$ המשטח עולה ובכיוון $y$ יורד: זה פרבולואיד היפרבולי, "אוכף". החתכים האופקיים $z=c$ הם
+          היפרבולות $x^2-y^2=c$.
+      - text: 'בשני המישורים פרבולות שפתוחות למעלה'
+        feedback: >-
+          ב-$x=1$ מקבלים $z=1-y^2$, עם מינוס לפני $y^2$: פרבולה הפוכה. הסימן של כל משתנה קובע את כיוון הפתיחה.
+        misconception: MC-c2-conic-by-sign
+      - text: 'בשני המישורים היפרבולות'
+        feedback: >-
+          היפרבולות הן החתכים **האופקיים**, $z=c$. במישור $y=1$ נשאר משתנה אחד בריבוע, $x$, וזו פרבולה.
+        misconception: MC-c2-hyperbola-opening
+
+  - id: Q-2.5-sketch-recipe
+    type: rank
+    objectives: [OBJ-2.5-3, OBJ-2.5-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סדרו את השלבים לשרטוט של משטח ריבועי כמו $\frac{x^2}{4}+\frac{y^2}{9}-z^2=1$ בעזרת חתכים.
+    help: 'גררו את השלבים לסדר הנכון: הראשון למעלה.'
+    items:
+      - { id: horiz, label: 'מציבים $z=c$ ומבררים לאילו $c$ יש חתך ומה צורתו (כאן: אליפסה לכל $c$)' }
+      - { id: size, label: 'רואים איך גודל החתך משתנה עם $c$ (כאן: גדל כש-$|c|$ גדל, הקטן ביותר ב-$c=0$)' }
+      - { id: vert, label: 'מציבים $x=0$ ו-$y=0$ ומשרטטים את החתכים האנכיים (כאן: היפרבולות)' }
+      - { id: assemble, label: 'מרכיבים שלד מהחתכים ומזהים את המשטח (כאן: היפרבולואיד חד-יריעתי)' }
+    order: [horiz, size, vert, assemble]
+    correctFeedback: >-
+      נכון. החתכים האופקיים אומרים אם המשטח רציף ואיך הוא מתרחב; החתכים האנכיים נותנים את הפרופיל; יחד הם שלד.
+    wrongFeedback: >-
+      מתחילים מהחתכים במישורים מקבילים לאחד ממישורי הצירים, ורק בסוף, כשיש שלד, מזהים את המשטח.
+
+  - id: Q-2.5-sphere-plane
+    type: numeric
+    objectives: [OBJ-2.5-3]
+    level: mid
+    prompt: >-
+      מה הרדיוס של מעגל החיתוך של הספירה $x^2+y^2+z^2=4$ עם המישור $z=1$?
+    answer: 1.7320508075688772
+    tolerance: 0.001
+    correctFeedback: 'נכון, $\sqrt3$: $x^2+y^2=4-1=3$.'
+    wrongFeedback: 'הציבו $z=1$ והעבירו אגף.'
+    commonWrong:
+      - value: 3
+        feedback: '3 הוא $R^2$; הרדיוס $\sqrt3$.'
+        misconception: MC-c2-square-not-root
+      - value: 2
+        feedback: >-
+          2 הוא רדיוס הספירה, והחתך המרכזי ($z=0$) הוא מעגל ברדיוס 2. בגובה 1 החתך קטן יותר.
+        misconception: MC-c2-section-same-size
+
+  - id: Q-2.5-ellipse-section-param
+    type: expr
+    objectives: [OBJ-2.5-3]
+    level: exam
+    prompt: >-
+      כתבו פרמטריזציה של אליפסת החיתוך של $\frac{x^2}{4}+\frac{y^2}{9}+z^2=1$ עם המישור $z=\frac12$, בצורה
+      $x=a\cos t$, $y=b\sin t$, $z=\frac12$. מהו $y(t)$? (השתמשו במשתנה $t$)
+    answer: '3*sqrt(3)/2*sin(t)'
+    answerTex: '$x=\sqrt3\cos t,\quad y=\frac{3\sqrt3}{2}\sin t,\quad z=\frac12$'
+    variables: [t]
+    domain: [0, 6]
+    correctFeedback: >-
+      נכון. $\frac{x^2}{4}+\frac{y^2}{9}=\frac34$, כלומר $\frac{x^2}{3}+\frac{y^2}{27/4}=1$: חצאי הצירים $\sqrt3$
+      ו-$\frac{3\sqrt3}{2}$. בדיקה: $\frac{3\cos^2t}{4}+\frac{27\sin^2t/4}{9}+\frac14=1$.
+    wrongFeedback: >-
+      הביאו את משוואת החתך לצורה $\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$ (חלקו ב-$\frac34$), ואז $y=b\sin t$.
+    commonWrong:
+      - expr: '3*sin(t)'
+        feedback: >-
+          זו האליפסה של החתך ב-$z=0$. בגובה $\frac12$ אגף ימין $\frac34$, והחתך מוקטן פי $\frac{\sqrt3}{2}$.
+        misconception: MC-c2-section-same-size
+      - expr: '27/4*sin(t)'
+        feedback: '$\frac{27}{4}$ הוא $b^2$. חצי הציר $b=\sqrt{27/4}=\frac{3\sqrt3}{2}$.'
+        misconception: MC-c2-square-not-root
+
+  - id: Q-2.5-cone-plane
+    type: mc
+    objectives: [OBJ-2.5-3]
+    qualitative: true
+    level: exam
+    prompt: >-
+      המישור $z=1+x$ חותך את החרוט $z^2=x^2+y^2$. מה ההיטל של עקום החיתוך על מישור $xy$?
+    choices:
+      - text: 'הפרבולה $y^2=1+2x$'
+        correct: true
+        feedback: >-
+          נכון. מציבים $z=1+x$: $(1+x)^2=x^2+y^2$, כלומר $1+2x=y^2$. המישור מקביל לישר $z=x$ שעל החרוט, וחתך כזה הוא
+          פרבולה: זה מקור השם "חתכי חרוט".
+      - text: 'מעגל'
+        feedback: >-
+          מעגל מתקבל ממישור אופקי, $z=c$. כאן המישור נטוי, והאיברים $x^2$ מצטמצמים: נשאר $y^2=1+2x$.
+        misconception: MC-c2-section-same-size
+      - text: 'היפרבולה'
+        feedback: >-
+          היפרבולה מתקבלת ממישור תלול יותר מקווי החרוט, כמו $x=1$. המישור $z=1+x$ מקביל בדיוק לקו $z=x$ של החרוט,
+          ו-$x^2$ נעלם מהמשוואה.
+        misconception: MC-c2-conic-by-sign
+      - text: 'זוג ישרים'
+        feedback: >-
+          זוג ישרים מתקבל ממישור שעובר דרך קודקוד החרוט, כמו $z=x$. המישור $z=1+x$ אינו עובר בראשית.
+        misconception: MC-c2-degenerate-conic

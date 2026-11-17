@@ -1,0 +1,85 @@
+# Misconceptions first detected in lesson 8.2 (substitution in a definite integral, symmetry, variable upper limit).
+- id: MC-c8-sub-keep-limits
+  title: מחליפים משתנה באינטגרל מסוים ומשאירים את הגבולות הישנים
+  belief: >-
+    אחרי ההצבה $u=g(x)$ מחשבים את הפונקציה הקדומה ב-$u$ בגבולות המקוריים $a$ ו-$b$.
+  truth: >-
+    $\int_a^bf(g(x))g'(x)\,dx=\int_{g(a)}^{g(b)}f(u)\,du$: הגבולות החדשים הם ערכי $u$ בקצוות. דרך אחרת: לחזור
+    ל-$x$ לפני ההצבה של $a$ ו-$b$. אסור לערבב.
+  remedy: { lesson: '8.2', label: 'הצבה באינטגרל מסוים: גבולות חדשים' }
+
+- id: MC-c8-sub-forget-factor
+  title: מחליפים את dx ב-du בלי הגורם של הנגזרת
+  belief: >-
+    בהצבה $u=x^2$ אפשר לכתוב $x\,dx=du$, או להשאיר $dx$ ו-$x$ אחרי ההצבה.
+  truth: >-
+    $du=g'(x)\,dx$, ולכן $x\,dx=\frac12du$ כש-$u=x^2$. אחרי ההצבה כל האינטגרל, כולל $dx$, כתוב ב-$u$ בלבד.
+  remedy: { lesson: '8.2', label: 'הצבה: du ו-dx' }
+
+- id: MC-c8-sub-drop-minus
+  title: שוכחים את הסימן של du
+  belief: >-
+    בהצבה $u=\cos x$ כותבים $du=\sin x\,dx$.
+  truth: >-
+    $du=-\sin x\,dx$. המינוס הזה, יחד עם הגבולות שמתהפכים ($\cos0=1>\cos\frac{\pi}{3}$), קובע את סימן התוצאה. בדיקה
+    מהירה: אינטגרנד חיובי על קטע עם $a<b$ נותן אינטגרל חיובי.
+  remedy: { lesson: '8.2', label: 'הצבה: סימן הנגזרת' }
+
+- id: MC-c8-odd-whole
+  title: מאפסים אינטגרל בגלל אי-זוגיות של חלק מהאינטגרנד או בקטע לא סימטרי
+  belief: >-
+    אם באינטגרנד יש גורם אי-זוגי, או אם הפונקציה אי-זוגית, האינטגרל 0 בכל קטע.
+  truth: >-
+    $\int_{-a}^{a}f\,dx=0$ כש-$f$ **כולה** אי-זוגית והקטע **סימטרי**. בסכום, כל מחובר נבדק בנפרד; מכפלה של שתי
+    אי-זוגיות היא זוגית; ובקטע לא סימטרי נשאר החלק העודף.
+  remedy: { lesson: '8.2', label: 'סימטריה: פונקציה אי-זוגית בקטע סימטרי' }
+
+- id: MC-c8-even-forget-double
+  title: שוכחים להכפיל ב-2 באינטגרל של פונקציה זוגית
+  belief: >-
+    $\int_{-a}^{a}f\,dx=\int_0^af\,dx$ כש-$f$ זוגית.
+  truth: >-
+    לפונקציה זוגית שני החצאים תורמים אותו דבר: $\int_{-a}^{a}f\,dx=2\int_0^af\,dx$.
+  remedy: { lesson: '8.2', label: 'סימטריה: פונקציה זוגית' }
+
+- id: MC-c8-zero-means-odd
+  title: מסיקים אי-זוגיות מאינטגרל אפס
+  belief: >-
+    אם $\int_{-a}^{a}f\,dx=0$, אז $f$ אי-זוגית.
+  truth: >-
+    רק הכיוון ההפוך נכון. $x^2-\frac13$ זוגית ו-$\int_{-1}^{1}\left(x^2-\tfrac13\right)dx=0$.
+  remedy: { lesson: '8.2', label: 'סימטריה: מה נובע ממה' }
+
+- id: MC-c8-ftc-differentiate-integrand
+  title: גוזרים את האינטגרנד במקום להציב בו את הגבול
+  belief: >-
+    $\frac{d}{dx}\int_a^xf(t)\,dt=f'(x)$, או שצריך קודם למצוא פונקציה קדומה.
+  truth: >-
+    לפי המשפט היסודי $\frac{d}{dx}\int_a^xf(t)\,dt=f(x)$: השטח גדל בקצב הגובה בקצה. אין צורך בפונקציה קדומה, וזה
+    עובד גם כשאין לה נוסחה, כמו ל-$\sin(t^2)$.
+  remedy: { lesson: '8.2', label: 'אינטגרל עם גבול עליון משתנה' }
+
+- id: MC-c8-ftc-subtract-f0
+  title: מחסירים את ערך האינטגרנד בגבול התחתון הקבוע
+  belief: >-
+    $\frac{d}{dx}\int_a^xf(t)\,dt=f(x)-f(a)$, בדומה ל-$F(b)-F(a)$.
+  truth: >-
+    הגבול התחתון קבוע, והתרומה שלו לאינטגרל, $-G(a)$, היא קבוע שהנגזרת שלו 0. לכן הנגזרת היא $f(x)$ בלבד.
+  remedy: { lesson: '8.2', label: 'אינטגרל עם גבול עליון משתנה' }
+
+- id: MC-c8-ftc-forget-chain
+  title: שוכחים את כלל השרשרת כשהגבול העליון הוא פונקציה
+  belief: >-
+    $\frac{d}{dx}\int_a^{g(x)}f(t)\,dt=f(g(x))$, או $f(x)\,g'(x)$.
+  truth: >-
+    $\frac{d}{dx}\int_a^{g(x)}f(t)\,dt=f\bigl(g(x)\bigr)\,g'(x)$: מציבים את הגבול **כולו** באינטגרנד וכופלים בנגזרת
+    הפנימית.
+  remedy: { lesson: '8.2', label: 'גבול עליון משתנה וכלל השרשרת' }
+
+- id: MC-c8-ftc-lower-limit-sign
+  title: מחברים במקום לחסר את התרומה של גבול תחתון משתנה
+  belief: >-
+    כששני הגבולות משתנים, $\frac{d}{dx}\int_{h(x)}^{g(x)}f\,dt=f(g)g'+f(h)h'$.
+  truth: >-
+    $\int_{h(x)}^{g(x)}f\,dt=\int_c^{g(x)}f\,dt-\int_c^{h(x)}f\,dt$, ולכן הנגזרת היא $f(g(x))g'(x)-f(h(x))h'(x)$.
+  remedy: { lesson: '8.2', label: 'שני גבולות משתנים' }

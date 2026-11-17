@@ -1,0 +1,295 @@
+# Lesson 6.4 — the domain of convergence and Leibniz-type series.
+# Objectives (src/course.ts):
+#   OBJ-6.4-1  the radius of convergence of the standard expansions and of expansions derived from them
+#   OBJ-6.4-2  estimate the sum of an alternating Leibniz series, bounding the error by the first omitted term
+#   OBJ-6.4-3  compose series and find the first coefficients of the expansion of a composition
+# No convergence tests (ratio test) are assumed: radii come from the standard series by substitution.
+# Keys recomputed in screens/tools/recompute-ch6.py.
+chapter: 6
+questions:
+  - id: Q-6.4-radius-std
+    type: multi
+    objectives: [OBJ-6.4-1]
+    qualitative: true
+    level: basic
+    prompt: 'אילו מטורי טיילור הבאים, סביב 0, מתכנסים לפונקציה לכל $x$ ממשי? סמנו את כולם.'
+    choices:
+      - text: '$e^x=\sum\frac{x^k}{k!}$'
+        correct: true
+        feedback: 'נכון. רדיוס ההתכנסות אינסופי: העצרת במכנה גדלה מהר יותר מכל חזקה.'
+      - text: '$\cos x=\sum\frac{(-1)^kx^{2k}}{(2k)!}$'
+        correct: true
+        feedback: 'נכון, כמו $e^x$ ו-$\sin x$: רדיוס אינסופי.'
+      - text: '$\ln(1+x)=\sum\frac{(-1)^{k+1}x^k}{k}$'
+        feedback: >-
+          רדיוס ההתכנסות 1: ל-$|x|>1$ האיברים $\frac{x^k}{k}$ אינם שואפים לאפס. (הפונקציה עצמה מוגדרת לכל $x>-1$, אבל הטור
+          לא מייצג אותה שם.)
+        misconception: MC-c6-series-beyond-radius
+      - text: '$\frac{1}{1-x}=\sum x^k$'
+        feedback: 'הטור ההנדסי מתכנס רק כש-$|x|<1$.'
+        misconception: MC-c6-series-beyond-radius
+      - text: '$\arctan x=\sum\frac{(-1)^kx^{2k+1}}{2k+1}$'
+        feedback: >-
+          $\arctan$ מוגדרת וחלקה על כל הישר, אבל הטור שלה מתכנס רק כש-$|x|\le1$: הוא בא מהטור ההנדסי של $\frac{1}{1+t^2}$.
+        misconception: MC-c6-smooth-means-infinite-radius
+    hints: ['באילו טורים יש עצרת במכנה?']
+
+  - id: Q-6.4-radius-3x
+    type: numeric
+    objectives: [OBJ-6.4-1]
+    level: basic
+    prompt: 'מהו רדיוס ההתכנסות של טור טיילור סביב 0 של $\frac{1}{1-3x}$?'
+    answer: 0.333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{1}{1-3x}=\sum(3x)^k$, טור הנדסי במשתנה $u=3x$, שמתכנס כש-$|3x|<1$, כלומר $|x|<\frac13$.
+    wrongFeedback: 'הטור ההנדסי ב-$u$ מתכנס כש-$|u|<1$. מהו $u$ כאן, ומה זה אומר על $x$?'
+    commonWrong:
+      - value: 3
+        feedback: >-
+          התנאי הוא $|3x|<1$, ולכן $|x|<\frac13$. ככל שהמקדם של $x$ גדל, הרדיוס **קטן**.
+        misconception: MC-c6-radius-substitution
+    hints: ['$|u|<1$ עם $u=3x$.']
+
+  - id: Q-6.4-radius-x2
+    type: numeric
+    objectives: [OBJ-6.4-1]
+    level: mid
+    prompt: 'מהו רדיוס ההתכנסות של טור טיילור סביב 0 של $\ln\left(1+\frac{x^2}{4}\right)$?'
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\ln(1+u)$ מתפתחת כש-$|u|<1$, ו-$u=\frac{x^2}{4}$: $x^2<4$, כלומר $|x|<2$.
+    wrongFeedback: 'פתרו את $\left|\frac{x^2}{4}\right|<1$ עבור $x$.'
+    commonWrong:
+      - value: 4
+        feedback: 'מ-$x^2<4$ נובע $|x|<2$, לא 4: שכחתם להוציא שורש.'
+        misconception: MC-c6-radius-substitution
+      - value: 0.25
+        feedback: >-
+          $\frac14$ הוא המקדם, לא הרדיוס. התנאי הוא $\frac{x^2}{4}<1$, כלומר $|x|<2$.
+        misconception: MC-c6-radius-substitution
+    hints: ['איזה $u$ מציבים בטור של $\ln(1+u)$?']
+
+  - id: Q-6.4-endpoint
+    type: mc
+    objectives: [OBJ-6.4-1, OBJ-6.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      הטור $x-\frac{x^2}{2}+\frac{x^3}{3}-\dots$ של $\ln(1+x)$ מתכנס כש-$|x|<1$. מה קורה בשני הקצוות $x=1$ ו-$x=-1$?
+    choices:
+      - text: 'ב-$x=1$ הוא מתכנס (ל-$\ln2$), וב-$x=-1$ הוא מתבדר'
+        correct: true
+        feedback: >-
+          נכון. ב-$x=1$ מתקבל $1-\frac12+\frac13-\dots$: טור מתחלף שאיבריו יורדים לאפס, טור מסוג לייבניץ, ולכן מתכנס. ב-$x=-1$
+          מתקבל $-\left(1+\frac12+\frac13+\dots\right)$, הטור ההרמוני, שמתבדר.
+      - text: 'בשני הקצוות הוא מתבדר, כי שם $|x|=1$'
+        feedback: >-
+          רדיוס ההתכנסות אומר מה קורה **בפנים** ($|x|<1$) ומחוץ; בקצוות צריך לבדוק כל אחד בנפרד. ב-$x=1$ הסימנים מתחלפים
+          והטור מתכנס.
+        misconception: MC-c6-radius-endpoints
+      - text: 'בשני הקצוות הוא מתכנס, כי האיברים $\frac1k$ שואפים לאפס'
+        feedback: >-
+          איברים ששואפים לאפס אינם מספיקים: הטור ההרמוני $\sum\frac1k$ מתבדר. ב-$x=-1$ כל האיברים באותו סימן, ואין ביטול.
+        misconception: MC-c6-radius-endpoints
+    hints: ['הציבו $x=1$ ו-$x=-1$ וכתבו את ארבעת האיברים הראשונים.']
+
+  - id: Q-6.4-sin1-error
+    type: numeric
+    objectives: [OBJ-6.4-2]
+    level: basic
+    prompt: >-
+      מקרבים $\sin1\approx1-\frac{1}{3!}+\frac{1}{5!}$. הטור $\sum\frac{(-1)^k}{(2k+1)!}$ הוא מסוג לייבניץ. מהו החסם על
+      השגיאה לפי האיבר הראשון שהושמט?
+    answer: 0.000198412698413
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון: $\frac{1}{7!}=\frac{1}{5040}\approx1.98\cdot10^{-4}$. בטור מתחלף שאיבריו יורדים לאפס, השגיאה קטנה מהאיבר הראשון
+      שהושמט ובסימן שלו.
+    wrongFeedback: 'האיבר הבא אחרי $\frac{1}{5!}$ הוא $-\frac{1}{7!}$. מה ערכו המוחלט?'
+    commonWrong:
+      - value: 0.00833333333333
+        feedback: >-
+          זה $\frac{1}{5!}$, האיבר האחרון ש**נכלל**. החסם הוא האיבר הראשון שלא נכלל, $\frac{1}{7!}$.
+        misconception: MC-c6-leibniz-last-included
+    hints: ['אילו איברים לקחנו, ומהו הבא בתור?']
+
+  - id: Q-6.4-pi4-count
+    type: numeric
+    objectives: [OBJ-6.4-2]
+    level: mid
+    prompt: >-
+      $\frac{\pi}{4}=1-\frac13+\frac15-\frac17+\dots$ (הטור של $\arctan$ ב-$x=1$). כמה איברים צריך לסכם כדי שהשגיאה תהיה
+      בוודאות קטנה מ-0.001 לפי חסם לייבניץ?
+    answer: 500
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. אחרי $n$ איברים, האיבר הראשון שהושמט הוא $\frac{1}{2n+1}$; צריך $2n+1>1000$, כלומר $n\ge500$. (טור שמתכנס
+      לאט מאוד: לכן מחשבים את $\pi$ בדרכים אחרות.)
+    wrongFeedback: 'האיבר ה-$k$ (מתחילים מ-$k=0$) הוא $\frac{(-1)^k}{2k+1}$. מהו האיבר הראשון שהושמט אחרי $n$ איברים?'
+    commonWrong:
+      - value: 501
+        feedback: >-
+          דרשתם שהאיבר האחרון ש**נכלל**, $\frac{1}{2n-1}$, יהיה קטן מ-0.001. מספיק שהאיבר הראשון שהושמט, $\frac{1}{2n+1}$, קטן
+          ממנו.
+        misconception: MC-c6-leibniz-last-included
+    hints: ['$\frac{1}{2n+1}<0.001$.']
+
+  - id: Q-6.4-overshoot
+    type: twotier
+    objectives: [OBJ-6.4-2]
+    qualitative: true
+    level: mid
+    prompt: 'נכון או לא: $1-\frac12+\frac13>\ln2$.'
+    choices:
+      - text: נכון
+        correct: true
+        feedback: >-
+          נכון: $1-\frac12+\frac13=\frac56\approx0.833$, ו-$\ln2\approx0.693$. בטור לייבניץ הסכום החלקי שנגמר באיבר חיובי
+          עובר את הסכום.
+      - text: לא נכון
+        feedback: >-
+          בטור מתחלף עם איברים יורדים, השגיאה בסימן של האיבר הראשון שהושמט, שהוא $-\frac14$, שלילי. לכן $\ln2$ מתקבל
+          מ-$\frac56$ בהחסרה של מספר חיובי, כלומר $\ln2<\frac56$.
+        misconception: MC-c6-leibniz-sign
+    reasons:
+      - text: 'האיבר הראשון שהושמט, $-\frac14$, שלילי, ולכן הסכום קטן מהסכום החלקי'
+        correct: true
+        feedback: 'בדיוק. הסכומים החלקיים קופצים מעל ומתחת לגבול לסירוגין, והגבול תמיד ביניהם.'
+      - text: 'כי כל סכום חלקי של טור מתכנס קטן מהסכום שלו'
+        feedback: >-
+          זה נכון לטור עם איברים חיוביים בלבד. בטור מתחלף הסכומים החלקיים עולים ויורדים לסירוגין, וחלקם מעל הגבול.
+        misconception: MC-c6-leibniz-sign
+      - text: 'כי השגיאה קטנה מ-$\frac14$, ולכן הסכום החלקי קרוב מספיק'
+        feedback: >-
+          חסם על **גודל** השגיאה לא אומר באיזה צד הגבול. את הצד קובע הסימן של האיבר הראשון שהושמט.
+        misconception: MC-c6-leibniz-sign
+    hints: ['מה הסימן של האיבר הבא, $-\frac14$?']
+
+  - id: Q-6.4-beyond-radius
+    type: twotier
+    objectives: [OBJ-6.4-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא: כיוון ש-$\frac{1}{1-x}=1+x+x^2+\dots$, הצבה של $x=2$ נותנת $1+2+4+8+\dots=-1$.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. השוויון בין הפונקציה לטור תקף רק כש-$|x|<1$. ב-$x=2$ הטור מתבדר לאינסוף, ואילו $\frac{1}{1-2}=-1$.
+      - text: נכון
+        feedback: >-
+          סכום של מספרים חיוביים אינו יכול להיות $-1$. הפונקציה מוגדרת ב-2, אבל הטור מייצג אותה רק בתוך רדיוס ההתכנסות.
+        misconception: MC-c6-series-beyond-radius
+    reasons:
+      - text: 'השוויון בין $\frac{1}{1-x}$ לטור מתקיים רק כש-$|x|<1$; ב-$x=2$ הטור מתבדר'
+        correct: true
+        feedback: 'בדיוק. טור טיילור הוא ייצוג של הפונקציה בתחום ההתכנסות בלבד.'
+      - text: 'כי $\frac{1}{1-x}$ אינה מוגדרת ב-$x=2$'
+        feedback: '$\frac{1}{1-2}=-1$ מוגדר היטב. הבעיה בטור, לא בפונקציה.'
+        misconception: MC-c6-smooth-means-infinite-radius
+      - text: 'כי צריך לסכם מספיק איברים, ואז הסכום יתקרב ל-$-1$'
+        feedback: 'הסכומים החלקיים $1,3,7,15,\dots$ רק גדלים. אין מספר איברים שיקרב אותם ל-$-1$.'
+        misconception: MC-c6-series-beyond-radius
+    hints: ['מה רדיוס ההתכנסות של הטור ההנדסי?']
+
+  - id: Q-6.4-radius-smooth
+    type: twotier
+    objectives: [OBJ-6.4-1]
+    qualitative: true
+    level: exam
+    prompt: >-
+      הפונקציה $\frac{1}{1+x^2}$ מוגדרת, רציפה וגזירה אינסוף פעמים על כל הישר. נכון או לא: לכן טור טיילור שלה סביב 0
+      מתכנס אליה לכל $x$.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. $\frac{1}{1+x^2}=1-x^2+x^4-\dots$ מתכנס רק כש-$x^2<1$. כבר ב-$x=1$ מתקבל $1-1+1-\dots$, שאינו מתכנס.
+      - text: נכון
+        feedback: >-
+          חלקות על כל הישר אינה מבטיחה רדיוס אינסופי. בדקו ב-$x=2$: האיברים $(-4)^k$ אינם שואפים לאפס, והטור מתבדר.
+        misconception: MC-c6-smooth-means-infinite-radius
+    reasons:
+      - text: 'זה טור הנדסי במשתנה $u=-x^2$, ולכן הוא מתכנס רק כש-$|x|<1$; במישור המרוכב המכנה מתאפס ב-$\pm i$, במרחק 1 מ-0'
+        correct: true
+        feedback: >-
+          בדיוק. הרדיוס נקבע על ידי הנקודה ה"רעה" הקרובה ביותר, גם אם היא מרוכבת: $1+z^2=0$ כש-$z=\pm i$.
+      - text: 'רדיוס ההתכנסות אינסופי לכל פונקציה שגזירה אינסוף פעמים על כל הישר'
+        feedback: '$\arctan x$ ו-$\frac{1}{1+x^2}$ הן דוגמאות נגדיות: חלקות לגמרי על הישר, ורדיוס 1.'
+        misconception: MC-c6-smooth-means-infinite-radius
+      - text: 'הטור מתכנס לכל $x$, אבל לפונקציה אחרת'
+        feedback: 'לטור $\sum(-1)^kx^{2k}$ אין סכום כש-$|x|\ge1$: איבריו אינם שואפים לאפס.'
+        misconception: MC-c6-series-beyond-radius
+    hints: ['כתבו את הטור כטור הנדסי. למה הוא מתכנס?']
+
+  - id: Q-6.4-compose-plan
+    type: mc
+    objectives: [OBJ-6.4-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      רוצים את פולינום טיילור מסדר 4 של $e^{\sin x}$ סביב 0, בהצבה $u=\sin x$ בטור של $e^u$. כמה איברים צריך מכל טור?
+    choices:
+      - text: 'מ-$\sin x$ עד $x^3$, ומ-$e^u$ עד $u^4$'
+        correct: true
+        feedback: >-
+          נכון. $u=x-\frac{x^3}{6}+\dots$ מתחיל ב-$x$, ולכן $u^k$ מתחיל ב-$x^k$: כל $u^k$ עם $k\le4$ תורם ל-$x^4$, ו-$u^5$ כבר
+          לא. האיבר $\frac{x^5}{120}$ של סינוס תורם רק מחזקה 5.
+      - text: 'מ-$\sin x$ רק את $x$, ומ-$e^u$ עד $u^4$'
+        feedback: >-
+          אז מקבלים את הטור של $e^x$. האיבר $-\frac{x^3}{6}$ של סינוס, כפול $1$ ב-$u$ וכפול $x$ ב-$\frac{u^2}{2}$, תורם
+          ל-$x^3$ ול-$x^4$.
+        misconception: MC-c6-compose-truncate
+      - text: 'מ-$\sin x$ עד $x^3$, ומ-$e^u$ רק $1+u$'
+        feedback: 'גם $u^2,u^3,u^4$ מכילים חזקות של $x$ עד 4: $u^2=x^2-\frac{x^4}{3}+\dots$'
+        misconception: MC-c6-compose-truncate
+    hints: ['מאיזו חזקה של $x$ מתחיל $u^k$?']
+
+  - id: Q-6.4-esin
+    type: numeric
+    objectives: [OBJ-6.4-3]
+    level: mid
+    prompt: 'מהו המקדם של $x^4$ בטור טיילור סביב 0 של $e^{\sin x}$?'
+    answer: -0.125
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\frac18$. עם $u=x-\frac{x^3}{6}$: מ-$\frac{u^2}{2}$ מגיע $\frac12\cdot2\cdot x\cdot\left(-\frac{x^3}{6}\right)=-\frac{x^4}{6}$,
+      ומ-$\frac{u^4}{24}$ מגיע $\frac{x^4}{24}$. יחד $-\frac16+\frac1{24}=-\frac18$. ($u$ ו-$\frac{u^3}{6}$ נותנים רק חזקות
+      אי-זוגיות עד הסדר הזה.)
+    wrongFeedback: >-
+      הציבו $u=x-\frac{x^3}{6}$ ב-$1+u+\frac{u^2}{2}+\frac{u^3}{6}+\frac{u^4}{24}$ ואספו את כל התרומות ל-$x^4$.
+    commonWrong:
+      - value: 0.0416666666667
+        feedback: >-
+          זה $\frac{1}{24}$, המקדם של $x^4$ ב-$e^x$: השתמשתם ב-$\sin x\approx x$. האיבר $-\frac{x^3}{6}$ של סינוס תורם
+          ל-$x^4$ דרך $\frac{u^2}{2}$.
+        misconception: MC-c6-compose-truncate
+    hints: ['$u^2=x^2-\frac{x^4}{3}+\dots$']
+
+  - id: Q-6.4-lncos
+    type: expr
+    objectives: [OBJ-6.4-3]
+    level: exam
+    prompt: >-
+      מצאו את פולינום טיילור מסדר 4 סביב 0 של $\ln(\cos x)$. רמז: $\cos x=1+u$ עם $u=-\frac{x^2}{2}+\frac{x^4}{24}-\dots$
+    answer: '-x^2/2 - x^4/12'
+    answerTex: '$\ln(\cos x)\approx-\frac{x^2}{2}-\frac{x^4}{12}$'
+    variables: [x]
+    domain: [-1, 1]
+    correctFeedback: >-
+      נכון. $\ln(1+u)=u-\frac{u^2}{2}+\dots$; $u^2=\frac{x^4}{4}+\dots$, ולכן
+      $\ln\cos x=-\frac{x^2}{2}+\frac{x^4}{24}-\frac{x^4}{8}+\dots=-\frac{x^2}{2}-\frac{x^4}{12}+\dots$
+    wrongFeedback: 'הציבו את $u$ ב-$u-\frac{u^2}{2}$ ושמרו את כל החזקות עד $x^4$.'
+    commonWrong:
+      - expr: '-x^2/2 + x^4/24'
+        feedback: >-
+          זה $u$ בלבד. גם $-\frac{u^2}{2}$ תורם ל-$x^4$, כי $u$ מתחיל ב-$x^2$: $-\frac12\cdot\frac{x^4}{4}=-\frac{x^4}{8}$.
+        misconception: MC-c6-compose-truncate
+      - expr: '-x^2/2 - x^4/8'
+        feedback: >-
+          קיצרתם את $u$ ל-$-\frac{x^2}{2}$ ושכחתם את $\frac{x^4}{24}$, שנכנס דרך האיבר $u$ עצמו.
+        misconception: MC-c6-compose-truncate
+    hints: ['מאיזו חזקה של $x$ מתחיל $u^2$? ו-$u^3$?']

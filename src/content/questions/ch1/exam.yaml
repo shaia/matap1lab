@@ -1,0 +1,320 @@
+# Chapter 1 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# Every number recomputed in screens/tools/recompute-ch1-exam.py.
+chapter: 1
+questions:
+  - id: Q-1-exam-1
+    type: exam
+    title: מישור דרך שלוש נקודות, שטח ומרחק
+    prompt: >-
+      נתונות הנקודות $A=(1,1,1)$, $B=(2,3,1)$, $C=(1,3,2)$ והנקודה $P=(4,-2,1)$.
+    parts:
+      - label: א
+        points: 6
+        type: numeric
+        objectives: [OBJ-1.4-1, OBJ-1.4-3]
+        prompt: >-
+          חשבו את $\vec n=\vec{AB}\times\vec{AC}$. מהו הרכיב השני (רכיב ה-$y$) שלו?
+        answer: -1
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\vec{AB}=(1,2,0)$, $\vec{AC}=(0,2,1)$, ו-$\vec n=(2\cdot1-0\cdot2,\ 0\cdot0-1\cdot1,\ 1\cdot2-2\cdot0)=(2,-1,2)$.
+          בדיקה: $\vec n\cdot\vec{AB}=2-2+0=0$ ו-$\vec n\cdot\vec{AC}=0-2+2=0$.
+        wrongFeedback: >-
+          הרכיב השני של $\vec u\times\vec v$ הוא $u_3v_1-u_1v_3$.
+        commonWrong:
+          - value: 1
+            feedback: >-
+              $1=u_1v_3-u_3v_1$: הרכיב האמצעי בלי המינוס של הפיתוח. בדיקה: $(2,1,2)\cdot\vec{AB}=4\ne0$.
+            misconception: MC-c1-middle-sign
+
+      - label: ב
+        points: 5
+        type: expr
+        objectives: [OBJ-1.3-2]
+        standalone: false
+        prompt: >-
+          כתבו את המישור $ABC$ בצורה $z=f(x,y)$ (במשתנים $x$, $y$).
+        answer: '(3 - 2*x + y)/2'
+        answerTex: '$2x-y+2z=3$, כלומר $z=\frac{3-2x+y}{2}$'
+        variables: [x, y]
+        correctFeedback: >-
+          נכון. $d=\vec n\cdot A=2-1+2=3$. בדיקה: $B$: $4-3+2=3$; $C$: $2-3+4=3$.
+        wrongFeedback: >-
+          המישור הוא $\vec n\cdot(x,y,z)=\vec n\cdot A$. בודדו את $z$ ובדקו בשלוש הנקודות.
+        commonWrong:
+          - expr: '(-3 - 2*x + y)/2'
+            feedback: >-
+              זה $2x-y+2z=-3$: הסימן של $d$ התהפך. $A=(1,1,1)$ נותנת $2-1+2=3$.
+            misconception: MC-c1-plane-d-sign
+
+      - label: ג
+        points: 5
+        type: numeric
+        objectives: [OBJ-1.4-2]
+        standalone: false
+        prompt: >-
+          מהו שטח המשולש $ABC$?
+        answer: 1.5
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $|\vec n|=\sqrt{4+1+4}=3$ הוא שטח המקבילית, והמשולש חצי: $\frac32$.
+        wrongFeedback: >-
+          שטח משולש $=\frac12|\vec{AB}\times\vec{AC}|$.
+        commonWrong:
+          - value: 3
+            feedback: '3 הוא שטח המקבילית שנפרשת מ-$\vec{AB}$ ו-$\vec{AC}$. המשולש חצי ממנה.'
+            misconception: MC-c1-triangle-half
+
+      - label: ד
+        points: 9
+        type: open
+        objectives: [OBJ-1.3-3, OBJ-1.3-1]
+        standalone: false
+        prompt: >-
+          חשבו את המרחק מ-$P$ למישור $ABC$, ומצאו את הנקודה במישור הקרובה ביותר ל-$P$.
+        solution:
+          - kind: given
+            text: 'המישור $2x-y+2z=3$ עם הנורמל $\vec n=(2,-1,2)$, $|\vec n|=3$; הנקודה $P=(4,-2,1)$.'
+          - kind: goal
+            text: 'המרחק $\text{dist}(P,\text{plane})$ והנקודה $H$ במישור שבה הוא מתקבל.'
+          - kind: idea
+            text: >-
+              הדרך הקצרה ביותר מ-$P$ למישור היא לאורך הנורמל. המרחק הוא הרכיב של $\vec{AP}$ בכיוון $\hat n$, ו-$H$ מתקבלת
+              כשהולכים מ-$P$ את המרחק הזה בכיוון $-\hat n$ (או: חיתוך המישור עם הישר דרך $P$ בכיוון $\vec n$).
+          - kind: computation
+            text: >-
+              $\vec{AP}=(3,-3,0)$, ו-$\vec{AP}\cdot\vec n=6+3+0=9$. לכן $\text{dist}=\frac{|9|}{3}=3$ (או ישר:
+              $\frac{|8+2+2-3|}{3}=3$).
+          - kind: computation
+            text: >-
+              הישר דרך $P$ בכיוון $\vec n$: $(4+2s,\ -2-s,\ 1+2s)$. הצבה במישור: $2(4+2s)-(-2-s)+2(1+2s)=12+9s=3$, ולכן $s=-1$ ו-$H=(2,-1,-1)$.
+          - kind: check
+            text: >-
+              $H$ במישור: $4+1-2=3$. ו-$|\vec{HP}|=|(2,-1,2)|=3$, שווה למרחק שחושב.
+          - kind: result
+            text: 'המרחק 3, והנקודה הקרובה ביותר $H=(2,-1,-1)$.'
+        rubric:
+          - text: 'נוסחת המרחק (או היטל על הנורמל) עם חילוק ב-$|\vec n|$, ותוצאה 3'
+            weight: 3
+          - text: 'הישר דרך $P$ בכיוון הנורמל וחיתוכו עם המישור'
+            weight: 3
+          - text: 'נקודה נכונה $H=(2,-1,-1)$'
+            weight: 2
+          - text: 'בדיקה: $H$ במישור ו-$|\vec{HP}|$ שווה למרחק'
+            weight: 1
+
+  - id: Q-1-exam-2
+    type: exam
+    title: עבודה, פירוק כוח ומומנט
+    prompt: >-
+      חלקיק נע בקו ישר מ-$A=(1,1,0)$ ל-$B=(3,-1,1)$ (במטרים) בהשפעת כוח קבוע $\vec F=(3,0,3)$ (בניוטון).
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-1.2-3]
+        prompt: >-
+          מהי העבודה (בג׳אול) שעושה $\vec F$ לאורך התנועה?
+        answer: 9
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\vec d=B-A=(2,-2,1)$ ו-$W=\vec F\cdot\vec d=6+0+3=9$ ג׳אול.
+        wrongFeedback: >-
+          $W=\vec F\cdot\vec d$, כש-$\vec d$ ההעתק מ-$A$ ל-$B$.
+        commonWrong:
+          - value: 12
+            feedback: >-
+              $12=\vec F\cdot B$: השתמשתם בווקטור המקום של $B$ במקום בהעתק $B-A$.
+            misconception: MC-c1-position-vs-displacement
+          - value: 12.7279220613579
+            feedback: >-
+              זה $|\vec F||\vec d|=3\sqrt2\cdot3$: מכפלת הגדלים בלי הזווית. העבודה היא המכפלה הסקלרית.
+            misconception: MC-c1-work-magnitudes
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-1.2-2]
+        prompt: >-
+          מהי הזווית (ברדיאנים) בין הכוח לכיוון התנועה?
+        answer: 0.785398163397448
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $\frac\pi4$. $\cos\theta=\frac{9}{3\sqrt2\cdot3}=\frac{1}{\sqrt2}$.
+        wrongFeedback: >-
+          $\cos\theta=\frac{\vec F\cdot\vec d}{|\vec F||\vec d|}$, עם $|\vec F|=3\sqrt2$ ו-$|\vec d|=3$.
+        commonWrong:
+          - value: 45
+            feedback: '$45^\circ$ נכון, אבל התבקשה תשובה ברדיאנים: $\frac\pi4$.'
+            misconception: MC-c0-radians-as-degrees
+          - value: 0.707106781186548
+            feedback: >-
+              $\frac{1}{\sqrt2}$ הוא $\cos\theta$. הזווית היא $\arccos\frac{1}{\sqrt2}=\frac\pi4$.
+            misconception: MC-c1-cos-is-angle
+
+      - label: ג
+        points: 9
+        type: open
+        objectives: [OBJ-1.2-3, OBJ-1.2-1]
+        prompt: >-
+          פרקו את $\vec F$ לסכום $\vec F=\vec F_\parallel+\vec F_\perp$, כש-$\vec F_\parallel$ מקביל להעתק $\vec d=\vec{AB}$
+          ו-$\vec F_\perp$ מאונך לו. הראו שרק $\vec F_\parallel$ עושה עבודה.
+        solution:
+          - kind: given
+            text: '$\vec F=(3,0,3)$, $\vec d=(2,-2,1)$, $|\vec d|^2=9$, $\vec F\cdot\vec d=9$.'
+          - kind: goal
+            text: '$\vec F_\parallel\parallel\vec d$, $\vec F_\perp\perp\vec d$, $\vec F_\parallel+\vec F_\perp=\vec F$; ואז $\vec F_\perp\cdot\vec d=0$.'
+          - kind: idea
+            text: >-
+              $\vec F_\parallel$ הוא ההיטל של $\vec F$ על $\vec d$; מה שנשאר, $\vec F-\vec F_\parallel$, מאונך ל-$\vec d$. העבודה
+              לינארית: $W=\vec F_\parallel\cdot\vec d+\vec F_\perp\cdot\vec d$.
+          - kind: computation
+            text: >-
+              $\vec F_\parallel=\frac{\vec F\cdot\vec d}{|\vec d|^2}\vec d=\frac99(2,-2,1)=(2,-2,1)$, ו-$\vec F_\perp=\vec F-\vec F_\parallel=(1,2,2)$.
+          - kind: check
+            text: >-
+              $\vec F_\perp\cdot\vec d=2-4+2=0$: אכן מאונך. וגם $\vec F_\parallel+\vec F_\perp=(3,0,3)=\vec F$.
+          - kind: step
+            text: >-
+              $W=\vec F\cdot\vec d=\vec F_\parallel\cdot\vec d+\vec F_\perp\cdot\vec d=\vec F_\parallel\cdot\vec d+0=4+4+1=9$.
+          - kind: result
+            text: >-
+              $\vec F_\parallel=(2,-2,1)$, $\vec F_\perp=(1,2,2)$. הרכיב המאונך אינו עושה עבודה, וכל 9 הג׳אול באים מ-$\vec F_\parallel$.
+        rubric:
+          - text: 'נוסחת ההיטל עם חילוק ב-$|\vec d|^2$, ו-$\vec F_\parallel=(2,-2,1)$'
+            weight: 3
+          - text: '$\vec F_\perp=\vec F-\vec F_\parallel=(1,2,2)$'
+            weight: 2
+          - text: 'בדיקה ש-$\vec F_\perp\cdot\vec d=0$'
+            weight: 2
+          - text: 'הסבר בעזרת פילוג המכפלה הסקלרית שהעבודה כולה מ-$\vec F_\parallel$'
+            weight: 2
+
+      - label: ד
+        points: 6
+        type: numeric
+        objectives: [OBJ-1.4-3, OBJ-1.4-1]
+        prompt: >-
+          כשהחלקיק ב-$B$, מהו רכיב ה-$y$ של המומנט של $\vec F$ ביחס לראשית, $\vec\tau=\vec r\times\vec F$ עם $\vec r=B$?
+        answer: -6
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\vec\tau=(3,-1,1)\times(3,0,3)=(-3,-6,3)$; רכיב ה-$y$: $r_3F_1-r_1F_3=3-9=-6$.
+        wrongFeedback: >-
+          $\vec\tau=\vec r\times\vec F$ בסדר הזה, ורכיב ה-$y$ הוא $r_3F_1-r_1F_3$.
+        commonWrong:
+          - value: 6
+            feedback: >-
+              זה רכיב של $\vec F\times\vec r$ (או רכיב אמצעי בלי המינוס של הפיתוח). המומנט הוא $\vec r\times\vec F$.
+            misconception: MC-c1-cross-commutes
+
+  - id: Q-1-exam-3
+    type: exam
+    title: ישרים מצטלבים
+    prompt: >-
+      נתונים הישרים $L_1:\ (1,0,0)+t(1,2,1)$ ו-$L_2:\ (0,1,3)+s(1,0,-1)$. נסמן $P=(1,0,0)$, $\vec u=(1,2,1)$, $Q=(0,1,3)$,
+      $\vec v=(1,0,-1)$.
+    parts:
+      - label: א
+        points: 6
+        type: numeric
+        objectives: [OBJ-1.5-2, OBJ-1.5-3]
+        prompt: >-
+          חשבו את נפח המקבילון שנפרש מ-$\vec{PQ}$, $\vec u$ ו-$\vec v$.
+        answer: 2
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\vec u\times\vec v=(-2,2,-2)$, $\vec{PQ}=(-1,1,3)$, ו-$\vec{PQ}\cdot(\vec u\times\vec v)=2+2-6=-2$. הנפח $|-2|=2$.
+        wrongFeedback: >-
+          הנפח הוא $|\vec{PQ}\cdot(\vec u\times\vec v)|$.
+        commonWrong:
+          - value: -2
+            feedback: 'המכפלה המשולשת $-2$ נכונה, אבל נפח הוא הערך המוחלט.'
+            misconception: MC-c1-det-sign-meaning
+          - value: 6
+            feedback: >-
+              עם $\vec u\times\vec v=(-2,-2,-2)$ (רכיב אמצעי בלי המינוס) יוצא $-6$. בדיקה: $(-2,-2,-2)\cdot\vec u=-8\ne0$.
+            misconception: MC-c1-middle-sign
+
+      - label: ב
+        points: 6
+        type: twotier
+        objectives: [OBJ-1.5-3, OBJ-1.3-1]
+        qualitative: true
+        prompt: >-
+          האם הישרים $L_1$ ו-$L_2$ נחתכים?
+        choices:
+          - text: 'לא: הם ישרים מצטלבים'
+            correct: true
+            feedback: 'נכון. הם אינם מקבילים ואינם נפגשים.'
+          - text: 'כן'
+            feedback: >-
+              במרחב ישרים לא מקבילים לא חייבים להיפגש. כאן המכפלה המשולשת $\ne0$, ולכן $Q$ אינה במישור שעובר דרך $L_1$ ומקביל
+              ל-$\vec v$, ואין נקודה משותפת.
+            misconception: MC-c1-nonparallel-intersect
+        reasons:
+          - text: '$\vec u\times\vec v\ne\vec0$ (לא מקבילים), אבל $\vec{PQ}\cdot(\vec u\times\vec v)\ne0$: ארבעת הנתונים אינם במישור אחד'
+            correct: true
+            feedback: 'בדיוק. ישרים נחתכים תמיד נמצאים במישור אחד, ואז המקבילון שטוח והמכפלה המשולשת 0.'
+          - text: 'הם לא מקבילים, ושני ישרים לא מקבילים תמיד נחתכים'
+            feedback: >-
+              זה נכון במישור, לא במרחב. גשר מעל כביש בכיוון אחר: לא מקבילים, ולא נפגשים.
+            misconception: MC-c1-nonparallel-intersect
+          - text: '$\vec u\cdot\vec v=0$, ולכן הם מאונכים ונחתכים'
+            feedback: >-
+              $\vec u\cdot\vec v=1+0-1=0$: הכיוונים אכן מאונכים, אבל מאונכות של כיוונים לא אומרת שהישרים נפגשים.
+            misconception: MC-c1-nonparallel-intersect
+
+      - label: ג
+        points: 9
+        type: open
+        objectives: [OBJ-1.5-2, OBJ-1.4-2]
+        standalone: false
+        prompt: >-
+          חשבו את המרחק בין הישרים $L_1$ ו-$L_2$. (רמז: נפח = שטח בסיס כפול גובה.)
+        solution:
+          - kind: given
+            text: '$\vec u\times\vec v=(-2,2,-2)$, $|\vec u\times\vec v|=2\sqrt3$; הנפח מסעיף א הוא 2.'
+          - kind: goal
+            text: 'המרחק הקצר ביותר בין נקודה על $L_1$ לנקודה על $L_2$.'
+          - kind: idea
+            text: >-
+              שני הישרים נמצאים בשני מישורים מקבילים, שהנורמל המשותף שלהם $\vec u\times\vec v$. המרחק בין הישרים הוא המרחק בין
+              המישורים, וזה בדיוק הגובה של המקבילון שבסיסו נפרש מ-$\vec u$ ו-$\vec v$ וצלעו השלישית $\vec{PQ}$.
+          - kind: theorem
+            text: 'נפח מקבילון = שטח הבסיס $|\vec u\times\vec v|$ כפול הגובה.'
+          - kind: computation
+            text: >-
+              $h=\frac{|\vec{PQ}\cdot(\vec u\times\vec v)|}{|\vec u\times\vec v|}=\frac{2}{2\sqrt3}=\frac{1}{\sqrt3}\approx0.577$.
+          - kind: check
+            text: >-
+              זה הרכיב של $\vec{PQ}$ בכיוון הנורמל היחידה $\frac{(-1,1,-1)}{\sqrt3}$: $\frac{1+1-3}{\sqrt3}=-\frac{1}{\sqrt3}$, ובערך
+              מוחלט $\frac1{\sqrt3}$.
+          - kind: result
+            text: 'המרחק בין הישרים הוא $\frac{1}{\sqrt3}=\frac{\sqrt3}{3}$.'
+        rubric:
+          - text: 'זיהוי $\vec u\times\vec v$ כנורמל משותף, או נימוק נפח = בסיס כפול גובה'
+            weight: 3
+          - text: 'חילוק הנפח ב-$|\vec u\times\vec v|=2\sqrt3$ (לא בריבוע)'
+            weight: 3
+          - text: 'תוצאה נכונה $\frac{1}{\sqrt3}$'
+            weight: 2
+
+      - label: ד
+        points: 4
+        type: numeric
+        objectives: [OBJ-1.5-3]
+        prompt: >-
+          מזיזים את $L_2$ כך שיעבור ב-$(0,1,c)$ במקום ב-$Q$, באותו כיוון $\vec v$. לאיזה ערך של $c$ הישרים נחתכים?
+        answer: 2
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. הישרים לא מקבילים, ולכן נחתכים בדיוק כשהמכפלה המשולשת מתאפסת: $(-1,1,c)\cdot(-2,2,-2)=4-2c=0$.
+        wrongFeedback: >-
+          ישרים לא מקבילים נחתכים בדיוק כש-$(Q-P)\cdot(\vec u\times\vec v)=0$, כלומר כשהם במישור אחד.
+        commonWrong:
+          - value: 3
+            feedback: >-
+              $c=3$ הוא המצב הנתון, שבו הישרים מצטלבים (מכפלה משולשת $-2$). צריך את ה-$c$ שמאפס אותה.
+            misconception: MC-c1-nonparallel-intersect

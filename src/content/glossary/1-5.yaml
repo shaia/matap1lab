@@ -1,0 +1,40 @@
+# Terms first defined in lesson 1.5 (the triple product and determinants).
+- id: determinant
+  term: דטרמיננטה
+  en: determinant
+  symbol: '\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc'
+  definition: >-
+    מספר שמחושב מטבלה ריבועית של מספרים. מסדר 2: $ad-bc$, השטח עם סימן של המקבילית שנפרשת מהשורות. מסדר 3: פיתוח לפי
+    השורה הראשונה עם הסימנים $+,-,+$, כל איבר כפול הדטרמיננטה מסדר 2 שנשארת כשמוחקים את שורתו ואת עמודתו; זה הנפח עם
+    סימן של המקבילון שנפרש מהשורות. החלפת שתי שורות הופכת את הסימן.
+  lesson: '1.5'
+- id: triple-product
+  term: מכפלה משולשת
+  en: scalar triple product
+  symbol: '\vec a\cdot(\vec b\times\vec c)'
+  definition: >-
+    המספר $\vec a\cdot(\vec b\times\vec c)$, השווה לדטרמיננטה שבשורותיה $\vec a,\vec b,\vec c$. ערכו המוחלט הוא נפח המקבילון
+    שהם פורשים; הוא 0 בדיוק כששלושת הווקטורים במישור אחד. סיבוב מעגלי של הווקטורים אינו משנה אותו.
+  lesson: '1.5'
+- id: parallelepiped
+  term: מקבילון
+  en: parallelepiped
+  definition: >-
+    הגוף שנפרש משלושה וקטורים מקודקוד אחד: "תיבה משופעת" שכל שש פאותיה מקביליות. נפחו $|\vec a\cdot(\vec b\times\vec c)|$,
+    כלומר שטח הבסיס $|\vec b\times\vec c|$ כפול הגובה.
+  lesson: '1.5'
+- id: coplanar
+  term: במישור אחד
+  en: coplanar
+  definition: >-
+    שלושה וקטורים (או ארבע נקודות) נמצאים במישור אחד כשאפשר להניח את כולם (את חיציהם מנקודה משותפת) על מישור אחד. מבחן:
+    $\vec a\cdot(\vec b\times\vec c)=0$; לארבע נקודות $A,B,C,D$ בודקים את $\vec{AB}$, $\vec{AC}$, $\vec{AD}$.
+  lesson: '1.5'
+- id: skew-lines
+  term: ישרים מצטלבים
+  en: skew lines
+  definition: >-
+    שני ישרים במרחב שאינם מקבילים ואינם נחתכים (אין להם נקודה משותפת). הישרים $P+t\vec u$ ו-$Q+s\vec v$ עם
+    $\vec u\times\vec v\ne\vec0$ נחתכים בדיוק כש-$(Q-P)\cdot(\vec u\times\vec v)=0$; אחרת הם מצטלבים, והמרחק ביניהם
+    $\frac{|(Q-P)\cdot(\vec u\times\vec v)|}{|\vec u\times\vec v|}$.
+  lesson: '1.5'

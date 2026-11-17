@@ -1,0 +1,308 @@
+# Chapter 5 review — derivatives (lessons 5.1–5.5), easy to hard.
+# Every lesson is touched; several questions combine lessons or reach back to chapter 4 (exp/ln, inverse
+# trigonometric and hyperbolic functions, continuity). Each hint names the lesson to go back to.
+# Every key is recomputed in screens/tools/checks_ch5.py.
+chapter: 5
+questions:
+  - id: Q-5-review-01
+    type: numeric
+    objectives: [OBJ-5.1-1, OBJ-5.1-2]
+    level: basic
+    prompt: >-
+      אבן נופלת, והדרך שעברה עד הרגע $t$ היא $x(t)=5t^2$ (מטרים, שניות). מהי המהירות הממוצעת שלה (מ׳ לשנייה) בין
+      $t=2$ ל-$t=2.1$?
+    answer: 20.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{5\cdot4.41-5\cdot4}{0.1}=\frac{2.05}{0.1}=20.5$. כשמקצרים את פרק הזמן הממוצע מתקרב ל-$x'(2)=20$,
+      המהירות הרגעית.
+    wrongFeedback: >-
+      מהירות ממוצעת היא $\frac{x(2.1)-x(2)}{0.1}$: שיפוע המיתר.
+    commonWrong:
+      - value: 20
+        feedback: >-
+          20 הוא $x'(2)$, המהירות **הרגעית** ב-$t=2$. השאלה שואלת על הממוצע בפרק זמן של $0.1$ שנייה.
+        misconception: MC-c5-avg-vs-instant
+    hints: ['חזרו לשיעור 5.1: מהירות ממוצעת כשיפוע מיתר, ומהירות רגעית כגבול שלה.']
+
+  - id: Q-5-review-02
+    type: expr
+    objectives: [OBJ-5.3-2, OBJ-4.3-2]
+    level: basic
+    prompt: 'גזרו: $f(x)=\ln(x^2+1)$. כתבו את $f''(x)$.'
+    answer: '2*x/(x^2 + 1)'
+    answerTex: '$f''(x)=\dfrac{2x}{x^2+1}$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. $(\ln y)'=\frac1y$ בערך $y=x^2+1$, כפול $2x$. ($x^2+1>0$, ולכן $f$ מוגדרת בכל הישר.)
+    wrongFeedback: >-
+      בחוץ $\ln$, בפנים $x^2+1$: נגזרת חיצונית בערך הפנימית, כפול נגזרת פנימית.
+    commonWrong:
+      - expr: '1/(x^2 + 1)'
+        feedback: >-
+          חסרה הנגזרת הפנימית $2x$. בדיקה: $f$ זוגית, ולכן הנגזרת שלה צריכה להיות אי-זוגית; $\frac{1}{x^2+1}$ זוגית.
+        misconception: MC-c5-chain-missing-inner
+    hints: ['חזרו לשיעור 5.3: כלל השרשרת, ולשיעור 4.3: הלוגריתם הטבעי ותחום ההגדרה שלו.']
+
+  - id: Q-5-review-03
+    type: mc
+    objectives: [OBJ-5.1-3, OBJ-4.6-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      מה נכון לגבי $f(x)=|x-2|$ בנקודה $x=2$?
+    choices:
+      - text: '$f$ רציפה ב-2 אבל אינה גזירה שם'
+        correct: true
+        feedback: >-
+          נכון. $\lim_{x\to2}|x-2|=0=f(2)$, אבל מנת ההפרשים $\frac{|h|}{h}$ היא $1$ מימין ו-$-1$ משמאל: פינה.
+      - text: '$f$ רציפה ב-2, ולכן גם גזירה שם'
+        feedback: >-
+          רציפות אינה גוררת גזירות: בפינה הגרף לא נקטע, אבל אין לו שיפוע אחד.
+        misconception: MC-c5-continuous-implies-differentiable
+      - text: '$f$ אינה רציפה ב-2, כי יש שם "שבירה" בגרף'
+        feedback: >-
+          שבירה (פינה) אינה קפיצה: שני הגבולות החד-צדדיים שווים ל-0, כמו $f(2)$. הגרף שלם, רק לא חלק.
+        misconception: MC-c5-abs-never-differentiable
+      - text: '$f$ גזירה ב-2 ו-$f''(2)=0$, כי שם יש מינימום'
+        feedback: >-
+          $f'=0$ במינימום נכון רק כש-$f$ גזירה שם. כאן השיפועים החד-צדדיים $-1$ ו-$1$, ולכן הנגזרת אינה קיימת.
+        misconception: MC-c5-continuous-implies-differentiable
+    hints: ['חזרו לשיעור 5.1: נקודות שבהן פונקציה אינה גזירה, ולשיעור 4.6: רציפות וסוגי אי-רציפות.']
+
+  - id: Q-5-review-04
+    type: expr
+    objectives: [OBJ-5.5-1, OBJ-4.5-1]
+    level: basic
+    prompt: 'גזרו: $f(x)=\sinh x\cosh x$. כתבו את $f''(x)$ (אפשר להקליד sinh ו-cosh).'
+    answer: 'cosh(x)^2 + sinh(x)^2'
+    answerTex: '$f''(x)=\cosh^2x+\sinh^2x=\cosh(2x)$'
+    variables: [x]
+    domain: [-1.5, 1.5]
+    correctFeedback: >-
+      נכון. כלל המכפלה עם $(\sinh x)'=\cosh x$ ו-$(\cosh x)'=\sinh x$. (התוצאה שווה ל-$\cosh(2x)$, וכל צורה שקולה מתקבלת.)
+    wrongFeedback: >-
+      כלל המכפלה, עם שתי הנגזרות ההיפרבוליות. שימו לב לסימן: אין מינוס.
+    commonWrong:
+      - expr: '1'
+        feedback: >-
+          $\cosh^2x-\sinh^2x=1$ מתקבל כשלוקחים $(\cosh x)'=-\sinh x$. הנגזרת של $\cosh$ היא $+\sinh$.
+        misconception: MC-c5-cosh-sign
+      - expr: 'cosh(x)*sinh(x)'
+        feedback: >-
+          זו מכפלת הנגזרות $\cosh x\cdot\sinh x$, שבמקרה שווה ל-$f$ עצמה. כלל המכפלה הוא סכום.
+        misconception: MC-c5-product-of-derivatives
+    hints: ['חזרו לשיעור 5.5: טבלת הנגזרות, ולשיעור 4.5: ההגדרות של הפונקציות ההיפרבוליות.']
+
+  - id: Q-5-review-05
+    type: numeric
+    objectives: [OBJ-5.2-1, OBJ-5.4-2]
+    level: mid
+    prompt: >-
+      השתמשו בקירוב הלינארי של $\arctan x$ ליד $x=1$ כדי להעריך את $\arctan(1.1)$. כתבו את הערך שהקירוב נותן.
+    answer: 0.835398163397448
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון: $\frac\pi4+\frac{0.1}{2}\approx0.8354$. $\arctan1=\frac\pi4$ ו-$(\arctan x)'=\frac{1}{1+x^2}$, שב-1 שווה $\frac12$.
+      הערך האמיתי $0.8330\ldots$.
+    wrongFeedback: >-
+      $f(1+h)\approx f(1)+f'(1)h$ עם $f(1)=\frac\pi4$, $f'(1)=\frac12$, $h=0.1$.
+    commonWrong:
+      - value: 0.832981266674432
+        feedback: >-
+          זה הערך האמיתי (ממחשבון), לא מה שהקירוב נותן. הקירוב הלינארי הוא $\frac\pi4+\frac12\cdot0.1$.
+        misconception: MC-c5-differential-is-exact
+    hints: ['חזרו לשיעור 5.2: קירוב לינארי, ולשיעור 5.4: הנגזרת של arctan.']
+
+  - id: Q-5-review-06
+    type: expr
+    objectives: [OBJ-5.3-1, OBJ-4.3-2]
+    level: mid
+    prompt: 'גזרו: $f(x)=\sqrt{x}\,\ln x$ ל-$x>0$. כתבו את $f''(x)$.'
+    answer: 'log(x)/(2*sqrt(x)) + 1/sqrt(x)'
+    answerTex: '$f''(x)=\dfrac{\ln x}{2\sqrt x}+\dfrac{\sqrt x}{x}=\dfrac{\ln x+2}{2\sqrt x}$'
+    variables: [x]
+    domain: [0.3, 3]
+    correctFeedback: >-
+      נכון. כלל המכפלה: $(\sqrt x)'\ln x+\sqrt x\,(\ln x)'=\frac{\ln x}{2\sqrt x}+\frac{1}{\sqrt x}$.
+    wrongFeedback: >-
+      מכפלה של $\sqrt x$ ו-$\ln x$: גזרו כל גורם פעם אחת וחברו.
+    commonWrong:
+      - expr: '1/(2*sqrt(x)*x)'
+        feedback: >-
+          זו מכפלת הנגזרות $\frac{1}{2\sqrt x}\cdot\frac1x$. כלל המכפלה הוא $u'v+uv'$.
+        misconception: MC-c5-product-of-derivatives
+    hints: ['חזרו לשיעור 5.3: כלל המכפלה.']
+
+  - id: Q-5-review-07
+    type: numeric
+    objectives: [OBJ-5.4-1, OBJ-5.2-1]
+    level: mid
+    prompt: >-
+      הנקודה $(1,2)$ נמצאת על העקום $x^3+y^3=9$. השתמשו במשיק לעקום בנקודה הזו כדי להעריך את $y$ של הנקודה על העקום
+      שבה $x=1.1$ (ליד $(1,2)$).
+    answer: 1.975
+    tolerance: 0.0001
+    correctFeedback: >-
+      נכון. $3x^2+3y^2y'=0$, ולכן $y'=-\frac{x^2}{y^2}=-\frac14$, ו-$y\approx2-\frac14\cdot0.1=1.975$.
+    wrongFeedback: >-
+      מצאו את $y'$ ב-$(1,2)$ בגזירה סתומה, ואז $y(1.1)\approx y(1)+y'\cdot0.1$.
+    hints: ['חזרו לשיעור 5.4: גזירה סתומה, ולשיעור 5.2: המשיק כקירוב לינארי.']
+
+  - id: Q-5-review-08
+    type: twotier
+    objectives: [OBJ-5.5-3, OBJ-4.6-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f$ רציפה בקטע הסגור $[a,b]$, גזירה בקטע הפתוח, ו-$f'(x)>0$ לכל $a<x<b$. נכון או לא נכון: הערך הגדול ביותר של
+      $f$ בקטע הוא $f(b)$.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. $f$ עולה בכל הקטע, ולכן $f(x)\le f(b)$ לכל $x$. אין נקודה פנימית שבה $f'=0$: המקסימום בקצה.
+      - text: 'לא נכון'
+        feedback: >-
+          המקסימום אינו חייב להיות בנקודה שבה $f'=0$; בקטע סגור גם הקצוות מועמדים, וכאן הקצה הימני מנצח.
+        misconception: MC-c5-endpoints-forgotten
+    reasons:
+      - text: 'נגזרת חיובית פירושה ש-$f$ עולה, ולכן היא הגדולה ביותר בקצה הימני'
+        correct: true
+        feedback: 'בדיוק. (קיום המקסימום מובטח ממילא: $f$ רציפה בקטע סגור.)'
+      - text: 'למקסימום צריך $f''=0$, וכאן אין נקודה כזו, ולכן אין מקסימום'
+        feedback: >-
+          $f'=0$ נדרש רק בנקודה **פנימית**. פונקציה רציפה בקטע סגור מקבלת מקסימום, וכאן הוא בקצה.
+        misconception: MC-c5-endpoints-forgotten
+      - text: 'כי $f$ חיובית בכל הקטע'
+        feedback: >-
+          הנתון הוא על הסימן של $f'$, לא של $f$. $f$ יכולה להיות שלילית כולה ועדיין עולה.
+        misconception: MC-c5-fprime-graph-is-f
+    hints: ['חזרו לשיעור 5.5: תחומי עלייה וקיצון בקטע סגור, ולשיעור 4.6: קיום מקסימום ומינימום בקטע סגור.']
+
+  - id: Q-5-review-09
+    type: numeric
+    objectives: [OBJ-5.5-2, OBJ-5.2-3]
+    level: mid
+    prompt: >-
+      אדם בגובה $1.8$ מ׳ מתרחק מעמוד תאורה בגובה 6 מ׳ במהירות $1.2$ מ׳ לשנייה. באיזה קצב (מ׳ לשנייה) גדל אורך הצל
+      שלו?
+    answer: 0.514285714285714
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{18}{35}\approx0.514$. משולשים דומים: $\frac{s}{1.8}=\frac{x+s}{6}$, כלומר $s=\frac37x$ בכל רגע, ולכן
+      $\frac{ds}{dt}=\frac37\cdot1.2$. היחידות: מטר חלקי שנייה.
+    wrongFeedback: >-
+      סמנו $x$ = המרחק מהעמוד ו-$s$ = אורך הצל, כתבו את יחס המשולשים הדומים, בטאו את $s$ בעזרת $x$, וגזרו לפי $t$.
+    commonWrong:
+      - value: 1.2
+        feedback: >-
+          הצל אינו מתארך באותו קצב שבו האדם הולך: $s=\frac37x$, ולכן הקצב שלו $\frac37$ מקצב ההליכה.
+        misconception: MC-c5-related-same-rate
+    hints: ['חזרו לשיעור 5.5: קצבים קשורים, ולשיעור 5.2: סימון לייבניץ ויחידות של נגזרת.']
+
+  - id: Q-5-review-10
+    type: expr
+    objectives: [OBJ-5.4-3, OBJ-5.3-2]
+    level: mid
+    prompt: 'גזרו: $f(x)=(\sin x)^x$ בקטע $0<x<\pi$. כתבו את $f''(x)$.'
+    answer: 'sin(x)^x*(log(sin(x)) + x*cos(x)/sin(x))'
+    answerTex: '$f''(x)=(\sin x)^x\left(\ln\sin x+\dfrac{x\cos x}{\sin x}\right)$'
+    variables: [x]
+    domain: [0.3, 2.8]
+    correctFeedback: >-
+      נכון. $\ln f=x\ln\sin x$; כלל המכפלה וכלל השרשרת: $\frac{f'}{f}=\ln\sin x+x\cdot\frac{\cos x}{\sin x}$.
+    wrongFeedback: >-
+      גם הבסיס וגם המעריך משתנים: קחו $\ln$, גזרו את $x\ln\sin x$ (מכפלה, ובתוכה שרשרת), וכפלו ב-$f$.
+    commonWrong:
+      - expr: 'x*sin(x)^(x - 1)*cos(x)'
+        feedback: >-
+          זה כלל החזקה (עם כלל השרשרת), שמניח מעריך קבוע. חסרה התרומה של המעריך המשתנה, $(\sin x)^x\ln\sin x$.
+        misconception: MC-c5-power-rule-variable-exponent
+      - expr: 'sin(x)^x*(log(sin(x)) + x/sin(x))'
+        feedback: >-
+          בנגזרת של $\ln\sin x$ חסרה הנגזרת הפנימית $\cos x$: $(\ln\sin x)'=\frac{\cos x}{\sin x}$.
+        misconception: MC-c5-chain-missing-inner
+    hints: ['חזרו לשיעור 5.4: גזירה לוגריתמית, ולשיעור 5.3: כלל השרשרת.']
+
+  - id: Q-5-review-11
+    type: numeric
+    objectives: [OBJ-5.3-2, OBJ-4.3-1]
+    level: exam
+    prompt: >-
+      כוס תה מתקררת בחדר, והטמפרטורה שלה (במעלות צלזיוס) אחרי $t$ דקות היא $T(t)=20+60e^{-t/10}$. מהו קצב השינוי של
+      הטמפרטורה (מעלות לדקה) ברגע $t=10$?
+    answer: -2.20727664702865
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-6e^{-1}\approx-2.21$ מעלות לדקה. $T'(t)=60e^{-t/10}\cdot\left(-\frac1{10}\right)=-6e^{-t/10}$. הסימן שלילי:
+      התה מתקרר, ולאט יותר ככל שהוא מתקרב ל-20 מעלות.
+    wrongFeedback: >-
+      גזרו את $e^{-t/10}$ בכלל השרשרת: הנגזרת הפנימית היא $-\frac1{10}$, עם הסימן.
+    commonWrong:
+      - value: 2.20727664702865
+        feedback: >-
+          הסימן הפוך: הנגזרת הפנימית של $-\frac{t}{10}$ היא $-\frac1{10}$, לא $\frac1{10}$. תה שמתקרר צריך קצב שלילי.
+        misconception: MC-c5-chain-missing-inner
+      - value: -22.0727664702865
+        feedback: >-
+          $-60e^{-1}$: חסר הכופל $\frac1{10}$ מהנגזרת הפנימית.
+        misconception: MC-c5-chain-missing-inner
+    hints: ['חזרו לשיעור 5.3: כלל השרשרת, ולשיעור 4.3: האקספוננט והתנהגותו.']
+
+  - id: Q-5-review-12
+    type: numeric
+    objectives: [OBJ-5.5-3, OBJ-4.3-2]
+    level: exam
+    prompt: >-
+      מהו הערך הגדול ביותר של $f(x)=x-2\ln x$ בקטע הסגור $[1,e^2]$?
+    answer: 3.38905609893065
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $e^2-4\approx3.389$. $f'(x)=1-\frac2x$ מתאפסת ב-$x=2$, ושם $f(2)=2-2\ln2\approx0.61$ (מינימום). בקצוות
+      $f(1)=1$ ו-$f(e^2)=e^2-2\cdot2$. הגדול מבין השלושה הוא $e^2-4$.
+    wrongFeedback: >-
+      השוו את ערכי $f$ בנקודה שבה $f'=0$ ובשני הקצוות. $\ln(e^2)=2$.
+    commonWrong:
+      - value: 0.613705638880109
+        feedback: >-
+          זה $f(2)$, בנקודה היחידה שבה $f'=0$, וזו נקודת **מינימום**. בקטע סגור בודקים גם את הקצוות.
+        misconception: MC-c5-endpoints-forgotten
+    hints: ['חזרו לשיעור 5.5: קיצון בקטע סגור, ולשיעור 4.3: לוגריתם טבעי.']
+
+  - id: Q-5-review-13
+    type: multi
+    objectives: [OBJ-5.1-3, OBJ-5.4-2, OBJ-5.5-1]
+    qualitative: true
+    level: exam
+    prompt: >-
+      אילו מהפונקציות הבאות **אינן** גזירות בנקודה שלידן? סמנו את כולן.
+    choices:
+      - text: '$\sqrt[3]{x}$ ב-$x=0$'
+        correct: true
+        feedback: >-
+          נכון. משיק אנכי: המנה $\frac{\sqrt[3]h}{h}=h^{-2/3}\to\infty$. זו ההפוכה של $x^3$, שנגזרתה ב-0 היא 0.
+      - text: '$|\sin x|$ ב-$x=0$'
+        correct: true
+        feedback: >-
+          נכון. פינה: השיפוע מימין $1$ ומשמאל $-1$.
+      - text: '$\arcsin x$ ב-$x=1$'
+        correct: true
+        feedback: >-
+          נכון. $(\arcsin x)'=\frac{1}{\sqrt{1-x^2}}\to\infty$ כש-$x\to1^-$: בקצה התחום הגרף אנכי (וגם $\arcsin$ מוגדרת רק
+          משמאל ל-1).
+      - text: '$x|x|$ ב-$x=0$'
+        feedback: >-
+          $x|x|$ **גזירה** ב-0: המנה $\frac{h|h|}{h}=|h|\to0$, ולכן $f'(0)=0$. ערך מוחלט בנוסחה אינו גורר פינה.
+        misconception: MC-c5-abs-never-differentiable
+      - text: '$e^{|x|}$ ב-$x=0$'
+        correct: true
+        feedback: >-
+          נכון. פינה: מימין $e^{x}$ עם שיפוע 1, משמאל $e^{-x}$ עם שיפוע $-1$.
+      - text: '$\cosh x$ ב-$x=0$'
+        feedback: >-
+          $\cosh$ גזירה בכל מקום: $(\cosh x)'=\sinh x$, וב-0 הנגזרת 0. ליד 0 הגרף נראה כמו $e^{|x|}$, אבל הוא חלק: הממוצע
+          $\frac{e^x+e^{-x}}{2}$ מחליק את הפינה.
+        misconception: MC-c5-abs-never-differentiable
+    hints: ['חזרו לשיעור 5.1: פינה ומשיק אנכי, לשיעור 5.4: נגזרת של פונקציה הפוכה, ולשיעור 5.5: הטבלה.']

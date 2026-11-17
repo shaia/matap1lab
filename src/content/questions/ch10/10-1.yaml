@@ -1,0 +1,278 @@
+# Lesson 10.1 — graphs, level curves and sections; domain; limits and continuity in two variables.
+# Objectives (src/course.ts):
+#   OBJ-10.1-1  sketch level curves and read the shape of the graph from them
+#   OBJ-10.1-2  find and sketch the domain of a function of several variables
+#   OBJ-10.1-3  check a limit and continuity at a point; show a limit does not exist with two paths
+# Examples from the notes pp. 36–37 (10 − x² − 4y², ln(y − x²), xy/√(x²+y²)), recomputed in screens/tools/recompute-ch10.py.
+chapter: 10
+questions:
+  - id: Q-10.1-level-ellipse
+    type: mc
+    objectives: [OBJ-10.1-1]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=10-x^2-4y^2$. מהו קו הגובה $f(x,y)=6$?
+    choices:
+      - text: 'האליפסה $x^2+4y^2=4$, עם חצאי צירים 2 בכיוון $x$ ו-1 בכיוון $y$'
+        correct: true
+        feedback: >-
+          נכון. $10-x^2-4y^2=6$ שקול ל-$x^2+4y^2=4$, כלומר $\frac{x^2}{4}+y^2=1$. זו אליפסה במישור $xy$, והחיתוך של
+          הגרף עם המישור האופקי $z=6$.
+      - text: 'הפרבולה $z=10-x^2$ במישור $xz$'
+        feedback: >-
+          זה החתך של הגרף עם המישור האנכי $y=0$. קו גובה נמצא במישור $xy$: כל הנקודות $(x,y)$ שבהן הגובה הוא 6.
+        misconception: MC-c10-level-vs-section
+      - text: 'הנקודה $(0,0)$ בלבד'
+        feedback: >-
+          הנקודה $(0,0)$ היא קו הגובה של הערך המרבי, $f=10$. לערך 6, שקטן מ-10, יש עקום שלם של נקודות.
+        misconception: MC-c10-level-vs-section
+      - text: 'הקבוצה הריקה'
+        feedback: >-
+          קו הגובה ריק רק כש-$c>10$, כי $f\le10$ בכל מקום. ל-$c=6$ יש פתרונות, למשל $(2,0)$.
+        misconception: MC-c10-level-vs-section
+
+  - id: Q-10.1-level-value
+    type: numeric
+    objectives: [OBJ-10.1-1]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=10-x^2-4y^2$. על איזה קו גובה $f=c$ נמצאת הנקודה $(1,1)$? כתבו את $c$.
+    answer: 5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f(1,1)=10-1-4=5$, ולכן הנקודה על האליפסה $x^2+4y^2=5$.
+    wrongFeedback: >-
+      קו הגובה שעובר בנקודה הוא זה שהערך שלו שווה לערך של $f$ בנקודה: הציבו $x=1$, $y=1$.
+
+  - id: Q-10.1-density
+    type: twotier
+    objectives: [OBJ-10.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      במפה טופוגרפית קווי הגובה משורטטים כל 10 מטרים. במדרון המזרחי של הר הקווים צפופים מאוד, ובמדרון המערבי הם
+      רחוקים זה מזה. נכון או לא נכון: המדרון המזרחי תלול יותר.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. בשני המדרונות עולים 10 מטר בין קו לקו, אבל במזרח עושים זאת במרחק אופקי קצר יותר.'
+      - text: 'לא נכון'
+        feedback: >-
+          צפיפות הקווים אינה הגובה, אלא היחס בין הפרש הגובה הקבוע למרחק האופקי ביניהם: קווים צפופים, שיפוע גדול.
+        misconception: MC-c10-contour-density-height
+    reasons:
+      - text: 'אותו הפרש גובה, 10 מטר, מתפרס במזרח על מרחק אופקי קטן יותר'
+        correct: true
+        feedback: 'בדיוק: השיפוע הוא הפרש הגובה חלקי המרחק האופקי.'
+      - text: 'איפה שיש יותר קווים ההר גבוה יותר'
+        feedback: >-
+          הגובה נקרא מהמספרים שעל הקווים. ייתכן שהמדרון המזרחי נמוך ותלול, והמערבי גבוה ומתון.
+        misconception: MC-c10-contour-density-height
+      - text: 'קווים צפופים מסמנים מקום שבו הגובה כמעט לא משתנה'
+        feedback: 'להפך: לאורך כל קו הגובה קבוע, ובין קווים צפופים הגובה משתנה מהר.'
+        misconception: MC-c10-contour-density-height
+
+  - id: Q-10.1-domain-ln
+    type: mc
+    objectives: [OBJ-10.1-2]
+    level: basic
+    prompt: >-
+      מהו תחום ההגדרה של $f(x,y)=\ln\left(y-x^2\right)$?
+    choices:
+      - text: 'הנקודות שמעל הפרבולה $y=x^2$, בלי הפרבולה עצמה: $y>x^2$'
+        correct: true
+        feedback: >-
+          נכון. הלוגריתם מוגדר רק לארגומנט חיובי: $y-x^2>0$. על הפרבולה הארגומנט 0, ו-$\ln0$ אינו מוגדר.
+      - text: '$y\ge x^2$: הפרבולה והנקודות שמעליה'
+        feedback: >-
+          על הפרבולה $y-x^2=0$, ו-$\ln0$ אינו מוגדר. התנאי $\ge$ מתאים לשורש, לא ללוגריתם.
+        misconception: MC-c10-domain-boundary
+      - text: '$y<x^2$: הנקודות שמתחת לפרבולה'
+        feedback: 'שם $y-x^2<0$, ולוגריתם של מספר שלילי אינו מוגדר. בדקו נקודה, למשל $(0,1)$: $\ln1=0$, מוגדר.'
+        misconception: MC-c10-domain-boundary
+      - text: 'כל המישור'
+        feedback: 'ב-$(0,-1)$, למשל, הארגומנט $-1$, ו-$\ln(-1)$ אינו מוגדר.'
+        misconception: MC-c10-domain-boundary
+
+  - id: Q-10.1-paths
+    type: mc
+    objectives: [OBJ-10.1-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=\frac{xy}{x^2+y^2}$. לאורך ציר $x$, $f(t,0)=0$, ולאורך הישר $y=x$, $f(t,t)=\frac12$. מה אפשר להסיק על
+      $\lim_{(x,y)\to(0,0)}f(x,y)$?
+    choices:
+      - text: 'הגבול אינו קיים'
+        correct: true
+        feedback: >-
+          נכון. אילו הגבול $L$ היה קיים, $f$ הייתה מתקרבת ל-$L$ בכל מסלול לראשית, ובפרט $L=0$ וגם $L=\frac12$.
+      - text: 'הגבול הוא 0, כי לאורך שני הצירים $f=0$'
+        feedback: >-
+          שני מסלולים עם אותו גבול אינם מוכיחים דבר: יש מסלול אחר, $y=x$, עם גבול $\frac12$.
+        misconception: MC-c10-lines-enough
+      - text: 'הגבול הוא $\frac14$, הממוצע של שני הגבולות'
+        feedback: 'גבול אינו ממוצע של מסלולים. כששני מסלולים נותנים ערכים שונים, אין גבול.'
+        misconception: MC-c10-lines-enough
+      - text: 'אין גבול, כי המכנה מתאפס בראשית'
+        feedback: >-
+          המסקנה נכונה אבל הנימוק לא: ל-$\frac{x^2y^2}{x^2+y^2}$ המכנה מתאפס בראשית, והגבול 0 קיים. מה שמוכיח כאן הוא שני
+          המסלולים.
+        misconception: MC-c10-zero-denominator
+
+  - id: Q-10.1-read-contours
+    type: mc
+    objectives: [OBJ-10.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      קווי הגובה $f=1,2,3,4$ של פונקציה $f(x,y)$ הם מעגלים סביב הראשית ברדיוסים $1,2,3,4$ בהתאמה, במרווחים שווים, ו-$f(0,0)=0$.
+      איזה גרף מתאים?
+    choices:
+      - text: 'חרוט, $z=\sqrt{x^2+y^2}$'
+        correct: true
+        feedback: >-
+          נכון. קו הגובה $c$ של $\sqrt{x^2+y^2}$ הוא המעגל ברדיוס $c$: מרווחים שווים, כלומר שיפוע קבוע בכל כיוון מהראשית.
+      - text: 'פרבולואיד, $z=x^2+y^2$'
+        feedback: >-
+          לפרבולואיד קו הגובה $c$ הוא מעגל ברדיוס $\sqrt c$: הרדיוסים $1,\sqrt2,\sqrt3,2$, והמעגלים מתקרבים זה לזה כלפי
+          חוץ, כי הפרבולואיד מתלול.
+        misconception: MC-c10-contour-spacing
+      - text: 'חצי ספירה, $z=\sqrt{16-x^2-y^2}$'
+        feedback: >-
+          לחצי הספירה הגובה הוא 4 בראשית ויורד כלפי חוץ, ואילו כאן $f(0,0)=0$ והערכים עולים עם הרדיוס.
+        misconception: MC-c10-contour-spacing
+      - text: 'מישור, $z=x+y$'
+        feedback: 'קווי הגובה של מישור (שאינו אופקי) הם ישרים מקבילים, לא מעגלים.'
+        misconception: MC-c10-level-vs-section
+
+  - id: Q-10.1-saddle-contours
+    type: mc
+    objectives: [OBJ-10.1-1]
+    level: mid
+    prompt: >-
+      מה צורת קווי הגובה של $f(x,y)=x^2-y^2$?
+    choices:
+      - text: 'ל-$c\ne0$ היפרבולות, ול-$c=0$ שני הישרים $y=x$ ו-$y=-x$'
+        correct: true
+        feedback: >-
+          נכון. $x^2-y^2=c$ היא היפרבולה (שנפתחת לכיוון ציר $x$ כש-$c>0$ ולכיוון ציר $y$ כש-$c<0$), ו-$x^2-y^2=0$ מתפרק
+          ל-$(x-y)(x+y)=0$. זה גרף בצורת אוכף.
+      - text: 'מעגלים סביב הראשית'
+        feedback: >-
+          מעגלים מתקבלים מ-$x^2+y^2=c$. המינוס לפני $y^2$ הופך את המעגלים להיפרבולות.
+        misconception: MC-c10-contour-spacing
+      - text: 'הפרבולות $z=x^2$ ו-$z=-y^2$'
+        feedback: >-
+          אלה החתכים של הגרף עם המישורים האנכיים $y=0$ ו-$x=0$, לא קווי גובה. הם מראים שבראשית הגרף עולה בכיוון $x$
+          ויורד בכיוון $y$.
+        misconception: MC-c10-level-vs-section
+
+  - id: Q-10.1-domain-points
+    type: multi
+    objectives: [OBJ-10.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      תהי $f(x,y)=\frac{\sqrt{4-x^2-y^2}}{y-x}$. אילו מהנקודות הבאות נמצאות בתחום ההגדרה? סמנו את כולן.
+    choices:
+      - text: '$(0,2)$'
+        correct: true
+        feedback: 'נכון. $4-0-4=0$, ו-$\sqrt0=0$ מוגדר; המכנה $2-0=2\ne0$. נקודה על השפה של העיגול שייכת לתחום.'
+      - text: '$(-1,0)$'
+        correct: true
+        feedback: 'נכון. $4-1-0=3\ge0$ והמכנה $0-(-1)=1\ne0$.'
+      - text: '$(1,1)$'
+        feedback: >-
+          בתוך העיגול ($4-2=2\ge0$), אבל המכנה $y-x=0$. התחום הוא העיגול $x^2+y^2\le4$ **בלי** הישר $y=x$.
+        misconception: MC-c10-domain-forget-denominator
+      - text: '$(0,0)$'
+        feedback: 'הראשית על הישר $y=x$, ולכן המכנה מתאפס בה, אף שהשורש מוגדר.'
+        misconception: MC-c10-domain-forget-denominator
+      - text: '$(2,1)$'
+        feedback: 'כאן $4-4-1=-1<0$: הנקודה מחוץ לעיגול, והשורש אינו מוגדר.'
+        misconception: MC-c10-domain-boundary
+
+  - id: Q-10.1-domain-area
+    type: numeric
+    objectives: [OBJ-10.1-2]
+    level: mid
+    prompt: >-
+      תחום ההגדרה של $f(x,y)=\sqrt{9-x^2-y^2}+\sqrt{x^2+y^2-4}$ הוא צורה במישור. מה השטח שלה? (אפשר לכתוב תשובה עם
+      pi.)
+    answer: 15.707963267949
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $5\pi$. השורש הראשון דורש $x^2+y^2\le9$ והשני $x^2+y^2\ge4$: הטבעת בין המעגלים ברדיוסים 2 ו-3, ושטחה
+      $\pi\cdot3^2-\pi\cdot2^2=5\pi$.
+    wrongFeedback: >-
+      כתבו את התנאי של כל שורש, ומצאו את החיתוך שלהם. מה הצורה? מה הרדיוסים?
+    commonWrong:
+      - value: 28.274333882308
+        feedback: >-
+          $9\pi$ הוא השטח של העיגול $x^2+y^2\le9$: השתמשתם רק בתנאי של השורש הראשון. השורש השני מוציא את העיגול הפנימי.
+        misconception: MC-c10-domain-one-condition
+
+  - id: Q-10.1-limit-bound
+    type: twotier
+    objectives: [OBJ-10.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $\lim_{(x,y)\to(0,0)}\frac{xy}{\sqrt{x^2+y^2}}=0$.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. מ-$(|x|-|y|)^2\ge0$ מקבלים $|xy|\le\frac{x^2+y^2}{2}$, ולכן הערך המוחלט של הפונקציה קטן או שווה ל-$\frac{\sqrt{x^2+y^2}}{2}$, ששואף ל-0.
+      - text: 'לא נכון'
+        feedback: >-
+          המכנה מתאפס, אבל המונה מתאפס מהר יותר: $|xy|\le\frac{x^2+y^2}{2}$, והמנה קטנה מחצי המרחק מהראשית.
+        misconception: MC-c10-zero-denominator
+    reasons:
+      - text: 'הערך המוחלט של הפונקציה חסום על ידי $\frac12\sqrt{x^2+y^2}$, חסם שתלוי רק במרחק ושואף ל-0'
+        correct: true
+        feedback: 'בדיוק. חסם שתלוי רק במרחק מהנקודה תופס את כל המסלולים בבת אחת.'
+      - text: 'לאורך כל ישר $y=mx$ הפונקציה שואפת ל-0'
+        feedback: >-
+          זה נכון כאן, אבל לא מוכיח גבול: ל-$\frac{x^2y}{x^4+y^2}$ כל הישרים נותנים 0 והפרבולה $y=x^2$ נותנת $\frac12$.
+        misconception: MC-c10-lines-enough
+      - text: 'בראשית המונה 0, ולכן כל המנה 0'
+        feedback: 'בראשית גם המכנה 0, והפונקציה לא מוגדרת שם. הגבול נקבע מהערכים הקרובים, לא מהנקודה עצמה.'
+        misconception: MC-c10-zero-denominator
+
+  - id: Q-10.1-continuity
+    type: numeric
+    objectives: [OBJ-10.1-3]
+    level: mid
+    prompt: >-
+      תהי $f(x,y)=\frac{\sin\left(x^2+y^2\right)}{x^2+y^2}$ ל-$(x,y)\ne(0,0)$. איזה ערך צריך לתת ל-$f(0,0)$ כדי ש-$f$ תהיה
+      רציפה בראשית?
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. הפונקציה תלויה רק ב-$s=x^2+y^2$, ו-$s\to0^+$ כש-$(x,y)\to(0,0)$ בכל מסלול. לכן הגבול הוא
+      $\lim_{s\to0^+}\frac{\sin s}{s}=1$, ורציפות דורשת $f(0,0)=1$.
+    wrongFeedback: >-
+      הציבו $s=x^2+y^2$: מה קורה ל-$s$ כשמתקרבים לראשית, ומהו הגבול הידוע של $\frac{\sin s}{s}$?
+
+  - id: Q-10.1-parabola-path
+    type: numeric
+    objectives: [OBJ-10.1-3]
+    level: exam
+    prompt: >-
+      תהי $f(x,y)=\frac{x^2y}{x^4+y^2}$. לאורך כל ישר $y=mx$ מתקיים $f\to0$ כש-$x\to0$. חשבו את הערך של $f$ לאורך הפרבולה
+      $y=x^2$ (עבור $x\ne0$). מה המסקנה על הגבול בראשית?
+    answer: 0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f(x,x^2)=\frac{x^4}{x^4+x^4}=\frac12$ לכל $x\ne0$. לאורך הישרים הגבול 0 ולאורך הפרבולה $\frac12$, ולכן הגבול
+      בראשית אינו קיים, למרות שכל הישרים מסכימים.
+    wrongFeedback: >-
+      הציבו $y=x^2$: המונה $x^2\cdot x^2$, המכנה $x^4+(x^2)^2$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 הוא הגבול לאורך הישרים. לאורך הפרבולה $y=x^2$ המונה והמכנה מאותו סדר, $x^4$, והערך קבוע: $\frac12$.
+        misconception: MC-c10-lines-enough
+    hints: ['במסלול $y=x^2$, באיזו חזקה של $x$ מתנהגים המונה והמכנה?']

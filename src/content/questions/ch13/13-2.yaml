@@ -1,0 +1,248 @@
+# Lesson 13.2 — flux of a vector field (enrichment, "if time permits").
+# Objectives (src/course.ts):
+#   OBJ-13.2-1  compute the flux of a vector field through a surface with a given normal direction
+#   OBJ-13.2-2  compute flux through a sphere, a cylinder and a graph
+#   OBJ-13.2-3  read flux as the rate of flow through the surface
+# No divergence theorem (not in the course): closed surfaces are done face by face.
+# Keys recomputed in screens/tools/recompute-ch13.py.
+chapter: 13
+questions:
+  - id: Q-13.2-def
+    type: mc
+    objectives: [OBJ-13.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $S$ משטח בפרמטריזציה $\vec r(u,v)$, $(u,v)\in D$, ו-$\vec r_u\times\vec r_v$ מצביע בכיוון הנורמל שנבחר. איזו נוסחה
+      נותנת את השטף $\iint_S\vec F\cdot\hat n\,dS$?
+    choices:
+      - text: '$\iint_D\vec F(\vec r(u,v))\cdot(\vec r_u\times\vec r_v)\,du\,dv$'
+        correct: true
+        feedback: >-
+          נכון. $\hat n=\frac{\vec r_u\times\vec r_v}{|\vec r_u\times\vec r_v|}$ ו-$dS=|\vec r_u\times\vec r_v|\,du\,dv$: האורך
+          מתבטל, ונשאר הנורמל הלא מנורמל.
+      - text: '$\iint_D|\vec F(\vec r(u,v))|\,|\vec r_u\times\vec r_v|\,du\,dv$'
+        feedback: >-
+          זה $\iint_S|\vec F|\,dS$: סופר את כל השדה, גם את החלק שמשיק למשטח ולא עובר דרכו. השטף לוקח רק את
+          $\vec F\cdot\hat n$.
+        misconception: MC-c13-flux-magnitude
+      - text: '$\iint_D\vec F(\vec r(u,v))\cdot\dfrac{\vec r_u\times\vec r_v}{|\vec r_u\times\vec r_v|}\,du\,dv$'
+        feedback: >-
+          זה $\iint\vec F\cdot\hat n\,du\,dv$: חסר $dS=|\vec r_u\times\vec r_v|\,du\,dv$. או מנרמלים וכופלים ב-$dS$, או לא
+          מנרמלים בכלל.
+        misconception: MC-c13-dS-is-dudv
+
+  - id: Q-13.2-orientation
+    type: mc
+    objectives: [OBJ-13.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      השטף של $\vec F$ דרך משטח $S$, עם הנורמל כלפי מעלה, הוא 7. מה השטף עם הנורמל כלפי מטה?
+    choices:
+      - text: '$-7$'
+        correct: true
+        feedback: 'נכון: $\hat n\to-\hat n$ הופך את הסימן של $\vec F\cdot\hat n$ בכל נקודה.'
+      - text: '$7$'
+        feedback: >-
+          השטף סופר כמה עובר דרך המשטח **בכיוון** של $\hat n$. מה שעובר למעלה בקצב 7 עובר "למטה" בקצב $-7$.
+        misconception: MC-c13-flux-orientation
+      - text: '0'
+        feedback: 'השדה לא השתנה, רק הכיוון שבו סופרים. השטף מחליף סימן ואינו מתאפס.'
+        misconception: MC-c13-flux-orientation
+
+  - id: Q-13.2-constant
+    type: numeric
+    objectives: [OBJ-13.2-1, OBJ-13.2-3]
+    level: basic
+    prompt: >-
+      $\vec F=(1,2,3)$ שדה קבוע. חשבו את השטף שלו דרך הריבוע $0\le x\le2$, $0\le y\le2$ במישור $z=0$, עם הנורמל $\hat k$
+      (כלפי מעלה).
+    answer: 12
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec F\cdot\hat k=3$ בכל נקודה, והשטח 4. הרכיבים $1$ ו-$2$ משיקים לריבוע ולא עוברים דרכו.
+    wrongFeedback: >-
+      $\hat n=\hat k$ ו-$dS=dA$. מה $\vec F\cdot\hat k$?
+    commonWrong:
+      - value: 14.9666295470958
+        feedback: >-
+          $4\sqrt{14}=|\vec F|\cdot4$: כאילו כל הזרם עובר דרך הריבוע. רק הרכיב הניצב, 3, עובר.
+        misconception: MC-c13-flux-magnitude
+      - value: -12
+        feedback: 'זה השטף עם הנורמל כלפי מטה. הנורמל הנתון הוא $\hat k$.'
+        misconception: MC-c13-flux-orientation
+
+  - id: Q-13.2-sphere
+    type: numeric
+    objectives: [OBJ-13.2-2]
+    level: basic
+    prompt: >-
+      חשבו את השטף של $\vec F=(x,y,z)$ החוצה דרך הספירה ברדיוס 2 סביב הראשית.
+    answer: 100.530964914873
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $32\pi$. על הספירה $\hat n=\frac{(x,y,z)}{2}$, ולכן $\vec F\cdot\hat n=\frac{x^2+y^2+z^2}{2}=2$ בכל נקודה, כפול
+      השטח $16\pi$.
+    wrongFeedback: >-
+      על ספירה סביב הראשית הנורמל החיצוני הוא וקטור המקום חלקי הרדיוס. $\vec F\cdot\hat n$ יוצא קבוע.
+    commonWrong:
+      - value: 39.4784176043574
+        feedback: >-
+          $4\pi^2=2\cdot\pi\cdot2\pi$: הכפלתם בשטח של תחום הפרמטרים במקום בשטח הספירה. $dS=4\sin\theta\,d\theta\,d\varphi$.
+        misconception: MC-c13-dS-is-dudv
+      - value: 50.2654824574367
+        feedback: >-
+          $16\pi$ הוא שטח הספירה, כאילו $\vec F\cdot\hat n=1$. על הספירה $|\vec F|=2$, והוא כולו בכיוון הנורמל.
+        misconception: MC-c13-flux-magnitude
+
+  - id: Q-13.2-rank
+    type: rank
+    objectives: [OBJ-13.2-1]
+    level: mid
+    prompt: >-
+      סדרו את שלבי החישוב של השטף של $\vec F$ דרך $S$ בכיוון נורמל נתון.
+    help: 'גררו את השלבים לפי הסדר: הראשון למעלה.'
+    items:
+      - { id: param, label: 'בוחרים פרמטריזציה $\vec r(u,v)$, $(u,v)\in D$' }
+      - { id: normal, label: 'מחשבים $\vec r_u\times\vec r_v$' }
+      - { id: orient, label: 'בודקים שהוא מצביע בכיוון הנתון; אם לא, הופכים את הסימן' }
+      - { id: dot, label: 'מציבים: $\vec F(\vec r(u,v))\cdot(\vec r_u\times\vec r_v)$' }
+      - { id: integrate, label: 'מחשבים את האינטגרל הכפול על $D$' }
+    order: [param, normal, orient, dot, integrate]
+    correctFeedback: 'נכון. בדיקת הכיוון באה מיד אחרי חישוב הנורמל: היא קובעת את הסימן של כל התוצאה.'
+    wrongFeedback: 'אי אפשר לבדוק כיוון של נורמל לפני שחישבתם אותו, ואי אפשר להכפיל סקלרית לפני שיש נורמל.'
+
+  - id: Q-13.2-inverse-square
+    type: numeric
+    objectives: [OBJ-13.2-2, OBJ-13.2-3]
+    level: mid
+    prompt: >-
+      שדה של מטען נקודתי בראשית (ביחידות שבהן הקבועים 1): $\vec E=\dfrac{(x,y,z)}{(x^2+y^2+z^2)^{3/2}}$. חשבו את השטף שלו
+      החוצה דרך הספירה ברדיוס 5.
+    answer: 12.5663706143592
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $4\pi$. על הספירה $\vec E\cdot\hat n=\frac{1}{R^2}=\frac{1}{25}$, והשטח $4\pi R^2=100\pi$. השדה נחלש כמו
+      $\frac{1}{R^2}$ והשטח גדל כמו $R^2$, ולכן השטף $4\pi$ בכל רדיוס: כל קו שדה שיוצא מהמטען חוצה כל ספירה סביבו.
+    wrongFeedback: >-
+      $\vec E\cdot\hat n$ קבוע על הספירה: $|\vec E|=\frac{1}{R^2}$ והוא רדיאלי. הכפילו בשטח הספירה.
+    commonWrong:
+      - value: 0.502654824574367
+        feedback: >-
+          $\frac{4\pi}{25}$ מתקבל עם $dS=\sin\theta\,d\theta\,d\varphi$, בלי $R^2$. על ספירה ברדיוס 5 התאים גדולים פי 25.
+        misconception: MC-c13-dS-is-dudv
+
+  - id: Q-13.2-cylinder
+    type: numeric
+    objectives: [OBJ-13.2-2]
+    level: mid
+    prompt: >-
+      חשבו את השטף של $\vec F=(x,y,z)$ החוצה דרך המעטפת של הגליל $x^2+y^2=4$, $0\le z\le3$ (בלי הבסיסים).
+    answer: 75.398223686155
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $24\pi$. על המעטפת $\hat n=\frac{(x,y,0)}{2}$, ולכן $\vec F\cdot\hat n=\frac{x^2+y^2}{2}=2$ (הרכיב $z$ משיק
+      למעטפת), כפול השטח $2\pi\cdot2\cdot3=12\pi$.
+    wrongFeedback: >-
+      הנורמל של המעטפת אופקי ורדיאלי. עם $\vec r(z,\varphi)=(2\cos\varphi,2\sin\varphi,z)$:
+      $|\vec r_z\times\vec r_\varphi|=2$.
+    commonWrong:
+      - value: 37.6991118430775
+        feedback: >-
+          $12\pi$ מתקבל עם $dS=d\varphi\,dz$. על גליל ברדיוס 2, $dS=2\,d\varphi\,dz$: הקשת היא $2\,d\varphi$.
+        misconception: MC-c13-dS-is-dudv
+      - value: -75.398223686155
+        feedback: >-
+          עם $\vec r(z,\varphi)$, המכפלה $\vec r_z\times\vec r_\varphi=(-2\cos\varphi,-2\sin\varphi,0)$ מצביעה **פנימה**. לשטף
+          החוצה הופכים את הסדר.
+        misconception: MC-c13-flux-orientation
+
+  - id: Q-13.2-tangent-field
+    type: twotier
+    objectives: [OBJ-13.2-3, OBJ-13.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec F=(-y,x,0)$ (סיבוב סביב ציר $z$). מה השטף שלו החוצה דרך ספירת היחידה?
+    choices:
+      - text: '0'
+        correct: true
+        feedback: 'נכון: הזרם מסתובב על הספירה ולא חוצה אותה.'
+      - text: 'מספר חיובי, כי $|\vec F|>0$ כמעט בכל נקודה'
+        feedback: >-
+          גודל השדה לא קובע את השטף. בכל נקודה $\vec F\cdot\hat n=(-y,x,0)\cdot(x,y,z)=0$.
+        misconception: MC-c13-flux-magnitude
+    reasons:
+      - text: '$\vec F$ מאונך לנורמל $(x,y,z)$ בכל נקודה, כלומר משיק לספירה'
+        correct: true
+        feedback: 'בדיוק. שדה שמשיק למשטח אינו עובר דרכו.'
+      - text: 'על משטח סגור כל שטף הוא 0'
+        feedback: 'השטף של $(x,y,z)$ דרך אותה ספירה הוא $4\pi$. כאן האפס בא מכך שהשדה משיק.'
+        misconception: MC-c13-closed-surface-zero
+      - text: 'החלק העליון והתחתון מבטלים זה את זה בגלל הכיוון'
+        feedback: >-
+          לא צריך ביטול: האינטגרנד $\vec F\cdot\hat n$ הוא 0 בכל נקודה, גם בחצי העליון לבד.
+        misconception: MC-c13-flux-orientation
+
+  - id: Q-13.2-tilted
+    type: numeric
+    objectives: [OBJ-13.2-3, OBJ-13.2-1]
+    level: mid
+    prompt: >-
+      מים זורמים במהירות אחידה $\vec v=(0,0,3)$ (מטר לשנייה). חישוק עגול ברדיוס $0.5$ מטר מוחזק כך שהנורמל שלו יוצר זווית
+      $60^\circ$ עם ציר $z$. כמה מטר מעוקב מים עוברים דרכו בשנייה?
+    answer: 1.17809724509617
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{3\pi}{8}$. השטף של שדה קבוע דרך משטח שטוח: $\vec v\cdot\hat n$ כפול השטח, $3\cos60^\circ\cdot\pi\cdot0.25$.
+      החישוק "רואה" רק חצי מהזרם.
+    wrongFeedback: >-
+      $\vec v\cdot\hat n=|\vec v|\cos60^\circ$; שטח החישוק $\pi\cdot0.5^2$.
+    commonWrong:
+      - value: 2.35619449019234
+        feedback: >-
+          $\frac{3\pi}{4}$ הוא הספיקה כשהחישוק ניצב לזרם. מוטה ב-$60^\circ$ דרכו עובר רק הרכיב הנורמלי, פי $\cos60^\circ$.
+        misconception: MC-c13-flux-magnitude
+
+  - id: Q-13.2-meaning
+    type: multi
+    objectives: [OBJ-13.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec v$ שדה המהירות של זורם, ו-$S$ משטח מכוון. סמנו את כל הטענות הנכונות על השטף $\iint_S\vec v\cdot\hat n\,dS$.
+    choices:
+      - text: 'זה נפח הזורם שעובר דרך $S$ ביחידת זמן, בכיוון של $\hat n$'
+        correct: true
+        feedback: 'נכון: בזמן $\Delta t$ עובר דרך $\Delta S$ גליל משופע בנפח $(\vec v\cdot\hat n)\,\Delta t\,\Delta S$.'
+      - text: 'אם $\vec v$ משיק ל-$S$ בכל נקודה, השטף 0'
+        correct: true
+        feedback: 'נכון: $\vec v\cdot\hat n=0$ בכל נקודה.'
+      - text: 'השטף תלוי בכיוון הנורמל שבוחרים'
+        correct: true
+        feedback: 'נכון: החלפת הכיוון הופכת את הסימן.'
+      - text: 'השטף שווה ל-$|\vec v|$ כפול השטח של $S$, כשהשדה קבוע'
+        feedback: 'רק כשהזרם ניצב למשטח. באופן כללי נכנס $\cos$ של הזווית בין $\vec v$ ל-$\hat n$.'
+        misconception: MC-c13-flux-magnitude
+
+  - id: Q-13.2-graph
+    type: numeric
+    objectives: [OBJ-13.2-2, OBJ-13.2-1]
+    level: exam
+    prompt: >-
+      $S$ הפרבולואיד $z=4-x^2-y^2$, $z\ge0$, עם הנורמל כלפי מעלה. חשבו את השטף של $\vec F=(x,y,z)$ דרך $S$.
+    answer: 75.398223686155
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $24\pi$. לגרף, הנורמל כלפי מעלה $(-f_x,-f_y,1)=(2x,2y,1)$, ו-$\vec F\cdot(2x,2y,1)=2x^2+2y^2+4-x^2-y^2=4+r^2$. על העיגול
+      $r\le2$: $\int_0^{2\pi}\int_0^2(4+r^2)\,r\,dr\,d\theta=2\pi(8+4)$.
+    wrongFeedback: >-
+      $\vec F\cdot(-f_x,-f_y,1)\,dA$, עם $z=4-x^2-y^2$ מוצב ב-$\vec F$; אחר כך קוטביות על העיגול ברדיוס 2.
+    commonWrong:
+      - value: 67.0206432765823
+        feedback: '$\frac{64\pi}{3}=2\pi\int_0^2(4+r^2)\,dr$: בלי הגורם $r$ של הקוטביות.'
+        misconception: MC-c11-polar-jacobian-one
+      - value: -75.398223686155
+        feedback: 'זה השטף עם הנורמל כלפי מטה, $(-2x,-2y,-1)$. הרכיב ה-$z$ של הנורמל כלפי מעלה חיובי.'
+        misconception: MC-c13-flux-orientation

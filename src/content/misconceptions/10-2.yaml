@@ -1,0 +1,60 @@
+# Misconceptions first detected in lesson 10.2 (partial and directional derivatives, second-order partials).
+- id: MC-c10-partial-wrong-variable
+  title: גוזרים לפי המשתנה הלא נכון
+  belief: >-
+    כשמבקשים $f_x$ אפשר לגזור איבר לפי $y$, או לחשב את $f_y$ במקום $f_x$.
+  truth: >-
+    $f_x$ היא הנגזרת לפי $x$ כש-$y$ קבוע: כל איבר נגזר לפי $x$ בלבד, ו-$y$ מתנהג כמו מספר. $f_y$ היא שאלה אחרת, עם
+    תשובה אחרת בדרך כלל.
+  remedy: { lesson: '10.2', label: 'נגזרת חלקית: משתנה אחד זז, השאר קבועים' }
+
+- id: MC-c10-mixed-term-constant
+  title: מוחקים כל איבר שמופיע בו המשתנה האחר
+  belief: >-
+    בגזירה לפי $x$, כל איבר שמופיע בו $y$ הוא קבוע ונגזרתו 0, למשל $\frac{\partial}{\partial x}\left(4xy^3\right)=0$.
+  truth: >-
+    $y$ קבוע, אבל $x$ באותו איבר עדיין משתנה: $4xy^3$ הוא "מספר כפול $x$", ונגזרתו לפי $x$ היא $4y^3$. רק איבר שאין בו
+    $x$ כלל, כמו $y^2$, נגזר ל-0.
+  remedy: { lesson: '10.2', label: 'נגזרת חלקית: y קבוע הוא מקדם, לא אפס' }
+
+- id: MC-c10-partial-chain-inner
+  title: שוכחים את הנגזרת הפנימית בנגזרת חלקית
+  belief: >-
+    $\frac{\partial}{\partial y}e^{xy}=e^{xy}$, כמו הנגזרת של $e^y$.
+  truth: >-
+    כלל השרשרת של משתנה אחד חל גם כאן, עם $x$ קבוע: $\frac{\partial}{\partial y}e^{xy}=e^{xy}\cdot\frac{\partial(xy)}{\partial y}=xe^{xy}$.
+  remedy: { lesson: '10.2', label: 'נגזרת חלקית של הרכבה: הנגזרת הפנימית' }
+
+- id: MC-c10-partial-along-level
+  title: מבלבלים בין הכיוון שבו קו הגובה נמתח לבין הכיוון שבו הפונקציה משתנה
+  belief: >-
+    אם קווי הגובה של $T$ הם הישרים האנכיים $x=\text{const}$, אז $T$ לא משתנה כש-$x$ משתנה, כלומר $T_x=0$.
+  truth: >-
+    לאורך קו גובה $T$ קבועה. כשקווי הגובה הם ישרים אנכיים, $T$ קבועה כשזזים **אנכית** ($y$ משתנה), ולכן $T_y=0$;
+    כשזזים אופקית חוצים קווי גובה, ו-$T_x$ היא קצב השינוי.
+  remedy: { lesson: '10.2', label: 'נגזרת חלקית מתוך קווי גובה' }
+
+- id: MC-c10-nonunit-direction
+  title: מחשבים נגזרת כיוונית עם וקטור שאינו וקטור יחידה
+  belief: >-
+    את הנגזרת הכיוונית "בכיוון $(3,4)$" מחשבים עם הווקטור $(3,4)$ עצמו.
+  truth: >-
+    כיוון מיוצג על ידי וקטור יחידה, $\hat u=\frac{(3,4)}{5}$. וקטור באורך $L$ נותן מספר גדול פי $L$, ולכן תוצאה שתלויה
+    באורך החץ ולא רק בכיוון שלו.
+  remedy: { lesson: '10.2', label: 'נגזרת כיוונית: מנרמלים את הכיוון' }
+
+- id: MC-c10-directional-sign
+  title: חושבים שהנגזרת הכיוונית אינה תלויה בכיוון ההליכה לאורך הישר
+  belief: >-
+    $D_{-\hat u}f=D_{\hat u}f$: הולכים על אותו ישר, ולכן קצב השינוי זהה.
+  truth: >-
+    הליכה בכיוון ההפוך הופכת עלייה לירידה: $D_{-\hat u}f=\nabla f\cdot(-\hat u)=-D_{\hat u}f$.
+  remedy: { lesson: '10.2', label: 'נגזרת כיוונית בכיוון ההפוך' }
+
+- id: MC-c10-partial-product-rule
+  title: שוכחים את כלל המכפלה כשהמשתנה מופיע בשני גורמים
+  belief: >-
+    $\frac{\partial}{\partial y}\big(y\cos(xy)\big)=\cos(xy)$, כאילו $\cos(xy)$ קבוע בגזירה לפי $y$.
+  truth: >-
+    גם $\cos(xy)$ תלוי ב-$y$, ולכן צריך כלל מכפלה: $\cos(xy)+y\cdot\big(-x\sin(xy)\big)$.
+  remedy: { lesson: '10.2', label: 'נגזרות מסדר שני: כלל המכפלה' }

@@ -1,0 +1,308 @@
+# Lesson 2.4 — cylindrical and spherical coordinates (notes pp. 29, 34–35).
+# Objectives (src/course.ts):
+#   OBJ-2.4-1  Cartesian <-> cylindrical and spherical, by the course's angle convention
+#   OBJ-2.4-2  the surfaces where one coordinate is constant: cylinder, plane, sphere, cone
+#   OBJ-2.4-3  solids such as a ball, a cylinder and a cone in the fitting coordinates
+# Convention (CLAUDE.md): cylindrical (r, θ, z); spherical (r, θ, φ), θ from the positive z-axis, φ the azimuth.
+# The notes measure their angle φ from the xy-plane (a latitude, -π/2..π/2) and call the azimuth θ: translated here.
+# Every number recomputed in screens/tools/recompute-ch2.py.
+chapter: 2
+questions:
+  - id: Q-2.4-cyl-to-cart
+    type: numeric
+    objectives: [OBJ-2.4-1]
+    level: basic
+    prompt: >-
+      לנקודה הקואורדינטות הגליליות $(r,\theta,z)=\left(2,\frac{\pi}{3},-1\right)$. מהי קואורדינטת $y$ שלה?
+    answer: 1.7320508075688772
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $y=r\sin\theta=2\cdot\frac{\sqrt3}{2}=\sqrt3$. הנקודה כולה: $(1,\sqrt3,-1)$; $z$ עובר כמו שהוא.
+    wrongFeedback: >-
+      בגליליות $x=r\cos\theta$, $y=r\sin\theta$, $z=z$: קוטביות במישור $xy$ ועוד גובה.
+    commonWrong:
+      - value: 1
+        feedback: 'זה $x=r\cos\theta=1$. קואורדינטת $y$ באה עם סינוס.'
+        misconception: MC-c2-polar-r-theta-roles
+      - value: -1
+        feedback: '$-1$ הוא $z$. השאלה שואלת על $y=r\sin\theta$.'
+        misconception: MC-c2-polar-r-theta-roles
+
+  - id: Q-2.4-sph-z
+    type: numeric
+    objectives: [OBJ-2.4-1]
+    level: basic
+    prompt: >-
+      לנקודה הקואורדינטות הכדוריות $(r,\theta,\varphi)=\left(4,\frac{\pi}{3},\frac{\pi}{4}\right)$ (במוסכמה של הקורס:
+      $\theta$ מציר $z$, $\varphi$ האזימוט). מהי קואורדינטת $z$ שלה?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $z=r\cos\theta=4\cos\frac{\pi}{3}=2$. הנקודה כולה: $(\sqrt6,\sqrt6,2)$, ובדיקה: $6+6+4=16=r^2$.
+    wrongFeedback: >-
+      $\theta$ היא הזווית מציר $z$, ולכן ההיטל על ציר $z$ הוא $r\cos\theta$.
+    commonWrong:
+      - value: 3.4641016151377544
+        feedback: >-
+          $2\sqrt3=4\sin\frac{\pi}{3}$ מתאים לזווית שנמדדת **ממישור $xy$**, כמו בסיכומי ההרצאות. בקורס $\theta$ נמדדת
+          מציר $z$: $z=r\cos\theta$.
+        misconception: MC-c2-spherical-convention
+      - value: 2.8284271247461903
+        feedback: >-
+          $2\sqrt2=4\cos\frac{\pi}{4}$: השתמשתם באזימוט $\varphi$ במקום ב-$\theta$. האזימוט אינו משפיע על $z$.
+        misconception: MC-c2-theta-cyl-vs-sph
+
+  - id: Q-2.4-theta-const
+    type: mc
+    objectives: [OBJ-2.4-2]
+    level: basic
+    prompt: >-
+      מהו המשטח $\theta=\frac{\pi}{4}$ בקואורדינטות כדוריות (עם $r\ge0$)?
+    choices:
+      - text: 'חצי חרוט עליון סביב ציר $z$, בזווית $\frac{\pi}{4}$ מהציר'
+        correct: true
+        feedback: >-
+          נכון. כל הנקודות שהקרן אליהן יוצרת זווית $\frac{\pi}{4}$ עם ציר $z$: $z=\sqrt{x^2+y^2}$.
+      - text: 'חצי מישור שמכיל את ציר $z$'
+        feedback: >-
+          זה $\varphi=\frac{\pi}{4}$: אזימוט קבוע. $\theta$ קבוע מסתובב סביב ציר $z$ ונותן חרוט.
+        misconception: MC-c2-angle-const-plane
+      - text: 'ספירה ברדיוס $\frac{\pi}{4}$'
+        feedback: >-
+          ספירה היא $r$ קבוע. $\theta$ היא זווית, ולא מרחק.
+        misconception: MC-c2-polar-r-theta-roles
+
+  - id: Q-2.4-solid-cylinder
+    type: mc
+    objectives: [OBJ-2.4-3]
+    level: basic
+    prompt: >-
+      איך מתארים את הגליל המלא $x^2+y^2\le4$, $0\le z\le3$ בקואורדינטות גליליות?
+    choices:
+      - text: '$0\le r\le2$, $0\le\theta<2\pi$, $0\le z\le3$'
+        correct: true
+        feedback: 'נכון. בכל גובה עיגול ברדיוס 2 סביב ציר $z$.'
+      - text: '$0\le r\le4$, $0\le\theta<2\pi$, $0\le z\le3$'
+        feedback: '$x^2+y^2=r^2\le4$, ולכן $r\le2$.'
+        misconception: MC-c2-square-not-root
+      - text: '$0\le r\le2$, $0\le\theta\le\pi$, $0\le z\le3$'
+        feedback: 'זה חצי גליל בלבד, $y\ge0$. גליל מלא סביב ציר $z$ מכסה את כל הכיוונים, $0\le\theta<2\pi$.'
+        misconception: MC-c2-theta-cyl-vs-sph
+
+  - id: Q-2.4-cart-to-sph
+    type: numeric
+    objectives: [OBJ-2.4-1]
+    level: mid
+    prompt: >-
+      מצאו את הזווית הכדורית $\theta$ (מציר $z$ החיובי) של הנקודה $(0,\sqrt3,1)$.
+    answer: 1.0471975511965976
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\theta=\frac{\pi}{3}$. $r=\sqrt{0+3+1}=2$ ו-$\cos\theta=\frac{z}{r}=\frac12$. האזימוט $\varphi=\frac{\pi}{2}$,
+      כי הנקודה על ציר $y$ החיובי מבחינת ההיטל שלה.
+    wrongFeedback: >-
+      חשבו $r=\sqrt{x^2+y^2+z^2}$, ואז $\cos\theta=\frac{z}{r}$.
+    commonWrong:
+      - value: 0.5235987755982988
+        feedback: >-
+          $\frac{\pi}{6}$ היא הזווית **מעל מישור $xy$** (קו רוחב). הזווית מציר $z$ משלימה אותה ל-$\frac{\pi}{2}$.
+        misconception: MC-c2-spherical-convention
+      - value: 1.5707963267948966
+        feedback: >-
+          $\frac{\pi}{2}$ הוא האזימוט $\varphi$ של הנקודה, הזווית במישור $xy$. $\theta$ נמדדת מציר $z$.
+        misconception: MC-c2-theta-cyl-vs-sph
+
+  - id: Q-2.4-azimuth
+    type: numeric
+    objectives: [OBJ-2.4-1]
+    level: mid
+    prompt: >-
+      מצאו את האזימוט $\varphi\in[0,2\pi)$ של הנקודה $(-1,-1,5)$ בקואורדינטות כדוריות.
+    answer: 3.9269908169872414
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\varphi=\frac{5\pi}{4}$: האזימוט הוא הזווית הקוטבית של ההיטל $(-1,-1)$ על מישור $xy$, ברביע השלישי. הגובה
+      $z=5$ אינו משפיע עליו.
+    wrongFeedback: >-
+      הטילו על מישור $xy$ ומצאו את הזווית הקוטבית של $(-1,-1)$, ברביע הנכון.
+    commonWrong:
+      - value: 0.7853981633974483
+        feedback: >-
+          $\arctan\frac{-1}{-1}=\frac{\pi}{4}$ היא הזווית של $(1,1)$. ההיטל $(-1,-1)$ ברביע השלישי: מוסיפים $\pi$.
+        misconception: MC-c2-arctan-quadrant
+      - value: -2.356194490192345
+        feedback: '$-\frac{3\pi}{4}$ מגיע לאותו כיוון, אבל השאלה מבקשת $\varphi\in[0,2\pi)$.'
+        misconception: MC-c2-angle-range
+
+  - id: Q-2.4-notes-translate
+    type: mc
+    objectives: [OBJ-2.4-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      בסיכומי ההרצאות כתוב $x=\rho\cos\theta\cos\varphi$, $y=\rho\sin\theta\cos\varphi$, $z=\rho\sin\varphi$, עם
+      $-\frac{\pi}{2}\le\varphi\le\frac{\pi}{2}$ (זווית ממישור $xy$). איך מתרגמים לקואורדינטות של הקורס
+      $(r,\theta,\varphi)$, שבהן $\theta$ מציר $z$ ו-$\varphi$ האזימוט?
+    choices:
+      - text: '$r=\rho$; ה-$\theta$ של הקורס שווה $\frac{\pi}{2}$ פחות ה-$\varphi$ של הסיכומים; ה-$\varphi$ של הקורס הוא ה-$\theta$ של הסיכומים'
+        correct: true
+        feedback: >-
+          נכון. הזווית מציר $z$ והזווית ממישור $xy$ משלימות זו את זו ל-$\frac{\pi}{2}$, ולכן $\cos$ של האחת הוא $\sin$
+          של השנייה: $z=\rho\sin\varphi_{\text{notes}}=r\cos\theta$. האזימוט רק החליף שם.
+      - text: 'אותן נוסחאות בדיוק, רק עם $r$ במקום $\rho$'
+        feedback: >-
+          בסיכומים הזווית נמדדת ממישור $xy$; אצלנו מציר $z$. נקודה על ציר $z$ החיובי היא $\varphi=\frac{\pi}{2}$
+          אצלם ו-$\theta=0$ אצלנו.
+        misconception: MC-c2-spherical-convention
+      - text: 'מחליפים רק את האותיות: ה-$\theta$ של הקורס הוא ה-$\varphi$ של הסיכומים, וה-$\varphi$ של הקורס הוא ה-$\theta$ שלהם'
+        feedback: >-
+          החלפת האותיות לבדה אינה מספיקה: גם נקודת האפס של הזווית שונה. זווית רוחב 0 (קו המשווה) היא
+          $\theta=\frac{\pi}{2}$ אצלנו.
+        misconception: MC-c2-spherical-convention
+
+  - id: Q-2.4-planes
+    type: multi
+    objectives: [OBJ-2.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      אילו מהמשטחים הבאים הם מישור או חצי מישור? סמנו את כולם.
+    choices:
+      - text: 'בגליליות: $\theta=\frac{\pi}{3}$'
+        correct: true
+        feedback: 'נכון. אזימוט קבוע וכל $r\ge0$ וכל $z$: חצי מישור שמכיל את ציר $z$.'
+      - text: 'בגליליות: $z=2$'
+        correct: true
+        feedback: 'נכון. המישור האופקי בגובה 2.'
+      - text: 'בכדוריות: $\theta=\frac{\pi}{2}$'
+        correct: true
+        feedback: 'נכון. זווית ישרה עם ציר $z$, כלומר $z=0$: מישור $xy$. זה ה"חרוט" היחיד שהוא שטוח.'
+      - text: 'בכדוריות: $\varphi=\frac{\pi}{3}$'
+        correct: true
+        feedback: 'נכון. אזימוט קבוע: חצי מישור שמכיל את ציר $z$, כמו $\theta$ קבוע בגליליות.'
+      - text: 'בכדוריות: $\theta=\frac{\pi}{3}$'
+        feedback: >-
+          $\theta$ קבוע בכדוריות הוא חרוט סביב ציר $z$. אל תבלבלו עם $\theta$ הגלילי, שהוא אזימוט.
+        misconception: MC-c2-theta-cyl-vs-sph
+      - text: 'בגליליות: $r=2$'
+        feedback: '$r$ הגלילי הוא המרחק מציר $z$: $r=2$ הוא גליל.'
+        misconception: MC-c2-cyl-r-vs-sph-r
+
+  - id: Q-2.4-cone-translate
+    type: mc
+    objectives: [OBJ-2.4-2, OBJ-2.4-1]
+    level: mid
+    prompt: >-
+      בסיכומים (עמ׳ 35) מתרגמים את $x^2+y^2-z^2=0$, $z\ge0$. מה המשוואה שלו בקואורדינטות כדוריות של הקורס, ומה
+      בגליליות?
+    choices:
+      - text: 'כדוריות: $\theta=\frac{\pi}{4}$; גליליות: $z=r$'
+        correct: true
+        feedback: >-
+          נכון. $x^2+y^2=r^2\sin^2\theta$ ו-$z^2=r^2\cos^2\theta$, ולכן $\tan^2\theta=1$, ועם $z\ge0$:
+          $\theta=\frac{\pi}{4}$. בגליליות $x^2+y^2=r^2$, ולכן $r^2=z^2$, ועם $z\ge0$: $z=r$. (בסיכומים יוצא גם
+          $\varphi=\frac{\pi}{4}$, במקרה, כי $\frac{\pi}{2}-\frac{\pi}{4}=\frac{\pi}{4}$.)
+      - text: 'כדוריות: $r=\frac{\pi}{4}$; גליליות: $z=r$'
+        feedback: >-
+          ב-$x^2+y^2=z^2$ אין מרחק מסוים מהראשית: הקרן הולכת לאינסוף. מה שקבוע הוא הזווית.
+        misconception: MC-c2-polar-r-theta-roles
+      - text: 'כדוריות: $\varphi=\frac{\pi}{4}$; גליליות: $\theta=\frac{\pi}{4}$'
+        feedback: >-
+          אזימוט קבוע הוא חצי מישור. החרוט סימטרי סביב ציר $z$, ולכן הוא לא תלוי באזימוט בכלל.
+        misconception: MC-c2-angle-const-plane
+
+  - id: Q-2.4-sphere-cyl
+    type: expr
+    objectives: [OBJ-2.4-2, OBJ-2.4-3]
+    level: mid
+    prompt: >-
+      כתבו את חצי הספירה העליון $x^2+y^2+z^2=9$, $z\ge0$, בקואורדינטות גליליות כ-$z$ כפונקציה של $r$. (השתמשו
+      במשתנה $r$)
+    answer: 'sqrt(9-r^2)'
+    answerTex: '$z=\sqrt{9-r^2},\quad 0\le r\le3$'
+    variables: [r]
+    domain: [0, 2.8]
+    correctFeedback: >-
+      נכון. $x^2+y^2=r^2$, ולכן $r^2+z^2=9$ ו-$z=\sqrt{9-r^2}$ (השורש החיובי, כי $z\ge0$).
+    wrongFeedback: >-
+      החליפו את $x^2+y^2$ ב-$r^2$ ופתרו עבור $z$.
+    commonWrong:
+      - expr: '3-r'
+        feedback: >-
+          $\sqrt{9-r^2}\ne3-r$: ב-$r=2$ השמאלי $\sqrt5$ והימני 1. $z=3-r$ הוא חרוט, לא ספירה.
+        misconception: MC-c2-sqrt-of-difference
+      - expr: '9-r^2'
+        feedback: 'זה $z^2$. צריך את השורש.'
+        misconception: MC-c2-square-not-root
+      - expr: '-sqrt(9-r^2)'
+        feedback: 'זה חצי הספירה **התחתון**. עם $z\ge0$ לוקחים את השורש החיובי.'
+        misconception: MC-c2-sqrt-half-curve
+
+  - id: Q-2.4-choose
+    type: mc
+    objectives: [OBJ-2.4-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      צינור עבה נתון על ידי $1\le x^2+y^2\le4$, $0\le z\le5$. באיזו מערכת קואורדינטות התיאור שלו פשוט ביותר, ואיך הוא
+      נראה בה?
+    choices:
+      - text: 'גליליות: $1\le r\le2$, $0\le\theta<2\pi$, $0\le z\le5$'
+        correct: true
+        feedback: 'נכון. התנאי הוא על המרחק מציר $z$ בלבד, וזה בדיוק ה-$r$ הגלילי; כל הגבולות קבועים.'
+      - text: 'כדוריות: $1\le r\le2$, $0\le\theta\le\pi$, $0\le\varphi<2\pi$'
+        feedback: >-
+          זו קליפה כדורית בין הספירות ברדיוס 1 ו-2. ה-$r$ הכדורי הוא המרחק מהראשית, ובצינור הנקודה $(1.5,0,4)$
+          במרחק גדול מ-2 מהראשית.
+        misconception: MC-c2-cyl-r-vs-sph-r
+      - text: 'גליליות: $1\le r\le4$, $0\le\theta<2\pi$, $0\le z\le5$'
+        feedback: '$r^2$ בין 1 ל-4, ולכן $r$ בין 1 ל-2.'
+        misconception: MC-c2-square-not-root
+
+  - id: Q-2.4-ice-cream
+    type: mc
+    objectives: [OBJ-2.4-3, OBJ-2.4-2]
+    level: exam
+    prompt: >-
+      הגוף $E$ נמצא מעל החרוט $z=\sqrt{x^2+y^2}$ ובתוך הכדור $x^2+y^2+z^2\le4$ ("גביע גלידה"). איך מתארים אותו
+      בקואורדינטות כדוריות?
+    choices:
+      - text: '$0\le r\le2$, $0\le\theta\le\frac{\pi}{4}$, $0\le\varphi<2\pi$'
+        correct: true
+        feedback: >-
+          נכון. החרוט הוא $\theta=\frac{\pi}{4}$, ו"מעל" פירושו קרוב יותר לציר $z$: $\theta$ קטן. הכדור הוא $r\le2$, והגוף
+          סימטרי סביב ציר $z$.
+      - text: '$0\le r\le2$, $\frac{\pi}{4}\le\theta\le\frac{\pi}{2}$, $0\le\varphi<2\pi$'
+        feedback: >-
+          זה החלק של חצי הכדור העליון **מתחת** לחרוט, בין החרוט למישור $xy$. בנקודה $(0,0,1)$, שמעל החרוט,
+          $\theta=0$.
+        misconception: MC-c2-cone-inside-outside
+      - text: '$0\le r\le4$, $0\le\theta\le\frac{\pi}{4}$, $0\le\varphi<2\pi$'
+        feedback: '$r^2\le4$ נותן $r\le2$.'
+        misconception: MC-c2-square-not-root
+      - text: '$0\le r\le2$, $0\le\theta\le\frac{\pi}{4}$, $0\le\varphi\le\frac{\pi}{4}$'
+        feedback: >-
+          הגבלת $\varphi$ חותכת פרוסה צרה מהגביע. הגוף מסתובב סביב ציר $z$ כולו; רק $\theta$ מוגבל.
+        misconception: MC-c2-theta-cyl-vs-sph
+
+  - id: Q-2.4-cone-sphere-height
+    type: numeric
+    objectives: [OBJ-2.4-3, OBJ-2.4-1]
+    level: exam
+    prompt: >-
+      באיזה גובה $z$ החרוט $z=\sqrt{x^2+y^2}$ פוגש את הספירה $x^2+y^2+z^2=4$? (זו שפת הגביע מהשאלה הקודמת.)
+    answer: 1.4142135623730951
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $z=\sqrt2$. על החרוט $x^2+y^2=z^2$, ולכן $2z^2=4$. בכדוריות: $z=r\cos\theta=2\cos\frac{\pi}{4}=\sqrt2$.
+    wrongFeedback: >-
+      הציבו $x^2+y^2=z^2$ במשוואת הספירה.
+    commonWrong:
+      - value: 2
+        feedback: 'זה $z^2$. מ-$2z^2=4$ מקבלים $z^2=2$ ו-$z=\sqrt2$.'
+        misconception: MC-c2-square-not-root
+      - value: 1.7320508075688772
+        feedback: >-
+          $\sqrt3=2\sin\frac{\pi}{3}$ או $2\cos\frac{\pi}{6}$: זווית שאינה זווית החרוט. החרוט $z=\sqrt{x^2+y^2}$ הוא
+          $\theta=\frac{\pi}{4}$, ו-$z=2\cos\frac{\pi}{4}$.
+        misconception: MC-c2-spherical-convention

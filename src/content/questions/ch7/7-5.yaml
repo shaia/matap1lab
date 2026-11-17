@@ -1,0 +1,289 @@
+# Lesson 7.5 — trigonometric integrals and trigonometric substitutions.
+# Objectives (src/course.ts):
+#   OBJ-7.5-1  integrals of powers of sine and cosine by identities
+#   OBJ-7.5-2  the tangent half-angle substitution for a rational function of sine and cosine
+#   OBJ-7.5-3  trigonometric substitution for integrals with the square root of a quadratic expression
+# The notes have no trigonometric integrals beyond the table (p. 9); the syllabus supplies the lesson.
+# Keys recomputed in screens/tools/recompute-ch7.py.
+chapter: 7
+questions:
+  - id: Q-7.5-sin2
+    type: expr
+    objectives: [OBJ-7.5-1]
+    level: basic
+    prompt: 'חשבו $\int\sin^2x\,dx$.'
+    answer: 'x/2 - sin(2*x)/4'
+    answerTex: '$\frac x2-\frac{\sin2x}{4}+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. מזהות הזווית הכפולה: $\sin^2x=\frac{1-\cos2x}{2}$, ולכן $\int\sin^2x\,dx=\frac x2-\frac{\sin2x}{4}+C$.
+    wrongFeedback: 'הורידו את החזקה: $\cos2x=1-2\sin^2x$, ולכן $\sin^2x=\frac{1-\cos2x}{2}$.'
+    commonWrong:
+      - expr: 'sin(x)^3/3'
+        feedback: >-
+          כלל החזקה $\int u^2\,du=\frac{u^3}{3}$ דורש את $du=\cos x\,dx$ באינטגרל, ואין שם $\cos x$. גזרו:
+          $\left(\frac{\sin^3x}{3}\right)'=\sin^2x\cos x$.
+        misconception: MC-c7-power-rule-on-trig
+      - expr: 'x/2 + sin(2*x)/4'
+        feedback: 'זה $\int\cos^2x\,dx$. לסינוס: $\sin^2x=\frac{1-\cos2x}{2}$, עם מינוס.'
+        misconception: MC-c7-double-angle-sign
+    hints: ['$\sin^2x=\frac{1-\cos2x}{2}$.']
+
+  - id: Q-7.5-which-route
+    type: mc
+    objectives: [OBJ-7.5-1]
+    qualitative: true
+    level: basic
+    prompt: 'מהי הדרך הקצרה ביותר לחשב את $\int\sin^2x\cos^3x\,dx$?'
+    choices:
+      - text: 'להפריד $\cos x$ אחד, לכתוב $\cos^2x=1-\sin^2x$, ולהציב $u=\sin x$'
+        correct: true
+        feedback: >-
+          נכון. החזקה של הקוסינוס אי-זוגית: $\sin^2x(1-\sin^2x)\cos x\,dx=u^2(1-u^2)\,du$, פולינום. התשובה
+          $\frac{\sin^3x}{3}-\frac{\sin^5x}{5}+C$.
+      - text: 'להוריד את כל החזקות בזהויות הזווית הכפולה'
+        feedback: >-
+          זהויות הזווית הכפולה מיועדות למקרה ששתי החזקות זוגיות. כשאחת אי-זוגית, הפרדת גורם אחד והצבה קצרות בהרבה.
+        misconception: MC-c7-even-odd-strategy
+      - text: 'להציב $u=\sin x$ ישר, בלי להפריד גורם'
+        feedback: '$du=\cos x\,dx$ צורך רק $\cos x$ אחד. את $\cos^2x$ שנשאר צריך לבטא ב-$u$: $1-u^2$.'
+        misconception: MC-c7-subst-mixed-variables
+    hints: ['איזו מהחזקות אי-זוגית?']
+
+  - id: Q-7.5-cos2-definite
+    type: numeric
+    objectives: [OBJ-7.5-1]
+    level: basic
+    prompt: 'חשבו $\int_0^{\pi/2}\cos^2x\,dx$.'
+    answer: 0.785398163397
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac\pi4$. $\cos^2x=\frac{1+\cos2x}{2}$, וקדומה $\frac x2+\frac{\sin2x}{4}$; ב-$\frac\pi2$ היא $\frac\pi4$ וב-0 היא 0.
+      (בדיקת שפיות: הממוצע של $\cos^2$ על רבע מחזור הוא $\frac12$, כפול אורך $\frac\pi2$.)
+    wrongFeedback: 'השתמשו ב-$\cos^2x=\frac{1+\cos2x}{2}$.'
+    commonWrong:
+      - value: 1.57079632679
+        feedback: 'זה $\int_0^{\pi/2}(1+\cos2x)\,dx$: שכחתם לחלק ב-2 בזהות.'
+        misconception: MC-c7-double-angle-half
+    hints: ['$\cos^2x=\frac{1+\cos2x}{2}$.']
+
+  - id: Q-7.5-odd-power
+    type: expr
+    objectives: [OBJ-7.5-1]
+    level: mid
+    prompt: 'חשבו $\int\sin^3x\,dx$.'
+    answer: '-cos(x) + cos(x)^3/3'
+    answerTex: '$-\cos x+\frac{\cos^3x}{3}+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $\sin^3x=(1-\cos^2x)\sin x$, ועם $u=\cos x$, $du=-\sin x\,dx$: $-\int(1-u^2)\,du=-u+\frac{u^3}{3}$.
+    wrongFeedback: 'הפרידו $\sin x$ אחד, כתבו $\sin^2x=1-\cos^2x$, והציבו $u=\cos x$.'
+    commonWrong:
+      - expr: 'cos(x) - cos(x)^3/3'
+        feedback: '$du=-\sin x\,dx$: המינוס הופך את הסימן של שני המחוברים.'
+        misconception: MC-c7-fprime-f-sign
+      - expr: 'sin(x)^4/4'
+        feedback: 'כלל החזקה עובד רק עם $du$ באינטגרל. גזרו: $\left(\frac{\sin^4x}{4}\right)''=\sin^3x\cos x$.'
+        misconception: MC-c7-power-rule-on-trig
+    hints: ['$\sin^3x=\sin^2x\cdot\sin x$.']
+
+  - id: Q-7.5-three-answers
+    type: twotier
+    objectives: [OBJ-7.5-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      שלושה סטודנטים חישבו את $\int\sin x\cos x\,dx$ וקיבלו $\frac{\sin^2x}{2}$, $-\frac{\cos^2x}{2}$ ו-$-\frac{\cos2x}{4}$.
+      נכון או לא: לכל היותר אחד מהם צודק.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. שלושתם צודקים: $\frac{\sin^2x}{2}-\left(-\frac{\cos^2x}{2}\right)=\frac12$ ו-$-\frac{\cos2x}{4}=\frac{\sin^2x}{2}-\frac14$.
+          הם נבדלים בקבועים, וכל אחד נגזר ל-$\sin x\cos x$.
+      - text: נכון
+        feedback: 'גזרו כל אחת: שלושתן נותנות $\sin x\cos x$. קדומות נבדלות בקבוע, ושלוש הצורות נבדלות בדיוק בקבועים.'
+        misconception: MC-c7-unique-antiderivative-form
+    reasons:
+      - text: 'שלוש הפונקציות נבדלות זו מזו בקבוע, ולכן כולן קדומות'
+        correct: true
+        feedback: 'בדיוק. לכן בודקים תשובה בגזירה, לא בהשוואת צורה לתשובון.'
+      - text: 'כי לאינטגרל יש תשובה אחת, והאחרות שגויות'
+        feedback: '$\sin^2x+\cos^2x=1$: ההפרש בין שתי הראשונות הוא $\frac12$, קבוע. "$+C$" בולע אותו.'
+        misconception: MC-c7-unique-antiderivative-form
+      - text: 'רק $-\frac{\cos2x}{4}$ נכונה, כי היא היחידה שמשתמשת בזהות $\sin2x=2\sin x\cos x$'
+        feedback: 'הדרך לא משנה: $u=\sin x$ ו-$u=\cos x$ הן הצבות נכונות לא פחות, ונותנות את שתי הצורות האחרות.'
+        misconception: MC-c7-unique-antiderivative-form
+    hints: ['גזרו את שלוש התשובות.']
+
+  - id: Q-7.5-weier-formulas
+    type: mc
+    objectives: [OBJ-7.5-2]
+    level: basic
+    prompt: 'בהצבה $t=\tan\frac x2$ (ל-$|x|<\pi$), איך מבטאים את $\sin x$, $\cos x$ ו-$dx$?'
+    choices:
+      - text: '$\sin x=\frac{2t}{1+t^2}$, $\cos x=\frac{1-t^2}{1+t^2}$, $dx=\frac{2\,dt}{1+t^2}$'
+        correct: true
+        feedback: >-
+          נכון. מזהויות הזווית הכפולה עם $\cos^2\frac x2=\frac{1}{1+t^2}$; ו-$x=2\arctan t$ נותן $dx=\frac{2\,dt}{1+t^2}$.
+      - text: '$\sin x=\frac{2t}{1+t^2}$, $\cos x=\frac{1-t^2}{1+t^2}$, $dx=\frac{dt}{1+t^2}$'
+        feedback: '$x=2\arctan t$, ולכן $dx=\frac{2\,dt}{1+t^2}$: הגורם 2 בא מהחצי שבתוך הטנגנס.'
+        misconception: MC-c7-weierstrass-dx
+      - text: '$\sin x=\frac{2t}{1-t^2}$, $\cos x=\frac{1-t^2}{1+t^2}$, $dx=\frac{2\,dt}{1+t^2}$'
+        feedback: '$\frac{2t}{1-t^2}$ הוא $\tan x$ (נוסחת הטנגנס של זווית כפולה). בסינוס המכנה $1+t^2$.'
+        misconception: MC-c7-weierstrass-formulas
+    hints: ['$x=2\arctan t$.']
+
+  - id: Q-7.5-weier-int
+    type: expr
+    objectives: [OBJ-7.5-2]
+    level: mid
+    prompt: 'חשבו $\int\frac{dx}{1+\cos x}$ ל-$|x|<\pi$, בהצבה $t=\tan\frac x2$.'
+    answer: 'tan(x/2)'
+    answerTex: '$\tan\frac x2+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $1+\cos x=\frac{2}{1+t^2}$ ו-$dx=\frac{2\,dt}{1+t^2}$, ולכן האינטגרנד הופך ל-$dt$, ו-$\int dt=t=\tan\frac x2$.
+    wrongFeedback: 'הציבו את שלוש הנוסחאות; הכול מצטמצם.'
+    commonWrong:
+      - expr: 'tan(x/2)/2'
+        feedback: 'זה מתקבל עם $dx=\frac{dt}{1+t^2}$. הנכון $dx=\frac{2\,dt}{1+t^2}$.'
+        misconception: MC-c7-weierstrass-dx
+    hints: ['$1+\frac{1-t^2}{1+t^2}=\frac{2}{1+t^2}$.']
+
+  - id: Q-7.5-weier-when
+    type: twotier
+    objectives: [OBJ-7.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא: ההצבה $t=\tan\frac x2$ הופכת כל אינטגרל של פונקציה רציונלית של $\sin x$ ו-$\cos x$ לאינטגרל של פונקציה
+      רציונלית של $t$.
+    choices:
+      - text: נכון
+        correct: true
+        feedback: >-
+          נכון. $\sin x$, $\cos x$ ו-$\frac{dx}{dt}$ כולם רציונליים ב-$t$, ולכן כל ביטוי רציונלי בהם נשאר רציונלי, ואותו פותרים
+          בשברים חלקיים. היא תמיד עובדת, גם אם לא תמיד בדרך הקצרה.
+      - text: לא נכון
+        feedback: 'שלוש הנוסחאות רציונליות ב-$t$, ולכן ההרכבה רציונלית. זו בדיוק הסיבה שקוראים לה ההצבה ה"אוניברסלית".'
+        misconception: MC-c7-weierstrass-formulas
+    reasons:
+      - text: '$\sin x$, $\cos x$ ו-$dx$ מתבטאים כולם כמנות של פולינומים ב-$t$'
+        correct: true
+        feedback: 'בדיוק. ואחר כך שברים חלקיים (שיעור 7.4) מסיימים את העבודה.'
+      - text: 'כי $\tan$ היא עצמה פונקציה רציונלית'
+        feedback: '$\tan$ אינה פונקציה רציונלית של $x$. מה שחשוב הוא ש-$\sin$, $\cos$ ו-$dx$ רציונליים ב-$t$.'
+        misconception: MC-c7-weierstrass-formulas
+      - text: 'רק כשמופיעות חזקות זוגיות של $\sin x$'
+        feedback: 'אין צורך בזוגיות: ההצבה עובדת לכל ביטוי רציונלי, למשל $\frac{1}{\sin x}$ או $\frac{1}{2+\cos x}$.'
+        misconception: MC-c7-even-odd-strategy
+    hints: ['כתבו את שלוש הנוסחאות של ההצבה.']
+
+  - id: Q-7.5-trig-sub-choose
+    type: mc
+    objectives: [OBJ-7.5-3]
+    qualitative: true
+    level: basic
+    prompt: 'איזו הצבה מתאימה לאינטגרל שמופיע בו $\sqrt{4-x^2}$?'
+    choices:
+      - text: '$x=2\sin\theta$'
+        correct: true
+        feedback: >-
+          נכון. $4-4\sin^2\theta=4\cos^2\theta$, ולכן $\sqrt{4-x^2}=2\cos\theta$ (כש-$|\theta|\le\frac\pi2$). השורש נעלם.
+      - text: '$x=2\tan\theta$'
+        feedback: '$4-4\tan^2\theta$ אינו ריבוע של כלום. $\tan$ מתאים ל-$\sqrt{4+x^2}$, כי $1+\tan^2\theta=\frac{1}{\cos^2\theta}$.'
+        misconception: MC-c7-trig-sub-wrong-identity
+      - text: '$x=4\sin\theta$'
+        feedback: 'המקדם הוא השורש של 4: עם $x=4\sin\theta$ מתקבל $\sqrt{4-16\sin^2\theta}$, שאינו מתפשט.'
+        misconception: MC-c7-trig-sub-radius
+    hints: ['איזו זהות הופכת $a^2-a^2\sin^2\theta$ לריבוע?']
+
+  - id: Q-7.5-arcsin-scale
+    type: expr
+    objectives: [OBJ-7.5-3]
+    level: mid
+    prompt: 'חשבו $\int\frac{dx}{\sqrt{9-x^2}}$ ל-$|x|<3$.'
+    answer: 'asin(x/3)'
+    answerTex: '$\arcsin\frac x3+C$'
+    variables: [x]
+    domain: [-2.5, 2.5]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $x=3\sin\theta$, $dx=3\cos\theta\,d\theta$, $\sqrt{9-x^2}=3\cos\theta$: האינטגרנד הופך ל-$d\theta$, ו-$\theta=\arcsin\frac x3$.
+    wrongFeedback: 'הציבו $x=3\sin\theta$ ובדקו מה קורה ל-$dx$ ולשורש.'
+    commonWrong:
+      - expr: 'asin(x/3)/3'
+        feedback: >-
+          ב-$\arctan$ יש $\frac1a$, אבל כאן ה-3 של $dx$ מתבטל עם ה-3 של השורש. גזרו: $\left(\arcsin\frac x3\right)'=\frac{1}{\sqrt{9-x^2}}$
+          בדיוק.
+        misconception: MC-c7-inverse-trig-scale
+    hints: ['$x=3\sin\theta$.']
+
+  - id: Q-7.5-semicircle
+    type: numeric
+    objectives: [OBJ-7.5-3]
+    level: mid
+    prompt: 'חשבו $\int_{-2}^{2}\sqrt{4-x^2}\,dx$ בהצבה טריגונומטרית, ובדקו מול שטח של צורה מוכרת.'
+    answer: 6.28318530718
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2\pi$. $x=2\sin\theta$ ($-\frac\pi2\le\theta\le\frac\pi2$): $\int4\cos^2\theta\,d\theta=\int2(1+\cos2\theta)\,d\theta=2\pi$.
+      זה חצי עיגול ברדיוס 2: $\frac12\pi\cdot2^2$.
+    wrongFeedback: 'אחרי ההצבה מתקבל $\int_{-\pi/2}^{\pi/2}4\cos^2\theta\,d\theta$; הורידו חזקה.'
+    commonWrong:
+      - value: 12.5663706144
+        feedback: 'זה $4\pi$, שטח עיגול שלם. בזהות $\cos^2\theta=\frac{1+\cos2\theta}{2}$ חסרה החלוקה ב-2.'
+        misconception: MC-c7-double-angle-half
+    hints: ['הגרף של $\sqrt{4-x^2}$ הוא חצי מעגל.']
+
+  - id: Q-7.5-csc
+    type: expr
+    objectives: [OBJ-7.5-2]
+    level: exam
+    prompt: 'חשבו $\int\frac{dx}{\sin x}$ ל-$0<x<\pi$, בהצבה $t=\tan\frac x2$.'
+    answer: 'log(abs(tan(x/2)))'
+    answerTex: '$\ln\left|\tan\frac x2\right|+C$'
+    variables: [x]
+    domain: [0.3, 2.5]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $\frac{dx}{\sin x}=\frac{1+t^2}{2t}\cdot\frac{2\,dt}{1+t^2}=\frac{dt}{t}$, ולכן $\ln|t|+C=\ln\left|\tan\frac x2\right|+C$.
+    wrongFeedback: 'הציבו $\sin x=\frac{2t}{1+t^2}$ ו-$dx=\frac{2\,dt}{1+t^2}$ וצמצמו.'
+    commonWrong:
+      - expr: 'log(abs(sin(x)))'
+        feedback: '$\ln|\sin x|$ היא הקדומה של $\frac{\cos x}{\sin x}$, לא של $\frac{1}{\sin x}$: אין במונה נגזרת של המכנה.'
+        misconception: MC-c7-log-of-denominator
+      - expr: 'log(abs(tan(x/2)))/2'
+        feedback: 'זה מתקבל עם $dx=\frac{dt}{1+t^2}$. עם הגורם 2 הנכון מתקבל בדיוק $\frac{dt}{t}$.'
+        misconception: MC-c7-weierstrass-dx
+    hints: ['אחרי ההצבה נשאר $\frac{dt}{t}$.']
+
+  - id: Q-7.5-x2-sqrt
+    type: expr
+    objectives: [OBJ-7.5-3, OBJ-7.5-1]
+    level: exam
+    prompt: 'חשבו $\int\frac{x^2}{\sqrt{1-x^2}}\,dx$ ל-$|x|<1$.'
+    answer: '(asin(x) - x*sqrt(1-x^2))/2'
+    answerTex: '$\frac12\left(\arcsin x-x\sqrt{1-x^2}\right)+C$'
+    variables: [x]
+    domain: [-0.9, 0.9]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $x=\sin\theta$: $\int\sin^2\theta\,d\theta=\frac\theta2-\frac{\sin2\theta}{4}=\frac\theta2-\frac{\sin\theta\cos\theta}{2}$, ועם
+      $\cos\theta=\sqrt{1-x^2}$ חוזרים ל-$x$.
+    wrongFeedback: 'אחרי $x=\sin\theta$ נשאר $\int\sin^2\theta\,d\theta$. בחזרה ל-$x$: $\sin2\theta=2x\sqrt{1-x^2}$.'
+    commonWrong:
+      - expr: '(asin(x) + x*sqrt(1-x^2))/2'
+        feedback: 'זה $\int\cos^2\theta\,d\theta$. ל-$\sin^2\theta=\frac{1-\cos2\theta}{2}$ הסימן מינוס.'
+        misconception: MC-c7-double-angle-sign
+      - expr: 'asin(x) - x*sqrt(1-x^2)'
+        feedback: 'חסרה החלוקה ב-2 בזהות $\sin^2\theta=\frac{1-\cos2\theta}{2}$.'
+        misconception: MC-c7-double-angle-half
+    hints: ['$x=\sin\theta$, $dx=\cos\theta\,d\theta$, $\sqrt{1-x^2}=\cos\theta$.']

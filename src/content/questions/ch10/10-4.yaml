@@ -1,0 +1,245 @@
+# Lesson 10.4 — the gradient: steepest ascent, perpendicular to level curves and surfaces, tangent planes to level surfaces.
+# Objectives (src/course.ts):
+#   OBJ-10.4-1  compute a gradient and use that it points in the direction of fastest increase
+#   OBJ-10.4-2  use that the gradient is perpendicular to the level curve and the level surface
+#   OBJ-10.4-3  find the tangent plane to a surface given as a level surface of a function of three variables
+# From the notes pp. 43–45, 51–54 (Cauchy–Schwarz argument, ∇f ⟂ level curves, x² + y² − z² = a, z = g(x,y) as g − z = 0),
+# recomputed in screens/tools/recompute-ch10.py.
+chapter: 10
+questions:
+  - id: Q-10.4-grad-component
+    type: expr
+    objectives: [OBJ-10.4-1]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=x^2y+\ln y$ (עבור $y>0$). כתבו את הרכיב השני של $\nabla f$, כלומר $f_y$.
+    answer: 'x^2 + 1/y'
+    answerTex: '$\nabla f=\left(2xy,\ x^2+\tfrac1y\right)$, ולכן $f_y=x^2+\frac1y$'
+    variables: [x, y]
+    domain: [0.3, 3]
+    correctFeedback: >-
+      נכון. $x$ קבוע: $x^2y\mapsto x^2$ ו-$\ln y\mapsto\frac1y$. הרכיב הראשון הוא $f_x=2xy$.
+    wrongFeedback: >-
+      הרכיב השני של הגרדיאנט הוא הנגזרת החלקית לפי $y$: גזרו כל איבר לפי $y$ כש-$x$ קבוע.
+    commonWrong:
+      - expr: '2*x*y'
+        feedback: 'זה הרכיב הראשון, $f_x$. הרכיב השני הוא הנגזרת לפי $y$.'
+        misconception: MC-c10-partial-wrong-variable
+
+  - id: Q-10.4-max-rate
+    type: numeric
+    objectives: [OBJ-10.4-1]
+    level: basic
+    prompt: >-
+      הטמפרטורה על לוח היא $T(x,y)=x^2+2y^2$. מהו קצב העלייה המהיר ביותר של $T$ בנקודה $(1,1)$ (מעלות ליחידת אורך)?
+      (אפשר לכתוב שורש.)
+    answer: 4.472135955
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2\sqrt5$. $\nabla T=(2x,4y)=(2,4)$, והקצב המרבי הוא $|\nabla T|=\sqrt{4+16}=\sqrt{20}$, בכיוון $\frac{(2,4)}{\sqrt{20}}$.
+    wrongFeedback: >-
+      הקצב המרבי של העלייה הוא האורך של הגרדיאנט בנקודה.
+    commonWrong:
+      - value: 6
+        feedback: >-
+          $6=T_x+T_y$, הנגזרת "בכיוון" $(1,1)$ בלי נרמול. הקצב המרבי הוא בכיוון הגרדיאנט, וגודלו $|\nabla T|=\sqrt{20}$.
+        misconception: MC-c10-max-rate-sum
+
+  - id: Q-10.4-perp-circle
+    type: twotier
+    objectives: [OBJ-10.4-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      הנקודה $(1,2)$ על המעגל $x^2+y^2=5$. נכון או לא נכון: הווקטור $(1,2)$ מאונך למעגל בנקודה הזו.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. המעגל הוא קו גובה של $f=x^2+y^2$, ו-$\nabla f(1,2)=(2,4)$, מקביל ל-$(1,2)$.'
+      - text: 'לא נכון'
+        feedback: >-
+          הווקטור $(1,2)$ מקביל לגרדיאנט של $x^2+y^2$, והגרדיאנט מאונך לקו הגובה. גיאומטרית: הרדיוס מאונך למשיק.
+        misconception: MC-c10-gradient-along-level
+    reasons:
+      - text: 'המעגל הוא קו גובה של $x^2+y^2$, והגרדיאנט $(2x,2y)$ מאונך לקו הגובה'
+        correct: true
+        feedback: 'בדיוק. ומכאן גם העובדה מהתיכון שהרדיוס מאונך למשיק.'
+      - text: 'הגרדיאנט משיק לקו הגובה, ו-$(1,2)$ מקביל לגרדיאנט'
+        feedback: >-
+          לאורך קו הגובה $f$ קבועה, ולכן $\nabla f\cdot\vec r\,'=0$: הגרדיאנט **מאונך** לקו הגובה, לא משיק לו.
+        misconception: MC-c10-gradient-along-level
+      - text: 'כל וקטור מהראשית לנקודה מאונך לכל עקום שעובר בה'
+        feedback: 'זה נכון למעגל סביב הראשית בלבד. על הישר $y=2x$, למשל, הווקטור $(1,2)$ דווקא משיק.'
+        misconception: MC-c10-gradient-along-level
+
+  - id: Q-10.4-ellipsoid-plane
+    type: numeric
+    objectives: [OBJ-10.4-3]
+    level: basic
+    prompt: >-
+      המישור המשיק לאליפסואיד $x^2+2y^2+3z^2=6$ בנקודה $(1,1,1)$ הוא $x+2y+3z=d$. מהו $d$?
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\nabla F=(2x,4y,6z)=(2,4,6)$, מקביל ל-$(1,2,3)$. המישור עובר דרך $(1,1,1)$: $d=1+2+3=6$.
+    wrongFeedback: >-
+      הנורמל הוא $\nabla F(1,1,1)$, והמישור חייב לעבור דרך הנקודה: הציבו אותה כדי למצוא את $d$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          $x+2y+3z=0$ עובר דרך הראשית, לא דרך נקודת ההשקה. בדיקה: $(1,1,1)$ צריכה לקיים את משוואת המישור.
+        misconception: MC-c10-tangent-plane-base
+
+  - id: Q-10.4-hiker
+    type: mc
+    objectives: [OBJ-10.4-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      גובה הר הוא $h(x,y)=1000-x^2-2y^2$ (מטרים). מטיילת עומדת בנקודה $(10,5)$ ורוצה לעלות בדרך התלולה ביותר. לאיזה
+      כיוון עליה ללכת?
+    choices:
+      - text: 'בכיוון $\frac{(-1,-1)}{\sqrt2}$'
+        correct: true
+        feedback: >-
+          נכון. $\nabla h=(-2x,-4y)=(-20,-20)$ בנקודה, והעלייה המהירה ביותר היא בכיוון הגרדיאנט. שימו לב שזה לא הכיוון
+          הישר לפסגה $(0,0)$, שהוא $(-10,-5)$: ההר תלול יותר בכיוון $y$, והדרך התלולה פונה אליו.
+      - text: 'בכיוון $\frac{(1,1)}{\sqrt2}$'
+        feedback: 'זה הכיוון ההפוך לגרדיאנט: שם הגובה יורד הכי מהר.'
+        misconception: MC-c10-gradient-sign
+      - text: 'בכיוון $\frac{(1,-1)}{\sqrt2}$'
+        feedback: >-
+          הכיוון הזה מאונך לגרדיאנט, כלומר משיק לקו הגובה: בו הגובה לא משתנה ברגע הראשון.
+        misconception: MC-c10-gradient-along-level
+      - text: 'בכיוון $\frac{(-2,-1)}{\sqrt5}$, ישר אל הפסגה'
+        feedback: >-
+          זה הכיוון לפסגה $(0,0)$, אבל לא הכיוון התלול ביותר: $\nabla h\cdot\frac{(-2,-1)}{\sqrt5}=\frac{60}{\sqrt5}\approx26.8$,
+          פחות מ-$|\nabla h|=20\sqrt2\approx28.3$.
+        misconception: MC-c10-max-rate-sum
+
+  - id: Q-10.4-descent
+    type: numeric
+    objectives: [OBJ-10.4-1]
+    level: mid
+    prompt: >-
+      תהי $f(x,y)=xe^y$. מהו הערך **הקטן** ביותר של $D_{\hat u}f(2,0)$ על פני כל וקטורי היחידה $\hat u$? (אפשר לכתוב שורש.)
+    answer: -2.2360679775
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\sqrt5$. $\nabla f=(e^y,xe^y)=(1,2)$, ו-$D_{\hat u}f=\nabla f\cdot\hat u\ge-|\nabla f|$, עם שוויון בכיוון
+      $-\frac{(1,2)}{\sqrt5}$.
+    wrongFeedback: >-
+      $\nabla f\cdot\hat u=|\nabla f|\cos\alpha$. מתי $\cos\alpha$ הכי קטן?
+    commonWrong:
+      - value: 2.2360679775
+        feedback: 'זה הקצב המרבי, בכיוון הגרדיאנט. בכיוון ההפוך הקצב הוא $-|\nabla f|$.'
+        misconception: MC-c10-gradient-sign
+      - value: -3
+        feedback: '$-3=-(f_x+f_y)$, הכיוון $-(1,1)$ בלי נרמול. הקיצון הוא בכיוון $\pm\nabla f$, וגודלו $|\nabla f|=\sqrt5$.'
+        misconception: MC-c10-max-rate-sum
+
+  - id: Q-10.4-tangent-line
+    type: expr
+    objectives: [OBJ-10.4-2]
+    level: mid
+    prompt: >-
+      מצאו את הישר המשיק לאליפסה $x^2+4y^2=8$ בנקודה $(2,1)$, בעזרת הגרדיאנט. כתבו אותו בצורה $y=\ldots$.
+    answer: '2 - x/2'
+    answerTex: '$4(x-2)+8(y-1)=0$, כלומר $y=2-\frac x2$'
+    variables: [x]
+    correctFeedback: >-
+      נכון. $\nabla(x^2+4y^2)=(2x,8y)=(4,8)$ מאונך לאליפסה, ולכן הוא הנורמל של הישר: $4(x-2)+8(y-1)=0$.
+    wrongFeedback: >-
+      הגרדיאנט בנקודה הוא הנורמל של הישר המשיק: $f_x(x-2)+f_y(y-1)=0$.
+    commonWrong:
+      - expr: '2*x - 3'
+        feedback: >-
+          זה הישר דרך $(2,1)$ **בכיוון** הגרדיאנט $(4,8)$, כלומר הישר המאונך לאליפסה. הגרדיאנט הוא הנורמל של המשיק, לא
+          הכיוון שלו.
+        misconception: MC-c10-gradient-along-level
+
+  - id: Q-10.4-arrow
+    type: mc
+    objectives: [OBJ-10.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      במפת קווי גובה של $f$ (הקווים $f=1,2,3$) הנקודה $P$ נמצאת על הקו $f=2$. הקו $f=3$ עובר צפונית ל-$P$, והקו $f=1$
+      דרומית לה. איזה תיאור מתאים ל-$\nabla f(P)$?
+    choices:
+      - text: 'מאונך לקו $f=2$ ב-$P$, ופונה לצד של הקו $f=3$'
+        correct: true
+        feedback: 'נכון. הגרדיאנט מאונך לקו הגובה ומצביע לכיוון שבו $f$ עולה.'
+      - text: 'משיק לקו $f=2$ ב-$P$'
+        feedback: 'לאורך הקו $f$ לא משתנה, ולכן הנגזרת הכיוונית שם 0. הגרדיאנט מאונך לכיוון הזה.'
+        misconception: MC-c10-gradient-along-level
+      - text: 'מאונך לקו $f=2$ ב-$P$, ופונה לצד של הקו $f=1$'
+        feedback: 'בכיוון הזה $f$ יורדת: זה $-\nabla f$, כיוון הירידה המהירה ביותר.'
+        misconception: MC-c10-gradient-sign
+      - text: 'מצביע ישר צפונה בכל מקרה'
+        feedback: 'הכיוון נקבע מהשיפוע של קו הגובה ב-$P$: הגרדיאנט מאונך לו, וזה צפונה רק אם הקו שם אופקי.'
+        misconception: MC-c10-gradient-along-level
+
+  - id: Q-10.4-hyperboloid
+    type: mc
+    objectives: [OBJ-10.4-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מה המישור המשיק להיפרבולואיד $x^2+y^2-z^2=2$ בנקודה $(1,1,0)$?
+    choices:
+      - text: 'המישור האנכי $x+y=2$'
+        correct: true
+        feedback: >-
+          נכון. $\nabla F=(2x,2y,-2z)=(2,2,0)$: הנורמל אופקי, ולכן המישור אנכי. במעגל המותן $z=0$ המשטח עומד זקוף.
+      - text: 'המישור $z=0$'
+        feedback: >-
+          $z=0$ מאונך ל-$(0,0,1)$, אבל הנורמל כאן הוא $\nabla F=(2,2,0)$. המישור $z=0$ חותך את המשטח במעגל, לא משיק לו.
+        misconception: MC-c10-grad-is-normal-to-graph
+      - text: 'המישור $x+y=0$'
+        feedback: 'הנורמל נכון אבל המישור לא עובר דרך $(1,1,0)$: $1+1\ne0$.'
+        misconception: MC-c10-tangent-plane-base
+      - text: 'אין מישור משיק, כי אי אפשר לכתוב שם את $z$ כפונקציה של $x,y$'
+        feedback: >-
+          משטח גובה עם $\nabla F\ne0$ יש לו מישור משיק גם כשהוא לא גרף של $z$. כאן $\nabla F=(2,2,0)\ne0$.
+        misconception: MC-c10-grad-is-normal-to-graph
+
+  - id: Q-10.4-graph-level
+    type: mc
+    objectives: [OBJ-10.4-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      את הגרף $z=g(x,y)$ אפשר לראות כמשטח הגובה $F(x,y,z)=g(x,y)-z=0$. איזה נורמל נותנת הנוסחה של משטחי גובה?
+    choices:
+      - text: '$(g_x,g_y,-1)$, אותו נורמל שנותנת הנוסחה של המישור המשיק לגרף'
+        correct: true
+        feedback: >-
+          נכון. $F_x=g_x$, $F_y=g_y$, $F_z=-1$. שתי הדרכים נותנות אותו מישור, כמו שצריך.
+      - text: '$(g_x,g_y,0)$'
+        feedback: 'זה הגרדיאנט של $g$ בתוספת 0. אבל $F$ תלויה גם ב-$z$, ו-$F_z=-1$.'
+        misconception: MC-c10-grad-is-normal-to-graph
+      - text: '$(g_x,g_y,1)$'
+        feedback: 'הנגזרת של $-z$ לפי $z$ היא $-1$. עם $+1$ מתקבל מישור אחר, לא המשיק.'
+        misconception: MC-c10-grad-is-normal-to-graph
+
+  - id: Q-10.4-cooling
+    type: numeric
+    objectives: [OBJ-10.4-1]
+    level: exam
+    prompt: >-
+      הטמפרטורה סביב גוף חם היא $T(x,y)=100e^{-(x^2+2y^2)}$. חרק בנקודה $(1,1)$ זז לכיוון הראשית. מהו קצב השינוי של
+      הטמפרטורה ליחידת מרחק בכיוון הזה? (אפשר לכתוב ביטוי, למשל עם sqrt ו-e.)
+    answer: 21.122864195
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $300\sqrt2\,e^{-3}\approx21.1$. $\nabla T=100e^{-(x^2+2y^2)}(-2x,-4y)=100e^{-3}(-2,-4)$, הכיוון לראשית הוא
+      $\hat u=\frac{(-1,-1)}{\sqrt2}$, ו-$D_{\hat u}T=100e^{-3}\cdot\frac{2+4}{\sqrt2}$. החיובי: החרק מתחמם.
+    wrongFeedback: >-
+      חשבו את $\nabla T(1,1)$ בכלל השרשרת, את וקטור היחידה מ-$(1,1)$ לראשית, והכפילו סקלרית.
+    commonWrong:
+      - value: 29.872241021
+        feedback: >-
+          $600e^{-3}$ הוא $\nabla T\cdot(-1,-1)$: הווקטור לראשית באורך $\sqrt2$, ולא וקטור יחידה.
+        misconception: MC-c10-nonunit-direction
+    hints: ['הכיוון מ-$(1,1)$ אל הראשית הוא $(-1,-1)$. מה האורך שלו?']

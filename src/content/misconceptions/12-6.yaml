@@ -1,0 +1,37 @@
+# Misconceptions first detected in lesson 12.6 (general change of variables).
+- id: MC-c12-jacobian-no-abs
+  title: משתמשים ביעקוביאן בלי ערך מוחלט
+  belief: >-
+    אם $\frac{\partial(x,y)}{\partial(u,v)}=-2$ אז $dx\,dy=-2\,du\,dv$.
+  truth: >-
+    היעקוביאן הוא מקדם השינוי של שטח, וסימן שלילי רק אומר שההעתקה הופכת כיוון. באינטגרל כפול כותבים
+    $dx\,dy=\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv$, ולכן כאן $dx\,dy=2\,du\,dv$.
+  remedy: { lesson: '12.6', label: 'הערך המוחלט של היעקוביאן' }
+
+- id: MC-c12-jacobian-inverse-direction
+  title: מכפילים ביעקוביאן של ההעתקה בכיוון הלא נכון
+  belief: >-
+    כשנתונים $u(x,y)$ ו-$v(x,y)$, מכפילים את האינטגרנד ב-$\left|\frac{\partial(u,v)}{\partial(x,y)}\right|$.
+  truth: >-
+    באינטגרל לפי $du\,dv$ צריך את $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|$, וזה ההופכי:
+    $\frac{\partial(x,y)}{\partial(u,v)}=1\Big/\frac{\partial(u,v)}{\partial(x,y)}$. למשל ל-$u=x+y$, $v=x-y$ מקבלים
+    $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|=2$, ולכן $dx\,dy=\frac12\,du\,dv$.
+  remedy: { lesson: '12.6', label: 'היעקוביאן של ההעתקה ההפוכה' }
+
+- id: MC-c12-change-no-jacobian
+  title: מחליפים משתנים בלי יעקוביאן
+  belief: >-
+    אחרי החלפת משתנים $dx\,dy=du\,dv$: מספיק להחליף את הגבולות ואת האינטגרנד.
+  truth: >-
+    ההעתקה מותחת ומכווצת שטחים, ו-$dx\,dy=\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv$. למשל ב-$x=3u$,
+    $y=2v$ עיגול היחידה במישור $uv$ (שטח $\pi$) הופך לאליפסה ששטחה $6\pi$.
+  remedy: { lesson: '12.6', label: 'היעקוביאן כמקדם שינוי שטח' }
+
+- id: MC-c12-integrand-not-converted
+  title: לא מתרגמים נכון את האינטגרנד למשתנים החדשים
+  belief: >-
+    אחרי החלפת משתנים משאירים את האינטגרנד ב-$x,y$, או מתרגמים אותו "בערך" (למשל $x^2y$ כאילו היה $xy^2$).
+  truth: >-
+    את האינטגרנד כותבים במלואו ב-$u,v$ דרך $x(u,v)$ ו-$y(u,v)$, ובודקים: ב-$u=\frac yx$, $v=xy$ מתקבל
+    $x^2y=x\cdot xy=\sqrt{v/u}\cdot v$.
+  remedy: { lesson: '12.6', label: 'מתרגמים את האינטגרנד' }

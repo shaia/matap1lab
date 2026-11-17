@@ -1,0 +1,247 @@
+# Lesson 3.1 — arithmetic with complex numbers (the notes have no complex numbers: the syllabus supplies them).
+# Objectives (src/course.ts):
+#   OBJ-3.1-1  add, multiply and divide complex numbers in algebraic form
+#   OBJ-3.1-2  the conjugate, used to divide and to find the real and imaginary parts
+#   OBJ-3.1-3  solve a quadratic equation with a negative discriminant
+# Complex answers are asked as their real or imaginary part (numeric answers are real).
+# Every number recomputed in screens/tools/recompute-ch3.py.
+chapter: 3
+questions:
+  - id: Q-3.1-im-real
+    type: mc
+    objectives: [OBJ-3.1-1]
+    qualitative: true
+    level: basic
+    prompt: 'מהו $\operatorname{Im}(3-4i)$?'
+    choices:
+      - text: '$-4$'
+        correct: true
+        feedback: 'נכון. החלק המדומה של $a+bi$ הוא המספר הממשי $b$: $3-4i=3+(-4)i$.'
+      - text: '$-4i$'
+        feedback: >-
+          $\operatorname{Im}z$ הוא מספר **ממשי**, המקדם של $i$. כך $z=\operatorname{Re}z+i\operatorname{Im}z$; עם $-4i$
+          היינו מקבלים $i\cdot(-4i)=4$.
+        misconception: MC-c3-im-includes-i
+      - text: '$4$'
+        feedback: 'הסימן שייך לחלק המדומה: $3-4i=3+(-4)i$.'
+        misconception: MC-c3-im-includes-i
+      - text: '$3$'
+        feedback: '3 הוא החלק **הממשי**.'
+        misconception: MC-c3-im-includes-i
+
+  - id: Q-3.1-product
+    type: numeric
+    objectives: [OBJ-3.1-1]
+    level: basic
+    prompt: 'חשבו את $\operatorname{Re}\big((2+3i)(1-4i)\big)$.'
+    answer: 14
+    tolerance: 0.001
+    correctFeedback: 'נכון. $2-8i+3i-12i^2=2+12-5i=14-5i$.'
+    wrongFeedback: 'פתחו סוגריים כמו בממשיים, והחליפו $i^2$ ב-$-1$.'
+    commonWrong:
+      - value: -10
+        feedback: '$-10=2-12$ מתקבל מ-$i^2=+1$. אבל $i^2=-1$, ולכן $-12i^2=+12$.'
+        misconception: MC-c3-i-squared
+      - value: 2
+        feedback: '2 הוא רק מכפלת החלקים הממשיים. גם $3i\cdot(-4i)=-12i^2=12$ ממשי.'
+        misconception: MC-c3-divide-componentwise
+
+  - id: Q-3.1-square
+    type: numeric
+    objectives: [OBJ-3.1-1]
+    level: basic
+    prompt: 'חשבו את $\operatorname{Im}\big((3-i)^2\big)$.'
+    answer: -6
+    tolerance: 0.001
+    correctFeedback: 'נכון. $(3-i)^2=9-6i+i^2=8-6i$.'
+    wrongFeedback: 'השתמשו ב-$(a-b)^2=a^2-2ab+b^2$, עם $b=i$.'
+    commonWrong:
+      - value: 0
+        feedback: '$9+i^2=8$ שוכח את האיבר האמצעי $-2\cdot3\cdot i=-6i$, וזה בדיוק החלק המדומה.'
+        misconception: MC-c3-square-termwise
+      - value: 6
+        feedback: 'האיבר האמצעי הוא $-2ab=-2\cdot3\cdot i$, עם מינוס.'
+        misconception: MC-c3-square-termwise
+
+  - id: Q-3.1-i-power
+    type: numeric
+    objectives: [OBJ-3.1-1]
+    level: basic
+    prompt: 'חשבו את $i^{102}$.'
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: 'נכון. $102=4\cdot25+2$, ולכן $i^{102}=(i^4)^{25}i^2=-1$.'
+    wrongFeedback: 'החזקות של $i$ חוזרות במחזור של 4: $i,-1,-i,1$. מה השארית של 102 בחלוקה ב-4?'
+    commonWrong:
+      - value: 1
+        feedback: 'זוגיות אינה מספיקה: $i^2=-1$. רק מעריך שמתחלק ב-4 נותן 1.'
+        misconception: MC-c3-i-power-cycle
+
+  - id: Q-3.1-quadratic
+    type: numeric
+    objectives: [OBJ-3.1-3]
+    level: basic
+    prompt: >-
+      פתרו את $z^2-4z+13=0$. מהו החלק המדומה של השורש שחלקו המדומה חיובי?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\Delta=16-52=-36$, $\sqrt{-36}=6i$, ו-$z=\frac{4\pm6i}{2}=2\pm3i$. בדיקה: סכום השורשים 4 ומכפלתם $4+9=13$.
+    wrongFeedback: 'נוסחת השורשים: $z=\frac{-b\pm\sqrt{\Delta}}{2a}$, עם $\sqrt{-36}=6i$.'
+    commonWrong:
+      - value: 6
+        feedback: 'שכחתם לחלק ב-$2a=2$: $\frac{4\pm6i}{2}=2\pm3i$.'
+        misconception: MC-c3-quadratic-forget-2a
+
+  - id: Q-3.1-divide
+    type: numeric
+    objectives: [OBJ-3.1-1, OBJ-3.1-2]
+    level: mid
+    prompt: 'חשבו את $\operatorname{Re}\dfrac{3+4i}{1-2i}$.'
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{(3+4i)(1+2i)}{(1-2i)(1+2i)}=\frac{3+6i+4i+8i^2}{1+4}=\frac{-5+10i}{5}=-1+2i$.
+    wrongFeedback: 'כפלו מונה ומכנה בצמוד של המכנה, $1+2i$.'
+    commonWrong:
+      - value: 3
+        feedback: '$\frac31$ הוא חילוק רכיב ברכיב. חילוק מרוכבים אינו פועל כך: כופלים בצמוד.'
+        misconception: MC-c3-divide-componentwise
+      - value: -5
+        feedback: '$-5$ הוא החלק הממשי של המונה אחרי הכפל, בלי לחלק ב-$(1-2i)(1+2i)=5$.'
+        misconception: MC-c3-conjugate-is-inverse
+      - value: 1.6666666666666667
+        feedback: '$(1-2i)(1+2i)=1-4i^2=5$, לא $1-4=-3$.'
+        misconception: MC-c3-i-squared
+
+  - id: Q-3.1-why-conjugate
+    type: mc
+    objectives: [OBJ-3.1-2]
+    qualitative: true
+    level: mid
+    prompt: 'למה כופלים מונה ומכנה בצמוד של המכנה כשמחלקים מספרים מרוכבים?'
+    choices:
+      - text: 'כי $(c+di)(c-di)=c^2+d^2$ הוא מספר ממשי, ובו אפשר לחלק כל רכיב'
+        correct: true
+        feedback: 'נכון. אחרי הכפל המכנה ממשי וחיובי, והחילוק בו הוא חילוק של החלק הממשי ושל המדומה בנפרד.'
+      - text: 'כי הצמוד של $w$ הוא $\frac1w$'
+        feedback: >-
+          $w\bar w=|w|^2$, ולכן $\bar w=\frac{|w|^2}{w}$. רק כש-$|w|=1$ הצמוד הוא ההפכי. למשל $\overline{1-2i}=1+2i$,
+          ו-$(1-2i)(1+2i)=5\ne1$.
+        misconception: MC-c3-conjugate-is-inverse
+      - text: 'כי כך המכנה הופך ל-$c^2-d^2$'
+        feedback: '$(c+di)(c-di)=c^2-d^2i^2=c^2+d^2$: הסימן מתהפך בגלל $i^2=-1$.'
+        misconception: MC-c3-i-squared
+
+  - id: Q-3.1-re-formulas
+    type: multi
+    objectives: [OBJ-3.1-2]
+    qualitative: true
+    level: mid
+    prompt: 'אילו מהשוויונות נכונים לכל מספר מרוכב $z$? סמנו את כולם.'
+    choices:
+      - text: '$\operatorname{Re}z=\frac{z+\bar z}{2}$'
+        correct: true
+        feedback: 'נכון. $(a+bi)+(a-bi)=2a$.'
+      - text: '$\operatorname{Im}z=\frac{z-\bar z}{2i}$'
+        correct: true
+        feedback: 'נכון. $z-\bar z=2bi$, ומחלקים ב-$2i$.'
+      - text: '$z\bar z=|z|^2$, מספר ממשי שאינו שלילי'
+        correct: true
+        feedback: 'נכון. $(a+bi)(a-bi)=a^2+b^2$.'
+      - text: '$\operatorname{Im}z=\frac{z-\bar z}{2}$'
+        feedback: '$\frac{z-\bar z}{2}=bi$, כלומר $i\operatorname{Im}z$. החלק המדומה הוא המספר הממשי $b$.'
+        misconception: MC-c3-im-includes-i
+      - text: '$z\bar z=z^2$'
+        feedback: 'רק כש-$z$ ממשי. ל-$z=i$: $z\bar z=1$ ואילו $z^2=-1$.'
+        misconception: MC-c3-conjugate-is-inverse
+
+  - id: Q-3.1-re-inverse
+    type: expr
+    objectives: [OBJ-3.1-2]
+    level: mid
+    prompt: >-
+      יהי $z=x+iy\ne0$ עם $x,y$ ממשיים. כתבו את $\operatorname{Re}\frac1z$ כפונקציה של $x$ ו-$y$. (השתמשו במשתנים $x,y$)
+    answer: 'x/(x^2+y^2)'
+    answerTex: '$\operatorname{Re}\frac1z=\frac{x}{x^2+y^2}$'
+    variables: [x, y]
+    domain: [0.3, 2]
+    correctFeedback: 'נכון. $\frac{1}{x+iy}=\frac{x-iy}{x^2+y^2}$.'
+    wrongFeedback: 'כפלו מונה ומכנה ב-$x-iy$.'
+    commonWrong:
+      - expr: '1/x'
+        feedback: 'הפכי אינו פועל רכיב ברכיב: ל-$z=1+i$, $\frac1z=\frac{1-i}{2}$ וחלקו הממשי $\frac12$, לא 1.'
+        misconception: MC-c3-divide-componentwise
+      - expr: 'x/(x^2-y^2)'
+        feedback: '$(x+iy)(x-iy)=x^2-i^2y^2=x^2+y^2$.'
+        misconception: MC-c3-i-squared
+      - expr: 'x'
+        feedback: 'זה $\operatorname{Re}\bar z$. $\frac1z=\frac{\bar z}{|z|^2}$: צריך גם לחלק ב-$|z|^2$.'
+        misconception: MC-c3-conjugate-is-inverse
+
+  - id: Q-3.1-conjugate-roots
+    type: twotier
+    objectives: [OBJ-3.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      למשוואה $z^2+bz+c=0$ עם $b,c$ **ממשיים** יש השורש $1+2i$. האם $1-2i$ הוא בהכרח השורש השני?
+    choices:
+      - text: 'כן'
+        correct: true
+        feedback: 'נכון. במקדמים ממשיים השורשים הלא-ממשיים באים בזוגות צמודים. כאן $b=-2$, $c=5$.'
+      - text: 'לא, השורש השני יכול להיות כל מספר'
+        feedback: >-
+          סכום השורשים $-b$ ממשי. אם $1+2i$ שורש והשני $w$, אז $1+2i+w$ ממשי, ולכן $\operatorname{Im}w=-2$; והמכפלה
+          הממשית קובעת $w=1-2i$.
+        misconception: MC-c3-conjugate-root-any-coeffs
+    reasons:
+      - text: 'כש-$b,c$ ממשיים, $\overline{z^2+bz+c}=\bar z^2+b\bar z+c$, ולכן גם $\bar z$ שורש'
+        correct: true
+        feedback: 'בדיוק. הצמדה של המשוואה $p(z_0)=0$ נותנת $p(\bar z_0)=0$.'
+      - text: 'כי לכל משוואה ריבועית השורשים צמודים זה לזה'
+        feedback: >-
+          לא לכל משוואה: ל-$z^2-iz=0$ השורשים $0$ ו-$i$. התכונה נובעת מכך שהמקדמים ממשיים.
+        misconception: MC-c3-conjugate-root-any-coeffs
+      - text: 'כי השורש $\sqrt{\Delta}$ תמיד מדומה טהור'
+        feedback: >-
+          $\sqrt{\Delta}$ מדומה טהור רק כש-$\Delta<0$ ממשי. כש-$\Delta$ חיובי, גם השורשים ממשיים; ועם מקדמים מרוכבים
+          $\Delta$ עצמו מרוכב.
+        misconception: MC-c3-conjugate-root-any-coeffs
+
+  - id: Q-3.1-conj-equation
+    type: numeric
+    objectives: [OBJ-3.1-2, OBJ-3.1-1]
+    level: exam
+    prompt: >-
+      מצאו את המספר המרוכב $z$ שמקיים $2z+i\bar z=3+3i$, וכתבו את $\operatorname{Re}z$.
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $z=1+i$. עם $z=a+bi$: $2a+2bi+i(a-bi)=(2a+b)+(a+2b)i$, ולכן $2a+b=3$ ו-$a+2b=3$, כלומר $a=b=1$. בדיקה:
+      $2+2i+i(1-i)=3+3i$.
+    wrongFeedback: >-
+      כשהמשוואה מכילה גם $z$ וגם $\bar z$, כותבים $z=a+bi$ ומשווים חלק ממשי וחלק מדומה: שתי משוואות ממשיות.
+    commonWrong:
+      - value: 1.8
+        feedback: >-
+          $\frac95$ מתקבל אם מתייחסים ל-$\bar z$ כאילו היה $z$: $(2+i)z=3+3i$. אבל $\bar z\ne z$, ולכן כותבים $z=a+bi$.
+
+  - id: Q-3.1-build-quadratic
+    type: numeric
+    objectives: [OBJ-3.1-3, OBJ-3.1-1]
+    level: exam
+    prompt: >-
+      מצאו משוואה $z^2+bz+c=0$ עם $b,c$ ממשיים שאחד משורשיה $3-2i$. מהו $c$?
+    answer: 13
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. השורש השני הוא $3+2i$, ו-$c$ היא מכפלת השורשים: $(3-2i)(3+2i)=9+4=13$, ו-$b=-(3-2i+3+2i)=-6$. המשוואה:
+      $z^2-6z+13=0$.
+    wrongFeedback: 'השורש השני הוא הצמוד. $c$ היא מכפלת השורשים ו-$-b$ סכומם.'
+    commonWrong:
+      - value: 5
+        feedback: '$(3-2i)(3+2i)=9-4i^2=13$, לא $9-4$.'
+        misconception: MC-c3-i-squared
+      - value: -6
+        feedback: '$-6$ הוא $b$, המקדם של $z$. $c$ הוא האיבר החופשי, מכפלת השורשים.'

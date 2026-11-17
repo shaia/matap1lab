@@ -1,0 +1,26 @@
+# Terms first defined in lesson 2.4 (cylindrical and spherical coordinates).
+- id: cylindrical-coordinates
+  term: קואורדינטות גליליות
+  en: cylindrical coordinates
+  symbol: '(r,\theta,z)'
+  definition: >-
+    קואורדינטות קוטביות במישור $xy$ ועוד הגובה: $x=r\cos\theta$, $y=r\sin\theta$, $z=z$. כאן $r=\sqrt{x^2+y^2}$ הוא
+    המרחק **מציר $z$**. המשטח $r=c$ הוא גליל.
+  lesson: '2.4'
+- id: spherical-coordinates
+  term: קואורדינטות כדוריות
+  en: spherical coordinates
+  symbol: '(r,\theta,\varphi)'
+  definition: >-
+    $r=\sqrt{x^2+y^2+z^2}$ המרחק מהראשית, $\theta\in[0,\pi]$ הזווית מציר $z$ החיובי, ו-$\varphi$ האזימוט במישור $xy$:
+    $x=r\sin\theta\cos\varphi$, $y=r\sin\theta\sin\varphi$, $z=r\cos\theta$ (המוסכמה של הפיזיקה; בסיכומי ההרצאות
+    ובספר של תומס האותיות מוחלפות, ובסיכומים הזווית נמדדת ממישור $xy$).
+  lesson: '2.4'
+- id: azimuth
+  term: אזימוט
+  en: azimuth (azimuthal angle)
+  symbol: '\varphi'
+  definition: >-
+    הזווית של ההיטל של נקודה על מישור $xy$, נמדדת מציר $x$ החיובי נגד כיוון השעון. בקואורדינטות כדוריות היא $\varphi$,
+    ובגליליות היא $\theta$. המשטח שבו האזימוט קבוע הוא חצי מישור שמכיל את ציר $z$.
+  lesson: '2.4'

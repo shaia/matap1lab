@@ -1,0 +1,32 @@
+# Terms first defined in lesson 3.2 (the Gauss plane).
+- id: gauss-plane
+  term: מישור גאוס
+  en: complex plane (Argand plane)
+  definition: >-
+    המישור שבו המספר $a+bi$ הוא הנקודה $(a,b)$, או הווקטור מהראשית אליה. הציר האופקי הוא הציר הממשי והאנכי הציר
+    המדומה; חיבור מרוכבים הוא חיבור וקטורים, והצמוד הוא שיקוף דרך הציר הממשי. נקרא גם מישור ארגנד.
+  lesson: '3.2'
+- id: complex-modulus
+  term: ערך מוחלט של מספר מרוכב
+  en: modulus
+  symbol: '|z|'
+  definition: >-
+    $|a+bi|=\sqrt{a^2+b^2}$: המרחק של $z$ מהראשית במישור גאוס. $|z|^2=z\bar z$, $|zw|=|z||w|$, ו-$|z-w|$ הוא המרחק בין
+    $z$ ל-$w$.
+  lesson: '3.2'
+- id: complex-argument
+  term: ארגומנט
+  en: argument
+  symbol: '\arg z'
+  definition: >-
+    לכל $z\ne0$: זווית $\theta$ שבה $z=|z|(\cos\theta+i\sin\theta)$, הזווית מהציר הממשי החיובי לווקטור של $z$. היא
+    נקבעת עד כדי כפולה של $2\pi$.
+  lesson: '3.2'
+- id: principal-argument
+  term: ארגומנט ראשי
+  en: principal argument
+  symbol: '\operatorname{Arg}z\in(-\pi,\pi]'
+  definition: >-
+    הארגומנט היחיד בקטע $(-\pi,\pi]$. למספרים ממשיים שליליים $\operatorname{Arg}=\pi$. מחשבים אותו לפי הרביע, לא רק
+    לפי $\arctan\frac{b}{a}$.
+  lesson: '3.2'

@@ -1,0 +1,322 @@
+# Lesson 8.5 — areas between graphs and volumes of solids of revolution.
+# Objectives (src/course.ts):
+#   OBJ-8.5-1  area between two graphs, including finding the intersection points
+#   OBJ-8.5-2  volume of a solid of revolution by discs (and washers)
+#   OBJ-8.5-3  volume of a solid of revolution by cylindrical shells
+# Every number recomputed in screens/tools/recompute-ch8.py.
+chapter: 8
+questions:
+  - id: Q-8.5-area-basic
+    type: numeric
+    objectives: [OBJ-8.5-1]
+    level: basic
+    prompt: >-
+      חשבו את השטח הכלוא בין $y=x$ לבין $y=x^2$. (אפשר לכתוב שבר.)
+    answer: 0.1666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\tfrac16$. החיתוכים ב-$x=0$ וב-$x=1$, ובין שניהם $x\ge x^2$: $\int_0^1(x-x^2)\,dx=\tfrac12-\tfrac13$.
+    wrongFeedback: >-
+      מצאו את נקודות החיתוך ($x=x^2$), קבעו איזה גרף עליון ביניהן, וחשבו את $\int_a^b(f-g)\,dx$, כש-$f$ הגרף העליון ו-$g$ התחתון.
+    commonWrong:
+      - value: -0.1666666667
+        feedback: >-
+          שטח אינו שלילי: חיסרתם עליון מתחתון. ב-$(0,1)$, $x^2<x$ (למשל $x=\tfrac12$), ולכן $y=x$ הוא העליון.
+        misconception: MC-c8-area-order
+    hints: ['בדקו נקודה אחת בין החיתוכים, למשל $x=\tfrac12$.']
+
+  - id: Q-8.5-area-cross
+    type: numeric
+    objectives: [OBJ-8.5-1]
+    level: mid
+    prompt: >-
+      חשבו את השטח הכולל הכלוא בין הגרפים $y=x^3$ ו-$y=x$ (יש שני חלקים).
+    answer: 0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. החיתוכים ב-$x=-1,0,1$. ב-$(-1,0)$ הגרף $x^3$ עליון, וב-$(0,1)$ הגרף $x$ עליון. כל חלק תורם
+      $\tfrac14$, וביחד $\tfrac12$.
+    wrongFeedback: >-
+      $x^3=x$ בשלוש נקודות. בכל אחד משני הקטעים בדקו מי עליון, וחברו שני שטחים חיוביים.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          $\int_{-1}^{1}(x-x^3)\,dx=0$ כי הגרפים מחליפים תפקיד ב-0, והחלקים מתקזזים. שטח בין גרפים הוא
+          $\int|f-g|\,dx$: מפצלים בכל חיתוך.
+        misconception: MC-c8-area-crossing
+      - value: 0.25
+        feedback: >-
+          זה רק החלק ב-$[0,1]$. הגרפים כולאים גם חלק שני, ב-$[-1,0]$, באותו שטח (סימטריה).
+        misconception: MC-c8-area-crossing
+    hints: ['$x^3-x=x(x-1)(x+1)$.']
+
+  - id: Q-8.5-area-intersections
+    type: numeric
+    objectives: [OBJ-8.5-1]
+    level: mid
+    prompt: >-
+      חשבו את השטח הכלוא בין הפרבולות $y=x^2-2x$ ו-$y=4-x^2$.
+    answer: 9
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x^2-2x=4-x^2$ נותן $x^2-x-2=0$, כלומר $x=-1,2$. ביניהם $4-x^2$ עליונה:
+      $\int_{-1}^{2}\left(4+2x-2x^2\right)dx=\left[4x+x^2-\tfrac23x^3\right]_{-1}^{2}=\tfrac{20}{3}+\tfrac73=9$.
+    wrongFeedback: >-
+      השוו את שתי הנוסחאות כדי למצוא את גבולות האינטגרציה, ואז חשבו את האינטגרל של העליונה פחות התחתונה.
+    commonWrong:
+      - value: -9
+        feedback: >-
+          החסרתם עליונה מתחתונה. ב-$x=0$: $4-x^2=4$ ו-$x^2-2x=0$, ולכן $4-x^2$ היא העליונה.
+        misconception: MC-c8-area-order
+    hints: ['$2x^2-2x-4=2(x-2)(x+1)$.']
+
+  - id: Q-8.5-area-setup
+    type: mc
+    objectives: [OBJ-8.5-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      התחום חסום בפרבולה $x=y^2$ ובישר $x=y+2$ (הם נחתכים ב-$(1,-1)$ וב-$(4,2)$). איזה אינטגרל נותן את שטחו?
+    choices:
+      - text: '$\int_{-1}^{2}\left(y+2-y^2\right)dy$'
+        correct: true
+        feedback: >-
+          נכון. בכל גובה $y$ התחום משתרע מ-$x=y^2$ (שמאל) עד $x=y+2$ (ימין): "ימני פחות שמאלי". השטח $\tfrac92$.
+      - text: '$\int_0^4\left(\sqrt x-(x-2)\right)dx$'
+        feedback: >-
+          ב-$0\le x\le1$ הגבול התחתון של התחום הוא $y=-\sqrt x$, לא הישר. בתחום שבו הגבול משנה נוסחה, ב-$x$ צריך שני
+          אינטגרלים; ב-$y$ מספיק אחד.
+        misconception: MC-c8-area-one-formula
+      - text: '$\int_{-1}^{2}\left(y^2-y-2\right)dy$'
+        feedback: >-
+          זה שמאלי פחות ימני: התוצאה $-\tfrac92$. ב-$y=0$ הישר ב-$x=2$ והפרבולה ב-$x=0$, ולכן הישר מימין.
+        misconception: MC-c8-area-order
+      - text: '$\int_1^4\left(y+2-y^2\right)dy$'
+        feedback: >-
+          1 ו-4 הם ערכי ה-$x$ של נקודות החיתוך. באינטגרל לפי $y$ הגבולות הם ערכי $y$: $-1$ ו-$2$.
+        misconception: MC-c8-area-one-formula
+
+  - id: Q-8.5-disc-basic
+    type: numeric
+    objectives: [OBJ-8.5-2]
+    level: basic
+    prompt: >-
+      התחום שמתחת ל-$y=\sqrt x$, $0\le x\le4$, מסתובב סביב ציר $x$. חשבו את נפח הגוף. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 25.132741228718
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $8\pi$. כל חתך הוא דיסקה ברדיוס $\sqrt x$, בשטח $\pi x$: $V=\pi\int_0^4x\,dx=8\pi$.
+    wrongFeedback: >-
+      $V=\pi\int_a^b\bigl(f(x)\bigr)^2dx$: שטח הדיסקה הוא $\pi r^2$ עם $r=f(x)$.
+    commonWrong:
+      - value: 16.755160819146
+        feedback: >-
+          זה $\pi\int_0^4\sqrt x\,dx=\tfrac{16\pi}{3}$: לא העליתם את הרדיוס בריבוע. שטח הדיסקה הוא $\pi r^2$.
+        misconception: MC-c8-disc-no-square
+      - value: 8
+        feedback: 'חסר הגורם $\pi$ משטח הדיסקה $\pi r^2$.'
+        misconception: MC-c8-disc-no-square
+    hints: ['$\left(\sqrt x\right)^2=x$.']
+
+  - id: Q-8.5-washer
+    type: numeric
+    objectives: [OBJ-8.5-2]
+    level: mid
+    prompt: >-
+      התחום שבין $y=x$ ו-$y=x^2$ (ב-$0\le x\le1$) מסתובב סביב ציר $x$. חשבו את הנפח. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 0.41887902047864
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{2\pi}{15}$. כל חתך הוא טבעת עם רדיוס חיצוני $x$ ופנימי $x^2$:
+      $V=\pi\int_0^1\left(x^2-x^4\right)dx=\pi\left(\tfrac13-\tfrac15\right)$.
+    wrongFeedback: >-
+      שטח טבעת הוא $\pi R^2-\pi r^2$: חיצוני בריבוע פחות פנימי בריבוע.
+    commonWrong:
+      - value: 0.10471975511966
+        feedback: >-
+          זה $\pi\int_0^1(x-x^2)^2dx=\frac{\pi}{30}$: העליתם בריבוע את **ההפרש** של הרדיוסים. שטח הטבעת הוא
+          $\pi(R^2-r^2)$, ו-$(R-r)^2\ne R^2-r^2$.
+        misconception: MC-c8-washer-square-difference
+    hints: ['$R=x$, $r=x^2$.']
+
+  - id: Q-8.5-cone
+    type: expr
+    objectives: [OBJ-8.5-2]
+    level: mid
+    prompt: >-
+      הישר $y=\frac{r}{h}x$, $0\le x\le h$, מסתובב סביב ציר $x$ ויוצר חרוט עם רדיוס בסיס $r$ וגובה $h$. חשבו את הנפח
+      בשיטת הדיסקות וכתבו נוסחה ב-$r$ וב-$h$.
+    answer: 'pi*r^2*h/3'
+    answerTex: '$V=\pi\int_0^h\frac{r^2}{h^2}x^2\,dx=\dfrac{\pi r^2h}{3}$'
+    variables: [r, h]
+    domain: [0.5, 3]
+    correctFeedback: >-
+      נכון: שליש מנפח הגליל $\pi r^2h$ שחוסם אותו, כמו שמלמדים בתיכון.
+    wrongFeedback: >-
+      הדיסקה בנקודה $x$ ברדיוס $\frac rhx$. בצעו אינטגרציה ל-$\pi\left(\frac rhx\right)^2$ מ-0 עד $h$.
+    commonWrong:
+      - expr: 'pi*r*h/2'
+        feedback: >-
+          זה $\pi\int_0^h\frac rhx\,dx$: לא העליתם את הרדיוס בריבוע. (בדיקת ממדים: נפח צריך להיות אורך בחזקת 3.)
+        misconception: MC-c8-disc-no-square
+      - expr: 'pi*r^2*h'
+        feedback: >-
+          זה נפח הגליל: לקחתם רדיוס קבוע $r$. בחרוט הרדיוס גדל מ-0 עד $r$.
+        misconception: MC-c8-disc-no-square
+    hints: ['$\int_0^hx^2dx=\frac{h^3}{3}$.']
+
+  - id: Q-8.5-two-methods
+    type: twotier
+    objectives: [OBJ-8.5-2, OBJ-8.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      התחום $0\le y\le2$, $0\le x\le\sqrt y$ (בין הפרבולה $y=x^2$, ציר $y$ והישר $y=2$) מסתובב סביב ציר $y$. סטודנטית
+      חישבה בדיסקות $\pi\int_0^2y\,dy$ וסטודנט בקליפות $2\pi\int_0^{\sqrt2}x\left(2-x^2\right)dx$. נכון או לא נכון:
+      שני החישובים נותנים את אותו נפח.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. $\pi\int_0^2y\,dy=2\pi$ ו-$2\pi\left[x^2-\tfrac{x^4}{4}\right]_0^{\sqrt2}=2\pi(2-1)=2\pi$.
+      - text: 'לא נכון'
+        feedback: >-
+          חשבו את שניהם: שניהם $2\pi$. שתי השיטות פורסות את אותו גוף בדרכים שונות, ולכן חייבות להסכים; ההסכמה היא
+          בדיקה טובה.
+        misconception: MC-c8-axis-confusion
+    reasons:
+      - text: 'שתי השיטות מחשבות את נפח אותו גוף, בפרוסות אופקיות (דיסקות) או בגלילים (קליפות)'
+        correct: true
+        feedback: 'בדיוק. בדיסקות הרדיוס $x=\sqrt y$; בקליפות הרדיוס $x$ והגובה $2-x^2$.'
+      - text: 'דיסקות נותנות נפח רק בסיבוב סביב ציר $x$'
+        feedback: >-
+          דיסקות עובדות סביב כל ציר, כשפורסים בניצב לציר: כאן פרוסות אופקיות, ומשתנה האינטגרציה הוא $y$.
+        misconception: MC-c8-axis-confusion
+      - text: 'בקליפות הגובה הוא $x^2$, ולכן החישוב של הסטודנט שגוי'
+        feedback: >-
+          הקליפה ברדיוס $x$ משתרעת מהפרבולה $y=x^2$ עד הישר $y=2$, ולכן גובהה $2-x^2$. הסטודנט צדק.
+        misconception: MC-c8-shell-radius
+
+  - id: Q-8.5-shell-basic
+    type: numeric
+    objectives: [OBJ-8.5-3]
+    level: basic
+    prompt: >-
+      התחום שמתחת ל-$y=2x-x^2$ ומעל ציר $x$ מסתובב סביב ציר $y$. חשבו את הנפח בשיטת הקליפות. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 8.3775804095728
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{8\pi}{3}$. הקליפה ברדיוס $x$ ובגובה $2x-x^2$: $V=2\pi\int_0^2x\left(2x-x^2\right)dx=2\pi\left(\tfrac{16}{3}-4\right)$.
+    wrongFeedback: >-
+      $V=2\pi\int_a^b r(x)\,h(x)\,dx$, כש-$r(x)$ הרדיוס ו-$h(x)$ הגובה: הרדיוס הוא המרחק לציר $y$, כלומר $x$, והגובה $f(x)$.
+    commonWrong:
+      - value: 3.3510321638291
+        feedback: >-
+          זה $\pi\int_0^2(2x-x^2)^2dx=\frac{16\pi}{15}$, נפח הסיבוב סביב ציר **$x$**. השאלה מסובבת סביב ציר $y$.
+        misconception: MC-c8-axis-confusion
+      - value: 1.3333333333
+        feedback: 'חסר הגורם $2\pi$: היקף הקליפה הוא $2\pi x$.'
+        misconception: MC-c8-shell-radius
+    hints: ['$2x-x^2=0$ ב-$x=0$ וב-$x=2$.']
+
+  - id: Q-8.5-choose-shells
+    type: mc
+    objectives: [OBJ-8.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      התחום שמתחת ל-$y=x^3+x$, $0\le x\le1$, מסתובב סביב ציר $y$. איזו שיטה נוחה, ולמה?
+    choices:
+      - text: 'קליפות: $V=2\pi\int_0^1x\left(x^3+x\right)dx$, בלי לבטא את $x$ כפונקציה של $y$'
+        correct: true
+        feedback: >-
+          נכון. בדיסקות סביב ציר $y$ צריך את הרדיוס כפונקציה של $y$, כלומר לפתור $y=x^3+x$ עבור $x$: משוואה ממעלה
+          שלוש. בקליפות עובדים ישירות עם $x$.
+      - text: 'דיסקות: $V=\pi\int_0^1\left(x^3+x\right)^2dx$'
+        feedback: >-
+          זה נפח הסיבוב סביב ציר $x$. בסיבוב סביב ציר $y$ הדיסקות אופקיות, והרדיוס שלהן הוא ערך של $x$.
+        misconception: MC-c8-axis-confusion
+      - text: 'קליפות: $V=2\pi\int_0^1\left(x^3+x\right)x\,dy$'
+        feedback: >-
+          בקליפות משתנה האינטגרציה הוא הרדיוס $x$, ו-$dx$ הוא עובי הקליפה. אינטגרל ב-$dy$ של ביטוי ב-$x$ אינו מוגדר כאן.
+        misconception: MC-c8-shell-radius
+      - text: 'אי אפשר לחשב את הנפח, כי $x^3+x$ אינה הפיכה בצורה מפורשת'
+        feedback: 'זה בדיוק המצב שבו קליפות עוזרות: הן לא צריכות את הפונקציה ההפוכה.'
+        misconception: MC-c8-axis-confusion
+
+  - id: Q-8.5-shell-radius-tf
+    type: twotier
+    objectives: [OBJ-8.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: כשמסובבים את התחום שמתחת ל-$y=f(x)$, $a\le x\le b$ (עם $a\ge0$), סביב ציר $y$, הרדיוס של
+      הקליפה בנקודה $x$ הוא $f(x)$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. הרדיוס הוא $x$, המרחק לציר הסיבוב, ו-$f(x)$ הוא הגובה של הקליפה.'
+      - text: 'נכון'
+        feedback: >-
+          $f(x)$ הוא הגובה של הקליפה, הצלע האנכית. הרדיוס הוא המרחק האופקי לציר $y$, כלומר $x$.
+        misconception: MC-c8-shell-radius
+    reasons:
+      - text: 'הרדיוס הוא המרחק מהקליפה לציר הסיבוב, ובסיבוב סביב ציר $y$ זה $x$'
+        correct: true
+        feedback: 'בדיוק: $V=2\pi\int_a^bx\,f(x)\,dx$. סביב הישר $x=c$ הרדיוס היה $|x-c|$.'
+      - text: 'בשיטת הדיסקות הרדיוס הוא $f(x)$, ולכן גם בקליפות'
+        feedback: >-
+          בדיסקות סביב ציר $x$ הרדיוס הוא אכן $f(x)$, כי הדיסקה ניצבת לציר $x$. קליפה סביב ציר $y$ מקבילה לציר, ורדיוסה
+          המרחק $x$.
+        misconception: MC-c8-shell-radius
+      - text: 'הרדיוס הוא $b-x$, המרחק לקצה התחום'
+        feedback: 'הרדיוס נמדד לציר הסיבוב, לא לקצה התחום.'
+        misconception: MC-c8-shell-radius
+
+  - id: Q-8.5-shell-offaxis
+    type: numeric
+    objectives: [OBJ-8.5-3]
+    level: exam
+    prompt: >-
+      התחום שמתחת ל-$y=x^2$, $0\le x\le1$, מסתובב סביב הישר $x=2$. חשבו את הנפח בשיטת הקליפות. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 2.6179938779915
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{5\pi}{6}$. הקליפה בנקודה $x$ רחוקה $2-x$ מהציר, וגובהה $x^2$:
+      $V=2\pi\int_0^1(2-x)x^2\,dx=2\pi\left(\tfrac23-\tfrac14\right)=\tfrac{5\pi}{6}$.
+    wrongFeedback: >-
+      הרדיוס הוא המרחק מ-$x$ לישר $x=2$. כל התחום משמאל לישר, ולכן המרחק $2-x$.
+    commonWrong:
+      - value: 1.5707963267949
+        feedback: >-
+          זה $2\pi\int_0^1x\cdot x^2\,dx=\frac\pi2$: רדיוס $x$, המרחק לציר $y$. כאן הציר הוא $x=2$.
+        misconception: MC-c8-shell-radius
+      - value: 5.7595865315813
+        feedback: >-
+          זה $2\pi\int_0^1(x+2)x^2\,dx=\frac{11\pi}{6}$: הרדיוס $x+2$ הוא המרחק לישר $x=-2$. המרחק לישר $x=2$ הוא $2-x$.
+        misconception: MC-c8-shell-radius
+    hints: ['ב-$x=0$ הקליפה ברדיוס 2, וב-$x=1$ ברדיוס 1.']
+
+  - id: Q-8.5-washer-offaxis
+    type: numeric
+    objectives: [OBJ-8.5-2, OBJ-8.5-1]
+    level: exam
+    prompt: >-
+      התחום שבין $y=4-x^2$ לציר $x$ מסתובב סביב הישר $y=-1$. חשבו את הנפח. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 174.25367251911
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{832\pi}{15}$. החיתוכים עם הציר ב-$x=\pm2$. כל חתך הוא טבעת: רדיוס חיצוני $(4-x^2)-(-1)=5-x^2$
+      ופנימי $0-(-1)=1$. $V=\pi\int_{-2}^{2}\left((5-x^2)^2-1\right)dx$.
+    wrongFeedback: >-
+      הרדיוסים נמדדים מהציר $y=-1$: הוסיפו 1 לכל ערך $y$. בין התחום לציר יש רווח, ולכן החתך הוא טבעת ולא דיסקה.
+    commonWrong:
+      - value: 107.23302924253
+        feedback: >-
+          זה $\pi\int_{-2}^{2}(4-x^2)^2dx=\frac{512\pi}{15}$, הסיבוב סביב ציר $x$. סביב $y=-1$ כל רדיוס גדל ב-1.
+        misconception: MC-c8-axis-confusion
+      - value: 186.82004313347
+        feedback: >-
+          זה $\pi\int(5-x^2)^2dx$ בלי להחסיר את החור: בין ציר $x$ לישר $y=-1$ אין חומר, והחתך הוא טבעת עם רדיוס פנימי 1.
+        misconception: MC-c8-washer-square-difference
+    hints: ['$R=5-x^2$, $r=1$.']

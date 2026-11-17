@@ -1,0 +1,347 @@
+# Lesson 9.1 — parametrised curves (notes pp. 16, 21).
+# Objectives (src/course.ts):
+#   OBJ-9.1-1  describe a curve in the plane and in space by a parametrisation, and find its Cartesian equation when possible
+#   OBJ-9.1-2  parametrise a segment, a circle, an ellipse, a helix and the graph of a function
+#   OBJ-9.1-3  tell a curve (the set of points) from the graph of the vector function, its world line
+# Numbers recomputed in screens/tools/recompute-ch9.py.
+chapter: 9
+questions:
+  - id: Q-9.1-eliminate
+    type: mc
+    objectives: [OBJ-9.1-1]
+    level: basic
+    prompt: >-
+      העקום נתון על ידי $x=t+1$, $y=t^2$, $t\in\mathbb{R}$. מהי המשוואה הקרטזית שלו?
+    choices:
+      - text: '$y=(x-1)^2$'
+        correct: true
+        feedback: 'נכון. מהמשוואה הראשונה $t=x-1$, ומציבים בשנייה. זו פרבולה שקודקודה ב-$(1,0)$.'
+      - text: '$y=x^2+1$'
+        feedback: >-
+          הצבתם $x$ במקום $t$ והוספתם 1. צריך לבטא את $t$ באמצעות $x$: $t=x-1$, ורק אז להציב.
+        misconception: MC-c9-substitute-x-for-t
+      - text: '$y=x^2$'
+        feedback: >-
+          כאן $t$ הוחלף ב-$x$, כאילו הפרמטר והקואורדינטה הם אותו דבר. $x=t+1$, ולכן $t=x-1$.
+        misconception: MC-c9-substitute-x-for-t
+      - text: '$y=(x+1)^2$'
+        feedback: 'בדקו בנקודה $t=0$: היא $(1,0)$, ו-$(1+1)^2\ne0$. מ-$x=t+1$ נובע $t=x-1$.'
+        misconception: MC-c9-substitute-x-for-t
+
+  - id: Q-9.1-ellipse-eq
+    type: mc
+    objectives: [OBJ-9.1-1]
+    level: basic
+    prompt: >-
+      העקום $x=3\cos t$, $y=2\sin t$, $0\le t\le2\pi$. מהי המשוואה הקרטזית שלו?
+    choices:
+      - text: '$\frac{x^2}{9}+\frac{y^2}{4}=1$'
+        correct: true
+        feedback: 'נכון. $\cos t=\frac x3$ ו-$\sin t=\frac y2$, ו-$\cos^2t+\sin^2t=1$. אליפסה עם חצאי צירים 3 ו-2.'
+      - text: '$\frac{x^2}{3}+\frac{y^2}{2}=1$'
+        feedback: >-
+          ב-$t=0$ הנקודה $(3,0)$, ו-$\frac{9}{3}\ne1$. המקדמים בפרמטריזציה הם חצאי הצירים, ובמשוואה מופיעים **הריבועים**
+          שלהם.
+        misconception: MC-c9-semi-axes-squared
+      - text: '$x^2+y^2=13$'
+        feedback: >-
+          זה מעגל. $x^2+y^2=9\cos^2t+4\sin^2t$ אינו קבוע: המרחק מהראשית משתנה בין 2 ל-3.
+        misconception: MC-c9-semi-axes-squared
+      - text: '$\frac{x}{3}+\frac{y}{2}=1$'
+        feedback: 'זה ישר. הזהות היא על **ריבועי** הסינוס והקוסינוס, לא על הסכום שלהם.'
+        misconception: MC-c9-semi-axes-squared
+
+  - id: Q-9.1-cartesian-expr
+    type: expr
+    objectives: [OBJ-9.1-1]
+    level: mid
+    prompt: >-
+      העקום $x=e^t$, $y=e^{2t}+1$. בטאו את $y$ כפונקציה של $x$ (כש-$x>0$).
+    answer: 'x^2+1'
+    answerTex: '$y=x^2+1,\ x>0$'
+    variables: [x]
+    domain: [0.2, 3]
+    correctFeedback: >-
+      נכון. $e^{2t}=\left(e^t\right)^2=x^2$. העקום הוא רק החצי הימני של הפרבולה, כי $x=e^t>0$.
+    wrongFeedback: >-
+      אל תחליפו את $t$ ב-$x$: בטאו את $e^{2t}$ בעזרת $e^t=x$.
+    commonWrong:
+      - expr: 'exp(2*x)+1'
+        feedback: 'הצבתם $x$ במקום $t$. אבל $x=e^t$, כלומר $t=\ln x$, ו-$e^{2\ln x}=x^2$.'
+        misconception: MC-c9-substitute-x-for-t
+    hints: ['$e^{2t}=(e^t)^2$.']
+
+  - id: Q-9.1-part-of-line
+    type: twotier
+    objectives: [OBJ-9.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: העקום $x=\cos^2t$, $y=\sin^2t$, $t\in\mathbb{R}$, הוא כל הישר $x+y=1$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. כל נקודה של העקום על הישר, אבל $0\le x\le1$ ו-$0\le y\le1$: העקום הוא רק הקטע מ-$(1,0)$ עד $(0,1)$,
+          והנקודה נעה עליו הלוך וחזור.
+      - text: 'נכון'
+        feedback: >-
+          המשוואה $x+y=1$ נכונה לכל נקודה של העקום, אבל לא כל נקודה של הישר מתקבלת: למשל $(2,-1)$ דורשת
+          $\cos^2t=2$.
+        misconception: MC-c9-cartesian-whole-curve
+    reasons:
+      - text: '$\cos^2t$ ו-$\sin^2t$ נמצאים בין 0 ל-1, ולכן רק חלק מהישר מתקבל'
+        correct: true
+        feedback: 'בדיוק. אחרי שמוצאים משוואה קרטזית, בודקים את טווח הערכים של $x$ ושל $y$.'
+      - text: '$\cos^2t+\sin^2t=1$ לכל $t$, ולכן כל נקודה של הישר מתקבלת'
+        feedback: >-
+          הזהות מראה שהעקום **בתוך** הישר, לא שהוא ממלא אותו. אלה שני כיוונים שונים.
+        misconception: MC-c9-cartesian-whole-curve
+      - text: 'העקום הוא מעגל, כי מופיעים בו סינוס וקוסינוס'
+        feedback: 'מופיעים ריבועים שלהם: $x+y=1$ היא משוואה לינארית, והעקום חלק מישר.'
+        misconception: MC-c9-semi-axes-squared
+
+  - id: Q-9.1-segment
+    type: expr
+    objectives: [OBJ-9.1-2]
+    level: basic
+    prompt: >-
+      כתבו פרמטריזציה $\vec r(t)$, $0\le t\le1$, לקטע מ-$A=(1,2,0)$ ל-$B=(3,-1,4)$, כך ש-$\vec r(0)=A$ ו-$\vec r(1)=B$.
+      הקלידו את הרכיב $y(t)$.
+    answer: '2-3*t'
+    answerTex: '$\vec r(t)=A+t(B-A)=(1+2t,\ 2-3t,\ 4t)$, ולכן $y(t)=2-3t$'
+    variables: [t]
+    domain: [0, 1]
+    correctFeedback: >-
+      נכון. $\vec r(t)=A+t\,(B-A)$ עם $B-A=(2,-3,4)$. בדיקה: $y(0)=2$ ו-$y(1)=-1$.
+    wrongFeedback: >-
+      מתחילים ב-$A$ והולכים בכיוון $B-A$: $\vec r(t)=A+t(B-A)$. בדקו את $t=0$ ואת $t=1$.
+    commonWrong:
+      - expr: '2-t'
+        feedback: >-
+          זו $A+tB$: ב-$t=1$ מקבלים $A+B$, לא $B$. הכיוון הוא **ההפרש** $B-A$.
+        misconception: MC-c9-segment-add-endpoint
+      - expr: '-1+3*t'
+        feedback: >-
+          זו הפרמטריזציה מ-$B$ ל-$A$: היא מתארת את אותו קטע, אבל ב-$t=0$ היא ב-$B$. השאלה קובעת את הכיוון.
+        misconception: MC-c9-orientation-ignored
+    hints: ['$B-A=(3-1,\,-1-2,\,4-0)$.']
+
+  - id: Q-9.1-circle-param
+    type: mc
+    objectives: [OBJ-9.1-2]
+    level: basic
+    prompt: >-
+      איזו פרמטריזציה מתארת את המעגל שמרכזו $(2,-1)$ ורדיוסו 3, נגד כיוון השעון, $0\le t\le2\pi$?
+    choices:
+      - text: '$\vec r(t)=\left(2+3\cos t,\ -1+3\sin t\right)$'
+        correct: true
+        feedback: 'נכון. המרכז ועוד וקטור באורך 3 שמסתובב נגד כיוון השעון; ב-$t=0$ הנקודה $(5,-1)$.'
+      - text: '$\vec r(t)=\left(2+9\cos t,\ -1+9\sin t\right)$'
+        feedback: >-
+          9 הוא ריבוע הרדיוס, שמופיע במשוואה $(x-2)^2+(y+1)^2=9$. בפרמטריזציה מופיע הרדיוס עצמו.
+        misconception: MC-c9-semi-axes-squared
+      - text: '$\vec r(t)=\left(2+3\sin t,\ -1+3\cos t\right)$'
+        feedback: >-
+          זה אותו מעגל, אבל בכיוון השעון: ב-$t=0$ הנקודה $(2,2)$ (למעלה), ובהמשך היא זזה ימינה. נגד כיוון השעון
+          הקוסינוס ב-$x$ והסינוס ב-$y$.
+        misconception: MC-c9-orientation-ignored
+      - text: '$\vec r(t)=\left(-2+3\cos t,\ 1+3\sin t\right)$'
+        feedback: 'זה מעגל שמרכזו $(-2,1)$: בפרמטריזציה מוסיפים את המרכז כמו שהוא, $(2,-1)$.'
+        misconception: MC-c9-centre-shift
+
+  - id: Q-9.1-graph-param
+    type: multi
+    objectives: [OBJ-9.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      אילו מהבאות הן פרמטריזציות של הגרף $y=x^2$, $0\le x\le2$ (אותה קבוצת נקודות)? סמנו את כולן.
+    choices:
+      - text: '$(t,t^2)$, $0\le t\le2$'
+        correct: true
+        feedback: 'נכון: הפרמטריזציה הסטנדרטית של גרף, $x=t$, $y=f(t)$.'
+      - text: '$(2t,4t^2)$, $0\le t\le1$'
+        correct: true
+        feedback: 'נכון. $y=4t^2=(2t)^2=x^2$, ו-$x=2t$ עובר על $[0,2]$. אותו עקום, במהירות כפולה.'
+      - text: '$(t^2,t^4)$, $0\le t\le\sqrt2$'
+        correct: true
+        feedback: 'נכון. $y=t^4=x^2$, ו-$x=t^2$ עובר על $[0,2]$.'
+      - text: '$(t^2,t)$, $0\le t\le2$'
+        feedback: 'כאן $x=y^2$: זו פרבולה "שוכבת". בפרמטריזציה של גרף $y=f(x)$ הרכיב השני הוא $f$ של הראשון.'
+        misconception: MC-c9-graph-param-swap
+      - text: '$(t,t^2)$, $0\le t\le4$'
+        feedback: 'הנוסחה נכונה אבל הטווח לא: היא ממשיכה עד $(4,16)$. פרמטריזציה כוללת גם את טווח הפרמטר.'
+        misconception: MC-c9-cartesian-whole-curve
+
+  - id: Q-9.1-helix-pitch
+    type: expr
+    objectives: [OBJ-9.1-2]
+    level: mid
+    prompt: >-
+      סליל ברדיוס 2 סביב ציר $z$ עולה 6 יחידות בכל סיבוב שלם: $\vec r(t)=\left(2\cos t,\ 2\sin t,\ z(t)\right)$ עם
+      $z(0)=0$ ו-$z$ לינארית ב-$t$. כתבו את $z(t)$.
+    answer: '3*t/pi'
+    answerTex: '$z(t)=\dfrac{3t}{\pi}$'
+    variables: [t]
+    domain: [0, 6]
+    correctFeedback: >-
+      נכון. סיבוב שלם הוא $t$ שגדל ב-$2\pi$, ובו $z$ צריך לגדול ב-6: השיפוע $\frac{6}{2\pi}=\frac3\pi$.
+    wrongFeedback: >-
+      כמה גדל $t$ בסיבוב אחד? $z$ צריך לגדול ב-6 בדיוק באותו פרק.
+    commonWrong:
+      - expr: '6*t'
+        feedback: >-
+          כאן $z$ עולה 6 כש-$t$ גדל ב-1, כלומר ברדיאן אחד. סיבוב שלם הוא $2\pi$ רדיאנים, ובו הסליל היה עולה $12\pi$.
+        misconception: MC-c9-helix-pitch-per-radian
+      - expr: '6*t/pi'
+        feedback: 'ב-$t=2\pi$ זה נותן 12: חילקתם ב-$\pi$ במקום ב-$2\pi$.'
+        misconception: MC-c9-helix-pitch-per-radian
+    hints: ['ב-$t=2\pi$ צריך $z=6$.']
+
+  - id: Q-9.1-ellipse-param
+    type: expr
+    objectives: [OBJ-9.1-2]
+    level: mid
+    prompt: >-
+      כתבו פרמטריזציה לאליפסה $\frac{(x-1)^2}{4}+\frac{y^2}{9}=1$ מהצורה $x(t)=\ldots$, $y(t)=3\sin t$, $0\le t\le2\pi$,
+      נגד כיוון השעון, כך שב-$t=0$ הנקודה $(3,0)$.
+      הקלידו את $x(t)$.
+    answer: '1+2*cos(t)'
+    answerTex: '$x(t)=1+2\cos t,\quad y(t)=3\sin t$'
+    variables: [t]
+    domain: [0, 6]
+    correctFeedback: >-
+      נכון. $\frac{x-1}{2}=\cos t$ ו-$\frac y3=\sin t$, ואז $\cos^2t+\sin^2t=1$ נותן בדיוק את המשוואה.
+    wrongFeedback: >-
+      כתבו $\frac{x-1}{2}=\cos t$ (חצי הציר 2 הוא השורש של 4) ובודדו את $x$.
+    commonWrong:
+      - expr: '1+4*cos(t)'
+        feedback: 'חצי הציר הוא $\sqrt4=2$. 4 הוא הריבוע שלו, שמופיע במכנה במשוואה.'
+        misconception: MC-c9-semi-axes-squared
+      - expr: '2*cos(t)'
+        feedback: 'זו אליפסה שמרכזה בראשית. המרכז כאן $(1,0)$, ולכן מוסיפים 1.'
+        misconception: MC-c9-centre-shift
+    hints: ['הציבו $x=1+2\cos t$, $y=3\sin t$ במשוואה ובדקו.']
+
+  - id: Q-9.1-world-line
+    type: mc
+    objectives: [OBJ-9.1-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $\vec r(t)=(\cos t,\sin t)$, $0\le t\le4\pi$. העקום הוא מעגל היחידה. מהו הגרף של הפונקציה הווקטורית, קו העולם,
+      $\{(t,\cos t,\sin t)\}$?
+    choices:
+      - text: 'סליל במרחב $(t,x,y)$ סביב ציר $t$, עם שני ליפופים'
+        correct: true
+        feedback: >-
+          נכון. קו העולם רושם גם **מתי** הנקודה הייתה בכל מקום: כל סיבוב מתקדם לאורך ציר הזמן. ההיטל שלו על מישור
+          $(x,y)$ הוא המעגל.
+      - text: 'מעגל היחידה'
+        feedback: >-
+          המעגל הוא העקום, קבוצת הנקודות שהנקודה עוברת בהן. הגרף מוסיף קואורדינטה של זמן, ולכן הוא במרחב תלת-ממדי.
+        misconception: MC-c9-curve-equals-graph
+      - text: 'שני מעגלים זה על זה, כי הנקודה מקיפה פעמיים'
+        feedback: >-
+          בעקום שני הסיבובים מתלכדים, ובקו העולם לא: בסיבוב השני $t$ גדול יותר, ולכן הנקודות שונות.
+        misconception: MC-c9-curve-equals-graph
+      - text: 'הגרפים של $\cos t$ ושל $\sin t$ במישור'
+        feedback: >-
+          אלה ההיטלים של קו העולם על המישורים $(t,x)$ ו-$(t,y)$. קו העולם עצמו הוא עקום אחד במרחב.
+        misconception: MC-c9-curve-equals-graph
+
+  - id: Q-9.1-same-curve
+    type: twotier
+    objectives: [OBJ-9.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec r_1(t)=(t,t^2)$, $0\le t\le2$, ו-$\vec r_2(t)=\left(t^2,t^4\right)$, $0\le t\le\sqrt2$. נכון או לא נכון: הן
+      מתארות את אותו עקום.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. שתיהן עוברות בדיוק על הנקודות $(x,x^2)$, $0\le x\le2$. (בסיכומים הטווח של $\vec r_2$ נכתב
+          $0\le t\le4$; אז היא הייתה ממשיכה עד $(16,256)$.)
+      - text: 'לא נכון'
+        feedback: >-
+          הנוסחאות שונות, אבל קבוצת הנקודות זהה. מה שונה הוא **קו העולם**: מתי ובאיזו מהירות הנקודה עוברת בכל מקום.
+        misconception: MC-c9-curve-is-formula
+    reasons:
+      - text: 'שתיהן עוברות על אותה קבוצת נקודות, אף שהתנועה עליה שונה'
+        correct: true
+        feedback: 'בדיוק: עקום הוא קבוצת נקודות; פרמטריזציה היא תנועה עליו. לעקום אחד יש פרמטריזציות רבות.'
+      - text: 'יש להן אותו קו עולם'
+        feedback: >-
+          קווי העולם שונים: ב-$t=1$ שתיהן ב-$(1,1)$, אבל ב-$t=\sqrt2$ אחת ב-$\left(\sqrt2,2\right)$ והשנייה ב-$(2,4)$.
+        misconception: MC-c9-curve-equals-graph
+      - text: 'שתיהן מתחילות ב-$(0,0)$'
+        feedback: 'נקודת התחלה משותפת אינה מספיקה: גם $(t,t^3)$ מתחילה שם.'
+        misconception: MC-c9-curve-is-formula
+
+  - id: Q-9.1-curve-vs-graph
+    type: multi
+    objectives: [OBJ-9.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec r:[a,b]\to\mathbb{R}^2$ פונקציה וקטורית רציפה. אילו טענות נכונות? סמנו את כולן.
+    choices:
+      - text: 'קו העולם $\{(t,\vec r(t))\}$ נמצא במרחב תלת-ממדי'
+        correct: true
+        feedback: 'נכון: קואורדינטה אחת לזמן ושתיים למקום.'
+      - text: 'ההיטל של קו העולם על מישור המקום הוא העקום'
+        correct: true
+        feedback: 'נכון: כשמוחקים את הזמן נשארת קבוצת המקומות שהנקודה עברה בהם.'
+      - text: 'מהעקום לבדו אפשר לדעת מתי הנקודה הייתה בכל מקום'
+        feedback: 'העקום מאבד את הזמן: אותו מעגל מתקבל מתנועה מהירה, איטית או הלוך וחזור. את הזמן שומר קו העולם.'
+        misconception: MC-c9-curve-equals-graph
+      - text: 'שתי פרמטריזציות של אותו עקום הן בהכרח אותה פונקציה'
+        feedback: '$(\cos t,\sin t)$ ו-$(\cos2t,\sin2t)$ על $[0,2\pi]$ מתארות את אותו מעגל, בקצבים שונים.'
+        misconception: MC-c9-curve-is-formula
+
+  - id: Q-9.1-self-cross
+    type: mc
+    objectives: [OBJ-9.1-1]
+    level: exam
+    prompt: >-
+      העקום $x=t^2-1$, $y=t^3-t$, $t\in\mathbb{R}$. מהי המשוואה הקרטזית שלו? (רמז: $y=t\,x$.)
+    choices:
+      - text: '$y^2=x^2(x+1)$'
+        correct: true
+        feedback: >-
+          נכון. $y=t(t^2-1)=tx$, ולכן $y^2=t^2x^2=(x+1)x^2$. העקום עובר בראשית פעמיים, ב-$t=-1$ וב-$t=1$: הוא חותך את
+          עצמו שם.
+      - text: '$y=x\sqrt{x+1}$'
+        feedback: >-
+          זה רק הענף $t\ge0$ (ובו $y=x\sqrt{x+1}$). הענף $t\le0$ נותן $y=-x\sqrt{x+1}$, למשל $t=-2$ נותן $(3,-6)$.
+        misconception: MC-c9-cartesian-whole-curve
+      - text: '$y=x^3-x$'
+        feedback: 'הצבתם $x$ במקום $t$ בנוסחה של $y$. אבל $x=t^2-1$, לא $t$.'
+        misconception: MC-c9-substitute-x-for-t
+      - text: '$y=x(x+1)$'
+        feedback: 'בדקו ב-$t=2$: הנקודה $(3,6)$, ו-$3\cdot4\ne6$. מ-$y=tx$ צריך להיפטר מ-$t$ בעזרת $t^2=x+1$.'
+        misconception: MC-c9-substitute-x-for-t
+
+  - id: Q-9.1-projectile
+    type: expr
+    objectives: [OBJ-9.1-1]
+    level: exam
+    prompt: >-
+      כדור נזרק מהראשית במהירות $20$ מטרים לשנייה בזווית $45^\circ$, ו-$g=10$: $x(t)=10\sqrt2\,t$,
+      $y(t)=10\sqrt2\,t-5t^2$. בטאו את $y$ כפונקציה של $x$ (המסלול).
+    answer: 'x-x^2/40'
+    answerTex: '$y=x-\dfrac{x^2}{40}$'
+    variables: [x]
+    domain: [0, 40]
+    correctFeedback: >-
+      נכון. $t=\frac{x}{10\sqrt2}$, ו-$5t^2=\frac{5x^2}{200}$. המסלול פרבולה שחוזרת לקרקע ב-$x=40$ מטרים.
+    wrongFeedback: >-
+      בודדו את $t$ מהמשוואה של $x$ והציבו במשוואה של $y$. $(10\sqrt2)^2=200$.
+    commonWrong:
+      - expr: '10*sqrt(2)*x-5*x^2'
+        feedback: 'הצבתם $x$ במקום $t$. צריך $t=\frac{x}{10\sqrt2}$.'
+        misconception: MC-c9-substitute-x-for-t
+    hints: ['$t=\dfrac{x}{10\sqrt2}$.']

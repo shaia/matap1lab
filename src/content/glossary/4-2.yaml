@@ -1,0 +1,32 @@
+# Terms first defined in lesson 4.2 (shifts and stretches, parity, period).
+- id: even-function
+  term: פונקציה זוגית
+  en: even function
+  symbol: 'f(-x)=f(x)'
+  definition: >-
+    פונקציה שמקיימת $f(-x)=f(x)$ לכל $x$ בתחום (שסימטרי סביב 0). הגרף שלה סימטרי ביחס לציר $y$: $x^2$, $\cos x$, $|x|$.
+  lesson: '4.2'
+- id: odd-function
+  term: פונקציה אי-זוגית
+  en: odd function
+  symbol: 'f(-x)=-f(x)'
+  definition: >-
+    פונקציה שמקיימת $f(-x)=-f(x)$ לכל $x$ בתחום. הגרף שלה סימטרי ביחס לראשית (סיבוב בחצי סיבוב): $x^3$, $\sin x$,
+    $\frac1x$.
+  lesson: '4.2'
+- id: periodic-function
+  term: פונקציה מחזורית
+  en: periodic function
+  symbol: 'f(x+T)=f(x)'
+  definition: >-
+    פונקציה שיש לה מספר $T>0$ כך ש-$f(x+T)=f(x)$ לכל $x$. ה-$T$ החיובי הקטן ביותר כזה נקרא **המחזור**: $2\pi$ ל-$\sin x$,
+    $\pi$ ל-$\tan x$, $\frac{2\pi}{k}$ ל-$\sin(kx)$.
+  lesson: '4.2'
+- id: graph-transformation
+  term: הזזה ומתיחה של גרף
+  en: graph transformation (shift, stretch, reflection)
+  symbol: 'c\,f\!\left(\frac{x-a}{b}\right)+d'
+  definition: >-
+    $f(x-a)$: הזזה ימינה ב-$a$; $f(x)+d$: הזזה למעלה ב-$d$; $f\!\left(\frac xb\right)$: מתיחה לרוחב פי $b$; $c\,f(x)$:
+    מתיחה לגובה פי $c$; $f(-x)$ ו-$-f(x)$: שיקוף ביחס לציר $y$ וביחס לציר $x$.
+  lesson: '4.2'

@@ -1,0 +1,236 @@
+# Lesson 3.3 — polar form and Euler's formula.
+# Objectives (src/course.ts):
+#   OBJ-3.3-1  write a complex number in polar form, with cis and with the complex exponential
+#   OBJ-3.3-2  multiply and divide in polar form; multiplication as rotation and stretching
+#   OBJ-3.3-3  de Moivre's formula for powers and for trigonometric identities
+# Convention: Arg in (-π, π]; cis θ = cos θ + i sin θ = e^{iθ}.
+# Every number recomputed in screens/tools/recompute-ch3.py.
+chapter: 3
+questions:
+  - id: Q-3.3-polar-form
+    type: mc
+    objectives: [OBJ-3.3-1]
+    level: basic
+    prompt: 'מהי הצורה הקוטבית של $-2+2i$?'
+    choices:
+      - text: '$2\sqrt2\operatorname{cis}\frac{3\pi}{4}=2\sqrt2\,e^{3\pi i/4}$'
+        correct: true
+        feedback: 'נכון. $|z|=\sqrt{4+4}=2\sqrt2$, והנקודה ברביע השני על האלכסון: $\frac{3\pi}{4}$.'
+      - text: '$2\sqrt2\operatorname{cis}\left(-\frac{\pi}{4}\right)$'
+        feedback: '$\arctan\frac{2}{-2}=-\frac{\pi}{4}$ מצביע לרביע הרביעי, אל $2-2i$. כאן $x<0<y$: הרביע השני.'
+        misconception: MC-c3-arg-arctan
+      - text: '$8\operatorname{cis}\frac{3\pi}{4}$'
+        feedback: '8 הוא $|z|^2$. הערך המוחלט $\sqrt8=2\sqrt2$.'
+        misconception: MC-c3-modulus-no-root
+      - text: '$-2\sqrt2\operatorname{cis}\frac{\pi}{4}$'
+        feedback: '$-2\sqrt2\operatorname{cis}\frac{\pi}{4}=-2-2i$, לא $-2+2i$. וחוץ מזה, בצורה קוטבית המקדם $r=|z|$ חיובי.'
+        misconception: MC-c3-negative-modulus
+
+  - id: Q-3.3-exp-to-algebraic
+    type: numeric
+    objectives: [OBJ-3.3-1]
+    level: basic
+    prompt: 'חשבו את $\operatorname{Im}\left(4e^{-i\pi/3}\right)$.'
+    answer: -3.4641016151377544
+    tolerance: 0.001
+    correctFeedback: 'נכון, $-2\sqrt3$. $4e^{-i\pi/3}=4\cos\frac{\pi}{3}-4i\sin\frac{\pi}{3}=2-2\sqrt3i$.'
+    wrongFeedback: '$re^{i\theta}=r\cos\theta+ir\sin\theta$, עם $\theta=-\frac{\pi}{3}$.'
+    commonWrong:
+      - value: 3.4641016151377544
+        feedback: '$\sin\left(-\frac{\pi}{3}\right)=-\frac{\sqrt3}{2}$: הזווית שלילית, הנקודה ברביע הרביעי.'
+        misconception: MC-c3-rotation-direction
+      - value: -2
+        feedback: '$-2=-4\cos\frac{\pi}{3}$: החלק המדומה בא עם **סינוס**.'
+        misconception: MC-c3-cis-swap
+
+  - id: Q-3.3-product-arg
+    type: numeric
+    objectives: [OBJ-3.3-2]
+    level: basic
+    prompt: >-
+      $z=2\operatorname{cis}\frac{\pi}{3}$ ו-$w=3\operatorname{cis}\frac{\pi}{4}$. מהו $\operatorname{Arg}(zw)$?
+    answer: 1.8325957145940461
+    tolerance: 0.001
+    correctFeedback: 'נכון, $\frac{7\pi}{12}$: $zw=6\operatorname{cis}\left(\frac{\pi}{3}+\frac{\pi}{4}\right)$. הערכים המוחלטים נכפלים, הזוויות מתחברות.'
+    wrongFeedback: 'בכפל בצורה קוטבית הזוויות מתחברות.'
+    commonWrong:
+      - value: 0.8224670334241132
+        feedback: '$\frac{\pi^2}{12}$ הוא **מכפלת** הזוויות. בכפל מרוכבים הזוויות מתחברות, כמו מעריכים ב-$e^{i\alpha}e^{i\beta}$.'
+        misconception: MC-c3-multiply-args
+
+  - id: Q-3.3-quotient-arg
+    type: numeric
+    objectives: [OBJ-3.3-2]
+    level: basic
+    prompt: >-
+      אותם $z=2\operatorname{cis}\frac{\pi}{3}$ ו-$w=3\operatorname{cis}\frac{\pi}{4}$. מהו $\operatorname{Arg}\frac{z}{w}$?
+    answer: 0.2617993877991494
+    tolerance: 0.001
+    correctFeedback: 'נכון, $\frac{\pi}{12}$: $\frac{z}{w}=\frac23\operatorname{cis}\left(\frac{\pi}{3}-\frac{\pi}{4}\right)$.'
+    wrongFeedback: 'בחילוק בצורה קוטבית הזוויות מתחסרות.'
+    commonWrong:
+      - value: 1.3333333333333333
+        feedback: '$\frac43$ הוא **מנת** הזוויות. בחילוק הזוויות מתחסרות.'
+        misconception: MC-c3-multiply-args
+      - value: 1.8325957145940461
+        feedback: '$\frac{7\pi}{12}$ הוא **סכום** הזוויות: זה $\operatorname{Arg}(zw)$, לא של המנה.'
+        misconception: MC-c3-multiply-args
+
+  - id: Q-3.3-power
+    type: numeric
+    objectives: [OBJ-3.3-3]
+    level: basic
+    prompt: 'חשבו את $(1+i)^8$.'
+    answer: 16
+    tolerance: 0.001
+    correctFeedback: 'נכון. $1+i=\sqrt2\operatorname{cis}\frac{\pi}{4}$, ולכן $(1+i)^8=(\sqrt2)^8\operatorname{cis}2\pi=16$.'
+    wrongFeedback: 'כתבו בצורה קוטבית והשתמשו בדה-מואבר: $(r\operatorname{cis}\theta)^n=r^n\operatorname{cis}n\theta$.'
+    commonWrong:
+      - value: 256
+        feedback: '$2^8$ מתקבל מ-$|1+i|=2$. אבל $|1+i|=\sqrt2$.'
+        misconception: MC-c3-modulus-no-root
+      - value: 1
+        feedback: 'הזווית נכונה, $2\pi$, אבל גם הערך המוחלט מועלה בחזקה: $(\sqrt2)^8=16$.'
+        misconception: MC-c3-demoivre-modulus-forget
+
+  - id: Q-3.3-negative-r
+    type: twotier
+    objectives: [OBJ-3.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סטודנט כותב: "$-3\operatorname{cis}\frac{\pi}{5}$ הוא בצורה קוטבית, עם ערך מוחלט 3 וארגומנט $\frac{\pi}{5}$". האם
+      הוא צודק?
+    choices:
+      - text: 'לא'
+        correct: true
+        feedback: 'נכון. $-3\operatorname{cis}\frac{\pi}{5}=3\operatorname{cis}\frac{6\pi}{5}$, והארגומנט הראשי $-\frac{4\pi}{5}$.'
+      - text: 'כן'
+        feedback: 'המקדם בצורה קוטבית הוא $|z|>0$. סימן מינוס הוא $\operatorname{cis}\pi$, והוא מסובב את הנקודה ב-$\pi$.'
+        misconception: MC-c3-negative-modulus
+    reasons:
+      - text: '$-1=\operatorname{cis}\pi$, ולכן המינוס מוסיף $\pi$ לזווית: הנקודה ברביע השלישי'
+        correct: true
+        feedback: 'בדיוק. $\frac{\pi}{5}+\pi=\frac{6\pi}{5}$, ובקטע $(-\pi,\pi]$: $-\frac{4\pi}{5}$.'
+      - text: 'כי ערך מוחלט יכול להיות שלילי'
+        feedback: 'ערך מוחלט הוא מרחק מהראשית, ואינו שלילי.'
+        misconception: MC-c3-negative-modulus
+      - text: 'כי המינוס הופך רק את החלק המדומה'
+        feedback: 'זה הצמוד. מינוס הופך את שני החלקים: $-(a+bi)=-a-bi$.'
+        misconception: MC-c3-conj-reflect-wrong-axis
+
+  - id: Q-3.3-multiply-geometry
+    type: mc
+    objectives: [OBJ-3.3-2]
+    qualitative: true
+    level: mid
+    prompt: 'מה עושה ההעתקה $z\mapsto(1+i)z$ למישור גאוס?'
+    choices:
+      - text: 'מסובבת ב-$\frac{\pi}{4}$ נגד כיוון השעון ומותחת פי $\sqrt2$ מהראשית'
+        correct: true
+        feedback: 'נכון. $1+i=\sqrt2\operatorname{cis}\frac{\pi}{4}$: הזוויות מתחברות והערכים המוחלטים נכפלים.'
+      - text: 'מסובבת ב-$\frac{\pi}{4}$ בלבד'
+        feedback: '$|1+i|=\sqrt2\ne1$, ולכן כל מרחק מהראשית גדל פי $\sqrt2$. סיבוב טהור הוא כפל במספר עם ערך מוחלט 1.'
+        misconception: MC-c3-multiply-rotation-only
+      - text: 'מזיזה כל נקודה ב-$(1,1)$'
+        feedback: 'הזזה היא **חיבור** של $1+i$. כפל משאיר את הראשית במקומה ומסובב סביבה.'
+        misconception: MC-c3-multiply-rotation-only
+
+  - id: Q-3.3-rotate-i
+    type: numeric
+    objectives: [OBJ-3.3-2]
+    level: mid
+    prompt: >-
+      מסובבים את הנקודה $(3,1)$ סביב הראשית ב-$\frac{\pi}{2}$ נגד כיוון השעון. מהי קואורדינטת $x$ של התמונה? (היעזרו
+      בכפל ב-$i$.)
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: 'נכון. $i(3+i)=3i+i^2=-1+3i$: הנקודה $(-1,3)$.'
+    wrongFeedback: 'סיבוב ב-$\frac{\pi}{2}$ נגד כיוון השעון הוא כפל ב-$i=\operatorname{cis}\frac{\pi}{2}$.'
+    commonWrong:
+      - value: 1
+        feedback: '$-i(3+i)=1-3i$ הוא סיבוב **עם** כיוון השעון. כפל ב-$i$ מסובב נגד כיוון השעון.'
+        misconception: MC-c3-rotation-direction
+
+  - id: Q-3.3-power-arg
+    type: numeric
+    objectives: [OBJ-3.3-3]
+    level: mid
+    prompt: 'מהו $\operatorname{Arg}\left((1+\sqrt3i)^{10}\right)$?'
+    answer: -2.0943951023931957
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\frac{2\pi}{3}$. $1+\sqrt3i=2\operatorname{cis}\frac{\pi}{3}$, ולכן החזקה היא $1024\operatorname{cis}\frac{10\pi}{3}$,
+      ו-$\frac{10\pi}{3}-4\pi=-\frac{2\pi}{3}$.
+    wrongFeedback: 'הכפילו את הזווית ב-10, ואז הורידו כפולות של $2\pi$ עד שתגיעו לקטע $(-\pi,\pi]$.'
+    commonWrong:
+      - value: 10.471975511965976
+        feedback: '$\frac{10\pi}{3}$ הוא ארגומנט, אבל לא הראשי: מורידים $4\pi$.'
+        misconception: MC-c3-principal-arg-range
+      - value: 4.1887902047863905
+        feedback: '$\frac{4\pi}{3}$ בקטע $[0,2\pi)$; הקטע של הארגומנט הראשי הוא $(-\pi,\pi]$.'
+        misconception: MC-c3-principal-arg-range
+
+  - id: Q-3.3-demoivre-truths
+    type: multi
+    objectives: [OBJ-3.3-3]
+    qualitative: true
+    level: mid
+    prompt: 'אילו מהשוויונות נכונים לכל $\theta$ ממשי ולכל $n$ טבעי? סמנו את כולם.'
+    choices:
+      - text: '$(\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta$'
+        correct: true
+        feedback: 'נכון: נוסחת דה-מואבר, $\left(e^{i\theta}\right)^n=e^{in\theta}$.'
+      - text: '$(\cos\theta-i\sin\theta)^n=\cos n\theta-i\sin n\theta$'
+        correct: true
+        feedback: 'נכון: $\cos\theta-i\sin\theta=\operatorname{cis}(-\theta)$, ודה-מואבר עם $-\theta$.'
+      - text: '$(\cos\theta+i\sin\theta)^n=\cos^n\theta+i\sin^n\theta$'
+        feedback: 'כבר ב-$n=2$, $\theta=\frac{\pi}{4}$: אגף שמאל $i$, ואגף ימין $\frac12+\frac12i$.'
+        misconception: MC-c3-power-termwise
+      - text: '$(2\operatorname{cis}\theta)^n=2\operatorname{cis}n\theta$'
+        feedback: 'הערך המוחלט מועלה בחזקה: $(2\operatorname{cis}\theta)^n=2^n\operatorname{cis}n\theta$.'
+        misconception: MC-c3-demoivre-modulus-forget
+
+  - id: Q-3.3-rotate-about-point
+    type: numeric
+    objectives: [OBJ-3.3-2]
+    level: exam
+    prompt: >-
+      מסובבים את $z=4+i$ סביב הנקודה $c=1+i$ בזווית $\frac{\pi}{3}$ נגד כיוון השעון. מהו החלק המדומה של התמונה?
+    answer: 3.598076211353316
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $1+\frac{3\sqrt3}{2}$. מזיזים את $c$ לראשית: $z-c=3$; מסובבים: $3\operatorname{cis}\frac{\pi}{3}=\frac32+\frac{3\sqrt3}{2}i$;
+      מחזירים: $c+\frac32+\frac{3\sqrt3}{2}i=\frac52+\left(1+\frac{3\sqrt3}{2}\right)i$.
+    wrongFeedback: 'סיבוב סביב $c$: $c+(z-c)\operatorname{cis}\alpha$.'
+    commonWrong:
+      - value: 3.964101615137754
+        feedback: '$\frac12+2\sqrt3$ הוא $\operatorname{Im}\left((4+i)\operatorname{cis}\frac{\pi}{3}\right)$: סיבוב סביב הראשית, לא סביב $c$.'
+        misconception: MC-c3-rotate-about-origin
+
+  - id: Q-3.3-cos3t
+    type: expr
+    objectives: [OBJ-3.3-3]
+    level: exam
+    prompt: >-
+      בעזרת נוסחת דה-מואבר עם $n=3$, כתבו את $\cos3t$ כפולינום ב-$\cos t$ בלבד. (השתמשו במשתנה $t$ וכתבו
+      $\cos t$ כ-cos(t); למשל cos(t)^2)
+    answer: '4*cos(t)^3-3*cos(t)'
+    answerTex: '$\cos3t=4\cos^3t-3\cos t$'
+    variables: [t]
+    domain: [-3, 3]
+    correctFeedback: >-
+      נכון. $(\cos t+i\sin t)^3=\cos^3t+3i\cos^2t\sin t-3\cos t\sin^2t-i\sin^3t$. החלק הממשי:
+      $\cos^3t-3\cos t(1-\cos^2t)=4\cos^3t-3\cos t$. בדיקה: ב-$t=0$ שני הצדדים 1.
+    wrongFeedback: >-
+      פתחו את $(\cos t+i\sin t)^3$ בבינום, קחו את החלק הממשי, והחליפו $\sin^2t=1-\cos^2t$.
+    commonWrong:
+      - expr: '3*cos(t)'
+        feedback: '$\cos3t\ne3\cos t$: ב-$t=0$ אגף שמאל 1 ואגף ימין 3.'
+        misconception: MC-c3-demoivre-trig-linear
+      - expr: 'cos(t)^3+3*cos(t)*sin(t)^2'
+        feedback: 'האיבר $3\cos t\,(i\sin t)^2$ הוא $-3\cos t\sin^2t$: $i^2=-1$.'
+        misconception: MC-c3-demoivre-trig-linear
+      - expr: 'cos(t)^3'
+        feedback: 'זה מעלה בחזקה רק את הקוסינוס. דה-מואבר: $\cos3t=\operatorname{Re}(\cos t+i\sin t)^3$, כולל האיברים המעורבים.'
+        misconception: MC-c3-power-termwise

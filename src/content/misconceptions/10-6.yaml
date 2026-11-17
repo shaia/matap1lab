@@ -1,0 +1,45 @@
+# Misconceptions first detected in lesson 10.6 (implicit functions).
+- id: MC-c10-implicit-sign
+  title: שוכחים את המינוס בנוסחה לנגזרת של פונקציה סתומה
+  belief: >-
+    אם $F(x,y)=0$ מגדירה את $y$ כפונקציה של $x$, אז $\frac{dy}{dx}=\frac{F_x}{F_y}$.
+  truth: >-
+    גוזרים את $F(x,y(x))=0$ בכלל השרשרת: $F_x+F_y\frac{dy}{dx}=0$, ולכן $\frac{dy}{dx}=-\frac{F_x}{F_y}$. בדיקה: על המעגל
+    $x^2+y^2=1$ ברביע הראשון השיפוע שלילי, $-\frac{x}{y}$.
+  remedy: { lesson: '10.6', label: 'הנוסחה לנגזרת של פונקציה סתומה' }
+
+- id: MC-c10-implicit-inverted
+  title: הופכים את המנה בנוסחה לנגזרת של פונקציה סתומה
+  belief: >-
+    $\frac{\partial z}{\partial x}=-\frac{F_z}{F_x}$.
+  truth: >-
+    המשתנה שגוזרים לפיו במונה, המשתנה התלוי במכנה: $\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}$. הנוסחה באה מ-$F_x+F_z\frac{\partial z}{\partial x}=0$,
+    ומחלקים ב-$F_z$, ולכן גם התנאי $F_z\ne0$.
+  remedy: { lesson: '10.6', label: 'הנוסחה לנגזרת של פונקציה סתומה' }
+
+- id: MC-c10-partials-cancel-like-fractions
+  title: מצמצמים נגזרות חלקיות כמו שברים
+  belief: >-
+    $\frac{\partial V}{\partial T}\cdot\frac{\partial T}{\partial P}\cdot\frac{\partial P}{\partial V}=1$, כי ה"מונים" וה"מכנים" מצטמצמים.
+  truth: >-
+    כל נגזרת חלקית נלקחת כשמשתנה **אחר** קבוע, ולכן אין כאן צמצום. ל-$PV=kT$ מקבלים
+    $\frac{k}{P}\cdot\frac{V}{k}\cdot\left(-\frac{kT}{V^2}\right)=-\frac{kT}{PV}=-1$, וזה נכון לכל משוואת מצב $F(P,V,T)=0$.
+  remedy: { lesson: '10.6', label: 'נגזרות חלקיות אינן שברים' }
+
+- id: MC-c10-implicit-always-function
+  title: חושבים שמשוואה מגדירה תמיד את y כפונקציה של x ליד כל נקודה שלה
+  belief: >-
+    כל נקודה על העקום $F(x,y)=0$ היא נקודה שבה אפשר לכתוב, ליד הנקודה, $y=g(x)$.
+  truth: >-
+    כש-$F_y=0$ בנקודה ההבטחה נעלמת: על המעגל $x^2+y^2=1$ ליד $(1,0)$ לכל $x<1$ קרוב יש שני ערכי $y$, ולכל $x>1$ אף
+    אחד. אם $F_y\ne0$ בנקודה (ו-$F$ גזירה ברציפות), ליד הנקודה $y$ היא פונקציה של $x$.
+  remedy: { lesson: '10.6', label: 'מתי משוואה מגדירה פונקציה' }
+
+- id: MC-c10-no-slope-no-tangent
+  title: חושבים שכשהנוסחה לשיפוע מתחלקת באפס, לקו הגובה אין משיק
+  belief: >-
+    בנקודה שבה $F_y=0$ הנוסחה $-\frac{F_x}{F_y}$ אינה מוגדרת, ולכן אין לקו הגובה $F=c$ ישר משיק שם.
+  truth: >-
+    הנוסחה נותנת שיפוע, ובנקודה כזו המשיק **אנכי** ואין לו שיפוע. הגרדיאנט עדיין נותן אותו: אם $\nabla F\ne0$, המשיק הוא
+    $F_x(x-x_0)+F_y(y-y_0)=0$. על המעגל $x^2+y^2=1$ ב-$(1,0)$: $2(x-1)=0$, הישר $x=1$.
+  remedy: { lesson: '10.6', label: 'משיק לקו גובה בעזרת הגרדיאנט' }

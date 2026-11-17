@@ -1,0 +1,327 @@
+# Lesson 8.2 — substitution in a definite integral, symmetry, an integral with a variable upper limit (notes p. 11).
+# Objectives (src/course.ts):
+#   OBJ-8.2-1  substitute in a definite integral and change the limits accordingly
+#   OBJ-8.2-2  use the symmetry of an even or odd function on a symmetric interval
+#   OBJ-8.2-3  differentiate an integral whose upper limit varies
+# Every number recomputed in screens/tools/recompute-ch8.py.
+chapter: 8
+questions:
+  - id: Q-8.2-sub-basic
+    type: numeric
+    objectives: [OBJ-8.2-1]
+    level: basic
+    prompt: >-
+      חשבו את $\int_0^2 x\,e^{x^2}\,dx$ בהצבה $u=x^2$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 26.799075016572
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{e^4-1}{2}$. $du=2x\,dx$, והגבולות עוברים: $x=0\mapsto u=0$, $x=2\mapsto u=4$. לכן
+      $\int_0^2xe^{x^2}dx=\frac12\int_0^4e^u\,du=\frac{e^4-1}{2}$.
+    wrongFeedback: >-
+      אחרי ההצבה גם הגבולות הם ערכים של $u$: הציבו את $x=0$ ואת $x=2$ ב-$u=x^2$. ואל תשכחו את $\frac12$ מ-$du=2x\,dx$.
+    commonWrong:
+      - value: 3.1945280494653
+        feedback: >-
+          זה $\frac{e^2-1}{2}$: עברתם ל-$u$ אבל השארתם את הגבולות 0 ו-2 של $x$. כש-$x=2$, $u=4$.
+        misconception: MC-c8-sub-keep-limits
+      - value: 53.598150033144
+        feedback: >-
+          זה $e^4-1$: חסר הגורם $\frac12$. $x\,dx=\frac12du$, לא $du$.
+        misconception: MC-c8-sub-forget-factor
+    hints: ['כש-$x=2$, מה ערכו של $u$?']
+
+  - id: Q-8.2-new-limits
+    type: mc
+    objectives: [OBJ-8.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      בהצבה $u=\ln x$, לאיזה אינטגרל שווה $\int_1^e\frac{(\ln x)^2}{x}\,dx$?
+    choices:
+      - text: '$\int_0^1u^2\,du$'
+        correct: true
+        feedback: >-
+          נכון. $du=\frac{dx}{x}$, ו-$\ln1=0$, $\ln e=1$. הערך $\frac13$.
+      - text: '$\int_1^eu^2\,du$'
+        feedback: >-
+          הגבולות 1 ו-$e$ הם ערכים של $x$. אחרי ההצבה האינטגרל רץ על ערכי $u$: מ-$\ln1=0$ עד $\ln e=1$.
+        misconception: MC-c8-sub-keep-limits
+      - text: '$\int_0^1\frac{u^2}{x}\,du$'
+        feedback: >-
+          ה-$\frac1x$ כבר "נבלע" ב-$du=\frac{dx}{x}$. אחרי ההצבה לא נשאר $x$ באינטגרל.
+        misconception: MC-c8-sub-forget-factor
+      - text: '$\int_0^1u^2\,dx$'
+        feedback: >-
+          משתנה האינטגרציה הוא $u$: מחליפים גם את $dx$. אינטגרל עם $u$ ו-$dx$ יחד אינו מוגדר כאן.
+        misconception: MC-c8-sub-forget-factor
+
+  - id: Q-8.2-sub-sign
+    type: numeric
+    objectives: [OBJ-8.2-1]
+    level: mid
+    prompt: >-
+      חשבו את $\int_0^{\pi/3}\frac{\sin x}{\cos^2x}\,dx$ בהצבה $u=\cos x$.
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $du=-\sin x\,dx$, והגבולות $u(0)=1$, $u(\pi/3)=\tfrac12$:
+      $\int_1^{1/2}\frac{-du}{u^2}=\int_{1/2}^{1}u^{-2}\,du=\left[-\tfrac1u\right]_{1/2}^{1}=-1+2=1$. הבדיקה: האינטגרנד
+      חיובי בקטע, ולכן התשובה חיובית.
+    wrongFeedback: >-
+      שימו לב לסימן ב-$du=-\sin x\,dx$ ולגבולות החדשים: $\cos0=1$ ו-$\cos\frac{\pi}{3}=\frac12$.
+    commonWrong:
+      - value: -1
+        feedback: >-
+          שכחתם את המינוס ב-$du=-\sin x\,dx$, ונשארתם עם $\int_1^{1/2}u^{-2}\,du=-1$. סימן שלילי לאינטגרל של פונקציה
+          חיובית על קטע עם $a<b$ הוא סימן אזהרה.
+        misconception: MC-c8-sub-drop-minus
+    hints: ['$\frac{d}{dx}\cos x=-\sin x$.']
+
+  - id: Q-8.2-sub-sqrt
+    type: numeric
+    objectives: [OBJ-8.2-1]
+    level: mid
+    prompt: >-
+      חשבו את $\int_0^3x\sqrt{x+1}\,dx$ בהצבה $u=x+1$. (אפשר לכתוב שבר.)
+    answer: 7.7333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{116}{15}$. $x=u-1$, $dx=du$, והגבולות 1 עד 4:
+      $\int_1^4(u-1)\sqrt u\,du=\left[\tfrac25u^{5/2}-\tfrac23u^{3/2}\right]_1^4=\left(\tfrac{64}{5}-\tfrac{16}{3}\right)-\left(\tfrac25-\tfrac23\right)=\tfrac{116}{15}$.
+    wrongFeedback: >-
+      בטאו גם את $x$ שבחוץ בעזרת $u$: $x=u-1$. ואז החליפו את הגבולות: $x=0\mapsto u=1$, $x=3\mapsto u=4$.
+    commonWrong:
+      - value: 2.7712812921102
+        feedback: >-
+          זה $\frac{8\sqrt3}{5}$: הצבתם בפונקציה הקדומה ב-$u$ את הגבולות 0 ו-3 של $x$. הגבולות של $u$ הם 1 ו-4.
+        misconception: MC-c8-sub-keep-limits
+    hints: ['$x\sqrt{x+1}=(u-1)u^{1/2}=u^{3/2}-u^{1/2}$.']
+
+  - id: Q-8.2-odd
+    type: numeric
+    objectives: [OBJ-8.2-2]
+    level: basic
+    prompt: >-
+      חשבו את $\int_{-2}^{2}\left(x^3\cos x+4\right)dx$ בלי למצוא פונקציה קדומה ל-$x^3\cos x$.
+    answer: 16
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x^3\cos x$ אי-זוגית (אי-זוגית כפול זוגית), ולכן האינטגרל שלה על $[-2,2]$ הוא 0. נשאר
+      $\int_{-2}^{2}4\,dx=16$.
+    wrongFeedback: >-
+      פצלו לשני אינטגרלים. מה הזוגיות של $x^3\cos x$? ומה האינטגרל של הקבוע 4 על קטע באורך 4?
+    commonWrong:
+      - value: 0
+        feedback: >-
+          רק $x^3\cos x$ אי-זוגית. הקבוע 4 זוגי, והאינטגרל שלו $4\cdot4=16$ אינו מתאפס. הסימטריה פועלת על כל מחובר
+          בנפרד.
+        misconception: MC-c8-odd-whole
+      - value: 8
+        feedback: >-
+          $\int_{-2}^{2}4\,dx$ הוא $4\cdot4$: אורך הקטע $[-2,2]$ הוא 4, לא 2.
+        misconception: MC-c8-constant-integral-length
+    hints: ['$(-x)^3\cos(-x)=-x^3\cos x$.']
+
+  - id: Q-8.2-even
+    type: numeric
+    objectives: [OBJ-8.2-2]
+    level: basic
+    prompt: >-
+      חשבו את $\int_{-\pi}^{\pi}\left(x^2+\sin x\right)dx$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+    answer: 20.6708511202
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{2\pi^3}{3}$. $\sin x$ אי-זוגית ונעלמת, ו-$x^2$ זוגית:
+      $\int_{-\pi}^{\pi}x^2\,dx=2\int_0^{\pi}x^2\,dx=\frac{2\pi^3}{3}$.
+    wrongFeedback: >-
+      פצלו: $\int\sin x$ על קטע סימטרי הוא 0, ו-$\int_{-\pi}^{\pi}x^2\,dx=2\int_0^\pi x^2\,dx$.
+    commonWrong:
+      - value: 10.3354255601
+        feedback: >-
+          זה $\frac{\pi^3}{3}=\int_0^\pi x^2\,dx$: לפונקציה זוגית צריך **להכפיל** ב-2, כי החצי השמאלי תורם בדיוק כמו
+          הימני.
+        misconception: MC-c8-even-forget-double
+    hints: ['$\int_{-a}^{a}f=2\int_0^af$ כש-$f$ זוגית.']
+
+  - id: Q-8.2-which-zero
+    type: multi
+    objectives: [OBJ-8.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      אילו מהאינטגרלים שווים 0? החליטו לפי סימטריה, בלי לחשב. סמנו את כולם.
+    choices:
+      - text: '$\int_{-1}^{1}x^3e^{x^2}\,dx$'
+        correct: true
+        feedback: 'נכון. $x^3$ אי-זוגית ו-$e^{x^2}$ זוגית, והמכפלה אי-זוגית; הקטע סימטרי.'
+      - text: '$\int_{-1}^{1}x^2\sin x\,dx$'
+        correct: true
+        feedback: 'נכון. זוגית כפול אי-זוגית היא אי-זוגית.'
+      - text: '$\int_{-1}^{1}\left(e^x-e^{-x}\right)dx$'
+        correct: true
+        feedback: 'נכון. $g(x)=e^x-e^{-x}$ מקיימת $g(-x)=-g(x)$: היא אי-זוגית (זו $2\sinh x$).'
+      - text: '$\int_{-1}^{2}x^3\,dx$'
+        feedback: >-
+          $x^3$ אי-זוגית, אבל הקטע $[-1,2]$ אינו סימטרי: החלק $[-1,1]$ מתקזז, ונשאר $\int_1^2x^3\,dx=\frac{15}{4}$.
+        misconception: MC-c8-odd-whole
+      - text: '$\int_{-1}^{1}x\sin x\,dx$'
+        feedback: >-
+          $x\sin x$ היא **זוגית** (אי-זוגית כפול אי-זוגית), ואף חיובית ליד 0. האינטגרל $2(\sin1-\cos1)\approx0.60$.
+        misconception: MC-c8-odd-whole
+
+  - id: Q-8.2-zero-not-odd
+    type: twotier
+    objectives: [OBJ-8.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: אם $\int_{-1}^{1}f(x)\,dx=0$, אז $f$ אי-זוגית.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $f(x)=x^2-\frac13$ זוגית, ובכל זאת $\int_{-1}^{1}\left(x^2-\tfrac13\right)dx=\tfrac23-\tfrac23=0$.
+      - text: 'נכון'
+        feedback: >-
+          הכיוון הנכון הוא ההפוך: אי-זוגית על קטע סימטרי גורר אינטגרל 0. אינטגרל 0 יכול לנבוע מקיזוז שאינו סימטרי.
+        misconception: MC-c8-zero-means-odd
+    reasons:
+      - text: 'יש פונקציה זוגית עם אינטגרל 0 על $[-1,1]$, למשל $x^2-\frac13$'
+        correct: true
+        feedback: 'בדיוק. דוגמה נגדית אחת מספיקה כדי להפריך טענה כללית.'
+      - text: 'כל פונקציה שהאינטגרל שלה על קטע סימטרי מתאפס היא אי-זוגית, לפי הגדרת הזוגיות'
+        feedback: >-
+          ההגדרה של אי-זוגית היא $f(-x)=-f(x)$ לכל $x$, תנאי על הערכים. האינטגרל הוא מספר אחד, והוא לא יכול לקבוע את
+          כל הערכים.
+        misconception: MC-c8-zero-means-odd
+      - text: 'אינטגרל 0 פירושו $f\equiv0$, ו-0 היא פונקציה אי-זוגית'
+        feedback: '$\int_0^{2\pi}\sin x\,dx=0$ אבל $\sin x\not\equiv0$: אינטגרל 0 נובע מקיזוז שטחים.'
+        misconception: MC-c8-zero-integral-zero-function
+
+  - id: Q-8.2-ftc-basic
+    type: expr
+    objectives: [OBJ-8.2-3]
+    level: basic
+    prompt: >-
+      $F(x)=\int_0^x\sin\left(t^2\right)dt$. כתבו את $F'(x)$.
+    answer: 'sin(x^2)'
+    answerTex: '$F''(x)=\sin\left(x^2\right)$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. לפי המשפט היסודי, הנגזרת של $\int_a^x f(t)\,dt$ לפי הגבול העליון היא $f(x)$: מציבים את הגבול במקום
+      $t$. (ל-$\sin(t^2)$ אין פונקציה קדומה אלמנטרית, ובכל זאת הנגזרת של $F$ ידועה.)
+    wrongFeedback: >-
+      $F(x)$ הוא השטח מ-0 עד $x$. כמה השטח גדל כש-$x$ זז מעט ימינה? בערך $f(x)\,\Delta x$.
+    commonWrong:
+      - expr: '2*x*cos(x^2)'
+        feedback: >-
+          זו הנגזרת של $\sin(x^2)$. כאן לא גוזרים את האינטגרנד: מציבים את הגבול העליון בו.
+        misconception: MC-c8-ftc-differentiate-integrand
+      - expr: '-cos(x^2)'
+        feedback: >-
+          ניסיתם למצוא פונקציה קדומה ל-$\sin(t^2)$, ו-$-\cos(t^2)$ אינה כזו (גזרו אותה). וגם אין בזה צורך: גזירה
+          של האינטגרל לפי הגבול מחזירה את האינטגרנד.
+        misconception: MC-c8-ftc-differentiate-integrand
+    hints: ['המשפט היסודי: $\frac{d}{dx}\int_a^xf(t)\,dt=f(x)$.']
+
+  - id: Q-8.2-ftc-constant-lower
+    type: twotier
+    objectives: [OBJ-8.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $\frac{d}{dx}\int_0^xe^{t^2}\,dt=e^{x^2}-1$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. הנגזרת היא $e^{x^2}$ בלבד.'
+      - text: 'נכון'
+        feedback: >-
+          $-1$ הוא $e^{0^2}$, הערך בגבול התחתון. אבל הגבול התחתון קבוע, וקבוע אינו תורם לנגזרת.
+        misconception: MC-c8-ftc-subtract-f0
+    reasons:
+      - text: 'הגבול התחתון קבוע, ולכן רק הגבול העליון משתנה והנגזרת היא האינטגרנד בגבול העליון'
+        correct: true
+        feedback: >-
+          בדיוק. אם $G$ קדומה, $\int_0^xe^{t^2}dt=G(x)-G(0)$, ו-$G(0)$ הוא מספר: הנגזרת שלו 0.
+      - text: 'כי $F(b)-F(a)$ נותן $e^{x^2}-e^{0}$'
+        feedback: >-
+          $F(b)-F(a)$ מחשב את האינטגרל, לא את הנגזרת שלו. ו-$e^{t^2}$ היא האינטגרנד, לא פונקציה קדומה.
+        misconception: MC-c8-ftc-subtract-f0
+      - text: 'כי צריך לגזור גם את $e^{t^2}$ לפי $t$'
+        feedback: 'לא גוזרים את האינטגרנד: מציבים בו את הגבול העליון.'
+        misconception: MC-c8-ftc-differentiate-integrand
+
+  - id: Q-8.2-ftc-chain
+    type: expr
+    objectives: [OBJ-8.2-3]
+    level: mid
+    prompt: >-
+      $G(x)=\int_0^{x^2}e^{-t^2}\,dt$. כתבו את $G'(x)$.
+    answer: '2*x*exp(-x^4)'
+    answerTex: '$G''(x)=2x\,e^{-x^4}$'
+    variables: [x]
+    domain: [-1.5, 1.5]
+    correctFeedback: >-
+      נכון. $G=F(x^2)$ כש-$F(y)=\int_0^ye^{-t^2}dt$, וכלל השרשרת נותן $F'(x^2)\cdot2x=e^{-(x^2)^2}\cdot2x$.
+    wrongFeedback: >-
+      כתבו את $G$ כהרכבה: $F(y)=\int_0^ye^{-t^2}dt$ עם $y=x^2$. גזרו בכלל השרשרת.
+    commonWrong:
+      - expr: 'exp(-x^4)'
+        feedback: >-
+          הצבתם נכון את $x^2$, אבל שכחתם את הנגזרת הפנימית $(x^2)'=2x$.
+        misconception: MC-c8-ftc-forget-chain
+      - expr: '2*x*exp(-x^2)'
+        feedback: >-
+          הצבתם באינטגרנד $x$ ולא את הגבול $x^2$. מציבים את הגבול כולו: $e^{-(x^2)^2}=e^{-x^4}$.
+        misconception: MC-c8-ftc-forget-chain
+    hints: ['$\frac{d}{dx}F(x^2)=F''(x^2)\cdot2x$.']
+
+  - id: Q-8.2-ftc-both
+    type: expr
+    objectives: [OBJ-8.2-3]
+    level: exam
+    prompt: >-
+      $H(x)=\int_x^{2x}\frac{e^t}{t}\,dt$ ל-$x>0$. כתבו את $H'(x)$.
+    answer: '(exp(2*x)-exp(x))/x'
+    answerTex: '$H''(x)=\dfrac{e^{2x}}{2x}\cdot2-\dfrac{e^x}{x}=\dfrac{e^{2x}-e^x}{x}$'
+    variables: [x]
+    domain: [0.2, 2]
+    correctFeedback: >-
+      נכון. מפצלים בנקודה קבועה, $H(x)=\int_1^{2x}\frac{e^t}{t}dt-\int_1^{x}\frac{e^t}{t}dt$, וגוזרים כל חלק: הראשון
+      בכלל השרשרת, $\frac{e^{2x}}{2x}\cdot2$, והשני $\frac{e^x}{x}$.
+    wrongFeedback: >-
+      כששני הגבולות משתנים, פצלו בנקודה קבועה (למשל 1). הגבול התחתון נכנס עם מינוס, והגבול $2x$ מביא נגזרת פנימית 2.
+    commonWrong:
+      - expr: 'exp(2*x)/(2*x)-exp(x)/x'
+        feedback: >-
+          חסרה הנגזרת הפנימית של הגבול העליון: $(2x)'=2$.
+        misconception: MC-c8-ftc-forget-chain
+      - expr: '(exp(2*x)+exp(x))/x'
+        feedback: >-
+          הגבול התחתון נכנס עם **מינוס**: $\int_x^{c}=-\int_c^{x}$, ולכן הנגזרת לפיו היא $-f(x)$.
+        misconception: MC-c8-ftc-lower-limit-sign
+    hints: ['$\int_x^{2x}=\int_1^{2x}-\int_1^{x}$.']
+
+  - id: Q-8.2-ftc-extremum
+    type: numeric
+    objectives: [OBJ-8.2-3]
+    level: exam
+    prompt: >-
+      $F(x)=\int_0^x\left(t^2-4\right)e^{-t}\,dt$. באיזו נקודה $x>0$ יש ל-$F$ מינימום מקומי?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $F'(x)=(x^2-4)e^{-x}$ מתאפסת ב-$x=\pm2$. ב-$x=2$ היא עוברת משלילית לחיובית ($e^{-x}>0$ והסימן הוא של
+      $x^2-4$), ולכן זה מינימום. לא צריך לחשב את האינטגרל.
+    wrongFeedback: >-
+      $F'(x)$ נתונה ישירות מהמשפט היסודי. מצאו את האפסים שלה ובדקו את החלפת הסימן.
+    commonWrong:
+      - value: -2
+        feedback: >-
+          $x=-2$ אינו בתחום $x>0$, ושם $F'$ עוברת מחיובית לשלילית: זה מקסימום מקומי.
+      - value: 0
+        feedback: >-
+          $F(0)=0$, אבל $F'(0)=-4\ne0$: הנקודה אינה קריטית. מחפשים היכן $F'(x)=(x^2-4)e^{-x}$ מתאפסת.
+    hints: ['$F''(x)=(x^2-4)e^{-x}$.']

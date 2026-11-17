@@ -1,0 +1,34 @@
+# Terms first defined in lesson 6.4 (the domain of convergence and Leibniz-type series).
+- id: radius-of-convergence
+  term: רדיוס התכנסות
+  en: radius of convergence
+  symbol: 'R'
+  definition: >-
+    המספר $R$ (אולי $\infty$) שלטור חזקות $\sum a_k(x-x_0)^k$ יש: הטור מתכנס כש-$|x-x_0|<R$ ומתבדר כש-$|x-x_0|>R$. לטורים
+    של $e^x,\sin x,\cos x$ הרדיוס אינסופי; לטור ההנדסי, ל-$\ln(1+x)$, ל-$\arctan x$ ולטור הבינומי הוא 1.
+  reject: []
+  lesson: '6.4'
+- id: interval-of-convergence
+  term: תחום התכנסות
+  en: interval of convergence
+  definition: >-
+    קבוצת ה-$x$ שבהם טור החזקות מתכנס: קטע סביב $x_0$ ברדיוס $R$, כשבכל אחד משני הקצוות בודקים בנפרד. למשל הטור של
+    $\ln(1+x)$ מתכנס בדיוק כש-$-1<x\le1$.
+  reject: []
+  lesson: '6.4'
+- id: alternating-series
+  term: טור מתחלף
+  en: alternating series
+  symbol: '\sum(-1)^ka_k,\ a_k>0'
+  definition: >-
+    טור שהסימנים של איבריו מתחלפים: $a_0-a_1+a_2-\dots$ עם $a_k>0$.
+  reject: []
+  lesson: '6.4'
+- id: leibniz-series
+  term: טור לייבניץ
+  en: Leibniz (alternating) series
+  definition: >-
+    טור מתחלף $\sum(-1)^ka_k$ שבו $a_k$ יורדים ושואפים ל-0. טור כזה מתכנס, והשגיאה של הסכום החלקי קטנה מהאיבר הראשון
+    שהושמט ובסימן שלו: $|S-S_n|\le a_{n+1}$.
+  reject: [טור ליבניץ]
+  lesson: '6.4'

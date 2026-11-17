@@ -1,0 +1,45 @@
+# Misconceptions first detected in lesson 13.1 (surface area and surface integrals of a function).
+- id: MC-c13-dS-is-dudv
+  title: מחליפים את אלמנט שטח הפנים ב-du dv
+  belief: >-
+    $\iint_Sf\,dS=\iint_Df(\vec r(u,v))\,du\,dv$, כש-$D$ תחום הפרמטרים.
+  truth: >-
+    מלבן קטן $\Delta u\times\Delta v$ בתחום הפרמטרים הופך על המשטח למקבילית שהצלעות שלה $\vec r_u\Delta u$ ו-$\vec r_v\Delta v$,
+    ולכן $dS=|\vec r_u\times\vec r_v|\,du\,dv$. בלי הגורם הזה מקבלים "שטח" שתלוי בפרמטריזציה.
+  remedy: { lesson: '13.1', label: 'אלמנט שטח הפנים dS' }
+
+- id: MC-c13-surface-vs-shadow
+  title: מחליפים את שטח המשטח בשטח הצל שלו
+  belief: >-
+    השטח של גרף $z=f(x,y)$ מעל תחום $D$ שווה לשטח של $D$, או ש-$\iint_Sg\,dS=\iint_Dg\,dA$.
+  truth: >-
+    משטח משופע גדול מהצל שלו: $dS=\sqrt{1+f_x^2+f_y^2}\,dA$. רק כשהמשטח אופקי ($f_x=f_y=0$) הגורם הוא 1. לדוגמה, החרוט
+    $z=\sqrt{x^2+y^2}$ מעל עיגול ברדיוס 2: שטח הצל $4\pi$, שטח החרוט $4\sqrt2\,\pi$.
+  remedy: { lesson: '13.1', label: 'שטח של גרף: הגורם עם השורש' }
+
+- id: MC-c13-graph-no-sqrt
+  title: שוכחים את השורש בנוסחת השטח של גרף
+  belief: >-
+    לגרף $z=f(x,y)$: $dS=(1+f_x^2+f_y^2)\,dA$.
+  truth: >-
+    $dS=|\vec r_x\times\vec r_y|\,dA=|(-f_x,-f_y,1)|\,dA=\sqrt{1+f_x^2+f_y^2}\,dA$: זה **אורך** של וקטור. בדיקה: למישור
+    $z=x$ (שיפוע $45^\circ$) הגורם צריך להיות $\sqrt2$, לא 2.
+  remedy: { lesson: '13.1', label: 'שטח של גרף: אורך הנורמל' }
+
+- id: MC-c13-shell-vs-solid
+  title: מחליפים קליפה בגוף מלא
+  belief: >-
+    מרכז המסה של קליפה חצי-כדורית הוא כמו של חצי כדור מלא, $\frac38R$, ומסה של קליפה מחשבים באינטגרל משולש.
+  truth: >-
+    לקליפה אין עובי: המסה שלה היא $\iint_S\sigma\,dS$, עם צפיפות שטחית $\sigma$. בקליפה כל המסה רחוקה מהמרכז, ולכן מרכז
+    המסה של קליפה חצי-כדורית הומוגנית גבוה יותר: $\bar z=\frac R2$.
+  remedy: { lesson: '13.1', label: 'מסה ומרכז מסה של קליפה' }
+
+- id: MC-c13-closed-surface-zero
+  title: חושבים שאינטגרל של פונקציה על משטח סגור תמיד אפס
+  belief: >-
+    על משטח סגור, כמו ספירה, $\iint_Sf\,dS=0$, כמו שעבודה של שדה גרדיאנט על עקום סגור היא 0.
+  truth: >-
+    $\iint_Sf\,dS$ הוא סכום של $f\,\Delta S$, ולפונקציה חיובית הוא חיובי: $\iint_S1\,dS$ הוא שטח הפנים. אפס מתקבל רק
+    מסיבה מיוחדת, למשל סימטריה: על ספירה סביב הראשית $\iint_Sx\,dS=0$ כי $x$ אי-זוגית.
+  remedy: { lesson: '13.1', label: 'אינטגרל משטחי וסימטריה' }

@@ -1,0 +1,19 @@
+# Terms first defined in lesson 6.2 (Taylor's formula with the Lagrange remainder).
+- id: taylor-remainder
+  term: שארית
+  en: remainder (of a Taylor approximation)
+  symbol: 'R_n(x)=f(x)-T_n(x)'
+  definition: >-
+    השגיאה של קירוב טיילור: $R_n(x)=f(x)-T_n(x)$. חסם על $|R_n(x)|$ בקטע הוא חסם על שגיאת הקירוב בכל הקטע.
+  reject: []
+  lesson: '6.2'
+- id: lagrange-remainder
+  term: שארית בצורת לגרנז׳
+  en: Lagrange form of the remainder
+  symbol: 'R_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}'
+  definition: >-
+    אם $f$ גזירה $n+1$ פעמים בקטע שמכיל את $x_0$ ואת $x$, יש נקודה $c$ ביניהם עם
+    $R_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}$. הנקודה $c$ תלויה ב-$x$ ואינה ידועה, ולכן משתמשים בנוסחה לחסם
+    ולסימן של השגיאה. הקורס משתמש במשפט בלי הוכחה מלאה.
+  reject: [שארית לגראנז]
+  lesson: '6.2'

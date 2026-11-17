@@ -1,0 +1,9 @@
+# Terms first defined in lesson 10.6 (implicit functions).
+- id: implicit-function
+  term: פונקציה סתומה
+  en: implicit function
+  definition: >-
+    פונקציה שמוגדרת על ידי משוואה ולא על ידי נוסחה: $y=g(x)$ כך ש-$F(x,g(x))=0$, או $z=g(x,y)$ כך ש-$F(x,y,g(x,y))=0$.
+    אם $F$ גזירה ברציפות ו-$F_y\ne0$ (או $F_z\ne0$) בנקודה של המשוואה, ליד הנקודה הפונקציה קיימת (משפט, בקורס בלי
+    הוכחה), ו-$\frac{dy}{dx}=-\frac{F_x}{F_y}$, $\frac{\partial z}{\partial x}=-\frac{F_x}{F_z}$, $\frac{\partial z}{\partial y}=-\frac{F_y}{F_z}$.
+  lesson: '10.6'

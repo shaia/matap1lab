@@ -1,0 +1,35 @@
+# Terms first defined in lesson 10.2 (partial and directional derivatives, second-order partials).
+- id: partial-derivative
+  term: נגזרת חלקית
+  en: partial derivative
+  symbol: '\frac{\partial f}{\partial x}=f_x'
+  definition: >-
+    $f_x(x_0,y_0)=\lim_{h\to0}\frac{f(x_0+h,y_0)-f(x_0,y_0)}{h}$: הנגזרת של $f$ לפי $x$ כש-$y$ קבוע. גיאומטרית, השיפוע של
+    החתך של הגרף עם המישור $y=y_0$. באותו אופן $f_y$, ו-$f_z$ בשלושה משתנים.
+  reject: [נגזרת חילקית]
+  lesson: '10.2'
+- id: directional-derivative
+  term: נגזרת כיוונית
+  en: directional derivative
+  symbol: 'D_{\hat u}f'
+  definition: >-
+    לווקטור יחידה $\hat u$: $D_{\hat u}f(x_0,y_0)=\lim_{t\to0}\frac{f\big((x_0,y_0)+t\hat u\big)-f(x_0,y_0)}{t}$, קצב השינוי של
+    $f$ ליחידת מרחק כשזזים מהנקודה בכיוון $\hat u$. כש-$f$ דיפרנציאבילית, $D_{\hat u}f=\nabla f\cdot\hat u$. הנגזרות החלקיות
+    הן המקרים $\hat u=\hat\imath$ ו-$\hat u=\hat\jmath$.
+  lesson: '10.2'
+- id: second-partial-derivative
+  term: נגזרת חלקית מסדר שני
+  en: second-order partial derivative
+  symbol: 'f_{xx},\ f_{xy}=(f_x)_y'
+  definition: >-
+    נגזרת חלקית של נגזרת חלקית: $f_{xx}=(f_x)_x$, $f_{yy}=(f_y)_y$, ושתי הנגזרות המעורבות $f_{xy}=(f_x)_y$ ו-$f_{yx}=(f_y)_x$.
+    בסימון השברים $f_{xy}=\frac{\partial^2 f}{\partial y\,\partial x}$: גוזרים קודם לפי $x$.
+  lesson: '10.2'
+- id: mixed-partial-derivative
+  term: נגזרת מעורבת
+  en: mixed partial derivative
+  symbol: 'f_{xy}=f_{yx}'
+  definition: >-
+    נגזרת חלקית מסדר שני לפי שני משתנים שונים, כמו $f_{xy}$. משפט (בקורס בלי הוכחה): אם $f_{xy}$ ו-$f_{yx}$ רציפות בסביבה
+    של הנקודה, הן שוות שם. לכן לפונקציות שבנויות מפונקציות אלמנטריות סדר הגזירה לא משנה בתוך תחום ההגדרה שלהן.
+  lesson: '10.2'

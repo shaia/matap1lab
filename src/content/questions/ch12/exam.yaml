@@ -1,0 +1,315 @@
+# Chapter 12 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with an open part graded against a model solution and a rubric.
+# Core lessons only (12.1–12.7): no part cites OBJ-12.8-*. Every number recomputed with sympy, and each mass, volume
+# and centre of mass in two ways (both orders, or spherical and cylindrical): screens/tools/recompute-ch12.py.
+chapter: 12
+questions:
+  - id: Q-12-exam-1
+    type: exam
+    title: לוח בין פרבולה לישר
+    prompt: >-
+      לוח דק תופס את התחום $D$ שבין הפרבולה $y=x^2$ לישר $y=2x$. צפיפות הלוח (מסה ליחידת שטח) היא $\rho(x,y)=x$.
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-12.2-2, OBJ-12.7-1]
+        prompt: >-
+          חשבו את השטח של $D$.
+        answer: 1.33333333333333
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. העקומים נחתכים ב-$x=0$ וב-$x=2$, ובין לבין $2x\ge x^2$: $\int_0^2\left(2x-x^2\right)dx=4-\frac83=\frac43$.
+        wrongFeedback: >-
+          מצאו את נקודות החיתוך ($x^2=2x$) ובדקו מי העקום העליון בין לבין.
+        commonWrong:
+          - value: -1.33333333333333
+            feedback: >-
+              שטח שלילי: חיסרתם את העליון מהתחתון. ב-$x=1$: $2x=2>1=x^2$, ולכן הישר למעלה.
+            misconception: MC-c12-region-wrong-side
+
+      - label: ב
+        points: 12
+        type: open
+        objectives: [OBJ-12.2-1, OBJ-12.2-3, OBJ-12.7-2]
+        prompt: >-
+          כתבו את המסה $M$ של הלוח כאינטגרל נשנה בשני הסדרים ($dy\,dx$ ו-$dx\,dy$), וחשבו אותה בשניהם.
+        solution:
+          - kind: given
+            text: '$D$ בין $y=x^2$ ל-$y=2x$, $\rho=x$. המסה $M=\iint_D\rho\,dA$.'
+          - kind: goal
+            text: 'שני תיאורים של $D$ (לפי $x$ ולפי $y$), ו-$M$ בכל אחד מהם.'
+          - kind: idea
+            text: >-
+              לפי $x$: רצועות אנכיות, מהפרבולה עד הישר. לפי $y$: רצועות אופקיות, מהישר ($x=\frac y2$) עד הפרבולה ($x=\sqrt y$).
+              שתי התוצאות חייבות להיות שוות (פוביני), וזו בדיקה.
+          - kind: step
+            text: 'נקודות החיתוך: $x^2=2x$, כלומר $(0,0)$ ו-$(2,4)$. לפי $x$: $0\le x\le2$, $x^2\le y\le2x$.'
+          - kind: computation
+            text: >-
+              $M=\int_0^2\!\int_{x^2}^{2x}x\,dy\,dx=\int_0^2x\left(2x-x^2\right)dx=\frac{16}{3}-4=\frac43$.
+          - kind: step
+            text: >-
+              לפי $y$: $0\le y\le4$; בגובה $y$ הישר נותן $x=\frac y2$ והפרבולה $x=\sqrt y$, ו-$\frac y2\le\sqrt y$ (למשל ב-$y=1$).
+          - kind: computation
+            text: >-
+              $M=\int_0^4\!\int_{y/2}^{\sqrt y}x\,dx\,dy=\int_0^4\frac12\left(y-\frac{y^2}{4}\right)dy=\frac12\left(8-\frac{16}{3}\right)=\frac43$.
+          - kind: check
+            text: 'שני הסדרים נותנים $\frac43$. גם סביר: השטח $\frac43$ והצפיפות $x$ נעה בין 0 ל-2.'
+          - kind: result
+            text: '$M=\frac43$.'
+        rubric:
+          - text: 'נקודות החיתוך ותיאור נכון של $D$ לפי $x$ (גבולות פנימיים $x^2\le y\le2x$)'
+            weight: 3
+          - text: 'תיאור נכון של $D$ לפי $y$: $0\le y\le4$, $\frac y2\le x\le\sqrt y$ (גבולות חיצוניים מספרים)'
+            weight: 3
+          - text: 'אינטגרנד נכון, $\rho=x$, בשני האינטגרלים (לא 1)'
+            weight: 2
+          - text: 'חישוב נכון של $M=\frac43$ בשני הסדרים, והשוואה ביניהם'
+            weight: 4
+
+      - label: ג
+        points: 5
+        type: numeric
+        objectives: [OBJ-12.7-2]
+        prompt: >-
+          חשבו את $\bar x$ של מרכז המסה של הלוח.
+        answer: 1.2
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\iint_Dx\cdot x\,dA=\int_0^2x^2\left(2x-x^2\right)dx=8-\frac{32}{5}=\frac85$, ו-$\bar x=\frac{8/5}{4/3}=\frac65$.
+        wrongFeedback: >-
+          $\bar x=\frac1M\iint_Dx\rho\,dA$, עם $\rho=x$, ו-$M=\frac43$.
+        commonWrong:
+          - value: 1.6
+            feedback: >-
+              $\frac85$ הוא $\iint_Dx\rho\,dA$, לפני החלוקה במסה.
+            misconception: MC-c12-centroid-no-divide
+          - value: 1
+            feedback: >-
+              1 הוא $\bar x$ של לוח **אחיד** באותה צורה. כאן הצפיפות $x$ מוסיפה משקל לצד הימני.
+            misconception: MC-c12-density-ignored
+
+      - label: ד
+        points: 3
+        type: twotier
+        objectives: [OBJ-12.7-2]
+        qualitative: true
+        prompt: >-
+          נכון או לא נכון: בלי לחשב, אפשר לדעת ש-$\bar x$ של הלוח גדול מ-$\bar x$ של לוח אחיד באותה צורה.
+        choices:
+          - text: נכון
+            correct: true
+            feedback: 'נכון. $\frac65>1$.'
+          - text: לא נכון
+            feedback: >-
+              הצפיפות $x$ גדלה ימינה, ולכן לנקודות עם $x$ גדול יש משקל גדול יותר בממוצע. מרכז המסה זז ימינה.
+            misconception: MC-c12-density-ignored
+        reasons:
+          - text: '$\bar x$ הוא ממוצע של $x$ במשקל $\rho=x$, שגדל עם $x$: ממוצע כזה גדול מהממוצע במשקל אחיד'
+            correct: true
+            feedback: 'בדיוק. משקל עולה מושך את הממוצע לכיוון הערכים הגדולים.'
+          - text: 'מרכז המסה תלוי רק בצורה של הלוח'
+            feedback: >-
+              רק כשהצפיפות אחידה. כאן היא תלויה ב-$x$.
+            misconception: MC-c12-density-ignored
+          - text: 'כי $\iint_Dx\rho\,dA$ גדול מ-$\iint_Dx\,dA$'
+            feedback: >-
+              המומנט לבדו אינו מיקום: צריך לחלק במסה, והמסה משתנה גם היא. ההשוואה הנכונה היא בין ממוצעים.
+            misconception: MC-c12-centroid-no-divide
+
+  - id: Q-12-exam-2
+    type: exam
+    title: גביע גלידה הומוגני
+    prompt: >-
+      $E$ הוא הגוף שמעל החרוט $z=\sqrt{x^2+y^2}$ ובתוך הכדור $x^2+y^2+z^2\le4$ ("גביע גלידה"). הגוף הומוגני. משתמשים
+      בקואורדינטות כדוריות $(r,\theta,\varphi)$, כש-$\theta$ נמדדת מציר $z$ החיובי.
+    parts:
+      - label: א
+        points: 5
+        type: mc
+        objectives: [OBJ-12.5-2, OBJ-12.5-3]
+        prompt: >-
+          אילו גבולות מתארים את $E$?
+        choices:
+          - text: '$0\le r\le2$, $0\le\theta\le\frac\pi4$, $0\le\varphi\le2\pi$'
+            correct: true
+            feedback: >-
+              נכון. על החרוט $z=\sqrt{x^2+y^2}$, כלומר $r\cos\theta=r\sin\theta$ ו-$\theta=\frac\pi4$; מעליו (קרוב יותר לציר
+              $z$) $\theta<\frac\pi4$. הספרה היא $r=2$.
+          - text: '$0\le r\le2$, $\frac\pi4\le\theta\le\frac\pi2$, $0\le\varphi\le2\pi$'
+            feedback: >-
+              אלה הנקודות שבין החרוט למישור $xy$, כלומר **מתחת** לחרוט.
+            misconception: MC-c12-spherical-ranges
+          - text: '$0\le r\le4$, $0\le\theta\le\frac\pi4$, $0\le\varphi\le2\pi$'
+            feedback: >-
+              $x^2+y^2+z^2=r^2$, ולכן הספרה היא $r=2$, לא $r=4$.
+            misconception: MC-c12-polar-limits
+
+      - label: ב
+        points: 7
+        type: numeric
+        objectives: [OBJ-12.5-2, OBJ-12.4-3]
+        prompt: >-
+          חשבו את הנפח של $E$.
+        answer: 4.90747298405659
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $V=\int_0^{2\pi}\!\int_0^{\pi/4}\!\int_0^2r^2\sin\theta\,dr\,d\theta\,d\varphi=2\pi\cdot\left(1-\frac{\sqrt2}{2}\right)\cdot\frac83=\frac{8\pi\left(2-\sqrt2\right)}{3}\approx4.91$.
+        wrongFeedback: >-
+          אלמנט הנפח $r^2\sin\theta\,dr\,d\theta\,d\varphi$, והאינטגרל מתפרק למכפלה של שלושה.
+        commonWrong:
+          - value: 11.847687835089
+            feedback: >-
+              זה מה שיוצא עם $\cos\theta$ במקום $\sin\theta$ (המוסכמה של זווית מהמישור). עם $\theta$ מציר $z$ האלמנט
+              $r^2\sin\theta$. בדיקה: הגביע הוא חלק קטן מחצי הכדור ($\frac{16\pi}{3}\approx16.8$), ו-11.8 הם כמעט 70% ממנו.
+            misconception: MC-c12-spherical-element
+
+      - label: ג
+        points: 13
+        type: open
+        objectives: [OBJ-12.5-2, OBJ-12.7-2]
+        prompt: >-
+          מצאו את מרכז המסה של $E$. נמקו למה $\bar x=\bar y=0$, וחשבו את $\bar z$.
+        solution:
+          - kind: given
+            text: '$E$: $0\le r\le2$, $0\le\theta\le\frac\pi4$, $0\le\varphi\le2\pi$; צפיפות אחידה, ולכן $\bar z=\frac1V\iiint_Ez\,dV$.'
+          - kind: goal
+            text: '$(\bar x,\bar y,\bar z)$.'
+          - kind: idea
+            text: >-
+              סימטריה סביב ציר $z$ מאפסת את $\bar x$ ואת $\bar y$. ל-$\bar z$ מחשבים את המומנט $\iiint z\,dV$ בכדוריות, עם
+              $z=r\cos\theta$, ומחלקים בנפח מסעיף ב.
+          - kind: step
+            text: >-
+              $E$ והצפיפות אינם משתנים כשמחליפים $x\mapsto-x$ (וכך גם $y\mapsto-y$), ולכן $\iiint_Ex\,dV=\iiint_Ey\,dV=0$, כלומר
+              $\bar x=\bar y=0$. (גם בחישוב: $\int_0^{2\pi}\cos\varphi\,d\varphi=0$.)
+          - kind: computation
+            text: >-
+              $\iiint_Ez\,dV=\int_0^{2\pi}\!\int_0^{\pi/4}\!\int_0^2r\cos\theta\cdot r^2\sin\theta\,dr\,d\theta\,d\varphi=2\pi\cdot\left[\frac{\sin^2\theta}{2}\right]_0^{\pi/4}\cdot\frac{2^4}{4}=2\pi\cdot\frac14\cdot4=2\pi$.
+          - kind: computation
+            text: >-
+              $V=\frac{8\pi\left(2-\sqrt2\right)}{3}$, ולכן $\bar z=\frac{2\pi}{V}=\frac{3}{4\left(2-\sqrt2\right)}=\frac34+\frac{3\sqrt2}{8}\approx1.28$.
+          - kind: check
+            text: >-
+              $0<\bar z<2$, כמו שצריך. ובגליליות: $r\le z\le\sqrt{4-r^2}$, $0\le r\le\sqrt2$, ו-$\int_0^{2\pi}\!\int_0^{\sqrt2}\frac{4-2r^2}{2}\,r\,dr\,d\theta=2\pi$:
+              אותו מומנט. $\bar z$ גבוה מזה של חצי כדור ($\frac34$), כי הגביע צר למטה והחומר מרוכז למעלה.
+          - kind: result
+            text: '$(\bar x,\bar y,\bar z)=\left(0,\ 0,\ \frac34+\frac{3\sqrt2}{8}\right)\approx(0,0,1.28)$.'
+        rubric:
+          - text: 'נימוק נכון לסימטריה: $\bar x=\bar y=0$'
+            weight: 2
+          - text: 'אינטגרל נכון למומנט: $z=r\cos\theta$, אלמנט הנפח $r^2\sin\theta$, והגבולות מסעיף א'
+            weight: 4
+          - text: 'חישוב נכון של $\iiint_Ez\,dV=2\pi$'
+            weight: 3
+          - text: 'חלוקה בנפח וערך נכון של $\bar z\approx1.28$, עם בדיקת סבירות (בין 0 ל-2)'
+            weight: 3
+
+  - id: Q-12-exam-3
+    type: exam
+    title: תחום בין ישרים להיפרבולות
+    prompt: >-
+      $D$ הוא התחום ברביע הראשון שחסום על ידי ההיפרבולות $xy=1$ ו-$xy=4$ והישרים $y=x$ ו-$y=4x$. משתמשים בהחלפה $u=\frac yx$,
+      $v=xy$.
+    parts:
+      - label: א
+        points: 3
+        type: mc
+        objectives: [OBJ-12.6-2]
+        qualitative: true
+        prompt: >-
+          לאיזה תחום $D^*$ במישור $uv$ ההחלפה מעבירה את $D$?
+        choices:
+          - text: 'הריבוע $1\le u\le4$, $1\le v\le4$'
+            correct: true
+            feedback: 'נכון. על הישרים $u$ הוא 1 או 4, ועל ההיפרבולות $v$ הוא 1 או 4.'
+          - text: 'התחום $x\le u\le4x$, $1\le v\le4$'
+            feedback: >-
+              במישור $uv$ הגבולות נכתבים רק ב-$u$ וב-$v$. הישרים $y=x$ ו-$y=4x$ הם $u=1$ ו-$u=4$.
+            misconception: MC-c12-integrand-not-converted
+          - text: 'אין צורך: $D$ כבר מלבן'
+            feedback: >-
+              הצלעות של $D$ הן שני ישרים משופעים ושתי היפרבולות, לא ישרים מקבילים לצירים.
+            misconception: MC-c12-bounding-rectangle
+
+      - label: ב
+        points: 5
+        type: expr
+        objectives: [OBJ-12.6-1, OBJ-12.6-3]
+        prompt: >-
+          חשבו את $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|$ כפונקציה של $u$ ו-$v$.
+        answer: '1/(2*u)'
+        answerTex: '$\left|\frac{\partial(x,y)}{\partial(u,v)}\right|=\frac{1}{2u}$'
+        variables: [u, v]
+        domain: [1, 4]
+        correctFeedback: >-
+          נכון. $\frac{\partial(u,v)}{\partial(x,y)}=\det\begin{pmatrix}-y/x^2&1/x\\y&x\end{pmatrix}=-\frac{2y}{x}=-2u$, וההופכי
+          בערך מוחלט $\frac{1}{2u}$.
+        wrongFeedback: >-
+          חשבו את $\frac{\partial(u,v)}{\partial(x,y)}$ מהנוסחאות הנתונות, כתבו אותו ב-$u$, וקחו הופכי וערך מוחלט.
+        commonWrong:
+          - expr: '2*u'
+            feedback: >-
+              זה $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|$. המקדם של $du\,dv$ הוא ההופכי.
+            misconception: MC-c12-jacobian-inverse-direction
+          - expr: '-1/(2*u)'
+            feedback: 'זה היעקוביאן עם הסימן; המקדם הוא הערך המוחלט.'
+            misconception: MC-c12-jacobian-no-abs
+
+      - label: ג
+        points: 5
+        type: numeric
+        objectives: [OBJ-12.6-1, OBJ-12.7-1]
+        prompt: >-
+          חשבו את השטח של $D$.
+        answer: 2.07944154167984
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\int_1^4\!\int_1^4\frac{1}{2u}\,du\,dv=3\cdot\frac{\ln4}{2}=3\ln2\approx2.08$.
+        wrongFeedback: >-
+          השטח $\iint_{D^*}\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv$ על הריבוע $[1,4]^2$.
+        commonWrong:
+          - value: 9
+            feedback: >-
+              9 הוא השטח של הריבוע $D^*$ במישור $uv$, בלי יעקוביאן.
+            misconception: MC-c12-change-no-jacobian
+          - value: 45
+            feedback: >-
+              45 יוצא כשמכפילים ב-$2u$ במקום ב-$\frac{1}{2u}$.
+            misconception: MC-c12-jacobian-inverse-direction
+
+      - label: ד
+        points: 12
+        type: open
+        objectives: [OBJ-12.6-1, OBJ-12.6-2]
+        prompt: >-
+          חשבו את $\iint_Dy^2\,dA$.
+        solution:
+          - kind: given
+            text: '$u=\frac yx$, $v=xy$; $D^*=[1,4]\times[1,4]$; $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|=\frac{1}{2u}$.'
+          - kind: goal
+            text: '$\iint_Dy^2\,dA$.'
+          - kind: idea
+            text: >-
+              בתחום החדש הגבולות קבועים. נשאר לתרגם את האינטגרנד ל-$u,v$ ולהכפיל במקדם השטח.
+          - kind: step
+            text: '$uv=\frac yx\cdot xy=y^2$, ולכן $y^2=uv$ (ואין צורך לפתור את $x$ ו-$y$ בנפרד).'
+          - kind: computation
+            text: >-
+              $\iint_Dy^2\,dA=\int_1^4\!\int_1^4uv\cdot\frac{1}{2u}\,du\,dv=\frac12\int_1^4du\int_1^4v\,dv=\frac12\cdot3\cdot\frac{15}{2}=\frac{45}{4}$.
+          - kind: check
+            text: >-
+              סדר גודל: השטח $3\ln2\approx2.08$, ו-$y^2$ נע ב-$D$ בין 1 ל-16 (בקודקודים $(1,1)$ ו-$(1,4)$), ממוצע של כ-5.4 סביר.
+              חישוב ישיר בקרטזיות (פיצול לפי $x=1$) נותן גם הוא $11.25$.
+          - kind: result
+            text: '$\iint_Dy^2\,dA=\frac{45}{4}$.'
+        rubric:
+          - text: 'תרגום נכון של האינטגרנד: $y^2=uv$'
+            weight: 3
+          - text: 'הכפלה במקדם הנכון $\frac{1}{2u}$ (לא $2u$ ולא בלי מקדם)'
+            weight: 3
+          - text: 'גבולות $[1,4]\times[1,4]$ וחישוב נכון של האינטגרל'
+            weight: 4
+          - text: 'תוצאה $\frac{45}{4}$ ובדיקת סבירות'
+            weight: 2

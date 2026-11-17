@@ -1,0 +1,20 @@
+# Terms first defined in lesson 12.3 (double integrals in polar coordinates).
+- id: area-element
+  term: אלמנט שטח
+  en: area element
+  symbol: 'dA=dx\,dy=r\,dr\,d\theta'
+  definition: >-
+    השטח של תא קטן בחלוקה של התחום, כפי שהוא נכתב במשתנים של האינטגרל. בקרטזיות $dA=dx\,dy$; בקוטביות התא הוא כמעט
+    מלבן עם צלעות $dr$ ו-$r\,d\theta$, ולכן $dA=r\,dr\,d\theta$.
+  reject: []
+  lesson: '12.3'
+- id: gaussian-integral
+  term: אינטגרל גאוס
+  en: Gaussian integral
+  symbol: '\int_{-\infty}^{\infty}e^{-x^2}\,dx=\sqrt{\pi}'
+  definition: >-
+    האינטגרל הלא אמיתי $I=\int_{-\infty}^{\infty}e^{-x^2}\,dx$. ל-$e^{-x^2}$ אין פונקציה קדומה אלמנטרית, אבל
+    $I^2=\iint_{\mathbb{R}^2}e^{-(x^2+y^2)}\,dA$, ובקוטביות זה $\int_0^{2\pi}\!\int_0^\infty e^{-r^2}r\,dr\,d\theta=\pi$.
+    לכן $I=\sqrt\pi$.
+  reject: []
+  lesson: '12.3'

@@ -1,0 +1,238 @@
+# Lesson 10.8 — absolute maximum and minimum on a closed bounded region.
+# Objectives (src/course.ts):
+#   OBJ-10.8-1  find the absolute max and min of a function on a closed bounded region in the plane: interior and boundary
+#   OBJ-10.8-2  parametrise the boundary of a triangle, rectangle or disk and find the extrema on it
+#   OBJ-10.8-3  use the method for regions in space too
+# The examples of the notes pp. 60–61 (x² + y² − xy + x + y on a triangle and on the unit disk) are recomputed in
+# screens/tools/recompute-ch10.py; the notes' slips (f(−1,1) for f(−1,−1), the derivative on the circle, the extra
+# points π and 3π/2) are corrected: on the disk the max is 2 and the min is 1/2 − √2.
+chapter: 10
+questions:
+  - id: Q-10.8-exists
+    type: twotier
+    objectives: [OBJ-10.8-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      נכון או לא נכון: לפונקציה $f(x,y)=x+y$ יש מקסימום מוחלט בעיגול הפתוח $x^2+y^2<1$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $x+y<\sqrt2$ בכל העיגול הפתוח, ומתקרבת ל-$\sqrt2$ ליד $\left(\tfrac1{\sqrt2},\tfrac1{\sqrt2}\right)$, שאינה בתחום. אין
+          נקודה שבה הערך הגדול ביותר מתקבל.
+      - text: 'נכון'
+        feedback: 'המשפט על קיום מקסימום דורש תחום סגור וחסום. העיגול הפתוח אינו מכיל את השפה, ושם בדיוק המקסימום "היה" מתקבל.'
+        misconception: MC-c10-open-region-max
+    reasons:
+      - text: 'התחום אינו סגור: הערכים מתקרבים ל-$\sqrt2$ רק ליד השפה, שאינה בתחום'
+        correct: true
+        feedback: 'בדיוק. בעיגול הסגור $x^2+y^2\le1$ המקסימום $\sqrt2$ קיים.'
+      - text: 'פונקציה רציפה בתחום חסום מקבלת תמיד מקסימום'
+        feedback: 'צריך גם תחום **סגור**. הדוגמה הזו מראה למה.'
+        misconception: MC-c10-open-region-max
+      - text: 'ל-$x+y$ אין נקודה קריטית, ולכן אין לה מקסימום בשום תחום'
+        feedback: 'בעיגול הסגור יש לה מקסימום, על השפה, בלי נקודה קריטית. מקסימום מוחלט לא חייב להיות בנקודה קריטית.'
+        misconception: MC-c10-abs-only-critical
+
+  - id: Q-10.8-edge
+    type: expr
+    objectives: [OBJ-10.8-2]
+    level: basic
+    prompt: >-
+      על הצלע מ-$(-3,0)$ ל-$(0,-3)$ של המשולש, כתבו את $f(x,y)=x^2+y^2-xy+x+y$ כפונקציה של $x$ בלבד, $-3\le x\le0$.
+    answer: '3*x^2 + 9*x + 6'
+    answerTex: '$y=-x-3$, ולכן $f=3x^2+9x+6$'
+    variables: [x]
+    correctFeedback: >-
+      נכון. הצלע היא $y=-x-3$, ואחרי הצבה $x^2+(x+3)^2+x(x+3)+x-(x+3)=3x^2+9x+6$. הנגזרת $6x+9$ מתאפסת ב-$x=-\frac32$, ושם
+      $f=-\frac34$.
+    wrongFeedback: >-
+      מצאו את משוואת הישר דרך $(-3,0)$ ו-$(0,-3)$, הציבו את $y$ ב-$f$ ופשטו.
+    commonWrong:
+      - expr: 'x^2 - x + 6'
+        feedback: 'הצבתם $y=x-3$. אבל השיפוע בין $(-3,0)$ ל-$(0,-3)$ הוא $-1$: $y=-x-3$. בדקו שהנקודה $(-3,0)$ מקיימת את המשוואה.'
+        misconception: MC-c10-edge-line
+
+  - id: Q-10.8-disk-boundary
+    type: mc
+    objectives: [OBJ-10.8-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      איזו פרמטריזציה מתאימה לשפה של העיגול $x^2+y^2\le4$, כדי למצוא עליה קיצון של $f(x,y)$?
+    choices:
+      - text: '$x=2\cos t$, $y=2\sin t$, $0\le t\le2\pi$'
+        correct: true
+        feedback: 'נכון. כל המעגל ברדיוס 2, פעם אחת, ו-$f$ על השפה היא פונקציה של $t$ בקטע סגור.'
+      - text: '$y=\sqrt{4-x^2}$, $-2\le x\le2$'
+        feedback: 'זה רק חצי המעגל העליון. צריך גם $y=-\sqrt{4-x^2}$, אחרת מפספסים את חצי השפה.'
+        misconception: MC-c10-half-boundary
+      - text: '$x=\cos t$, $y=\sin t$, $0\le t\le2\pi$'
+        feedback: 'זה מעגל היחידה. הרדיוס כאן 2: $x=2\cos t$, $y=2\sin t$.'
+        misconception: MC-c10-edge-line
+      - text: '$x=2\cos t$, $y=2\sin t$, $0\le t\le\pi$'
+        feedback: 'כש-$t$ רץ רק עד $\pi$ מתקבל חצי מעגל. צריך $0\le t\le2\pi$.'
+        misconception: MC-c10-half-boundary
+
+  - id: Q-10.8-recipe
+    type: rank
+    objectives: [OBJ-10.8-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סדרו את שלבי החיפוש של מקסימום ומינימום מוחלטים של פונקציה רציפה בתחום סגור וחסום במישור, שהשפה שלו מורכבת מכמה
+      קטעים.
+    help: 'סדרו מהשלב הראשון לאחרון.'
+    items:
+      - { id: crit, label: 'מוצאים את הנקודות הקריטיות שבפנים התחום ומחשבים בהן את $f$' }
+      - { id: param, label: 'מפרמטרים כל חלק של השפה ומקבלים פונקציה של משתנה אחד בקטע' }
+      - { id: edge, label: 'בכל קטע מוצאים את הנקודות שבהן הנגזרת מתאפסת, ומחשבים את $f$ בהן' }
+      - { id: corners, label: 'מחשבים את $f$ בקצות הקטעים (הקודקודים)' }
+      - { id: compare, label: 'משווים את כל הערכים: הגדול הוא המקסימום, הקטן הוא המינימום' }
+    order: [crit, param, edge, corners, compare]
+    correctFeedback: >-
+      נכון. אין צורך לסווג את הנקודות הקריטיות במבחן הנגזרות השניות: משווים ערכים. (סדר שני השלבים הראשונים אינו חשוב,
+      אבל ההשוואה באה אחרי שכל המועמדים נאספו.)
+    wrongFeedback: >-
+      אוספים מועמדים מהפנים ומהשפה, כולל קצות הקטעים, ורק בסוף משווים.
+
+  - id: Q-10.8-triangle-min
+    type: numeric
+    objectives: [OBJ-10.8-1]
+    level: mid
+    prompt: >-
+      מצאו את המינימום המוחלט של $f(x,y)=x^2+y^2-xy+x+y$ במשולש הסגור שקודקודיו $(0,0)$, $(-3,0)$, $(0,-3)$.
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. הנקודה הקריטית $(-1,-1)$ בפנים המשולש, ו-$f(-1,-1)=-1$. על השפה הערכים הקטנים הם $-\frac14$ (על שתי הצלעות
+      הניצבות) ו-$-\frac34$ (על היתר), ובקודקודים $0,6,6$. הקטן מכולם $-1$.
+    wrongFeedback: >-
+      בדקו גם את הנקודה הקריטית בפנים: $f_x=2x-y+1$, $f_y=2y-x+1$. האם היא בתוך המשולש?
+    commonWrong:
+      - value: -0.75
+        feedback: >-
+          $-\frac34$ הוא המינימום על השפה (על היתר, ב-$x=-\frac32$). שכחתם את הפנים: ב-$(-1,-1)$, שבתוך המשולש, $f=-1$.
+        misconception: MC-c10-forget-interior
+
+  - id: Q-10.8-triangle-max
+    type: numeric
+    objectives: [OBJ-10.8-1, OBJ-10.8-2]
+    level: mid
+    prompt: >-
+      מצאו את המקסימום המוחלט של $f(x,y)=x^2+y^2-xy+x+y$ באותו משולש, עם הקודקודים $(0,0)$, $(-3,0)$, $(0,-3)$.
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. המקסימום מתקבל בשני קודקודים: $f(-3,0)=9-3=6$ ו-$f(0,-3)=6$. בפנים יש רק מינימום ($-1$), ועל הצלעות הנקודות
+      שבהן הנגזרת מתאפסת נותנות $-\frac14$, $-\frac14$, $-\frac34$.
+    wrongFeedback: >-
+      על כל צלע $f$ היא פונקציה של משתנה אחד בקטע סגור: בדקו גם את קצות הקטע.
+    commonWrong:
+      - value: -0.25
+        feedback: >-
+          $-\frac14$ הוא הגדול מבין הערכים בנקודות שבהן הנגזרת על הצלעות מתאפסת. אבל בקטע סגור צריך לבדוק גם את קצותיו,
+          הקודקודים, ושם $f=6$.
+        misconception: MC-c10-forget-corners
+
+  - id: Q-10.8-rectangle
+    type: numeric
+    objectives: [OBJ-10.8-2]
+    level: mid
+    prompt: >-
+      מצאו את המקסימום המוחלט של $f(x,y)=x^2-2x+y^2-4y$ במלבן $0\le x\le3$, $0\le y\le3$.
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. בפנים הנקודה הקריטית $(1,2)$, עם $f=-5$ (המינימום). על הצלעות הנקודות שבהן הנגזרת מתאפסת נותנות $-1$, $-4$,
+      $-4$, $-1$, ובקודקודים $f(0,0)=0$, $f(3,0)=3$, $f(0,3)=-3$, $f(3,3)=0$. המקסימום 3, ב-$(3,0)$.
+    wrongFeedback: >-
+      אספו מועמדים: הנקודה הקריטית, הנקודות על כל צלע שבהן הנגזרת מתאפסת, וארבעת הקודקודים.
+    commonWrong:
+      - value: -1
+        feedback: >-
+          $-1$ הוא הגדול מבין הערכים בפנים ובנקודות של הצלעות שבהן הנגזרת מתאפסת. שכחתם את הקודקודים: $f(3,0)=3$.
+        misconception: MC-c10-forget-corners
+
+  - id: Q-10.8-cube
+    type: numeric
+    objectives: [OBJ-10.8-3]
+    level: mid
+    prompt: >-
+      מצאו את המקסימום המוחלט של $f(x,y,z)=x^2+y^2+z^2-2x-4z$ בקובייה $0\le x,y,z\le3$.
+    answer: 12
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f=(x^2-2x)+y^2+(z^2-4z)$, סכום של שלוש פונקציות של משתנה אחד, וכל אחת מקבלת את המקסימום שלה בקצה הקטע:
+      $3$ ב-$x=3$, $9$ ב-$y=3$, $0$ ב-$z=0$. המקסימום $12$, בקודקוד $(3,3,0)$. הנקודה הקריטית $(1,0,2)$ נותנת את המינימום $-5$.
+    wrongFeedback: >-
+      הנקודה הקריטית בפנים היא רק מועמדת אחת. בקובייה השפה היא פאות, צלעות וקודקודים; כאן הפונקציה מתפרקת למשתנים נפרדים,
+      וזה מקצר את הבדיקה.
+    commonWrong:
+      - value: -5
+        feedback: >-
+          $-5$ הוא הערך בנקודה הקריטית $(1,0,2)$, והוא דווקא המינימום. המקסימום בתחום סגור יכול להיות על השפה, וכאן הוא בקודקוד.
+        misconception: MC-c10-abs-only-critical
+
+  - id: Q-10.8-cube-boundary
+    type: mc
+    objectives: [OBJ-10.8-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מחפשים מקסימום מוחלט של פונקציה $f(x,y,z)$ (שאינה מתפרקת למשתנים נפרדים) בקובייה סגורה. אילו מועמדים צריך לבדוק?
+    choices:
+      - text: 'נקודות קריטיות בפנים; נקודות קריטיות של $f$ על כל פאה (בעיה בשני משתנים); נקודות שבהן הנגזרת מתאפסת על כל צלע; ו-8 הקודקודים'
+        correct: true
+        feedback: >-
+          נכון. השפה של הקובייה בנויה מ-6 פאות, וכל פאה היא מלבן עם שפה משלו: 12 צלעות ו-8 קודקודים. כל מימד מוסיף רמה אחת
+          לאלגוריתם.
+      - text: 'רק נקודות קריטיות בפנים'
+        feedback: 'מקסימום מוחלט בתחום סגור מתקבל לעתים קרובות על השפה, בלי נקודה קריטית שם.'
+        misconception: MC-c10-abs-only-critical
+      - text: 'נקודות קריטיות בפנים ו-8 הקודקודים'
+        feedback: 'הקיצון יכול להיות גם באמצע פאה או באמצע צלע. צריך לבדוק כל פאה ואת השפה שלה.'
+        misconception: MC-c10-forget-corners
+      - text: 'רק 6 הפאות, כי הקיצון תמיד על השפה'
+        feedback: 'הקיצון יכול להתקבל גם בפנים, כמו המינימום של $x^2+y^2+z^2$ במרכז קובייה שמכילה את הראשית.'
+        misconception: MC-c10-forget-interior
+
+  - id: Q-10.8-disk-min
+    type: numeric
+    objectives: [OBJ-10.8-2, OBJ-10.8-1]
+    level: exam
+    prompt: >-
+      מצאו את המינימום המוחלט של $f(x,y)=x^2+y^2-xy+x+y$ בעיגול $x^2+y^2\le1$. (אפשר לכתוב תשובה עם שורש.)
+    answer: -0.914213562373
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac12-\sqrt2$. הנקודה הקריטית $(-1,-1)$ מחוץ לעיגול, ולכן הקיצון על השפה. עם $x=\cos t$, $y=\sin t$:
+      $g(t)=1-\cos t\sin t+\cos t+\sin t$, ו-$g'(t)=(\sin t-\cos t)(\sin t+\cos t-1)$. האפסים: $t=\frac\pi4,\frac{5\pi}4,0,\frac\pi2$,
+      עם הערכים $\frac12+\sqrt2$, $\frac12-\sqrt2$, $2$, $2$.
+    wrongFeedback: >-
+      בדקו אם הנקודה הקריטית בתוך העיגול. אם לא, הקיצון על המעגל: פרמטרו אותו, גזרו ופרקו את הנגזרת לגורמים.
+    commonWrong:
+      - value: -1
+        feedback: >-
+          $-1=f(-1,-1)$, אבל $(-1,-1)$ מחוץ לעיגול ($1+1>1$), ולכן אינה מועמדת. המינימום בעיגול מתקבל על השפה, ב-$t=\frac{5\pi}{4}$.
+        misconception: MC-c10-crit-outside-region
+    hints: ['$\sin^2t-\cos^2t=(\sin t-\cos t)(\sin t+\cos t)$.']
+
+  - id: Q-10.8-ball
+    type: numeric
+    objectives: [OBJ-10.8-3]
+    level: exam
+    prompt: >-
+      מצאו את המינימום המוחלט של $f(x,y,z)=x^2+y^2+z^2-2z$ בכדור $x^2+y^2+z^2\le4$.
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. בפנים: $\nabla f=(2x,2y,2z-2)=0$ ב-$(0,0,1)$, בתוך הכדור, עם $f=-1$. על הספירה $x^2+y^2+z^2=4$, ולכן $f=4-2z$
+      עם $-2\le z\le2$: בין $0$ ל-$8$. המינימום $-1$, והמקסימום $8$ ב-$(0,0,-2)$.
+    wrongFeedback: >-
+      בדקו את הנקודה הקריטית בפנים, ועל השפה השתמשו ב-$x^2+y^2+z^2=4$ כדי לכתוב את $f$ כפונקציה של $z$ בלבד.
+    commonWrong:
+      - value: 0
+        feedback: '$0$ הוא המינימום על הספירה (ב-$(0,0,2)$). בפנים, ב-$(0,0,1)$, הערך $-1$ קטן יותר.'
+        misconception: MC-c10-forget-interior

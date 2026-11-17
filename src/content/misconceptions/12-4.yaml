@@ -1,0 +1,9 @@
+# Misconceptions first detected in lesson 12.4 (triple integrals).
+- id: MC-c12-volume-top-only
+  title: מחשבים נפח בין שני משטחים בלי להחסיר את המשטח התחתון
+  belief: >-
+    הנפח של גוף שבין $z=g(x,y)$ למטה ל-$z=h(x,y)$ למעלה, מעל $D$, הוא $\iint_D h\,dA$.
+  truth: >-
+    $\iint_Dh\,dA$ הוא הנפח מתחת ל-$h$ עד המישור $z=0$. הנפח בין המשטחים הוא $\iint_D(h-g)\,dA=\iiint_E1\,dV$: לכל
+    $(x,y)$ הגובה של העמודה הוא העליון פחות התחתון. אותו דבר בשטח: עקום עליון פחות עקום תחתון.
+  remedy: { lesson: '12.4', label: 'נפח בין שני משטחים' }

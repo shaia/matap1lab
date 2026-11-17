@@ -1,0 +1,24 @@
+# Terms first used in lesson 0.3 (powers, the exponential and logarithms).
+- id: logarithm
+  term: לוגריתם
+  en: logarithm
+  symbol: '\log_a b'
+  definition: >-
+    לבסיס $a>0$, $a\ne1$, ולמספר $b>0$: $\log_ab$ הוא המעריך $c$ שבו $a^c=b$. הלוגריתם הוא הפעולה ההפוכה לחזקה, ומוגדר
+    רק למספרים חיוביים. חוקיו: $\log_a(bc)=\log_ab+\log_ac$ ו-$\log_a(b^p)=p\log_ab$.
+  lesson: '0.3'
+- id: natural-logarithm
+  term: הלוגריתם הטבעי
+  en: natural logarithm
+  symbol: '\ln x'
+  definition: >-
+    הלוגריתם בבסיס $e\approx2.718$: $\ln x=\log_ex$, כלומר $e^{\ln x}=x$ לכל $x>0$ ו-$\ln(e^y)=y$ לכל $y$. בקורס זה
+    הלוגריתם הנפוץ ביותר.
+  lesson: '0.3'
+- id: change-of-base
+  term: מעבר בסיס
+  en: change of base
+  symbol: '\log_a b=\frac{\ln b}{\ln a}'
+  definition: >-
+    הנוסחה $\log_ab=\frac{\ln b}{\ln a}$ (ובכל בסיס משותף אחר): הבסיס הולך למכנה. בדיקה: $\log_28=\frac{\ln8}{\ln2}=3$.
+  lesson: '0.3'

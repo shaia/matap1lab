@@ -1,0 +1,308 @@
+# Chapter 4 review — functions of one variable (lessons 4.1–4.6), easy to hard.
+# Every lesson is touched; most questions combine two lessons, some reach back to chapter 0.
+# Each hint names the lesson to go back to. Every number is recomputed in screens/tools/checks_ch4.py.
+chapter: 4
+questions:
+  - id: Q-4-review-01
+    type: mc
+    objectives: [OBJ-4.1-1, OBJ-4.3-2, OBJ-0.1-3]
+    level: basic
+    prompt: >-
+      מהו תחום ההגדרה של $f(x)=\ln\left(x^2-4\right)$?
+    choices:
+      - text: '$(-\infty,-2)\cup(2,\infty)$'
+        correct: true
+        feedback: >-
+          נכון. $\ln$ דורש ארגומנט חיובי: $x^2-4>0$, כלומר $|x|>2$.
+      - text: '$(-2,2)$'
+        feedback: >-
+          זה התחום שבו $x^2-4<0$, ושם הלוגריתם **אינו** מוגדר. $x^2>4$ מתקיים מחוץ לשורשים.
+        misconception: MC-c0-quadratic-ineq-outside
+      - text: '$\mathbb{R}$'
+        feedback: >-
+          $x^2-4$ מוגדר לכל $x$, אבל הוא הקלט של $\ln$, וצריך שיהיה חיובי. ב-$x=0$ מקבלים $\ln(-4)$.
+        misconception: MC-c4-composition-domain-inner-only
+    hints:
+      - 'חזרו לשיעור 4.1 (תחום הגדרה של הרכבה), לשיעור 4.3 (התחום של ln) ולשיעור 0.1 (אי-שוויון ריבועי).'
+
+  - id: Q-4-review-02
+    type: numeric
+    objectives: [OBJ-4.6-1, OBJ-4.3-2]
+    level: basic
+    prompt: >-
+      חשבו את $\lim_{x\to0}\frac{e^{2x}-1}{e^x-1}$.
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $e^{2x}-1=\left(e^x\right)^2-1=\left(e^x-1\right)\left(e^x+1\right)$, ולכן ל-$x\ne0$ המנה היא $e^x+1\to2$.
+    wrongFeedback: >-
+      הצבה נותנת $\frac00$. כתבו $e^{2x}=\left(e^x\right)^2$ ופרקו הפרש ריבועים.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          $\frac00$ אינו 0. אחרי פירוק הגורם $e^x-1$ מצטמצם.
+        misconception: MC-c4-zero-over-zero
+      - value: 1
+        feedback: >-
+          $\frac00$ אינו 1. המונה שואף ל-0 פי 2 מהר יותר מהמכנה: $e^{2x}-1=\left(e^x-1\right)\left(e^x+1\right)$.
+        misconception: MC-c4-zero-over-zero
+    hints:
+      - 'חזרו לשיעור 4.6 (גבול מהצורה 0/0) ולשיעור 4.3 (חוקי חזקות עם e).'
+
+  - id: Q-4-review-03
+    type: mc
+    objectives: [OBJ-4.2-3, OBJ-4.5-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $f(x)=\sinh x\cdot\cos x$. מה נכון?
+    choices:
+      - text: '$f$ אי-זוגית'
+        correct: true
+        feedback: >-
+          נכון. $f(-x)=\sinh(-x)\cos(-x)=-\sinh x\cos x=-f(x)$: אי-זוגית כפול זוגית.
+      - text: '$f$ זוגית, כי $\cos$ זוגית'
+        feedback: >-
+          גורם זוגי אחד לא הופך מכפלה לזוגית. בודקים את $f(-x)$: המינוס של $\sinh(-x)$ נשאר.
+        misconception: MC-c4-parity-by-exponents
+      - text: '$f$ לא זוגית ולא אי-זוגית, כי $\sinh$ אינה פונקציה טריגונומטרית'
+        feedback: >-
+          הזוגיות לא תלויה במשפחה של הפונקציה. $\sinh$ אי-זוגית בדיוק כמו $\sin$.
+        misconception: MC-c4-sinh-cosh-swap
+    hints:
+      - 'חזרו לשיעור 4.2 (זוגיות לפי ההגדרה) ולשיעור 4.5 (הזוגיות של sinh ו-cosh).'
+
+  - id: Q-4-review-04
+    type: numeric
+    objectives: [OBJ-4.3-2, OBJ-0.3-1]
+    level: basic
+    prompt: >-
+      חשבו את $e^{\ln5+2\ln3}$.
+    answer: 45
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $e^{\ln5+2\ln3}=e^{\ln5}\cdot\left(e^{\ln3}\right)^2=5\cdot9$.
+    wrongFeedback: >-
+      $e^{a+b}=e^a\cdot e^b$, ו-$e^{2\ln3}=\left(e^{\ln3}\right)^2$.
+    commonWrong:
+      - value: 14
+        feedback: >-
+          $5+9$: חיברתם במקום לכפול. סכום במעריך הופך למכפלה: $e^{a+b}=e^ae^b$.
+        misconception: MC-c0-power-sum-rule
+      - value: 30
+        feedback: >-
+          $5\cdot6$: לקחתם $e^{2\ln3}=2\cdot3$. אבל $2\ln3=\ln9$, ולכן $e^{2\ln3}=9$.
+        misconception: MC-c4-exp-log-coefficient
+    hints:
+      - 'חזרו לשיעור 4.3 (e ו-ln הפוכות) ולשיעור 0.3 (חוקי החזקות).'
+
+  - id: Q-4-review-05
+    type: expr
+    objectives: [OBJ-4.3-2, OBJ-4.1-1]
+    level: mid
+    prompt: >-
+      מצאו את הפונקציה ההפוכה של $f(x)=\frac{2x+1}{x-3}$ (במשתנה x).
+    answer: '(3*x + 1)/(x - 2)'
+    answerTex: '$f^{-1}(x)=\frac{3x+1}{x-2}$'
+    variables: [x]
+    domain: [2.5, 6]
+    correctFeedback: >-
+      נכון. $y(x-3)=2x+1$, ולכן $x(y-2)=3y+1$ ו-$x=\frac{3y+1}{y-2}$. התחום של ההפוכה, $y\ne2$, הוא התמונה של $f$:
+      $f(x)=2+\frac7{x-3}$ לעולם אינה 2.
+    wrongFeedback: >-
+      כתבו $y=\frac{2x+1}{x-3}$, כפלו במכנה, אספו את האיברים עם $x$ לצד אחד ובודדו את $x$.
+    commonWrong:
+      - expr: '(x - 3)/(2*x + 1)'
+        feedback: >-
+          זה $\frac1{f(x)}$. ההפוכה מבטלת את $f$: $f(4)=9$, ולכן $f^{-1}(9)$ צריך לצאת 4.
+        misconception: MC-c4-inverse-is-reciprocal
+    hints:
+      - 'חזרו לשיעור 4.3 (מציאת פונקציה הפוכה) ולשיעור 4.1 (תחום ותמונה).'
+
+  - id: Q-4-review-06
+    type: mc
+    objectives: [OBJ-4.1-2, OBJ-4.4-2, OBJ-4.3-1]
+    level: mid
+    prompt: >-
+      מהו תחום ההגדרה של $h(x)=\arcsin(\ln x)$?
+    choices:
+      - text: '$\left[\frac1e,e\right]$'
+        correct: true
+        feedback: >-
+          נכון. צריך $x>0$ (בשביל $\ln$) וגם $-1\le\ln x\le1$ (בשביל $\arcsin$), כלומר $e^{-1}\le x\le e$.
+      - text: '$(0,\infty)$'
+        feedback: >-
+          זה התחום של $\ln$ לבדו. ב-$x=10$: $\ln10\approx2.3$, ו-$\arcsin2.3$ אינו מוגדר.
+        misconception: MC-c4-composition-domain-inner-only
+      - text: '$[-1,1]$'
+        feedback: >-
+          זה התחום של $\arcsin$, אבל הוא מגביל את $\ln x$, לא את $x$. וב-$x\le0$ הלוגריתם אינו מוגדר כלל.
+        misconception: MC-c4-composition-domain-inner-only
+      - text: '$(0,e]$'
+        feedback: >-
+          חסר התנאי $\ln x\ge-1$: ליד 0 הלוגריתם שואף ל-$-\infty$, ולכן גם הקצה השמאלי מוגבל.
+        misconception: MC-c4-ln-near-zero
+    hints:
+      - 'חזרו לשיעור 4.1 (תחום של הרכבה), לשיעור 4.4 (התחום של arcsin) ולשיעור 4.3 (ln ליד 0).'
+
+  - id: Q-4-review-07
+    type: numeric
+    objectives: [OBJ-4.4-1, OBJ-0.2-3]
+    level: mid
+    prompt: >-
+      מהו הפתרון הקטן ביותר בקטע $[0,2\pi]$ של המשוואה $2\sin\!\left(x-\frac\pi6\right)=1$? (אפשר לכתוב ערך מדויק, כמו 5π/6 או 3√2)
+    answer: 1.0471975511965976
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac\pi3$. $\sin\!\left(x-\frac\pi6\right)=\frac12$ נותן $x-\frac\pi6=\frac\pi6$ או $\frac{5\pi}6$ (ועוד $2\pi k$), כלומר
+      $x=\frac\pi3$ או $x=\pi$. הגרף הוא $2\sin x$ מוזז ימינה ב-$\frac\pi6$.
+    wrongFeedback: >-
+      פתרו קודם את $\sin u=\frac12$ ל-$u=x-\frac\pi6$, ואז חזרו ל-$x$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 מתקבל מ-$x=\frac\pi6-\frac\pi6$: חיסרתם את ההזזה במקום להוסיף אותה. אם $u=x-\frac\pi6=\frac\pi6$, אז $x=u+\frac\pi6$.
+        misconception: MC-c4-shift-direction
+    hints:
+      - 'חזרו לשיעור 4.4 (הזזת מופע) ולשיעור 0.2 (משוואות טריגונומטריות).'
+
+  - id: Q-4-review-08
+    type: numeric
+    objectives: [OBJ-4.6-2, OBJ-4.4-1]
+    level: mid
+    prompt: >-
+      $f(x)=\frac{\sin x}{x}$ ל-$x\ne0$, ו-$f(0)=a$. לאיזה $a$ הפונקציה רציפה ב-0?
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\lim_{x\to0}\frac{\sin x}x=1$ (בסיכומים, עמ׳ 5, בבדיקה מספרית), ולכן האי-רציפות סליקה וצריך $a=1$.
+    wrongFeedback: >-
+      רציפות ב-0 פירושה $f(0)=\lim_{x\to0}f(x)$. מה הגבול של $\frac{\sin x}x$? נסו $x=0.01$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          $\sin0=0$, אבל גם המכנה 0. הגבול $\frac00$ כאן הוא 1: $\frac{\sin0.01}{0.01}\approx0.99998$.
+        misconception: MC-c4-zero-over-zero
+    hints:
+      - 'חזרו לשיעור 4.6 (אי-רציפות סליקה) ולשיעור 4.4 (הגרף של הסינוס ליד 0).'
+
+  - id: Q-4-review-09
+    type: numeric
+    objectives: [OBJ-4.5-1, OBJ-4.3-2]
+    level: mid
+    prompt: >-
+      חשבו את $\cosh(\ln3)$. (אפשר לכתוב שבר)
+    answer: 1.6666666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac53$. $e^{\ln3}=3$ ו-$e^{-\ln3}=\frac13$, ולכן $\frac{3+\frac13}2=\frac{10}6$.
+    wrongFeedback: >-
+      $\cosh x=\frac{e^x+e^{-x}}2$, ו-$e^{-\ln3}=\frac1{e^{\ln3}}$.
+    commonWrong:
+      - value: 1.3333333333333333
+        feedback: >-
+          $\frac43=\frac{3-\frac13}2$ הוא $\sinh(\ln3)$. ב-$\cosh$ מחברים.
+        misconception: MC-c4-sinh-cosh-swap
+      - value: 3.3333333333333335
+        feedback: >-
+          $\frac{10}3=3+\frac13$: שכחתם לחלק ב-2.
+        misconception: MC-c4-hyperbolic-half-forgot
+    hints:
+      - 'חזרו לשיעור 4.5 (ההגדרה של cosh) ולשיעור 4.3 (e בחזקת ln).'
+
+  - id: Q-4-review-10
+    type: twotier
+    objectives: [OBJ-4.6-3, OBJ-4.4-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: למשוואה $\cos x=x$ יש פתרון בקטע $\left[0,\frac\pi2\right]$.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. $g(x)=\cos x-x$ רציפה, $g(0)=1>0$ ו-$g\!\left(\frac\pi2\right)=-\frac\pi2<0$. לפי משפט ערך הביניים יש $x_0$ עם
+          $g(x_0)=0$ (בערך $0.739$).
+      - text: 'לא נכון'
+        feedback: >-
+          בדקו את הסימן של $\cos x-x$ בקצוות: חיובי ב-0 ושלילי ב-$\frac\pi2$, והפונקציה רציפה.
+        misconception: MC-c4-ivt-without-continuity
+    reasons:
+      - text: '$\cos x-x$ רציפה ומחליפה סימן בין קצות הקטע'
+        correct: true
+        feedback: 'בדיוק. מעבירים הכול לאגף אחד ומפעילים את משפט ערך הביניים על ההפרש.'
+      - text: '$\cos x$ יורדת ו-$x$ עולה'
+        feedback: >-
+          זה מבטיח שיש **לכל היותר** פתרון אחד, לא שיש פתרון. הקיום בא מהחלפת הסימן.
+        misconception: MC-c4-monotone-gives-root
+    hints:
+      - 'חזרו לשיעור 4.6 (משפט ערך הביניים) ולשיעור 4.4 (ערכי הקוסינוס).'
+
+  - id: Q-4-review-11
+    type: mc
+    objectives: [OBJ-4.3-3, OBJ-4.6-1]
+    level: exam
+    prompt: >-
+      חשבו את $\lim_{x\to\infty}\frac{e^x+x^5}{2e^x-x^3}$.
+    choices:
+      - text: '$\frac12$'
+        correct: true
+        feedback: >-
+          נכון. מחלקים ב-$e^x$: $\frac{1+\frac{x^5}{e^x}}{2-\frac{x^3}{e^x}}$, ו-$\frac{x^n}{e^x}\to0$ לכל $n$. נשאר $\frac12$.
+      - text: '$-\infty$'
+        feedback: >-
+          זה מתקבל אם $x^5$ ו-$x^3$ היו השולטים. אבל האקספוננט גדל מהר יותר מכל חזקה, ולכן $e^x$ ו-$2e^x$ שולטים.
+        misconception: MC-c4-power-beats-exp
+      - text: '1'
+        feedback: >-
+          האיברים השולטים הם $e^x$ במונה ו-$2e^x$ במכנה, ולכן היחס $\frac12$, לא 1: גם המקדם המוביל נכנס.
+        misconception: MC-c4-rational-limit-at-infinity
+    hints:
+      - 'חזרו לשיעור 4.3 (סולם קצבי הגידול) ולשיעור 4.6 (גבול באינסוף: מחלקים באיבר השולט).'
+
+  - id: Q-4-review-12
+    type: numeric
+    objectives: [OBJ-4.2-2, OBJ-4.1-3]
+    level: exam
+    prompt: >-
+      כמה פתרונות יש למשוואה $\left|x^2-2x\right|=1$?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x^2-2x=1$ נותן $x=1\pm\sqrt2$, ו-$x^2-2x=-1$ נותן $(x-1)^2=0$, כלומר $x=1$. בגרף: הקודקוד של $x^2-2x$ ב-$(1,-1)$
+      משתקף ל-$(1,1)$, והישר $y=1$ נוגע בו בדיוק שם, וחותך את שתי הזרועות.
+    wrongFeedback: >-
+      $|u|=1$ פירושו $u=1$ או $u=-1$. פתרו את שתי המשוואות וספרו.
+    commonWrong:
+      - value: 2
+        feedback: >-
+          אלה הפתרונות של $x^2-2x=1$ בלבד. החלק המשוקף של הגרף מגיע בדיוק לגובה 1 ב-$x=1$: פתרון שלישי.
+        misconception: MC-c4-abs-graph-reflection
+    hints:
+      - 'חזרו לשיעור 4.2 (הגרף של ערך מוחלט ופתרון גרפי) ולשיעור 4.1 (הקודקוד של פרבולה).'
+
+  - id: Q-4-review-13
+    type: expr
+    objectives: [OBJ-4.5-1, OBJ-4.3-2]
+    level: exam
+    prompt: >-
+      פשטו את $\sinh(2\ln x)$ ל-$x>0$, לביטוי בלי פונקציות היפרבוליות ובלי לוגריתמים (במשתנה x).
+    answer: '(x^2 - x^(-2))/2'
+    answerTex: '$\sinh(2\ln x)=\frac{x^2-x^{-2}}{2}=\frac{x^4-1}{2x^2}$'
+    variables: [x]
+    domain: [0.2, 3]
+    correctFeedback: >-
+      נכון. $e^{2\ln x}=x^2$ ו-$e^{-2\ln x}=x^{-2}$, ולכן $\sinh(2\ln x)=\frac{x^2-x^{-2}}2$.
+    wrongFeedback: >-
+      הציבו $u=2\ln x$ בהגדרה $\sinh u=\frac{e^u-e^{-u}}2$, ופשטו את $e^{2\ln x}$.
+    commonWrong:
+      - expr: '(x^2 + x^(-2))/2'
+        feedback: >-
+          זה $\cosh(2\ln x)$. ב-$\sinh$ יש מינוס בין האקספוננטים.
+        misconception: MC-c4-sinh-cosh-swap
+      - expr: '(2*x - 1/(2*x))/2'
+        feedback: >-
+          לקחתם $e^{2\ln x}=2x$. אבל $2\ln x=\ln\left(x^2\right)$, ולכן $e^{2\ln x}=x^2$.
+        misconception: MC-c4-exp-log-coefficient
+    hints:
+      - 'חזרו לשיעור 4.5 (ההגדרה של sinh) ולשיעור 4.3 (e בחזקת מכפלה של ln).'

@@ -1,0 +1,283 @@
+# Lesson 12.1 — double integral over a rectangle, Fubini's theorem (notes pp. 71–72).
+# Objectives (src/course.ts):
+#   OBJ-12.1-1  double integral as a limit of Riemann sums and as a volume
+#   OBJ-12.1-2  compute a double integral on a rectangle as an iterated integral, in both orders
+#   OBJ-12.1-3  split an integrand that is a product of a function of x and a function of y
+# Every number recomputed with sympy: screens/tools/recompute-ch12.py. Notes p. 72, example 1: the integrand changes
+# between lines (x^2y, then xy^2); here the first one, x^2y + x^3 + x^3y, whose value is 88 (the notes' 122 belongs to xy^2).
+chapter: 12
+questions:
+  - id: Q-12.1-volume-meaning
+    type: mc
+    objectives: [OBJ-12.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      תהי $f(x,y)\ge0$ רציפה על המלבן $R$. מה מודד $\iint_Rf\,dA$?
+    choices:
+      - text: 'את הנפח של הגוף שבין המלבן $R$ במישור $xy$ לבין הגרף $z=f(x,y)$'
+        correct: true
+        feedback: >-
+          נכון. כל מחובר בסכום רימן, $f(x_i,y_i)\,\Delta A_i$, הוא נפח של עמודה צרה: גובה $f(x_i,y_i)$ כפול שטח הבסיס
+          $\Delta A_i$. סכום העמודות שואף לנפח שמתחת לגרף.
+      - text: 'את השטח של המלבן $R$'
+        feedback: >-
+          השטח של $R$ הוא $\iint_R1\,dA$, המקרה $f\equiv1$. לפונקציה אחרת כל תא נשקל בגובה $f$ שלו.
+        misconception: MC-c12-integral-is-size
+      - text: 'את השטח של המשטח $z=f(x,y)$ שמעל $R$'
+        feedback: >-
+          המחוברים בסכום הם גובה כפול שטח בסיס, כלומר נפחים של עמודות, ולא חתיכות של המשטח. השטח של משטח מחושב בנוסחה
+          אחרת (פרק 13).
+        misconception: MC-c12-volume-vs-surface
+
+  - id: Q-12.1-riemann
+    type: numeric
+    objectives: [OBJ-12.1-1]
+    level: basic
+    prompt: >-
+      מחלקים את המלבן $R=[0,2]\times[0,4]$ לארבעה מלבנים שווים בעזרת הישרים $x=1$ ו-$y=2$. חשבו את סכום רימן של
+      $f(x,y)=x+y$ כשבכל מלבן קטן לוקחים את ערך $f$ בפינה הימנית העליונה.
+    answer: 36
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. כל מלבן קטן הוא $1\times2$, כלומר $\Delta A=2$. הפינות: $(1,2),(2,2),(1,4),(2,4)$, עם ערכים $3,4,5,6$. הסכום
+      $(3+4+5+6)\cdot2=36$. (האינטגרל עצמו הוא 24: הפינה הימנית העליונה היא המקום שבו $f$ הכי גדולה בכל תא, ולכן הסכום
+      גדול ממנו.)
+    wrongFeedback: >-
+      מצאו את ארבע הפינות הימניות העליונות, את ערך $f$ בכל אחת, ואל תשכחו להכפיל כל ערך בשטח של המלבן הקטן.
+    commonWrong:
+      - value: 18
+        feedback: >-
+          18 הוא $3+4+5+6$, בלי השטח. כל ערך צריך להיות מוכפל בשטח התא, $\Delta A=1\cdot2=2$.
+        misconception: MC-c12-riemann-no-area
+      - value: 24
+        feedback: >-
+          24 הוא האינטגרל המדויק $\iint_R(x+y)\,dA$. השאלה מבקשת את הסכום הסופי עם ארבעה מלבנים, שהוא רק קירוב לאינטגרל.
+    hints: ['כמה שווה $\Delta A$ של כל אחד מארבעת המלבנים?']
+
+  - id: Q-12.1-constant
+    type: numeric
+    objectives: [OBJ-12.1-1]
+    level: basic
+    prompt: >-
+      חשבו את $\iint_R2\,dA$, כש-$R=[0,3]\times[1,5]$.
+    answer: 24
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. זה הנפח של תיבה עם בסיס $R$ (שטח $3\cdot4=12$) וגובה 2, כלומר $24$.
+    wrongFeedback: >-
+      פונקציה קבועה: הגוף מתחת לגרף הוא תיבה. מה השטח של הבסיס ומה הגובה?
+    commonWrong:
+      - value: 12
+        feedback: >-
+          12 הוא השטח של $R$, כלומר $\iint_R1\,dA$. כאן הגובה 2, והנפח כפול.
+        misconception: MC-c12-integral-is-size
+
+  - id: Q-12.1-inner
+    type: expr
+    objectives: [OBJ-12.1-2]
+    level: basic
+    prompt: >-
+      חשבו את האינטגרל הפנימי $\int_1^5\left(x^2y+x^3+x^3y\right)dy$ (כפונקציה של $x$). זה הצעד הראשון בחישוב של
+      $\iint_{[1,2]\times[1,5]}\left(x^2y+x^3+x^3y\right)dA$.
+    answer: '12*x^2 + 16*x^3'
+    answerTex: '$\int_1^5\left(x^2y+x^3+x^3y\right)dy=12x^2+16x^3$'
+    variables: [x]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. $x$ קבוע: $\int_1^5x^2y\,dy=x^2\cdot\frac{25-1}{2}=12x^2$, $\int_1^5x^3\,dy=4x^3$ ו-$\int_1^5x^3y\,dy=12x^3$.
+    wrongFeedback: >-
+      באינטגרל לפי $y$ כל ביטוי ב-$x$ הוא קבוע. מחשבים כל מחובר בנפרד ומציבים $y=5$ פחות $y=1$.
+    commonWrong:
+      - expr: '12*x^2 + 13*x^3'
+        feedback: >-
+          המחובר $x^3$ קבוע לגבי $y$, ולכן $\int_1^5x^3\,dy=x^3\cdot(5-1)=4x^3$, ולא $x^3$.
+        misconception: MC-c12-inner-constant
+      - expr: '12*x^2 + x^4/4 + 12*x^3'
+        feedback: >-
+          $\frac{x^4}{4}$ היא פונקציה קדומה לפי $x$. באינטגרל לפי $y$ הביטוי $x^3$ קבוע: $\int_1^5x^3\,dy=4x^3$.
+        misconception: MC-c12-inner-constant
+    hints: ['כמה שווה $\int_1^5 c\,dy$ לקבוע $c$?']
+
+  - id: Q-12.1-sign
+    type: twotier
+    objectives: [OBJ-12.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $\iint_{[-1,1]\times[0,2]}x^3e^y\,dA=0$.
+    choices:
+      - text: נכון
+        correct: true
+        feedback: >-
+          נכון. לפי פוביני $\left(\int_{-1}^1x^3\,dx\right)\left(\int_0^2e^y\,dy\right)$, והגורם הראשון 0.
+      - text: לא נכון
+        feedback: >-
+          האינטגרנד אינו אפס, אבל האינטגרל הוא נפח **מסומן**: מה שמתחת למישור $xy$ (כש-$x<0$) מקזז בדיוק את מה שמעליו.
+        misconception: MC-c12-signed-volume
+    reasons:
+      - text: '$x^3$ אי-זוגית והמלבן סימטרי ביחס לציר $y$: הנפח מתחת למישור (ב-$x<0$) שווה לנפח שמעליו'
+        correct: true
+        feedback: 'בדיוק. החלק עם $x<0$ תורם נפח שלילי, והחלק עם $x>0$ תורם אותו נפח בחיוב.'
+      - text: 'אינטגרל כפול הוא נפח, ולכן הוא אפס רק כשהפונקציה אפס'
+        feedback: >-
+          זה נכון רק ל-$f\ge0$. לפונקציה שמחליפה סימן האינטגרל סופר את מה שמתחת למישור בשלילה, ויכול לצאת 0 ואף שלילי.
+        misconception: MC-c12-signed-volume
+      - text: '$e^y>0$, ולכן האינטגרל חיובי'
+        feedback: >-
+          גם הגורם $x^3$ קובע את הסימן. האינטגרל מתפרק למכפלה, והגורם $\int_{-1}^1x^3\,dx=0$ מאפס אותה.
+        misconception: MC-c12-signed-volume
+
+  - id: Q-12.1-full
+    type: numeric
+    objectives: [OBJ-12.1-2]
+    level: mid
+    prompt: >-
+      חשבו את $\iint_R\left(x^2y+x^3+x^3y\right)dA$, כש-$R=[1,2]\times[1,5]$.
+    answer: 88
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. האינטגרל הפנימי לפי $y$ הוא $12x^2+16x^3$, ואז $\int_1^2\left(12x^2+16x^3\right)dx=4\cdot7+4\cdot15=88$.
+      בסדר ההפוך יוצא אותו מספר.
+    wrongFeedback: >-
+      חשבו קודם את האינטגרל לפי $y$ מ-1 עד 5 כש-$x$ קבוע, ואז את האינטגרל של התוצאה לפי $x$ מ-1 עד 2.
+    commonWrong:
+      - value: 76.75
+        feedback: >-
+          זה מה שיוצא כשכותבים $\int_1^5x^3\,dy=x^3$ במקום $4x^3$: $\int_1^2\left(12x^2+13x^3\right)dx=\frac{307}{4}$.
+        misconception: MC-c12-inner-constant
+    hints: ['האינטגרל הפנימי יוצא פולינום ב-$x$.']
+
+  - id: Q-12.1-fubini-orders
+    type: twotier
+    objectives: [OBJ-12.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      שני סטודנטים חישבו את $\iint_{[1,2]\times[1,5]}\left(x^2y+x^3+x^3y\right)dA$. דנה חישבה קודם לפי $y$ וקיבלה 88; יוסי
+      חישב קודם לפי $x$ וקיבל 76.75. האם ייתכן ששניהם צדקו?
+    choices:
+      - text: 'לא: לפחות אחד מהם טעה'
+        correct: true
+        feedback: >-
+          נכון. שני הסדרים מחשבים את אותו אינטגרל כפול. (כאן 88 נכון; 76.75 הוא מה שיוצא כש-$\int_1^5x^3\,dy$ נכתב
+          $x^3$.)
+      - text: 'כן: לכל סדר יש תשובה משלו'
+        feedback: >-
+          שני האינטגרלים הנשנים שווים שניהם ל-$\iint_Rf\,dA$, לפי משפט פוביני. תשובות שונות הן סימן לטעות.
+        misconception: MC-c12-order-changes-value
+    reasons:
+      - text: 'משפט פוביני: לפונקציה רציפה על מלבן שני הסדרים שווים לאינטגרל הכפול'
+        correct: true
+        feedback: 'בדיוק. הסדר קובע רק את הדרך, לא את התוצאה, ולכן חישוב בסדר השני הוא בדיקה טובה.'
+      - text: 'בסדר אחד סוכמים רצועות אנכיות ובשני אופקיות, ואלה נפחים שונים'
+        feedback: >-
+          שני סוגי הרצועות מכסים את אותו גוף מתחת לגרף, ולכן סכום הנפחים זהה. רק החיתוך לפרוסות שונה.
+        misconception: MC-c12-order-changes-value
+      - text: 'הסדרים שווים רק כשהפונקציה סימטרית ב-$x$ וב-$y$'
+        feedback: >-
+          משפט פוביני לא דורש סימטריה, רק רציפות על המלבן. הפונקציה כאן אינה סימטרית, ושני הסדרים עדיין נותנים 88.
+        misconception: MC-c12-order-changes-value
+
+  - id: Q-12.1-which-order
+    type: mc
+    objectives: [OBJ-12.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      רוצים לחשב את $\iint_Rx\cos(xy)\,dA$ על $R=[0,1]\times\left[0,\frac\pi2\right]$. באיזה סדר כדאי לחשב?
+    choices:
+      - text: 'קודם לפי $y$: האינטגרל הפנימי נותן מיד $\sin(xy)$'
+        correct: true
+        feedback: >-
+          נכון. כש-$x$ קבוע, $x\cos(xy)$ היא הנגזרת לפי $y$ של $\sin(xy)$, ולכן
+          $\int_0^{\pi/2}x\cos(xy)\,dy=\sin\left(\frac{\pi x}{2}\right)$, שקל לבצע לו אינטגרציה לפי $x$.
+      - text: 'קודם לפי $x$, כי זה הסדר הרגיל'
+        feedback: >-
+          לפי $x$ צריך אינטגרציה בחלקים ($x$ כפול $\cos(xy)$), ואחר כך אינטגרל לפי $y$ של ביטוי מסובך. בודקים קודם איזה
+          אינטגרל פנימי פשוט.
+        misconception: MC-c12-order-by-habit
+      - text: 'אין ברירה: הסדר משנה את התוצאה, ולכן מחשבים לפי הסדר שבו המלבן נכתב'
+        feedback: >-
+          לפי משפט פוביני שני הסדרים נותנים אותו מספר. מותר לבחור את הסדר הנוח.
+        misconception: MC-c12-order-changes-value
+
+  - id: Q-12.1-product
+    type: numeric
+    objectives: [OBJ-12.1-3]
+    level: basic
+    prompt: >-
+      חשבו את $\iint_Rxe^y\,dA$, כש-$R=[0,2]\times[0,\ln4]$.
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. האינטגרנד מכפלה והתחום מלבן: $\left(\int_0^2x\,dx\right)\left(\int_0^{\ln4}e^y\,dy\right)=2\cdot(4-1)=6$.
+    wrongFeedback: >-
+      פרקו למכפלה של אינטגרל לפי $x$ באינטגרל לפי $y$, וחשבו כל אחד בנפרד.
+    commonWrong:
+      - value: 5
+        feedback: >-
+          5 הוא $2+3$: חיברתם את שני האינטגרלים. הפירוק נותן **מכפלה**: $\iint g(x)h(y)\,dA=\left(\int g\right)\left(\int h\right)$.
+        misconception: MC-c12-separable-misuse
+    hints: ['$\int_0^{\ln 4}e^y\,dy=e^{\ln4}-e^0$.']
+
+  - id: Q-12.1-separable-which
+    type: multi
+    objectives: [OBJ-12.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      לאילו מהאינטגרלים הבאים מותר לכתוב את האינטגרל הכפול כמכפלה של אינטגרל לפי $x$ באינטגרל לפי $y$? סמנו את כל
+      האפשרויות הנכונות.
+    choices:
+      - text: '$\iint_{[0,1]\times[0,2]}x^2y^3\,dA$'
+        correct: true
+        feedback: 'נכון. מלבן, ו-$x^2y^3$ מכפלה של $x^2$ ב-$y^3$.'
+      - text: '$\iint_{[0,1]\times[0,1]}e^{x+y}\,dA$'
+        correct: true
+        feedback: 'נכון. $e^{x+y}=e^xe^y$, מכפלה, והתחום מלבן.'
+      - text: '$\iint_{[0,\pi]\times[0,\pi]}\sin(x+y)\,dA$'
+        feedback: >-
+          $\sin(x+y)=\sin x\cos y+\cos x\sin y$ הוא **סכום** של שתי מכפלות, לא מכפלה אחת. אפשר לפרק כל מחובר בנפרד, אבל
+          לא לכתוב $\left(\int\sin x\right)\left(\int\sin y\right)$.
+        misconception: MC-c12-separable-misuse
+      - text: '$\iint_Txy\,dA$, כש-$T$ המשולש $0\le y\le x\le1$'
+        feedback: >-
+          האינטגרנד מכפלה, אבל $T$ אינו מלבן: הגבול הפנימי $y\le x$ תלוי ב-$x$, ולכן אי-אפשר להפריד.
+        misconception: MC-c12-separable-misuse
+
+  - id: Q-12.1-xcos
+    type: numeric
+    objectives: [OBJ-12.1-2]
+    level: exam
+    prompt: >-
+      חשבו את $\iint_Rx\cos(xy)\,dA$, כש-$R=[0,1]\times\left[0,\frac\pi2\right]$. (אפשר לכתוב ביטוי מדויק, למשל 3/pi.)
+    answer: 0.636619772367581
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. קודם לפי $y$: $\int_0^{\pi/2}x\cos(xy)\,dy=\sin(xy)\Big|_{y=0}^{y=\pi/2}=\sin\frac{\pi x}{2}$. אחר כך
+      $\int_0^1\sin\frac{\pi x}{2}\,dx=\frac2\pi\left(1-\cos\frac\pi2\right)=\frac2\pi$.
+    wrongFeedback: >-
+      בחרו את הסדר שבו האינטגרל הפנימי פשוט: לפי $y$, כש-$x$ קבוע, $x\cos(xy)$ היא נגזרת של $\sin(xy)$.
+    hints: ['איזו פונקציה של $y$ נגזרתה $x\cos(xy)$ כש-$x$ קבוע?']
+
+  - id: Q-12.1-avg
+    type: numeric
+    objectives: [OBJ-12.1-1, OBJ-12.1-3]
+    level: exam
+    prompt: >-
+      הטמפרטורה על לוח מלבני $R=[0,2]\times[0,3]$ היא $T(x,y)=xy^2$. הטמפרטורה הממוצעת על הלוח היא האינטגרל הכפול של $T$
+      על $R$, מחולק בשטח של $R$. חשבו אותה.
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\iint_RT\,dA=\left(\int_0^2x\,dx\right)\left(\int_0^3y^2\,dy\right)=2\cdot9=18$, והשטח 6, ולכן הממוצע 3. בדיקת
+      סבירות: $T$ נעה על הלוח בין 0 ל-18, והממוצע בתוך הטווח.
+    wrongFeedback: >-
+      פרקו את האינטגרל למכפלה של אינטגרל לפי $x$ באינטגרל לפי $y$, ואז חלקו בשטח של $R$.
+    commonWrong:
+      - value: 1.8333333333333333
+        feedback: >-
+          זה $\frac{2+9}{6}$: חיברתם את שני האינטגרלים במקום להכפיל אותם.
+        misconception: MC-c12-separable-misuse
+    hints: ['השטח של $R$ הוא $2\cdot3$.']

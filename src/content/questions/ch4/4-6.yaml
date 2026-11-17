@@ -1,0 +1,343 @@
+# Lesson 4.6 — limits and continuity, intuitively (notes pp. 3–6).
+# Objectives (src/course.ts):
+#   OBJ-4.6-1  compute limits at a point and at infinity of elementary functions, including one-sided limits
+#   OBJ-4.6-2  identify points of discontinuity and classify them: removable, jump or infinite
+#   OBJ-4.6-3  use the intermediate value theorem and the existence of max and min on a closed interval
+# Every number is recomputed in screens/tools/checks_ch4.py.
+chapter: 4
+questions:
+  - id: Q-4.6-notes-cancel
+    type: numeric
+    objectives: [OBJ-4.6-1]
+    level: basic
+    prompt: >-
+      (מהסיכומים, עמ׳ 4) חשבו את $\lim_{x\to2}\frac{x^2-5x+6}{x-2}$.
+    answer: -1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x^2-5x+6=(x-2)(x-3)$, ול-$x\ne2$ המנה היא $x-3$, ששואפת ל-$-1$. בסיכומים גם בדיקה מספרית: $f(1.99)=-1.01$,
+      $f(2.01)=-0.99$.
+    wrongFeedback: >-
+      הצבה נותנת $\frac00$. פרקו את המונה לגורמים וצמצמו.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          המונה שואף ל-0, אבל גם המכנה. $\frac00$ אינו 0: אחרי הצמצום המנה $x-3$, ושם $x=2$ נותן $-1$.
+        misconception: MC-c4-zero-over-zero
+
+  - id: Q-4.6-notes-removable
+    type: numeric
+    objectives: [OBJ-4.6-1]
+    level: basic
+    prompt: >-
+      (מהסיכומים, עמ׳ 3) חשבו את $\lim_{x\to1}\frac{x^2-3x+2}{x^2-1}$.
+    answer: -0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{(x-1)(x-2)}{(x-1)(x+1)}=\frac{x-2}{x+1}$ ל-$x\ne\pm1$, וב-$x=1$ זה $-\frac12$.
+    wrongFeedback: >-
+      פרקו מונה ומכנה לגורמים, צמצמו את הגורם המשותף, ורק אז הציבו.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          "$\frac00=1$" אינו כלל. מה שמתבטל הוא הגורם $(x-1)$, ונשארת המנה $\frac{x-2}{x+1}$.
+        misconception: MC-c4-zero-over-zero
+
+  - id: Q-4.6-jump
+    type: mc
+    objectives: [OBJ-4.6-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      (מהסיכומים, עמ׳ 6) $f(x)=2x+1$ ל-$x<3$ ו-$f(x)=x^2$ ל-$x\ge3$. איזו אי-רציפות יש ל-$f$ ב-$x=3$?
+    choices:
+      - text: 'קפיצה: הגבול משמאל 7 והגבול מימין 9'
+        correct: true
+        feedback: >-
+          נכון. שני הגבולות החד-צדדיים סופיים ושונים. גודל הקפיצה $9-7=2$, ושום ערך של $f(3)$ לא יסלק אותה.
+      - text: 'סליקה, כי שני הגבולות החד-צדדיים סופיים'
+        feedback: >-
+          לסליקה צריך שהגבולות החד-צדדיים יהיו **שווים**. כאן 7 ו-9.
+        misconception: MC-c4-removable-vs-jump
+      - text: 'אינסופית, כי הפונקציה מוגדרת בשתי נוסחאות'
+        feedback: >-
+          אין כאן ערך ששואף לאינסוף: שתי הנוסחאות סופיות ליד 3. אי-רציפות אינסופית היא כמו $\frac1x$ ב-0.
+        misconception: MC-c4-zero-denominator-infinite
+
+  - id: Q-4.6-sinx-x-infinity
+    type: mc
+    objectives: [OBJ-4.6-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      מהו $\lim_{x\to\infty}\frac{\sin x}{x}$?
+    choices:
+      - text: '0'
+        correct: true
+        feedback: >-
+          נכון. $\left|\frac{\sin x}x\right|\le\frac1x\to0$: מונה חסום חלקי מכנה שגדל.
+      - text: '1'
+        feedback: >-
+          $\frac{\sin x}x\to1$ כש-$x\to0$ (בסיכומים, עמ׳ 5). כאן $x\to\infty$, והסינוס לא גדל בכלל.
+        misconception: MC-c4-sinx-over-x-everywhere
+      - text: 'הגבול אינו קיים, כי $\sin x$ מתנודד'
+        feedback: >-
+          המונה מתנודד, אבל המנה כולה כלואה בין $-\frac1x$ ל-$\frac1x$, ושני אלה שואפים ל-0.
+        misconception: MC-c4-bounded-has-limit
+
+  - id: Q-4.6-one-sided
+    type: mc
+    objectives: [OBJ-4.6-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מה נכון לגבי $\lim_{x\to0}\frac1x$?
+    choices:
+      - text: 'הגבול אינו קיים: מימין $+\infty$ ומשמאל $-\infty$'
+        correct: true
+        feedback: >-
+          נכון. הגבולות החד-צדדיים שונים (בסיכומים, עמ׳ 6). לעומת זאת $\lim_{x\to0}\frac1{x^2}=+\infty$ משני הצדדים.
+      - text: '$\infty$'
+        feedback: >-
+          זה הגבול מימין בלבד. ב-$x=-0.001$ הערך $-1000$.
+        misconception: MC-c4-one-sided-ignored
+      - text: '0'
+        feedback: >-
+          $\frac1x$ **גדל** בערכו המוחלט כש-$x\to0$. מתקרב ל-0 הוא כש-$x\to\pm\infty$.
+        misconception: MC-c4-one-sided-ignored
+
+  - id: Q-4.6-classify
+    type: multi
+    objectives: [OBJ-4.6-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f(x)=\frac{x^2-1}{(x-1)(x+2)}$. אילו מהטענות נכונות? סמנו את כולן.
+    choices:
+      - text: 'ב-$x=1$ יש אי-רציפות סליקה'
+        correct: true
+        feedback: 'נכון. ל-$x\ne1$, $f(x)=\frac{x+1}{x+2}$, והגבול ב-1 קיים: $\frac23$.'
+      - text: 'ב-$x=-2$ יש אי-רציפות אינסופית'
+        correct: true
+        feedback: 'נכון. המונה שואף ל-3 והמכנה ל-0: $|f|\to\infty$.'
+      - text: 'ב-$x=1$ יש אסימפטוטה אנכית, כי המכנה מתאפס'
+        feedback: >-
+          גם המונה מתאפס ב-1, והגורם $(x-1)$ מצטמצם. הגרף הוא $\frac{x+1}{x+2}$ עם "חור" בנקודה $\left(1,\frac23\right)$.
+        misconception: MC-c4-zero-denominator-infinite
+      - text: 'ב-$x=-2$ האי-רציפות סליקה, כי הגבולות החד-צדדיים "שווים לאינסוף"'
+        feedback: >-
+          גבול אינסופי אינו גבול סופי, ושום ערך ב-$-2$ לא יתקן אותו. (וכאן גם הסימנים שונים: $+\infty$ משמאל, $-\infty$ מימין.)
+        misconception: MC-c4-removable-vs-jump
+
+  - id: Q-4.6-removable-value
+    type: numeric
+    objectives: [OBJ-4.6-2]
+    level: mid
+    prompt: >-
+      $f(x)=\frac{x^2-1}{(x-1)(x+2)}$ אינה מוגדרת ב-$x=1$. איזה ערך צריך לתת ל-$f(1)$ כדי שהפונקציה תהיה רציפה שם?
+    answer: 0.6666666666666666
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac23$. ל-$x\ne1$, $f(x)=\frac{(x-1)(x+1)}{(x-1)(x+2)}=\frac{x+1}{x+2}$, וב-1: $\frac23$.
+    wrongFeedback: >-
+      הערך הנכון הוא הגבול $\lim_{x\to1}f(x)$. צמצמו את הגורם המשותף.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 בא מהמונה בלבד ($1^2-1=0$). גם המכנה מתאפס; אחרי הצמצום הגבול $\frac23$.
+        misconception: MC-c4-zero-over-zero
+
+  - id: Q-4.6-root-conjugate
+    type: numeric
+    objectives: [OBJ-4.6-1]
+    level: mid
+    prompt: >-
+      חשבו את $\lim_{x\to0}\frac{\sqrt{x+4}-2}{x}$.
+    answer: 0.25
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. כופלים בצמוד: $\frac{(x+4)-4}{x\left(\sqrt{x+4}+2\right)}=\frac{1}{\sqrt{x+4}+2}\to\frac14$.
+    wrongFeedback: >-
+      הצבה נותנת $\frac00$. כפלו מונה ומכנה ב-$\sqrt{x+4}+2$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          $\frac00$ אינו 0. אחרי הכפל בצמוד ה-$x$ מצטמצם ונשאר $\frac1{\sqrt{x+4}+2}$.
+        misconception: MC-c4-zero-over-zero
+
+  - id: Q-4.6-rational-infinity
+    type: numeric
+    objectives: [OBJ-4.6-1]
+    level: mid
+    prompt: >-
+      חשבו את $\lim_{x\to\infty}\frac{3x^2-x}{1-2x^2}$.
+    answer: -1.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. מחלקים מונה ומכנה ב-$x^2$: $\frac{3-\frac1x}{\frac1{x^2}-2}\to\frac{3}{-2}$.
+    wrongFeedback: >-
+      באינסוף שולטים האיברים מהחזקה הגבוהה. חלקו מונה ומכנה ב-$x^2$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 הוא היחס בין האיברים החופשיים ($\frac01$). אבל כש-$x$ גדול האיברים $3x^2$ ו-$-2x^2$ גדולים מכל השאר.
+        misconception: MC-c4-rational-limit-at-infinity
+      - value: 1.5
+        feedback: >-
+          המקדם המוביל במכנה הוא $-2$, לא 2: הסדר $1-2x^2$ מסתיר את הסימן.
+        misconception: MC-c4-rational-limit-at-infinity
+
+  - id: Q-4.6-sin-1-over-x
+    type: twotier
+    objectives: [OBJ-4.6-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: ל-$f(x)=\sin\frac1x$ יש ב-$x=0$ אי-רציפות סליקה, כי הפונקציה חסומה שם.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. ליד 0 הפונקציה מקבלת את כל הערכים בין $-1$ ל-1 שוב ושוב (בסיכומים, עמ׳ 6), ואין לה גבול אף מצד אחד.
+      - text: 'נכון'
+        feedback: >-
+          לסליקה צריך שהגבול יהיה קיים. ב-$x=\frac1{\pi/2+2\pi n}$ הערך 1, וב-$x=\frac1{3\pi/2+2\pi n}$ הערך $-1$, ושתי הסדרות
+          מתקרבות ל-0.
+        misconception: MC-c4-bounded-has-limit
+    reasons:
+      - text: 'הגבול אינו קיים: יש נקודות קרובות ל-0 כרצוננו שבהן $f=1$ ואחרות שבהן $f=-1$'
+        correct: true
+        feedback: 'בדיוק. זו אי-רציפות "מסוג שני": לא סליקה ולא קפיצה.'
+      - text: 'פונקציה חסומה ליד נקודה תמיד מתכנסת בה'
+        feedback: >-
+          חסימות אומרת שהערכים לא בורחים לאינסוף, לא שהם מתייצבים. $\sin\frac1x$ חסומה ומתנודדת.
+        misconception: MC-c4-bounded-has-limit
+
+  - id: Q-4.6-ivt-cubic
+    type: mc
+    objectives: [OBJ-4.6-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f(x)=x^3+x-1$. למה יש ל-$f$ שורש בקטע $[0,1]$?
+    choices:
+      - text: '$f$ רציפה ב-$[0,1]$, $f(0)=-1<0$ ו-$f(1)=1>0$, ולפי משפט ערך הביניים היא עוברת דרך 0'
+        correct: true
+        feedback: >-
+          נכון. שני התנאים נחוצים: רציפות בכל הקטע והחלפת סימן בקצוות.
+      - text: '$f$ עולה בקטע'
+        feedback: >-
+          עלייה מבטיחה שיש **לכל היותר** שורש אחד, לא שיש שורש: $x^3+x+5$ עולה ואין לה שורש ב-$[0,1]$.
+        misconception: MC-c4-monotone-gives-root
+      - text: '$f(0)$ ו-$f(1)$ בסימנים מנוגדים, וזה מספיק לכל פונקציה'
+        feedback: >-
+          בלי רציפות זה לא מספיק: $\frac1{x-0.5}$ שלילית ב-0 וחיובית ב-1, ואין לה שורש.
+        misconception: MC-c4-ivt-without-continuity
+
+  - id: Q-4.6-ivt-recip
+    type: twotier
+    objectives: [OBJ-4.6-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f(x)=\frac1x$. מתקיים $f(-1)=-1<0$ ו-$f(1)=1>0$. נכון או לא נכון: לפי משפט ערך הביניים יש ל-$f$ שורש בקטע $[-1,1]$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $\frac1x$ לעולם אינה 0, והמשפט אינו חל: $f$ אינה רציפה (אפילו אינה מוגדרת) ב-$x=0$.'
+      - text: 'נכון'
+        feedback: >-
+          נסו לפתור $\frac1x=0$: אין פתרון. הגרף עובר ממתחת לציר אל מעליו דרך האסימפטוטה ב-0, בלי לחצות אותו.
+        misconception: MC-c4-ivt-without-continuity
+    reasons:
+      - text: 'המשפט דורש רציפות בכל הקטע, ו-$f$ אינה מוגדרת ב-0'
+        correct: true
+        feedback: 'בדיוק. החלפת סימן לבדה אינה מספיקה.'
+      - text: 'המשפט נכון רק לפולינומים'
+        feedback: >-
+          המשפט נכון לכל פונקציה רציפה בקטע סגור, למשל $\cos x-x$ ב-$\left[0,\frac\pi2\right]$. הבעיה כאן היא חוסר הרציפות.
+        misconception: MC-c4-ivt-without-continuity
+
+  - id: Q-4.6-extreme-value
+    type: multi
+    objectives: [OBJ-4.6-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      לאילו מהפונקציות הבאות **מובטח**, לפי משפט קיום מקסימום ומינימום, שיש ערך גדול ביותר בקטע הנתון? סמנו את כולן.
+    choices:
+      - text: '$x^2$ בקטע $[-1,2]$'
+        correct: true
+        feedback: 'נכון. רציפה בקטע סגור. (המקסימום 4, ב-$x=2$.)'
+      - text: '$\sin x$ בקטע $[0,10]$'
+        correct: true
+        feedback: 'נכון. רציפה בקטע סגור; המקסימום 1, למשל ב-$x=\frac\pi2$.'
+      - text: '$x$ בקטע $(0,1)$'
+        feedback: >-
+          הקטע פתוח: הערכים מתקרבים ל-1 בלי להגיע, ואין ערך גדול ביותר.
+        misconception: MC-c4-evt-open-interval
+      - text: '$\frac1x$ בקטע $(0,1]$'
+        feedback: >-
+          הקטע אינו סגור בקצה 0, ושם $\frac1x\to\infty$: הפונקציה אינה חסומה ואין מקסימום.
+        misconception: MC-c4-evt-open-interval
+
+  - id: Q-4.6-glue
+    type: numeric
+    objectives: [OBJ-4.6-2]
+    level: exam
+    prompt: >-
+      $f(x)=ax+1$ ל-$x<2$ ו-$f(x)=x^2-a$ ל-$x\ge2$. לאיזה ערך של $a$ הפונקציה רציפה ב-$x=2$?
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. הגבול משמאל $2a+1$, והגבול מימין (וגם $f(2)$) $4-a$. רציפות: $2a+1=4-a$, ולכן $a=1$. אחרת יש קפיצה בגודל
+      $|3-3a|$.
+    wrongFeedback: >-
+      חשבו את שני הגבולות החד-צדדיים ב-2 (כל אחד מהנוסחה שלו) והשוו ביניהם.
+    commonWrong:
+      - value: 3
+        feedback: >-
+          $a=3$ פותר $2a+1=4+a$: איבדתם את הסימן של $-a$ בנוסחה הימנית. עם $a=3$ הגבול משמאל 7 ומימין 1: קפיצה.
+        misconception: MC-c4-removable-vs-jump
+
+  - id: Q-4.6-bisection
+    type: numeric
+    objectives: [OBJ-4.6-3]
+    level: exam
+    prompt: >-
+      מחפשים את השורש של $f(x)=x^3+x-1$ בקטע $[0,1]$ בשיטת החצייה: בכל צעד בודקים את הסימן של $f$ בנקודת האמצע וממשיכים עם
+      החצי שבקצותיו $f$ מחליפה סימן. אחרי שלושה צעדים מתקבל קטע $[p,q]$ שאורכו $\frac18$. מהו $p$?
+    answer: 0.625
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f(0.5)=-0.375<0$: $[0.5,1]$. $f(0.75)\approx0.172>0$: $[0.5,0.75]$. $f(0.625)\approx-0.131<0$: $[0.625,0.75]$.
+      השורש בערך $0.682$.
+    wrongFeedback: >-
+      בכל צעד: חשבו $f(m)$ בנקודת האמצע. אם הסימן שלו כמו ב-$f$ בקצה השמאלי, הקצה השמאלי עובר ל-$m$; אחרת הימני.
+    commonWrong:
+      - value: 0.5
+        feedback: >-
+          בצעד השלישי $f(0.625)<0$, כמו בקצה השמאלי $0.5$, ולכן השורש בין $0.625$ ל-$0.75$. המשכתם עם החצי שבו אין החלפת סימן.
+        misconception: MC-c4-bisection-wrong-half
+
+  - id: Q-4.6-sqrt-minus-x
+    type: numeric
+    objectives: [OBJ-4.6-1]
+    level: exam
+    prompt: >-
+      חשבו את $\lim_{x\to\infty}\left(\sqrt{x^2+3x}-x\right)$.
+    answer: 1.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. כופלים בצמוד: $\frac{x^2+3x-x^2}{\sqrt{x^2+3x}+x}=\frac{3x}{\sqrt{x^2+3x}+x}=\frac{3}{\sqrt{1+\frac3x}+1}\to\frac32$.
+    wrongFeedback: >-
+      $\infty-\infty$ אינו מוגדר. כפלו וחלקו ב-$\sqrt{x^2+3x}+x$, ואחר כך חלקו מונה ומכנה ב-$x$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          שני האיברים שואפים לאינסוף, אבל ההפרש ביניהם אינו שואף ל-0: ב-$x=100$ הוא בערך $1.49$. $\infty-\infty$ תלוי בקצב.
+        misconception: MC-c4-infinity-minus-infinity
+      - value: 3
+        feedback: >-
+          כנראה החלפתם את המכנה $\sqrt{x^2+3x}+x$ ב-$x$ בלבד. אבל $\sqrt{x^2+3x}\approx x$, ולכן המכנה בערך $2x$.
+        misconception: MC-c4-rational-limit-at-infinity

@@ -1,0 +1,31 @@
+# Terms first defined in lesson 3.1 (arithmetic with complex numbers).
+- id: imaginary-unit
+  term: היחידה המדומה
+  en: imaginary unit
+  symbol: 'i'
+  definition: 'מספר $i$ שמקיים $i^2=-1$. החזקות שלו חוזרות במחזור של 4: $i,-1,-i,1$.'
+  lesson: '3.1'
+- id: complex-number
+  term: מספר מרוכב
+  en: complex number
+  symbol: 'z=a+bi'
+  definition: >-
+    מספר מהצורה $z=a+bi$ עם $a,b$ ממשיים. מחברים וכופלים כמו בביטויים אלגבריים, עם $i^2=-1$. אוסף המספרים המרוכבים
+    מסומן $\mathbb{C}$.
+  reject: [מספר קומפלקסי]
+  lesson: '3.1'
+- id: real-imaginary-part
+  term: חלק ממשי וחלק מדומה
+  en: real part and imaginary part
+  symbol: '\operatorname{Re}z,\ \operatorname{Im}z'
+  definition: >-
+    ל-$z=a+bi$: $\operatorname{Re}z=a$ ו-$\operatorname{Im}z=b$. שניהם מספרים **ממשיים** (החלק המדומה הוא $b$, לא $bi$).
+  lesson: '3.1'
+- id: complex-conjugate
+  term: הצמוד
+  en: complex conjugate
+  symbol: '\bar z'
+  definition: >-
+    ל-$z=a+bi$: $\bar z=a-bi$. מתקיים $z\bar z=a^2+b^2$ (ממשי), $\operatorname{Re}z=\frac{z+\bar z}{2}$,
+    $\operatorname{Im}z=\frac{z-\bar z}{2i}$, ו-$\overline{zw}=\bar z\bar w$. כדי לחלק כופלים מונה ומכנה בצמוד של המכנה.
+  lesson: '3.1'

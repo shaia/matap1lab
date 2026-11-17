@@ -1,0 +1,327 @@
+# Lesson 4.5 — hyperbolic functions.
+# Objectives (src/course.ts):
+#   OBJ-4.5-1  define sinh and cosh through the exponential and sketch them
+#   OBJ-4.5-2  prove cosh^2 - sinh^2 = 1 and compare it with the trigonometric identity
+#   OBJ-4.5-3  find the inverses of the hyperbolic functions through the logarithm
+# Every number is recomputed in screens/tools/checks_ch4.py.
+chapter: 4
+questions:
+  - id: Q-4.5-cosh0
+    type: numeric
+    objectives: [OBJ-4.5-1]
+    level: basic
+    prompt: >-
+      חשבו את $\cosh0$.
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\cosh0=\frac{e^0+e^{0}}2=\frac{1+1}2=1$. זו הנקודה הנמוכה ביותר של הגרף: $\cosh x\ge1$.
+    wrongFeedback: >-
+      הציבו בהגדרה $\cosh x=\frac{e^x+e^{-x}}2$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 הוא $\sinh0=\frac{1-1}2$. בקוסינוס ההיפרבולי יש **פלוס**: $\frac{1+1}2=1$, כמו $\cos0=1$.
+        misconception: MC-c4-sinh-cosh-swap
+
+  - id: Q-4.5-sinh-ln2
+    type: numeric
+    objectives: [OBJ-4.5-1]
+    level: basic
+    prompt: >-
+      חשבו את $\sinh(\ln2)$.
+    answer: 0.75
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $e^{\ln2}=2$ ו-$e^{-\ln2}=\frac12$, ולכן $\sinh(\ln2)=\frac{2-\frac12}2=\frac34$.
+    wrongFeedback: >-
+      $\sinh x=\frac{e^x-e^{-x}}2$, ו-$e^{-\ln2}=\frac1{e^{\ln2}}$.
+    commonWrong:
+      - value: 1.25
+        feedback: >-
+          $\frac54=\frac{2+\frac12}2$ הוא $\cosh(\ln2)$. בסינוס ההיפרבולי מחסרים.
+        misconception: MC-c4-sinh-cosh-swap
+      - value: 1.5
+        feedback: >-
+          $\frac32=2-\frac12$: שכחתם לחלק ב-2. $\sinh x$ הוא **חצי** ההפרש $e^x-e^{-x}$.
+        misconception: MC-c4-hyperbolic-half-forgot
+
+  - id: Q-4.5-shape
+    type: multi
+    objectives: [OBJ-4.5-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      אילו מהטענות נכונות? סמנו את כולן.
+    choices:
+      - text: '$\cosh$ זוגית ו-$\sinh$ אי-זוגית'
+        correct: true
+        feedback: 'נכון. החלפת $x$ ב-$-x$ מחליפה בין $e^x$ ל-$e^{-x}$: הסכום לא משתנה, וההפרש מחליף סימן.'
+      - text: '$\cosh x\ge1$ לכל $x$'
+        correct: true
+        feedback: 'נכון. $e^x+e^{-x}\ge2$, כי $\left(e^{x/2}-e^{-x/2}\right)^2\ge0$; שוויון רק ב-$x=0$.'
+      - text: '$\sinh$ מחזורית'
+        feedback: >-
+          $\sinh x\approx\frac{e^x}2$ כש-$x$ גדול: היא עולה בלי גבול ואינה חוזרת על עצמה.
+        misconception: MC-c4-hyperbolic-periodic
+      - text: '$-1\le\cosh x\le1$, כמו הקוסינוס'
+        feedback: >-
+          $\cosh x\to\infty$ כש-$x\to\pm\infty$. רק השם והזהויות דומים לקוסינוס, לא הגרף.
+        misconception: MC-c4-hyperbolic-periodic
+
+  - id: Q-4.5-identity-pick
+    type: mc
+    objectives: [OBJ-4.5-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      איזו זהות נכונה לכל $x$?
+    choices:
+      - text: '$\cosh^2x-\sinh^2x=1$'
+        correct: true
+        feedback: >-
+          נכון. $\cosh x+\sinh x=e^x$ ו-$\cosh x-\sinh x=e^{-x}$, והמכפלה שלהם $e^x\cdot e^{-x}=1$.
+      - text: '$\cosh^2x+\sinh^2x=1$'
+        feedback: >-
+          ב-$x=1$: $\cosh^21+\sinh^21\approx2.38+1.38\ne1$. בזהות ההיפרבולית יש מינוס.
+        misconception: MC-c4-hyperbolic-identity-sign
+      - text: '$\sinh^2x-\cosh^2x=1$'
+        feedback: >-
+          ב-$x=0$: $0-1=-1$. הסדר הפוך: $\cosh$ הוא הגדול מהשניים.
+        misconception: MC-c4-hyperbolic-identity-sign
+
+  - id: Q-4.5-arsinh-value
+    type: numeric
+    objectives: [OBJ-4.5-3]
+    level: basic
+    prompt: >-
+      מצאו את $x$ שעבורו $\sinh x=\frac34$. (אפשר לכתוב ערך מדויק, כמו ln 3 או 3√2)
+    answer: 0.6931471805599453
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $x=\ln2$. בהצבת $u=e^x$: $u-\frac1u=\frac32$, כלומר $2u^2-3u-2=0$, ו-$u=2$ (השורש $-\frac12$ נפסל כי $e^x>0$).
+    wrongFeedback: >-
+      כתבו $\frac{e^x-e^{-x}}2=\frac34$, הציבו $u=e^x$ ופתרו משוואה ריבועית. זכרו ש-$u>0$.
+    commonWrong:
+      - value: -0.6931471805599453
+        feedback: >-
+          $-\ln2$ מקיים $\sinh(-\ln2)=-\frac34$: $\sinh$ אי-זוגית. כנראה בחרתם את השורש הלא נכון, או שכחתם שאחד השורשים
+          שלילי ואינו יכול להיות $e^x$.
+        misconception: MC-c4-quadratic-root-choice
+
+  - id: Q-4.5-cable-shape
+    type: mc
+    objectives: [OBJ-4.5-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      שרשרת שתלויה בין שני עמודים מקבלת את הצורה $y=a\cosh\frac xa$. מה נכון לגבי הגרף הזה?
+    choices:
+      - text: 'יש לו נקודה נמוכה אחת ב-$x=0$, והוא עולה לשני הצדדים כמו $\frac a2e^{|x|/a}$ כש-$|x|$ גדול'
+        correct: true
+        feedback: >-
+          נכון. $\cosh$ זוגית עם מינימום 1 ב-0, וכש-$x$ גדול האיבר $e^{-x/a}$ זניח, ולכן הגרף מתנהג כמו אקספוננט.
+      - text: 'הוא מתנודד כמו הקוסינוס, ולכן שרשרת ארוכה הייתה יוצרת גלים'
+        feedback: >-
+          $\cosh$ אינה מחזורית: היא בנויה מ-$e^x$ ומ-$e^{-x}$, ושניהם חיוביים. הגרף "שוקת" אחת.
+        misconception: MC-c4-hyperbolic-periodic
+      - text: 'הוא בדיוק פרבולה'
+        feedback: >-
+          ליד התחתית הצורה דומה לפרבולה, אבל רחוק ממנה $\cosh$ גדל מעריכית, מהר יותר מכל פולינום.
+        misconception: MC-c4-power-beats-exp
+
+  - id: Q-4.5-tanh-limit
+    type: mc
+    objectives: [OBJ-4.5-1]
+    level: mid
+    prompt: >-
+      מהו $\lim_{x\to\infty}\tanh x$?
+    choices:
+      - text: '1'
+        correct: true
+        feedback: >-
+          נכון. $\tanh x=\frac{e^x-e^{-x}}{e^x+e^{-x}}=\frac{1-e^{-2x}}{1+e^{-2x}}\to1$. הישר $y=1$ הוא אסימפטוטה אופקית.
+      - text: '$\infty$'
+        feedback: >-
+          המונה והמכנה גדלים שניהם כמו $\frac{e^x}{2}$, והיחס ביניהם מתקרב ל-1. תמיד $|\sinh x|<\cosh x$, ולכן $|\tanh x|<1$.
+        misconception: MC-c4-tanh-unbounded
+      - text: 'אינו קיים, כי $\tanh$ מחזורית כמו $\tan$'
+        feedback: >-
+          $\tanh$ אינה מחזורית ואין לה אסימפטוטות אנכיות: המכנה $\cosh x\ge1$ לעולם אינו מתאפס.
+        misconception: MC-c4-hyperbolic-periodic
+
+  - id: Q-4.5-cosh-from-sinh
+    type: numeric
+    objectives: [OBJ-4.5-2]
+    level: mid
+    prompt: >-
+      ידוע ש-$\sinh x=\frac34$. חשבו את $\cosh x$ בלי למצוא את $x$.
+    answer: 1.25
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\cosh^2x=1+\sinh^2x=1+\frac9{16}=\frac{25}{16}$, ו-$\cosh x>0$, ולכן $\cosh x=\frac54$. (בדיקה: $x=\ln2$ ו-$\cosh(\ln2)=\frac54$.)
+    wrongFeedback: >-
+      השתמשו ב-$\cosh^2x-\sinh^2x=1$, ובחרו את הסימן לפי $\cosh x\ge1$.
+    commonWrong:
+      - value: 0.6614378277661477
+        feedback: >-
+          $\frac{\sqrt7}4=\sqrt{1-\frac9{16}}$: השתמשתם בזהות הטריגונומטרית $\cos^2+\sin^2=1$. בהיפרבולית יש מינוס, ולכן
+          $\cosh^2x=1+\sinh^2x$.
+        misconception: MC-c4-hyperbolic-identity-sign
+      - value: -1.25
+        feedback: >-
+          $\cosh x=\frac{e^x+e^{-x}}2$ חיובי תמיד (ואפילו לפחות 1). מבין $\pm\frac54$ רק $\frac54$ אפשרי.
+        misconception: MC-c4-cosh-sign-choice
+
+  - id: Q-4.5-identity-steps
+    type: rank
+    objectives: [OBJ-4.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סדרו את שלבי ההוכחה של $\cosh^2x-\sinh^2x=1$ מההגדרות.
+    help: 'גררו את השלב הראשון למעלה ואת המסקנה למטה.'
+    items:
+      - { id: def, label: 'כותבים $\cosh x=\frac{e^x+e^{-x}}2$ ו-$\sinh x=\frac{e^x-e^{-x}}2$' }
+      - { id: sq, label: 'מעלים בריבוע: $\cosh^2x=\frac{e^{2x}+2+e^{-2x}}4$ ו-$\sinh^2x=\frac{e^{2x}-2+e^{-2x}}4$' }
+      - { id: sub, label: 'מחסרים: $e^{2x}$ ו-$e^{-2x}$ מתבטלים, ונשאר $\frac{2-(-2)}4$' }
+      - { id: res, label: 'מקבלים $\frac44=1$ לכל $x$' }
+    order: [def, sq, sub, res]
+    correctFeedback: >-
+      נכון. האיבר האמצעי $2e^xe^{-x}=2$ הוא כל הסיפור: בריבוע של הסכום הוא $+2$, ובריבוע של ההפרש $-2$.
+    wrongFeedback: >-
+      מתחילים מההגדרות, מעלים כל אחת בריבוע (עם $e^x\cdot e^{-x}=1$), ורק אז מחסרים.
+
+  - id: Q-4.5-hyperbola
+    type: twotier
+    objectives: [OBJ-4.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: כש-$t$ עובר על כל הממשיים, הנקודה $(\cosh t,\sinh t)$ עוברת על הענף הימני של ההיפרבולה $x^2-y^2=1$.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. $x^2-y^2=\cosh^2t-\sinh^2t=1$, ו-$x=\cosh t\ge1>0$. כמו ש-$(\cos t,\sin t)$ עוברת על מעגל היחידה, ומכאן השם
+          "היפרבולי".
+      - text: 'לא נכון: היא עוברת על מעגל היחידה'
+        feedback: >-
+          זה נכון ל-$(\cos t,\sin t)$. ל-$(\cosh t,\sinh t)$: $\cosh^2t-\sinh^2t=1$, עם מינוס, וזו משוואת היפרבולה.
+        misconception: MC-c4-hyperbolic-identity-sign
+    reasons:
+      - text: '$\cosh^2t-\sinh^2t=1$ ו-$\cosh t>0$'
+        correct: true
+        feedback: 'בדיוק. הזהות נותנת את ההיפרבולה, והסימן של $\cosh$ בוחר את הענף הימני. ($\sinh$ מקבל כל ערך, ולכן כל הענף.)'
+      - text: '$\cosh^2t+\sinh^2t=1$'
+        feedback: >-
+          זו הזהות הטריגונומטרית עם השמות ההיפרבוליים. ב-$t=1$ אגף שמאל בערך $3.76$.
+        misconception: MC-c4-hyperbolic-identity-sign
+
+  - id: Q-4.5-root-choice
+    type: twotier
+    objectives: [OBJ-4.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      כדי להפוך את $y=\sinh x$ מציבים $u=e^x$ ומקבלים $u^2-2yu-1=0$, ולכן $u=y\pm\sqrt{y^2+1}$. נכון או לא נכון: שני הסימנים
+      נותנים פתרון $x$.
+    choices:
+      - text: 'לא נכון: רק הסימן פלוס'
+        correct: true
+        feedback: >-
+          נכון. $\sqrt{y^2+1}>|y|$, ולכן $y-\sqrt{y^2+1}<0$, ו-$u=e^x$ חייב להיות חיובי. נשאר
+          $x=\ln\left(y+\sqrt{y^2+1}\right)$.
+      - text: 'נכון'
+        feedback: >-
+          $y-\sqrt{y^2+1}$ שלילי לכל $y$, ולמשוואה $e^x=$ מספר שלילי אין פתרון.
+        misconception: MC-c4-quadratic-root-choice
+    reasons:
+      - text: '$u=e^x$ חייב להיות חיובי, ו-$y-\sqrt{y^2+1}<0$ תמיד'
+        correct: true
+        feedback: 'בדיוק. ולכן $\sinh$ חד-חד-ערכית: לכל $y$ יש $x$ יחיד.'
+      - text: 'לכל משוואה ריבועית יש שני פתרונות, ולכן ל-$\sinh$ יש שתי הפוכות'
+        feedback: >-
+          למשוואה ב-$u$ יש שני שורשים, אבל רק שורש חיובי יכול להיות $e^x$. $\sinh$ עולה, ולכן לכל ערך מקור אחד.
+        misconception: MC-c4-quadratic-root-choice
+
+  - id: Q-4.5-arsinh-formula
+    type: expr
+    objectives: [OBJ-4.5-3]
+    level: mid
+    prompt: >-
+      מצאו נוסחה ל-$\operatorname{arsinh}x$, הפונקציה ההפוכה של $\sinh$: הפתרון $w$ של המשוואה $\sinh w=x$, בעזרת לוגריתם
+      ושורש (במשתנה x).
+    answer: 'log(x + sqrt(x^2 + 1))'
+    answerTex: '$\operatorname{arsinh}x=\ln\left(x+\sqrt{x^2+1}\right)$'
+    variables: [x]
+    domain: [1.2, 3]
+    correctFeedback: >-
+      נכון. מ-$\frac{e^w-e^{-w}}2=x$ עם $u=e^w$: $u^2-2xu-1=0$, $u=x+\sqrt{x^2+1}$ (השורש החיובי), ו-$w=\ln u$.
+    wrongFeedback: >-
+      פתרו $\frac{e^w-e^{-w}}2=x$ לפי $w$: הציבו $u=e^w$, פתרו את המשוואה הריבועית ב-$u$, ובחרו שורש חיובי.
+    commonWrong:
+      - expr: '1/sinh(x)'
+        feedback: >-
+          זה $\frac1{\sinh x}$, לא ההפוכה. ההפוכה צריכה לקיים $\sinh(\operatorname{arsinh}x)=x$.
+        misconception: MC-c4-inverse-is-reciprocal
+      - expr: 'log(x + sqrt(x^2 - 1))'
+        feedback: >-
+          זו ההפוכה של $\cosh$ (עם $u^2-2xu+1=0$). ל-$\sinh$ המשוואה $u^2-2xu-1=0$, ולכן $\sqrt{x^2+1}$.
+        misconception: MC-c4-sinh-cosh-swap
+
+  - id: Q-4.5-cosh2x
+    type: numeric
+    objectives: [OBJ-4.5-2]
+    level: exam
+    prompt: >-
+      ידוע ש-$\sinh x=2$. חשבו את $\cosh(2x)$. (היעזרו בזהות $\cosh2x=\cosh^2x+\sinh^2x$, שנובעת מההגדרות.)
+    answer: 9
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\cosh^2x=1+\sinh^2x=5$, ולכן $\cosh2x=5+4=9$. באותו אופן $\cosh2x=1+2\sinh^2x$.
+    wrongFeedback: >-
+      חשבו את $\cosh^2x$ מהזהות הבסיסית $\cosh^2x-\sinh^2x=1$, ואז הציבו.
+    commonWrong:
+      - value: -7
+        feedback: >-
+          $1-2\sinh^2x=-7$ היא העתקה של $\cos2x=1-2\sin^2x$. אבל $\cosh2x\ge1$ תמיד; בהיפרבולי $\cosh2x=1+2\sinh^2x$.
+        misconception: MC-c4-hyperbolic-identity-sign
+      - value: 7
+        feedback: >-
+          $7=3+4$: לקחתם $\cosh^2x=\sinh^2x-1$. מהזהות, $\cosh^2x=1+\sinh^2x=5$.
+        misconception: MC-c4-hyperbolic-identity-sign
+
+  - id: Q-4.5-arcosh-value
+    type: numeric
+    objectives: [OBJ-4.5-3]
+    level: exam
+    prompt: >-
+      מצאו את הפתרון **החיובי** של $\cosh x=2$. (אפשר לכתוב ערך מדויק, כמו ln 3 או 3√2)
+    answer: 1.3169578969248166
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $x=\ln\left(2+\sqrt3\right)\approx1.317$. עם $u=e^x$: $u^2-4u+1=0$, $u=2\pm\sqrt3$. שני השורשים חיוביים ונותנים
+      $x=\pm\ln\left(2+\sqrt3\right)$ (כי $\left(2-\sqrt3\right)\left(2+\sqrt3\right)=1$), ו-$\cosh$ זוגית. החיובי הוא עם הפלוס.
+    wrongFeedback: >-
+      הציבו $u=e^x$, פתרו $u+\frac1u=4$, ובחרו את השורש שנותן $x>0$, כלומר $u>1$.
+    commonWrong:
+      - value: -1.3169578969248166
+        feedback: >-
+          $\ln\left(2-\sqrt3\right)<0$, כי $2-\sqrt3<1$. זה הפתרון השלילי. ביקשו את החיובי: $u=2+\sqrt3$.
+        misconception: MC-c4-quadratic-root-choice
+
+  - id: Q-4.5-cable-sag
+    type: numeric
+    objectives: [OBJ-4.5-1]
+    level: exam
+    prompt: >-
+      כבל חשמל תלוי בין שני עמודים שנמצאים ב-$x=-15$ וב-$x=15$ (מטרים), וצורתו $y=20\cosh\frac x{20}$. בכמה מטרים גבוהה נקודת
+      התלייה בעמוד מהנקודה הנמוכה ביותר של הכבל?
+    answer: 5.89366569353689
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, בערך $5.89$ מ׳. הנקודה הנמוכה ב-$x=0$, בגובה $20\cosh0=20$; בעמוד $20\cosh\frac34\approx25.89$. ההפרש
+      $20\left(\cosh\frac34-1\right)$.
+    wrongFeedback: >-
+      איפה הנקודה הנמוכה של $\cosh$? חשבו את הגובה שם ובעמוד, והחסירו.

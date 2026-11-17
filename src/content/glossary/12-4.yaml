@@ -1,0 +1,19 @@
+# Terms first defined in lesson 12.4 (triple integrals).
+- id: triple-integral
+  term: אינטגרל משולש
+  en: triple integral
+  symbol: '\iiint_E f\,dV'
+  definition: >-
+    הגבול של סכומי רימן $\sum f(x_i,y_i,z_i)\,\Delta V_i$ כשמחלקים גוף $E$ במרחב לתיבות קטנות. מחשבים אותו כאינטגרל
+    נשנה של שלושה אינטגרלים. $\iiint_E1\,dV$ הוא הנפח של $E$, ו-$\iiint_E\rho\,dV$ המסה שלו כש-$\rho$ הצפיפות.
+  reject: []
+  lesson: '12.4'
+- id: mass-density
+  term: צפיפות
+  en: density (mass per unit volume, area or length)
+  symbol: '\rho'
+  definition: >-
+    מסה ליחידת נפח (בגוף), ליחידת שטח (בלוח דק) או ליחידת אורך (בתיל), כפונקציה של המקום. המסה היא האינטגרל של הצפיפות:
+    $M=\iiint_E\rho\,dV$ או $M=\iint_D\rho\,dA$. צפיפות קבועה נקראת אחידה, והגוף הומוגני.
+  reject: []
+  lesson: '12.4'

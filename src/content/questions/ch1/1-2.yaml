@@ -1,0 +1,273 @@
+# Lesson 1.2 — the dot product (notes pp. 18–19).
+# Objectives (src/course.ts):
+#   OBJ-1.2-1  compute a dot product in coordinates and use its properties
+#   OBJ-1.2-2  find the angle between two vectors; recognise perpendicular vectors
+#   OBJ-1.2-3  compute the projection of a vector on a direction; the work of a constant force along a displacement
+# Every number recomputed in screens/tools/recompute-ch1.py.
+chapter: 1
+questions:
+  - id: Q-1.2-dot
+    type: numeric
+    objectives: [OBJ-1.2-1]
+    level: basic
+    prompt: >-
+      חשבו את $(1,2,-2)\cdot(3,-1,4)$.
+    answer: -7
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $1\cdot3+2\cdot(-1)+(-2)\cdot4=3-2-8=-7$. התוצאה מספר, לא וקטור.
+    wrongFeedback: >-
+      כופלים רכיב ברכיב ומחברים את שלוש המכפלות.
+    hints: ['$\vec a\cdot\vec b=a_1b_1+a_2b_2+a_3b_3$.']
+
+  - id: Q-1.2-props
+    type: multi
+    objectives: [OBJ-1.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      אילו מהטענות נכונות לכל שלושה וקטורים $\vec u,\vec v,\vec w$ במרחב? סמנו את כולן.
+    choices:
+      - text: '$\vec u\cdot\vec v=\vec v\cdot\vec u$'
+        correct: true
+        feedback: 'נכון: $u_1v_1+u_2v_2+u_3v_3$ סימטרי ב-$\vec u$ וב-$\vec v$.'
+      - text: '$\vec u\cdot(\vec v+\vec w)=\vec u\cdot\vec v+\vec u\cdot\vec w$'
+        correct: true
+        feedback: 'נכון: פילוג, כמו בכפל מספרים.'
+      - text: '$\vec u\cdot\vec u=|\vec u|^2$'
+        correct: true
+        feedback: 'נכון: $u_1^2+u_2^2+u_3^2$. כך מחשבים אורך בעזרת מכפלה סקלרית.'
+      - text: '$(\vec u\cdot\vec v)\,\vec w=\vec u\,(\vec v\cdot\vec w)$'
+        feedback: >-
+          אגף שמאל וקטור בכיוון $\vec w$, אגף ימין בכיוון $\vec u$. עם $\vec u=\vec v=\hat\imath$ ו-$\vec w=\hat\jmath$: $\hat\jmath$ מול
+          $\vec0$.
+        misconception: MC-c1-dot-associative
+      - text: 'אם $\vec u\cdot\vec v=0$ אז $\vec u=\vec0$ או $\vec v=\vec0$'
+        feedback: >-
+          $\hat\imath\cdot\hat\jmath=0$ ואף אחד מהם אינו אפס. מכפלה סקלרית אפס פירושה שהווקטורים מאונכים.
+        misconception: MC-c1-dot-zero-factor
+
+  - id: Q-1.2-perp
+    type: numeric
+    objectives: [OBJ-1.2-2]
+    level: basic
+    prompt: >-
+      לאיזה ערך של $k$ הווקטורים $(k,2,-1)$ ו-$(3,k,4)$ מאונכים?
+    answer: 0.8
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. מאונכים בדיוק כשהמכפלה הסקלרית אפס: $3k+2k-4=0$, ולכן $k=\frac45$.
+    wrongFeedback: >-
+      כתבו את המכפלה הסקלרית כביטוי ב-$k$ והשוו ל-0.
+    hints: ['$\vec u\perp\vec v\iff\vec u\cdot\vec v=0$.']
+
+  - id: Q-1.2-angle
+    type: numeric
+    objectives: [OBJ-1.2-2]
+    level: mid
+    prompt: >-
+      מהי הזווית (ברדיאנים) בין הווקטורים $(1,1,0)$ ו-$(1,0,1)$? (אפשר לכתוב ערך מדויק, כמו √7 או 3π/4.)
+    answer: 1.0471975511966
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\cos\theta=\frac{1}{\sqrt2\cdot\sqrt2}=\frac12$, ולכן $\theta=\frac\pi3$. (אלה שני אלכסונים של פאות של קובייה
+      היחידה, והם צלעות של משולש שווה צלעות.)
+    wrongFeedback: >-
+      $\cos\theta=\frac{\vec u\cdot\vec v}{|\vec u|\,|\vec v|}$, ואז $\theta=\arccos(\dots)$ בין 0 ל-$\pi$.
+    commonWrong:
+      - value: 0.5
+        feedback: >-
+          $\frac12$ הוא $\cos\theta$. הזווית עצמה: $\arccos\frac12=\frac\pi3\approx1.047$.
+        misconception: MC-c1-cos-is-angle
+      - value: 60
+        feedback: >-
+          $60^\circ$ היא הזווית הנכונה, אבל התבקשה תשובה ברדיאנים: $\frac\pi3$.
+        misconception: MC-c0-radians-as-degrees
+      - value: 0
+        feedback: >-
+          לקחתם $\cos\theta=\vec u\cdot\vec v=1$. צריך לחלק במכפלת האורכים, $\sqrt2\cdot\sqrt2=2$.
+        misconception: MC-c1-angle-no-normalise
+    hints: ['$\cos\theta=\frac{\vec u\cdot\vec v}{|\vec u||\vec v|}$.']
+
+  - id: Q-1.2-obtuse-tf
+    type: twotier
+    objectives: [OBJ-1.2-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: אם $\vec u\cdot\vec v<0$ (ושניהם שונים מאפס), הזווית בין $\vec u$ ל-$\vec v$ גדולה מ-$\frac\pi2$.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. $\cos\theta=\frac{\vec u\cdot\vec v}{|\vec u||\vec v|}<0$, ובין 0 ל-$\pi$ הקוסינוס שלילי רק בזווית קהה.'
+      - text: 'לא נכון'
+        feedback: >-
+          המכנה $|\vec u||\vec v|$ חיובי, ולכן הסימן של $\cos\theta$ הוא הסימן של $\vec u\cdot\vec v$: שלילי, כלומר זווית קהה.
+        misconception: MC-c1-negative-dot-opposite
+    reasons:
+      - text: 'הסימן של $\cos\theta$ הוא הסימן של $\vec u\cdot\vec v$, וקוסינוס שלילי בדיוק כש-$\frac\pi2<\theta\le\pi$'
+        correct: true
+        feedback: 'בדיוק. לכן הסימן לבדו מסווג: חדה, ישרה או קהה.'
+      - text: 'מכפלה סקלרית שלילית פירושה שהווקטורים בכיוונים הפוכים, $\theta=\pi$'
+        feedback: >-
+          $\theta=\pi$ הוא רק המקרה הקיצוני. $(1,0,0)\cdot(-1,1,0)=-1<0$, והזווית $\frac{3\pi}{4}$.
+        misconception: MC-c1-negative-dot-opposite
+      - text: 'מכפלה סקלרית היא מכפלת האורכים, ולכן אינה יכולה להיות שלילית'
+        feedback: >-
+          מכפלת האורכים מוכפלת ב-$\cos\theta$, שיכול להיות שלילי. $\hat\imath\cdot(-\hat\imath)=-1$.
+        misconception: MC-c1-work-magnitudes
+
+  - id: Q-1.2-scalar-proj
+    type: numeric
+    objectives: [OBJ-1.2-3]
+    level: mid
+    prompt: >-
+      מהו הרכיב (ההיטל הסקלרי) של $\vec a=(2,3,1)$ בכיוון $\vec b=(1,1,1)$? (אפשר לכתוב ערך מדויק, כמו √7 או 3π/4.)
+    answer: 3.46410161513775
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec a\cdot\hat b=\frac{\vec a\cdot\vec b}{|\vec b|}=\frac{6}{\sqrt3}=2\sqrt3\approx3.46$.
+    wrongFeedback: >-
+      הרכיב בכיוון $\vec b$ הוא המכפלה הסקלרית עם **וקטור היחידה** $\hat b=\frac{\vec b}{|\vec b|}$.
+    commonWrong:
+      - value: 6
+        feedback: >-
+          6 הוא $\vec a\cdot\vec b$ בלי לנרמל את $\vec b$. אילו היו מחליפים את $\vec b$ ב-$2\vec b$, התוצאה הייתה מוכפלת, אף
+          שהכיוון אותו כיוון.
+        misconception: MC-c1-proj-normalise
+      - value: 2
+        feedback: >-
+          $2=\frac{\vec a\cdot\vec b}{|\vec b|^2}$ הוא המקדם שכופל את $\vec b$ בווקטור ההיטל. הרכיב (אורך ההיטל עם סימן)
+          הוא $\frac{\vec a\cdot\vec b}{|\vec b|}$.
+        misconception: MC-c1-proj-normalise
+    hints: ['$\hat b=\frac{\vec b}{|\vec b|}$.']
+
+  - id: Q-1.2-proj-vec
+    type: mc
+    objectives: [OBJ-1.2-3]
+    level: mid
+    prompt: >-
+      מהו וקטור ההיטל של $\vec a=(2,1,3)$ על $\vec b=(1,0,1)$?
+    choices:
+      - text: '$\left(\frac52,0,\frac52\right)$'
+        correct: true
+        feedback: >-
+          נכון. $\frac{\vec a\cdot\vec b}{|\vec b|^2}\vec b=\frac52(1,0,1)$. בדיקה: השארית $\vec a-\left(\frac52,0,\frac52\right)=\left(-\frac12,1,\frac12\right)$
+          מאונכת ל-$\vec b$.
+      - text: '$(5,0,5)$'
+        feedback: >-
+          זה $(\vec a\cdot\vec b)\,\vec b$, בלי החילוק ב-$|\vec b|^2=2$. ההיטל צריך להיות זהה אם מחליפים את $\vec b$ בכפולה שלו.
+        misconception: MC-c1-proj-normalise
+      - text: '$\frac{5}{\sqrt2}(1,0,1)$'
+        feedback: >-
+          חילקתם ב-$|\vec b|$ פעם אחת בלבד. $\vec a\cdot\hat b=\frac5{\sqrt2}$ הוא האורך, והכיוון הוא $\hat b$, לא $\vec b$:
+          $\frac5{\sqrt2}\hat b=\frac52(1,0,1)$.
+        misconception: MC-c1-proj-normalise
+      - text: '$(2,0,3)$'
+        feedback: >-
+          מחקתם את הרכיב שבו $\vec b$ מתאפס. אבל ההיטל על $\vec b$ חייב להיות מקביל ל-$\vec b$, ו-$(2,0,3)$ אינו כפולה של
+          $(1,0,1)$.
+        misconception: MC-c1-proj-componentwise
+    hints: ['$\operatorname{proj}_{\vec b}\vec a=\frac{\vec a\cdot\vec b}{|\vec b|^2}\,\vec b$.']
+
+  - id: Q-1.2-work
+    type: numeric
+    objectives: [OBJ-1.2-3, OBJ-1.2-1]
+    level: basic
+    prompt: >-
+      כוח קבוע $\vec F=(2,-1,3)$ ניוטון פועל על גוף שזז בקו ישר מ-$(1,0,0)$ ל-$(3,4,1)$ (במטרים). כמה עבודה (בג׳אול) עושה
+      הכוח?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. ההעתק $\vec d=(3,4,1)-(1,0,0)=(2,4,1)$, ו-$W=\vec F\cdot\vec d=4-4+3=3$ ג׳אול.
+    wrongFeedback: >-
+      $W=\vec F\cdot\vec d$, כש-$\vec d$ הוא ההעתק: נקודת הסיום פחות נקודת ההתחלה.
+    commonWrong:
+      - value: 5
+        feedback: >-
+          $5=\vec F\cdot(3,4,1)$: השתמשתם בווקטור המקום של נקודת הסיום במקום בהעתק. העבודה תלויה רק בתזוזה.
+        misconception: MC-c1-position-vs-displacement
+      - value: 17.1464281994822
+        feedback: >-
+          זה $|\vec F|\,|\vec d|=\sqrt{14}\sqrt{21}$: מכפלת הגדלים, כאילו הכוח בכיוון התנועה. רק הרכיב בכיוון התנועה עושה עבודה.
+        misconception: MC-c1-work-magnitudes
+    hints: ['ההעתק הוא $\vec d=P_1-P_0$.']
+
+  - id: Q-1.2-work-tf
+    type: twotier
+    objectives: [OBJ-1.2-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: כוח שאינו עושה עבודה לאורך העתק $\vec d\ne\vec0$ חייב להיות כוח אפס.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. כל כוח מאונך להעתק עושה עבודה 0. למשל הכוח הנורמלי על גוף שמחליק על רצפה אופקית.'
+      - text: 'נכון'
+        feedback: >-
+          $W=\vec F\cdot\vec d=0$ גם כש-$\vec F\perp\vec d$: $(0,0,5)\cdot(3,0,0)=0$, והכוח גודלו 5.
+        misconception: MC-c1-dot-zero-factor
+    reasons:
+      - text: '$W=\vec F\cdot\vec d=|\vec F||\vec d|\cos\theta$, וזה אפס כש-$\theta=\frac\pi2$'
+        correct: true
+        feedback: 'בדיוק. עבודה אפס = כוח אפס או כוח מאונך לתנועה.'
+      - text: 'מכפלה סקלרית מתאפסת רק כשאחד הגורמים אפס'
+        feedback: >-
+          $\hat\imath\cdot\hat k=0$, ושניהם וקטורי יחידה. מכפלה סקלרית מתאפסת לכל זוג מאונך.
+        misconception: MC-c1-dot-zero-factor
+      - text: '$W=|\vec F||\vec d|$, ולכן $W=0$ רק אם $|\vec F|=0$'
+        feedback: >-
+          חסר $\cos\theta$. רק הרכיב של הכוח בכיוון התנועה עושה עבודה.
+        misconception: MC-c1-work-magnitudes
+
+  - id: Q-1.2-cube-diagonals
+    type: numeric
+    objectives: [OBJ-1.2-2]
+    level: exam
+    prompt: >-
+      בקובייה, מהו הקוסינוס של הזווית החדה בין שני אלכסונים ראשיים (אלכסונים שעוברים במרכז הקובייה)? היעזרו בקובייה
+      $[0,1]^3$ ובאלכסונים מ-$(0,0,0)$ ל-$(1,1,1)$ ומ-$(0,0,1)$ ל-$(1,1,0)$.
+    answer: 0.333333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. כיווני האלכסונים $(1,1,1)$ ו-$(1,1,-1)$: המכפלה הסקלרית $1+1-1=1$, האורכים $\sqrt3$, ולכן $\cos\theta=\frac13$
+      ($\theta\approx70.5^\circ$). הקוסינוס חיובי, אז זו אכן הזווית החדה.
+    wrongFeedback: >-
+      מצאו את וקטורי הכיוון של שני האלכסונים (סוף פחות התחלה), ואז $\cos\theta=\frac{\vec u\cdot\vec v}{|\vec u||\vec v|}$.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          1 הוא $\vec u\cdot\vec v$ בלי חילוק ב-$|\vec u||\vec v|=3$. קוסינוס 1 היה אומר שהאלכסונים מקבילים.
+        misconception: MC-c1-angle-no-normalise
+      - value: -0.333333333333333
+        feedback: >-
+          זה הקוסינוס של הזווית הקהה, מכיוונים כמו $(1,1,1)$ ו-$(-1,-1,1)$. הזווית החדה בין הישרים היא המשלימה, עם $\cos=\frac13$.
+        misconception: MC-c1-negative-dot-opposite
+    hints: ['$(1,1,0)-(0,0,1)=(1,1,-1)$.']
+
+  - id: Q-1.2-work-angle
+    type: numeric
+    objectives: [OBJ-1.2-3]
+    level: exam
+    prompt: >-
+      ארגז נגרר 10 מטרים לאורך רצפה אופקית בכוח של 50 ניוטון שמופעל בזווית של $60^\circ$ מעל האופק. כמה עבודה (בג׳אול)
+      עושה הכוח?
+    answer: 250
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $W=|\vec F||\vec d|\cos60^\circ=50\cdot10\cdot\frac12=250$ ג׳אול. בקואורדינטות: $\vec F=(25,25\sqrt3)$,
+      $\vec d=(10,0)$, ו-$\vec F\cdot\vec d=250$.
+    wrongFeedback: >-
+      רק הרכיב האופקי של הכוח, בכיוון התנועה, עושה עבודה: $W=\vec F\cdot\vec d=|\vec F||\vec d|\cos\theta$.
+    commonWrong:
+      - value: 500
+        feedback: >-
+          $500=50\cdot10$: מכפלת הגדלים, כאילו הכוח אופקי. הרכיב האנכי של הכוח אינו עושה עבודה.
+        misconception: MC-c1-work-magnitudes
+      - value: 433.012701892219
+        feedback: >-
+          זה $500\sin60^\circ$: הרכיב **האנכי** של הכוח. הרכיב לאורך התנועה הוא הרכיב הצמוד לזווית, $F\cos60^\circ$.
+        misconception: MC-c0-sin-cos-swap
+    hints: ['איזה רכיב של הכוח פועל בכיוון התנועה?']

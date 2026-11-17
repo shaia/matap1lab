@@ -1,0 +1,290 @@
+# Lesson 1.4 — the cross product (notes pp. 19–20, 26).
+# Objectives (src/course.ts):
+#   OBJ-1.4-1  compute a cross product in coordinates; its direction by the right-hand rule
+#   OBJ-1.4-2  |u x v| is the area of the parallelogram, and u x v is perpendicular to both factors
+#   OBJ-1.4-3  the normal to the plane spanned by two vectors; the torque of a force
+# The notes (p. 20) miscopy the k-component as x1y2 + y1x2; the correct one is x1y2 - y1x2.
+# Every number recomputed in screens/tools/recompute-ch1.py.
+chapter: 1
+questions:
+  - id: Q-1.4-compute
+    type: mc
+    objectives: [OBJ-1.4-1]
+    level: basic
+    prompt: >-
+      חשבו את $(1,2,3)\times(4,5,6)$.
+    choices:
+      - text: '$(-3,6,-3)$'
+        correct: true
+        feedback: >-
+          נכון. $(2\cdot6-3\cdot5,\ 3\cdot4-1\cdot6,\ 1\cdot5-2\cdot4)=(-3,6,-3)$. בדיקה: $(-3,6,-3)\cdot(1,2,3)=-3+12-9=0$.
+      - text: '$(3,-6,3)$'
+        feedback: >-
+          זה $(4,5,6)\times(1,2,3)$: הסדר הפוך, והכיוון התהפך. $\vec v\times\vec u=-\vec u\times\vec v$.
+        misconception: MC-c1-cross-commutes
+      - text: '$(-3,-6,-3)$'
+        feedback: >-
+          הרכיב האמצעי בא עם מינוס בפיתוח: $-(1\cdot6-3\cdot4)=6$. בדיקה: $(-3,-6,-3)\cdot(1,2,3)=-24\ne0$.
+        misconception: MC-c1-middle-sign
+      - text: '$(4,10,18)$'
+        feedback: >-
+          זו מכפלה רכיב ברכיב, שאינה פעולה של הקורס. כל רכיב של המכפלה הווקטורית בנוי משני הרכיבים **האחרים**.
+        misconception: MC-c1-cross-componentwise
+    hints: ['$\vec u\times\vec v=(u_2v_3-u_3v_2,\ u_3v_1-u_1v_3,\ u_1v_2-u_2v_1)$.']
+
+  - id: Q-1.4-ijk
+    type: mc
+    objectives: [OBJ-1.4-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      מהו $\hat\jmath\times\hat\imath$?
+    choices:
+      - text: '$-\hat k$'
+        correct: true
+        feedback: 'נכון. $\hat\imath\times\hat\jmath=\hat k$, והחלפת הסדר הופכת את הסימן.'
+      - text: '$\hat k$'
+        feedback: >-
+          $\hat k=\hat\imath\times\hat\jmath$. כאן הסדר הפוך: מ-$\hat\jmath$ אל $\hat\imath$ האצבעות מסתובבות עם כיוון השעון
+          (במבט מלמעלה), והאגודל מצביע למטה.
+        misconception: MC-c1-cross-commutes
+      - text: '$0$'
+        feedback: >-
+          המכפלה הסקלרית $\hat\jmath\cdot\hat\imath$ היא 0, כי הם מאונכים. המכפלה הווקטורית של וקטורים מאונכים היא דווקא
+          הגדולה ביותר: גודלה $1\cdot1\cdot\sin\frac\pi2=1$.
+        misconception: MC-c1-cross-vs-dot
+    hints: ['$\hat\imath\times\hat\jmath=\hat k$; מה עושה החלפת הסדר?']
+
+  - id: Q-1.4-component
+    type: numeric
+    objectives: [OBJ-1.4-1]
+    level: basic
+    prompt: >-
+      מהו רכיב ה-$y$ (הרכיב השני) של $(2,-1,0)\times(1,3,4)$?
+    answer: -8
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $u_3v_1-u_1v_3=0\cdot1-2\cdot4=-8$. כל המכפלה: $(-4,-8,7)$, ובדיקה: $(-4,-8,7)\cdot(2,-1,0)=0$.
+    wrongFeedback: >-
+      הרכיב השני הוא $u_3v_1-u_1v_3$ (או מינוס הדטרמיננטה של המינור שמוחקים בו את העמודה האמצעית).
+    commonWrong:
+      - value: 8
+        feedback: >-
+          $8=u_1v_3-u_3v_1$: שכחתם את המינוס של האיבר האמצעי בפיתוח. בדיקה: $(-4,8,7)\cdot(2,-1,0)=-16\ne0$.
+        misconception: MC-c1-middle-sign
+    hints: ['בפיתוח לפי השורה $\hat\imath,\hat\jmath,\hat k$ הסימנים $+,-,+$.']
+
+  - id: Q-1.4-lorentz
+    type: mc
+    objectives: [OBJ-1.4-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מטען חיובי נע בכיוון $+x$ בשדה מגנטי בכיוון $+z$. הכוח עליו הוא $q\,\vec v\times\vec B$. לאיזה כיוון הוא מצביע?
+    choices:
+      - text: '$-y$'
+        correct: true
+        feedback: >-
+          נכון. $\hat\imath\times\hat k=-\hat\jmath$ (כי $\hat k\times\hat\imath=\hat\jmath$). ביד ימין: האצבעות מ-$+x$ אל
+          $+z$, והאגודל אל $-y$.
+      - text: '$+y$'
+        feedback: >-
+          $+\hat\jmath=\hat k\times\hat\imath$, כלומר $\vec B\times\vec v$: הסדר הפוך. בכלל יד ימין מסובבים מהגורם הראשון,
+          $\vec v$, אל השני.
+        misconception: MC-c1-cross-commutes
+      - text: '$+z$'
+        feedback: >-
+          המכפלה הווקטורית מאונכת **לשני** הגורמים, ולכן אינה יכולה להיות בכיוון $\vec B$.
+        misconception: MC-c1-cross-along-factor
+      - text: 'אין כוח, כי $\vec v$ ו-$\vec B$ מאונכים'
+        feedback: >-
+          מאונכים זה המקרה של הכוח **המרבי**: $|\vec v\times\vec B|=|\vec v||\vec B|\sin\frac\pi2$. הכוח מתאפס כשהם מקבילים.
+        misconception: MC-c1-cross-vs-dot
+    hints: ['$\hat\imath\times\hat\jmath=\hat k$, $\hat\jmath\times\hat k=\hat\imath$, $\hat k\times\hat\imath=\hat\jmath$.']
+
+  - id: Q-1.4-parallel-zero
+    type: mc
+    objectives: [OBJ-1.4-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $\vec u$ ו-$\vec v$ שונים מאפס, ו-$\vec u\times\vec v=\vec0$. מה אפשר להסיק?
+    choices:
+      - text: 'הם מקבילים (באותו כיוון או בכיוונים הפוכים)'
+        correct: true
+        feedback: >-
+          נכון. $|\vec u\times\vec v|=|\vec u||\vec v|\sin\theta=0$ עם אורכים חיוביים פירושו $\sin\theta=0$: $\theta=0$ או
+          $\pi$. גם המקבילית שהם פורשים שטוחה, ושטחה 0.
+      - text: 'הם מאונכים'
+        feedback: >-
+          מאונכים מאפסים את המכפלה **הסקלרית**. המכפלה הווקטורית של וקטורים מאונכים גדולה ככל האפשר.
+        misconception: MC-c1-cross-vs-dot
+      - text: 'אחד מהם הוא וקטור האפס'
+        feedback: >-
+          נתון ששניהם שונים מאפס, ובכל זאת $\vec u\times2\vec u=\vec0$. מכפלה אפס אינה מחייבת גורם אפס.
+        misconception: MC-c1-dot-zero-factor
+
+  - id: Q-1.4-triangle
+    type: numeric
+    objectives: [OBJ-1.4-2]
+    level: mid
+    prompt: >-
+      חשבו את שטח המשולש שקודקודיו $A=(1,0,0)$, $B=(0,2,0)$ ו-$C=(0,0,3)$.
+    answer: 3.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec{AB}=(-1,2,0)$, $\vec{AC}=(-1,0,3)$, $\vec{AB}\times\vec{AC}=(6,3,2)$, אורכו $\sqrt{49}=7$, והמשולש חצי
+      מהמקבילית: $\frac72$.
+    wrongFeedback: >-
+      שטח משולש $=\frac12|\vec{AB}\times\vec{AC}|$.
+    commonWrong:
+      - value: 7
+        feedback: >-
+          7 הוא שטח המקבילית שנפרשת מ-$\vec{AB}$ ו-$\vec{AC}$. המשולש הוא חצי ממנה.
+        misconception: MC-c1-triangle-half
+    hints: ['$|\vec u\times\vec v|$ הוא שטח מקבילית.']
+
+  - id: Q-1.4-sin
+    type: numeric
+    objectives: [OBJ-1.4-2]
+    level: mid
+    prompt: >-
+      $|\vec u|=3$, $|\vec v|=4$, והזווית ביניהם $\frac\pi6$. מהו $|\vec u\times\vec v|$?
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $3\cdot4\cdot\sin\frac\pi6=12\cdot\frac12=6$: שטח המקבילית, בסיס 4 וגובה $3\sin\frac\pi6=1.5$.
+    wrongFeedback: >-
+      $|\vec u\times\vec v|=|\vec u||\vec v|\sin\theta$.
+    commonWrong:
+      - value: 10.3923048454133
+        feedback: >-
+          $6\sqrt3=12\cos\frac\pi6$ הוא $|\vec u\cdot\vec v|$. גודל המכפלה הווקטורית הולך עם **סינוס**: שטח = בסיס כפול גובה.
+        misconception: MC-c1-cross-vs-dot
+      - value: 12
+        feedback: >-
+          12 הוא $|\vec u||\vec v|$ בלי הזווית: נכון רק כשהם מאונכים.
+        misconception: MC-c1-cross-magnitude-no-sin
+    hints: ['שטח מקבילית = בסיס כפול גובה.']
+
+  - id: Q-1.4-magnitude-tf
+    type: twotier
+    objectives: [OBJ-1.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: לכל שני וקטורים $|\vec u\times\vec v|\le|\vec u|\,|\vec v|$, ושוויון רק כשהם מאונכים (או אחד מהם אפס).
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. $|\vec u\times\vec v|=|\vec u||\vec v|\sin\theta$ ו-$0\le\sin\theta\le1$, עם 1 רק ב-$\theta=\frac\pi2$.'
+      - text: 'לא נכון'
+        feedback: >-
+          $\sin\theta\le1$ תמיד. ל-$(1,0,0)$ ו-$(1,1,0)$: $|\vec u\times\vec v|=|(0,0,1)|=1$, קטן מ-$1\cdot\sqrt2$.
+        misconception: MC-c1-cross-magnitude-no-sin
+    reasons:
+      - text: 'הגודל הוא $|\vec u||\vec v|\sin\theta$, ו-$\sin\theta=1$ רק בזווית ישרה'
+        correct: true
+        feedback: 'בדיוק. גיאומטרית: מקבילית עם צלעות נתונות שטחה הגדול ביותר כשהיא מלבן.'
+      - text: 'הגודל תמיד שווה ל-$|\vec u||\vec v|$, ולכן יש תמיד שוויון'
+        feedback: >-
+          חסר $\sin\theta$. למקבילית "שטוחה" (וקטורים כמעט מקבילים) שטח קטן מאוד.
+        misconception: MC-c1-cross-magnitude-no-sin
+      - text: 'הגודל הוא $|\vec u||\vec v|\cos\theta$, ושוויון כשהם מקבילים'
+        feedback: >-
+          זה הגודל של המכפלה **הסקלרית**. המכפלה הווקטורית מתאפסת דווקא כשהם מקבילים.
+        misconception: MC-c1-cross-vs-dot
+
+  - id: Q-1.4-plane-normal
+    type: expr
+    objectives: [OBJ-1.4-3]
+    level: mid
+    prompt: >-
+      מצאו את המישור דרך $A=(1,0,0)$, $B=(0,2,0)$ ו-$C=(0,0,3)$ בעזרת הנורמל $\vec{AB}\times\vec{AC}$. כתבו את $z$ כפונקציה של
+      $x$ ו-$y$ (במשתנים $x$, $y$).
+    answer: '3 - 3*x - 3*y/2'
+    answerTex: '$6x+3y+2z=6$, כלומר $z=3-3x-\frac32y$'
+    variables: [x, y]
+    correctFeedback: >-
+      נכון. $\vec n=(-1,2,0)\times(-1,0,3)=(6,3,2)$, ו-$d=\vec n\cdot A=6$. בדיקה: $B$ ו-$C$ מקיימות $6x+3y+2z=6$.
+    wrongFeedback: >-
+      חשבו $\vec n=\vec{AB}\times\vec{AC}$, קבעו את $d$ מהנקודה $A$, ובודדו את $z$. בדקו בשלוש הנקודות.
+    commonWrong:
+      - expr: '-3 - 3*x - 3*y/2'
+        feedback: >-
+          זה המישור $6x+3y+2z=-6$: הסימן של $d$ התהפך. $A=(1,0,0)$ נותנת $6$, לא $-6$.
+        misconception: MC-c1-plane-d-sign
+    hints: ['$\vec n=\vec{AB}\times\vec{AC}$ מאונך לשני וקטורים שבמישור.']
+
+  - id: Q-1.4-torque
+    type: numeric
+    objectives: [OBJ-1.4-3]
+    level: mid
+    prompt: >-
+      הכוח $\vec F=(3,-1,2)$ ניוטון פועל בנקודה $\vec r=(1,2,0)$ מטר (ביחס לציר בראשית). מהו רכיב ה-$z$ של המומנט
+      $\vec\tau=\vec r\times\vec F$ (בניוטון-מטר)?
+    answer: -7
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\tau_z=r_1F_2-r_2F_1=1\cdot(-1)-2\cdot3=-7$. כל המומנט: $\vec\tau=(4,-2,-7)$.
+    wrongFeedback: >-
+      $\vec\tau=\vec r\times\vec F$, בסדר הזה: המקום קודם, הכוח אחריו.
+    commonWrong:
+      - value: 7
+        feedback: >-
+          זה רכיב של $\vec F\times\vec r$: הסדר הפוך והסימן התהפך. המומנט מוגדר $\vec r\times\vec F$.
+        misconception: MC-c1-cross-commutes
+    hints: ['רכיב ה-$z$ של $\vec u\times\vec v$ הוא $u_1v_2-u_2v_1$.']
+
+  - id: Q-1.4-torque-tf
+    type: twotier
+    objectives: [OBJ-1.4-3, OBJ-1.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: כוח שפועל לאורך הקו שעובר דרך ציר הסיבוב אינו יוצר מומנט, גם אם הוא גדול מאוד.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. אז $\vec F$ מקביל ל-$\vec r$, ו-$\vec r\times\vec F=\vec0$. דחיפת דלת לכיוון הציר שלה אינה מסובבת אותה.'
+      - text: 'לא נכון'
+        feedback: >-
+          המומנט תלוי בזווית: $|\vec\tau|=|\vec r||\vec F|\sin\theta$, ו-$\theta=0$ כשהכוח לאורך $\vec r$.
+        misconception: MC-c1-cross-magnitude-no-sin
+    reasons:
+      - text: '$\vec F\parallel\vec r$, ולכן $|\vec r\times\vec F|=|\vec r||\vec F|\sin0=0$'
+        correct: true
+        feedback: 'בדיוק. רק הרכיב של הכוח המאונך ל-$\vec r$ מסובב.'
+      - text: 'גודל המומנט הוא $|\vec r||\vec F|$, ולכן כוח גדול נותן מומנט גדול'
+        feedback: >-
+          חסר $\sin\theta$. מומנט נקבע לפי "זרוע" הכוח, המרחק מהציר לקו הפעולה, וכאן הוא 0.
+        misconception: MC-c1-cross-magnitude-no-sin
+      - text: 'המומנט הוא $\vec r\cdot\vec F$, ולכן הוא מרבי כשהכוח לאורך $\vec r$'
+        feedback: >-
+          מומנט הוא מכפלה **וקטורית**, והיא מתאפסת כשהגורמים מקבילים. $\vec r\cdot\vec F$ הוא דווקא מקסימלי שם.
+        misconception: MC-c1-cross-vs-dot
+
+  - id: Q-1.4-plane-lines
+    type: numeric
+    objectives: [OBJ-1.4-3, OBJ-1.4-1]
+    level: exam
+    prompt: >-
+      שני ישרים נחתכים בנקודה $P=(2,1,0)$: האחד בכיוון $(1,1,0)$ והשני בכיוון $(0,1,1)$. מצאו את המישור שמכיל את שניהם.
+      באיזה ערך של $z$ הוא חותך את ציר ה-$z$?
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. הנורמל $(1,1,0)\times(0,1,1)=(1,-1,1)$, ו-$d=\vec n\cdot P=2-1+0=1$: המישור $x-y+z=1$, וב-$x=y=0$ מתקבל $z=1$.
+      בדיקה: $(1,-1,1)$ מאונך לשני הכיוונים.
+    wrongFeedback: >-
+      המישור מכיל את שני הכיוונים, ולכן הנורמל מאונך לשניהם: מכפלה וקטורית. אחר כך $d$ מהנקודה $P$.
+    commonWrong:
+      - value: 3
+        feedback: >-
+          עם הנורמל $(1,1,1)$ מתקבל $x+y+z=3$. אבל $(1,1,1)\cdot(1,1,0)=2\ne0$: שכחתם את המינוס של הרכיב האמצעי.
+        misconception: MC-c1-middle-sign
+      - value: -1
+        feedback: >-
+          הסימן של $d$ התהפך. $P=(2,1,0)$ צריכה לקיים את המשוואה: $2-1+0=1$.
+        misconception: MC-c1-plane-d-sign
+    hints: ['$\vec n=\vec v_1\times\vec v_2$, ו-$d=\vec n\cdot P$.']

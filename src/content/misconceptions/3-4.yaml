@@ -1,0 +1,88 @@
+# Misconceptions first detected in lesson 3.4 (the complex exponential and logarithm).
+- id: MC-c3-exp-sum-additive
+  title: מפרקים את האקספוננט של סכום לסכום אקספוננטים
+  belief: >-
+    $e^{a+ib}=e^a+e^{ib}$.
+  truth: >-
+    $e^{a+ib}=e^a\cdot e^{ib}=e^a(\cos b+i\sin b)$: אקספוננט של סכום הוא **מכפלה**. למשל $e^{1+i\pi}=e\cdot(-1)=-e$.
+  remedy: { lesson: '3.4', label: 'האקספוננט המרוכב' }
+
+- id: MC-c3-exp-modulus-of-exponent
+  title: חושבים שהגודל של האקספוננט תלוי בגודל של המעריך
+  belief: >-
+    $|e^{3-4i}|=e^{|3-4i|}=e^5$.
+  truth: >-
+    $|e^{x+iy}|=e^x|e^{iy}|=e^x$: רק החלק הממשי של המעריך קובע את הגודל, והחלק המדומה קובע את הכיוון. לכן
+    $|e^{3-4i}|=e^3$.
+  remedy: { lesson: '3.4', label: 'גודל וכיוון של האקספוננט' }
+
+- id: MC-c3-exp-injective
+  title: חושבים שהאקספוננט המרוכב חד-חד-ערכי
+  belief: >-
+    $e^z=1$ רק כש-$z=0$, כמו בממשיים.
+  truth: >-
+    $e^{z+2\pi i}=e^z\cdot e^{2\pi i}=e^z$: האקספוננט מחזורי בכיוון המדומה עם מחזור $2\pi i$. לכן $e^z=1$ בדיוק
+    כש-$z=2\pi ki$, $k$ שלם, ולמשוואה $e^z=w$ ($w\ne0$) יש אינסוף פתרונות.
+  remedy: { lesson: '3.4', label: 'המחזוריות של האקספוננט' }
+
+- id: MC-c3-log-single-valued
+  title: חושבים שללוגריתם מרוכב יש ערך אחד
+  belief: >-
+    $\log(1+i)$ הוא מספר אחד, $\ln\sqrt2+\frac{\pi}{4}i$.
+  truth: >-
+    $\log w=\ln|w|+i(\operatorname{Arg}w+2\pi k)$, $k$ שלם: כל הפתרונות של $e^z=w$. הערך עם $k=0$ הוא הערך הראשי
+    $\operatorname{Log}w$, שהחלק המדומה שלו ב-$(-\pi,\pi]$.
+  remedy: { lesson: '3.4', label: 'כל הערכים של הלוגריתם' }
+
+- id: MC-c3-log-rules-hold
+  title: מניחים שחוק הלוגריתם של מכפלה תקף לערך הראשי
+  belief: >-
+    $\operatorname{Log}(zw)=\operatorname{Log}z+\operatorname{Log}w$ לכל $z,w\ne0$.
+  truth: >-
+    הסכום נכון רק עד כדי $2\pi ki$: $\operatorname{Log}(-1)+\operatorname{Log}(-1)=2\pi i$, אבל $\operatorname{Log}1=0$.
+    הארגומנטים מתחברים, והסכום יכול לצאת מהקטע $(-\pi,\pi]$.
+  remedy: { lesson: '3.4', label: 'חוקי הלוגריתם במרוכבים' }
+
+- id: MC-c3-log-componentwise
+  title: לוקחים לוגריתם רכיב ברכיב
+  belief: >-
+    $\operatorname{Re}\operatorname{Log}(x+iy)=\ln x$.
+  truth: >-
+    $\operatorname{Log}z=\ln|z|+i\operatorname{Arg}z$, ולכן $\operatorname{Re}\operatorname{Log}(x+iy)=\ln\sqrt{x^2+y^2}=\frac12\ln(x^2+y^2)$.
+    החלק הממשי של הלוגריתם תלוי בגודל, לא בחלק הממשי.
+  remedy: { lesson: '3.4', label: 'הלוגריתם מהצורה הקוטבית' }
+
+- id: MC-c3-sin-cos-exp-swap
+  title: מחליפים בין הנוסחאות של סינוס וקוסינוס דרך האקספוננט
+  belief: >-
+    $\cos\theta=\frac{e^{i\theta}-e^{-i\theta}}{2}$, או $\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2}$ בלי $i$.
+  truth: >-
+    $\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2}$ (החלק הממשי, זוגי) ו-$\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i}$
+    (החלק המדומה, אי-זוגי). בדיקה: ב-$\theta=0$ הקוסינוס 1 והסינוס 0.
+  remedy: { lesson: '3.4', label: 'סינוס וקוסינוס דרך האקספוננט' }
+
+- id: MC-c3-exp-pair-factor
+  title: שוכחים את הגורם 2 בצירוף של שני אקספוננטים צמודים
+  belief: >-
+    $e^{i\theta}+e^{-i\theta}=\cos\theta$.
+  truth: >-
+    $e^{i\theta}+e^{-i\theta}=2\cos\theta$: שני חלקים ממשיים שווים מצטרפים, והמדומים מתבטלים. לכן
+    $\cos^3t=\frac{(e^{it}+e^{-it})^3}{8}=\frac{2\cos3t+6\cos t}{8}$.
+  remedy: { lesson: '3.4', label: 'סינוס וקוסינוס דרך האקספוננט' }
+
+- id: MC-c3-cos-bounded-complex
+  title: חושבים שקוסינוס של מספר מרוכב חסום ב-1
+  belief: >-
+    $|\cos z|\le1$ לכל $z$, כמו לכל $x$ ממשי.
+  truth: >-
+    $\cos z=\frac{e^{iz}+e^{-iz}}{2}$, ול-$z=iy$ זה $\frac{e^{-y}+e^{y}}{2}$, שגדל ללא חסם: $\cos i=\frac{e+e^{-1}}{2}\approx1.543$.
+    החסם $|\cos x|\le1$ נובע מ-$|e^{ix}|=1$, שנכון רק ל-$x$ ממשי.
+  remedy: { lesson: '3.4', label: 'קוסינוס של מספר מרוכב' }
+
+- id: MC-c3-eiz-unit-modulus
+  title: חושבים ש-e בחזקת iz נמצא תמיד על מעגל היחידה
+  belief: >-
+    $|e^{iz}|=1$ לכל $z$, כי כפל ב-$i$ במעריך "הוא תמיד סיבוב".
+  truth: >-
+    $|e^{iz}|=e^{\operatorname{Re}(iz)}=e^{-\operatorname{Im}z}$. הוא 1 רק כש-$z$ ממשי. למשל $|e^{i\cdot i}|=e^{-1}$.
+  remedy: { lesson: '3.4', label: 'גודל וכיוון של האקספוננט' }

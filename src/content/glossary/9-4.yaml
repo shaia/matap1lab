@@ -1,0 +1,55 @@
+# Terms first defined in lesson 9.4 (tangential and normal acceleration; enrichment).
+- id: unit-tangent
+  term: וקטור היחידה המשיק
+  en: unit tangent vector
+  symbol: '\vec T=\frac{\vec v}{|\vec v|}'
+  definition: >-
+    $\vec T(t)=\frac{\vec v(t)}{|\vec v(t)|}$ (כש-$\vec v\ne\vec 0$): וקטור באורך 1 בכיוון התנועה. הוא תלוי רק בצורת
+    העקום ובכיוון המעבר עליו, לא בקצב.
+  reject: []
+  lesson: '9.4'
+- id: unit-normal
+  term: וקטור היחידה הנורמלי
+  en: unit normal vector
+  symbol: '\vec N=\frac{\vec T\,''}{|\vec T\,''|}'
+  definition: >-
+    $\vec N=\frac{\vec T\,'}{|\vec T\,'|}$ (כש-$\vec T\,'\ne\vec 0$). כי $|\vec T|=1$, מתקיים $\vec T\cdot\vec T\,'=0$,
+    ולכן $\vec N\perp\vec T$; הוא מצביע לצד שאליו העקום מתעקל.
+  reject: []
+  lesson: '9.4'
+- id: tangential-acceleration
+  term: תאוצה משיקית
+  en: tangential component of acceleration
+  symbol: 'a_T=\frac{d|\vec v|}{dt}=\frac{\vec v\cdot\vec a}{|\vec v|}'
+  definition: >-
+    הרכיב של $\vec a$ בכיוון $\vec T$ בפירוק $\vec a=a_T\vec T+a_N\vec N$: קצב השינוי של גודל המהירות. חיובי כשהנקודה
+    מאיצה ושלילי כשהיא מאטה.
+  reject: []
+  lesson: '9.4'
+- id: normal-acceleration
+  term: תאוצה נורמלית
+  en: normal component of acceleration
+  symbol: 'a_N=\kappa|\vec v|^2=\sqrt{|\vec a|^2-a_T^2}'
+  definition: >-
+    הרכיב של $\vec a$ בכיוון $\vec N$: האחראי לשינוי **כיוון** המהירות. $a_N\ge0$, ו-$a_N=\kappa|\vec v|^2$; בתנועה
+    מעגלית $a_N=\frac{v^2}{R}$, התאוצה הצנטריפטלית.
+  reject: []
+  lesson: '9.4'
+- id: curvature
+  term: עקמומיות
+  en: curvature
+  symbol: '\kappa=\left|\frac{d\vec T}{ds}\right|=\frac{|\vec v\times\vec a|}{|\vec v|^3}'
+  definition: >-
+    כמה מהר וקטור היחידה המשיק מסתובב לכל יחידת אורך: $\kappa=\left|\frac{d\vec T}{ds}\right|$. לישר $\kappa=0$,
+    למעגל ברדיוס $R$, $\kappa=\frac1R$. בכל פרמטריזציה $\kappa=\frac{|\vec v\times\vec a|}{|\vec v|^3}$.
+  reject: [עקימות]
+  lesson: '9.4'
+- id: osculating-circle
+  term: מעגל צמוד
+  en: osculating circle
+  symbol: 'R=\frac1\kappa'
+  definition: >-
+    המעגל שמשיק לעקום בנקודה, באותה עקמומיות, ומרכזו בכיוון $\vec N$: המעגל שהכי מתאים לעקום שם. הרדיוס שלו,
+    $R=\frac1\kappa$, נקרא רדיוס העקמומיות.
+  reject: []
+  lesson: '9.4'

@@ -1,0 +1,58 @@
+# Terms first defined in lesson 4.6 (limits and continuity, intuitively).
+- id: one-sided-limit
+  term: גבול חד-צדדי
+  en: one-sided limit
+  symbol: '\lim_{x\to a^-}f(x),\ \lim_{x\to a^+}f(x)'
+  definition: >-
+    הערך שאליו $f(x)$ מתקרבת כש-$x$ מתקרב ל-$a$ רק משמאל ($x\to a^-$) או רק מימין ($x\to a^+$). הגבול הדו-צדדי קיים בדיוק
+    כששני הגבולות החד-צדדיים קיימים ושווים.
+  lesson: '4.6'
+- id: continuity
+  term: רציפות
+  en: continuity
+  symbol: '\lim_{x\to a}f(x)=f(a)'
+  definition: >-
+    $f$ רציפה ב-$a$ אם $f(a)$ מוגדרת, הגבול $\lim_{x\to a}f(x)$ קיים, והם שווים. באופן אינטואיטיבי: אפשר לצייר את הגרף
+    ליד $a$ בלי להרים את העיפרון. כל הפונקציות האלמנטריות רציפות בתחום ההגדרה שלהן.
+  lesson: '4.6'
+- id: removable-discontinuity
+  term: אי-רציפות סליקה
+  en: removable discontinuity
+  definition: >-
+    נקודה שבה הגבול $\lim_{x\to a}f(x)$ קיים וסופי, אבל $f(a)$ אינה מוגדרת או שונה ממנו. מגדירים מחדש $f(a)$ כגבול,
+    והאי-רציפות "נסלקת": $\frac{\sin x}{x}$ ב-0 עם הערך 1.
+  lesson: '4.6'
+- id: jump-discontinuity
+  term: אי-רציפות מסוג קפיצה
+  en: jump discontinuity
+  definition: >-
+    נקודה שבה שני הגבולות החד-צדדיים קיימים וסופיים אבל שונים (בסיכומים: "מסוג ראשון"). גודל הקפיצה הוא ההפרש ביניהם.
+  lesson: '4.6'
+- id: infinite-discontinuity
+  term: אי-רציפות אינסופית
+  en: infinite discontinuity
+  definition: >-
+    נקודה שבה לפחות אחד הגבולות החד-צדדיים אינסופי, כמו $\frac1x$ ב-0: הגרף מתקרב לאסימפטוטה אנכית. יחד עם נקודות שבהן
+    גבול חד-צדדי אינו קיים כלל ($\sin\frac1x$ ב-0), הסיכומים קוראים לזה "מסוג שני".
+  lesson: '4.6'
+- id: intermediate-value-theorem
+  term: משפט ערך הביניים
+  en: intermediate value theorem
+  definition: >-
+    אם $f$ רציפה בקטע הסגור $[a,b]$ ו-$c$ מספר בין $f(a)$ ל-$f(b)$, יש $x_0\in[a,b]$ עם $f(x_0)=c$. בפרט, אם $f(a)$ ו-$f(b)$
+    בסימנים מנוגדים, ל-$f$ יש שורש בקטע. המשפט נותן קיום, לא יחידות.
+  lesson: '4.6'
+- id: extreme-value-theorem
+  term: משפט קיום מקסימום ומינימום
+  en: extreme value theorem
+  definition: >-
+    פונקציה רציפה בקטע **סגור** $[a,b]$ מקבלת בו ערך גדול ביותר וערך קטן ביותר. בקטע פתוח, או בלי רציפות, זה עלול
+    להיכשל: $x$ ב-$(0,1)$ אין מקסימום.
+  lesson: '4.6'
+- id: bisection-method
+  term: שיטת החצייה
+  en: bisection method
+  definition: >-
+    מציאת שורש של פונקציה רציפה בקטע $[a,b]$ שבקצותיו היא מחליפה סימן: בודקים את נקודת האמצע $m$ וממשיכים עם החצי שבקצותיו
+    יש עדיין החלפת סימן. אחרי $n$ צעדים הקטע קצר פי $2^n$.
+  lesson: '4.6'

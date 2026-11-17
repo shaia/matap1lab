@@ -1,0 +1,284 @@
+# Lesson 10.3 — differentiability as a linear approximation, the tangent plane, the differential.
+# Objectives (src/course.ts):
+#   OBJ-10.3-1  define differentiability as the existence of a linear approximation and check it in an example
+#   OBJ-10.3-2  find the tangent plane to a graph and use the differential to approximate
+#   OBJ-10.3-3  know a function with partials that is not differentiable, and that continuous partials ensure it
+# Examples from the notes pp. 39–42, 55, 58 (xy² from the definition; the normal (f_x, f_y, −1); √(x²+y) near (3,16)),
+# recomputed in screens/tools/recompute-ch10.py.
+chapter: 10
+questions:
+  - id: Q-10.3-definition
+    type: mc
+    objectives: [OBJ-10.3-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      כותבים $f(x_0+h,y_0+k)=f(x_0,y_0)+ah+bk+\psi(h,k)$. מתי $f$ דיפרנציאבילית ב-$(x_0,y_0)$?
+    choices:
+      - text: 'כשיש מספרים $a,b$ שעבורם $\frac{\psi}{\sqrt{h^2+k^2}}\to0$ כש-$(h,k)\to(0,0)$'
+        correct: true
+        feedback: >-
+          נכון. השארית קטנה **יותר מהמרחק** לנקודה, ולכן המישור $z=f(x_0,y_0)+a(x-x_0)+b(y-y_0)$ הוא קירוב טוב ליד
+          הנקודה. אז בהכרח $a=f_x$ ו-$b=f_y$.
+      - text: 'כשיש מספרים $a,b$ שעבורם $\psi\to0$ כש-$(h,k)\to(0,0)$'
+        feedback: >-
+          $\psi\to0$ מתקיים לכל פונקציה רציפה ולכל בחירה של $a,b$, ולכן הוא לא אומר כלום על קירוב לינארי. צריך
+          $\frac{\psi}{\sqrt{h^2+k^2}}\to0$.
+        misconception: MC-c10-remainder-only-to-zero
+      - text: 'כשהנגזרות החלקיות $f_x$ ו-$f_y$ קיימות בנקודה'
+        feedback: >-
+          זה לא מספיק: ל-$\frac{xy}{x^2+y^2}$ (ו-0 בראשית) שתי הנגזרות החלקיות בראשית קיימות, והיא אפילו לא רציפה שם.
+        misconception: MC-c10-partials-imply-differentiable
+      - text: 'כש-$f$ רציפה בנקודה'
+        feedback: 'החרוט $\sqrt{x^2+y^2}$ רציף בראשית ויש לו שם חוד, בלי מישור משיק.'
+        misconception: MC-c10-continuity-implies-differentiable
+
+  - id: Q-10.3-plane
+    type: expr
+    objectives: [OBJ-10.3-2]
+    level: basic
+    prompt: >-
+      מצאו את המישור המשיק לגרף של $f(x,y)=x^2+3xy$ בנקודה שבה $(x,y)=(1,2)$. כתבו אותו בצורה $z=\ldots$, כנוסחה ב-$x$
+      וב-$y$.
+    answer: '8*x + 3*y - 7'
+    answerTex: '$z=7+8(x-1)+3(y-2)=8x+3y-7$'
+    variables: [x, y]
+    correctFeedback: >-
+      נכון. $f(1,2)=7$, $f_x=2x+3y=8$, $f_y=3x=3$, ולכן $z=7+8(x-1)+3(y-2)$. בדיקה: ב-$(1,2)$ המישור נותן 7.
+    wrongFeedback: >-
+      $z=f(1,2)+f_x(1,2)(x-1)+f_y(1,2)(y-2)$. חשבו את שלושת המספרים.
+    commonWrong:
+      - expr: '7 + 8*x + 3*y'
+        feedback: >-
+          שכחתם להזיז לנקודה: צריך $(x-1)$ ו-$(y-2)$. בדיקה: ב-$(1,2)$ הנוסחה שלכם נותנת 21, לא 7.
+        misconception: MC-c10-tangent-plane-base
+      - expr: '8*(x - 1) + 3*(y - 2)'
+        feedback: >-
+          חסר הגובה $f(1,2)=7$. המישור צריך לעבור דרך הנקודה $(1,2,7)$, והנוסחה שלכם נותנת שם 0.
+        misconception: MC-c10-tangent-plane-base
+
+  - id: Q-10.3-normal
+    type: mc
+    objectives: [OBJ-10.3-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      לגרף של $f(x,y)=x^2+3xy$ בנקודה $(1,2,7)$, $f_x=8$ ו-$f_y=3$. איזה וקטור מאונך למישור המשיק?
+    choices:
+      - text: '$(8,3,-1)$'
+        correct: true
+        feedback: >-
+          נכון. המישור $8(x-1)+3(y-2)-(z-7)=0$, והמקדמים של $x,y,z$ הם הנורמל: $(f_x,f_y,-1)$.
+      - text: '$(8,3,0)$'
+        feedback: >-
+          זה הגרדיאנט $\nabla f$, וקטור אופקי שמאונך לקו הגובה במישור $xy$. המישור המשיק נטוי, והנורמל שלו צריך רכיב $z$.
+        misconception: MC-c10-grad-is-normal-to-graph
+      - text: '$(8,3,7)$'
+        feedback: >-
+          7 הוא הגובה של הנקודה, לא מקדם של $z$ במשוואת המישור. כשמעבירים אגפים ב-$z-7=8(x-1)+3(y-2)$ המקדם של $z$ הוא $-1$.
+        misconception: MC-c10-tangent-plane-base
+      - text: '$(1,2,7)$'
+        feedback: 'זה וקטור המקום של נקודת ההשקה, לא נורמל. הנורמל נקבע מהנגזרות החלקיות.'
+        misconception: MC-c10-grad-is-normal-to-graph
+
+  - id: Q-10.3-partials-origin
+    type: numeric
+    objectives: [OBJ-10.3-3]
+    level: basic
+    prompt: >-
+      תהי $f(x,y)=\frac{xy}{x^2+y^2}$ ל-$(x,y)\ne(0,0)$ ו-$f(0,0)=0$. חשבו לפי ההגדרה את $f_x(0,0)$.
+    answer: 0
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f(h,0)=0$ לכל $h$, ולכן המנה $\frac{f(h,0)-f(0,0)}{h}=0$. גם $f_y(0,0)=0$. ובכל זאת $f(t,t)=\frac12$, כך ש-$f$
+      אינה רציפה בראשית ובוודאי אינה דיפרנציאבילית שם.
+    wrongFeedback: >-
+      הנגזרת לפי $x$ בראשית מסתכלת רק על ציר $x$: מה ערכי $f(h,0)$?
+
+  - id: Q-10.3-remainder
+    type: expr
+    objectives: [OBJ-10.3-1]
+    level: mid
+    prompt: >-
+      תהי $f(x,y)=xy^2$, והנקודה $(1,2)$, שבה $f=4$, $f_x=4$, $f_y=4$. כתבו את השארית
+      $\psi(h,k)=f(1+h,2+k)-4-4h-4k$ כנוסחה ב-$h$ וב-$k$.
+    answer: 'k^2 + 4*h*k + h*k^2'
+    answerTex: '$\psi(h,k)=k^2+4hk+hk^2$'
+    variables: [h, k]
+    correctFeedback: >-
+      נכון. $(1+h)(2+k)^2=(1+h)(4+4k+k^2)=4+4h+4k+k^2+4hk+hk^2$. כל איבר בשארית הוא מסדר שני לפחות ב-$(h,k)$, ולכן
+      $\frac{\psi}{\sqrt{h^2+k^2}}\to0$: $f$ דיפרנציאבילית בנקודה.
+    wrongFeedback: >-
+      פתחו את $(1+h)(2+k)^2$ לגמרי, ואז החסירו $4+4h+4k$.
+    hints: ['$(2+k)^2=4+4k+k^2$; כפלו ב-$(1+h)$.']
+
+  - id: Q-10.3-remainder-check
+    type: twotier
+    objectives: [OBJ-10.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      תהי $f(x,y)=x^2+y^2$. בנקודה $(0,0)$: $f(h,k)=0+0\cdot h+0\cdot k+\psi$ עם $\psi=h^2+k^2$. האם $f$ דיפרנציאבילית
+      בראשית?
+    choices:
+      - text: 'כן, והמישור המשיק הוא $z=0$'
+        correct: true
+        feedback: 'נכון. $\frac{\psi}{\sqrt{h^2+k^2}}=\sqrt{h^2+k^2}\to0$, ולכן הקירוב הלינארי $0+0h+0k$ טוב מספיק.'
+      - text: 'לא, כי $\psi$ אינה 0'
+        feedback: >-
+          לא דורשים ש-$\psi$ תהיה 0, אלא שתהיה קטנה ביחס למרחק. כאן $\psi$ היא ריבוע המרחק, קטנה הרבה יותר מהמרחק עצמו.
+        misconception: MC-c10-remainder-only-to-zero
+    reasons:
+      - text: 'המנה $\frac{\psi}{\sqrt{h^2+k^2}}=\sqrt{h^2+k^2}$ שואפת ל-0'
+        correct: true
+        feedback: 'בדיוק: זו בדיוק ההגדרה.'
+      - text: '$\psi=h^2+k^2\to0$'
+        feedback: >-
+          זה נכון אבל לא מספיק: גם עם $a=1$, $b=0$ השארית $h^2+k^2-h$ שואפת ל-0, ו-$z=x$ אינו המישור המשיק. התנאי הוא על
+          המנה $\frac{\psi}{\sqrt{h^2+k^2}}$.
+        misconception: MC-c10-remainder-only-to-zero
+      - text: 'שתי הנגזרות החלקיות בראשית קיימות ושוות ל-0'
+        feedback: 'קיום הנגזרות החלקיות לבדו אינו מבטיח דיפרנציאביליות; צריך לבדוק את השארית, או נגזרות חלקיות רציפות.'
+        misconception: MC-c10-partials-imply-differentiable
+
+  - id: Q-10.3-approx
+    type: numeric
+    objectives: [OBJ-10.3-2]
+    level: mid
+    prompt: >-
+      תהי $z=\sqrt{x^2+y}$. ב-$(3,16)$: $z=5$, $z_x=\frac35$, $z_y=\frac1{10}$. השתמשו בקירוב הלינארי כדי להעריך את
+      $\sqrt{3.1^2+15.8}$.
+    answer: 5.04
+    tolerance: 0.00005
+    correctFeedback: >-
+      נכון. $\Delta x=0.1$, $\Delta y=-0.2$, ולכן $z\approx5+\tfrac35\cdot0.1+\tfrac1{10}\cdot(-0.2)=5+0.06-0.02=5.04$. הערך
+      המדויק הוא בערך $5.0408$.
+    wrongFeedback: >-
+      $z\approx z_0+z_x\Delta x+z_y\Delta y$. שימו לב שהשינוי ב-$y$ שלילי.
+    commonWrong:
+      - value: 5.06
+        feedback: >-
+          השתמשתם רק בשינוי של $x$. גם $y$ השתנה, ב-$-0.2$, ותורם $\tfrac1{10}\cdot(-0.2)=-0.02$.
+        misconception: MC-c10-differential-one-term
+
+  - id: Q-10.3-cylinder
+    type: numeric
+    objectives: [OBJ-10.3-2]
+    level: mid
+    prompt: >-
+      גליל ברדיוס $r=2$ ובגובה $h=5$ (בסנטימטרים) מתרחב: הרדיוס גדל ב-$0.01$ והגובה ב-$0.02$. העריכו בעזרת הדיפרנציאל
+      את השינוי בנפח $V=\pi r^2h$, בסמ"ק. (אפשר לכתוב תשובה עם pi.)
+    answer: 0.879645943005
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $0.28\pi$. $dV=2\pi rh\,dr+\pi r^2\,dh=20\pi\cdot0.01+4\pi\cdot0.02=0.2\pi+0.08\pi$.
+    wrongFeedback: >-
+      $dV=V_r\,dr+V_h\,dh$: חשבו את שתי הנגזרות החלקיות ב-$r=2$, $h=5$.
+    commonWrong:
+      - value: 0.628318530718
+        feedback: >-
+          $0.2\pi$ הוא רק התרומה של הרדיוס. גם הגובה השתנה, ומוסיף $\pi r^2\,dh=0.08\pi$.
+        misconception: MC-c10-differential-one-term
+
+  - id: Q-10.3-not-diff
+    type: twotier
+    objectives: [OBJ-10.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      ל-$f(x,y)=\frac{xy}{x^2+y^2}$, עם $f(0,0)=0$, שתי הנגזרות החלקיות בראשית קיימות ושוות ל-0. נכון או לא נכון: לגרף יש
+      בראשית את המישור המשיק $z=0$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. לאורך $y=x$ הפונקציה $\frac12$, ולכן היא לא רציפה בראשית. פונקציה דיפרנציאבילית רציפה, ולכן $f$ אינה
+          דיפרנציאבילית, ואין מישור משיק.
+      - text: 'נכון'
+        feedback: >-
+          המישור $z=0$ אמור לקרב את $f$ ליד הראשית, אבל לאורך $y=x$ הגרף בגובה $\frac12$ קרוב ככל שנרצה לראשית.
+        misconception: MC-c10-partials-imply-differentiable
+    reasons:
+      - text: '$f$ אינה רציפה בראשית, ופונקציה דיפרנציאבילית היא רציפה'
+        correct: true
+        feedback: 'בדיוק. הנגזרות החלקיות רואות רק את הצירים, ושם $f\equiv0$.'
+      - text: 'הנגזרות החלקיות קיימות, ולכן המישור $z=f_x x+f_y y$ משיק'
+        feedback: 'קיום הנגזרות החלקיות אינו מספיק. מה שמבטיח מישור משיק הוא נגזרות חלקיות רציפות בסביבה, וזה לא מתקיים כאן.'
+        misconception: MC-c10-partials-imply-differentiable
+      - text: 'המכנה מתאפס בראשית, ולכן אין לפונקציה ערך שם'
+        feedback: 'הפונקציה מוגדרת בראשית: $f(0,0)=0$. הבעיה היא חוסר הרציפות.'
+        misconception: MC-c10-zero-denominator
+
+  - id: Q-10.3-theorem
+    type: mc
+    objectives: [OBJ-10.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      איזה מהתנאים הבאים **מבטיח** ש-$f(x,y)$ דיפרנציאבילית בנקודה $(x_0,y_0)$?
+    choices:
+      - text: '$f_x$ ו-$f_y$ קיימות ורציפות בסביבה של $(x_0,y_0)$'
+        correct: true
+        feedback: >-
+          נכון. זה המשפט (בקורס בלי הוכחה), ולכן כל פולינום, אקספוננט, סינוס והרכבות שלהם דיפרנציאביליים בתחום ההגדרה.
+      - text: '$f_x$ ו-$f_y$ קיימות בנקודה $(x_0,y_0)$'
+        feedback: 'לא מספיק: $\frac{xy}{x^2+y^2}$ (ו-0 בראשית) היא הדוגמה הנגדית.'
+        misconception: MC-c10-partials-imply-differentiable
+      - text: '$f$ רציפה בסביבה של $(x_0,y_0)$'
+        feedback: 'החרוט $\sqrt{x^2+y^2}$ רציף בכל מקום, ובראשית אינו דיפרנציאבילי.'
+        misconception: MC-c10-continuity-implies-differentiable
+      - text: '$f_x(x_0,y_0)=f_y(x_0,y_0)$'
+        feedback: 'שוויון בין שני מספרים לא אומר דבר על קירוב לינארי. גם בדוגמה $\frac{xy}{x^2+y^2}$ שתיהן 0.'
+        misconception: MC-c10-partials-imply-differentiable
+
+  - id: Q-10.3-cone
+    type: twotier
+    objectives: [OBJ-10.3-3, OBJ-10.3-1]
+    qualitative: true
+    level: exam
+    prompt: >-
+      נכון או לא נכון: $f(x,y)=\sqrt{x^2+y^2}$ דיפרנציאבילית בראשית.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $f(h,0)=|h|$, והמנה $\frac{|h|}{h}$ היא 1 מימין ו-$-1$ משמאל: $f_x(0,0)$ אינה קיימת. פונקציה דיפרנציאבילית
+          חייבת שיהיו לה נגזרות חלקיות.
+      - text: 'נכון'
+        feedback: >-
+          $f$ רציפה בראשית, אבל הגרף הוא חרוט עם חוד, ואין מישור שמקרב אותו שם.
+        misconception: MC-c10-continuity-implies-differentiable
+    reasons:
+      - text: '$f_x(0,0)$ אינה קיימת, כי $f(h,0)=|h|$'
+        correct: true
+        feedback: 'בדיוק: כמו $|x|$ במשתנה אחד, בכל ישר דרך הראשית.'
+      - text: '$f$ רציפה בראשית, ולכן דיפרנציאבילית שם'
+        feedback: 'רציפות אינה מבטיחה קירוב לינארי: $|x|$ רציפה ב-0 ואינה גזירה שם.'
+        misconception: MC-c10-continuity-implies-differentiable
+      - text: '$f$ אינה רציפה בראשית'
+        feedback: '$f$ רציפה: $f$ היא המרחק מהראשית, והוא שואף ל-0. הבעיה היא החוד, לא קפיצה.'
+        misconception: MC-c10-continuity-implies-differentiable
+
+  - id: Q-10.3-gas-error
+    type: numeric
+    objectives: [OBJ-10.3-2]
+    level: exam
+    prompt: >-
+      ביחידות מתאימות הלחץ של גז הוא $P=\frac{T}{V}$. מודדים $T=300$ בדיוק של $\pm3$ ו-$V=10$ בדיוק של $\pm0.2$. העריכו בעזרת
+      הדיפרנציאל את השגיאה **המרבית** האפשרית ב-$P$.
+    answer: 0.9
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $P_T=\frac1V=0.1$ ו-$P_V=-\frac{T}{V^2}=-3$. במקרה הגרוע התרומות מצטרפות:
+      $|dP|\le|P_T|\cdot3+|P_V|\cdot0.2=0.3+0.6=0.9$, כשליש אחוז מ-$P=30$.
+    wrongFeedback: >-
+      חשבו את $P_T$ ואת $P_V$ בנקודת המדידה. השגיאות יכולות להיות בכל סימן: איזו בחירת סימנים נותנת את השגיאה הגדולה ביותר?
+    commonWrong:
+      - value: 0.3
+        feedback: >-
+          זה $|0.3-0.6|$: לקחתם את שתי השגיאות חיוביות, והתרומות קיזזו זו את זו. השגיאה במדידה יכולה להיות $dV=-0.2$, ואז
+          שתי התרומות באותו כיוון.
+        misconception: MC-c10-error-signs-cancel
+      - value: 0.6
+        feedback: 'זו רק התרומה של $V$. גם $T$ נמדד עם שגיאה, ותורם $0.1\cdot3=0.3$.'
+        misconception: MC-c10-differential-one-term

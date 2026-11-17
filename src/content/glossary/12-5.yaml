@@ -1,0 +1,11 @@
+# Terms first defined in lesson 12.5 (cylindrical and spherical coordinates in triple integrals).
+- id: volume-element
+  term: אלמנט נפח
+  en: volume element
+  symbol: 'dV=r\,dr\,d\theta\,dz=r^2\sin\theta\,dr\,d\theta\,d\varphi'
+  definition: >-
+    הנפח של תיבה קטנה בחלוקה של הגוף, כפי שהוא נכתב במשתנים של האינטגרל: הערך המוחלט של היעקוביאן כפול מכפלת
+    הדיפרנציאלים. בקרטזיות $dV=dx\,dy\,dz$; בגליליות $dV=r\,dr\,d\theta\,dz$; בכדוריות (כש-$\theta$ נמדדת מציר $z$
+    ו-$\varphi$ היא האזימוט) $dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$.
+  reject: []
+  lesson: '12.5'

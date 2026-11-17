@@ -1,0 +1,284 @@
+# Lesson 12.8 — Green's theorem (enrichment: in the notes, pp. 93–94, not in the 80114 syllabus).
+# Objectives (src/course.ts):
+#   OBJ-12.8-1  state Green's theorem for a simple closed curve in the plane, positively oriented
+#   OBJ-12.8-2  use Green's theorem to compute a line integral by a double integral, and conversely
+#   OBJ-12.8-3  compute the area of a region by a line integral over its boundary
+# Notation: ∮_C P dx + Q dy (the notes write M dx + N dy). Uses line integrals (11.4). Understanding questions only:
+# no chapter-12 review or exam question cites OBJ-12.8-*. Recomputed with sympy (screens/tools/recompute-ch12.py),
+# each line integral also directly from a parametrisation. From the notes: ∮ xy dx + y² dy on the unit circle (p. 93,
+# value 0) and the area of an ellipse, πab (p. 94).
+chapter: 12
+questions:
+  - id: Q-12.8-statement
+    type: mc
+    objectives: [OBJ-12.8-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $C$ עקום סגור פשוט, השפה של התחום $D$, בכיוון החיובי, ו-$P,Q$ בעלות נגזרות חלקיות רציפות ב-$D$. מה אומר משפט גרין?
+    choices:
+      - text: '$\oint_CP\,dx+Q\,dy=\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA$'
+        correct: true
+        feedback: >-
+          נכון. הרכיב שליד $dy$ נגזר לפי $x$, פחות הרכיב שליד $dx$ נגזר לפי $y$. בדיקה: לשדה $(-y,x)$ מתקבל $1-(-1)=2$.
+      - text: '$\oint_CP\,dx+Q\,dy=\iint_D\left(\frac{\partial P}{\partial y}-\frac{\partial Q}{\partial x}\right)dA$'
+        feedback: >-
+          זה הסימן ההפוך. לשדה הסיבובי $(-y,x)$, שהעבודה שלו נגד כיוון השעון חיובית, הנוסחה הזאת נותנת מספר שלילי.
+        misconception: MC-c12-green-sign
+      - text: '$\oint_CP\,dx+Q\,dy=\iint_D\left(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}\right)dA$'
+        feedback: >-
+          כאן כל רכיב נגזר לפי המשתנה של עצמו (זה הדיברגנץ). במשפט גרין לעבודה, $Q$ נגזר לפי $x$ ו-$P$ לפי $y$.
+        misconception: MC-c12-green-sign
+
+  - id: Q-12.8-orientation
+    type: twotier
+    objectives: [OBJ-12.8-1, OBJ-12.8-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $C$ הוא מעגל היחידה, ומקיפים אותו **עם** כיוון השעון. נכון או לא נכון:
+      $\oint_C-y\,dx+x\,dy=\iint_D2\,dA=2\pi$.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: 'נכון. עם כיוון השעון האינטגרל הוא $-2\pi$.'
+      - text: נכון
+        feedback: >-
+          משפט גרין מנוסח לכיוון החיובי, נגד כיוון השעון. הקפה הפוכה הופכת את הסימן של האינטגרל הקווי.
+        misconception: MC-c12-green-orientation
+    reasons:
+      - text: 'ההקפה עם כיוון השעון היא העקום ההפוך לכיוון החיובי, ואינטגרל קווי של שדה מחליף סימן כשהופכים כיוון'
+        correct: true
+        feedback: >-
+          בדיוק. גם ישירות: $x=\cos t$, $y=-\sin t$ נותן $\int_0^{2\pi}\left(-\sin^2t-\cos^2t\right)dt=-2\pi$.
+      - text: 'משפט גרין לא תלוי בכיוון, כי האינטגרל הכפול לא תלוי בכיוון'
+        feedback: >-
+          האינטגרל הכפול באמת לא תלוי בכיוון, ולכן המשפט חייב לקבוע כיוון אחד לאגף השמאלי: הכיוון שבו $D$ משמאל להולך.
+        misconception: MC-c12-green-orientation
+      - text: 'האינטגרל הכפול צריך להיות $\iint_D(-2)\,dA$, כי $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=-2$'
+        feedback: >-
+          $\frac{\partial}{\partial x}(x)-\frac{\partial}{\partial y}(-y)=1+1=2$. הסימן מתהפך בגלל הכיוון, לא בגלל הנגזרות.
+        misconception: MC-c12-green-sign
+
+  - id: Q-12.8-hypotheses
+    type: multi
+    objectives: [OBJ-12.8-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      באילו מהמקרים הבאים מותר להשתמש במשפט גרין כדי לחשב $\oint_CP\,dx+Q\,dy$ בעזרת $\iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA$?
+      סמנו את כל האפשרויות הנכונות.
+    choices:
+      - text: '$C$ שפת הריבוע $[0,1]^2$ נגד כיוון השעון, $P=xy$, $Q=x^2$'
+        correct: true
+        feedback: 'נכון. עקום סגור פשוט, ו-$P,Q$ פולינומים: הנגזרות רציפות בכל מקום.'
+      - text: '$C$ מעגל היחידה נגד כיוון השעון, $P=e^x\sin y$, $Q=e^x\cos y$'
+        correct: true
+        feedback: 'נכון. השדה חלק בכל המישור (ושם $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=0$, ולכן האינטגרל 0).'
+      - text: '$C$ מעגל היחידה נגד כיוון השעון, $P=\frac{-y}{x^2+y^2}$, $Q=\frac{x}{x^2+y^2}$'
+        feedback: >-
+          השדה אינו מוגדר בראשית, שנמצאת בתוך $D$. אכן $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=0$ מחוץ
+          לראשית, אבל האינטגרל הקווי $2\pi$, לא 0.
+        misconception: MC-c12-green-hypotheses
+      - text: '$C$ הקטע מ-$(0,0)$ ל-$(1,1)$, $P=y$, $Q=x$'
+        feedback: >-
+          קטע אינו עקום סגור, ואין תחום $D$ שהוא השפה שלו. משפט גרין מדבר רק על עקומים סגורים.
+        misconception: MC-c12-green-hypotheses
+
+  - id: Q-12.8-integrand
+    type: expr
+    objectives: [OBJ-12.8-2]
+    level: basic
+    prompt: >-
+      לפי משפט גרין, $\oint_C-y^3\,dx+x^3\,dy=\iint_Dg(x,y)\,dA$. מהי $g(x,y)$?
+    answer: '3*x^2 + 3*y^2'
+    answerTex: '$g=\frac{\partial}{\partial x}\left(x^3\right)-\frac{\partial}{\partial y}\left(-y^3\right)=3x^2+3y^2$'
+    variables: [x, y]
+    domain: [-2, 2]
+    correctFeedback: >-
+      נכון. $P=-y^3$ ו-$Q=x^3$, ו-$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=3x^2-\left(-3y^2\right)$.
+    wrongFeedback: >-
+      זהו את $P$ (ליד $dx$) ואת $Q$ (ליד $dy$), וחשבו $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}$.
+    commonWrong:
+      - expr: '3*x^2 - 3*y^2'
+        feedback: >-
+          $\frac{\partial P}{\partial y}=-3y^2$, והחיסור שלו נותן $+3y^2$. נשמט הסימן של $P$.
+        misconception: MC-c12-green-sign
+      - expr: '-3*x^2 - 3*y^2'
+        feedback: >-
+          זה $\frac{\partial P}{\partial y}-\frac{\partial Q}{\partial x}$, הסדר ההפוך.
+        misconception: MC-c12-green-sign
+    hints: ['$\frac{\partial}{\partial y}\left(-y^3\right)=-3y^2$.']
+
+  - id: Q-12.8-circle
+    type: numeric
+    objectives: [OBJ-12.8-2]
+    level: basic
+    prompt: >-
+      חשבו בעזרת משפט גרין את $\oint_C\left(x^2-y\right)dx+\left(x+y^2\right)dy$, כש-$C$ מעגל היחידה נגד כיוון השעון.
+    answer: 6.28318530717959
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=1-(-1)=2$, ולכן האינטגרל $2\cdot\pi=2\pi$, פעמיים
+      השטח של העיגול.
+    wrongFeedback: >-
+      $P=x^2-y$, $Q=x+y^2$. הביטוי $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}$ יוצא קבוע.
+    commonWrong:
+      - value: -6.28318530717959
+        feedback: >-
+          $-2\pi$ יוצא מ-$\frac{\partial P}{\partial y}-\frac{\partial Q}{\partial x}=-2$, הסדר ההפוך.
+        misconception: MC-c12-green-sign
+    hints: ['אינטגרל של קבוע על עיגול: הקבוע כפול השטח.']
+
+  - id: Q-12.8-square
+    type: numeric
+    objectives: [OBJ-12.8-2]
+    level: mid
+    prompt: >-
+      $C$ היא שפת הריבוע $[0,1]\times[0,1]$ נגד כיוון השעון. חשבו את $\oint_Cxy\,dx+x^2\,dy$.
+    answer: 0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=2x-x=x$, ו-$\iint_{[0,1]^2}x\,dA=\frac12$. (גם חישוב
+      ישיר על ארבע הצלעות נותן $0+1-\frac12+0=\frac12$.)
+    wrongFeedback: >-
+      עם גרין: $P=xy$, $Q=x^2$. האינטגרל הכפול על הריבוע של $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}$.
+    commonWrong:
+      - value: -0.5
+        feedback: >-
+          $-\frac12$ יוצא מ-$\frac{\partial P}{\partial y}-\frac{\partial Q}{\partial x}=-x$, הסדר ההפוך.
+        misconception: MC-c12-green-sign
+    hints: ['$\frac{\partial}{\partial x}x^2=2x$ ו-$\frac{\partial}{\partial y}xy=x$.']
+
+  - id: Q-12.8-rank
+    type: rank
+    objectives: [OBJ-12.8-2]
+    level: mid
+    prompt: >-
+      סדרו את שלבי החישוב של אינטגרל קווי $\oint_CP\,dx+Q\,dy$ בעזרת משפט גרין.
+    help: סדרו את שלבי השיטה מהראשון לאחרון.
+    items:
+      - id: a
+        label: 'בודקים ש-$C$ סגור ופשוט, ומזהים את התחום $D$ שהוא השפה שלו.'
+      - id: b
+        label: 'בודקים ש-$P,Q$ בעלות נגזרות חלקיות רציפות בכל $D$ (אין נקודה בעייתית בפנים).'
+      - id: c
+        label: 'מחשבים $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}$.'
+      - id: d
+        label: 'מחשבים את האינטגרל הכפול שלו על $D$ (לפעמים בקוטביות).'
+      - id: e
+        label: 'מתקנים את הסימן לפי הכיוון: אם $C$ מוקף עם כיוון השעון, מכפילים ב-$-1$.'
+    order: [[a, b], c, d, e]
+    correctFeedback: >-
+      נכון. קודם התנאים (בכל סדר), אחר כך החישוב, ובסוף הכיוון.
+    wrongFeedback: >-
+      לפני שמשתמשים במשפט בודקים את התנאים שלו: עקום סגור פשוט ושדה חלק בכל התחום. הסימן נקבע לפי כיוון ההקפה.
+
+  - id: Q-12.8-polar-green
+    type: numeric
+    objectives: [OBJ-12.8-2]
+    level: exam
+    prompt: >-
+      חשבו את $\oint_C-y^3\,dx+x^3\,dy$, כש-$C$ המעגל $x^2+y^2=4$ נגד כיוון השעון.
+    answer: 75.398223686155
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. לפי גרין $\iint_D3\left(x^2+y^2\right)dA=\int_0^{2\pi}\!\int_0^23r^2\,r\,dr\,d\theta=2\pi\cdot12=24\pi$.
+    wrongFeedback: >-
+      $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=3x^2+3y^2=3r^2$. עברו לקוטביות על העיגול $r\le2$.
+    commonWrong:
+      - value: -75.398223686155
+        feedback: >-
+          $-24\pi$: הסימן הפוך. $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=3x^2+3y^2$, חיובי.
+        misconception: MC-c12-green-sign
+      - value: 50.2654824574367
+        feedback: >-
+          $16\pi$ יוצא בלי הגורם $r$ של אלמנט השטח: $\int_0^23r^2\,dr=8$ במקום $\int_0^23r^3\,dr=12$.
+        misconception: MC-c12-polar-no-r
+    hints: ['$\int_0^2r^3\,dr=4$.']
+
+  - id: Q-12.8-work
+    type: numeric
+    objectives: [OBJ-12.8-2]
+    level: exam
+    prompt: >-
+      חלקיק מקיף פעם אחת את האליפסה $\frac{x^2}{4}+y^2=1$ נגד כיוון השעון, תחת הכוח $\vec F=(y+3x,\ 2y-x)$. חשבו את העבודה
+      $\oint_C\vec F\cdot d\vec r$.
+    answer: -12.5663706143592
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=-1-1=-2$, והשטח של האליפסה $\pi\cdot2\cdot1=2\pi$, ולכן
+      $W=-4\pi$. העבודה שלילית: הרכיב הסיבובי של הכוח, $(y,-x)$, פועל עם כיוון השעון, נגד התנועה.
+    wrongFeedback: >-
+      $P=y+3x$, $Q=2y-x$. הביטוי $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}$ קבוע, ונשאר שטח האליפסה $\pi ab$.
+    commonWrong:
+      - value: 12.5663706143592
+        feedback: >-
+          $4\pi$ יוצא מ-$\frac{\partial P}{\partial y}-\frac{\partial Q}{\partial x}=2$, הסדר ההפוך.
+        misconception: MC-c12-green-sign
+    hints: ['השטח של אליפסה עם חצאי צירים $a,b$ הוא $\pi ab$.']
+
+  - id: Q-12.8-ellipse-area
+    type: numeric
+    objectives: [OBJ-12.8-3]
+    level: basic
+    prompt: >-
+      חשבו את השטח של האליפסה $\frac{x^2}{9}+\frac{y^2}{4}\le1$ כ-$\oint_Cx\,dy$, עם $x=3\cos t$, $y=2\sin t$, $0\le t\le2\pi$.
+    answer: 18.8495559215388
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $dy=2\cos t\,dt$, ולכן $\oint_Cx\,dy=\int_0^{2\pi}6\cos^2t\,dt=6\pi$, כמו $\pi ab$. המשפט: $\oint_Cx\,dy=\iint_D1\,dA$.
+    wrongFeedback: >-
+      הציבו: $x\,dy=3\cos t\cdot2\cos t\,dt$, ו-$\int_0^{2\pi}\cos^2t\,dt=\pi$.
+    commonWrong:
+      - value: -18.8495559215388
+        feedback: >-
+          $-6\pi$ יוצא כשמקיפים עם כיוון השעון (למשל $y=-2\sin t$). הפרמטריזציה הנתונה נגד כיוון השעון, והשטח חיובי.
+        misconception: MC-c12-green-orientation
+    hints: ['$\cos^2t=\frac{1+\cos2t}{2}$.']
+
+  - id: Q-12.8-area-formulas
+    type: multi
+    objectives: [OBJ-12.8-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $C$ השפה של $D$ בכיוון החיובי. אילו מהביטויים שווים לשטח של $D$? סמנו את כל האפשרויות הנכונות.
+    choices:
+      - text: '$\oint_Cx\,dy$'
+        correct: true
+        feedback: 'נכון. $P=0$, $Q=x$: $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=1$.'
+      - text: '$-\oint_Cy\,dx$'
+        correct: true
+        feedback: 'נכון. ל-$\oint_Cy\,dx$: $P=y$, $Q=0$, וההפרש $-1$; עם המינוס מתקבל השטח.'
+      - text: '$\frac12\oint_C\left(x\,dy-y\,dx\right)$'
+        correct: true
+        feedback: 'נכון. $P=-\frac y2$, $Q=\frac x2$: ההפרש $\frac12+\frac12=1$.'
+      - text: '$\oint_Cy\,dx$'
+        feedback: >-
+          כאן $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=0-1=-1$, ולכן זה **מינוס** השטח.
+        misconception: MC-c12-green-area-form
+      - text: '$\oint_Cx\,dx$'
+        feedback: >-
+          $P=x$, $Q=0$: ההפרש 0, והאינטגרל 0 לכל עקום סגור ($x\,dx$ הוא הדיפרנציאל של $\frac{x^2}{2}$).
+        misconception: MC-c12-green-area-form
+
+  - id: Q-12.8-triangle-area
+    type: numeric
+    objectives: [OBJ-12.8-3]
+    level: mid
+    prompt: >-
+      חשבו את $\oint_Cx\,dy$, כש-$C$ שפת המשולש עם הקודקודים $(0,0)$, $(4,0)$, $(0,3)$, בכיוון החיובי, ישירות על שלוש הצלעות.
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. על הצלע שעל ציר $x$, $dy=0$; על הצלע שעל ציר $y$, $x=0$. נשארת היתר: $x=4-4t$, $y=3t$, $0\le t\le1$, ו-$\int_0^1(4-4t)\cdot3\,dt=6$,
+      כמו השטח $\frac12\cdot4\cdot3$.
+    wrongFeedback: >-
+      כתבו כל צלע כעקום, בכיוון $(0,0)\to(4,0)\to(0,3)\to(0,0)$. על שתי צלעות האינטגרנד מתאפס.
+    commonWrong:
+      - value: -6
+        feedback: >-
+          $-6$ הוא $\oint_Cy\,dx$, מינוס השטח. השטח הוא $\oint_Cx\,dy$ או $-\oint_Cy\,dx$.
+        misconception: MC-c12-green-area-form
+    hints: ['על היתר: $dy=3\,dt$.']

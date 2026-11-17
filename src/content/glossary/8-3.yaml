@@ -1,0 +1,20 @@
+# Terms first defined in lesson 8.3 (improper integrals).
+- id: improper-integral
+  term: אינטגרל לא אמיתי
+  en: improper integral
+  symbol: '\int_a^\infty f(x)\,dx=\lim_{R\to\infty}\int_a^R f(x)\,dx'
+  definition: >-
+    אינטגרל על קטע אינסופי, או של פונקציה שאינה חסומה ליד נקודה בקטע. מגדירים אותו כגבול של אינטגרלים רגילים:
+    $\int_a^\infty f\,dx=\lim_{R\to\infty}\int_a^Rf\,dx$, ו-$\int_0^1f\,dx=\lim_{\varepsilon\to0^+}\int_\varepsilon^1f\,dx$
+    כש-$f$ אינה חסומה ליד 0. כשיש כמה נקודות בעייתיות, מפצלים כך שבכל חלק יש אחת.
+  reject: []
+  lesson: '8.3'
+- id: convergent-integral
+  term: אינטגרל מתכנס
+  en: convergent (improper) integral
+  definition: >-
+    אינטגרל לא אמיתי **מתכנס** כשהגבול שמגדיר אותו קיים וסופי, ו**מתבדר** אחרת. החזקות הסטנדרטיות:
+    $\int_1^\infty x^{-p}dx$ מתכנס בדיוק כש-$p>1$, ו-$\int_0^1x^{-p}dx$ בדיוק כש-$p<1$. מבחן ההשוואה: אם
+    $0\le f\le g$ ו-$\int g$ מתכנס, גם $\int f$ מתכנס.
+  reject: []
+  lesson: '8.3'

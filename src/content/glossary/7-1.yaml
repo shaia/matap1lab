@@ -1,0 +1,36 @@
+# Terms first defined in lesson 7.1 (the antiderivative and the fundamental theorem).
+- id: antiderivative
+  term: פונקציה קדומה
+  en: antiderivative
+  symbol: "F'=f"
+  definition: >-
+    $F$ היא פונקציה קדומה של $f$ בקטע אם $F'(x)=f(x)$ לכל $x$ בקטע. אם $F$ קדומה, כל הקדומות בקטע הן $F+C$: פונקציה
+    שנגזרתה אפס בקטע קבועה בו. בודקים קדומה בגזירה.
+  reject: [פונקציה קדומית]
+  lesson: '7.1'
+- id: indefinite-integral
+  term: אינטגרל לא מסוים
+  en: indefinite integral
+  symbol: '\int f(x)\,dx=F(x)+C'
+  definition: >-
+    משפחת כל הפונקציות הקדומות של $f$ בקטע: $\int f(x)\,dx=F(x)+C$, כש-$F$ קדומה אחת ו-$C$ קבוע כלשהו (עמ׳ 9 במחברת).
+  reject: [אינטגרל בלתי מסויים]
+  lesson: '7.1'
+- id: integration-constant
+  term: קבוע האינטגרציה
+  en: constant of integration
+  symbol: 'C'
+  definition: >-
+    הקבוע $C$ ב-$\int f\,dx=F+C$: גזירה מאבדת קבועים, ולכן אינטגרציה מחזירה אותם רק עד כדי קבוע. תנאי התחלה, כמו
+    $x(0)=5$, קובע אותו. בתחום שבנוי מכמה קטעים הוא יכול להיות שונה בכל קטע.
+  reject: []
+  lesson: '7.1'
+- id: fundamental-theorem-of-calculus
+  term: המשפט היסודי של החשבון הדיפרנציאלי והאינטגרלי
+  en: fundamental theorem of calculus
+  symbol: '\int_a^bf(x)\,dx=F(b)-F(a)'
+  definition: >-
+    אם $f$ רציפה ב-$[a,b]$ ו-$F$ קדומה שלה, אז $\int_a^bf(x)\,dx=F(b)-F(a)$ (נוסחת ניוטון-לייבניץ, עמ׳ 10 במחברת). הוא
+    מקשר בין שטח לפונקציה קדומה, והקבוע של $F$ מתבטל בהפרש.
+  reject: []
+  lesson: '7.1'

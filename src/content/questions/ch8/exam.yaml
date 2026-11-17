@@ -1,0 +1,292 @@
+# Chapter 8 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# Numbers recomputed in screens/tools/recompute-ch8.py.
+chapter: 8
+questions:
+  - id: Q-8-exam-1
+    type: exam
+    title: תחום בין שורש לישר, ושלוש דרכים לנפח
+    prompt: >-
+      התחום $D$ כלוא בין הגרף של $y=\sqrt x$ לבין הישר $y=\frac x2$. (חלק מכונה מתקבל מסיבוב של $D$, ורוצים לדעת את
+      נפחו.)
+    parts:
+      - label: א
+        points: 5
+        type: numeric
+        objectives: [OBJ-8.5-1]
+        prompt: 'מצאו את נקודות החיתוך וחשבו את השטח של $D$. (אפשר לכתוב שבר.)'
+        answer: 1.3333333333333
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $\tfrac43$. $\sqrt x=\frac x2$ ב-$x=0$ וב-$x=4$, וביניהן $\sqrt x$ עליון (ב-$x=1$: $1>\tfrac12$):
+          $\int_0^4\left(\sqrt x-\tfrac x2\right)dx=\tfrac{16}{3}-4$.
+        wrongFeedback: >-
+          פתרו $\sqrt x=\frac x2$ (העלו בריבוע ובדקו), וחשבו את האינטגרל של העליון פחות התחתון.
+        commonWrong:
+          - value: -1.3333333333
+            feedback: 'חיסרתם את העליון מהתחתון: ב-$x=1$, $\sqrt1=1>\tfrac12$.'
+            misconception: MC-c8-area-order
+
+      - label: ב
+        points: 6
+        type: numeric
+        objectives: [OBJ-8.5-2]
+        prompt: '$D$ מסתובב סביב ציר $x$. חשבו את הנפח. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)'
+        answer: 8.3775804095728
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $\frac{8\pi}{3}$. טבעות עם $R=\sqrt x$ ו-$r=\frac x2$: $\pi\int_0^4\left(x-\tfrac{x^2}{4}\right)dx=\pi\left(8-\tfrac{16}{3}\right)$.
+        wrongFeedback: 'שטח הטבעת $\pi(R^2-r^2)$, עם $R=\sqrt x$ ו-$r=\frac x2$.'
+        commonWrong:
+          - value: 1.6755160819146
+            feedback: >-
+              זה $\pi\int_0^4\left(\sqrt x-\tfrac x2\right)^2dx=\frac{8\pi}{15}$: העליתם בריבוע את ההפרש. שטח הטבעת
+              $\pi(R^2-r^2)$.
+            misconception: MC-c8-washer-square-difference
+
+      - label: ג
+        points: 6
+        type: numeric
+        objectives: [OBJ-8.5-3]
+        prompt: '$D$ מסתובב סביב ציר $y$. חשבו את הנפח בשיטת הקליפות. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)'
+        answer: 13.404128655317
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $\frac{64\pi}{15}$. $2\pi\int_0^4x\left(\sqrt x-\tfrac x2\right)dx=2\pi\left(\tfrac25\cdot32-\tfrac{64}{6}\right)=2\pi\cdot\tfrac{32}{15}$.
+        wrongFeedback: 'קליפה ברדיוס $x$ ובגובה $\sqrt x-\frac x2$: $V=2\pi\int_0^4x\left(\sqrt x-\frac x2\right)dx$.'
+        commonWrong:
+          - value: 8.3775804095728
+            feedback: >-
+              זה $2\pi\int_0^4\left(\sqrt x-\tfrac x2\right)dx$: חסר הרדיוס $x$. (במקרה זה שווה לתשובה של סעיף ב, אבל
+              זו טעות.)
+            misconception: MC-c8-shell-radius
+
+      - label: ד
+        points: 8
+        type: open
+        objectives: [OBJ-8.5-2, OBJ-8.5-1]
+        prompt: >-
+          חשבו את הנפח של סעיף ג שוב, הפעם בשיטת הטבעות (פרוסות אופקיות, אינטגרל לפי $y$), והראו שמתקבלת אותה
+          תוצאה.
+        solution:
+          - kind: given
+            text: '$D$ בין $y=\sqrt x$ ל-$y=\frac x2$, בין $(0,0)$ ל-$(4,2)$; הסיבוב סביב ציר $y$.'
+          - kind: goal
+            text: 'לחשב את הנפח בפרוסות ניצבות לציר $y$ ולהשוות ל-$\frac{64\pi}{15}$.'
+          - kind: idea
+            text: >-
+              פרוסה בגובה $y$ ניצבת לציר הסיבוב, ולכן היא טבעת. צריך את הקצוות של $D$ בגובה הזה כפונקציות של $y$.
+          - kind: step
+            text: >-
+              מ-$y=\sqrt x$: $x=y^2$ (הקצה הקרוב לציר). מ-$y=\frac x2$: $x=2y$ (הקצה הרחוק). ב-$0\le y\le2$ מתקיים
+              $y^2\le2y$, ולכן $R=2y$, $r=y^2$.
+          - kind: computation
+            text: >-
+              $V=\pi\int_0^2\left((2y)^2-(y^2)^2\right)dy=\pi\int_0^2\left(4y^2-y^4\right)dy=\pi\left(\tfrac{32}{3}-\tfrac{32}{5}\right)=\tfrac{64\pi}{15}$.
+          - kind: check
+            text: 'אותו ערך כמו בקליפות: שתי פריסות של אותו גוף. ($\frac{64\pi}{15}\approx13.40$.)'
+          - kind: result
+            text: '$V=\dfrac{64\pi}{15}$ בשתי השיטות.'
+        rubric:
+          - text: 'זיהוי הקצוות כפונקציות של $y$: $x=y^2$ ו-$x=2y$, וגבולות $0\le y\le2$'
+            weight: 2
+          - text: 'רדיוס חיצוני $2y$ ופנימי $y^2$ (ולא להפך), ושטח הטבעת $\pi(R^2-r^2)$'
+            weight: 3
+          - text: 'חישוב נכון של האינטגרל: $\frac{64\pi}{15}$'
+            weight: 2
+          - text: 'השוואה מפורשת לתוצאה של סעיף ג'
+            weight: 1
+
+  - id: Q-8-exam-2
+    type: exam
+    title: אינטגרלים לא אמיתיים ממשפחה אחת
+    prompt: >-
+      נתבונן באינטגרלים $I_p=\int_1^\infty\frac{x}{\left(1+x^2\right)^p}\,dx$, וגם ב-$\int_0^\infty\frac{x}{\left(1+x^2\right)^2}\,dx$.
+    parts:
+      - label: א
+        points: 6
+        type: numeric
+        objectives: [OBJ-8.3-1, OBJ-8.2-1]
+        prompt: 'חשבו את $\int_0^\infty\frac{x}{\left(1+x^2\right)^2}\,dx$.'
+        answer: 0.5
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $u=1+x^2$, $x\,dx=\frac12du$, והגבולות $1$ עד $\infty$: $\frac12\int_1^\infty u^{-2}du=\frac12\cdot1$.
+        wrongFeedback: 'הציבו $u=1+x^2$, החליפו גבולות ($x=0\mapsto u=1$), וקחו גבול באינסוף.'
+        commonWrong:
+          - value: 1
+            feedback: 'חסר $\frac12$ מ-$x\,dx=\frac12du$.'
+            misconception: MC-c8-sub-forget-factor
+
+      - label: ב
+        points: 5
+        type: twotier
+        objectives: [OBJ-8.3-2]
+        qualitative: true
+        prompt: 'האם $\int_1^\infty\frac{x}{1+x^2}\,dx$ (המקרה $p=1$) מתכנס?'
+        choices:
+          - text: 'לא, הוא מתבדר'
+            correct: true
+            feedback: 'נכון. $\int_1^R\frac{x}{1+x^2}dx=\tfrac12\ln\frac{1+R^2}{2}\to\infty$.'
+          - text: 'כן'
+            feedback: >-
+              האינטגרנד שואף ל-0, אבל רק כמו $\frac1x$. זה איטי מדי.
+            misconception: MC-c8-integrand-to-zero-converges
+        reasons:
+          - text: 'ל-$x\ge1$, $\frac{x}{1+x^2}\ge\frac{x}{2x^2}=\frac{1}{2x}$, ו-$\int_1^\infty\frac{dx}{2x}$ מתבדר'
+            correct: true
+            feedback: 'בדיוק: חסם **מלמטה** באינטגרנד מתבדר מוכיח התבדרות.'
+          - text: '$\frac{x}{1+x^2}\le\frac1x$, ו-$\int_1^\infty\frac{dx}{x}$ מתבדר'
+            feedback: 'חסם מלמעלה באינטגרנד מתבדר אינו מוכיח דבר. צריך חסם מלמטה.'
+            misconception: MC-c8-comparison-wrong-direction
+          - text: 'האינטגרנד אינו מוגדר באינסוף'
+            feedback: 'האינטגרנד מוגדר ורציף בכל $[1,\infty)$; השאלה היא כמה מהר הוא דועך.'
+            misconception: MC-c8-integrand-to-zero-converges
+
+      - label: ג
+        points: 9
+        type: open
+        objectives: [OBJ-8.3-2, OBJ-8.3-3]
+        prompt: 'לאילו ערכים של $p$ האינטגרל $I_p$ מתכנס? נמקו בעזרת השוואה לחזקה.'
+        solution:
+          - kind: given
+            text: '$I_p=\int_1^\infty\frac{x}{(1+x^2)^p}dx$; האינטגרנד חיובי ורציף ב-$[1,\infty)$.'
+          - kind: goal
+            text: 'למצוא את כל $p$ שבהם $I_p$ מתכנס.'
+          - kind: idea
+            text: >-
+              באינסוף $1+x^2$ "שווה בערך" ל-$x^2$, ולכן האינטגרנד מתנהג כמו $x^{1-2p}$. חוסמים אותו משני הצדדים
+              בכפולות של $x^{1-2p}$ ומשתמשים בכלל של $\int_1^\infty x^{-q}dx$.
+          - kind: step
+            text: >-
+              ל-$x\ge1$: $x^2\le1+x^2\le2x^2$. כש-$p\ge0$, $x^{2p}\le(1+x^2)^p\le2^px^{2p}$, ולכן
+              $2^{-p}x^{1-2p}\le\frac{x}{(1+x^2)^p}\le x^{1-2p}$. (כש-$p<0$ האינטגרנד אינו חסום ומתבדר מיד: הוא לפחות $x$.)
+          - kind: theorem
+            text: '$\int_1^\infty x^{-q}dx$ מתכנס בדיוק כש-$q>1$. כאן $q=2p-1$.'
+          - kind: step
+            text: >-
+              אם $2p-1>1$, כלומר $p>1$: החסם העליון מתכנס, ולפי מבחן ההשוואה $I_p$ מתכנס. אם $p\le1$ (ו-$p\ge0$): החסם
+              התחתון $2^{-p}x^{1-2p}$ מתבדר, ולכן גם $I_p$.
+          - kind: check
+            text: 'מתאים לסעיף ב: $p=1$ מתבדר. ול-$p=2$ (סעיף א) האינטגרל מתכנס.'
+          - kind: result
+            text: '$I_p$ מתכנס בדיוק כש-$p>1$.'
+        rubric:
+          - text: 'זיהוי ההתנהגות באינסוף, $x^{1-2p}$'
+            weight: 2
+          - text: 'חסם עליון מתאים והתכנסות כש-$p>1$, עם ציטוט נכון של מבחן ההשוואה'
+            weight: 3
+          - text: 'חסם תחתון מתאים והתבדרות כש-$p\le1$ (השוואה בכיוון הנכון)'
+            weight: 3
+          - text: 'מסקנה מפורשת: $p>1$'
+            weight: 1
+
+      - label: ד
+        points: 5
+        type: numeric
+        objectives: [OBJ-8.3-1]
+        prompt: 'חשבו את $I_{3/2}$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)'
+        answer: 0.70710678118655
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $\frac1{\sqrt2}$. פונקציה קדומה: $-\left(1+x^2\right)^{-1/2}$, ולכן
+          $I_{3/2}=0-\left(-\tfrac{1}{\sqrt2}\right)$.
+        wrongFeedback: 'בהצבה $u=1+x^2$: $\frac12\int_2^\infty u^{-3/2}du$.'
+        commonWrong:
+          - value: 1.4142135624
+            feedback: 'זה $\sqrt2$: חסר הגורם $\frac12$ מ-$x\,dx=\frac12du$.'
+            misconception: MC-c8-sub-forget-factor
+          - value: -0.7071067812
+            feedback: 'חישבתם $F(1)-F(\infty)$. אינטגרנד חיובי נותן מספר חיובי.'
+            misconception: MC-c8-reverse-limits
+
+  - id: Q-8-exam-3
+    type: exam
+    title: פונקציה שמוגדרת על ידי אינטגרל, וחישוב נומרי שלה
+    prompt: >-
+      בהתפלגות הנורמלית ובדיפוזיה מופיעה הפונקציה $F(x)=\int_0^xe^{-t^2}\,dt$. ל-$e^{-t^2}$ אין פונקציה קדומה
+      אלמנטרית, ולכן את $F(1)$ מחשבים בקירוב.
+    parts:
+      - label: א
+        points: 4
+        type: expr
+        objectives: [OBJ-8.2-3]
+        prompt: 'כתבו את $F''(x)$.'
+        answer: 'exp(-x^2)'
+        answerTex: '$F''(x)=e^{-x^2}$'
+        variables: [x]
+        domain: [-2, 2]
+        correctFeedback: 'נכון: המשפט היסודי, עם הגבול העליון באינטגרנד. בפרט $F$ עולה ממש.'
+        wrongFeedback: 'אין צורך בפונקציה קדומה: הנגזרת של $\int_0^xf(t)\,dt$ היא $f(x)$.'
+        commonWrong:
+          - expr: '-2*x*exp(-x^2)'
+            feedback: 'זו הנגזרת של $e^{-x^2}$, האינטגרנד. את האינטגרנד לא גוזרים.'
+            misconception: MC-c8-ftc-differentiate-integrand
+
+      - label: ב
+        points: 5
+        type: numeric
+        objectives: [OBJ-8.4-1]
+        prompt: 'קרבו את $F(1)$ בכלל הטרפז עם $n=2$. (תשובה עשרונית, 4 ספרות אחרי הנקודה.)'
+        answer: 0.73137025182856
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $h=\tfrac12$: $\tfrac14\left(1+2e^{-1/4}+e^{-1}\right)\approx0.7314$. הערך האמיתי בערך $0.7468$.
+        wrongFeedback: '$T_2=\frac h2\left(f(0)+2f(\tfrac12)+f(1)\right)$ עם $h=\frac12$.'
+        commonWrong:
+          - value: 1.0733401121
+            feedback: 'זה $h\left(f_0+f_1+f_2\right)$: בטרפז הקצוות במשקל חצי.'
+            misconception: MC-c8-trap-weights
+
+      - label: ג
+        points: 6
+        type: numeric
+        objectives: [OBJ-8.4-1, OBJ-8.4-2]
+        prompt: 'קרבו את $F(1)$ בכלל סימפסון עם $n=2$. (תשובה עשרונית, 4 ספרות אחרי הנקודה.)'
+        answer: 0.74718042890951
+        tolerance: 0.0002
+        correctFeedback: >-
+          נכון. $\tfrac16\left(1+4e^{-1/4}+e^{-1}\right)\approx0.7472$: טעות של כ-$4\cdot10^{-4}$ בלבד, לעומת כ-$0.015$
+          בטרפז עם אותן שלוש נקודות.
+        wrongFeedback: '$S_2=\frac h3\left(f_0+4f_1+f_2\right)$ עם $h=\frac12$.'
+        commonWrong:
+          - value: 0.48758016789
+            feedback: 'זה $\frac h3\left(f_0+2f_1+f_2\right)$: בסימפסון הנקודה האמצעית במשקל 4.'
+            misconception: MC-c8-simpson-weights
+
+      - label: ד
+        points: 10
+        type: open
+        objectives: [OBJ-8.4-3]
+        prompt: >-
+          בעזרת החסם $|E_T|\le\frac{(b-a)^3M_2}{12n^2}$, מצאו $n$ שמבטיח שכלל הטרפז יחשב את $F(1)$ בטעות של לכל
+          היותר $10^{-3}$. נמקו את הבחירה של $M_2$.
+        solution:
+          - kind: given
+            text: '$f(t)=e^{-t^2}$ על $[0,1]$; דרוש $|E_T|\le10^{-3}$.'
+          - kind: goal
+            text: 'חסם $M_2\ge|f''''|$ בקטע, ואז $n$ שעומד בחסם.'
+          - kind: idea
+            text: 'מחשבים את $f''''$ ומוצאים את המקסימום של $|f''''|$ ב-$[0,1]$: בקצוות ובנקודות שבהן $f''''''=0$.'
+          - kind: computation
+            text: >-
+              $f'=-2te^{-t^2}$, $f''=(4t^2-2)e^{-t^2}$, $f'''=(-8t^3+12t)e^{-t^2}$. $f'''=0$ ב-$t=0$ וב-$t=\pm\sqrt{3/2}$,
+              ו-$\sqrt{3/2}>1$: בתוך הקטע אין נקודה קריטית חדשה של $f''$.
+          - kind: step
+            text: >-
+              בקצוות: $|f''(0)|=2$ ו-$|f''(1)|=\frac2e\approx0.74$. לכן $M_2=2$.
+          - kind: computation
+            text: '$\frac{1\cdot2}{12n^2}\le10^{-3}\iff n^2\ge\frac{1000}{6}\approx166.7\iff n\ge12.91$.'
+          - kind: check
+            text: '$n=13$: $\frac{2}{12\cdot169}\approx9.86\cdot10^{-4}\le10^{-3}$; $n=12$: $\approx1.16\cdot10^{-3}$, לא מספיק.'
+          - kind: result
+            text: '$n=13$ קטעים מבטיחים טעות של לכל היותר $10^{-3}$ (כל $n\ge13$ מתאים).'
+        rubric:
+          - text: 'חישוב נכון של $f''''(t)=(4t^2-2)e^{-t^2}$'
+            weight: 3
+          - text: 'נימוק ש-$\max|f''''|=2$ (בדיקת הקצוות והנקודות הקריטיות של $f''''$), או חסם נכון אחר עם נימוק'
+            weight: 3
+          - text: 'פתרון אי-השוויון ועיגול למעלה ל-$n=13$ (או לערך שמתאים לחסם שנבחר)'
+            weight: 3
+          - text: 'בדיקה בהצבה'
+            weight: 1

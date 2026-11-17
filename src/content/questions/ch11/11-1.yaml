@@ -1,0 +1,300 @@
+# Lesson 11.1 — vector fields (notes p. 89).
+# Objectives (src/course.ts):
+#   OBJ-11.1-1  sketch a plane field and recognise the basic ones: constant, radial, rotational
+#   OBJ-11.1-2  compute the gradient field of a given function
+#   OBJ-11.1-3  describe the flow lines of a simple field
+# Keys recomputed in screens/tools/recompute-ch11.py.
+chapter: 11
+questions:
+  - id: Q-11.1-identify
+    type: mc
+    objectives: [OBJ-11.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      בשרטוט של שדה במישור כל החצים משיקים למעגלים סביב הראשית, מסתובבים נגד כיוון השעון, והאורך שלהם שווה למרחק
+      מהראשית. איזה שדה זה?
+    choices:
+      - text: '$\vec F(x,y)=(-y,x)$'
+        correct: true
+        feedback: >-
+          נכון. $(x,y)\cdot(-y,x)=0$, ולכן החץ מאונך לווקטור המקום ומשיק למעגל; $|(-y,x)|=\sqrt{x^2+y^2}$; וב-$(1,0)$ החץ
+          $(0,1)$ מצביע למעלה, כלומר נגד כיוון השעון.
+      - text: '$\vec F(x,y)=(y,-x)$'
+        feedback: >-
+          גם הוא משיק למעגלים ובאותו אורך, אבל הציבו $(1,0)$: מתקבל $(0,-1)$, חץ למטה. זה סיבוב **עם** כיוון השעון.
+        misconception: MC-c11-field-point-check
+      - text: '$\vec F(x,y)=(x,y)$'
+        feedback: >-
+          זה וקטור המקום עצמו: הוא מצביע החוצה מהראשית (שדה רדיאלי), לא לאורך המעגלים.
+        misconception: MC-c11-rotational-vs-radial
+      - text: '$\vec F(x,y)=(-1,1)$'
+        feedback: >-
+          זה שדה קבוע: אותו חץ בכל נקודה. הוא לא תלוי בנקודה, ולכן אינו יכול להסתובב סביב הראשית.
+        misconception: MC-c11-field-point-check
+
+  - id: Q-11.1-value
+    type: numeric
+    objectives: [OBJ-11.1-1]
+    level: basic
+    prompt: >-
+      $\vec F(x,y)=(y^2,\ x-y)$. מה האורך של החץ שמשרטטים בנקודה $(1,-2)$?
+    answer: 5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec F(1,-2)=\big((-2)^2,\ 1-(-2)\big)=(4,3)$, ו-$|(4,3)|=5$.
+    wrongFeedback: >-
+      הציבו $x=1$, $y=-2$ בכל רכיב (שימו לב לסימן של $y$), ואז חשבו אורך: שורש סכום הריבועים.
+
+  - id: Q-11.1-radial-unit
+    type: mc
+    objectives: [OBJ-11.1-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      איך נראה השדה $\vec F(x,y)=\dfrac{(x,y)}{\sqrt{x^2+y^2}}$ (מחוץ לראשית)?
+    choices:
+      - text: 'חצים באורך 1, כולם מצביעים החוצה מהראשית'
+        correct: true
+        feedback: >-
+          נכון. זה וקטור המקום מחולק באורך שלו: וקטור יחידה בכיוון רדיאלי. השדה רדיאלי, וכל החצים באותו אורך.
+      - text: 'חצים שמצביעים החוצה מהראשית ומתארכים ככל שמתרחקים ממנה'
+        feedback: >-
+          זה השדה $(x,y)$. החלוקה ב-$\sqrt{x^2+y^2}$ מנרמלת: $\left|\frac{(x,y)}{\sqrt{x^2+y^2}}\right|=1$ בכל נקודה.
+        misconception: MC-c11-field-length-ignored
+      - text: 'חצים באורך 1 שמשיקים למעגלים סביב הראשית'
+        feedback: >-
+          חצים משיקים למעגלים מאונכים לווקטור המקום, כמו $(-y,x)$. כאן החץ הוא כפולה חיובית של $(x,y)$, ולכן מקביל לו.
+        misconception: MC-c11-rotational-vs-radial
+      - text: 'חצים שמצביעים פנימה, אל הראשית'
+        feedback: >-
+          הציבו $(2,0)$: מתקבל $(1,0)$, חץ ימינה, הרחק מהראשית. השדה שמצביע פנימה הוא $-\frac{(x,y)}{\sqrt{x^2+y^2}}$.
+        misconception: MC-c11-field-point-check
+
+  - id: Q-11.1-grad-log
+    type: expr
+    objectives: [OBJ-11.1-2]
+    level: basic
+    prompt: >-
+      $f(x,y)=\ln(x^2+y^2)$. כתבו את הרכיב **הראשון** (רכיב ה-$x$) של שדה הגרדיאנט $\nabla f$, במשתנים $x,y$.
+    answer: '2*x/(x^2+y^2)'
+    answerTex: '$\nabla f=\left(\dfrac{2x}{x^2+y^2},\ \dfrac{2y}{x^2+y^2}\right)$'
+    variables: [x, y]
+    domain: [0.3, 2]
+    correctFeedback: >-
+      נכון. לפי כלל השרשרת $\frac{\partial}{\partial x}\ln(x^2+y^2)=\frac{2x}{x^2+y^2}$. השדה כולו הוא
+      $\frac{2}{x^2+y^2}(x,y)$: רדיאלי, באורך $\frac{2}{\sqrt{x^2+y^2}}$.
+    wrongFeedback: >-
+      הרכיב הראשון הוא $\frac{\partial f}{\partial x}$, כש-$y$ קבוע. אל תשכחו את הנגזרת הפנימית של $x^2+y^2$.
+    commonWrong:
+      - expr: '2*y/(x^2+y^2)'
+        feedback: 'זו $\frac{\partial f}{\partial y}$, הרכיב השני. הרכיב ה-$x$ של הגרדיאנט הוא הנגזרת לפי $x$.'
+        misconception: MC-c11-gradient-order
+
+  - id: Q-11.1-grad-direction
+    type: mc
+    objectives: [OBJ-11.1-2, OBJ-11.1-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      משרטטים את שדה הגרדיאנט $\nabla f$ על גבי קווי הגובה של $f$. איזה תיאור נכון בכל נקודה שבה $\nabla f\ne\vec0$?
+    choices:
+      - text: 'החץ מאונך לקו הגובה ומצביע לכיוון שבו $f$ גדלה'
+        correct: true
+        feedback: >-
+          נכון. לאורך קו גובה $f$ לא משתנה, ולכן הנגזרת הכיוונית שם 0 והגרדיאנט מאונך לקו; והוא מצביע לכיוון העלייה המהירה
+          ביותר. לכן גם קווי הזרימה של $\nabla f$ חוצים את קווי הגובה בזווית ישרה.
+      - text: 'החץ משיק לקו הגובה'
+        feedback: >-
+          לאורך קו הגובה $f$ קבועה, כך שהקצב בכיוון הזה הוא 0, והגרדיאנט אינו מצביע לשם. הגרדיאנט **מאונך** לקו הגובה.
+        misconception: MC-c11-flowline-is-level
+      - text: 'החץ מאונך לקו הגובה ומצביע לכיוון שבו $f$ קטנה'
+        feedback: >-
+          $D_{\hat u}f=\nabla f\cdot\hat u$ גדולה ביותר כש-$\hat u$ בכיוון $\nabla f$, ושם היא $|\nabla f|>0$: הגרדיאנט
+          מצביע לכיוון העלייה. הכיוון שבו $f$ קטנה הוא $-\nabla f$.
+        misconception: MC-c11-field-point-check
+
+  - id: Q-11.1-flow-def
+    type: mc
+    objectives: [OBJ-11.1-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      מתי העקום $\vec r(t)$ הוא קו זרימה של השדה $\vec F$?
+    choices:
+      - text: 'כש-$\vec r\,''(t)=\vec F(\vec r(t))$ לכל $t$'
+        correct: true
+        feedback: >-
+          נכון. וקטור המהירות של העקום שווה לשדה בנקודה שבה העקום נמצא: זה המסלול של חלקיק שנסחף בזרם שמהירותו $\vec F$.
+      - text: 'כש-$\vec r\,''(t)\cdot\vec F(\vec r(t))=0$ לכל $t$'
+        feedback: >-
+          זה עקום שהולך **ניצב** לשדה. בשדה גרדיאנט אלה קווי הגובה, לא קווי הזרימה.
+        misconception: MC-c11-flowline-is-level
+      - text: 'כש-$\vec F$ קבוע לאורך העקום'
+        feedback: >-
+          ב-$(-y,x)$ קווי הזרימה הם מעגלים, והשדה משנה כיוון לאורכם. הדרישה היא על **המהירות** של העקום, לא שהשדה לא ישתנה.
+        misconception: MC-c11-flowline-speed
+
+  - id: Q-11.1-flow-rotational
+    type: mc
+    objectives: [OBJ-11.1-3]
+    level: basic
+    prompt: >-
+      מה קווי הזרימה של $\vec F(x,y)=(-y,x)$?
+    choices:
+      - text: 'מעגלים סביב הראשית, שעוברים עליהם נגד כיוון השעון'
+        correct: true
+        feedback: >-
+          נכון. $\vec r(t)=(R\cos t,R\sin t)$ מקיים $\vec r\,'=(-R\sin t,R\cos t)=\vec F(\vec r(t))$.
+      - text: 'מעגלים סביב הראשית, שעוברים עליהם עם כיוון השעון'
+        feedback: >-
+          ב-$(1,0)$ השדה הוא $(0,1)$, כלפי מעלה: חלקיק שם נע נגד כיוון השעון.
+        misconception: MC-c11-field-point-check
+      - text: 'קרניים שיוצאות מהראשית'
+        feedback: >-
+          קרניים הן קווי הזרימה של שדה רדיאלי כמו $(x,y)$. השדה $(-y,x)$ מאונך לווקטור המקום.
+        misconception: MC-c11-rotational-vs-radial
+
+  - id: Q-11.1-rotational-multi
+    type: multi
+    objectives: [OBJ-11.1-1]
+    level: mid
+    prompt: >-
+      $\vec F(x,y)=(-y,x)$. סמנו את כל הטענות הנכונות.
+    choices:
+      - text: 'בכל נקודה $\vec F$ מאונך לווקטור המקום $(x,y)$'
+        correct: true
+        feedback: 'נכון: $(x,y)\cdot(-y,x)=-xy+xy=0$.'
+      - text: 'האורך של $\vec F$ בנקודה שווה למרחק שלה מהראשית'
+        correct: true
+        feedback: 'נכון: $|(-y,x)|=\sqrt{y^2+x^2}$.'
+      - text: 'בנקודה $(0,2)$ החץ מצביע בכיוון השלילי של ציר $x$'
+        correct: true
+        feedback: 'נכון: $\vec F(0,2)=(-2,0)$. בראש המעגל, תנועה נגד כיוון השעון היא שמאלה.'
+      - text: 'בנקודה $(1,0)$ החץ מצביע למטה'
+        feedback: >-
+          $\vec F(1,0)=(0,1)$: למעלה. "למטה" הוא השדה $(y,-x)$, שמסתובב עם כיוון השעון.
+        misconception: MC-c11-field-point-check
+      - text: 'השדה מצביע החוצה מהראשית'
+        feedback: >-
+          מכפלה סקלרית 0 עם וקטור המקום פירושה שאין לשדה רכיב רדיאלי בכלל: הוא כולו משיק למעגלים.
+        misconception: MC-c11-rotational-vs-radial
+
+  - id: Q-11.1-grad-length
+    type: numeric
+    objectives: [OBJ-11.1-2]
+    level: mid
+    prompt: >-
+      $f(x,y)=\sqrt{x^2+y^2}$ (המרחק מהראשית). מה האורך של $\nabla f$ בנקודה $(3,4)$?
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\nabla f=\left(\frac{x}{\sqrt{x^2+y^2}},\frac{y}{\sqrt{x^2+y^2}}\right)$, וקטור היחידה הרדיאלי. המרחק מהראשית
+      גדל בקצב 1 כשמתרחקים ממנה ישר החוצה, בכל נקודה.
+    wrongFeedback: >-
+      גזרו את $\sqrt{x^2+y^2}$ לפי $x$ ולפי $y$ (כלל השרשרת), הציבו $(3,4)$, וחשבו את אורך הווקטור.
+    commonWrong:
+      - value: 5
+        feedback: >-
+          5 הוא $f(3,4)$, ערך הפונקציה. הגרדיאנט הוא $\left(\frac35,\frac45\right)$, וקטור באורך 1.
+        misconception: MC-c11-gradient-vs-value
+
+  - id: Q-11.1-grad-gravity
+    type: mc
+    objectives: [OBJ-11.1-2, OBJ-11.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f(x,y,z)=\dfrac{1}{\sqrt{x^2+y^2+z^2}}$ מחוץ לראשית. איך נראה שדה הגרדיאנט $\nabla f$?
+    choices:
+      - text: 'רדיאלי, מצביע אל הראשית, ואורכו $\frac{1}{x^2+y^2+z^2}$'
+        correct: true
+        feedback: >-
+          נכון. $\nabla f=-\frac{(x,y,z)}{(x^2+y^2+z^2)^{3/2}}$: כפולה **שלילית** של וקטור המקום, באורך $\frac{1}{r^2}$. $f$
+          גדלה כשמתקרבים לראשית, ולכן הגרדיאנט מצביע לשם. זו הצורה של שדה הכבידה של מסה נקודתית.
+      - text: 'רדיאלי, מצביע החוצה מהראשית, ואורכו $\frac{1}{x^2+y^2+z^2}$'
+        feedback: >-
+          $f$ **קטנה** כשמתרחקים מהראשית, והגרדיאנט מצביע לכיוון העלייה. לדוגמה, ב-$(1,2,2)$ הרכיב ה-$z$ הוא
+          $-\frac{2}{27}<0$.
+        misconception: MC-c11-field-point-check
+      - text: 'רדיאלי, מצביע אל הראשית, ואורכו $\frac{1}{\sqrt{x^2+y^2+z^2}}$'
+        feedback: >-
+          $\frac{1}{r}$ הוא ערך הפונקציה, לא קצב השינוי שלה. הנגזרת של $\frac1r$ לפי $r$ היא $-\frac{1}{r^2}$, ולכן אורך
+          הגרדיאנט $\frac{1}{r^2}$.
+        misconception: MC-c11-gradient-vs-value
+
+  - id: Q-11.1-flow-check
+    type: twotier
+    objectives: [OBJ-11.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec F(x,y)=(-y,x)$. האם $\vec r(t)=(\cos2t,\ \sin2t)$ הוא קו זרימה של $\vec F$?
+    choices:
+      - text: 'לא'
+        correct: true
+        feedback: >-
+          נכון. $\vec r\,'(t)=(-2\sin2t,\ 2\cos2t)=2\vec F(\vec r(t))$. המעגל הוא המסלול הנכון, אבל העקום עובר עליו פי 2 מהר
+          מדי. $(\cos t,\sin t)$ הוא קו זרימה.
+      - text: 'כן'
+        feedback: >-
+          העקום משיק לשדה בכל נקודה, אבל המהירות שלו היא $2\vec F$ ולא $\vec F$. בקו זרימה המהירות **שווה** לשדה.
+        misconception: MC-c11-flowline-speed
+    reasons:
+      - text: 'וקטור המהירות שלו הוא $2\vec F(\vec r(t))$ ולא $\vec F(\vec r(t))$'
+        correct: true
+        feedback: 'בדיוק. הגדרת קו זרימה דורשת שוויון: חלקיק בזרם נע במהירות שהשדה קובע.'
+      - text: 'הוא עובר על מעגל, וקווי הזרימה של $\vec F$ הם מעגלים'
+        feedback: >-
+          הצורה נכונה, אבל זה לא מספיק: צריך גם את הקצב. $(\cos2t,\sin2t)$ מסיים סיבוב בזמן $\pi$, וחלקיק בזרם צריך זמן
+          $2\pi$.
+        misconception: MC-c11-flowline-speed
+      - text: 'וקטור המהירות שלו מאונך ל-$\vec F$'
+        feedback: >-
+          $\vec r\,'(t)=2(-\sin2t,\cos2t)$ ו-$\vec F(\vec r(t))=(-\sin2t,\cos2t)$: הם מקבילים, לא מאונכים.
+        misconception: MC-c11-flowline-is-level
+
+  - id: Q-11.1-flow-curve
+    type: expr
+    objectives: [OBJ-11.1-3]
+    level: mid
+    prompt: >-
+      $\vec F(x,y)=(x,\ 2y)$. קו הזרימה שעובר ב-$(1,1)$ ב-$t=0$ הוא $x(t)=e^t$, $y(t)=e^{2t}$ (בדקו). על איזה עקום
+      הוא נמצא? כתבו את $y$ כפונקציה של $x$.
+    answer: 'x^2'
+    answerTex: '$y=x^2$'
+    variables: [x]
+    domain: [0.3, 1.5]
+    correctFeedback: >-
+      נכון. $x'=e^t=x$ ו-$y'=2e^{2t}=2y$, כך שזה באמת קו זרימה; ו-$y=e^{2t}=(e^t)^2=x^2$. קווי הזרימה של השדה הזה הם
+      הפרבולות $y=cx^2$.
+    wrongFeedback: >-
+      בטאו את $t$ בעזרת $x$ ($t=\ln x$) והציבו ב-$y(t)$.
+    commonWrong:
+      - expr: 'sqrt((3-x^2)/2)'
+        feedback: >-
+          זה העקום $x^2+2y^2=3$ דרך $(1,1)$, שהולך **ניצב** לשדה ($\frac{dy}{dx}=-\frac{x}{2y}$): קו הגובה של
+          $\frac{x^2}{2}+y^2$, שהשדה הוא הגרדיאנט שלה. קו זרימה הולך בכיוון השדה: $\frac{dy}{dx}=\frac{2y}{x}$.
+        misconception: MC-c11-flowline-is-level
+
+  - id: Q-11.1-spiral-angle
+    type: numeric
+    objectives: [OBJ-11.1-1]
+    level: exam
+    prompt: >-
+      $\vec F(x,y)=(x-y,\ x+y)$. מהי הזווית (ברדיאנים) בין $\vec F(x,y)$ לבין וקטור המקום $(x,y)$, בנקודה כלשהי
+      $(x,y)\ne(0,0)$?
+    answer: 0.785398163397448
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{\pi}{4}$ בכל נקודה. $\vec F\cdot(x,y)=x^2+y^2$ ו-$|\vec F|=\sqrt2\sqrt{x^2+y^2}$, ולכן
+      $\cos\alpha=\frac{1}{\sqrt2}$. השדה הוא סכום של הרדיאלי $(x,y)$ והסיבובי $(-y,x)$, וקווי הזרימה שלו ספירלות שיוצאות
+      מהראשית נגד כיוון השעון.
+    wrongFeedback: >-
+      חשבו $\cos\alpha=\frac{\vec F\cdot(x,y)}{|\vec F|\,|(x,y)|}$ באופן כללי; $x$ ו-$y$ יתבטלו.
+    commonWrong:
+      - value: 1.5707963267949
+        feedback: >-
+          $\frac{\pi}{2}$ הייתה נכונה לשדה הסיבובי $(-y,x)$ לבדו. כאן יש גם חלק רדיאלי $(x,y)$, והמכפלה הסקלרית
+          $x^2+y^2$ אינה אפס.
+        misconception: MC-c11-rotational-vs-radial

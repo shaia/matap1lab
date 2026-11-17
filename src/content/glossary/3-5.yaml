@@ -1,0 +1,23 @@
+# Terms first defined in lesson 3.5 (n-th roots).
+- id: nth-root-complex
+  term: שורש מסדר n
+  en: n-th root
+  definition: >-
+    פתרון של $z^n=w$. לכל $w=R\operatorname{cis}\alpha\ne0$ יש בדיוק $n$ שורשים:
+    $R^{1/n}\operatorname{cis}\frac{\alpha+2\pi k}{n}$, $k=0,1,\dots,n-1$, קודקודי מצולע משוכלל סביב הראשית.
+  lesson: '3.5'
+- id: roots-of-unity
+  term: שורשי היחידה
+  en: roots of unity
+  symbol: '\omega_k=\operatorname{cis}\frac{2\pi k}{n}'
+  definition: >-
+    $n$ הפתרונות של $z^n=1$: $\operatorname{cis}\frac{2\pi k}{n}$, $k=0,\dots,n-1$. הם קודקודי מצולע משוכלל על מעגל היחידה
+    עם קודקוד ב-1, וסכומם 0 כש-$n\ge2$.
+  lesson: '3.5'
+- id: fundamental-theorem-of-algebra
+  term: המשפט היסודי של האלגברה
+  en: fundamental theorem of algebra
+  definition: >-
+    לכל פולינום ממעלה $n\ge1$ עם מקדמים מרוכבים יש בדיוק $n$ שורשים מרוכבים (עם ריבוי), והוא מתפרק לגורמים לינאריים.
+    פולינום עם מקדמים ממשיים מתפרק לגורמים ממשיים ממעלה 1 ו-2. הקורס משתמש בו בלי הוכחה.
+  lesson: '3.5'

@@ -1,0 +1,253 @@
+# Chapter 3 review — complex numbers (lessons 3.1–3.5), easy to hard.
+# Every lesson is touched; several questions combine lessons, one reaches back to chapter 2 and one to chapter 0.
+# Each hint names the lesson to go back to. Every number recomputed in screens/tools/recompute-ch3.py.
+chapter: 3
+questions:
+  - id: Q-3-review-01
+    type: numeric
+    objectives: [OBJ-3.2-2, OBJ-3.3-2]
+    level: basic
+    prompt: 'חשבו את $|(3+4i)(1-i)|$.'
+    answer: 7.0710678118654755
+    tolerance: 0.001
+    correctFeedback: 'נכון, $5\sqrt2$. הערך המוחלט של מכפלה הוא מכפלת הערכים המוחלטים: $5\cdot\sqrt2$. (ובדיקה: $(3+4i)(1-i)=7+i$, ו-$\sqrt{50}=5\sqrt2$.)'
+    wrongFeedback: '$|zw|=|z||w|$.'
+    commonWrong:
+      - value: 10
+        feedback: '$|1-i|=\sqrt2$, לא 2.'
+        misconception: MC-c3-modulus-no-root
+    hints: ['חזרו לשיעור 3.2 (ערך מוחלט) ולשיעור 3.3 (כפל בצורה קוטבית).']
+
+  - id: Q-3-review-02
+    type: mc
+    objectives: [OBJ-3.1-2]
+    level: basic
+    prompt: 'מהו $\frac1i$?'
+    choices:
+      - text: '$-i$'
+        correct: true
+        feedback: 'נכון. $\frac1i=\frac{\bar i}{|i|^2}=\frac{-i}{1}$. בדיקה: $i\cdot(-i)=-i^2=1$.'
+      - text: '$i$'
+        feedback: '$i\cdot i=-1$, לא 1.'
+        misconception: MC-c3-i-squared
+      - text: '$1$'
+        feedback: 'חילוק רכיב ברכיב אינו מוגדר כאן. כופלים בצמוד: $\frac{1\cdot(-i)}{i\cdot(-i)}=-i$.'
+        misconception: MC-c3-divide-componentwise
+    hints: ['חזרו לשיעור 3.1: חילוק בעזרת הצמוד.']
+
+  - id: Q-3-review-03
+    type: numeric
+    objectives: [OBJ-3.2-2]
+    level: basic
+    prompt: 'מהו $\operatorname{Arg}(-\sqrt3+i)$?'
+    answer: 2.6179938779914944
+    tolerance: 0.001
+    correctFeedback: 'נכון, $\frac{5\pi}{6}$: הרביע השני, $\cos\theta=-\frac{\sqrt3}{2}$, $\sin\theta=\frac12$.'
+    wrongFeedback: 'שרטטו את הנקודה, קבעו רביע, ואז זווית.'
+    commonWrong:
+      - value: -0.5235987755982988
+        feedback: '$\arctan\frac{1}{-\sqrt3}=-\frac{\pi}{6}$ מצביע לרביע הרביעי. הנקודה ברביע השני: מוסיפים $\pi$.'
+        misconception: MC-c3-arg-arctan
+    hints: ['חזרו לשיעור 3.2: הארגומנט ברביע הנכון.']
+
+  - id: Q-3-review-04
+    type: mc
+    objectives: [OBJ-3.3-1, OBJ-3.4-1]
+    level: basic
+    prompt: 'מהו $e^{i\pi/2}$?'
+    choices:
+      - text: '$i$'
+        correct: true
+        feedback: 'נכון. $\cos\frac{\pi}{2}+i\sin\frac{\pi}{2}=i$: סיבוב של 1 ברבע סיבוב.'
+      - text: '$1$'
+        feedback: 'זה $e^{0}$. $e^{i\theta}$ הוא הנקודה בזווית $\theta$ על מעגל היחידה.'
+        misconception: MC-c3-exp-injective
+      - text: '$e^{\pi/2}$'
+        feedback: '$|e^{i\pi/2}|=1$: מעריך מדומה טהור רק מסובב, בלי לשנות גודל.'
+        misconception: MC-c3-exp-modulus-of-exponent
+    hints: ['חזרו לשיעור 3.3 (נוסחת אוילר) ולשיעור 3.4 (האקספוננט המרוכב).']
+
+  - id: Q-3-review-05
+    type: numeric
+    objectives: [OBJ-3.3-3, OBJ-3.2-2]
+    level: mid
+    prompt: 'חשבו את $\operatorname{Im}\left((1-i)^{10}\right)$.'
+    answer: -32
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $1-i=\sqrt2\operatorname{cis}\left(-\frac{\pi}{4}\right)$, ולכן $(1-i)^{10}=32\operatorname{cis}\left(-\frac{5\pi}{2}\right)=32\operatorname{cis}\left(-\frac{\pi}{2}\right)=-32i$.
+    wrongFeedback: 'צורה קוטבית, ואז דה-מואבר.'
+    commonWrong:
+      - value: 32
+        feedback: 'הארגומנט של $1-i$ הוא $-\frac{\pi}{4}$, לא $\frac{\pi}{4}$: $(1+i)^{10}=32i$, אבל כאן הסימן הפוך.'
+        misconception: MC-c3-conj-reflect-wrong-axis
+      - value: -1024
+        feedback: '$2^{10}$ מתקבל מ-$|1-i|=2$; הנכון $(\sqrt2)^{10}=32$.'
+        misconception: MC-c3-modulus-no-root
+    hints: ['חזרו לשיעור 3.3: נוסחת דה-מואבר.']
+
+  - id: Q-3-review-06
+    type: mc
+    objectives: [OBJ-3.2-3, OBJ-0.4-1]
+    qualitative: true
+    level: mid
+    prompt: 'מה הקבוצה $\{z:|z|=|z-2|\}$ במישור גאוס?'
+    choices:
+      - text: 'הישר $\operatorname{Re}z=1$'
+        correct: true
+        feedback: 'נכון. הנקודות שמרחקן מ-0 שווה למרחקן מ-2: האנך האמצעי לקטע $[0,2]$. בחישוב: $x^2+y^2=(x-2)^2+y^2$, כלומר $x=1$.'
+      - text: 'המעגל ברדיוס 1 סביב 1'
+        feedback: 'שוויון של שני מרחקים הוא ישר (האנך האמצעי), לא מעגל.'
+        misconception: MC-c3-set-center-sign
+      - text: 'הישר $\operatorname{Re}z=-1$'
+        feedback: '$|z-2|$ הוא המרחק מ-$2$, לא מ-$-2$: הישר באמצע בין 0 ל-2.'
+        misconception: MC-c3-set-center-sign
+    hints: ['חזרו לשיעור 3.2 (קבוצות במישור גאוס) ולשיעור 0.4 (ישרים במישור).']
+
+  - id: Q-3-review-07
+    type: mc
+    objectives: [OBJ-3.1-1, OBJ-3.2-3, OBJ-2.2-1]
+    level: mid
+    prompt: 'מה הקבוצה $\{z:\operatorname{Re}(z^2)=1\}$ במישור גאוס?'
+    choices:
+      - text: 'ההיפרבולה $x^2-y^2=1$'
+        correct: true
+        feedback: 'נכון. $(x+iy)^2=x^2-y^2+2xyi$, ולכן $\operatorname{Re}(z^2)=x^2-y^2$. (ו-$\operatorname{Im}(z^2)=1$ היא ההיפרבולה $xy=\frac12$.)'
+      - text: 'מעגל היחידה'
+        feedback: '$\operatorname{Re}(z^2)=x^2-y^2$, עם מינוס בגלל $i^2=-1$. מעגל היחידה הוא $|z|^2=x^2+y^2=1$.'
+        misconception: MC-c3-i-squared
+      - text: 'הישרים $x=\pm1$'
+        feedback: 'זה $(\operatorname{Re}z)^2=1$. בריבוע של $z$ גם $y$ משתתף.'
+        misconception: MC-c3-square-termwise
+    hints: ['חזרו לשיעור 3.1 (ריבוע של מרוכב), לשיעור 3.2 (קבוצות) ולשיעור 2.2 (ההיפרבולות הבסיסיות).']
+
+  - id: Q-3-review-08
+    type: numeric
+    objectives: [OBJ-3.5-1]
+    level: mid
+    prompt: 'לשלושת השורשים של $z^3=-27$, מהו החלק הממשי של השורש שברביע הראשון?'
+    answer: 1.5
+    tolerance: 0.001
+    correctFeedback: 'נכון. $-27=27\operatorname{cis}\pi$, והשורשים $3\operatorname{cis}\frac{\pi}{3}$, $3\operatorname{cis}\pi=-3$, $3\operatorname{cis}\frac{5\pi}{3}$. הראשון: $3\cdot\frac12$.'
+    wrongFeedback: 'ערך מוחלט $\sqrt[3]{27}=3$, זוויות $\frac{\pi+2\pi k}{3}$.'
+    commonWrong:
+      - value: -3
+        feedback: '$-3$ הוא השורש הממשי. יש עוד שניים, צמודים, מחוץ לציר.'
+        misconception: MC-c3-roots-plus-minus
+      - value: 13.5
+        feedback: '$27\cos\frac{\pi}{3}$: הערך המוחלט של השורש הוא $\sqrt[3]{27}=3$.'
+        misconception: MC-c3-root-modulus
+    hints: ['חזרו לשיעור 3.5: שורשים מסדר n.']
+
+  - id: Q-3-review-09
+    type: numeric
+    objectives: [OBJ-3.4-2, OBJ-3.2-2]
+    level: mid
+    prompt: 'מהו $\operatorname{Im}\operatorname{Log}(-1-i)$?'
+    answer: -2.356194490192345
+    tolerance: 0.001
+    correctFeedback: 'נכון, $-\frac{3\pi}{4}$. $\operatorname{Log}(-1-i)=\ln\sqrt2-\frac{3\pi}{4}i$: הרביע השלישי, בקטע $(-\pi,\pi]$.'
+    wrongFeedback: '$\operatorname{Im}\operatorname{Log}w=\operatorname{Arg}w$.'
+    commonWrong:
+      - value: 3.9269908169872414
+        feedback: '$\frac{5\pi}{4}$ מחוץ ל-$(-\pi,\pi]$: מחסירים $2\pi$.'
+        misconception: MC-c3-principal-arg-range
+      - value: 0.7853981633974483
+        feedback: '$\arctan\frac{-1}{-1}=\frac{\pi}{4}$ הוא הכיוון של $1+i$. כאן הרביע השלישי.'
+        misconception: MC-c3-arg-arctan
+    hints: ['חזרו לשיעור 3.4 (הערך הראשי של הלוגריתם) ולשיעור 3.2 (הארגומנט הראשי).']
+
+  - id: Q-3-review-10
+    type: multi
+    objectives: [OBJ-3.1-2, OBJ-3.2-2]
+    qualitative: true
+    level: mid
+    prompt: 'אילו מהטענות נכונות לכל $z,w\ne0$? סמנו את כולן.'
+    choices:
+      - text: '$|\bar z|=|z|$'
+        correct: true
+        feedback: 'נכון. שיקוף דרך הציר הממשי שומר מרחק מהראשית.'
+      - text: '$\overline{zw}=\bar z\,\bar w$'
+        correct: true
+        feedback: 'נכון. בצורה קוטבית: הצמדה הופכת את הזוויות, וסכום זוויות הפוכות הוא הזווית ההפוכה.'
+      - text: '$z\bar z=|z|^2$'
+        correct: true
+        feedback: 'נכון. $(a+bi)(a-bi)=a^2+b^2$.'
+      - text: '$\bar z=\frac1z$'
+        feedback: '$\frac1z=\frac{\bar z}{|z|^2}$; השוויון רק כש-$|z|=1$. ל-$z=2$: $\bar z=2\ne\frac12$.'
+        misconception: MC-c3-conjugate-is-inverse
+      - text: '$\operatorname{Arg}\bar z=-\operatorname{Arg}z$'
+        feedback: 'נכשל במספרים ממשיים שליליים: $\operatorname{Arg}(-1)=\pi$ ו-$-\pi$ אינו ארגומנט ראשי.'
+        misconception: MC-c3-principal-arg-range
+    hints: ['חזרו לשיעור 3.1 (הצמוד) ולשיעור 3.2 (הצמוד במישור גאוס).']
+
+  - id: Q-3-review-11
+    type: numeric
+    objectives: [OBJ-3.1-3, OBJ-3.5-3]
+    level: exam
+    prompt: 'פתרו את $z^2+2iz-5=0$. מהו החלק הממשי של השורש שחלקו הממשי חיובי?'
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\Delta=(2i)^2+20=16$, ולכן $z=\frac{-2i\pm4}{2}=\pm2-i$. בדיקה: $(2-i)^2+2i(2-i)-5=3-4i+4i+2-5=0$.
+    wrongFeedback: 'נוסחת השורשים עם $a=1$, $b=2i$, $c=-5$; שימו לב ש-$b^2=(2i)^2$.'
+    commonWrong:
+      - value: 2.449489742783178
+        feedback: '$\sqrt6=\frac{\sqrt{24}}{2}$ מתקבל מ-$(2i)^2=+4$. אבל $(2i)^2=-4$, ו-$\Delta=-4+20=16$.'
+        misconception: MC-c3-i-squared
+    hints: ['חזרו לשיעור 3.1 (נוסחת השורשים) ולשיעור 3.5 (משוואות עם מקדמים מרוכבים).']
+
+  - id: Q-3-review-12
+    type: numeric
+    objectives: [OBJ-3.3-2, OBJ-3.2-2]
+    level: exam
+    prompt: 'מהו $\operatorname{Arg}\dfrac{1+i}{1-\sqrt3i}$?'
+    answer: 1.8325957145940461
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{7\pi}{12}$. $\operatorname{Arg}(1+i)=\frac{\pi}{4}$, $\operatorname{Arg}(1-\sqrt3i)=-\frac{\pi}{3}$, ובחילוק
+      מחסירים: $\frac{\pi}{4}+\frac{\pi}{3}$. התוצאה בקטע $(-\pi,\pi]$.
+    wrongFeedback: 'מצאו את הארגומנט של המונה ושל המכנה, וחסרו.'
+    commonWrong:
+      - value: -0.2617993877991494
+        feedback: '$-\frac{\pi}{12}=\frac{\pi}{4}+\left(-\frac{\pi}{3}\right)$: חיברתם את הארגומנטים במקום לחסר. בחילוק מחסירים.'
+        misconception: MC-c3-multiply-args
+    hints: ['חזרו לשיעור 3.3: חילוק בצורה קוטבית.']
+
+  - id: Q-3-review-13
+    type: numeric
+    objectives: [OBJ-3.3-1, OBJ-3.2-2]
+    level: exam
+    prompt: >-
+      במעגל חשמלי בזרם חילופין העכבה היא המספר המרוכב $Z=R+i\omega L$. כש-$R=3$ ו-$\omega L=4$, מהי זווית הפאזה
+      $\operatorname{Arg}Z$ (ברדיאנים)?
+    answer: 0.9272952180016122
+    tolerance: 0.001
+    correctFeedback: 'נכון, $\arctan\frac43\approx0.927$. $Z=3+4i=5\operatorname{cis}\varphi$ עם $\cos\varphi=\frac35$, $\sin\varphi=\frac45$; הנקודה ברביע הראשון.'
+    wrongFeedback: '$\tan\operatorname{Arg}Z=\frac{\operatorname{Im}Z}{\operatorname{Re}Z}$ ברביע הראשון.'
+    commonWrong:
+      - value: 0.6435011087932844
+        feedback: '$\arctan\frac34$: החלפתם בין החלק הממשי למדומה. הזווית נמדדת מהציר הממשי, $\tan\varphi=\frac{\operatorname{Im}}{\operatorname{Re}}$.'
+        misconception: MC-c3-cis-swap
+    hints: ['חזרו לשיעור 3.3: הצורה הקוטבית.']
+
+  - id: Q-3-review-14
+    type: mc
+    objectives: [OBJ-3.4-3, OBJ-3.5-2]
+    level: exam
+    prompt: >-
+      ברשת חשמל תלת-פאזית שלושת המתחים הם $\cos t$, $\cos\left(t+\frac{2\pi}{3}\right)$ ו-$\cos\left(t+\frac{4\pi}{3}\right)$.
+      מה סכומם?
+    choices:
+      - text: '0 לכל $t$'
+        correct: true
+        feedback: >-
+          נכון. הסכום הוא $\operatorname{Re}\left(e^{it}\left(1+e^{2\pi i/3}+e^{4\pi i/3}\right)\right)$, והסוגריים הם סכום
+          שורשי היחידה מסדר 3, שהוא 0.
+      - text: '$3\cos t$'
+        feedback: 'ב-$t=0$: $1-\frac12-\frac12=0$, לא 3. שלושת "השורשים" אינם כולם 1.'
+        misconception: MC-c3-roots-sum-n
+      - text: 'תלוי ב-$t$, ומקסימלי ב-$t=0$'
+        feedback: 'ב-$t=0$ הסכום כבר 0. הסכום הוא $\operatorname{Re}(e^{it}\cdot0)$ לכל $t$.'
+        misconception: MC-c3-roots-sum-n
+    hints: ['חזרו לשיעור 3.4 (קוסינוס כחלק ממשי) ולשיעור 3.5 (סכום שורשי היחידה).']

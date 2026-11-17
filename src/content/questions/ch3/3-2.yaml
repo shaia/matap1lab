@@ -1,0 +1,233 @@
+# Lesson 3.2 — the Gauss plane: modulus, argument and conjugate.
+# Objectives (src/course.ts):
+#   OBJ-3.2-1  a complex number as a point and a vector in the Gauss plane; addition as vector addition
+#   OBJ-3.2-2  modulus and argument, the principal argument in the right quadrant
+#   OBJ-3.2-3  sets in the Gauss plane given by a condition on the modulus or the argument
+# Convention: the principal argument Arg z lies in (-π, π].
+# Every number recomputed in screens/tools/recompute-ch3.py.
+chapter: 3
+questions:
+  - id: Q-3.2-reflect
+    type: mc
+    objectives: [OBJ-3.2-1]
+    qualitative: true
+    level: basic
+    prompt: 'יהי $z=2+i$. איפה נמצא $-\bar z$ במישור גאוס?'
+    choices:
+      - text: 'בנקודה $(-2,1)$: השיקוף של $z$ דרך הציר המדומה'
+        correct: true
+        feedback: 'נכון. $\bar z=2-i$ (שיקוף דרך הציר הממשי), ו-$-\bar z=-2+i$: שני השיקופים יחד הם שיקוף דרך הציר המדומה.'
+      - text: 'בנקודה $(2,-1)$'
+        feedback: 'זה $\bar z$ עצמו. המינוס מסובב אותו עוד ב-$\pi$ סביב הראשית.'
+        misconception: MC-c3-conj-reflect-wrong-axis
+      - text: 'בנקודה $(-2,-1)$'
+        feedback: 'זה $-z$, הסיבוב של $z$ ב-$\pi$. ב-$-\bar z$ החלק המדומה נשאר 1.'
+        misconception: MC-c3-conj-reflect-wrong-axis
+
+  - id: Q-3.2-parallelogram
+    type: numeric
+    objectives: [OBJ-3.2-1]
+    level: basic
+    prompt: >-
+      שלושה קודקודים של מקבילית הם $0$, $z_1=1+2i$ ו-$z_2=3-i$, והקודקוד הרביעי מול $0$. מהו החלק המדומה של הקודקוד
+      הרביעי?
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: 'נכון. הקודקוד הרביעי הוא $z_1+z_2=4+i$: חיבור מרוכבים הוא חיבור וקטורים, בכלל המקבילית.'
+    wrongFeedback: 'בכלל המקבילית, האלכסון מ-$0$ הוא הסכום $z_1+z_2$.'
+    commonWrong:
+      - value: 3
+        feedback: '3 הוא החלק המדומה של $z_1-z_2=-2+3i$, האלכסון השני. הקודקוד מול $0$ הוא הסכום.'
+
+  - id: Q-3.2-modulus
+    type: numeric
+    objectives: [OBJ-3.2-2]
+    level: basic
+    prompt: 'חשבו את $|-5+12i|$.'
+    answer: 13
+    tolerance: 0.001
+    correctFeedback: 'נכון. $\sqrt{25+144}=\sqrt{169}=13$.'
+    wrongFeedback: '$|a+bi|=\sqrt{a^2+b^2}$.'
+    commonWrong:
+      - value: 17
+        feedback: '$17=5+12$ הוא $|a|+|b|$. הערך המוחלט הוא אורך: $\sqrt{a^2+b^2}$.'
+        misconception: MC-c3-modulus-components-sum
+      - value: 169
+        feedback: '169 הוא $|z|^2$. צריך שורש.'
+        misconception: MC-c3-modulus-no-root
+
+  - id: Q-3.2-arg-q3
+    type: numeric
+    objectives: [OBJ-3.2-2]
+    level: basic
+    prompt: 'מצאו את $\operatorname{Arg}(-1-\sqrt3i)$ (בקטע $(-\pi,\pi]$).'
+    answer: -2.0943951023931957
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $-\frac{2\pi}{3}$. הנקודה ברביע השלישי, $|z|=2$, $\cos\theta=-\frac12$ ו-$\sin\theta=-\frac{\sqrt3}{2}$.
+    wrongFeedback: 'שרטטו את הנקודה וקבעו את הרביע לפני שאתם מחשבים זווית.'
+    commonWrong:
+      - value: 1.0471975511965976
+        feedback: '$\arctan\frac{-\sqrt3}{-1}=\frac{\pi}{3}$ היא הזווית של $1+\sqrt3i$, ברביע הראשון. כאן מחסירים $\pi$.'
+        misconception: MC-c3-arg-arctan
+      - value: 4.1887902047863905
+        feedback: '$\frac{4\pi}{3}$ מצביע לאותו כיוון, אבל אינו בקטע $(-\pi,\pi]$: מחסירים $2\pi$.'
+        misconception: MC-c3-principal-arg-range
+
+  - id: Q-3.2-circle-set
+    type: mc
+    objectives: [OBJ-3.2-3]
+    level: basic
+    prompt: 'מה הקבוצה $\{z:|z-2i|=3\}$ במישור גאוס?'
+    choices:
+      - text: 'מעגל שמרכזו $2i$, כלומר $(0,2)$, ורדיוסו 3'
+        correct: true
+        feedback: 'נכון. $|z-a|$ הוא המרחק בין $z$ ל-$a$: כל הנקודות במרחק 3 מ-$2i$.'
+      - text: 'מעגל שמרכזו $-2i$ ורדיוסו 3'
+        feedback: '$|z-2i|$ מתאפס כש-$z=2i$: המרכז $2i$. $|z+2i|$ היה מרחק מ-$-2i$.'
+        misconception: MC-c3-set-center-sign
+      - text: 'מעגל שמרכזו $2i$ ורדיוסו 9'
+        feedback: '$|z-2i|=3$, לא $|z-2i|^2=3$: הרדיוס 3.'
+        misconception: MC-c3-modulus-no-root
+
+  - id: Q-3.2-triangle
+    type: twotier
+    objectives: [OBJ-3.2-1, OBJ-3.2-2]
+    qualitative: true
+    level: mid
+    prompt: 'נכון או לא: $|z+w|=|z|+|w|$ לכל שני מספרים מרוכבים $z,w$.'
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $|1+i|=\sqrt2$, ואילו $|1|+|i|=2$.'
+      - text: 'נכון'
+        feedback: 'ערך מוחלט הוא אורך, וחיבור הוא חיבור וקטורים: אורך הסכום קטן מסכום האורכים, אלא אם הווקטורים באותו כיוון.'
+        misconception: MC-c3-modulus-additive
+    reasons:
+      - text: 'הווקטורים $z$, $w$, $z+w$ יוצרים משולש, ולכן $|z+w|\le|z|+|w|$, עם שוויון רק באותו כיוון'
+        correct: true
+        feedback: 'בדיוק: זה אי-שוויון המשולש.'
+      - text: 'כי $|a+bi|=|a|+|b|$, ולכן הערך המוחלט חיבורי'
+        feedback: '$|a+bi|=\sqrt{a^2+b^2}$, לא $|a|+|b|$. גם $|1+i|=\sqrt2$ מראה זאת.'
+        misconception: MC-c3-modulus-components-sum
+      - text: 'כי ערך מוחלט של מרוכב יכול להיות שלילי'
+        feedback: 'ערך מוחלט הוא אורך, ואינו שלילי. הבעיה היא הכיוונים, לא הסימן.'
+        misconception: MC-c3-modulus-additive
+
+  - id: Q-3.2-arg-axis
+    type: numeric
+    objectives: [OBJ-3.2-2]
+    level: mid
+    prompt: 'מהו $\operatorname{Arg}(-4)$?'
+    answer: 3.141592653589793
+    tolerance: 0.001
+    correctFeedback: 'נכון, $\pi$. $-4$ על הציר הממשי השלילי, וזווית $\pi$ שייכת לקטע $(-\pi,\pi]$, ו-$-\pi$ לא.'
+    wrongFeedback: 'שרטטו את $-4$: באיזה כיוון הוא מהראשית?'
+    commonWrong:
+      - value: -3.141592653589793
+        feedback: '$-\pi$ מצביע לאותו כיוון, אבל הקטע $(-\pi,\pi]$ פתוח ב-$-\pi$: הארגומנט הראשי הוא $\pi$.'
+        misconception: MC-c3-principal-arg-range
+      - value: 0
+        feedback: '$\arctan\frac{0}{-4}=0$, אבל זו הזווית של $4$. $-4$ מצביע לכיוון ההפוך.'
+        misconception: MC-c3-arg-arctan
+
+  - id: Q-3.2-arg-conj
+    type: twotier
+    objectives: [OBJ-3.2-2]
+    qualitative: true
+    level: mid
+    prompt: 'נכון או לא: $\operatorname{Arg}\bar z=-\operatorname{Arg}z$ לכל $z\ne0$.'
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. ל-$z=-1$: $\bar z=-1$, ו-$\operatorname{Arg}\bar z=\pi$, ואילו $-\operatorname{Arg}z=-\pi$.'
+      - text: 'נכון'
+        feedback: 'הצמוד הוא שיקוף דרך הציר הממשי, ולכן הוא הופך את הזווית, אבל על הציר הממשי השלילי $-\pi$ אינו בקטע.'
+        misconception: MC-c3-principal-arg-range
+    reasons:
+      - text: 'למספר ממשי שלילי $\operatorname{Arg}=\pi$, ו-$-\pi$ אינו בקטע $(-\pi,\pi]$'
+        correct: true
+        feedback: 'בדיוק. לכל $z$ אחר השוויון נכון.'
+      - text: 'כי הצמוד הוא שיקוף דרך הציר המדומה, שמחליף $\theta$ ב-$\pi-\theta$'
+        feedback: 'הצמוד $a-bi$ הוא שיקוף דרך הציר **הממשי**, שמחליף $\theta$ ב-$-\theta$.'
+        misconception: MC-c3-conj-reflect-wrong-axis
+      - text: 'כי ל-$z$ ממשי חיובי $\operatorname{Arg}z=0$, ו-$-0\ne0$'
+        feedback: '$-0=0$: עבור ממשיים חיוביים השוויון מתקיים. הבעיה רק בממשיים שליליים.'
+        misconception: MC-c3-principal-arg-range
+
+  - id: Q-3.2-ray
+    type: mc
+    objectives: [OBJ-3.2-3, OBJ-3.2-2]
+    qualitative: true
+    level: mid
+    prompt: 'מה הקבוצה $\{z\ne0:\operatorname{Arg}z=\frac{\pi}{4}\}$?'
+    choices:
+      - text: 'הקרן מהראשית (בלי הראשית) בכיוון $1+i$'
+        correct: true
+        feedback: 'נכון. כל $r\operatorname{cis}\frac{\pi}{4}$ עם $r>0$: הנקודות $(t,t)$ עם $t>0$.'
+      - text: 'הישר $y=x$ כולו'
+        feedback: 'בחצי השני של הישר, $-1-i$ למשל, $\operatorname{Arg}=-\frac{3\pi}{4}$. ארגומנט קבוע הוא קרן.'
+        misconception: MC-c3-arg-set-line
+      - text: 'מעגל ברדיוס $\frac{\pi}{4}$'
+        feedback: 'מעגל הוא תנאי על $|z|$. התנאי כאן על הכיוון, ו-$|z|$ חופשי.'
+        misconception: MC-c3-arg-set-line
+
+  - id: Q-3.2-bisector
+    type: mc
+    objectives: [OBJ-3.2-3]
+    qualitative: true
+    level: mid
+    prompt: 'מה הקבוצה $\{z:|z-1|=|z+i|\}$?'
+    choices:
+      - text: 'הישר $y=-x$'
+        correct: true
+        feedback: >-
+          נכון. הנקודות שמרחקן מ-$1$ שווה למרחקן מ-$-i$: האנך האמצעי לקטע. בחישוב: $(x-1)^2+y^2=x^2+(y+1)^2$, כלומר
+          $-2x=2y$.
+      - text: 'הישר $y=x$'
+        feedback: '$|z+i|$ הוא המרחק מ-$-i$, לא מ-$i$. האנך האמצעי בין $1$ ל-$i$ הוא אכן $y=x$, אבל זו שאלה אחרת.'
+        misconception: MC-c3-set-center-sign
+      - text: 'מעגל שמרכזו $1-i$'
+        feedback: 'שוויון של שני מרחקים משתי נקודות הוא האנך האמצעי, ישר. מעגל הוא מרחק קבוע מנקודה אחת.'
+        misconception: MC-c3-set-center-sign
+
+  - id: Q-3.2-max-modulus
+    type: numeric
+    objectives: [OBJ-3.2-3, OBJ-3.2-2]
+    level: exam
+    prompt: 'מה הערך הגדול ביותר של $|z|$ כש-$|z-3-4i|\le2$?'
+    answer: 7
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. הקבוצה היא עיגול שמרכזו $3+4i$ ורדיוסו 2, והמרכז במרחק $|3+4i|=5$ מהראשית. הנקודה הרחוקה ביותר נמצאת על
+      הישר מהראשית דרך המרכז: $5+2=7$ (ובאי-שוויון המשולש $|z|\le|z-(3+4i)|+|3+4i|\le7$).
+    wrongFeedback: 'מה המרחק מהראשית למרכז העיגול? כמה עוד אפשר להתרחק בתוך העיגול?'
+    commonWrong:
+      - value: 9
+        feedback: '$|3+4i|=\sqrt{9+16}=5$, לא $3+4=7$.'
+        misconception: MC-c3-modulus-components-sum
+      - value: 27
+        feedback: '25 הוא $|3+4i|^2$. המרחק עצמו 5, ו-$5+2=7$.'
+        misconception: MC-c3-modulus-no-root
+
+  - id: Q-3.2-region-points
+    type: multi
+    objectives: [OBJ-3.2-3, OBJ-3.2-2]
+    level: exam
+    prompt: >-
+      אילו מהמספרים נמצאים בקבוצה $\{z:1<|z|\le2,\ 0\le\operatorname{Arg}z\le\frac{\pi}{2}\}$? סמנו את כולם.
+    choices:
+      - text: '$2i$'
+        correct: true
+        feedback: 'נכון. $|2i|=2$ (מותר, $\le$) ו-$\operatorname{Arg}=\frac{\pi}{2}$ (מותר).'
+      - text: '$1+i$'
+        correct: true
+        feedback: 'נכון. $|1+i|=\sqrt2$ ו-$\operatorname{Arg}=\frac{\pi}{4}$.'
+      - text: '$\sqrt2+\sqrt2i$'
+        correct: true
+        feedback: 'נכון. $|z|=\sqrt{2+2}=2$ ו-$\operatorname{Arg}=\frac{\pi}{4}$.'
+      - text: '$1$'
+        feedback: '$|1|=1$, והתנאי $1<|z|$ חזק: המעגל הפנימי אינו בקבוצה.'
+      - text: '$-1+i$'
+        feedback: '$|z|=\sqrt2$, אבל $\operatorname{Arg}(-1+i)=\frac{3\pi}{4}$, ברביע השני. ($\arctan(-1)=-\frac{\pi}{4}$ טועה ברביע.)'
+        misconception: MC-c3-arg-arctan

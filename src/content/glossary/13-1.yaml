@@ -1,0 +1,25 @@
+# Terms first defined in lesson 13.1 (surface area and surface integrals of a function).
+- id: surface-element
+  term: אלמנט שטח פנים
+  en: surface area element
+  symbol: 'dS=|\vec r_u\times\vec r_v|\,du\,dv'
+  definition: >-
+    השטח של חתיכה קטנה של משטח בפרמטריזציה: $dS=|\vec r_u\times\vec r_v|\,du\,dv$. לגרף $z=f(x,y)$:
+    $dS=\sqrt{1+f_x^2+f_y^2}\,dA$; לספירה ברדיוס $R$: $dS=R^2\sin\theta\,d\theta\,d\varphi$.
+  lesson: '13.1'
+- id: surface-area
+  term: שטח פנים
+  en: surface area
+  symbol: 'A(S)=\iint_D|\vec r_u\times\vec r_v|\,du\,dv'
+  definition: >-
+    השטח של משטח במרחב: $A(S)=\iint_S1\,dS=\iint_D|\vec r_u\times\vec r_v|\,du\,dv$, כש-$D$ תחום הפרמטרים. לא תלוי
+    בפרמטריזציה. לספירה ברדיוס $R$ הוא $4\pi R^2$.
+  lesson: '13.1'
+- id: surface-integral
+  term: אינטגרל משטחי
+  en: surface integral of a function
+  symbol: '\iint_S f\,dS'
+  definition: >-
+    הסכום של ערכי $f$ על המשטח, כשכל חתיכה נשקלת בשטח שלה: $\iint_Sf\,dS=\iint_Df(\vec r(u,v))\,|\vec r_u\times\vec r_v|\,du\,dv$.
+    עם צפיפות שטחית $\sigma$ הוא נותן מסה של קליפה, ועם $x\sigma$, $y\sigma$, $z\sigma$ את המומנטים של מרכז המסה.
+  lesson: '13.1'

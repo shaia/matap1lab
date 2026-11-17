@@ -1,0 +1,337 @@
+# Lesson 4.3 — exponential, logarithm and powers (notes pp. 12–13).
+# Objectives (src/course.ts):
+#   OBJ-4.3-1  sketch exponentials and logarithms in different bases; describe the behaviour at infinity and at 0
+#   OBJ-4.3-2  define ln and e; use that exp and ln are inverse to each other
+#   OBJ-4.3-3  compare growth rates of powers, exponentials and logarithms
+# Every number is recomputed in screens/tools/checks_ch4.py.
+chapter: 4
+questions:
+  - id: Q-4.3-half-power
+    type: mc
+    objectives: [OBJ-4.3-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      מה קורה ל-$\left(\frac12\right)^x$ כש-$x\to\infty$?
+    choices:
+      - text: 'שואף ל-0'
+        correct: true
+        feedback: >-
+          נכון. $\left(\frac12\right)^x=2^{-x}=\frac1{2^x}$, והמכנה גדל בלי גבול. הגרף יורד ומתקרב לציר $x$ (אסימפטוטה אופקית).
+      - text: 'שואף ל-$\infty$'
+        feedback: >-
+          זה נכון לבסיס גדול מ-1. בבסיס $\frac12$ כל הגדלה של $x$ ב-1 **מחצה** את הערך.
+        misconception: MC-c4-exp-base-small
+      - text: 'שואף ל-1'
+        feedback: >-
+          $\left(\frac12\right)^0=1$, אבל ככל ש-$x$ גדל הערך נחצה שוב ושוב: $\frac12,\frac14,\frac18,\ldots$
+        misconception: MC-c4-exp-base-small
+
+  - id: Q-4.3-ln-near-0
+    type: mc
+    objectives: [OBJ-4.3-1]
+    level: basic
+    prompt: >-
+      מה קורה ל-$\ln x$ כש-$x\to0^+$?
+    choices:
+      - text: 'שואף ל-$-\infty$'
+        correct: true
+        feedback: >-
+          נכון. $\ln\left(e^{-10}\right)=-10$, $\ln\left(e^{-100}\right)=-100$: ככל ש-$x$ קרוב יותר ל-0, הלוגריתם שלילי יותר.
+          ציר $y$ הוא אסימפטוטה אנכית.
+      - text: 'שואף ל-0'
+        feedback: >-
+          $\ln$ מתאפס ב-1, לא ב-0. ליד 0 הלוגריתם שלילי וגדל בערכו המוחלט בלי גבול.
+        misconception: MC-c4-ln-near-zero
+      - text: 'שואף ל-1'
+        feedback: >-
+          $\ln e=1$ ו-$\ln1=0$. ליד 0 הלוגריתם הוא מספר שלילי גדול.
+        misconception: MC-c4-ln-near-zero
+
+  - id: Q-4.3-e-limit
+    type: twotier
+    objectives: [OBJ-4.3-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      נכון או לא נכון: $\left(1+\frac1n\right)^n\to1$ כש-$n\to\infty$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. הגבול הוא $e\approx2.718$: ל-$n=1$ מתקבל 2, ל-$n=10$ בערך $2.594$, ל-$n=1000$ בערך $2.717$.
+      - text: 'נכון'
+        feedback: >-
+          חשבו ל-$n=10$: $1.1^{10}\approx2.59$, רחוק מ-1. המעריך הגדל מנצח את הבסיס שמתקרב ל-1.
+        misconception: MC-c4-e-limit-is-1
+    reasons:
+      - text: 'הבסיס מתקרב ל-1 אבל המעריך גדל, והגבול הוא המספר $e$'
+        correct: true
+        feedback: 'בדיוק. כך מוגדר $e$ (בסיכומים, עמ׳ 12).'
+      - text: '1 בכל חזקה הוא 1'
+        feedback: >-
+          הבסיס אינו 1, הוא $1+\frac1n>1$, וחזקה גבוהה של מספר מעט גדול מ-1 יכולה להיות גדולה.
+        misconception: MC-c4-e-limit-is-1
+
+  - id: Q-4.3-solve-exp
+    type: numeric
+    objectives: [OBJ-4.3-2]
+    level: basic
+    prompt: >-
+      פתרו את המשוואה $e^{2x}=5$. (אפשר לכתוב ערך מדויק, כמו ln 3 או 3√2)
+    answer: 0.8047189562170502
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. לוקחים $\ln$ משני הצדדים: $\ln\left(e^{2x}\right)=2x=\ln5$, ולכן $x=\frac{\ln5}2\approx0.805$.
+    wrongFeedback: >-
+      $\ln$ ו-$e^{(\cdot)}$ מבטלות זו את זו: $\ln\left(e^{u}\right)=u$ לכל $u$.
+    commonWrong:
+      - value: 0.9162907318741551
+        feedback: >-
+          זה $\ln\frac52$: חילקתם ב-2 לפני הלוגריתם, כאילו $e^{2x}=2e^x$. אבל $e^{2x}=\left(e^x\right)^2$.
+        misconception: MC-c4-exp-product-confusion
+
+  - id: Q-4.3-e-3lnx
+    type: expr
+    objectives: [OBJ-4.3-2]
+    level: basic
+    prompt: >-
+      פשטו את $e^{3\ln x}$ ל-$x>0$ (במשתנה x).
+    answer: 'x^3'
+    answerTex: '$e^{3\ln x}=e^{\ln(x^3)}=x^3$'
+    variables: [x]
+    domain: [0.2, 3]
+    correctFeedback: >-
+      נכון. $3\ln x=\ln\left(x^3\right)$, ו-$e^{\ln u}=u$. אפשר גם: $e^{3\ln x}=\left(e^{\ln x}\right)^3=x^3$.
+    wrongFeedback: >-
+      $e^{\ln u}=u$ רק כשבמעריך יש בדיוק $\ln u$. הכניסו את המקדם 3 לתוך הלוגריתם.
+    commonWrong:
+      - expr: '3*x'
+        feedback: >-
+          "ביטלתם" את $e$ ו-$\ln$ והשארתם את 3 בחוץ. אבל $3\ln x=\ln\left(x^3\right)$, ולכן התוצאה $x^3$. בדיקה ב-$x=2$:
+          $e^{3\ln2}=8$.
+        misconception: MC-c4-exp-log-coefficient
+
+  - id: Q-4.3-bases
+    type: multi
+    objectives: [OBJ-4.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      אילו מהטענות נכונות? סמנו את כולן.
+    choices:
+      - text: 'הגרפים של $2^x$ ו-$3^x$ עוברים שניהם בנקודה $(0,1)$'
+        correct: true
+        feedback: 'נכון. $a^0=1$ לכל בסיס $a>0$.'
+      - text: 'ל-$x<0$ מתקיים $2^x>3^x$'
+        correct: true
+        feedback: 'נכון. למשל $2^{-1}=\frac12>\frac13=3^{-1}$: משמאל ל-0 הסדר מתהפך.'
+      - text: 'ל-$x>1$ מתקיים $\log_2x>\log_3x$'
+        correct: true
+        feedback: >-
+          נכון. $\log_2x=\frac{\ln x}{\ln2}$ ו-$\log_3x=\frac{\ln x}{\ln3}$, ו-$\ln2<\ln3$. למשל $\log_28=3>\log_38\approx1.89$.
+      - text: '$3^x>2^x$ לכל $x$'
+        feedback: >-
+          רק ל-$x>0$. ב-$x=0$ הם שווים, ול-$x<0$ ההפך.
+        misconception: MC-c4-bigger-base-bigger
+
+  - id: Q-4.3-ln-unbounded
+    type: twotier
+    objectives: [OBJ-4.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: ל-$\ln x$ יש אסימפטוטה אופקית כש-$x\to\infty$, כי הוא גדל לאט מאוד.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. $\ln x\to\infty$, אף שלאט מאוד: כדי להגיע ל-10 צריך $x=e^{10}\approx22026$.'
+      - text: 'נכון'
+        feedback: >-
+          אילו $\ln x$ היה חסום ב-$M$, אז ב-$x=e^{M+1}$ היה מתקבל $\ln x=M+1>M$. אין חסם.
+        misconception: MC-c4-log-bounded
+    reasons:
+      - text: 'לכל מספר $M$, $\ln x>M$ כש-$x>e^M$'
+        correct: true
+        feedback: 'בדיוק. זה התרגום של "$e^x$ ו-$\ln x$ הפוכות": כל ערך מתקבל.'
+      - text: 'הגידול של $\ln x$ בכל יחידה הולך וקטן, ולכן הוא מתייצב'
+        feedback: >-
+          תוספות קטנות והולכות יכולות להצטבר לאינסוף. $\ln$ גדל ב-1 בכל פעם ש-$x$ מוכפל ב-$e$, וזה קורה שוב ושוב.
+        misconception: MC-c4-log-bounded
+
+  - id: Q-4.3-inverse-domain
+    type: twotier
+    objectives: [OBJ-4.3-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: $e^{\ln x}=x$ לכל $x$ ממשי.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. הזהות נכונה רק ל-$x>0$. לעומתה $\ln\left(e^x\right)=x$ נכונה לכל $x$.'
+      - text: 'נכון'
+        feedback: >-
+          ב-$x=-1$ צריך לחשב קודם את $\ln(-1)$, שאינו מוגדר (בממשיים). הזהות תקפה רק בתחום של $\ln$.
+        misconception: MC-c4-inverse-domain-ignored
+    reasons:
+      - text: 'הפונקציה הפנימית $\ln x$ מוגדרת רק ל-$x>0$'
+        correct: true
+        feedback: 'בדיוק. $f(f^{-1}(y))=y$ נכון לכל $y$ בתחום של $f^{-1}$, כאן $y>0$.'
+      - text: '$e^x$ ו-$\ln x$ הפוכות, ולכן כל הרכבה שלהן היא הזהות'
+        feedback: >-
+          הפוכות, אבל כל אחת על התחום שלה. $\ln$ מוגדרת רק על התמונה של $e^x$, כלומר על $(0,\infty)$.
+        misconception: MC-c4-inverse-domain-ignored
+
+  - id: Q-4.3-log-of-product
+    type: expr
+    objectives: [OBJ-4.3-2]
+    level: mid
+    prompt: >-
+      פשטו את $\ln\left(x^2e^{3x}\right)$ ל-$x>0$, לביטוי בלי מכפלה בתוך הלוגריתם (במשתנה x).
+    answer: '2*log(x) + 3*x'
+    answerTex: '$\ln\left(x^2e^{3x}\right)=2\ln x+3x$'
+    variables: [x]
+    domain: [0.2, 3]
+    correctFeedback: >-
+      נכון. $\ln(ab)=\ln a+\ln b$: $\ln\left(x^2\right)+\ln\left(e^{3x}\right)=2\ln x+3x$.
+    wrongFeedback: >-
+      הלוגריתם הופך מכפלה לסכום, וחזקה למקדם.
+    commonWrong:
+      - expr: '2*log(x)*3*x'
+        feedback: >-
+          $\ln(ab)$ הוא $\ln a+\ln b$, לא $\ln a\cdot\ln b$. בדיקה: $\ln(1\cdot e)=1$, אבל $\ln1\cdot\ln e=0$.
+        misconception: MC-c4-ln-product-is-product
+
+  - id: Q-4.3-inverse-formula
+    type: expr
+    objectives: [OBJ-4.3-2]
+    level: mid
+    prompt: >-
+      $f(x)=e^{2x}+1$. מצאו נוסחה לפונקציה ההפוכה $f^{-1}(x)$, ל-$x>1$ (במשתנה x).
+    answer: 'log(x - 1)/2'
+    answerTex: '$f^{-1}(x)=\frac{\ln(x-1)}{2}$'
+    variables: [x]
+    domain: [1.2, 4]
+    correctFeedback: >-
+      נכון. פותרים $y=e^{2x}+1$ לפי $x$: $e^{2x}=y-1$, $2x=\ln(y-1)$, $x=\frac{\ln(y-1)}2$; ומחליפים את שמות המשתנים.
+      התחום של $f^{-1}$ הוא התמונה של $f$, $(1,\infty)$.
+    wrongFeedback: >-
+      כתבו $y=e^{2x}+1$ ובטלו את הפעולות מהחיצונית לפנימית: קודם מחסירים 1, אחר כך $\ln$, ולבסוף מחלקים ב-2.
+    commonWrong:
+      - expr: '1/(exp(2*x) + 1)'
+        feedback: >-
+          זה $\frac1{f(x)}$, לא ההפוכה. $f^{-1}$ צריכה לבטל את $f$: $f^{-1}(f(0))=f^{-1}(2)$ צריך לצאת 0.
+        misconception: MC-c4-inverse-is-reciprocal
+      - expr: 'log(x)/2 - 1'
+        feedback: >-
+          ביטלתם את $+1$ אחרון. הפעולה האחרונה ב-$f$ היא הוספת 1, ולכן היא הראשונה שמבטלים: $\ln(x-1)$, לא $\ln x-1$.
+        misconception: MC-c0-inverse-order
+
+  - id: Q-4.3-growth-order
+    type: rank
+    objectives: [OBJ-4.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      סדרו את הפונקציות לפי קצב הגידול שלהן כש-$x\to\infty$.
+    help: 'גררו את הפונקציה שגדלה הכי מהר למעלה, ואת האיטית ביותר למטה.'
+    items:
+      - { id: ex, label: '$e^x$' }
+      - { id: two, label: '$2^x$' }
+      - { id: cube, label: '$x^3$' }
+      - { id: root, label: '$\sqrt x$' }
+      - { id: ln, label: '$\ln x$' }
+    order: [ex, two, cube, root, ln]
+    correctFeedback: >-
+      נכון. אקספוננטים מנצחים כל חזקה, ובין אקספוננטים הבסיס הגדול מנצח ($\frac{e^x}{2^x}=\left(\frac e2\right)^x\to\infty$);
+      כל חזקה חיובית, אפילו $\sqrt x$, מנצחת את הלוגריתם.
+    wrongFeedback: >-
+      הסולם: לוגריתם ≺ חזקות (לפי המעריך) ≺ אקספוננטים (לפי הבסיס). מה גדל מהר יותר, $e^x$ או $2^x$?
+
+  - id: Q-4.3-power-vs-exp
+    type: mc
+    objectives: [OBJ-4.3-3]
+    level: mid
+    prompt: >-
+      מהו $\lim_{x\to\infty}\frac{x^{100}}{e^x}$?
+    choices:
+      - text: '0'
+        correct: true
+        feedback: >-
+          נכון. כל אקספוננט עם בסיס גדול מ-1 גדל בסופו של דבר מהר יותר מכל חזקה. (ב-$x=100$ המונה עוד גדול יותר, אבל
+          ב-$x=1000$ כבר $e^{1000}\approx10^{434}$ מול $1000^{100}=10^{300}$.)
+      - text: '$\infty$'
+        feedback: >-
+          המעריך 100 מרשים, אבל הוא קבוע. $e^x$ מוכפל ב-$e$ בכל צעד של 1, ו-$x^{100}$ מוכפל ב-$\left(1+\frac1x\right)^{100}$, שמתקרב
+          ל-1.
+        misconception: MC-c4-power-beats-exp
+      - text: '1'
+        feedback: >-
+          אין סיבה ששתי הפונקציות יגדלו באותו קצב: היחס ביניהן שואף ל-0.
+        misconception: MC-c4-power-beats-exp
+
+  - id: Q-4.3-crossover
+    type: twotier
+    objectives: [OBJ-4.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: מכיוון ש-$2^x$ גדל מהר יותר מ-$x^{10}$, מתקיים $2^x>x^{10}$ לכל $x>10$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. ב-$x=10$: $2^{10}=1024$ מול $10^{10}$. האקספוננט עוקף רק ליד $x\approx58.8$, ומשם הוא מוביל לתמיד.
+      - text: 'נכון'
+        feedback: >-
+          חשבו ב-$x=20$: $2^{20}\approx10^6$, ו-$20^{10}\approx10^{13}$. "גדל מהר יותר" מבטיח עקיפה, לא מתי.
+        misconception: MC-c4-faster-means-already-bigger
+    reasons:
+      - text: '"גדל מהר יותר" היא טענה על היחס כש-$x\to\infty$, והעקיפה יכולה לקרות מאוחר'
+        correct: true
+        feedback: 'בדיוק. היחס $\frac{2^x}{x^{10}}\to\infty$, אבל ב-$x=10$ הוא בערך $10^{-7}$.'
+      - text: 'אחרי $x=10$ המעריך של $2^x$ גדול מ-10'
+        feedback: >-
+          השוואת המעריכים אינה השוואת הערכים: $2^{11}=2048$ ו-$11^{10}\approx2.6\cdot10^{10}$. הבסיסים שונים.
+        misconception: MC-c4-faster-means-already-bigger
+
+  - id: Q-4.3-half-life
+    type: numeric
+    objectives: [OBJ-4.3-2]
+    level: exam
+    prompt: >-
+      זמן מחצית החיים של פחמן-14 הוא 5730 שנה: הכמות היא $N(t)=N_0\left(\frac12\right)^{t/5730}$. אחרי כמה שנים נשאר
+      $10\%$ מהכמות ההתחלתית?
+    answer: 19034.647983704637
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, בערך 19035 שנה. $\left(\frac12\right)^{t/5730}=\frac1{10}$; לוקחים $\ln$: $\frac{t}{5730}\ln\frac12=-\ln10$, ולכן
+      $t=5730\cdot\frac{\ln10}{\ln2}\approx3.32\cdot5730$.
+    wrongFeedback: >-
+      כתבו את המשוואה $\left(\frac12\right)^{t/5730}=0.1$ ופתרו בלוגריתם.
+    commonWrong:
+      - value: 10314
+        feedback: >-
+          זה $\frac{0.9}{0.5}\cdot5730$: הנחתם שההתפרקות לינארית. בדעיכה מעריכית אחרי 2 מחציות נשאר רבע, אחרי 3 שמינית;
+          ל-$10\%$ צריך יותר מ-3 מחציות.
+        misconception: MC-c4-exp-as-linear
+
+  - id: Q-4.3-exp-vs-power-count
+    type: numeric
+    objectives: [OBJ-4.3-3]
+    level: exam
+    prompt: >-
+      כמה פתרונות יש למשוואה $2^x=x^{10}$ עם $x>0$?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. ב-$x=1$: $2>1$; ב-$x=2$: $4<1024$, ולכן חיתוך ליד $1.08$. החזקה מובילה עד שהאקספוננט עוקף ליד $x\approx58.8$
+      ($2^{59}\approx5.8\cdot10^{17}>59^{10}\approx5.1\cdot10^{17}$), ומשם הוא מוביל לתמיד.
+    wrongFeedback: >-
+      בדקו את הסדר ב-$x=1$, ב-$x=2$, ובערכים גדולים מאוד: מי גדל מהר יותר כש-$x\to\infty$?
+    commonWrong:
+      - value: 1
+        feedback: >-
+          את החיתוך ליד 1 רואים בציור, אבל האקספוננט גדל מהר יותר ולכן בסוף עוקף: יש חיתוך שני ליד $58.8$.
+        misconception: MC-c4-graph-count-miss-far

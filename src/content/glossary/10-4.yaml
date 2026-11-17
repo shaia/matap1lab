@@ -1,0 +1,19 @@
+# Terms first defined in lesson 10.4 (the gradient and its meaning).
+- id: gradient
+  term: גרדיאנט
+  en: gradient
+  symbol: '\nabla f=(f_x,f_y)'
+  definition: >-
+    הווקטור של הנגזרות החלקיות, $\nabla f=f_x\hat\imath+f_y\hat\jmath$ (ובשלושה משתנים גם $f_z\hat k$). כש-$f$ דיפרנציאבילית:
+    $D_{\hat u}f=\nabla f\cdot\hat u$; $\nabla f$ מצביע לכיוון העלייה המהירה ביותר, וקצב העלייה בו הוא $|\nabla f|$; והוא מאונך
+    לקו הגובה (ולמשטח הגובה) שעובר בנקודה.
+  lesson: '10.4'
+- id: level-surface
+  term: משטח גובה
+  en: level surface
+  symbol: 'F(x,y,z)=c'
+  definition: >-
+    לפונקציה של שלושה משתנים $F(x,y,z)$ ולמספר $c$: קבוצת הנקודות במרחב שבהן $F=c$, למשל ספירה
+    ($x^2+y^2+z^2=c$, $c>0$). הגרדיאנט $\nabla F$ מאונך למשטח הגובה, ולכן הוא הנורמל של המישור המשיק לו.
+  reject: [משטח רמה]
+  lesson: '10.4'

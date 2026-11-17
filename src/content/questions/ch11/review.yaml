@@ -1,0 +1,323 @@
+# Chapter 11 review — maps, vector fields and line integrals (lessons 11.1–11.6), easy to hard.
+# Every lesson is touched; most questions combine two lessons or reach back to chapters 1, 2, 9 and 10. No multiple
+# integral (chapter 12) and no Green's theorem. Each hint names the lesson to go back to.
+# Keys recomputed in screens/tools/recompute-ch11.py.
+chapter: 11
+questions:
+  - id: Q-11-review-01
+    type: mc
+    objectives: [OBJ-11.1-2, OBJ-11.1-1]
+    level: basic
+    prompt: >-
+      מהו שדה הגרדיאנט של $f(x,y)=x^2+y^2$, ואיך הוא נראה?
+    choices:
+      - text: '$(2x,2y)$: רדיאלי, מצביע החוצה מהראשית, ואורכו פעמיים המרחק ממנה'
+        correct: true
+        feedback: >-
+          נכון. $\nabla f=2(x,y)$, כפולה חיובית של וקטור המקום. $f$ גדלה כשמתרחקים מהראשית, והגרדיאנט מצביע לשם, ניצב
+          למעגלים שהם קווי הגובה.
+      - text: '$(-2y,2x)$: סיבובי סביב הראשית'
+        feedback: >-
+          שדה סיבובי משיק לקווי הגובה (המעגלים), אבל הגרדיאנט **מאונך** להם. $\frac{\partial f}{\partial x}=2x$, לא $-2y$.
+        misconception: MC-c11-rotational-vs-radial
+      - text: '$(2y,2x)$'
+        feedback: >-
+          $\frac{\partial f}{\partial x}=2x$: הרכיב הראשון הוא הנגזרת לפי $x$. $(2y,2x)$ הוא הגרדיאנט של $2xy$.
+        misconception: MC-c11-gradient-order
+    hints:
+      - 'חזרו לשיעור 11.1: שדה גרדיאנט ושדה רדיאלי.'
+
+  - id: Q-11-review-02
+    type: numeric
+    objectives: [OBJ-11.5-2, OBJ-10.4-1]
+    level: basic
+    prompt: >-
+      $\vec F=\nabla(xyz)$. חשבו את העבודה של $\vec F$ לאורך עקום כלשהו מ-$(0,0,0)$ ל-$(1,2,3)$.
+    answer: 6
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. לפי המשפט היסודי לאינטגרלים קוויים: $\varphi(1,2,3)-\varphi(0,0,0)=6-0$. אין צורך לדעת את העקום.
+    wrongFeedback: >-
+      השדה הוא גרדיאנט של $\varphi=xyz$. העבודה היא הפרש ערכי $\varphi$ בין נקודת הסוף לנקודת ההתחלה.
+    commonWrong:
+      - value: -6
+        feedback: 'חיסרתם בסדר ההפוך: העבודה היא $\varphi(B)-\varphi(A)$.'
+        misconception: MC-c11-ftli-order
+    hints:
+      - 'חזרו לשיעור 11.5: המשפט היסודי לאינטגרלים קוויים.'
+
+  - id: Q-11-review-03
+    type: numeric
+    objectives: [OBJ-11.3-2, OBJ-2.4-1]
+    level: basic
+    prompt: >-
+      הנקודה $(x,y,z)=(0,1,1)$. כתבו אותה בקואורדינטות כדוריות (לפי מוסכמת הקורס) וחשבו שם את היעקוביאן
+      $\frac{\partial(x,y,z)}{\partial(r,\theta,\varphi)}$.
+    answer: 1.4142135623731
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\sqrt2$. $r=\sqrt2$, ו-$\cos\theta=\frac{z}{r}=\frac{1}{\sqrt2}$, כלומר $\theta=\frac{\pi}{4}$; לכן
+      $r^2\sin\theta=2\cdot\frac{\sqrt2}{2}$.
+    wrongFeedback: >-
+      $r=\sqrt{x^2+y^2+z^2}$, $\theta$ הזווית מציר $z$ ($\cos\theta=\frac zr$), והיעקוביאן $r^2\sin\theta$.
+    commonWrong:
+      - value: 2
+        feedback: 'זה $r^2$ בלי $\sin\theta$.'
+        misconception: MC-c11-spherical-jacobian-no-sin
+    hints:
+      - 'חזרו לשיעור 2.4: מעבר לקואורדינטות כדוריות, ולשיעור 11.3: היעקוביאן הכדורי.'
+
+  - id: Q-11-review-04
+    type: multi
+    objectives: [OBJ-11.6-1, OBJ-11.1-2, OBJ-11.4-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $f$ פונקציה סקלרית, $\vec F$ שדה וקטורי ו-$C$ עקום. אילו מהביטויים הבאים הם **מספר** (או פונקציה שנותנת מספר בכל
+      נקודה)? סמנו את כולם.
+    choices:
+      - text: '$\nabla\cdot\vec F$'
+        correct: true
+        feedback: 'נכון: $P_x+Q_y+R_z$, מספר בכל נקודה.'
+      - text: '$\int_C\vec F\cdot d\vec r$'
+        correct: true
+        feedback: 'נכון: מספר אחד, העבודה לאורך כל העקום.'
+      - text: '$\nabla\times\vec F$'
+        feedback: 'הרוטור הוא שדה וקטורי: שלושה רכיבים בכל נקודה.'
+        misconception: MC-c11-div-is-vector
+      - text: '$\nabla f$'
+        feedback: 'הגרדיאנט הוא שדה וקטורי. המספר שקשור אליו הוא, למשל, $D_{\hat u}f=\nabla f\cdot\hat u$.'
+        misconception: MC-c11-gradient-vs-value
+    hints:
+      - 'חזרו לשיעור 11.6: דיברגנץ ורוטור, ולשיעור 11.4: אינטגרל קווי של שדה.'
+
+  - id: Q-11-review-05
+    type: numeric
+    objectives: [OBJ-11.4-1, OBJ-9.3-1]
+    level: mid
+    prompt: >-
+      $C$ העקום $\vec r(t)=(t^2,\ t^3)$, $0\le t\le1$. חשבו $\int_C1\,ds$.
+    answer: 1.43970987337155
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{13\sqrt{13}-8}{27}$: זה אורך העקום. $|\vec r\,'|=\sqrt{4t^2+9t^4}=t\sqrt{4+9t^2}$, ועם $w=4+9t^2$:
+      $\int_0^1t\sqrt{4+9t^2}\,dt=\frac{1}{18}\cdot\frac23\left(13^{3/2}-8\right)$.
+    wrongFeedback: >-
+      $\int_C1\,ds=\int_0^1|\vec r\,'(t)|\,dt$. הוציאו $t$ מהשורש ובצעו הצבה.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          $\int_0^1dt=1$ הוא אורך קטע הפרמטר, לא של העקום. $ds=|\vec r\,'(t)|\,dt$.
+        misconception: MC-c11-ds-forgot-speed
+    hints:
+      - 'חזרו לשיעור 9.3: אורך עקום, ולשיעור 11.4: האינטגרל לפי אורך.'
+
+  - id: Q-11-review-06
+    type: twotier
+    objectives: [OBJ-11.5-1, OBJ-11.6-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      לשדה $\vec F=(x,-y)$ במישור גם הדיברגנץ וגם הרוטור הם 0 בכל נקודה. האם הוא משמר?
+    choices:
+      - text: 'כן'
+        correct: true
+        feedback: 'נכון: $\vec F=\nabla\left(\frac{x^2-y^2}{2}\right)$.'
+      - text: 'לא, כי דיברגנץ 0 פירושו שאין פוטנציאל'
+        feedback: >-
+          דיברגנץ מודד מקור, והוא לא קשור לקיום פוטנציאל. מה שקובע הוא הרוטור ($P_y=Q_x$) בתחום בלי חורים.
+        misconception: MC-c11-div-curl-confuse
+    reasons:
+      - text: 'הרוטור $Q_x-P_y=0$ בכל המישור, שאין בו חורים, ואכן $\varphi=\frac{x^2-y^2}{2}$'
+        correct: true
+        feedback: 'בדיוק. (זה זרם שנכנס לאורך ציר $y$ ויוצא לאורך ציר $x$, בלי מקור ובלי סיבוב.)'
+      - text: 'כל שדה שהדיברגנץ שלו 0 הוא משמר'
+        feedback: '$(-y,x)$ עם דיברגנץ 0 אינו משמר: העבודה על מעגל היחידה $2\pi$.'
+        misconception: MC-c11-div-curl-confuse
+      - text: 'כי $P_x=Q_y$'
+        feedback: 'כאן $P_x=1$ ו-$Q_y=-1$, וגם אילו היו שווים זו לא הבדיקה. משווים את $P_y$ ל-$Q_x$.'
+        misconception: MC-c11-mixed-partials-wrong-pair
+    hints:
+      - 'חזרו לשיעור 11.5: תנאי הנגזרות המעורבות, ולשיעור 11.6: מה מודדים דיברגנץ ורוטור.'
+
+  - id: Q-11-review-07
+    type: numeric
+    objectives: [OBJ-11.2-3, OBJ-10.4-3]
+    level: mid
+    prompt: >-
+      הפרבולואיד $\vec r(u,v)=(u,\ v,\ u^2+v^2)$. מצאו את המישור המשיק לו בנקודה שמתאימה ל-$(u,v)=(1,1)$, ומה הגובה ($z$) של
+      המישור מעל $(x,y)=(0,0)$?
+    answer: -2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $P=(1,1,2)$, $\vec r_u=(1,0,2)$, $\vec r_v=(0,1,2)$, $\vec n=(-2,-2,1)$, והמישור $z=2x+2y-2$. אותו נורמל (עד
+      כדי סימן) נותן הגרדיאנט של $x^2+y^2-z$, כמשטח גובה.
+    wrongFeedback: >-
+      חשבו נקודה, שני וקטורים משיקים ואת המכפלה הווקטורית שלהם, ואז הציבו $x=y=0$.
+    commonWrong:
+      - value: 2.5
+        feedback: >-
+          זה המישור $(x-1)+2(z-2)=0$, עם $\vec r_u=(1,0,2)$ בתפקיד הנורמל. $\vec r_u$ משיק למשטח.
+        misconception: MC-c11-tangent-vector-as-normal
+    hints:
+      - 'חזרו לשיעור 11.2: המישור המשיק למשטח בפרמטריזציה, ולשיעור 10.4: מישור משיק למשטח גובה.'
+
+  - id: Q-11-review-08
+    type: mc
+    objectives: [OBJ-11.1-3, OBJ-10.4-2]
+    level: mid
+    prompt: >-
+      $f(x,y)=xy$, ו-$\nabla f=(y,x)$. על אילו עקומים נמצאים קווי הזרימה של $\nabla f$?
+    choices:
+      - text: 'על ההיפרבולות $x^2-y^2=c$ (ועל הישרים $y=\pm x$ כש-$c=0$)'
+        correct: true
+        feedback: >-
+          נכון. למשל $(\cosh t,\sinh t)$: המהירות $(\sinh t,\cosh t)=(y,x)$. ואכן $\frac{dy}{dx}=\frac xy$, ומכאן $y^2-x^2$
+          קבוע. ההיפרבולות האלה חוצות את קווי הגובה $xy=c$ בזווית ישרה.
+      - text: 'על ההיפרבולות $xy=c$'
+        feedback: >-
+          אלה קווי הגובה של $f$. קווי הזרימה של הגרדיאנט **ניצבים** להם.
+        misconception: MC-c11-flowline-is-level
+      - text: 'על מעגלים סביב הראשית'
+        feedback: >-
+          ב-$(1,0)$ השדה $(0,1)$ משיק למעגל, אבל ב-$(1,1)$ הוא $(1,1)$, רדיאלי. מעגלים הם קווי הזרימה של $(-y,x)$.
+        misconception: MC-c11-field-point-check
+    hints:
+      - 'חזרו לשיעור 11.1: קווי זרימה, ולשיעור 10.4: הגרדיאנט מאונך לקו הגובה.'
+
+  - id: Q-11-review-09
+    type: numeric
+    objectives: [OBJ-11.4-2, OBJ-9.1-2]
+    level: exam
+    prompt: >-
+      חלקיק נע לאורך סיבוב אחד של הסליל $\vec r(t)=(\cos t,\ \sin t,\ t)$, $0\le t\le2\pi$, בשדה הכוח
+      $\vec F(x,y,z)=(-y,\ x,\ z)$. חשבו את העבודה.
+    answer: 26.0223941093583
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $2\pi+2\pi^2$. $\vec F(\vec r(t))=(-\sin t,\cos t,t)$, $\vec r\,'=(-\sin t,\cos t,1)$, והמכפלה $1+t$;
+      $\int_0^{2\pi}(1+t)\,dt=2\pi+2\pi^2$.
+    wrongFeedback: >-
+      הציבו את הסליל בשדה, הכפילו סקלרית ב-$\vec r\,'(t)$ (כל שלושת הרכיבים), ובצעו אינטגרציה.
+    commonWrong:
+      - value: 6.28318530717959
+        feedback: >-
+          $2\pi$ הוא רק החלק של $(-y,x)$. הרכיב $z$ של השדה עושה עבודה גם הוא: $z\,dz=t\,dt$.
+        misconception: MC-c11-differential-missing-factor
+    hints:
+      - 'חזרו לשיעור 9.1: פרמטריזציה של סליל, ולשיעור 11.4: עבודה כאינטגרל קווי.'
+
+  - id: Q-11-review-10
+    type: numeric
+    objectives: [OBJ-11.5-1, OBJ-11.5-2, OBJ-1.2-3]
+    level: exam
+    prompt: >-
+      שדה המשיכה של מסה נקודתית בראשית (ביחידות שבהן כל הקבועים 1) הוא $\vec F=-\dfrac{(x,y,z)}{(x^2+y^2+z^2)^{3/2}}$.
+      בדקו ש-$\vec F=\nabla\left(\frac{1}{\sqrt{x^2+y^2+z^2}}\right)$, וחשבו את העבודה שהשדה עושה על חלקיק שעובר מ-$(1,0,0)$
+      ל-$(0,2,0)$ בדרך כלשהי שאינה עוברת בראשית.
+    answer: -0.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\varphi=\frac1r$, והעבודה $\varphi(B)-\varphi(A)=\frac12-1=-\frac12$: החלקיק התרחק מהמסה, נגד המשיכה, ולכן
+      העבודה של השדה שלילית.
+    wrongFeedback: >-
+      $\frac{\partial}{\partial x}\frac1r=-\frac{x}{r^3}$, וכך בכל רכיב. העבודה היא $\varphi$ בסוף פחות $\varphi$ בהתחלה.
+    commonWrong:
+      - value: 0.5
+        feedback: >-
+          חיסרתם בסדר ההפוך. בדיקת שפיות: המשיכה מושכת פנימה, והחלקיק נע החוצה, ולכן השדה עושה עבודה שלילית.
+        misconception: MC-c11-ftli-order
+    hints:
+      - 'חזרו לשיעור 11.5: פוטנציאל והמשפט היסודי, ולשיעור 1.2: עבודה של כוח.'
+
+  - id: Q-11-review-11
+    type: twotier
+    objectives: [OBJ-11.5-3, OBJ-11.6-3]
+    qualitative: true
+    level: exam
+    prompt: >-
+      השדה $\vec F=\dfrac{(x,y)}{x^2+y^2}$ מוגדר במישור בלי הראשית, ו-$Q_x-P_y=0$ שם. האם הוא משמר בתחום הזה?
+    choices:
+      - text: 'כן'
+        correct: true
+        feedback: 'נכון: $\vec F=\nabla\left(\tfrac12\ln(x^2+y^2)\right)$ בכל נקודה מחוץ לראשית.'
+      - text: 'לא, כי בתחום יש חור'
+        feedback: >-
+          החור רק מונע מהתנאי $P_y=Q_x$ להיות **ערובה**. כאן יש פוטנציאל מפורש, ולכן השדה משמר.
+        misconception: MC-c11-hole-kills-all
+    reasons:
+      - text: 'יש פוטנציאל מפורש בכל התחום: $\tfrac12\ln(x^2+y^2)$'
+        correct: true
+        feedback: >-
+          בדיוק. (בדיקה נוספת: על מעגל סביב הראשית $\vec F$ רדיאלי ו-$\vec r\,'$ משיק, ולכן העבודה 0, בניגוד ל-$\frac{(-y,x)}{x^2+y^2}$.)
+      - text: 'הרוטור 0, וזה תמיד מספיק'
+        feedback: >-
+          לא תמיד: ל-$\frac{(-y,x)}{x^2+y^2}$ גם הרוטור 0 באותו תחום, והוא אינו משמר. כאן ההכרעה היא הפוטנציאל.
+        misconception: MC-c11-curl-test-sufficient
+      - text: 'כל שדה רדיאלי משמר כי הדיברגנץ שלו 0'
+        feedback: >-
+          הדיברגנץ לא מכריע אם יש פוטנציאל. (ובכל זאת, כאן באמת הדיברגנץ 0 מחוץ לראשית; זה מקרה.)
+        misconception: MC-c11-div-curl-confuse
+    hints:
+      - 'חזרו לשיעור 11.5: שדות בתחום עם חור, ולשיעור 11.6: רוטור של גרדיאנט.'
+
+  - id: Q-11-review-12
+    type: mc
+    objectives: [OBJ-11.4-2, OBJ-11.5-2, OBJ-11.6-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $\vec F=(y,0)$. העבודה מ-$(0,0)$ ל-$(1,1)$ לאורך הקטע $y=x$ היא $\frac12$, ולאורך המסלול
+      $(0,0)\to(1,0)\to(1,1)$ היא 0. מה נובע מכך?
+    choices:
+      - text: '$\vec F$ אינו משמר, וזה מתאים לכך שהרכיב ה-$z$ של הרוטור שלו הוא $-1$'
+        correct: true
+        feedback: >-
+          נכון. בשדה משמר העבודה לא הייתה תלויה במסלול. $Q_x-P_y=0-1=-1\ne0$, ולכן אין פוטנציאל: הזרם "גוזר" ומסובב.
+      - text: 'אחד החישובים שגוי, כי עבודה לא תלויה במסלול'
+        feedback: >-
+          עבודה לא תלויה במסלול **רק** בשדה משמר. שני החישובים נכונים: על $y=0$ השדה אפס, ועל $x=1$ הוא ניצב לתנועה.
+        misconception: MC-c11-longer-path-more-work
+      - text: 'המסלול השבור ארוך יותר, ולכן העבודה עליו צריכה להיות גדולה יותר'
+        feedback: >-
+          אורך הדרך לא קובע עבודה. על המסלול השבור הכוח אפס או ניצב לתנועה, ולכן העבודה 0.
+        misconception: MC-c11-work-magnitude
+    hints:
+      - 'חזרו לשיעור 11.5: אי-תלות במסלול, ולשיעור 11.6: רוטור כסיבוב.'
+
+  - id: Q-11-review-13
+    type: numeric
+    objectives: [OBJ-11.3-1, OBJ-10.2-1]
+    level: basic
+    prompt: >-
+      $F(x,y)=(xy,\ x+y)$. חשבו את היעקוביאן $\det J$ בנקודה $(2,3)$.
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $J=\begin{pmatrix}y&x\\1&1\end{pmatrix}$, ו-$\det J=y-x=1$ ב-$(2,3)$. קרוב ל-$(2,3)$ ההעתקה שומרת בערך על שטחים.
+    wrongFeedback: >-
+      שורה ראשונה: הנגזרות החלקיות של $xy$; שורה שנייה: של $x+y$. אחר כך $ad-bc$.
+    hints:
+      - 'חזרו לשיעור 11.3: מטריצת הנגזרות והיעקוביאן, ולשיעור 10.2: נגזרות חלקיות.'
+
+  - id: Q-11-review-14
+    type: numeric
+    objectives: [OBJ-11.2-2, OBJ-1.4-2]
+    level: mid
+    prompt: >-
+      על הספירה ברדיוס 2, בפרמטריזציה הכדורית $(\theta,\varphi)$, חשבו את השטח של המקבילית שהווקטורים המשיקים
+      $\vec r_\theta$ ו-$\vec r_\varphi$ פורשים בנקודה שבה $\theta=\frac{\pi}{6}$.
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. שטח המקבילית הוא $|\vec r_\theta\times\vec r_\varphi|=R^2\sin\theta=4\cdot\frac12$. (באופן ישיר:
+      $|\vec r_\theta|=R=2$, $|\vec r_\varphi|=R\sin\theta=1$, והם מאונכים.)
+    wrongFeedback: >-
+      שטח מקבילית הוא אורך המכפלה הווקטורית. לספירה $|\vec r_\theta\times\vec r_\varphi|=R^2\sin\theta$.
+    commonWrong:
+      - value: 4
+        feedback: >-
+          $R^2$ בלי $\sin\theta$. ליד הקוטב מעגל הרוחב קטן, ו-$\vec r_\varphi$ קצר: $|\vec r_\varphi|=R\sin\theta$.
+        misconception: MC-c11-sphere-normal-no-sin
+    hints:
+      - 'חזרו לשיעור 11.2: הנורמל של הספירה, ולשיעור 1.4: גודל המכפלה הווקטורית כשטח.'

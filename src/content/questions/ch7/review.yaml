@@ -1,0 +1,298 @@
+# Chapter 7 review — the indefinite integral (lessons 7.1–7.6), easy to hard.
+# A rehearsal for the computerised gateway test on integration techniques: most questions are formulas to type, and
+# most combine two lessons (a method and a check, or two methods). Each hint names the lesson to go back to.
+# Keys recomputed in screens/tools/recompute-ch7.py.
+chapter: 7
+questions:
+  - id: Q-7-review-01
+    type: expr
+    objectives: [OBJ-7.1-3]
+    level: basic
+    prompt: 'חשבו $\int\left(x^3-\frac{2}{\sqrt x}+e^x\right)dx$ ל-$x>0$.'
+    answer: 'x^4/4 - 4*sqrt(x) + exp(x)'
+    answerTex: '$\frac{x^4}{4}-4\sqrt x+e^x+C$'
+    variables: [x]
+    domain: [0.3, 3]
+    upToConstant: true
+    correctFeedback: 'נכון. $\int x^{-1/2}\,dx=\frac{x^{1/2}}{1/2}=2\sqrt x$, ולכן $-2\cdot2\sqrt x=-4\sqrt x$.'
+    wrongFeedback: 'כתבו $\frac{2}{\sqrt x}=2x^{-1/2}$ והפעילו את כלל החזקה.'
+    commonWrong:
+      - expr: 'x^4/4 - sqrt(x) + exp(x)'
+        feedback: 'כפלתם במעריך החדש $\frac12$ במקום לחלק בו: $\int x^{-1/2}\,dx=2x^{1/2}$.'
+        misconception: MC-c7-power-rule-multiply
+    hints: ['חזרו לשיעור 7.1: כלל החזקה וטבלת האינטגרלים.']
+
+  - id: Q-7-review-02
+    type: expr
+    objectives: [OBJ-7.2-2, OBJ-7.1-3]
+    level: basic
+    prompt: 'חשבו $\int\cos(3x)\,dx$.'
+    answer: 'sin(3*x)/3'
+    answerTex: '$\frac{\sin3x}{3}+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: 'נכון. $u=3x$, $dx=\frac{du}{3}$. בדיקה: $\left(\frac{\sin3x}{3}\right)''=\cos3x$.'
+    wrongFeedback: 'גזרו את התשובה בכלל השרשרת ובדקו שמתקבל בדיוק $\cos3x$.'
+    commonWrong:
+      - expr: '3*sin(3*x)'
+        feedback: 'כפלתם בנגזרת הפנימית במקום לחלק בה. גזרו: $(3\sin3x)''=9\cos3x$.'
+        misconception: MC-c7-subst-forget-factor
+      - expr: '-sin(3*x)/3'
+        feedback: '$\int\cos u\,du=+\sin u$.'
+        misconception: MC-c7-trig-integral-sign
+    hints: ['חזרו לשיעור 7.2 (הצבה לינארית) ולשיעור 7.1 (הטבלה).']
+
+  - id: Q-7-review-03
+    type: mc
+    objectives: [OBJ-7.6-2, OBJ-7.2-1, OBJ-7.3-1]
+    qualitative: true
+    level: basic
+    prompt: 'איזה זוג שיטות מתאים ל-$\int x\sin\left(x^2\right)dx$ ול-$\int x\sin x\,dx$, בהתאמה?'
+    choices:
+      - text: 'הצבה $u=x^2$; אינטגרציה בחלקים עם $u=x$'
+        correct: true
+        feedback: >-
+          נכון. בראשון $x$ הוא (חצי) הנגזרת של $x^2$ הפנימי; בשני אין הרכבה, יש מכפלה של פולינום בפונקציה טריגונומטרית.
+      - text: 'אינטגרציה בחלקים בשניהם'
+        feedback: 'בראשון צריך לבצע אינטגרציה ל-$\sin(x^2)$, שאין לו קדומה אלמנטרית. ההצבה פותרת אותו בשורה.'
+        misconception: MC-c7-parts-wrong-choice
+      - text: 'הצבה $u=x^2$ בשניהם'
+        feedback: 'בשני אין $\sin(x^2)$: הצבה $u=x^2$ רק מכניסה $\sqrt u$.'
+        misconception: MC-c7-subst-no-du
+    hints: ['חזרו לשיעור 7.6 (בחירת שיטה), 7.2 (מתי הצבה) ו-7.3 (מתי בחלקים).']
+
+  - id: Q-7-review-04
+    type: expr
+    objectives: [OBJ-7.3-1, OBJ-7.2-2]
+    level: mid
+    prompt: 'חשבו $\int xe^{-2x}\,dx$.'
+    answer: '-x*exp(-2*x)/2 - exp(-2*x)/4'
+    answerTex: '$-\frac{2x+1}{4}e^{-2x}+C$'
+    variables: [x]
+    domain: [-1, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $u=x$, $v=-\frac12e^{-2x}$: $-\frac x2e^{-2x}+\frac12\int e^{-2x}\,dx=-\frac x2e^{-2x}-\frac14e^{-2x}+C$.
+    wrongFeedback: 'בחלקים עם $v''=e^{-2x}$, $v=-\frac12e^{-2x}$; ושוב $\int e^{-2x}\,dx=-\frac12e^{-2x}$.'
+    commonWrong:
+      - expr: '-x*exp(-2*x)/2'
+        feedback: 'חסר האינטגרל שנשאר, $+\frac12\int e^{-2x}\,dx$.'
+        misconception: MC-c7-parts-drop-integral
+      - expr: '-x*exp(-2*x)/2 + exp(-2*x)/4'
+        feedback: '$\frac12\int e^{-2x}\,dx=\frac12\cdot\left(-\frac12e^{-2x}\right)$: גם האינטגרל השני מביא מינוס.'
+        misconception: MC-c7-parts-sign-repeat
+    hints: ['חזרו לשיעור 7.3 (בחלקים) ולשיעור 7.2 ($\int e^{kx}dx$).']
+
+  - id: Q-7-review-05
+    type: expr
+    objectives: [OBJ-7.4-1, OBJ-7.4-3]
+    level: mid
+    prompt: 'חשבו $\int\frac{dx}{x^2-4}$ בתחום $x>2$.'
+    answer: 'log(abs(x-2))/4 - log(abs(x+2))/4'
+    answerTex: '$\frac14\ln\left|\frac{x-2}{x+2}\right|+C$'
+    variables: [x]
+    domain: [2.5, 5]
+    upToConstant: true
+    correctFeedback: 'נכון. $\frac{1}{(x-2)(x+2)}=\frac{1/4}{x-2}-\frac{1/4}{x+2}$ (כיסוי ב-$x=2$ וב-$x=-2$).'
+    wrongFeedback: 'המכנה מתפרק: $x^2-4=(x-2)(x+2)$. שברים חלקיים.'
+    commonWrong:
+      - expr: 'atan(x/2)/2'
+        feedback: 'זה $\int\frac{dx}{x^2+4}$. עם מינוס המכנה מתפרק, והתשובה לוגריתמים.'
+        misconception: MC-c7-atan-vs-log
+      - expr: 'log(abs(x^2-4))'
+        feedback: 'זו הקדומה של $\frac{2x}{x^2-4}$. המונה כאן 1.'
+        misconception: MC-c7-log-of-denominator
+    hints: ['חזרו לשיעור 7.4: שברים חלקיים, ולוגריתם או arctan.']
+
+  - id: Q-7-review-06
+    type: numeric
+    objectives: [OBJ-7.2-3, OBJ-7.1-2]
+    level: mid
+    prompt: 'חשבו $\int_0^1\frac{x}{1+x^2}\,dx$. (אפשר לכתוב ביטוי עם ln)'
+    answer: 0.34657359028
+    tolerance: 0.001
+    correctFeedback: 'נכון, $\frac{\ln2}{2}$. קדומה $\frac12\ln(1+x^2)$, ובין 0 ל-1: $\frac12\ln2-\frac12\ln1$.'
+    wrongFeedback: 'מצאו קדומה בהצבה $u=1+x^2$ והציבו את הגבולות.'
+    commonWrong:
+      - value: 0.69314718056
+        feedback: 'זה $\ln2$: חסר החצי מ-$du=2x\,dx$.'
+        misconception: MC-c7-subst-forget-factor
+      - value: 0.785398163397
+        feedback: 'זה $\arctan1=\frac\pi4$, האינטגרל של $\frac{1}{1+x^2}$. עם $x$ במונה מקבלים לוגריתם.'
+        misconception: MC-c7-atan-vs-log
+    hints: ['חזרו לשיעור 7.2 (הנגזרת חלקי הפונקציה) ולשיעור 7.1 (המשפט היסודי).']
+
+  - id: Q-7-review-07
+    type: expr
+    objectives: [OBJ-7.5-1, OBJ-7.2-3]
+    level: mid
+    prompt: 'חשבו $\int\cos^2x\sin x\,dx$.'
+    answer: '-cos(x)^3/3'
+    answerTex: '$-\frac{\cos^3x}{3}+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: 'נכון. $u=\cos x$, $du=-\sin x\,dx$: $-\int u^2\,du=-\frac{u^3}{3}$.'
+    wrongFeedback: 'הציבו $u=\cos x$ ושימו לב לסימן של $du$.'
+    commonWrong:
+      - expr: 'cos(x)^3/3'
+        feedback: '$du=-\sin x\,dx$: חסר מינוס.'
+        misconception: MC-c7-fprime-f-sign
+      - expr: '-cos(x)*(x/2 + sin(2*x)/4)'
+        feedback: >-
+          זו מכפלת האינטגרלים $\int\sin x\,dx\cdot\int\cos^2x\,dx$. אינטגרל של מכפלה אינו מכפלת האינטגרלים; כאן $\sin x\,dx$ הוא
+          (מינוס) $du$ עבור $u=\cos x$.
+        misconception: MC-c7-product-integral
+    hints: ['חזרו לשיעור 7.5 (חזקה אי-זוגית) ולשיעור 7.2 (הנגזרת הפנימית).']
+
+  - id: Q-7-review-08
+    type: twotier
+    objectives: [OBJ-7.2-1, OBJ-7.6-2]
+    qualitative: true
+    level: mid
+    prompt: 'נכון או לא: את $\int e^{x^2}dx$ מחשבים בהצבה $u=x^2$.'
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. $du=2x\,dx$, ובאינטגרל אין $x$: נשאר $\int\frac{e^u}{2\sqrt u}\,du$, לא פשוט יותר. ל-$e^{x^2}$ אין קדומה אלמנטרית
+          בכלל (הוא חשוב מאוד בפיזיקה ובסטטיסטיקה, ומחשבים אותו בטורים או נומרית).
+      - text: נכון
+        feedback: 'בהצבה $u=x^2$ צריך $x\,dx$ באינטגרל. $\int xe^{x^2}dx$ נפתר כך; $\int e^{x^2}dx$ לא.'
+        misconception: MC-c7-subst-no-du
+    reasons:
+      - text: 'אין באינטגרל את הגורם $x$ ש-$du=2x\,dx$ דורש'
+        correct: true
+        feedback: 'בדיוק. הצבה עובדת רק כשהנגזרת הפנימית שם.'
+      - text: 'הצבה לא עובדת על אקספוננט'
+        feedback: '$\int xe^{x^2}dx=\frac12e^{x^2}+C$ בהצבה. מה שחסר כאן הוא הגורם $x$.'
+        misconception: MC-c7-subst-no-du
+      - text: 'כי צריך אינטגרציה בחלקים'
+        feedback: 'גם בחלקים זה לא נפתר: לפונקציה אין קדומה אלמנטרית.'
+        misconception: MC-c7-parts-wrong-choice
+    hints: ['חזרו לשיעור 7.2 (מתי מתאימה הצבה) ולשיעור 7.6 (אסטרטגיה).']
+
+  - id: Q-7-review-09
+    type: expr
+    objectives: [OBJ-7.3-2, OBJ-7.3-3]
+    level: mid
+    prompt: 'חשבו $\int(\ln x)^2dx$ ל-$x>0$.'
+    answer: 'x*log(x)^2 - 2*x*log(x) + 2*x'
+    answerTex: '$x\ln^2x-2x\ln x+2x+C$'
+    variables: [x]
+    domain: [0.3, 3]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $u=(\ln x)^2$, $v'=1$: $x\ln^2x-\int2\ln x\,dx$, ו-$\int\ln x\,dx=x\ln x-x$ (שוב בחלקים).
+    wrongFeedback: 'בחלקים עם $v''=1$: נשאר $2\int\ln x\,dx$, שגם אותו מחשבים בחלקים.'
+    commonWrong:
+      - expr: 'x*log(x)^2 - 2*x*log(x)'
+        feedback: 'בפעם השנייה שכחתם את האינטגרל שנשאר: $\int\ln x\,dx=x\ln x-x$, ולכן $-2(x\ln x-x)=-2x\ln x+2x$.'
+        misconception: MC-c7-parts-drop-integral
+    hints: ['חזרו לשיעור 7.3: $\int\ln x\,dx$ ואינטגרציה בחלקים פעמיים.']
+
+  - id: Q-7-review-10
+    type: numeric
+    objectives: [OBJ-7.3-1, OBJ-7.1-2]
+    level: exam
+    prompt: 'חשבו $\int_0^{\pi/2}x\sin x\,dx$.'
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $F(x)=-x\cos x+\sin x$; $F\left(\frac\pi2\right)=1$, $F(0)=0$. (סבירות: האינטגרנד חיובי בקטע וקטן מ-$\frac\pi2$.)
+    wrongFeedback: 'בחלקים עם $u=x$, $v=-\cos x$, ואז הציבו את הגבולות.'
+    commonWrong:
+      - value: -1
+        feedback: 'זה מתקבל מ-$F=x\cos x-\sin x$: $\int\sin x\,dx=-\cos x$. אינטגרל של פונקציה חיובית אינו שלילי.'
+        misconception: MC-c7-trig-integral-sign
+    hints: ['חזרו לשיעור 7.3 (בחלקים) ולשיעור 7.1 (המשפט היסודי).']
+
+  - id: Q-7-review-11
+    type: expr
+    objectives: [OBJ-7.4-3, OBJ-7.6-1]
+    level: exam
+    prompt: 'חשבו $\int\frac{x+1}{x^2+4x+5}\,dx$.'
+    answer: 'log(x^2+4*x+5)/2 - atan(x+2)'
+    answerTex: '$\frac12\ln\left(x^2+4x+5\right)-\arctan(x+2)+C$'
+    variables: [x]
+    domain: [-4, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $x+1=\frac12(2x+4)-1$: $\frac12\int\frac{2x+4}{x^2+4x+5}\,dx-\int\frac{dx}{(x+2)^2+1}$.
+    wrongFeedback: 'פצלו את המונה לחלק שהוא כפולה של הנגזרת $2x+4$ ולשארית קבועה; את השארית השלימו לריבוע.'
+    commonWrong:
+      - expr: 'log(x^2+4*x+5)/2'
+        feedback: '$\frac12(2x+4)=x+2$, לא $x+1$: נשארה השארית $-1$, שנותנת $-\arctan(x+2)$.'
+        misconception: MC-c7-numerator-not-derivative
+      - expr: 'log(x^2+4*x+5)/2 - atan(x)'
+        feedback: 'אחרי ההשלמה $(x+2)^2+1$ המשתנה הוא $x+2$: $\arctan(x+2)$.'
+        misconception: MC-c7-complete-square-shift
+    hints: ['חזרו לשיעור 7.4 (לוגריתם ועוד arctan) ולשיעור 7.6 (השלמה לריבוע).']
+
+  - id: Q-7-review-12
+    type: expr
+    objectives: [OBJ-7.5-3, OBJ-7.5-1]
+    level: exam
+    prompt: 'חשבו $\int\sqrt{1-x^2}\,dx$ ל-$|x|<1$.'
+    answer: '(x*sqrt(1-x^2) + asin(x))/2'
+    answerTex: '$\frac12\left(x\sqrt{1-x^2}+\arcsin x\right)+C$'
+    variables: [x]
+    domain: [-0.9, 0.9]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $x=\sin\theta$: $\int\cos^2\theta\,d\theta=\frac\theta2+\frac{\sin2\theta}{4}$, ו-$\frac{\sin2\theta}{4}=\frac{x\sqrt{1-x^2}}{2}$.
+      (בדיקה: בין $-1$ ל-1 זה $\frac\pi2$, שטח חצי עיגול היחידה.)
+    wrongFeedback: 'הציבו $x=\sin\theta$, $dx=\cos\theta\,d\theta$, והורידו חזקה ב-$\cos^2\theta$.'
+    commonWrong:
+      - expr: '(asin(x) - x*sqrt(1-x^2))/2'
+        feedback: '$\cos^2\theta=\frac{1+\cos2\theta}{2}$, עם פלוס.'
+        misconception: MC-c7-double-angle-sign
+      - expr: 'x*sqrt(1-x^2) + asin(x)'
+        feedback: 'חסרה החלוקה ב-2 בזהות.'
+        misconception: MC-c7-double-angle-half
+    hints: ['חזרו לשיעור 7.5: הצבה טריגונומטרית והורדת חזקה.']
+
+  - id: Q-7-review-13
+    type: twotier
+    objectives: [OBJ-7.6-3, OBJ-7.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      ל-$\int2\sin x\cos x\,dx$ התקבלו שתי תשובות: $\sin^2x+C$ ו-$-\cos^2x+C$. נכון או לא: אחת מהן בהכרח שגויה.
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: 'נכון. שתיהן נגזרות ל-$2\sin x\cos x$, וההפרש ביניהן $\sin^2x+\cos^2x=1$, קבוע.'
+      - text: נכון
+        feedback: 'גזרו את שתיהן: מתקבל אותו אינטגרנד. קדומות של אותה פונקציה נבדלות בקבוע, וזה המצב כאן.'
+        misconception: MC-c7-unique-antiderivative-form
+    reasons:
+      - text: 'גזירה של כל אחת נותנת $2\sin x\cos x$, וההפרש ביניהן קבוע'
+        correct: true
+        feedback: 'בדיוק: בדיקה בגזירה מכריעה, וה-$+C$ סופג את ההפרש.'
+      - text: 'כי ל-$\sin^2x$ ול-$\cos^2x$ יש אותו גרף'
+        feedback: 'הגרפים שונים; הם רק מוזזים זה מזה: $\sin^2x=1-\cos^2x$.'
+        misconception: MC-c7-unique-antiderivative-form
+      - text: 'כי לכל אינטגרל יש קדומה אחת בלבד'
+        feedback: 'לכל פונקציה רציפה בקטע יש אינסוף קדומות, $F+C$.'
+        misconception: MC-c7-drop-constant
+    hints: ['חזרו לשיעור 7.6 (בדיקה בגזירה) ולשיעור 7.1 (קבוע האינטגרציה).']
+
+  - id: Q-7-review-14
+    type: numeric
+    objectives: [OBJ-7.3-3, OBJ-7.1-2]
+    level: mid
+    prompt: 'חשבו $\int_1^e\ln x\,dx$.'
+    answer: 1
+    tolerance: 0.001
+    correctFeedback: 'נכון. $F(x)=x\ln x-x$; $F(e)=e-e=0$ ו-$F(1)=0-1=-1$, ולכן $0-(-1)=1$.'
+    wrongFeedback: 'קדומה $x\ln x-x$; חשבו $F(e)-F(1)$.'
+    commonWrong:
+      - value: -1
+        feedback: 'זה $F(1)-F(e)$: הסדר הפוך. ($\ln x\ge0$ בקטע, ולכן האינטגרל חיובי.)'
+        misconception: MC-c7-ftc-order
+      - value: 0
+        feedback: 'זה $F(e)$ בלבד. $F(1)=-1$, לא 0, וצריך לחסר אותו.'
+        misconception: MC-c7-ftc-lower-zero
+    hints: ['חזרו לשיעור 7.3 ($\int\ln x\,dx$) ולשיעור 7.1 (המשפט היסודי).']

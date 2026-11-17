@@ -1,0 +1,82 @@
+# Misconceptions first detected in lesson 3.3 (polar form and Euler's formula).
+- id: MC-c3-cis-swap
+  title: מחליפים בין קוסינוס לסינוס בצורה הקוטבית
+  belief: >-
+    $r\operatorname{cis}\theta=r\sin\theta+ir\cos\theta$, או $\arg(a+bi)=\arctan\frac{a}{b}$.
+  truth: >-
+    $r\operatorname{cis}\theta=r\cos\theta+ir\sin\theta$: הקוסינוס נותן את החלק הממשי (ההיטל על הציר האופקי), והסינוס
+    את המדומה. הזווית נמדדת מהציר הממשי, ולכן $\tan\theta=\frac{b}{a}$.
+  remedy: { lesson: '3.3', label: 'מהצורה הקוטבית לאלגברית' }
+
+- id: MC-c3-negative-modulus
+  title: כותבים צורה קוטבית עם מקדם שלילי
+  belief: >-
+    $-3\operatorname{cis}\frac{\pi}{5}$ הוא צורה קוטבית עם ערך מוחלט 3 וארגומנט $\frac{\pi}{5}$.
+  truth: >-
+    בצורה קוטבית $r=|z|>0$. סימן מינוס הוא סיבוב ב-$\pi$: $-1=\operatorname{cis}\pi$, ולכן
+    $-3\operatorname{cis}\frac{\pi}{5}=3\operatorname{cis}\frac{6\pi}{5}=3\operatorname{cis}\left(-\frac{4\pi}{5}\right)$.
+  remedy: { lesson: '3.3', label: 'הצורה הקוטבית: r חיובי' }
+
+- id: MC-c3-multiply-args
+  title: כופלים או מחלקים ארגומנטים במקום לחבר או לחסר אותם
+  belief: >-
+    $\arg(zw)=\arg z\cdot\arg w$, או $\arg\frac{z}{w}=\frac{\arg z}{\arg w}$, או שבחילוק מחברים ארגומנטים.
+  truth: >-
+    $r_1\operatorname{cis}\alpha\cdot r_2\operatorname{cis}\beta=r_1r_2\operatorname{cis}(\alpha+\beta)$
+    ו-$\frac{r_1\operatorname{cis}\alpha}{r_2\operatorname{cis}\beta}=\frac{r_1}{r_2}\operatorname{cis}(\alpha-\beta)$:
+    הערכים המוחלטים נכפלים ומתחלקים, הארגומנטים מתחברים ומתחסרים, כמו מעריכים ב-$e^{i\alpha}e^{i\beta}=e^{i(\alpha+\beta)}$.
+  remedy: { lesson: '3.3', label: 'כפל וחילוק בצורה קוטבית' }
+
+- id: MC-c3-multiply-rotation-only
+  title: חושבים שכפל במספר מרוכב הוא סיבוב בלבד, או הזזה
+  belief: >-
+    כפל ב-$1+i$ מסובב ב-$\frac{\pi}{4}$ ותו לא, או מזיז את הנקודה ב-$(1,1)$.
+  truth: >-
+    כפל ב-$w=\rho\operatorname{cis}\alpha$ מסובב ב-$\alpha$ **ומותח** פי $\rho$: כפל ב-$1+i$ מסובב ב-$\frac{\pi}{4}$
+    ומותח פי $\sqrt2$. הזזה היא **חיבור** של $w$. רק כפל במספר עם $|w|=1$ הוא סיבוב טהור.
+  remedy: { lesson: '3.3', label: 'כפל כסיבוב ומתיחה' }
+
+- id: MC-c3-rotation-direction
+  title: טועים בכיוון הסיבוב של כפל ב-i
+  belief: >-
+    כפל ב-$i$ מסובב עם כיוון השעון.
+  truth: >-
+    $i=\operatorname{cis}\frac{\pi}{2}$, וזווית חיובית היא נגד כיוון השעון: $1\mapsto i\mapsto-1\mapsto-i$. כפל ב-$-i$
+    מסובב עם כיוון השעון.
+  remedy: { lesson: '3.3', label: 'כפל ב-i' }
+
+- id: MC-c3-rotate-about-origin
+  title: מסובבים סביב הראשית כשהסיבוב הוא סביב נקודה אחרת
+  belief: >-
+    כדי לסובב את $z$ סביב $c$ בזווית $\alpha$ מחשבים $z\operatorname{cis}\alpha$.
+  truth: >-
+    $z\operatorname{cis}\alpha$ מסובב סביב **הראשית**. סביב $c$: מזיזים את $c$ לראשית, מסובבים, ומחזירים:
+    $c+(z-c)\operatorname{cis}\alpha$.
+  remedy: { lesson: '3.3', label: 'סיבוב סביב נקודה' }
+
+- id: MC-c3-power-termwise
+  title: מעלים בחזקה את הקוסינוס ואת הסינוס בנפרד
+  belief: >-
+    $(\cos\theta+i\sin\theta)^n=\cos^n\theta+i\sin^n\theta$.
+  truth: >-
+    נוסחת דה-מואבר: $(\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta$. החזקה פועלת על הזווית, לא על כל רכיב.
+    כבר ב-$n=2$: $(\cos\theta+i\sin\theta)^2=\cos^2\theta-\sin^2\theta+2i\sin\theta\cos\theta$.
+  remedy: { lesson: '3.3', label: 'נוסחת דה-מואבר' }
+
+- id: MC-c3-demoivre-modulus-forget
+  title: שוכחים להעלות בחזקה את הערך המוחלט
+  belief: >-
+    $(r\operatorname{cis}\theta)^n=r\operatorname{cis}(n\theta)$.
+  truth: >-
+    $(r\operatorname{cis}\theta)^n=r^n\operatorname{cis}(n\theta)$: הערך המוחלט מועלה בחזקה והארגומנט מוכפל ב-$n$.
+    למשל $(1+i)^8=(\sqrt2)^8\operatorname{cis}2\pi=16$.
+  remedy: { lesson: '3.3', label: 'חזקות בצורה קוטבית' }
+
+- id: MC-c3-demoivre-trig-linear
+  title: חושבים שקוסינוס של זווית משולשת הוא פי שלושה קוסינוס, או טועים בסימן בפיתוח
+  belief: >-
+    $\cos3t=3\cos t$, או $\cos3t=\cos^3t+3\cos t\sin^2t$.
+  truth: >-
+    מדה-מואבר, $\cos3t=\operatorname{Re}(\cos t+i\sin t)^3=\cos^3t-3\cos t\sin^2t=4\cos^3t-3\cos t$. בפיתוח הבינום
+    האיבר עם $(i\sin t)^2$ הוא ממשי, ו-$i^2=-1$ הופך את הסימן שלו.
+  remedy: { lesson: '3.3', label: 'זהויות טריגונומטריות מדה-מואבר' }

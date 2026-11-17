@@ -1,0 +1,300 @@
+# Lesson 11.3 — the derivative matrix of a map and the Jacobian (notes pp. 76–77).
+# Objectives (src/course.ts):
+#   OBJ-11.3-1  compute the derivative matrix of a map as its linear approximation
+#   OBJ-11.3-2  compute the Jacobian of the change to polar, cylindrical and spherical coordinates
+#   OBJ-11.3-3  read the Jacobian as the factor by which area or volume changes
+# No double integral yet (chapter 12): the area factor is read on small cells and on linear maps.
+# Keys recomputed in screens/tools/recompute-ch11.py.
+chapter: 11
+questions:
+  - id: Q-11.3-matrix-meaning
+    type: mc
+    objectives: [OBJ-11.3-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      $F(x,y)=\big(F_1(x,y),\ F_2(x,y)\big)$ ו-$J$ מטריצת הנגזרות שלה בנקודה $\vec a$. איזה תיאור נכון?
+    choices:
+      - text: 'השורה ה-$i$ של $J$ היא $\nabla F_i(\vec a)$, ו-$F(\vec a+\Delta\vec x)\approx F(\vec a)+J\,\Delta\vec x$'
+        correct: true
+        feedback: >-
+          נכון. כל רכיב $F_i$ הוא פונקציה סקלרית עם קירוב לינארי $F_i(\vec a)+\nabla F_i\cdot\Delta\vec x$, ו-$J\Delta\vec x$
+          אוסף את כל הקירובים האלה לווקטור אחד.
+      - text: 'העמודה ה-$i$ של $J$ היא $\nabla F_i(\vec a)$'
+        feedback: >-
+          אז $J\Delta\vec x$ היה מערבב רכיבים: השורה הראשונה הייתה $\partial_xF_1\Delta x+\partial_xF_2\Delta y$, שאינו
+          השינוי של אף רכיב. בשורה ה-$i$ נמצאות הנגזרות של $F_i$.
+        misconception: MC-c11-jacobian-transpose
+      - text: '$J$ הוא מספר: $\frac{\partial(F_1,F_2)}{\partial(x,y)}$'
+        feedback: >-
+          המספר הזה הוא הדטרמיננטה של $J$, היעקוביאן. $J$ עצמה היא טבלה של ארבע נגזרות חלקיות, ומספר אחד לא יכול לתת
+          קירוב לווקטור $F(\vec a+\Delta\vec x)$.
+        misconception: MC-c11-jacobian-matrix-vs-det
+
+  - id: Q-11.3-matrix-entry
+    type: numeric
+    objectives: [OBJ-11.3-1]
+    level: basic
+    prompt: >-
+      $F(x,y)=\big(x^2y,\ 3x+y^2\big)$. מהו האיבר בשורה 2, עמודה 1 של מטריצת הנגזרות של $F$ בנקודה $(1,2)$?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. השורה השנייה היא הגרדיאנט של $F_2=3x+y^2$, והעמודה הראשונה היא הנגזרת לפי $x$: $\frac{\partial F_2}{\partial x}=3$.
+      כל המטריצה: $J(1,2)=\begin{pmatrix}4&1\\3&4\end{pmatrix}$.
+    wrongFeedback: >-
+      שורה = רכיב, עמודה = משתנה. שורה 2 עמודה 1 היא $\frac{\partial F_2}{\partial x}$.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          1 הוא $\frac{\partial F_1}{\partial y}=x^2$ ב-$(1,2)$, האיבר בשורה 1 עמודה 2. החלפתם שורות ועמודות.
+        misconception: MC-c11-jacobian-transpose
+
+  - id: Q-11.3-polar
+    type: numeric
+    objectives: [OBJ-11.3-2]
+    level: basic
+    prompt: >-
+      $x=r\cos\theta$, $y=r\sin\theta$. חשבו את היעקוביאן $\frac{\partial(x,y)}{\partial(r,\theta)}$ בנקודה $r=3$,
+      $\theta=\frac{\pi}{4}$.
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\det\begin{pmatrix}\cos\theta&-r\sin\theta\\ \sin\theta&r\cos\theta\end{pmatrix}=r\cos^2\theta+r\sin^2\theta=r$,
+      בלי תלות ב-$\theta$. לכן $dx\,dy=r\,dr\,d\theta$.
+    wrongFeedback: >-
+      כתבו את מטריצת הנגזרות של $(r,\theta)\mapsto(x,y)$ וחשבו את הדטרמיננטה; $\theta$ יתבטל.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          1 הוא היעקוביאן של "החלפת שמות" בלבד. ב-$r=3$ שינוי של $\Delta\theta$ מזיז נקודה לאורך קשת $3\Delta\theta$, ולכן
+          השטח גדל פי 3.
+        misconception: MC-c11-polar-jacobian-one
+
+  - id: Q-11.3-cyl
+    type: numeric
+    objectives: [OBJ-11.3-2]
+    level: basic
+    prompt: >-
+      קואורדינטות גליליות: $x=r\cos\theta$, $y=r\sin\theta$, $z=z$. חשבו את
+      $\frac{\partial(x,y,z)}{\partial(r,\theta,z)}$ בנקודה $(r,\theta,z)=\left(2,\frac{\pi}{3},5\right)$.
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. השורה של $z$ היא $(0,0,1)$, ולכן הדטרמיננטה היא היעקוביאן הקוטבי $r=2$. הגובה $z=5$ אינו משפיע.
+    wrongFeedback: >-
+      פתחו את הדטרמיננטה מסדר 3 לפי השורה של $z$, $(0,0,1)$: נשאר היעקוביאן של הקוטביות.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          שכחתם את הגורם $r$: גם בגליליות התנועה בכיוון $\theta$ היא לאורך קשת $r\Delta\theta$.
+        misconception: MC-c11-polar-jacobian-one
+
+  - id: Q-11.3-spherical
+    type: mc
+    objectives: [OBJ-11.3-2]
+    level: basic
+    prompt: >-
+      $x=r\sin\theta\cos\varphi$, $y=r\sin\theta\sin\varphi$, $z=r\cos\theta$ ($\theta$ מציר $z$). מהו
+      $\frac{\partial(x,y,z)}{\partial(r,\theta,\varphi)}$?
+    choices:
+      - text: '$r^2\sin\theta$'
+        correct: true
+        feedback: >-
+          נכון. התיבה הקטנה היא $\Delta r$ לאורך הרדיוס, $r\Delta\theta$ לאורך קו האורך, ו-$r\sin\theta\,\Delta\varphi$ לאורך
+          מעגל הרוחב (שהרדיוס שלו $r\sin\theta$), והם מאונכים זה לזה.
+      - text: '$r^2$'
+        feedback: >-
+          חסר $\sin\theta$: מעגל הרוחב שבו נע $\varphi$ הוא ברדיוס $r\sin\theta$, לא $r$. ליד הקטבים התאים צרים מאוד.
+        misconception: MC-c11-spherical-jacobian-no-sin
+      - text: '$r^2\cos\theta$'
+        feedback: >-
+          $r^2\cos\theta$ מתאים לזווית שנמדדת **מהמישור** $xy$ (קו רוחב גיאוגרפי). בקורס $\theta$ נמדדת מציר $z$, והרדיוס
+          של מעגל הרוחב הוא $r\sin\theta$.
+        misconception: MC-c11-sphere-angle-convention
+      - text: '$r$'
+        feedback: >-
+          זה היעקוביאן של הקוטביות והגליליות. בכדוריות שתי קואורדינטות הן זוויות, וכל אחת תורמת גורם של אורך.
+        misconception: MC-c11-spherical-jacobian-no-sin
+
+  - id: Q-11.3-area-factor
+    type: numeric
+    objectives: [OBJ-11.3-3]
+    level: basic
+    prompt: >-
+      ההעתקה הלינארית $(u,v)\mapsto(x,y)=(2u+v,\ u+3v)$ שולחת את ריבוע היחידה $0\le u,v\le1$ למקבילית. מה השטח שלה?
+    answer: 5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. היעקוביאן הוא $\det\begin{pmatrix}2&1\\1&3\end{pmatrix}=5$, קבוע, ולכן כל שטח גדל פי 5. המקבילית נפרשת על ידי
+      $(2,1)$ ו-$(1,3)$, ושטחה $|2\cdot3-1\cdot1|=5$.
+    wrongFeedback: >-
+      בהעתקה לינארית מטריצת הנגזרות קבועה, והיעקוביאן הוא מקדם השטח בכל מקום. חשבו את הדטרמיננטה.
+
+  - id: Q-11.3-linear-approx
+    type: numeric
+    objectives: [OBJ-11.3-1]
+    level: mid
+    prompt: >-
+      $F(x,y)=\big(x^2y,\ 3x+y^2\big)$. קרבו בעזרת מטריצת הנגזרות ב-$(1,2)$ את הרכיב הראשון של $F(1.1,\ 1.9)$.
+    answer: 2.3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $F(1,2)=(2,7)$ ו-$J\binom{0.1}{-0.1}=\binom{4\cdot0.1+1\cdot(-0.1)}{3\cdot0.1+4\cdot(-0.1)}=\binom{0.3}{-0.1}$, לכן
+      $F_1\approx2.3$. הערך המדויק $1.21\cdot1.9=2.299$.
+    wrongFeedback: >-
+      $\Delta\vec x=(0.1,-0.1)$. הרכיב הראשון של $J\Delta\vec x$ הוא השורה הראשונה של $J$, $(4,1)$, כפול $\Delta\vec x$.
+    commonWrong:
+      - value: 2.1
+        feedback: >-
+          השתמשתם בעמודה הראשונה $(4,3)$ במקום בשורה הראשונה $(4,1)$. השינוי של $F_1$ בא מהגרדיאנט של $F_1$, שהוא השורה.
+        misconception: MC-c11-jacobian-transpose
+
+  - id: Q-11.3-polar-why
+    type: mc
+    objectives: [OBJ-11.3-2, OBJ-11.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      רשת קוטבית: מעגלים $r=1,2,3,\dots$ וקרניים כל $\Delta\theta$. למה היעקוביאן $\frac{\partial(x,y)}{\partial(r,\theta)}=r$
+      גדל עם $r$?
+    choices:
+      - text: 'כי תא של $\Delta r\times\Delta\theta$ רחוק מהראשית הוא קשת ארוכה יותר, $r\Delta\theta$, ולכן שטחו גדול יותר'
+        correct: true
+        feedback: >-
+          נכון. התא הוא בקירוב מלבן בצלעות $\Delta r$ ו-$r\Delta\theta$, ושטחו $r\,\Delta r\,\Delta\theta$. אותה זווית "פורשת"
+          יותר מקום ככל שמתרחקים.
+      - text: 'כי $r$ הוא אורך וקטור המקום, וכל יעקוביאן שווה לאורך של וקטור המקום'
+        feedback: >-
+          זה מקרי לקוטביות. בכדוריות היעקוביאן $r^2\sin\theta$, ובהעתקה $(2u+v,u+3v)$ הוא 5 בכל מקום. היעקוביאן הוא מקדם
+          שינוי השטח של התא, ולא אורך של וקטור.
+        misconception: MC-c11-jacobian-matrix-vs-det
+      - text: 'הוא לא באמת גדל: $dx\,dy=dr\,d\theta$, והגורם $r$ הוא רק מוסכמה'
+        feedback: >-
+          ליד הראשית תא $\Delta r\times\Delta\theta$ הוא משולש זעיר, ורחוק ממנה הוא רצועה רחבה. בלי הגורם $r$ השטחים
+          היו יוצאים שגויים.
+        misconception: MC-c11-polar-jacobian-one
+
+  - id: Q-11.3-ellipse
+    type: expr
+    objectives: [OBJ-11.3-2, OBJ-11.3-1]
+    level: mid
+    prompt: >-
+      "קוטביות אליפטיות": $x=2r\cos t$, $y=3r\sin t$. חשבו את $\frac{\partial(x,y)}{\partial(r,t)}$ במשתנים $r,t$.
+    answer: '6*r'
+    answerTex: '$\dfrac{\partial(x,y)}{\partial(r,t)}=6r$'
+    variables: [r, t]
+    domain: [0.3, 2]
+    correctFeedback: >-
+      נכון. $\det\begin{pmatrix}2\cos t&-2r\sin t\\ 3\sin t&3r\cos t\end{pmatrix}=6r\cos^2t+6r\sin^2t=6r$: היעקוביאן הקוטבי
+      כפול $2\cdot3$, כי ההעתקה מותחת פי 2 בכיוון $x$ ופי 3 בכיוון $y$.
+    wrongFeedback: >-
+      כתבו את ארבע הנגזרות החלקיות וחשבו $x_ry_t-x_ty_r$.
+    commonWrong:
+      - expr: '6'
+        feedback: >-
+          שכחתם את $r$: הנגזרות לפי $t$ מוכפלות ב-$r$, כמו בקוטביות, ולכן גם הדטרמיננטה.
+        misconception: MC-c11-polar-jacobian-one
+      - expr: 'r'
+        feedback: >-
+          זה היעקוביאן של הקוטביות הרגילות. המתיחות פי 2 ופי 3 מכפילות את השטח פי 6.
+        misconception: MC-c11-polar-jacobian-one
+
+  - id: Q-11.3-negative
+    type: twotier
+    objectives: [OBJ-11.3-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      ההעתקה $(u,v)\mapsto(x,y)=(v,u)$ (שיקוף ביחס לישר $y=x$). היעקוביאן שלה $-1$. נכון או לא נכון: היא שומרת על
+      שטחים.
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: >-
+          נכון. מקדם השטח הוא $|-1|=1$. הסימן השלילי אומר שהיא הופכת כיוון: עקום נגד כיוון השעון הופך לעקום עם כיוון השעון.
+      - text: 'לא נכון'
+        feedback: >-
+          שיקוף לא משנה שטח של אף צורה. שטח הוא חיובי תמיד, והמקדם שלו הוא הערך המוחלט של היעקוביאן.
+        misconception: MC-c11-jacobian-sign-area
+    reasons:
+      - text: 'מקדם השטח הוא הערך המוחלט של היעקוביאן; הסימן מראה רק היפוך של הכיוון'
+        correct: true
+        feedback: 'בדיוק. כך גם $dx\,dy=\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv$.'
+      - text: 'היעקוביאן שלילי, ולכן השטחים מוכפלים ב-$-1$ והופכים לשליליים'
+        feedback: 'אין שטח שלילי: הריבוע $[0,1]^2$ עובר לעצמו, ושטחו 1 לפני ואחרי.'
+        misconception: MC-c11-jacobian-sign-area
+      - text: 'היעקוביאן לא קשור לשטח, רק לכיוון'
+        feedback: >-
+          הוא קשור לשניהם: הגודל שלו הוא מקדם השטח, והסימן שלו הוא הכיוון. ב-$(2u+v,u+3v)$, למשל, השטח גדל פי 5.
+        misconception: MC-c11-jacobian-matrix-vs-det
+
+  - id: Q-11.3-polar-cell
+    type: numeric
+    objectives: [OBJ-11.3-3, OBJ-11.3-2]
+    level: mid
+    prompt: >-
+      התא הקוטבי $2\le r\le2.1$, $0\le\theta\le0.1$ הוא חתיכה של טבעת. קרבו את השטח שלו בעזרת היעקוביאן בפינה $r=2$:
+      $\left|\frac{\partial(x,y)}{\partial(r,\theta)}\right|\Delta r\,\Delta\theta$.
+    answer: 0.02
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון: $2\cdot0.1\cdot0.1=0.02$. השטח המדויק (גזרה של טבעת) הוא $\frac{0.1}{2}(2.1^2-2^2)=0.0205$: הקירוב טוב, ושגיאתו
+      קטנה כשהתא קטן.
+    wrongFeedback: >-
+      היעקוביאן של הקוטביות הוא $r$. הכפילו $r=2$ ב-$\Delta r=0.1$ וב-$\Delta\theta=0.1$.
+    commonWrong:
+      - value: 0.01
+        feedback: >-
+          $\Delta r\,\Delta\theta$ בלי הגורם $r$. במרחק 2 מהראשית זווית של $0.1$ פורשת קשת באורך $0.2$, לא $0.1$.
+        misconception: MC-c11-polar-jacobian-one
+
+  - id: Q-11.3-spherical-cell
+    type: numeric
+    objectives: [OBJ-11.3-3, OBJ-11.3-2]
+    level: mid
+    prompt: >-
+      תא כדורי קטן סביב $r=2$, $\theta=\frac{\pi}{6}$ עם $\Delta r=\Delta\theta=\Delta\varphi=0.01$. הנפח שלו הוא בקירוב
+      $k\cdot10^{-6}$. מהו $k$?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\Delta V\approx r^2\sin\theta\,\Delta r\,\Delta\theta\,\Delta\varphi=4\cdot\frac12\cdot10^{-6}$.
+    wrongFeedback: >-
+      הכפילו את היעקוביאן הכדורי $r^2\sin\theta$ בנקודה במכפלה $\Delta r\,\Delta\theta\,\Delta\varphi=10^{-6}$.
+    commonWrong:
+      - value: 4
+        feedback: 'זה $r^2$ בלי $\sin\theta$. ב-$\theta=\frac{\pi}{6}$ מעגל הרוחב ברדיוס $r\sin\theta=1$ בלבד.'
+        misconception: MC-c11-spherical-jacobian-no-sin
+      - value: 3.46410161513775
+        feedback: >-
+          זה $r^2\cos\theta=2\sqrt3$, לפי זווית שנמדדת מהמישור $xy$. בקורס $\theta$ נמדדת מציר $z$.
+        misconception: MC-c11-sphere-angle-convention
+
+  - id: Q-11.3-uv
+    type: numeric
+    objectives: [OBJ-11.3-1, OBJ-11.3-3]
+    level: exam
+    prompt: >-
+      ברביע הראשון מגדירים $u=\frac{y}{x}$, $v=xy$. ההעתקה ההפוכה היא $x=\sqrt{v/u}$, $y=\sqrt{uv}$ (לפי סיכומי ההרצאות,
+      עמ׳ 76). פי כמה גדל (או קטן) שטח של תא קטן $\Delta u\,\Delta v$ סביב $(u,v)=(2,8)$ כשעוברים ממנו לתא במישור
+      $xy$? כלומר, חשבו $\left|\frac{\partial(x,y)}{\partial(u,v)}\right|$ שם.
+    answer: 0.25
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x_u=-\frac12v^{1/2}u^{-3/2}$, $x_v=\frac12u^{-1/2}v^{-1/2}$, $y_u=\frac12v^{1/2}u^{-1/2}$,
+      $y_v=\frac12u^{1/2}v^{-1/2}$, ו-$x_uy_v-x_vy_u=-\frac{1}{4u}-\frac{1}{4u}=-\frac{1}{2u}$. ב-$u=2$ הערך המוחלט
+      $\frac14$. (בדיקה: $\frac{\partial(u,v)}{\partial(x,y)}=-\frac{2y}{x}=-2u=-4$, ההופכי.)
+    wrongFeedback: >-
+      גזרו את $x=\sqrt{v/u}$ ו-$y=\sqrt{uv}$ לפי $u$ ולפי $v$, חשבו את הדטרמיננטה, והציבו $u=2$, $v=8$. מקדם השטח הוא הערך
+      המוחלט.
+    commonWrong:
+      - value: 4
+        feedback: >-
+          4 הוא $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|=\frac{2y}{x}$ ב-$(x,y)=(2,4)$: מקדם השטח של ההעתקה
+          **ההפוכה**, מ-$xy$ ל-$uv$.
+        misconception: MC-c11-jacobian-direction
+      - value: -0.25
+        feedback: >-
+          זה היעקוביאן עצמו. מקדם שינוי השטח הוא הערך המוחלט שלו; שטח אינו שלילי.
+        misconception: MC-c11-jacobian-sign-area

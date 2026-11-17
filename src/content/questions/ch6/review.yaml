@@ -1,0 +1,289 @@
+# Chapter 6 review — Taylor series (lessons 6.1–6.5), easy to hard.
+# Every lesson is touched; most questions combine two lessons, some reach back to chapter 5 (derivatives, extrema).
+# Each hint names the lesson to go back to. Keys recomputed in screens/tools/recompute-ch6.py.
+chapter: 6
+questions:
+  - id: Q-6-review-01
+    type: numeric
+    objectives: [OBJ-6.1-2, OBJ-6.3-2]
+    level: basic
+    prompt: 'מהו המקדם של $x^2$ בפולינום טיילור סביב 0 של $e^{2x}$?'
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $e^{2x}=1+2x+\frac{(2x)^2}{2!}+\dots$, והמקדם של $x^2$ הוא $\frac42=2$. (או: $f''(0)=4$, חלקי $2!$.)
+    wrongFeedback: 'הציבו $u=2x$ בטור של $e^u$, או חשבו $\frac{f''''(0)}{2!}$.'
+    commonWrong:
+      - value: 4
+        feedback: 'זה $f''''(0)=4$. המקדם הוא $\frac{f''''(0)}{2!}=2$.'
+        misconception: MC-c6-forget-factorial
+      - value: 0.5
+        feedback: 'זה המקדם $\frac{1}{2!}$ של $e^x$. ההצבה $u=2x$ מעלה את 2 בריבוע: $(2x)^2=4x^2$.'
+        misconception: MC-c6-subst-match-powers
+    hints: ['חזרו לשיעור 6.1 (מקדמי טיילור) ולשיעור 6.3 (הצבה בטור).']
+
+  - id: Q-6-review-02
+    type: mc
+    objectives: [OBJ-6.3-1, OBJ-6.4-1]
+    level: basic
+    prompt: 'איזו שורה נכונה לגבי טור טיילור סביב 0 של $\ln(1+x)$?'
+    choices:
+      - text: '$x-\frac{x^2}{2}+\frac{x^3}{3}-\dots$, ורדיוס ההתכנסות 1'
+        correct: true
+        feedback: 'נכון. זו האינטגרציה של הטור ההנדסי $1-x+x^2-\dots$, שמתכנס כש-$|x|<1$.'
+      - text: '$x-\frac{x^2}{2!}+\frac{x^3}{3!}-\dots$, ורדיוס ההתכנסות אינסופי'
+        feedback: 'בטור של הלוגריתם המכנים הם $k$ ולא $k!$, והרדיוס 1, כמו של הטור ההנדסי שממנו הוא בא.'
+        misconception: MC-c6-ln-factorial
+      - text: '$x-\frac{x^2}{2}+\frac{x^3}{3}-\dots$, ורדיוס ההתכנסות אינסופי, כי $\ln(1+x)$ מוגדרת לכל $x>-1$'
+        feedback: >-
+          מוגדרות הפונקציה אינה קובעת את הרדיוס. ב-$x=2$ האיברים $\frac{2^k}{k}$ גדלים, והטור מתבדר.
+        misconception: MC-c6-series-beyond-radius
+    hints: ['חזרו לשיעור 6.3 (הטורים הסטנדרטיים) ולשיעור 6.4 (רדיוס ההתכנסות).']
+
+  - id: Q-6-review-03
+    type: numeric
+    objectives: [OBJ-6.4-2, OBJ-6.2-2]
+    level: basic
+    prompt: >-
+      מקרבים $\cos(0.2)\approx1-\frac{(0.2)^2}{2}=0.98$. הטור של $\cos$ ב-$x=0.2$ הוא טור לייבניץ. מהו החסם על השגיאה לפי
+      האיבר הראשון שהושמט?
+    answer: 0.0000666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון: $\frac{(0.2)^4}{4!}=\frac{0.0016}{24}\approx6.67\cdot10^{-5}$. (שארית לגרנז׳ של $T_3=T_2$ נותנת אותו חסם.)
+    wrongFeedback: 'האיבר הבא בטור אחרי $-\frac{x^2}{2}$ הוא $\frac{x^4}{24}$.'
+    commonWrong:
+      - value: 0.02
+        feedback: 'זה $\frac{(0.2)^2}{2}$, האיבר האחרון שנכלל. החסם הוא האיבר הראשון שהושמט.'
+        misconception: MC-c6-leibniz-last-included
+      - value: 0.00133333333333
+        feedback: >-
+          זה $\frac{(0.2)^3}{3!}$, חסם השארית של $T_2$ עם הנגזרת השלישית. אבל האיבר של $x^3$ בקוסינוס אפס, ולכן $T_2=T_3$
+          ומותר להשתמש בשארית מסדר 3, עם $(0.2)^4$.
+        misconception: MC-c6-remainder-order
+    hints: ['חזרו לשיעור 6.4 (חסם לייבניץ) ולשיעור 6.2 (שארית לגרנז׳).']
+
+  - id: Q-6-review-04
+    type: expr
+    objectives: [OBJ-6.3-2, OBJ-6.1-2]
+    level: mid
+    prompt: 'כתבו את פולינום טיילור מסדר 3 סביב 0 של $xe^{-x}$.'
+    answer: 'x - x^2 + x^3/2'
+    answerTex: '$x-x^2+\frac{x^3}{2}$'
+    variables: [x]
+    domain: [-1, 1]
+    correctFeedback: 'נכון. $x\left(1-x+\frac{x^2}{2}-\dots\right)=x-x^2+\frac{x^3}{2}-\dots$'
+    wrongFeedback: 'כתבו את $e^{-x}$ עד $x^2$ וכפלו ב-$x$.'
+    commonWrong:
+      - expr: 'x - x^2 + x^3'
+        feedback: 'המקדם של $x^2$ ב-$e^{-x}$ הוא $\frac{1}{2!}$.'
+        misconception: MC-c6-forget-factorial
+      - expr: 'x + x^2 + x^3/2'
+        feedback: 'ב-$e^{-x}$ הסימנים מתחלפים: $1-x+\frac{x^2}{2}$.'
+        misconception: MC-c6-alternating-sign-lost
+    hints: ['חזרו לשיעור 6.3: כפל טור בפולינום.']
+
+  - id: Q-6-review-05
+    type: numeric
+    objectives: [OBJ-6.3-2, OBJ-6.1-1]
+    level: mid
+    prompt: 'תהי $f(x)=x^2\cos x$. חשבו את $f^{(6)}(0)$.'
+    answer: 30
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $x^2\cos x=x^2-\frac{x^4}{2}+\frac{x^6}{24}-\dots$, ולכן $f^{(6)}(0)=6!\cdot\frac{1}{24}=\frac{720}{24}=30$. גזירה
+      שש פעמים בכלל המכפלה הייתה ארוכה בהרבה.
+    wrongFeedback: 'מצאו את המקדם של $x^6$ (הוא בא מ-$\frac{x^4}{4!}$ של קוסינוס) והכפילו ב-$6!$.'
+    commonWrong:
+      - value: 0.0416666666667
+        feedback: 'זה המקדם $a_6=\frac{1}{24}$. הנגזרת היא $6!\cdot a_6$.'
+        misconception: MC-c6-coeff-is-derivative
+      - value: -1
+        feedback: >-
+          זה $6!\cdot\left(-\frac{1}{720}\right)$, עם המקדם של $x^6$ בטור של $\cos x$ עצמו. הכפל ב-$x^2$ מזיז כל איבר שתי חזקות
+          למעלה, ולכן $x^6$ בא מ-$x^2\cdot\frac{x^4}{24}$.
+        misconception: MC-c6-product-termwise
+    hints: ['חזרו לשיעור 6.3 (נגזרות מתוך הטור) ולשיעור 6.1 (המקדם הוא נגזרת חלקי עצרת).']
+
+  - id: Q-6-review-06
+    type: twotier
+    objectives: [OBJ-6.1-3, OBJ-6.5-1, OBJ-5.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      פולינום טיילור מסדר 2 של $f$ סביב $a$ הוא $T_2(x)=3+2(x-a)^2$. נכון או לא: ל-$f$ יש מינימום מקומי ב-$a$.
+    choices:
+      - text: נכון
+        correct: true
+        feedback: >-
+          נכון. מהמקדמים: $f'(a)=0$ ו-$\frac{f''(a)}{2}=2$, כלומר $f''(a)=4>0$. משיק אופקי ופרבולה צמודה פתוחה למעלה.
+      - text: לא נכון
+        feedback: >-
+          אין איבר לינארי, ולכן $f'(a)=0$; והמקדם החיובי של $(x-a)^2$ נותן $f''(a)>0$. זה בדיוק מבחן הנגזרת השנייה.
+        misconception: MC-c6-osculating-tangent-only
+    reasons:
+      - text: '$f''(a)=0$ ו-$f''''(a)=4>0$, שניהם נקראים מתוך $T_2$'
+        correct: true
+        feedback: 'בדיוק. $T_2$ מקודד את הערך, השיפוע והנגזרת השנייה בנקודה.'
+      - text: 'כי $T_2(a)=3>0$'
+        feedback: 'הערך בנקודה לא קובע קיצון. גם $3-2(x-a)^2$ מקיים $T_2(a)=3$, ושם יש מקסימום.'
+        misconception: MC-c6-skip-value-check
+      - text: 'כי $f$ שווה ל-$3+2(x-a)^2$ בסביבה של $a$'
+        feedback: >-
+          $f$ אינה בהכרח שווה ל-$T_2$; היא רק צמודה אליו. המסקנה נובעת מ-$f'(a)=0$ ו-$f''(a)>0$, לא משוויון.
+        misconception: MC-c6-taylor-global
+    hints: ['חזרו לשיעור 6.1 (הפרבולה הצמודה) ולשיעור 5.5 (נקודות קיצון).']
+
+  - id: Q-6-review-07
+    type: numeric
+    objectives: [OBJ-6.3-3, OBJ-6.3-1]
+    level: mid
+    prompt: 'חשבו: $\lim_{x\to0}\frac{\arctan x-x}{x^3}$.'
+    answer: -0.333333333333
+    tolerance: 0.001
+    correctFeedback: 'נכון. $\arctan x=x-\frac{x^3}{3}+\dots$, ולכן המנה שואפת ל-$-\frac13$.'
+    wrongFeedback: 'פתחו את $\arctan x$ עד $x^3$.'
+    commonWrong:
+      - value: -0.166666666667
+        feedback: 'זה מתקבל מ-$\arctan x\approx x-\frac{x^3}{3!}$, כמו סינוס. בטור של $\arctan$ המכנה 3, בלי עצרת.'
+        misconception: MC-c6-arctan-factorials
+      - value: 0
+        feedback: 'מ-$\arctan x\approx x$ מתקבל מונה 0; פתחו עד החזקה של המכנה.'
+        misconception: MC-c6-truncate-too-early
+    hints: ['חזרו לשיעור 6.3: הטור של $\arctan$ וגבולות בעזרת טורים.']
+
+  - id: Q-6-review-08
+    type: numeric
+    objectives: [OBJ-6.4-2, OBJ-6.2-3]
+    level: mid
+    prompt: >-
+      $e^{-1}=\sum_{k=0}^\infty\frac{(-1)^k}{k!}=1-1+\frac12-\frac16+\dots$ כמה איברים (החל מ-$k=0$) צריך לסכם כדי שהשגיאה
+      תהיה בוודאות קטנה מ-0.001 לפי חסם לייבניץ?
+    answer: 7
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. אחרי $m$ איברים ($k=0,\dots,m-1$) האיבר הראשון שהושמט הוא $\frac{1}{m!}$. $\frac{1}{6!}=\frac{1}{720}>0.001$
+      ו-$\frac{1}{7!}=\frac{1}{5040}<0.001$, ולכן $m=7$.
+    wrongFeedback: 'מצאו את ה-$m$ הקטן ביותר עם $\frac{1}{m!}<0.001$.'
+    commonWrong:
+      - value: 8
+        feedback: >-
+          דרשתם שהאיבר האחרון ש**נכלל** יהיה קטן מ-0.001. החסם הוא האיבר הראשון שהושמט, וזה חוסך איבר.
+        misconception: MC-c6-leibniz-last-included
+    hints: ['חזרו לשיעור 6.4 (חסם לייבניץ) ולשיעור 6.2 (בחירת סדר לדיוק נתון).']
+
+  - id: Q-6-review-09
+    type: multi
+    objectives: [OBJ-6.4-1, OBJ-6.3-1]
+    qualitative: true
+    level: mid
+    prompt: 'אילו מהטענות על $1+x+x^2+x^3+\dots$ נכונות? סמנו את כולן.'
+    choices:
+      - text: 'כש-$|x|<1$ הסכום הוא $\frac{1}{1-x}$'
+        correct: true
+        feedback: 'נכון. זה הטור ההנדסי.'
+      - text: 'ב-$x=-1$ הטור מתבדר'
+        correct: true
+        feedback: >-
+          נכון. $1-1+1-1+\dots$: הסכומים החלקיים $1,0,1,0,\dots$ אינם מתכנסים, אף ש-$\frac{1}{1-(-1)}=\frac12$ מוגדר.
+      - text: 'ב-$x=-1$ הסכום הוא $\frac12$, כי זה טור מתחלף'
+        feedback: >-
+          לטור לייבניץ צריך איברים ש**שואפים לאפס**; כאן כל האיברים $\pm1$. הסכומים החלקיים קופצים בין 1 ל-0.
+        misconception: MC-c6-radius-endpoints
+      - text: 'ב-$x=3$ הסכום הוא $-\frac12$'
+        feedback: 'מחוץ לרדיוס הטור מתבדר: $1+3+9+\dots\to\infty$. השוויון לפונקציה תקף רק כש-$|x|<1$.'
+        misconception: MC-c6-series-beyond-radius
+    hints: ['חזרו לשיעור 6.4: תחום ההתכנסות והקצוות.']
+
+  - id: Q-6-review-10
+    type: numeric
+    objectives: [OBJ-6.5-1, OBJ-6.1-1]
+    level: mid
+    prompt: 'באיזה $x$ יש ל-$f(x)=xe^x$ נקודת פיתול?'
+    answer: -2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f'=(x+1)e^x$ ו-$f''=(x+2)e^x$ (בכל גזירה נוסף 1 בסוגריים: $f^{(n)}=(x+n)e^x$). $f''$ מחליפה סימן ב-$x=-2$.
+    wrongFeedback: 'גזרו פעמיים בכלל המכפלה ומצאו איפה $f''''$ מחליפה סימן.'
+    commonWrong:
+      - value: -1
+        feedback: 'ב-$x=-1$ מתאפסת $f''$: זה המינימום של $f$. נקודת פיתול מחפשים ב-$f''''$.'
+        misconception: MC-c6-inflection-is-critical
+    hints: ['חזרו לשיעור 6.1 (נגזרות מסדר גבוה) ולשיעור 6.5 (נקודות פיתול).']
+
+  - id: Q-6-review-11
+    type: mc
+    objectives: [OBJ-6.1-2, OBJ-6.2-1]
+    qualitative: true
+    level: basic
+    prompt: 'מהו פולינום טיילור מסדר 5 של $f(x)=x^3$ סביב 0, ומהי השארית $R_5(x)$?'
+    choices:
+      - text: '$T_5(x)=x^3$ והשארית אפס'
+        correct: true
+        feedback: >-
+          נכון. $f'''=6$ וכל הנגזרות מסדר 4 ומעלה אפס, כך ש-$T_5=\frac{6}{3!}x^3=x^3$ ו-$R_5=\frac{f^{(6)}(c)}{6!}x^6=0$.
+      - text: '$T_5(x)=x^3$, אבל יש שארית קטנה כי כל קירוב טיילור שוגה'
+        feedback: 'לפולינום ממעלה 3, השארית של $T_n$ עם $n\ge3$ מכילה נגזרת מסדר $\ge4$, שהיא אפס.'
+        misconception: MC-c6-poly-taylor-different
+      - text: 'אין $T_5$, כי $x^3$ ממעלה 3 בלבד'
+        feedback: '$T_5$ קיים לכל פונקציה גזירה 5 פעמים; המקדמים של $x^4$ ו-$x^5$ פשוט אפס.'
+        misconception: MC-c6-poly-taylor-different
+    hints: ['חזרו לשיעור 6.1 (פולינום שווה לפולינום הטיילור של עצמו) ולשיעור 6.2 (השארית).']
+
+  - id: Q-6-review-12
+    type: numeric
+    objectives: [OBJ-6.3-3]
+    level: exam
+    prompt: 'חשבו: $\lim_{x\to0}\frac{\sin x-x\cos x}{x-\sin x}$.'
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. מונה: $\left(x-\frac{x^3}{6}\right)-x\left(1-\frac{x^2}{2}\right)+\dots=\frac{x^3}{3}+\dots$; מכנה: $\frac{x^3}{6}+\dots$.
+      היחס שואף ל-$\frac{1/3}{1/6}=2$.
+    wrongFeedback: 'פתחו מונה ומכנה עד $x^3$ ומצאו את האיבר המוביל של כל אחד.'
+    commonWrong:
+      - value: 3
+        feedback: >-
+          זה מתקבל מ-$\sin x\approx x$ במונה: $x-x\cos x\approx\frac{x^3}{2}$. גם $-\frac{x^3}{6}$ של הסינוס במונה ממעלה 3, וצריך
+          אותו.
+        misconception: MC-c6-truncate-too-early
+    hints: ['חזרו לשיעור 6.3: האיבר המוביל של מונה ושל מכנה.']
+
+  - id: Q-6-review-13
+    type: mc
+    objectives: [OBJ-6.5-3, OBJ-6.3-1]
+    level: exam
+    prompt: 'איך נראה הגרף של $f(x)=x-\ln(1+x)$ ליד $x=0$?'
+    choices:
+      - text: 'כמו $\frac{x^2}{2}$: מינימום מקומי 0 בראשית, ופתוח למעלה'
+        correct: true
+        feedback: >-
+          נכון. $x-\ln(1+x)=\frac{x^2}{2}-\frac{x^3}{3}+\dots$; האיבר המוביל ממעלה זוגית ובמקדם חיובי. ($f\ge0$ אפילו לכל
+          $x>-1$.)
+      - text: 'כמו $-\frac{x^2}{2}$: מקסימום בראשית'
+        feedback: '$\ln(1+x)=x-\frac{x^2}{2}+\dots$, ולכן $x-\ln(1+x)=+\frac{x^2}{2}+\dots$: מינוס כפול מינוס.'
+        misconception: MC-c6-alternating-sign-lost
+      - text: 'כמו $\frac{x^3}{3}$: נקודת פיתול בראשית'
+        feedback: 'האיבר המוביל הוא הראשון שאינו אפס, $\frac{x^2}{2}$; $\frac{x^3}{3}$ רק מתקן אותו.'
+        misconception: MC-c6-second-test-final
+    hints: ['חזרו לשיעור 6.5 (ההתנהגות המובילה) ולשיעור 6.3 (הטור של הלוגריתם).']
+
+  - id: Q-6-review-14
+    type: expr
+    objectives: [OBJ-6.3-2, OBJ-6.4-1]
+    level: exam
+    prompt: >-
+      כתבו את פולינום טיילור מסדר 3 סביב 0 של $\frac{e^x}{1-x}$ (כמכפלה של שני טורים). באיזה תחום הפיתוח תקף?
+    answer: '1 + 2*x + 5*x^2/2 + 8*x^3/3'
+    answerTex: '$1+2x+\frac52x^2+\frac83x^3$'
+    variables: [x]
+    domain: [-0.5, 0.5]
+    correctFeedback: >-
+      נכון. $\left(1+x+\frac{x^2}{2}+\frac{x^3}{6}\right)(1+x+x^2+x^3)$: המקדם של $x^n$ הוא סכום המקדמים של $e^x$ עד $n$,
+      כלומר $1$, $2$, $\frac52$, $\frac83$. הטור ההנדסי מגביל את התחום ל-$|x|<1$.
+    wrongFeedback: 'במכפלה, המקדם של $x^n$ הוא $\sum_{i+j=n}a_ib_j$, וכאן כל $b_j=1$.'
+    commonWrong:
+      - expr: '1 + x + x^2/2 + x^3/6'
+        feedback: 'כפלתם מקדם במקדם באותה חזקה ($a_nb_n$). המקדם של $x^n$ אוסף את כל הזוגות $i+j=n$.'
+        misconception: MC-c6-product-termwise
+    hints: ['חזרו לשיעור 6.3 (מכפלת טורים) ולשיעור 6.4 (רדיוס ההתכנסות).']

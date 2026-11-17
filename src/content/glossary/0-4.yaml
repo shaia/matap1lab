@@ -1,0 +1,24 @@
+# Terms first used in lesson 0.4 (lines and circles in the plane).
+- id: slope
+  term: שיפוע
+  en: slope
+  symbol: 'm=\frac{y_2-y_1}{x_2-x_1}'
+  definition: >-
+    של ישר לא אנכי: כמה $y$ עולה לכל יחידה של $x$, $m=\frac{y_2-y_1}{x_2-x_1}$ לכל שתי נקודות על הישר. בישר
+    $y=mx+n$ זה המקדם של $x$; לישר שיוצר זווית $\alpha$ עם ציר ה-$x$, $m=\tan\alpha$. ישרים מקבילים: אותו שיפוע;
+    מאונכים: $m_1m_2=-1$.
+  lesson: '0.4'
+- id: perpendicular-bisector
+  term: אנך אמצעי
+  en: perpendicular bisector
+  definition: >-
+    של קטע $AB$: הישר שעובר באמצע הקטע ומאונך לו. זו בדיוק קבוצת הנקודות שמרחקן מ-$A$ שווה למרחקן מ-$B$.
+  lesson: '0.4'
+- id: completing-the-square
+  term: השלמה לריבוע
+  en: completing the square
+  symbol: 'x^2+bx=\left(x+\tfrac b2\right)^2-\tfrac{b^2}{4}'
+  definition: >-
+    כתיבה מחדש של $x^2+bx$ כריבוע פחות קבוע: $\left(x+\frac b2\right)^2-\frac{b^2}4$. בעזרתה מביאים משוואה
+    $x^2+y^2+Dx+Ey+F=0$ לצורה $(x-a)^2+(y-b)^2=K$ וקוראים ממנה מרכז ורדיוס (כש-$K>0$).
+  lesson: '0.4'

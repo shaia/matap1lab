@@ -1,0 +1,9 @@
+# Terms first defined in lesson 10.5 (the chain rule in several variables).
+- id: dependency-tree
+  term: עץ תלויות
+  en: dependency tree (chain-rule diagram)
+  definition: >-
+    תרשים של מי תלוי במי: המשתנה התלוי למעלה, המשתנים שהוא תלוי בהם מתחתיו, ומתחתם המשתנים שהם תלויים בהם. על כל חץ
+    כותבים את הנגזרת המתאימה. כלל השרשרת: הנגזרת לפי משתנה בתחתית היא הסכום, על כל המסלולים מלמעלה אליו, של מכפלת
+    הנגזרות לאורך המסלול.
+  lesson: '10.5'

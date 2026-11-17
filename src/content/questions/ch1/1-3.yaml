@@ -1,0 +1,312 @@
+# Lesson 1.3 — lines and planes (notes pp. 25–27, 30–33).
+# Objectives (src/course.ts):
+#   OBJ-1.3-1  a line in space in parametric and canonical (symmetric) form, through a point and a direction or two points
+#   OBJ-1.3-2  a plane from a point and a normal vector; read the coefficients of the plane equation
+#   OBJ-1.3-3  intersect a line and a plane, check whether a point is on a plane, distance from a point to a plane
+# The line through (1,1,8) in direction (2,3,-5) and the plane x - 3y + 5z = -20 are the notes' examples (pp. 25-26,
+# 30-31), recomputed; p. 31 has an arithmetic slip (1 - 6 + 25 = 20, not -20), used in Q-1.3-notes-slip.
+# Every number recomputed in screens/tools/recompute-ch1.py.
+chapter: 1
+questions:
+  - id: Q-1.3-line-param
+    type: expr
+    objectives: [OBJ-1.3-1]
+    level: basic
+    prompt: >-
+      כתבו את הישר דרך הנקודה $(1,1,8)$ בכיוון $\vec v=(2,3,-5)$ בצורה פרמטרית $\vec r(t)=(x(t),y(t),z(t))$. מהו $z(t)$?
+      כתבו ביטוי במשתנה $t$.
+    answer: '8 - 5*t'
+    answerTex: '$z(t)=8-5t$'
+    variables: [t]
+    correctFeedback: >-
+      נכון. $\vec r(t)=(1,1,8)+t(2,3,-5)=(1+2t,\ 1+3t,\ 8-5t)$. ב-$t=0$ הישר בנקודה הנתונה, וכל יחידה של $t$ מזיזה ב-$\vec v$.
+    wrongFeedback: >-
+      $\vec r(t)=P_0+t\vec v$: הרכיב השלישי של הנקודה ועוד $t$ כפול הרכיב השלישי של הכיוון.
+    commonWrong:
+      - expr: '-5 + 8*t'
+        feedback: >-
+          החלפתם בין הנקודה לכיוון: ב-$t=0$ הישר שלכם ב-$z=-5$, ולא בנקודה הנתונה. הנקודה היא האיבר הקבוע, הכיוון מוכפל ב-$t$.
+        misconception: MC-c1-line-point-direction-swap
+    hints: ['$\vec r(t)=P_0+t\,\vec v$.']
+
+  - id: Q-1.3-on-line
+    type: twotier
+    objectives: [OBJ-1.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: הנקודה $(5,7,0)$ נמצאת על הישר $x=1+2t$, $y=1+3t$, $z=8-5t$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. מ-$x$ ומ-$y$ מתקבל $t=2$, אבל אז $z=8-10=-2\ne0$. (הנקודה $(5,7,-2)$ דווקא על הישר.)'
+      - text: 'נכון'
+        feedback: >-
+          $x=5$ נותן $t=2$, אבל ב-$t=2$ הנקודה על הישר היא $(5,7,-2)$. מ-$z=0$ היה יוצא $t=\frac85$: אין $t$ אחד לשלושת הרכיבים.
+        misconception: MC-c1-one-equation-enough
+    reasons:
+      - text: 'אין ערך אחד של $t$ שמקיים את שלוש המשוואות: $x,y$ נותנים $t=2$ ו-$z$ נותן $t=\frac85$'
+        correct: true
+        feedback: 'בדיוק. נקודה על הישר = $t$ אחד לכל הרכיבים.'
+      - text: '$5=1+2t$ נותן $t=2$, ולכן הנקודה על הישר'
+        feedback: >-
+          משוואה אחת מוצאת מועמד ל-$t$; צריך לבדוק אותו בשתי האחרות. ב-$z$ הוא נכשל.
+        misconception: MC-c1-one-equation-enough
+      - text: '$(5,7,0)-(1,1,8)=(4,6,-8)$ מקביל לכיוון $(2,3,-5)$'
+        feedback: >-
+          $(4,6,-8)$ אינו כפולה של $(2,3,-5)$: פי 2 היה נותן $-10$ ברכיב השלישי. לכן הנקודה אינה על הישר.
+        misconception: MC-c1-one-equation-enough
+
+  - id: Q-1.3-canonical
+    type: mc
+    objectives: [OBJ-1.3-1]
+    level: mid
+    prompt: >-
+      מהי הצורה הקנונית של הישר דרך $A=(2,-1,0)$ ו-$B=(4,0,3)$?
+    choices:
+      - text: '$\frac{x-2}{2}=\frac{y+1}{1}=\frac{z}{3}$'
+        correct: true
+        feedback: >-
+          נכון. הכיוון $\vec{AB}=(2,1,3)$, והנקודה $A$. בדיקה: $B$ נותנת $\frac22=\frac11=\frac33=1$.
+      - text: '$\frac{x-2}{4}=\frac{y+1}{0}=\frac{z}{3}$'
+        feedback: >-
+          לקחתם את $B$ עצמה ככיוון. הכיוון של ישר דרך שתי נקודות הוא $\vec{AB}=B-A=(2,1,3)$.
+        misconception: MC-c1-line-point-direction-swap
+      - text: '$\frac{x+2}{2}=\frac{y-1}{1}=\frac{z}{3}$'
+        feedback: >-
+          הסימנים של הנקודה התהפכו: $\frac{x+2}{2}$ מתאפס ב-$x=-2$, ולכן הישר הזה עובר ב-$(-2,1,0)$ ולא ב-$A$.
+        misconception: MC-c0-shift-sign
+      - text: '$\frac{x-2}{6}=\frac{y+1}{-1}=\frac{z}{3}$'
+        feedback: >-
+          $(6,-1,3)=A+B$ אינו כיוון הישר. הכיוון מ-$A$ ל-$B$ הוא $B-A$.
+        misconception: MC-c1-ab-sum
+    hints: ['$\frac{x-x_0}{a}=\frac{y-y_0}{b}=\frac{z-z_0}{c}$, עם $(a,b,c)=\vec{AB}$.']
+
+  - id: Q-1.3-canonical-zero
+    type: mc
+    objectives: [OBJ-1.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      איך כותבים בצורה קנונית את הישר דרך $(1,1,1)$ בכיוון $(0,2,3)$?
+    choices:
+      - text: '$x=1$ ו-$\frac{y-1}{2}=\frac{z-1}{3}$'
+        correct: true
+        feedback: >-
+          נכון. רכיב ה-$x$ של הכיוון 0, ולכן $x$ קבוע לאורך הישר: $x=1+0\cdot t$. שני האחרים בצורה הקנונית הרגילה.
+      - text: '$\frac{x-1}{0}=\frac{y-1}{2}=\frac{z-1}{3}$, כש-$x$ חופשי'
+        feedback: >-
+          אין חילוק באפס, ו-$x$ אינו חופשי: הוא **קבוע**. מ-$x=1+0\cdot t$ רואים ש-$x=1$ לכל $t$.
+        misconception: MC-c1-zero-denominator-line
+      - text: '$\frac{y-1}{2}=\frac{z-1}{3}$ בלבד'
+        feedback: >-
+          זו משוואה אחת בשלושה משתנים, והיא מתארת **מישור** (כל $x$ מותר). חסר התנאי $x=1$.
+        misconception: MC-c1-zero-denominator-line
+    hints: ['כתבו קודם את הצורה הפרמטרית ובדקו מה קורה ל-$x$.']
+
+  - id: Q-1.3-plane-d
+    type: numeric
+    objectives: [OBJ-1.3-2]
+    level: basic
+    prompt: >-
+      המישור דרך $(1,2,-3)$ עם הנורמל $\vec n=(1,-3,5)$ הוא $x-3y+5z=d$. מהו $d$?
+    answer: -20
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $d=\vec n\cdot P_0=1-6-15=-20$; או מ-$(x-1)-3(y-2)+5(z+3)=0$. בדיקה: $(1,2,-3)$ מקיימת $1-6-15=-20$.
+    wrongFeedback: >-
+      הנקודה הנתונה חייבת לקיים את המשוואה: הציבו אותה.
+    commonWrong:
+      - value: 20
+        feedback: >-
+          הסימן התהפך. מ-$\vec n\cdot(\vec r-P_0)=0$ מתקבל $\vec n\cdot\vec r=\vec n\cdot P_0$. בדיקה: הנקודה נותנת $-20$, לא 20.
+        misconception: MC-c1-plane-d-sign
+    hints: ['$d=ax_0+by_0+cz_0$.']
+
+  - id: Q-1.3-normal-read
+    type: multi
+    objectives: [OBJ-1.3-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      אילו מהווקטורים ניצבים (נורמלים) למישור $2x-y+4z=7$? סמנו את כולם.
+    choices:
+      - text: '$(2,-1,4)$'
+        correct: true
+        feedback: 'נכון. המקדמים של $x,y,z$ הם רכיבי הנורמל.'
+      - text: '$(-4,2,-8)$'
+        correct: true
+        feedback: 'נכון. כל כפולה (גם שלילית) של נורמל היא נורמל: $-2(2,-1,4)$.'
+      - text: '$\left(0,0,\frac74\right)$'
+        feedback: >-
+          זו **נקודה** על המישור, לא נורמל. $\left(0,0,\frac74\right)$ אינו כפולה של $(2,-1,4)$.
+        misconception: MC-c1-plane-coefficients
+      - text: '$(1,2,0)$'
+        feedback: >-
+          $(1,2,0)\cdot(2,-1,4)=0$: הווקטור הזה מאונך לנורמל, כלומר **מקביל** למישור.
+        misconception: MC-c1-normal-in-plane
+
+  - id: Q-1.3-plane-z
+    type: expr
+    objectives: [OBJ-1.3-2]
+    level: mid
+    prompt: >-
+      המישור עובר ב-$(1,2,-3)$ והנורמל שלו $(1,-3,5)$. כתבו את $z$ כפונקציה של $x$ ו-$y$ על המישור (במשתנים $x$, $y$).
+    answer: '(-20 - x + 3*y)/5'
+    answerTex: '$z=\frac{-20-x+3y}{5}=-4-\frac x5+\frac{3y}{5}$'
+    variables: [x, y]
+    correctFeedback: >-
+      נכון. המישור $x-3y+5z=-20$, ומבודדים את $z$. בדיקה: ב-$(x,y)=(1,2)$ מתקבל $z=\frac{-20-1+6}{5}=-3$.
+    wrongFeedback: >-
+      כתבו $(x-1)-3(y-2)+5(z+3)=0$, פתחו סוגריים ובודדו את $z$. בדקו שהנקודה הנתונה מקיימת את התשובה.
+    commonWrong:
+      - expr: '(20 - x + 3*y)/5'
+        feedback: >-
+          זה המישור $x-3y+5z=20$: הסימן של האיבר החופשי התהפך. ב-$(1,2)$ התשובה שלכם נותנת $z=5$, ולא $-3$.
+        misconception: MC-c1-plane-d-sign
+    hints: ['מצאו קודם את $d$ מהנקודה, ואז בודדו את $z$.']
+
+  - id: Q-1.3-parallel-planes
+    type: twotier
+    objectives: [OBJ-1.3-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: המישורים $2x-y+z=1$ ו-$-4x+2y-2z=5$ מקבילים (ואינם אותו מישור).
+    choices:
+      - text: 'נכון'
+        correct: true
+        feedback: 'נכון. הנורמלים $(2,-1,1)$ ו-$(-4,2,-2)=-2(2,-1,1)$ מקבילים, והמישורים שונים: חלוקה ב-$-2$ נותנת $2x-y+z=-\frac52\ne1$.'
+      - text: 'לא נכון'
+        feedback: >-
+          הכיוון של מישור נקבע לפי הנורמל בלבד, והנורמלים כאן פרופורציוניים. האיבר החופשי רק מזיז.
+        misconception: MC-c1-plane-coefficients
+    reasons:
+      - text: 'הנורמלים פרופורציוניים, ואחרי חלוקה ב-$-2$ האיברים החופשיים שונים ($1$ מול $-\frac52$)'
+        correct: true
+        feedback: 'בדיוק: אותו כיוון, הזזה שונה.'
+      - text: 'האיברים החופשיים 1 ו-5 שונים, ולכן המישורים נחתכים'
+        feedback: >-
+          האיבר החופשי אינו קובע כיוון. מישורים עם נורמלים מקבילים לעולם לא נחתכים בישר: הם מקבילים או זהים.
+        misconception: MC-c1-plane-coefficients
+      - text: 'הנורמלים מאונכים זה לזה'
+        feedback: >-
+          $(2,-1,1)\cdot(-4,2,-2)=-12\ne0$: הם אינם מאונכים, הם מקבילים (כפולה זה של זה). נורמלים מאונכים פירושם מישורים מאונכים.
+        misconception: MC-c1-perp-normal-means-perp-plane
+
+  - id: Q-1.3-notes-slip
+    type: mc
+    objectives: [OBJ-1.3-3]
+    qualitative: true
+    level: basic
+    prompt: >-
+      סטודנטית בודקת אם $(1,2,5)$ על המישור $x-3y+5z=-20$, וכותבת: "$1-6+25=-20$, ולכן הנקודה על המישור". מה נכון?
+    choices:
+      - text: 'יש טעות חשבון: $1-6+25=20\ne-20$, ולכן הנקודה אינה על המישור'
+        correct: true
+        feedback: >-
+          נכון. השיטה (להציב ולהשוות לאגף ימין) נכונה, החשבון לא. (זו בדיוק טעות שמופיעה באחד מעמודי הסיכומים של הקורס.)
+      - text: 'הבדיקה נכונה: הנקודה על המישור'
+        feedback: >-
+          $1-6+25=20$. אגף שמאל 20 ואגף ימין $-20$, ולכן הנקודה אינה על המישור.
+        misconception: MC-c1-plane-d-sign
+      - text: 'השיטה שגויה: צריך לבדוק אם $(1,2,5)$ מקביל לנורמל $(1,-3,5)$'
+        feedback: >-
+          נקודה על מישור בודקים בהצבה במשוואה. וקטור המקום של הנקודה אינו צריך להיות מקביל לנורמל: זה היה תנאי על ישר דרך
+          הראשית, לא על מישור.
+        misconception: MC-c1-plane-coefficients
+    hints: ['חשבו שוב: $1-3\cdot2+5\cdot5$.']
+
+  - id: Q-1.3-line-plane
+    type: numeric
+    objectives: [OBJ-1.3-3]
+    level: mid
+    prompt: >-
+      הישר $x=1+2t$, $y=1+3t$, $z=8-5t$ חותך את המישור $x-y+z=2$ בנקודה אחת. מהו רכיב ה-$z$ שלה?
+    answer: 3
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. הצבה: $(1+2t)-(1+3t)+(8-5t)=8-6t=2$, ולכן $t=1$ והנקודה $(3,4,3)$. בדיקה: $3-4+3=2$.
+    wrongFeedback: >-
+      הציבו את $x(t),y(t),z(t)$ במשוואת המישור, פתרו ל-$t$, והציבו את $t$ בחזרה בישר.
+    commonWrong:
+      - value: 1
+        feedback: >-
+          $t=1$ הוא ערך הפרמטר, לא הנקודה. מציבים אותו בישר: $z=8-5\cdot1=3$.
+        misconception: MC-c1-t-is-point
+    hints: ['המשוואה ב-$t$ ממעלה ראשונה.']
+
+  - id: Q-1.3-parallel-line
+    type: twotier
+    objectives: [OBJ-1.3-3, OBJ-1.3-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      האם הישר $x=1+2t$, $y=1+3t$, $z=8-5t$ פוגש את המישור $x+y+z=4$?
+    choices:
+      - text: 'לא'
+        correct: true
+        feedback: 'נכון. הצבה נותנת $10=4$ לכל $t$: אין פתרון.'
+      - text: 'כן, בנקודה אחת'
+        feedback: >-
+          הצבה: $(1+2t)+(1+3t)+(8-5t)=10$, וה-$t$ נעלם. $10=4$ לעולם אינו מתקיים.
+        misconception: MC-c1-perp-normal-means-perp-plane
+    reasons:
+      - text: 'הכיוון מאונך לנורמל ($2+3-5=0$), כלומר הישר מקביל למישור, והנקודה $(1,1,8)$ אינה עליו ($10\ne4$)'
+        correct: true
+        feedback: 'בדיוק. ישר מקביל למישור נמצא כולו בו או מחוצה לו; נקודה אחת מכריעה.'
+      - text: 'הכיוון מאונך לנורמל, ולכן הישר מאונך למישור וחותך אותו'
+        feedback: >-
+          ישר מאונך למישור כשהכיוון **מקביל** לנורמל. כיוון מאונך לנורמל פירושו ישר מקביל למישור.
+        misconception: MC-c1-perp-normal-means-perp-plane
+      - text: 'כל ישר וכל מישור במרחב נחתכים בנקודה אחת'
+        feedback: >-
+          לא כשהישר מקביל למישור. כאן $\vec v\cdot\vec n=0$, וההצבה מוחקת את $t$.
+        misconception: MC-c1-perp-normal-means-perp-plane
+
+  - id: Q-1.3-distance
+    type: numeric
+    objectives: [OBJ-1.3-3]
+    level: mid
+    prompt: >-
+      מהו המרחק מהנקודה $(2,1,-1)$ למישור $2x-y+2z=5$?
+    answer: 1.33333333333333
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{|2\cdot2-1+2\cdot(-1)-5|}{\sqrt{4+1+4}}=\frac{|-4|}{3}=\frac43$.
+    wrongFeedback: >-
+      $\text{dist}=\frac{|ax_P+by_P+cz_P-d|}{\sqrt{a^2+b^2+c^2}}$.
+    commonWrong:
+      - value: 4
+        feedback: >-
+          חסר החילוק ב-$|\vec n|=3$. בלי החילוק, כפל משוואת המישור ב-2 היה מכפיל את "המרחק".
+        misconception: MC-c1-distance-no-norm
+      - value: 0.444444444444444
+        feedback: >-
+          חילקתם ב-$|\vec n|^2=9$. מחלקים באורך הנורמל, 3: המרחק הוא הרכיב בכיוון **וקטור היחידה** של הנורמל.
+        misconception: MC-c1-distance-no-norm
+    hints: ['המרחק הוא הרכיב של $\vec{QP}$ בכיוון $\hat n$, כש-$Q$ נקודה במישור.']
+
+  - id: Q-1.3-intercepts
+    type: numeric
+    objectives: [OBJ-1.3-2, OBJ-1.3-3]
+    level: exam
+    prompt: >-
+      מצאו את המישור דרך $(1,0,0)$, $(0,2,0)$ ו-$(0,0,3)$, וחשבו את המרחק שלו מהראשית.
+    answer: 0.857142857142857
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac67$. נכתוב $ax+by+cz=d$: הנקודות נותנות $a=d$, $2b=d$, $3c=d$; עם $d=6$: $6x+3y+2z=6$ (או
+      $\frac x1+\frac y2+\frac z3=1$). המרחק $\frac{|0-6|}{\sqrt{36+9+4}}=\frac67$.
+    wrongFeedback: >-
+      הציבו כל נקודה ב-$ax+by+cz=d$ כדי למצוא את $a,b,c$ ביחס ל-$d$, ואז השתמשו בנוסחת המרחק.
+    commonWrong:
+      - value: 6
+        feedback: >-
+          חסר החילוק ב-$|\vec n|=\sqrt{36+9+4}=7$. המרחק קטן מ-1, כי הנקודה $(1,0,0)$ שעל המישור במרחק 1 מהראשית.
+        misconception: MC-c1-distance-no-norm
+      - value: 0.122448979591837
+        feedback: >-
+          $\frac{6}{49}$: חילקתם ב-$|\vec n|^2$. מחלקים ב-$|\vec n|=7$.
+        misconception: MC-c1-distance-no-norm
+    hints: ['במישור $\frac xp+\frac yq+\frac zr=1$ החיתוכים עם הצירים הם $p,q,r$.']

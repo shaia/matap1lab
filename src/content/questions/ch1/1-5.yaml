@@ -1,0 +1,299 @@
+# Lesson 1.5 — the triple product and determinants.
+# Objectives (src/course.ts):
+#   OBJ-1.5-1  compute a determinant of order 2 and of order 3
+#   OBJ-1.5-2  read an order-2 determinant as a parallelogram's area and an order-3 one as a parallelepiped's volume, with sign
+#   OBJ-1.5-3  compute a triple product and use it to test whether three vectors lie in one plane
+# Determinants by the formula of this lesson (expansion along the first row); linear algebra is not assumed.
+# Every number recomputed in screens/tools/recompute-ch1.py.
+chapter: 1
+questions:
+  - id: Q-1.5-det2
+    type: numeric
+    objectives: [OBJ-1.5-1]
+    level: basic
+    prompt: >-
+      חשבו את $\begin{vmatrix}3&5\\2&-1\end{vmatrix}$.
+    answer: -13
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $3\cdot(-1)-5\cdot2=-3-10=-13$.
+    wrongFeedback: >-
+      $\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc$: האלכסון הראשי פחות האלכסון המשני.
+    commonWrong:
+      - value: 7
+        feedback: >-
+          $7=-3+10$: חיברתם את המכפלה של האלכסון המשני במקום לחסר אותה.
+        misconception: MC-c1-det2-sign
+    hints: ['$ad-bc$.']
+
+  - id: Q-1.5-det3
+    type: numeric
+    objectives: [OBJ-1.5-1]
+    level: basic
+    prompt: >-
+      חשבו את $\begin{vmatrix}1&2&0\\3&-1&2\\0&4&1\end{vmatrix}$.
+    answer: -15
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. פיתוח לפי השורה הראשונה:
+      $1\cdot\begin{vmatrix}-1&2\\4&1\end{vmatrix}-2\cdot\begin{vmatrix}3&2\\0&1\end{vmatrix}+0=1\cdot(-9)-2\cdot3=-15$.
+    wrongFeedback: >-
+      פתחו לפי השורה הראשונה עם הסימנים $+,-,+$: כל איבר כפול הדטרמיננטה מסדר 2 שנשארת כשמוחקים את השורה והעמודה שלו.
+    commonWrong:
+      - value: -3
+        feedback: >-
+          $-3=-9+6$: האיבר האמצעי בא בפיתוח עם **מינוס**, $-2\cdot3$, ולא עם פלוס.
+        misconception: MC-c1-middle-sign
+    hints: ['הסימנים בפיתוח לפי השורה הראשונה: $+,-,+$.']
+
+  - id: Q-1.5-swap-tf
+    type: twotier
+    objectives: [OBJ-1.5-1, OBJ-1.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: אם מחליפים שתי שורות של דטרמיננטה מסדר 3, הערך שלה לא משתנה, כי אלה אותם מספרים.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. הערך מחליף סימן; רק הערך המוחלט, הנפח, נשאר.'
+      - text: 'נכון'
+        feedback: >-
+          בדקו ב-$\begin{vmatrix}1&0\\0&1\end{vmatrix}=1$ מול $\begin{vmatrix}0&1\\1&0\end{vmatrix}=-1$: החלפת השורות הפכה את
+          הסימן. כך גם בסדר 3.
+        misconception: MC-c1-det-order-irrelevant
+    reasons:
+      - text: 'הדטרמיננטה היא נפח עם סימן, והחלפת שני וקטורים הופכת את הכיוון (יד ימין ליד שמאל)'
+        correct: true
+        feedback: 'בדיוק. למשל $\vec a\cdot(\vec c\times\vec b)=-\vec a\cdot(\vec b\times\vec c)$, כי $\vec c\times\vec b=-\vec b\times\vec c$.'
+      - text: 'הדטרמיננטה תלויה רק בקבוצת המספרים, לא במקומם'
+        feedback: >-
+          המקום קובע: $\begin{vmatrix}1&2\\3&4\end{vmatrix}=-2$, ואותם מספרים אחרי החלפת העמודות נותנים
+          $\begin{vmatrix}2&1\\4&3\end{vmatrix}=2$.
+        misconception: MC-c1-det-order-irrelevant
+      - text: 'הנפח של המקבילון לא משתנה, ולכן גם הדטרמיננטה'
+        feedback: >-
+          הנפח הוא $|\det|$, והוא באמת נשמר. הדטרמיננטה עצמה נושאת גם סימן, והסימן מתהפך.
+        misconception: MC-c1-det-sign-meaning
+
+  - id: Q-1.5-scale
+    type: numeric
+    objectives: [OBJ-1.5-2]
+    level: mid
+    prompt: >-
+      הדטרמיננטה של מטריצה $3\times3$ היא 2. כופלים כל אחד מתשעת האיברים שלה ב-2. מהי הדטרמיננטה החדשה?
+    answer: 16
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. כל שורה היא צלע של המקבילון, וכל צלע מוכפלת ב-2: הנפח גדל פי $2\cdot2\cdot2=8$, ו-$8\cdot2=16$. (בפיתוח: כל
+      מחובר הוא מכפלה של שלושה איברים, אחד מכל שורה.)
+    wrongFeedback: >-
+      חשבו על המקבילון: מה קורה לנפח כשכל אחת משלוש הצלעות מוכפלת ב-2?
+    commonWrong:
+      - value: 4
+        feedback: >-
+          הכפלתם רק פי 2. אבל כל אחת משלוש הצלעות מוכפלת, והנפח גדל פי $2^3$.
+        misconception: MC-c1-det-scale-linear
+    hints: ['כל מחובר בפיתוח של דטרמיננטה מסדר 3 הוא מכפלה של שלושה איברים.']
+
+  - id: Q-1.5-area2
+    type: numeric
+    objectives: [OBJ-1.5-2, OBJ-1.5-1]
+    level: basic
+    prompt: >-
+      מהו שטח המקבילית שנפרשת במישור מהווקטורים $(3,1)$ ו-$(1,2)$?
+    answer: 5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\left|\begin{vmatrix}3&1\\1&2\end{vmatrix}\right|=|6-1|=5$.
+    wrongFeedback: >-
+      השטח הוא הערך המוחלט של הדטרמיננטה שבשורותיה שני הווקטורים.
+    commonWrong:
+      - value: 7
+        feedback: >-
+          $7=6+1$: ב-$ad-bc$ מחסרים. בדיקה: שטח המקבילית קטן ממכפלת האורכים $\sqrt{10}\sqrt5\approx7.07$, ושווה לה רק במלבן.
+        misconception: MC-c1-det2-sign
+    hints: ['$|ad-bc|$.']
+
+  - id: Q-1.5-sign
+    type: mc
+    objectives: [OBJ-1.5-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      במישור, $\vec u=(1,0)$ ו-$\vec v=(1,-1)$, ו-$\begin{vmatrix}1&0\\1&-1\end{vmatrix}=-1$. מה אומר הסימן השלילי?
+    choices:
+      - text: 'הסיבוב הקצר מ-$\vec u$ אל $\vec v$ הוא עם כיוון השעון; שטח המקבילית הוא 1'
+        correct: true
+        feedback: >-
+          נכון. $\vec v$ מתחת ל-$\vec u$: מסובבים ב-$\frac\pi4$ עם כיוון השעון. בסדר ההפוך, $\det(\vec v,\vec u)=+1$.
+      - text: 'יש טעות בחישוב: שטח אינו יכול להיות שלילי'
+        feedback: >-
+          החישוב נכון. הדטרמיננטה היא שטח **עם סימן**; השטח עצמו הוא $|\det|=1$, והסימן מספר על הכיוון.
+        misconception: MC-c1-det-sign-meaning
+      - text: 'הזווית בין $\vec u$ ל-$\vec v$ קהה'
+        feedback: >-
+          $\vec u\cdot\vec v=1>0$: הזווית חדה ($\frac\pi4$). חדה או קהה קובעת המכפלה הסקלרית; הדטרמיננטה קובעת לאיזה צד.
+        misconception: MC-c1-det-sign-is-dot
+    hints: ['ציירו את שני הווקטורים.']
+
+  - id: Q-1.5-volume
+    type: numeric
+    objectives: [OBJ-1.5-2]
+    level: mid
+    prompt: >-
+      מהו הנפח של המקבילון שנפרש מהווקטורים $(1,0,2)$, $(0,3,1)$ ו-$(2,1,0)$?
+    answer: 13
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\begin{vmatrix}1&0&2\\0&3&1\\2&1&0\end{vmatrix}=1\cdot(0-1)-0+2\cdot(0-6)=-13$, והנפח $|-13|=13$. הסימן השלילי אומר
+      שהסדר הזה של הווקטורים הוא "יד שמאל".
+    wrongFeedback: >-
+      הנפח הוא $|\vec a\cdot(\vec b\times\vec c)|$, הערך המוחלט של הדטרמיננטה.
+    commonWrong:
+      - value: -13
+        feedback: >-
+          הדטרמיננטה $-13$ נכונה, אבל נפח הוא הערך המוחלט שלה: 13.
+        misconception: MC-c1-det-sign-meaning
+    hints: ['נפח $=|\det|$.']
+
+  - id: Q-1.5-triple
+    type: numeric
+    objectives: [OBJ-1.5-3]
+    level: basic
+    prompt: >-
+      חשבו את $\vec a\cdot(\vec b\times\vec c)$ עבור $\vec a=(1,1,0)$, $\vec b=(0,1,1)$, $\vec c=(1,0,1)$.
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec b\times\vec c=(1,1,-1)$, ו-$\vec a\cdot(1,1,-1)=2$. או ישר בדטרמיננטה:
+      $1\cdot(1-0)-1\cdot(0-1)+0=2$.
+    wrongFeedback: >-
+      $\vec a\cdot(\vec b\times\vec c)$ היא הדטרמיננטה שבשורותיה $\vec a$, $\vec b$, $\vec c$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          $0=1\cdot1+1\cdot(-1)$: האיבר האמצעי בפיתוח בא עם מינוס, $-1\cdot(0-1)=+1$.
+        misconception: MC-c1-middle-sign
+    hints: ['פתחו את הדטרמיננטה לפי השורה של $\vec a$.']
+
+  - id: Q-1.5-cyclic
+    type: multi
+    objectives: [OBJ-1.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      אילו מהביטויים שווים תמיד ל-$\vec a\cdot(\vec b\times\vec c)$? סמנו את כולם.
+    choices:
+      - text: '$\vec b\cdot(\vec c\times\vec a)$'
+        correct: true
+        feedback: 'נכון. סיבוב מעגלי של שלושת הווקטורים מחליף שתי שורות פעמיים, והסימן חוזר.'
+      - text: '$(\vec a\times\vec b)\cdot\vec c$'
+        correct: true
+        feedback: 'נכון. זה $\vec c\cdot(\vec a\times\vec b)$, סיבוב מעגלי נוסף: שוב אותו נפח עם אותו סימן.'
+      - text: '$\vec a\cdot(\vec c\times\vec b)$'
+        feedback: >-
+          החלפה אחת של שני וקטורים הופכת את הסימן: $\vec c\times\vec b=-\vec b\times\vec c$.
+        misconception: MC-c1-det-order-irrelevant
+      - text: '$(\vec a\cdot\vec b)\times\vec c$'
+        feedback: >-
+          $\vec a\cdot\vec b$ הוא מספר, ומכפלה וקטורית מוגדרת רק בין שני וקטורים. הביטוי חסר משמעות.
+        misconception: MC-c1-cross-vs-dot
+
+  - id: Q-1.5-coplanar
+    type: numeric
+    objectives: [OBJ-1.5-3, OBJ-1.5-1]
+    level: mid
+    prompt: >-
+      לאיזה ערך של $k$ הווקטורים $(1,2,3)$, $(2,k,1)$ ו-$(1,1,1)$ נמצאים במישור אחד?
+    answer: 1.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\begin{vmatrix}1&2&3\\2&k&1\\1&1&1\end{vmatrix}=(k-1)-2(2-1)+3(2-k)=3-2k$, וזה 0 כש-$k=\frac32$.
+    wrongFeedback: >-
+      שלושה וקטורים במישור אחד בדיוק כשהמכפלה המשולשת (הדטרמיננטה) שלהם 0.
+    commonWrong:
+      - value: 3.5
+        feedback: >-
+          עם פלוס באיבר האמצעי מתקבל $(k-1)+2+3(2-k)=7-2k$. בפיתוח הסימנים $+,-,+$.
+        misconception: MC-c1-middle-sign
+    hints: ['מקבילון שטוח: נפח 0.']
+
+  - id: Q-1.5-coplanar-tf
+    type: twotier
+    objectives: [OBJ-1.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: אם $\vec a\cdot(\vec b\times\vec c)=0$, אז שניים מהווקטורים $\vec a,\vec b,\vec c$ מקבילים.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: 'נכון. מכפלה משולשת 0 פירושה רק שהשלושה במישור אחד.'
+      - text: 'נכון'
+        feedback: >-
+          $(1,0,0)$, $(0,1,0)$, $(1,1,0)$: המכפלה המשולשת 0 (כולם במישור $z=0$), ואף שניים אינם מקבילים.
+        misconception: MC-c1-coplanar-means-parallel
+    reasons:
+      - text: 'די שהשלושה יהיו במישור אחד, כמו $(1,0,0)$, $(0,1,0)$, $(1,1,0)$, שאף שניים מהם אינם מקבילים'
+        correct: true
+        feedback: 'בדיוק: מקבילון שטוח, נפח 0. מקבילות של שניים היא רק דרך אחת להיות במישור אחד.'
+      - text: '$\vec b\times\vec c$ מתאפס רק כש-$\vec b\parallel\vec c$'
+        feedback: >-
+          המכפלה המשולשת יכולה להתאפס גם כש-$\vec b\times\vec c\ne\vec0$: מספיק ש-$\vec a$ מאונך לו, כלומר $\vec a$ במישור של
+          $\vec b$ ו-$\vec c$.
+        misconception: MC-c1-dot-zero-factor
+      - text: 'מכפלה אפס פירושה שאחד הגורמים אפס'
+        feedback: >-
+          מכפלה סקלרית אפס פירושה מאונכים, לא גורם אפס. כאן $\vec a\perp\vec b\times\vec c$.
+        misconception: MC-c1-dot-zero-factor
+
+  - id: Q-1.5-tetra
+    type: numeric
+    objectives: [OBJ-1.5-2, OBJ-1.5-3]
+    level: exam
+    prompt: >-
+      מהו הנפח של הארבעון שקודקודיו $O=(0,0,0)$, $(1,0,2)$, $(0,3,1)$ ו-$(2,1,0)$? (נפח פירמידה הוא שליש משטח הבסיס כפול
+      הגובה.)
+    answer: 2.16666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac{13}{6}$. נפח המקבילון שנפרש משלוש הצלעות מ-$O$ הוא $|{-13}|=13$. בסיס הארבעון משולש, חצי מבסיס המקבילון,
+      ואותו גובה, ולכן $\frac13\cdot\frac12\cdot13=\frac{13}{6}$.
+    wrongFeedback: >-
+      חשבו את נפח המקבילון $|\vec a\cdot(\vec b\times\vec c)|$, ואז השוו: בסיס משולש במקום מקבילית, ופירמידה במקום מנסרה.
+    commonWrong:
+      - value: 13
+        feedback: >-
+          13 הוא נפח המקבילון. הארבעון הוא שישית ממנו: חצי (משולש במקום מקבילית) כפול שליש (פירמידה).
+        misconception: MC-c1-tetra-sixth
+      - value: 6.5
+        feedback: >-
+          חילקתם ב-2 כמו במשולש. בשלושה ממדים יש גם השליש של הפירמידה: $\frac16\cdot13$.
+        misconception: MC-c1-tetra-sixth
+      - value: -2.16666666666667
+        feedback: >-
+          נפח אינו שלילי: לוקחים ערך מוחלט של הדטרמיננטה.
+        misconception: MC-c1-det-sign-meaning
+    hints: ['ארבעון = $\frac16$ מהמקבילון שנפרש מאותן שלוש צלעות.']
+
+  - id: Q-1.5-four-points
+    type: numeric
+    objectives: [OBJ-1.5-3]
+    level: exam
+    prompt: >-
+      לאיזה ערך של $t$ ארבע הנקודות $A=(1,0,1)$, $B=(2,1,3)$, $C=(0,2,1)$ ו-$D=(3,t,5)$ נמצאות במישור אחד?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\vec{AB}=(1,1,2)$, $\vec{AC}=(-1,2,0)$, $\vec{AD}=(2,t,4)$, והמכפלה המשולשת
+      $\begin{vmatrix}1&1&2\\-1&2&0\\2&t&4\end{vmatrix}=4-2t$, שמתאפסת ב-$t=2$.
+    wrongFeedback: >-
+      ארבע נקודות במישור אחד בדיוק כששלושת הווקטורים מאחת מהן אל השאר, $\vec{AB}$, $\vec{AC}$, $\vec{AD}$, במישור אחד.
+    commonWrong:
+      - value: 2.5
+        feedback: >-
+          זו התוצאה של הדטרמיננטה של ווקטורי המקום $B$, $C$, $D$. אבל הם יוצאים מהראשית, שאינה על המישור; צריך את ההעתקים
+          מ-$A$.
+        misconception: MC-c1-position-vs-displacement
+    hints: ['השתמשו ב-$\vec{AB}$, $\vec{AC}$, $\vec{AD}$.']

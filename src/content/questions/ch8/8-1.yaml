@@ -1,0 +1,348 @@
+# Lesson 8.1 — Riemann sums and area (notes pp. 10–11).
+# Objectives (src/course.ts):
+#   OBJ-8.1-1  compute a Riemann sum for a given partition and read it as an approximation of the area
+#   OBJ-8.1-2  the definite integral as signed area, and as displacement when the integrand is a velocity
+#   OBJ-8.1-3  linearity, additivity over intervals, comparison
+# Every number recomputed in screens/tools/recompute-ch8.py.
+chapter: 8
+questions:
+  - id: Q-8.1-left-sum
+    type: numeric
+    objectives: [OBJ-8.1-1]
+    level: basic
+    prompt: >-
+      חלקו את הקטע $[0,2]$ לארבעה קטעים שווים וחשבו את סכום רימן **השמאלי** של $f(x)=x^2$: בכל קטע לוקחים את ערך
+      הפונקציה בקצה השמאלי שלו. (אפשר לכתוב שבר.)
+    answer: 1.75
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\Delta x=\tfrac12$ והקצוות השמאליים הם $0,\tfrac12,1,\tfrac32$, ולכן
+      $\tfrac12\left(0+\tfrac14+1+\tfrac94\right)=\tfrac74$. האינטגרל עצמו הוא $\tfrac83$: הסכום השמאלי קטן ממנו כי
+      $x^2$ עולה בקטע.
+    wrongFeedback: >-
+      כתבו את רוחב הקטע $\Delta x$, את ארבע נקודות הדגימה (הקצוות השמאליים), וחשבו $\sum f(x_i)\,\Delta x$.
+    commonWrong:
+      - value: 3.75
+        feedback: >-
+          זה הסכום **הימני**: דגמתם ב-$\tfrac12,1,\tfrac32,2$. בסכום השמאלי הנקודה $x=0$ נכנסת ו-$x=2$ לא.
+        misconception: MC-c8-left-right-endpoints
+      - value: 3.5
+        feedback: >-
+          זה סכום ערכי הפונקציה בלי הכפל ברוחב $\Delta x=\tfrac12$. כל מחובר בסכום רימן הוא שטח של מלבן: גובה כפול
+          רוחב.
+        misconception: MC-c8-riemann-forget-width
+      - value: 2.6666666667
+        feedback: >-
+          $\tfrac83$ הוא האינטגרל המדויק $\int_0^2x^2\,dx$. סכום רימן עם ארבעה מלבנים הוא רק קירוב שלו, והשאלה
+          מבקשת את הקירוב.
+        misconception: MC-c8-sum-is-integral
+    hints: ['$\Delta x=\frac{2-0}{4}$. מהן ארבע הנקודות השמאליות?']
+
+  - id: Q-8.1-midpoint
+    type: numeric
+    objectives: [OBJ-8.1-1]
+    level: basic
+    prompt: >-
+      חשבו את סכום רימן של $f(x)=\frac1x$ בקטע $[1,3]$ בחלוקה לשני קטעים שווים, כשדוגמים באמצע כל קטע.
+    answer: 1.0666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\tfrac{16}{15}$. $\Delta x=1$, האמצעים $\tfrac32$ ו-$\tfrac52$, והסכום $\tfrac23+\tfrac25$. הערך
+      המדויק $\int_1^3\frac{dx}{x}=\ln3\approx1.0986$ קרוב, כי נקודות האמצע מאזנות טעויות משני הצדדים.
+    wrongFeedback: >-
+      מצאו את אמצעי הקטעים $[1,2]$ ו-$[2,3]$, הציבו ב-$\frac1x$ וכפלו ב-$\Delta x$.
+    commonWrong:
+      - value: 1.5
+        feedback: >-
+          זה הסכום השמאלי, $1+\tfrac12$: דגמתם בקצוות $1$ ו-$2$ ולא באמצעים.
+        misconception: MC-c8-left-right-endpoints
+      - value: 0.8333333333
+        feedback: >-
+          זה הסכום הימני, $\tfrac12+\tfrac13$: דגמתם בקצוות $2$ ו-$3$ ולא באמצעים.
+        misconception: MC-c8-left-right-endpoints
+    hints: ['האמצע של $[1,2]$ הוא $\tfrac32$.']
+
+  - id: Q-8.1-over-under
+    type: mc
+    objectives: [OBJ-8.1-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $f$ רציפה ו**עולה** בקטע $[a,b]$, ו-$L_n$, $R_n$ הם סכומי רימן השמאלי והימני שלה בחלוקה ל-$n$ קטעים שווים. מה
+      נכון תמיד?
+    choices:
+      - text: '$L_n\le\int_a^b f(x)\,dx\le R_n$'
+        correct: true
+        feedback: >-
+          נכון. בכל קטע הפונקציה העולה מקבלת את ערכה הקטן ביותר בקצה השמאלי ואת הגדול ביותר בקצה הימני: המלבנים
+          השמאליים כולם מתחת לגרף, והימניים כולם מעליו.
+      - text: '$R_n\le\int_a^b f(x)\,dx\le L_n$'
+        feedback: >-
+          כך זה בפונקציה **יורדת**. בפונקציה עולה הקצה הימני של כל קטע הוא הגבוה, ולכן המלבן הימני בולט מעל הגרף.
+        misconception: MC-c8-left-always-under
+      - text: 'הסכום השמאלי קטן מהאינטגרל לכל פונקציה, בלי קשר לעלייה'
+        feedback: >-
+          לא: ל-$f(x)=-x$ ב-$[0,1]$ הסכום השמאלי גדול מהאינטגרל. הכיוון של הטעות נקבע לפי עלייה או ירידה, לא לפי
+          הצד.
+        misconception: MC-c8-left-always-under
+      - text: 'שני הסכומים שווים לאינטגרל כש-$n$ זוגי'
+        feedback: >-
+          הזוגיות של $n$ לא משנה דבר. ההפרש $R_n-L_n=\bigl(f(b)-f(a)\bigr)\Delta x$ חיובי לכל $n$ כש-$f$ עולה ממש, והוא
+          רק שואף ל-0.
+        misconception: MC-c8-sum-is-integral
+
+  - id: Q-8.1-signed-area
+    type: numeric
+    objectives: [OBJ-8.1-2]
+    level: basic
+    prompt: >-
+      חשבו את $\int_{-1}^{2}x\,dx$. חשבו על השטחים של שני המשולשים שהגרף יוצר עם ציר $x$.
+    answer: 1.5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. המשולש ב-$[0,2]$ מעל הציר, בשטח 2, והמשולש ב-$[-1,0]$ מתחת לציר, בשטח $\tfrac12$, נספר עם סימן מינוס:
+      $2-\tfrac12=\tfrac32$. גם $\left[\tfrac{x^2}{2}\right]_{-1}^{2}=2-\tfrac12$.
+    wrongFeedback: >-
+      שטח מתחת לציר $x$ נספר באינטגרל עם סימן מינוס. חשבו את שני המשולשים ושימו סימן לכל אחד.
+    commonWrong:
+      - value: 2.5
+        feedback: >-
+          $\tfrac52$ הוא השטח הגיאומטרי, שבו גם המשולש שמתחת לציר נספר כחיובי. האינטגרל סופר אותו עם מינוס.
+        misconception: MC-c8-signed-vs-geometric
+    hints: ['איזה חלק של הישר $y=x$ נמצא מתחת לציר $x$ בקטע הזה?']
+
+  - id: Q-8.1-total-area
+    type: numeric
+    objectives: [OBJ-8.1-2]
+    level: mid
+    prompt: >-
+      חשבו את **השטח** הכלוא בין הגרף של $f(x)=x^2-1$, ציר $x$ והישרים $x=0$ ו-$x=2$ (שטח, לא אינטגרל).
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $f<0$ ב-$[0,1)$ ו-$f>0$ ב-$(1,2]$. השטח הוא
+      $\int_0^1(1-x^2)\,dx+\int_1^2(x^2-1)\,dx=\tfrac23+\tfrac43=2$.
+    wrongFeedback: >-
+      מצאו היכן $f$ מחליפה סימן, חלקו את הקטע שם, ובחלק שבו $f<0$ בצעו אינטגרציה ל-$-f$.
+    commonWrong:
+      - value: 0.6666666667
+        feedback: >-
+          $\tfrac23=\int_0^2(x^2-1)\,dx$ הוא השטח עם הסימן: החלק שמתחת לציר, בשטח $\tfrac23$, קיזז חלק מהשטח
+          שמעליו, $\tfrac43$. השטח מבקש את סכום השניים.
+        misconception: MC-c8-signed-vs-geometric
+      - value: 1.3333333333
+        feedback: >-
+          $\tfrac43$ הוא רק החלק שמעל הציר, ב-$[1,2]$. גם החלק שמתחת לציר, ב-$[0,1]$, הוא חלק מהשטח הכלוא.
+        misconception: MC-c8-signed-vs-geometric
+    hints: ['$x^2-1=0$ ב-$x=1$.']
+
+  - id: Q-8.1-displacement
+    type: numeric
+    objectives: [OBJ-8.1-2]
+    level: basic
+    prompt: >-
+      גוף נע על ישר במהירות $v(t)=3-2t$ (מטרים לשנייה). מהו ה**העתק** שלו, במטרים, בין $t=0$ ל-$t=4$?
+    answer: -4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. ההעתק הוא $\int_0^4(3-2t)\,dt=\left[3t-t^2\right]_0^4=12-16=-4$: הגוף מסיים 4 מטרים **מאחורי** נקודת
+      ההתחלה.
+    wrongFeedback: >-
+      העתק הוא האינטגרל של המהירות, עם הסימן: $\int_0^4 v(t)\,dt$.
+    commonWrong:
+      - value: 8.5
+        feedback: >-
+          8.5 מטרים הוא ה**דרך** שהגוף עבר, $\int_0^4|v|\,dt$: הוא נע קדימה 2.25 מטרים עד $t=1.5$ ואחורה 6.25 מטרים
+          אחר כך. ההעתק סופר את התנועה אחורה עם מינוס.
+        misconception: MC-c8-displacement-vs-distance
+      - value: 4
+        feedback: >-
+          הגודל נכון, אבל הסימן לא: $\int_0^4(3-2t)\,dt=12-16$. רוב הזמן המהירות שלילית, והגוף מסיים מאחורי נקודת
+          ההתחלה.
+        misconception: MC-c8-signed-vs-geometric
+    hints: ['פונקציה קדומה של $3-2t$ היא $3t-t^2$.']
+
+  - id: Q-8.1-zero-integral
+    type: twotier
+    objectives: [OBJ-8.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: אם $a<b$, $f$ רציפה ב-$[a,b]$ ו-$\int_a^b f(x)\,dx=0$, אז $f(x)=0$ לכל $x$ בקטע.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $\int_0^{2\pi}\sin x\,dx=0$, אבל $\sin x$ אינה אפס: השטח מעל הציר ב-$[0,\pi]$ מתקזז בדיוק עם השטח
+          שמתחת לציר ב-$[\pi,2\pi]$.
+      - text: 'נכון'
+        feedback: >-
+          זה נכון רק לפונקציה שאינה מחליפה סימן (למשל $f\ge0$). אינטגרל הוא שטח **עם סימן**, וחלקים חיוביים ושליליים
+          יכולים להתקזז.
+        misconception: MC-c8-zero-integral-zero-function
+    reasons:
+      - text: 'שטח מעל הציר ושטח מתחת לציר מתקזזים, כמו ב-$\int_0^{2\pi}\sin x\,dx$'
+        correct: true
+        feedback: 'בדיוק. ובגוף נע: העתק 0 אינו אומר שהגוף עמד במקום, רק שחזר לנקודת ההתחלה.'
+      - text: 'אינטגרל של פונקציה רציפה הוא שטח, ושטח 0 פירושו שאין שטח בכלל'
+        feedback: >-
+          אינטגרל הוא שטח **עם סימן**. רק השטח הגיאומטרי $\int_a^b|f|\,dx$ מתאפס בדיוק כש-$f\equiv0$ (ל-$f$ רציפה).
+        misconception: MC-c8-signed-vs-geometric
+      - text: 'כי פונקציה רציפה עם אינטגרל 0 חייבת להיות שלילית בכל הקטע'
+        feedback: >-
+          פונקציה שלילית בכל הקטע נותנת אינטגרל **שלילי**, לא 0. אינטגרל 0 מתקבל כשחלקים חיוביים ושליליים מתקזזים.
+        misconception: MC-c8-zero-integral-zero-function
+
+  - id: Q-8.1-linearity
+    type: numeric
+    objectives: [OBJ-8.1-3]
+    level: basic
+    prompt: >-
+      נתון $\int_0^2 f(x)\,dx=3$ ו-$\int_0^2 g(x)\,dx=-1$. חשבו את $\int_0^2\bigl(2f(x)-5g(x)+1\bigr)\,dx$.
+    answer: 13
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. בליניאריות: $2\cdot3-5\cdot(-1)+\int_0^2 1\,dx=6+5+2=13$. האינטגרל של הקבוע 1 הוא אורך הקטע.
+    wrongFeedback: >-
+      פרקו לשלושה אינטגרלים, הוציאו את הקבועים, ואל תשכחו ש-$\int_0^2 1\,dx$ הוא אורך הקטע.
+    commonWrong:
+      - value: 12
+        feedback: >-
+          חישבתם $\int_0^2 1\,dx=1$. האינטגרל של הקבוע $c$ על $[a,b]$ הוא $c(b-a)$, שטח של מלבן: כאן $1\cdot2=2$.
+        misconception: MC-c8-constant-integral-length
+      - value: 11
+        feedback: >-
+          השמטתם את $\int_0^2 1\,dx$. גם המחובר 1 בתוך האינטגרל תורם, והוא תורם את אורך הקטע.
+        misconception: MC-c8-constant-integral-length
+    hints: ['$\int_a^b c\,dx=c(b-a)$.']
+
+  - id: Q-8.1-additivity
+    type: numeric
+    objectives: [OBJ-8.1-3]
+    level: basic
+    prompt: >-
+      נתון $\int_0^5 f(x)\,dx=7$ ו-$\int_3^5 f(x)\,dx=2$. חשבו את $\int_3^0 f(x)\,dx$ (שימו לב לסדר הגבולות).
+    answer: -5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. באדיטיביות $\int_0^3 f=\int_0^5 f-\int_3^5 f=5$, והחלפת הגבולות הופכת סימן: $\int_3^0 f=-5$.
+    wrongFeedback: >-
+      קודם מצאו את $\int_0^3 f$ מתוך $\int_0^5=\int_0^3+\int_3^5$, ואז החליפו את סדר הגבולות.
+    commonWrong:
+      - value: 5
+        feedback: >-
+          5 הוא $\int_0^3 f$. כשהגבול העליון קטן מהתחתון, $\int_3^0 f=-\int_0^3 f$.
+        misconception: MC-c8-reverse-limits
+    hints: ['$\int_a^b f=-\int_b^a f$.']
+
+  - id: Q-8.1-comparison
+    type: multi
+    objectives: [OBJ-8.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      אילו אי-שוויונות נכונים? נמקו לעצמכם כל אחד בלי לחשב את האינטגרלים. סמנו את כולם.
+    choices:
+      - text: '$\int_0^1x^2\,dx\le\int_0^1x\,dx$'
+        correct: true
+        feedback: 'נכון. ב-$[0,1]$ מתקיים $x^2\le x$, ואינטגרל שומר על אי-שוויון בין פונקציות.'
+      - text: '$\int_1^2x^2\,dx\le\int_1^2x\,dx$'
+        feedback: >-
+          ב-$[1,2]$ דווקא $x^2\ge x$, ולכן האי-שוויון הפוך. השוואה בין אינטגרלים נשענת על השוואה בין הפונקציות **בקטע
+          הנתון**.
+        misconception: MC-c8-comparison-abs
+      - text: '$\int_0^{\pi/2}\sin x\,dx\le\frac{\pi}{2}$'
+        correct: true
+        feedback: 'נכון. $\sin x\le1$, ולכן האינטגרל לכל היותר $1\cdot\frac{\pi}{2}$, השטח של המלבן.'
+      - text: '$\int_0^1e^{x^2}\,dx\ge1$'
+        correct: true
+        feedback: 'נכון. $e^{x^2}\ge1$ ב-$[0,1]$, ולכן האינטגרל לפחות $1\cdot(1-0)$.'
+      - text: '$\int_{-1}^{2}x^3\,dx\ge\int_{-1}^{2}x^5\,dx$'
+        feedback: >-
+          $x^3\ge x^5$ רק ב-$[0,1]$; ב-$[-1,0)$ וב-$(1,2]$ ההפך, ושם $x^5$ גדולה בהרבה:
+          $\int_{-1}^{2}x^3\,dx=\tfrac{15}{4}<\tfrac{21}{2}=\int_{-1}^{2}x^5\,dx$. השוואה צריכה להתקיים בכל הקטע.
+        misconception: MC-c8-comparison-abs
+
+  - id: Q-8.1-abs-compare
+    type: twotier
+    objectives: [OBJ-8.1-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נכון או לא נכון: אם $f(x)\le g(x)$ לכל $x\in[a,b]$, אז $\left|\int_a^b f\,dx\right|\le\left|\int_a^b g\,dx\right|$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $f=-2$ ו-$g=1$ ב-$[0,1]$: $f\le g$, אבל $|\int f|=2>1=|\int g|$.
+      - text: 'נכון'
+        feedback: >-
+          ההשוואה נותנת $\int f\le\int g$ בלבד. ערך מוחלט יכול להפוך את הסדר כשהאינטגרלים שליליים, כמו $-2\le1$
+          ו-$|-2|>|1|$.
+        misconception: MC-c8-comparison-abs
+    reasons:
+      - text: 'ההשוואה נותנת רק $\int f\le\int g$, וערך מוחלט אינו שומר על סדר של מספרים שליליים'
+        correct: true
+        feedback: 'בדיוק. מה שכן נכון תמיד הוא $\left|\int_a^b f\right|\le\int_a^b|f|$.'
+      - text: 'אינטגרל של פונקציה קטנה יותר קטן יותר, ולכן גם הערך המוחלט שלו'
+        feedback: >-
+          המעבר "קטן יותר, ולכן גם בערך מוחלט" נכשל במספרים שליליים: $-2<1$ אבל $|-2|>|1|$.
+        misconception: MC-c8-comparison-abs
+      - text: 'הטענה נכונה רק אם $a<0<b$'
+        feedback: 'מיקום הקטע לא משנה. הדוגמה $f=-2$, $g=1$ עובדת בכל קטע.'
+        misconception: MC-c8-comparison-abs
+
+  - id: Q-8.1-limit-of-sums
+    type: expr
+    objectives: [OBJ-8.1-1]
+    level: exam
+    prompt: >-
+      חלקו את $[0,3]$ ל-$n$ קטעים שווים, ויהי $S_n$ סכום רימן **הימני** של $f(x)=x^2$. היעזרו בנוסחה
+      $\sum_{i=1}^{n}i^2=\frac{n(n+1)(2n+1)}{6}$ וכתבו את $S_n$ כנוסחה ב-$n$. (בדקו אחר כך שהגבול כש-$n\to\infty$
+      הוא $\int_0^3x^2\,dx$.)
+    answer: '9*(n+1)*(2*n+1)/(2*n^2)'
+    answerTex: '$S_n=\dfrac{9(n+1)(2n+1)}{2n^2}\xrightarrow[n\to\infty]{}9=\int_0^3x^2\,dx$'
+    variables: [n]
+    domain: [1, 20]
+    correctFeedback: >-
+      נכון. $\Delta x=\frac3n$, $x_i=\frac{3i}{n}$, ולכן
+      $S_n=\sum_{i=1}^n\frac{9i^2}{n^2}\cdot\frac3n=\frac{27}{n^3}\cdot\frac{n(n+1)(2n+1)}{6}$. הגבול הוא
+      $\frac{9\cdot2}{2}=9$, בדיוק $\left[\frac{x^3}{3}\right]_0^3$.
+    wrongFeedback: >-
+      כתבו את $\Delta x$ ואת נקודות הדגימה $x_i=i\,\Delta x$ ל-$i=1,\dots,n$, הוציאו את הקבועים מהסכום והשתמשו
+      בנוסחה לסכום הריבועים.
+    commonWrong:
+      - expr: '9*(n-1)*(2*n-1)/(2*n^2)'
+        feedback: >-
+          זה הסכום **השמאלי** ($i=0,\dots,n-1$). בסכום הימני הנקודה האחרונה היא $x_n=3$.
+        misconception: MC-c8-left-right-endpoints
+      - expr: '3*(n+1)*(2*n+1)/(2*n)'
+        feedback: >-
+          חסר הכפל ב-$\Delta x=\frac3n$: סכמתם רק את גובהי המלבנים. התוצאה שלכם גדלה לאינסוף עם $n$, וזה סימן לכך.
+        misconception: MC-c8-riemann-forget-width
+    hints: ['$f(x_i)\,\Delta x=\left(\frac{3i}{n}\right)^2\cdot\frac3n$.']
+
+  - id: Q-8.1-distance
+    type: numeric
+    objectives: [OBJ-8.1-2]
+    level: exam
+    prompt: >-
+      חלקיק נע על ישר במהירות $v(t)=t^2-4t+3$ (מטרים לשנייה). חשבו את **הדרך** הכוללת שעבר, במטרים, בין $t=0$
+      ל-$t=3$.
+    answer: 2.6666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\tfrac83$. $v=(t-1)(t-3)$ חיובית ב-$[0,1)$ ושלילית ב-$(1,3)$. הדרך היא
+      $\int_0^1v\,dt-\int_1^3v\,dt=\tfrac43+\tfrac43$.
+    wrongFeedback: >-
+      דרך היא $\int_0^3|v(t)|\,dt$. מצאו היכן $v$ מחליפה סימן ופצלו את האינטגרל שם.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 הוא ה**העתק** $\int_0^3v\,dt$: החלקיק חזר בדיוק לנקודת ההתחלה. אבל הוא זז: 1⅓ מטר קדימה ואותו מרחק אחורה.
+        misconception: MC-c8-displacement-vs-distance
+      - value: 1.3333333333
+        feedback: >-
+          זה רק הקטע שבו $v>0$. גם התנועה אחורה, ב-$[1,3]$, היא דרך שהחלקיק עבר.
+        misconception: MC-c8-displacement-vs-distance
+    hints: ['$t^2-4t+3=(t-1)(t-3)$.']

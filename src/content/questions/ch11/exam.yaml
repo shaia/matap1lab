@@ -1,0 +1,297 @@
+# Chapter 11 exam questions — original, in the style of an 80114 final (not taken from a real exam).
+# Each is worth 25 points in lettered parts, with at least one open part graded against a model solution and a rubric.
+# No multiple integrals and no Green's theorem: closed-curve integrals are computed directly or by splitting off a
+# gradient. Keys recomputed in screens/tools/recompute-ch11.py and recompute-ch13.py ("11 extra").
+chapter: 11
+questions:
+  - id: Q-11-exam-1
+    type: exam
+    title: עבודה של שדה כוח לאורך סליל
+    prompt: >-
+      שדה הכוח $\vec F(x,y,z)=\big(yz+2x,\ xz,\ xy+2z\big)$ פועל על חלקיק שנע לאורך הסליל
+      $\vec r(t)=\left(\cos t,\ \sin t,\ \frac{t}{\pi}\right)$, $0\le t\le2\pi$.
+    parts:
+      - label: א
+        points: 8
+        type: expr
+        objectives: [OBJ-11.5-1]
+        prompt: >-
+          מצאו פוטנציאל $\varphi(x,y,z)$ ל-$\vec F$ (במשתנים $x,y,z$).
+        answer: 'x*y*z + x^2 + z^2'
+        answerTex: '$\varphi=xyz+x^2+z^2+C$'
+        variables: [x, y, z]
+        upToConstant: true
+        correctFeedback: >-
+          נכון. $\int(yz+2x)\,dx=xyz+x^2+g(y,z)$; $\varphi_y=xz+g_y=xz$ נותן $g=h(z)$; $\varphi_z=xy+h'=xy+2z$ נותן $h=z^2$.
+        wrongFeedback: >-
+          אינטגרציה לפי $x$, ואז השוואה לרכיב השני ולשלישי. בדקו שהגרדיאנט של התשובה הוא $\vec F$.
+        commonWrong:
+          - expr: '3*x*y*z + x^2 + z^2'
+            feedback: '$xyz$ נספר שלוש פעמים, פעם מכל רכיב. הגרדיאנט שלו היה $(3yz+2x,\dots)$.'
+            misconception: MC-c11-potential-overlap
+          - expr: 'x*y*z + x^2'
+            feedback: 'חסר $z^2$: אחרי האינטגרציה לפי $x$ "הקבוע" הוא פונקציה של $y$ ושל $z$, והגזירה לפי $z$ מראה שחסר $2z$.'
+            misconception: MC-c11-potential-forgot-g
+
+      - label: ב
+        points: 12
+        type: open
+        objectives: [OBJ-11.5-2, OBJ-11.6-3, OBJ-11.6-1]
+        prompt: >-
+          הראו ש-$\vec F$ משמר בכל המרחב, וחשבו את העבודה של $\vec F$ לאורך הסליל. נמקו למה אין צורך להציב את הסליל בשדה.
+        solution:
+          - kind: given
+            text: '$\vec F=(yz+2x,\ xz,\ xy+2z)$; הסליל מתחיל ב-$\vec r(0)=(1,0,0)$ ונגמר ב-$\vec r(2\pi)=(1,0,2)$.'
+          - kind: goal
+            text: 'להראות ש-$\vec F=\nabla\varphi$ בכל $\mathbb{R}^3$, ולחשב $\int_C\vec F\cdot d\vec r$.'
+          - kind: idea
+            text: >-
+              רוטור אפס בתחום בלי חורים מבטיח פוטנציאל, ואז לפי המשפט היסודי העבודה היא הפרש הפוטנציאל בין הקצוות: הצורה של
+              הסליל לא משנה.
+          - kind: computation
+            text: >-
+              $\nabla\times\vec F=\big(R_y-Q_z,\ P_z-R_x,\ Q_x-P_y\big)=(x-x,\ y-y,\ z-z)=\vec0$. בנוסף מצאנו בסעיף א פוטנציאל
+              מפורש $\varphi=xyz+x^2+z^2$, ובגזירה $\nabla\varphi=\vec F$.
+          - kind: theorem
+            text: >-
+              המשפט היסודי לאינטגרלים קוויים: לעקום $C$ מ-$A$ ל-$B$, $\int_C\nabla\varphi\cdot d\vec r=\varphi(B)-\varphi(A)$,
+              כי $\frac{d}{dt}\varphi(\vec r(t))=\nabla\varphi\cdot\vec r\,'(t)$.
+          - kind: computation
+            text: '$\varphi(1,0,2)=0+1+4=5$ ו-$\varphi(1,0,0)=0+1+0=1$.'
+          - kind: check
+            text: >-
+              בהצבה ישירה: $\vec F(\vec r(t))\cdot\vec r\,'(t)$ הוא בדיוק $\frac{d}{dt}\varphi(\vec r(t))$, והאינטגרל שלו מ-0
+              עד $2\pi$ הוא אותו הפרש.
+          - kind: result
+            text: '$\vec F$ משמר ב-$\mathbb{R}^3$, והעבודה לאורך הסליל היא $5-1=4$.'
+        rubric:
+          - text: 'בדיקה שהרוטור אפס (או הצגת פוטנציאל ובדיקה בגזירה), עם הנימוק שהמרחב הוא תחום בלי חורים'
+            weight: 3
+          - text: 'ניסוח נכון של המשפט היסודי: פוטנציאל בסוף פחות פוטנציאל בהתחלה'
+            weight: 2
+          - text: 'נקודות הקצה הנכונות של הסליל, $(1,0,0)$ ו-$(1,0,2)$'
+            weight: 2
+          - text: 'תוצאה 4, עם הסבר שהעבודה לא תלויה במסלול'
+            weight: 3
+
+      - label: ג
+        points: 5
+        type: numeric
+        objectives: [OBJ-11.5-2, OBJ-11.4-3]
+        prompt: >-
+          החלקיק חוזר בקו ישר מ-$(1,0,2)$ ל-$(1,0,0)$. מה העבודה של $\vec F$ בקטע הזה?
+        answer: -4
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $\varphi(1,0,0)-\varphi(1,0,2)=1-5=-4$. יחד עם הסליל זה עקום סגור, והעבודה הכוללת $4+(-4)=0$, כמו שצריך בשדה משמר.
+        wrongFeedback: >-
+          זה שוב שדה גרדיאנט: הערך של $\varphi$ בסוף פחות ההתחלה. כאן הסוף הוא $(1,0,0)$.
+        commonWrong:
+          - value: 4
+            feedback: 'זו העבודה מ-$(1,0,0)$ ל-$(1,0,2)$. בכיוון ההפוך הסימן מתהפך.'
+            misconception: MC-c11-reverse-work-same
+
+  - id: Q-11-exam-2
+    type: exam
+    title: השדה המגנטי של תיל ישר
+    prompt: >-
+      השדה המגנטי של תיל ישר לאורך ציר $z$ שבו זורם זרם הוא, במישור $xy$ ועד כדי קבוע,
+      $\vec B(x,y)=\left(\dfrac{-y}{x^2+y^2},\ \dfrac{x}{x^2+y^2}\right)$, המוגדר בכל המישור פרט לראשית.
+    parts:
+      - label: א
+        points: 4
+        type: numeric
+        objectives: [OBJ-11.5-3, OBJ-11.6-1]
+        prompt: >-
+          חשבו $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}$ בנקודה $(1,2)$.
+        answer: 0
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון. $P_y=\frac{y^2-x^2}{(x^2+y^2)^2}=Q_x$ בכל נקודה מחוץ לראשית, ולכן ההפרש 0 (ב-$(1,2)$ שניהם $\frac{3}{25}$).
+        wrongFeedback: >-
+          גזרו $\frac{x}{x^2+y^2}$ לפי $x$ ו-$\frac{-y}{x^2+y^2}$ לפי $y$ בכלל המנה.
+
+      - label: ב
+        points: 6
+        type: numeric
+        objectives: [OBJ-11.4-2]
+        prompt: >-
+          חשבו $\oint_C\vec B\cdot d\vec r$ על המעגל ברדיוס 3 סביב הראשית, נגד כיוון השעון.
+        answer: 6.28318530717959
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $2\pi$. $\vec B(\vec r(t))=\frac13(-\sin t,\cos t)$, $\vec r\,'(t)=3(-\sin t,\cos t)$, המכפלה 1. (זה חוק אמפר:
+          הסירקולציה סביב התיל לא תלויה ברדיוס.)
+        wrongFeedback: >-
+          פרמטרו $\vec r(t)=(3\cos t,3\sin t)$, $0\le t\le2\pi$, והציבו.
+        commonWrong:
+          - value: 0
+            feedback: >-
+              סעיף א הראה ש-$Q_x-P_y=0$, אבל בתחום עם חור זה לא מבטיח עבודה 0 על עקום סגור. חשבו ישירות.
+            misconception: MC-c11-curl-test-sufficient
+
+      - label: ג
+        points: 10
+        type: open
+        objectives: [OBJ-11.5-3, OBJ-11.5-1]
+        prompt: >-
+          הסבירו למה $\vec B$ אינו משמר בתחום $\mathbb{R}^2\setminus\{(0,0)\}$ למרות סעיף א, והראו שבחצי המישור $x>0$ הוא כן
+          משמר, עם הפוטנציאל $\varphi=\arctan\frac{y}{x}$.
+        solution:
+          - kind: given
+            text: '$P=\frac{-y}{x^2+y^2}$, $Q=\frac{x}{x^2+y^2}$, $Q_x-P_y=0$ מחוץ לראשית, ו-$\oint=2\pi$ על מעגל סביב הראשית.'
+          - kind: goal
+            text: '(1) אין פוטנציאל בכל המישור בלי הראשית. (2) $\nabla\arctan\frac yx=\vec B$ כש-$x>0$.'
+          - kind: idea
+            text: >-
+              לשדה משמר העבודה על **כל** עקום סגור בתחום היא 0; עקום אחד עם עבודה שונה מאפס מספיק כדי לשלול. התנאי $P_y=Q_x$
+              מבטיח פוטנציאל רק בתחום בלי חורים, וחצי המישור $x>0$ הוא כזה.
+          - kind: step
+            text: >-
+              אילו $\vec B=\nabla\varphi$ בכל $\mathbb{R}^2\setminus\{0\}$, אז לפי המשפט היסודי $\oint_C\vec B\cdot d\vec r=\varphi(\vec r(2\pi))-\varphi(\vec r(0))=0$
+              על מעגל היחידה. אבל בסעיף ב (וגם ברדיוס 1) העבודה $2\pi$. סתירה, ולכן אין פוטנציאל.
+          - kind: computation
+            text: >-
+              כש-$x>0$: $\frac{\partial}{\partial x}\arctan\frac yx=\frac{1}{1+y^2/x^2}\cdot\left(-\frac{y}{x^2}\right)=\frac{-y}{x^2+y^2}=P$,
+              ו-$\frac{\partial}{\partial y}\arctan\frac yx=\frac{1}{1+y^2/x^2}\cdot\frac1x=\frac{x}{x^2+y^2}=Q$.
+          - kind: check
+            text: >-
+              $\arctan\frac yx$ היא הזווית הקוטבית $\theta$ בחצי המישור הימני. אי אפשר להמשיך אותה ברציפות סביב כל הראשית: אחרי
+              סיבוב שלם היא גדלה ב-$2\pi$, וזו בדיוק העבודה על המעגל.
+          - kind: result
+            text: >-
+              $\vec B$ אינו משמר במישור בלי הראשית (עבודה $2\pi$ על מעגל סביבה), אבל בחצי המישור $x>0$ הוא משמר,
+              $\vec B=\nabla\arctan\frac yx$.
+        rubric:
+          - text: 'נימוק שלילת הפוטנציאל: עקום סגור בתחום שהעבודה עליו שונה מ-0'
+            weight: 3
+          - text: 'הסבר שהתנאי $P_y=Q_x$ מספיק רק בתחום בלי חורים'
+            weight: 2
+          - text: 'גזירה נכונה של $\arctan\frac yx$ לפי $x$ ולפי $y$ (כלל השרשרת)'
+            weight: 3
+          - text: 'קשר בין הפוטנציאל לזווית הקוטבית, או ציון שחצי המישור הוא תחום בלי חורים'
+            weight: 2
+
+      - label: ד
+        points: 5
+        type: numeric
+        objectives: [OBJ-11.5-2]
+        standalone: false
+        prompt: >-
+          חשבו את העבודה של $\vec B$ לאורך עקום כלשהו מ-$(1,0)$ ל-$(1,1)$ שנשאר כולו בחצי המישור $x>0$.
+        answer: 0.785398163397448
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $\frac{\pi}{4}$: $\arctan1-\arctan0$. זו הזווית שהעקום "מקיף" סביב הראשית.
+        wrongFeedback: >-
+          השתמשו בפוטנציאל מסעיף ג: הערך בסוף פחות הערך בהתחלה.
+        commonWrong:
+          - value: -0.785398163397448
+            feedback: 'חיסרתם בסדר ההפוך: $\varphi(1,1)-\varphi(1,0)$.'
+            misconception: MC-c11-ftli-order
+
+  - id: Q-11-exam-3
+    type: exam
+    title: שדה שמסתובב, ועבודה על אליפסה
+    prompt: >-
+      $\vec F(x,y)=\big(x^2-y,\ x+y^2\big)$ במישור, ו-$E$ האליפסה $\frac{x^2}{4}+y^2=1$.
+    parts:
+      - label: א
+        points: 4
+        type: numeric
+        objectives: [OBJ-11.6-1]
+        prompt: >-
+          חשבו את הרכיב ה-$z$ של הרוטור, $Q_x-P_y$.
+        answer: 2
+        tolerance: 0.001
+        correctFeedback: 'נכון: $Q_x=1$, $P_y=-1$. הרוטור קבוע: סיבוב אחיד נגד כיוון השעון.'
+        wrongFeedback: '$Q=x+y^2$ נגזר לפי $x$, $P=x^2-y$ נגזר לפי $y$.'
+        commonWrong:
+          - value: -2
+            feedback: 'זה $P_y-Q_x$, בסדר ההפוך.'
+            misconception: MC-c11-curl-sign
+          - value: 0
+            feedback: >-
+              0 הוא $Q_x-P_y$ של החלק $(x^2,y^2)$ בלבד; החלק $(-y,x)$ תורם 2. אם חישבתם $P_x+Q_y=2x+2y$ בנקודה, זה הדיברגנץ.
+            misconception: MC-c11-div-curl-confuse
+
+      - label: ב
+        points: 4
+        type: mc
+        objectives: [OBJ-11.5-3]
+        qualitative: true
+        prompt: >-
+          האם $\vec F$ משמר במישור?
+        choices:
+          - text: 'לא, כי $Q_x\ne P_y$'
+            correct: true
+            feedback: 'נכון: לשדה משמר $P_y=Q_x$ בכל נקודה, וכאן ההפרש 2.'
+          - text: 'כן, כי הוא מוגדר בכל המישור, שאין בו חורים'
+            feedback: >-
+              תחום בלי חורים הופך את התנאי $P_y=Q_x$ למספיק, אבל התנאי עצמו צריך להתקיים. כאן $Q_x-P_y=2$.
+            misconception: MC-c11-curl-test-sufficient
+          - text: 'כן, כי $P_x$ ו-$Q_y$ שניהם פולינומים ממעלה ראשונה'
+            feedback: 'הבדיקה משווה את $P_y$ ל-$Q_x$, לא את $P_x$ ל-$Q_y$.'
+            misconception: MC-c11-mixed-partials-wrong-pair
+
+      - label: ג
+        points: 11
+        type: open
+        objectives: [OBJ-11.4-2, OBJ-11.4-3, OBJ-11.5-2]
+        prompt: >-
+          חשבו $\oint_E\vec F\cdot d\vec r$ כשעוברים על $E$ **עם** כיוון השעון. רמז: כתבו
+          $\vec F=\nabla\left(\frac{x^3}{3}+\frac{y^3}{3}\right)+(-y,x)$.
+        solution:
+          - kind: given
+            text: '$\vec F=(x^2-y,\ x+y^2)$, האליפסה $\frac{x^2}{4}+y^2=1$, עם כיוון השעון.'
+          - kind: goal
+            text: '$\oint_E\vec F\cdot d\vec r$.'
+          - kind: idea
+            text: >-
+              מפרקים את השדה לחלק משמר ולחלק סיבובי. על עקום סגור החלק המשמר נותן 0 (המשפט היסודי), ונשאר לחשב רק את
+              $(-y,x)$, שהאינטגרל שלו פשוט. את הכיוון קובעים בפרמטריזציה.
+          - kind: step
+            text: >-
+              $\nabla\left(\frac{x^3}{3}+\frac{y^3}{3}\right)=(x^2,y^2)$, ולכן $\vec F=(x^2,y^2)+(-y,x)$. האינטגרל של $(x^2,y^2)$
+              על עקום סגור הוא $\varphi(\vec r(2\pi))-\varphi(\vec r(0))=0$, כי ההתחלה והסוף אותה נקודה.
+          - kind: computation
+            text: >-
+              נגד כיוון השעון: $\vec r(t)=(2\cos t,\sin t)$, $0\le t\le2\pi$, $\vec r\,'=(-2\sin t,\cos t)$. ל-$(-y,x)$:
+              $(-\sin t)(-2\sin t)+(2\cos t)(\cos t)=2$, ו-$\int_0^{2\pi}2\,dt=4\pi$.
+          - kind: step
+            text: 'עם כיוון השעון האינטגרל מחליף סימן: $-4\pi$.'
+          - kind: check
+            text: >-
+              סימן: על האליפסה $(-y,x)$ מצביע נגד כיוון השעון, ואנחנו הולכים עם כיוון השעון, נגד השדה, ולכן העבודה שלילית.
+              (חישוב ישיר של $\vec F$ כולו בפרמטריזציה נותן אותו $-4\pi$.)
+          - kind: result
+            text: '$\oint_E\vec F\cdot d\vec r=-4\pi$ (עם כיוון השעון).'
+        rubric:
+          - text: 'בדיקה שהחלק $(x^2,y^2)$ הוא גרדיאנט ושהעבודה שלו על עקום סגור 0'
+            weight: 3
+          - text: 'פרמטריזציה נכונה של האליפסה ונגזרתה'
+            weight: 2
+          - text: 'חישוב $\oint(-y,x)\cdot d\vec r=4\pi$ נגד כיוון השעון'
+            weight: 3
+          - text: 'טיפול נכון בכיוון: סימן מינוס עם כיוון השעון'
+            weight: 2
+
+      - label: ד
+        points: 6
+        type: numeric
+        objectives: [OBJ-11.4-2, OBJ-11.5-2]
+        prompt: >-
+          חשבו את העבודה של $\vec F$ לאורך החצי העליון של $E$, מ-$(2,0)$ ל-$(-2,0)$ (נגד כיוון השעון).
+        answer: 0.949851973846253
+        tolerance: 0.001
+        correctFeedback: >-
+          נכון, $2\pi-\frac{16}{3}$. החלק $(x^2,y^2)=\nabla\varphi$ עם $\varphi=\frac{x^3+y^3}{3}$ נותן
+          $\varphi(-2,0)-\varphi(2,0)=-\frac83-\frac83=-\frac{16}{3}$; החלק $(-y,x)$ נותן $\int_0^\pi2\,dt=2\pi$.
+        wrongFeedback: >-
+          פרקו כמו בסעיף ג. העקום כאן אינו סגור, ולכן גם החלק המשמר תורם: פוטנציאל בסוף פחות בהתחלה.
+        commonWrong:
+          - value: 6.28318530717959
+            feedback: >-
+              $2\pi$ הוא רק החלק $(-y,x)$. החלק המשמר נותן 0 רק על עקום **סגור**; כאן הוא מ-$(2,0)$ ל-$(-2,0)$, ותורם
+              $-\frac{16}{3}$.
+            misconception: MC-c11-closed-zero-always
