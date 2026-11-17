@@ -316,6 +316,11 @@ for (const { q, file, part, parent } of units) {
     if (lessonOfId && !o.startsWith(`OBJ-${lessonOfId}-`)) fail(w, `objective ${o} belongs to another lesson than the id prefix ${lessonOfId}`);
     // a review or exam question may mix lessons, and reach back to earlier chapters, never forward
     if (!lessonOfId && chapterOfObjective(o) > chapterOfId) fail(w, `objective ${o} is from a later chapter than ${chapterOfId}`);
+    // a core review or exam question never relies on an enrichment lesson (an enrichment chapter's own may)
+    const ofLesson = planned.get(o.match(/^OBJ-(\d+\.\d+)-/)?.[1] ?? '');
+    if (!lessonOfId && ofLesson?.enrichment && !chapters.find((c) => c.n === chapterOfId)?.beyondSyllabus) {
+      fail(w, `objective ${o} is from an enrichment lesson: a core review or exam question does not use it`);
+    }
   }
   if (part) {
     const waiting = part.pendingObjectives ?? [];
@@ -378,18 +383,23 @@ for (const c of chapters.filter((c) => bankChapters.has(c.n))) {
     }
   }
   const review = questions.filter(({ q }) => q.id.startsWith(`Q-${c.n}-review-`)).map(({ q }) => q);
-  if (review.length < 10) fail(where, `chapter ${c.n} has ${review.length} review questions (needs ≥ 10)`, true);
+  // an enrichment chapter (13, "if time permits") is two lessons: a shorter review and fewer exam questions
+  const minReview = c.beyondSyllabus ? 5 : 10;
+  const minExam = c.beyondSyllabus ? 2 : 3;
+  if (review.length < minReview) fail(where, `chapter ${c.n} has ${review.length} review questions (needs ≥ ${minReview})`, true);
   for (const level of ['basic', 'mid', 'exam']) {
     if (review.length && !review.some((q) => (q.level ?? 'basic') === level)) fail(where, `chapter ${c.n} has no ${level} review question`, true);
   }
-  for (const l of c.lessons) {
+  // the core review leaves enrichment lessons out (CLAUDE.md: a core question never relies on one), except in an
+  // enrichment chapter, which is all enrichment
+  for (const l of c.lessons.filter((l) => c.beyondSyllabus || !l.enrichment)) {
     if (review.length && !review.some((q) => q.objectives.some((o) => o.startsWith(`OBJ-${l.id}-`)))) fail(where, `no review question of chapter ${c.n} touches lesson ${l.id}`, true);
   }
   if (review.length && !review.some((q) => new Set(q.objectives.map((o) => o.match(/^OBJ-(\d+\.\d+)-/)?.[1])).size > 1)) {
     fail(where, `no review question of chapter ${c.n} combines two lessons`, true);
   }
   const exams = questions.filter(({ q }) => q.type === 'exam' && q.id.startsWith(`Q-${c.n}-exam-`));
-  if (exams.length < 3) fail(where, `chapter ${c.n} has ${exams.length} exam questions (needs ≥ 3)`, true);
+  if (exams.length < minExam) fail(where, `chapter ${c.n} has ${exams.length} exam questions (needs ≥ ${minExam})`, true);
 }
 
 /* ------------------------------------------------------- misconceptions */
