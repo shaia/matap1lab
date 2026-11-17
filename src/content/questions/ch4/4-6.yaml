@@ -83,7 +83,7 @@ questions:
       - text: 'הגבול אינו קיים, כי $\sin x$ מתנודד'
         feedback: >-
           המונה מתנודד, אבל המנה כולה כלואה בין $-\frac1x$ ל-$\frac1x$, ושני אלה שואפים ל-0.
-        misconception: MC-c4-bounded-has-limit
+        misconception: MC-c4-oscillation-no-limit
 
   - id: Q-4.6-one-sided
     type: mc
@@ -217,7 +217,7 @@ questions:
     type: mc
     objectives: [OBJ-4.6-3]
     qualitative: true
-    level: mid
+    level: basic
     prompt: >-
       $f(x)=x^3+x-1$. למה יש ל-$f$ שורש בקטע $[0,1]$?
     choices:
@@ -298,7 +298,6 @@ questions:
       - value: 3
         feedback: >-
           $a=3$ פותר $2a+1=4+a$: איבדתם את הסימן של $-a$ בנוסחה הימנית. עם $a=3$ הגבול משמאל 7 ומימין 1: קפיצה.
-        misconception: MC-c4-removable-vs-jump
 
   - id: Q-4.6-bisection
     type: numeric

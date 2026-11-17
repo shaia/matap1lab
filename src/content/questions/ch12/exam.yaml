@@ -162,7 +162,7 @@ questions:
           - value: 11.847687835089
             feedback: >-
               זה מה שיוצא עם $\cos\theta$ במקום $\sin\theta$ (המוסכמה של זווית מהמישור). עם $\theta$ מציר $z$ האלמנט
-              $r^2\sin\theta$. בדיקה: הגביע הוא חלק קטן מחצי הכדור ($\frac{16\pi}{3}\approx16.8$), ו-11.8 הם כמעט 70% ממנו.
+              $r^2\sin\theta$. בדיקה: הגביע הוא חלק קטן מחצי הכדור ($\frac{16\pi}{3}\approx16.8$), ו-11.8 הם כ-70% ממנו.
             misconception: MC-c12-spherical-element
 
       - label: ג
@@ -204,7 +204,7 @@ questions:
           - text: 'חישוב נכון של $\iiint_Ez\,dV=2\pi$'
             weight: 3
           - text: 'חלוקה בנפח וערך נכון של $\bar z\approx1.28$, עם בדיקת סבירות (בין 0 ל-2)'
-            weight: 3
+            weight: 4
 
   - id: Q-12-exam-3
     type: exam

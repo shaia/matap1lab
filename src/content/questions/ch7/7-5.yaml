@@ -234,9 +234,9 @@ questions:
     answer: 6.28318530718
     tolerance: 0.001
     correctFeedback: >-
-      נכון, $2\pi$. $x=2\sin\theta$ ($-\frac\pi2\le\theta\le\frac\pi2$): $\int4\cos^2\theta\,d\theta=\int2(1+\cos2\theta)\,d\theta=2\pi$.
-      זה חצי עיגול ברדיוס 2: $\frac12\pi\cdot2^2$.
-    wrongFeedback: 'אחרי ההצבה מתקבל $\int_{-\pi/2}^{\pi/2}4\cos^2\theta\,d\theta$; הורידו חזקה.'
+      נכון, $2\pi$. עם $x=2\sin\theta$ מתקבל $\int4\cos^2\theta\,d\theta=2\theta+\sin2\theta+C$, ובחזרה ל-$x$ הקדומה
+      $F(x)=2\arcsin\frac x2+\frac{x\sqrt{4-x^2}}{2}$. לפי המשפט היסודי: $F(2)-F(-2)=2\cdot\frac\pi2-2\cdot\left(-\frac\pi2\right)=2\pi$. זה חצי עיגול ברדיוס 2: $\frac12\pi\cdot2^2$.
+    wrongFeedback: 'אחרי ההצבה $x=2\sin\theta$ מתקבל $\int4\cos^2\theta\,d\theta$; הורידו חזקה, חזרו ל-$x$ והציבו את הגבולות $\pm2$.'
     commonWrong:
       - value: 12.5663706144
         feedback: 'זה $4\pi$, שטח עיגול שלם. בזהות $\cos^2\theta=\frac{1+\cos2\theta}{2}$ חסרה החלוקה ב-2.'

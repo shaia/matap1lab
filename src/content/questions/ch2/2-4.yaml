@@ -305,4 +305,3 @@ questions:
         feedback: >-
           $\sqrt3=2\sin\frac{\pi}{3}$ או $2\cos\frac{\pi}{6}$: זווית שאינה זווית החרוט. החרוט $z=\sqrt{x^2+y^2}$ הוא
           $\theta=\frac{\pi}{4}$, ו-$z=2\cos\frac{\pi}{4}$.
-        misconception: MC-c2-spherical-convention

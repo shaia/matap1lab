@@ -26,6 +26,15 @@
     הטנגנס עובר על כל הממשיים.
   remedy: { lesson: '4.4', label: 'הגרף של tan' }
 
+- id: MC-c4-tan-bounded
+  title: חושבים שטנגנס חסום כמו סינוס וקוסינוס
+  belief: >-
+    $\tan x$ מתנודדת בין $-1$ ל-1, ויש לה אמפליטודה, כמו לסינוס ולקוסינוס.
+  truth: >-
+    $\tan x=\frac{\sin x}{\cos x}$, והמכנה מתאפס ב-$x=\frac\pi2+k\pi$: שם יש אסימפטוטות אנכיות, ובכל מחזור הטנגנס מקבל
+    כל ערך ממשי. פונקציה לא חסומה אינה מתנודדת "באמפליטודה".
+  remedy: { lesson: '4.4', label: 'הגרף של tan' }
+
 - id: MC-c4-arcsin-arccos-range-swap
   title: מחליפים בין הטווחים של arcsin ו-arccos
   belief: >-

@@ -265,10 +265,10 @@ questions:
       - expr: 'log(1+cos(x)^2)'
         feedback: '$(\cos^2x)''=-2\cos x\sin x$: המינוס של הנגזרת של קוסינוס חסר.'
         misconception: MC-c7-fprime-f-sign
-      - expr: '-atan(cos(x))'
+      - expr: '-2*atan(cos(x))'
         feedback: >-
-          זה מתקבל מהצבה $u=\cos x$ ששוכחת את $\cos x$ שבמונה: $\sin2x\,dx=-2u\,du$, ונשאר $\int\frac{-2u}{1+u^2}\,du$,
-          לוגריתם ולא $\arctan$.
+          זה מתקבל מהצבה $u=\cos x$ ששוכחת את $\cos x$ שבמונה: $\sin2x\,dx=-2u\,du$, ובלי ה-$u$ נשאר
+          $-2\int\frac{du}{1+u^2}$. עם ה-$u$ במונה נשאר $\int\frac{-2u}{1+u^2}\,du$: לוגריתם ולא $\arctan$.
         misconception: MC-c7-atan-vs-log
     hints: ['מה הנגזרת של $1+\cos^2x$?']
 

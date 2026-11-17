@@ -23,8 +23,9 @@ questions:
         misconception: MC-c11-mixed-partials-wrong-pair
       - text: '$(y,\ -x)$'
         feedback: >-
-          $P_y=1$ ו-$Q_x=-1$. זה שדה סיבובי (עם כיוון השעון): העבודה על מעגל סביב הראשית אינה 0.
-        misconception: MC-c11-closed-zero-always
+          כאן $P_x=0=Q_y$, אבל זו לא הבדיקה: $P_y=1$ ו-$Q_x=-1$. זה שדה סיבובי (עם כיוון השעון): העבודה על מעגל סביב
+          הראשית אינה 0.
+        misconception: MC-c11-mixed-partials-wrong-pair
       - text: '$(x^2,\ xy)$'
         feedback: >-
           $P_y=0$ ו-$Q_x=y$: שונים מחוץ לציר $x$, ולכן השדה אינו משמר.

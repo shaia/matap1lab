@@ -204,7 +204,7 @@ questions:
       - text: 'לא נכון'
         feedback: >-
           לפונקציה עם נגזרות שניות רציפות הנגזרות המעורבות שוות, ולכן שתי תוצאות שונות לא יכולות להיות נכונות יחד.
-        misconception: MC-c10-partial-wrong-variable
+        misconception: MC-c10-mixed-order-matters
     reasons:
       - text: 'הנגזרות השניות של $f$ רציפות, ולכן לפי המשפט $f_{xy}=f_{yx}$'
         correct: true
@@ -212,10 +212,10 @@ questions:
       - text: 'סדר הגזירה משנה, ולכן התוצאות אמורות להיות שונות'
         feedback: >-
           המשפט אומר את ההפך לפונקציות עם נגזרות שניות רציפות, כמו כל הפונקציות האלמנטריות בתחום ההגדרה שלהן.
-        misconception: MC-c10-partial-wrong-variable
+        misconception: MC-c10-mixed-order-matters
       - text: 'האיבר $e^x\sin y$ נותן תוצאות שונות בשני הסדרים'
         feedback: 'בשני הסדרים הוא נותן $e^x\cos y$, וכך כתב גם התלמיד. ההבדל באיבר הפולינומי.'
-        misconception: MC-c10-partial-product-rule
+        misconception: MC-c10-mixed-order-matters
 
   - id: Q-10.2-laplace
     type: expr

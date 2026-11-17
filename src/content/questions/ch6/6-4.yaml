@@ -189,7 +189,7 @@ questions:
         feedback: 'בדיוק. טור טיילור הוא ייצוג של הפונקציה בתחום ההתכנסות בלבד.'
       - text: 'כי $\frac{1}{1-x}$ אינה מוגדרת ב-$x=2$'
         feedback: '$\frac{1}{1-2}=-1$ מוגדר היטב. הבעיה בטור, לא בפונקציה.'
-        misconception: MC-c6-smooth-means-infinite-radius
+        misconception: MC-c6-series-beyond-radius
       - text: 'כי צריך לסכם מספיק איברים, ואז הסכום יתקרב ל-$-1$'
         feedback: 'הסכומים החלקיים $1,3,7,15,\dots$ רק גדלים. אין מספר איברים שיקרב אותם ל-$-1$.'
         misconception: MC-c6-series-beyond-radius

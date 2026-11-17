@@ -80,7 +80,7 @@ questions:
         type: numeric
         objectives: [OBJ-3.5-1, OBJ-3.3-2]
         standalone: false
-        prompt: 'מהו החלק הממשי של השורש $z_0=\sqrt[3]2\operatorname{cis}\frac{2\pi}{9}$?'
+        prompt: 'מהו החלק הממשי של השורש מסעיף ג שהארגומנט הראשי שלו הוא החיובי הקטן ביותר?'
         answer: 0.9651555190405
         tolerance: 0.001
         correctFeedback: 'נכון, $\sqrt[3]2\cos\frac{2\pi}{9}\approx1.26\cdot0.766\approx0.965$.'
@@ -202,7 +202,7 @@ questions:
             correct: true
             feedback: 'נכון. $p(-2i)=p(\overline{2i})=\overline{p(2i)}=\bar0=0$.'
           - text: 'כי לכל פולינום השורשים באים בזוגות נגדיים'
-            feedback: 'לא: ל-$z-1$ השורש היחיד 1. והשורשים האחרים של $p$, $1\pm i$, אינם נגדיים.'
+            feedback: 'לא: ל-$z-1$ השורש היחיד הוא 1, ו-$-1$ אינו שורש שלו. מה שמבטיח את $-2i$ כאן הוא שהמקדמים של $p$ ממשיים.'
             misconception: MC-c3-roots-plus-minus
           - text: 'כי השורשים של כל פולינום באים בזוגות צמודים'
             feedback: 'רק כשהמקדמים ממשיים; ל-$z-i$ השורש היחיד $i$.'
@@ -259,7 +259,7 @@ questions:
         type: numeric
         objectives: [OBJ-3.3-2, OBJ-3.2-2]
         standalone: false
-        prompt: 'מהו $\operatorname{Arg}$ של מכפלת שני השורשים שבחצי המישור העליון, $2i(1+i)$?'
+        prompt: 'מהו $\operatorname{Arg}$ של מכפלת שני השורשים של $p$ שבחצי המישור העליון?'
         answer: 2.356194490192345
         tolerance: 0.001
         correctFeedback: 'נכון, $\frac{3\pi}{4}$: $\frac{\pi}{2}+\frac{\pi}{4}$, ובדיקה: $2i(1+i)=-2+2i$.'

@@ -160,6 +160,9 @@ questions:
         feedback: >-
           השתמשתם רק בשינוי של $x$. גם $y$ השתנה, ב-$-0.2$, ותורם $\tfrac1{10}\cdot(-0.2)=-0.02$.
         misconception: MC-c10-differential-one-term
+      - value: 5.0408
+        feedback: >-
+          זה הערך המדויק של השורש, מהמחשבון. השאלה מבקשת את ההערכה של הקירוב הלינארי, שרחוקה ממנו בכ-$8\cdot10^{-4}$.
 
   - id: Q-10.3-cylinder
     type: numeric
@@ -270,7 +273,7 @@ questions:
     tolerance: 0.001
     correctFeedback: >-
       נכון. $P_T=\frac1V=0.1$ ו-$P_V=-\frac{T}{V^2}=-3$. במקרה הגרוע התרומות מצטרפות:
-      $|dP|\le|P_T|\cdot3+|P_V|\cdot0.2=0.3+0.6=0.9$, כשליש אחוז מ-$P=30$.
+      $|dP|\le|P_T|\cdot3+|P_V|\cdot0.2=0.3+0.6=0.9$, כשלושה אחוזים מ-$P=30$.
     wrongFeedback: >-
       חשבו את $P_T$ ואת $P_V$ בנקודת המדידה. השגיאות יכולות להיות בכל סימן: איזו בחירת סימנים נותנת את השגיאה הגדולה ביותר?
     commonWrong:

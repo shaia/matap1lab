@@ -232,7 +232,7 @@ questions:
     type: rank
     objectives: [OBJ-4.3-3]
     qualitative: true
-    level: mid
+    level: basic
     prompt: >-
       סדרו את הפונקציות לפי קצב הגידול שלהן כש-$x\to\infty$.
     help: 'גררו את הפונקציה שגדלה הכי מהר למעלה, ואת האיטית ביותר למטה.'

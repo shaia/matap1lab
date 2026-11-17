@@ -230,7 +230,7 @@ questions:
       - text: 'נכון'
         feedback: >-
           ההפוכה של פונקציה גזירה אינה חייבת להיות גזירה. הנוסחה $\frac{1}{f'(a)}$ דורשת $f'(a)\ne0$, וכאן $f'(0)=0$.
-        misconception: MC-c5-continuous-implies-differentiable
+        misconception: MC-c5-inverse-always-differentiable
     reasons:
       - text: 'השיפוע של ההפוכה ב-$(0,0)$ הוא ההופכי של $f''(0)=0$: שיפוע אינסופי, משיק אנכי'
         correct: true
@@ -242,7 +242,7 @@ questions:
       - text: 'כל הפונקציות ההפוכות גזירות, כי $(f^{-1})''=\frac{1}{f''}$'
         feedback: >-
           הנוסחה נכונה רק כש-$f'(a)\ne0$, ובנקודה המתאימה: $(f^{-1})'(b)=\frac{1}{f'(a)}$ עם $f(a)=b$.
-        misconception: MC-c5-inverse-wrong-point
+        misconception: MC-c5-inverse-always-differentiable
 
   - id: Q-5.4-inverse-exp
     type: numeric

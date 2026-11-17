@@ -23,7 +23,6 @@ questions:
         misconception: MC-c3-exp-sum-additive
       - value: 2.718281828459045
         feedback: '$e^{i\pi}=\cos\pi+i\sin\pi=-1$, ולכן הסימן מתהפך.'
-        misconception: MC-c3-cis-swap
 
   - id: Q-3.4-exp-modulus
     type: numeric
@@ -96,7 +95,7 @@ questions:
         feedback: 'אין סדר על המרוכבים, ו-$e^{iy}$ מסתובב על מעגל היחידה וחוזר לעצמו כל $2\pi$.'
         misconception: MC-c3-exp-injective
       - text: 'כי $|e^z|=1$ רק כש-$z=0$'
-        feedback: '$|e^z|=e^{\operatorname{Re}z}=1$ כש-$\operatorname{Re}z=0$, לכל ציר מדומה: $|e^{iy}|=1$.'
+        feedback: '$|e^z|=e^{\operatorname{Re}z}=1$ כש-$\operatorname{Re}z=0$, על כל הציר המדומה: $|e^{iy}|=1$.'
         misconception: MC-c3-exp-modulus-of-exponent
 
   - id: Q-3.4-solve-exp
@@ -223,4 +222,3 @@ questions:
         misconception: MC-c3-exp-pair-factor
       - value: 0.25
         feedback: '$\frac14$ הוא $b$, המקדם של $\cos3t$.'
-        misconception: MC-c3-demoivre-trig-linear

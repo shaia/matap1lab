@@ -132,10 +132,14 @@ questions:
             feedback: >-
               חילקתם ב-$\sin x$ ונשארתם עם $\cos x=\frac12$. החילוק מאבד את שלושת הפתרונות שבהם $\sin x=0$.
             misconception: MC-c0-divide-lose-roots
+          - value: 4
+            feedback: >-
+              החמצתם פתרון אחד: או את $\frac{5\pi}{3}$ (ל-$\cos x=\frac12$ יש שניים בקטע, $\frac\pi3$ ו-$\frac{5\pi}{3}$), או
+              את $2\pi$ (הקטע סגור, ו-$\sin2\pi=0$).
+            misconception: MC-c0-arcsin-only
           - value: 3
             feedback: >-
-              מצאתם רק פתרון אחד של $\cos x=\frac12$, או שהחמצתם את הקצוות. ל-$\cos x=\frac12$ יש שניים, $\frac\pi3$
-              ו-$\frac{5\pi}{3}$.
+              החמצתם את שני הקצוות: מ-$\sin x=0$ יש בקטע הסגור שלושה פתרונות, $0$, $\pi$ ו-$2\pi$, ולא רק $\pi$.
             misconception: MC-c0-arcsin-only
 
       - label: ג
@@ -167,13 +171,13 @@ questions:
             text: '$x\in\left\{\frac\pi6,\ \frac\pi2,\ \frac{5\pi}{6}\right\}$.'
         rubric:
           - text: 'שימוש נכון בזווית הכפולה בצורה $1-2\sin^2x$, כך שנשאר רק $\sin x$'
-            weight: 3
+            weight: 4
           - text: 'פתרון נכון של המשוואה הריבועית ב-$\sin x$'
-            weight: 3
+            weight: 4
           - text: 'מציאת כל הפתרונות בקטע, כולל $\frac{5\pi}{6}$'
-            weight: 3
+            weight: 4
           - text: 'בדיקה בהצבה ותשובה סופית מסודרת'
-            weight: 1
+            weight: 2
 
   - id: Q-0-exam-3
     type: exam
@@ -251,10 +255,10 @@ questions:
             text: 'המשיק $3x+4y=27$, והשטח $\frac12\cdot9\cdot\frac{27}{4}=\frac{243}{8}=30.375$.'
         rubric:
           - text: 'בדיקה שהנקודה על המעגל'
-            weight: 1
+            weight: 2
           - text: 'שימוש בכך שהמשיק מאונך לרדיוס, ושיפוע נכון $-\frac34$'
-            weight: 3
+            weight: 5
           - text: 'משוואת משיק נכונה'
-            weight: 2
+            weight: 4
           - text: 'נקודות חיתוך עם הצירים ושטח נכון'
-            weight: 2
+            weight: 4

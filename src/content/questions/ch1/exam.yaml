@@ -295,7 +295,7 @@ questions:
             text: 'המרחק בין הישרים הוא $\frac{1}{\sqrt3}=\frac{\sqrt3}{3}$.'
         rubric:
           - text: 'זיהוי $\vec u\times\vec v$ כנורמל משותף, או נימוק נפח = בסיס כפול גובה'
-            weight: 3
+            weight: 4
           - text: 'חילוק הנפח ב-$|\vec u\times\vec v|=2\sqrt3$ (לא בריבוע)'
             weight: 3
           - text: 'תוצאה נכונה $\frac{1}{\sqrt3}$'

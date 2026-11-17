@@ -108,10 +108,11 @@ questions:
         feedback: >-
           שם $f'>0$, ולכן $f$ **עולה**. ירידה היא המקום שבו הנגזרת שלילית.
         misconception: MC-c5-sign-change-direction
-      - text: '$(-\infty,0]$'
+      - text: '$(-\infty,-\sqrt3]$ ו-$[0,\sqrt3]$'
         feedback: >-
-          זה המקום שבו $x\le0$, אבל הסימן של $f$ או של $x$ לא קובע: מה שקובע הוא הסימן של $f'$.
-        misconception: MC-c5-fprime-graph-is-f
+          שם $f\le0$: הגרף מתחת לציר, אבל זה הסימן של $f$, לא הכיוון שלה. למשל $f(-2)=-2<f(-\sqrt3)=0$: ב-$(-\infty,-\sqrt3]$
+          היא **עולה**. ירידה נקבעת לפי הסימן של $f'$.
+        misconception: MC-c4-graph-increasing-positive
       - text: '$[-\sqrt3,\sqrt3]$'
         feedback: >-
           $\pm\sqrt3$ ו-0 הם האפסים של $f$ עצמה, לא של $f'$. תחומי עלייה וירידה נקבעים לפי האפסים והסימן של $f'$.
@@ -143,8 +144,8 @@ questions:
         misconception: MC-c5-fprime-zero-extremum
       - text: 'ל-$x^3$ אין נגזרת ב-0'
         feedback: >-
-          $x^3$ פולינום, גזירה בכל מקום, ו-$f'(0)=0$. הגרף שטוח שם, ובכל זאת אין קיצון.
-        misconception: MC-c5-continuous-implies-differentiable
+          $x^3$ פולינום, גזירה בכל מקום, ו-$f'(0)=0$. הגרף שטוח שם, ובכל זאת אין קיצון: $f'=0$ אינו מבטיח קיצון.
+        misconception: MC-c5-fprime-zero-extremum
 
   - id: Q-5.5-table
     type: multi
@@ -341,7 +342,7 @@ questions:
       - text: 'לא נכון'
         feedback: >-
           לפולינום ממעלה 3 יכולים להיות עד שלושה שורשים ממשיים, אבל לזה יש אחד בלבד, כי הוא עולה ממש.
-        misconception: MC-c5-ivt-gives-uniqueness
+        misconception: MC-c5-cubic-three-roots
     reasons:
       - text: 'ערך הביניים נותן קיום, ו-$f''>0$ נותן יחידות'
         correct: true
@@ -353,7 +354,7 @@ questions:
       - text: 'כי $f''$ לא מתאפסת, אז ל-$f$ אין אפסים בכלל חוץ מאחד'
         feedback: >-
           $f'\ne0$ נותן מונוטוניות, כלומר **לכל היותר** פתרון אחד. קיום דורש עוד נימוק: החלפת סימן וערך הביניים.
-        misconception: MC-c5-ivt-gives-uniqueness
+        misconception: MC-c4-monotone-gives-root
 
   - id: Q-5.5-arcsin-combo
     type: expr

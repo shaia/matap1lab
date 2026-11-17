@@ -161,7 +161,7 @@ questions:
       - text: 'מספר חיובי'
         feedback: >-
           על חצי הספירה עם $x<0$ התרומות שליליות, ובדיוק מקזזות את אלה של $x>0$.
-        misconception: MC-c13-closed-surface-zero
+        misconception: MC-c12-signed-volume
     reasons:
       - text: 'הספירה סימטרית לשיקוף $x\to-x$, ו-$x$ מחליפה סימן בשיקוף, כך שהתרומות מתקזזות בזוגות'
         correct: true

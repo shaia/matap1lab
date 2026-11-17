@@ -173,9 +173,8 @@ questions:
     items:
       - { id: horiz, label: 'מציבים $z=c$ ומבררים לאילו $c$ יש חתך ומה צורתו (כאן: אליפסה לכל $c$)' }
       - { id: size, label: 'רואים איך גודל החתך משתנה עם $c$ (כאן: גדל כש-$|c|$ גדל, הקטן ביותר ב-$c=0$)' }
-      - { id: vert, label: 'מציבים $x=0$ ו-$y=0$ ומשרטטים את החתכים האנכיים (כאן: היפרבולות)' }
-      - { id: assemble, label: 'מרכיבים שלד מהחתכים ומזהים את המשטח (כאן: היפרבולואיד חד-יריעתי)' }
-    order: [horiz, size, vert, assemble]
+      - { id: assemble, label: 'מוסיפים את החתכים האנכיים $x=0$ ו-$y=0$ (כאן: היפרבולות), מרכיבים מכל החתכים שלד ומזהים את המשטח (כאן: היפרבולואיד חד-יריעתי)' }
+    order: [horiz, size, assemble]
     correctFeedback: >-
       נכון. החתכים האופקיים אומרים אם המשטח רציף ואיך הוא מתרחב; החתכים האנכיים נותנים את הפרופיל; יחד הם שלד.
     wrongFeedback: >-
@@ -206,7 +205,7 @@ questions:
     level: exam
     prompt: >-
       כתבו פרמטריזציה של אליפסת החיתוך של $\frac{x^2}{4}+\frac{y^2}{9}+z^2=1$ עם המישור $z=\frac12$, בצורה
-      $x=a\cos t$, $y=b\sin t$, $z=\frac12$. מהו $y(t)$? (השתמשו במשתנה $t$)
+      $x=a\cos t$, $y=b\sin t$, $z=\frac12$, עם $a,b>0$. מהו $y(t)$? (השתמשו במשתנה $t$)
     answer: '3*sqrt(3)/2*sin(t)'
     answerTex: '$x=\sqrt3\cos t,\quad y=\frac{3\sqrt3}{2}\sin t,\quad z=\frac12$'
     variables: [t]

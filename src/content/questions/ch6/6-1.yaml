@@ -244,7 +244,8 @@ questions:
     prompt: >-
       קרבו את $\sqrt{4.4}$ בעזרת $T_2$, פולינום טיילור מסדר 2 של $f(x)=\sqrt x$ סביב $x_0=4$. תנו את הערך של $T_2(4.4)$.
     answer: 2.0975
-    tolerance: 0.0001
+    # tight on purpose: √4.4 ≈ 2.09762 (the calculator value, not T₂) must not count as right
+    tolerance: 0.00002
     correctFeedback: >-
       נכון. $f(4)=2$, $f'(4)=\frac{1}{2\sqrt4}=\frac14$, $f''(4)=-\frac14\cdot4^{-3/2}=-\frac{1}{32}$, ולכן
       $T_2(4.4)=2+\frac{0.4}{4}-\frac{1}{64}(0.4)^2=2+0.1-0.0025=2.0975$. (המחשבון: $\sqrt{4.4}\approx2.09762$.)

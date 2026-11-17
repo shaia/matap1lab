@@ -252,7 +252,8 @@ questions:
         misconception: MC-c10-abs-only-critical
       - value: 8
         feedback: >-
-          $8$ הוא $x^2+y^2$ על השפה. $xy\le\frac{x^2+y^2}{2}=4$, עם שוויון כש-$x=y$. בדקו ערך בנקודה שמצאתם.
+          $8=f(2\sqrt2,2\sqrt2)$: לקחתם $x=y=\sqrt8$, הרדיוס, אבל הנקודה הזו אינה על המעגל ($8+8=16\ne8$). על המעגל עם
+          $x=y$ מקבלים $x^2=4$. ובכלל $xy\le\frac{x^2+y^2}{2}=4$ על השפה.
         misconception: MC-c10-lagrange-check-constraint
     hints: ['חזרו לשיעור 10.8 (פנים ושפה) ולשיעור 10.9 (לגרנז׳ על השפה).']
 
@@ -305,5 +306,5 @@ questions:
         misconception: MC-c10-rate-vs-directional
       - value: 2.2360679775
         feedback: '$\sqrt5=|\nabla T|$ הוא הקצב המרבי למטר, בכיוון הגרדיאנט. הרחפן נע בכיוון אחר ובמהירות 5.'
-        misconception: MC-c10-max-rate-sum
+        misconception: MC-c10-rate-vs-directional
     hints: ['חזרו לשיעור 10.5 (כלל השרשרת), לשיעור 10.4 (הגרדיאנט) ולשיעור 9.2 (וקטור המהירות).']

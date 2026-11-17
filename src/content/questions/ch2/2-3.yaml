@@ -263,11 +263,11 @@ questions:
         feedback: >-
           זה העיגול ברדיוס 1 **סביב הראשית**. העיגול כאן מרכזו $(1,0)$, והראשית על השפה שלו.
         misconception: MC-c2-polar-region-center
-      - text: '$0\le\theta\le2\pi$, $0\le r\le2\cos\theta$'
+      - text: '$0\le\theta\le\pi$, $0\le r\le2\cos\theta$'
         feedback: >-
-          כש-$\frac{\pi}{2}<\theta<\frac{3\pi}{2}$ הקוסינוס שלילי, ואין $r\ge0$ עם $r\le2\cos\theta$. הקטע של $\theta$
-          הוא הכיוונים שבהם יש נקודות של התחום.
-        misconception: MC-c2-arctan-quadrant
+          כש-$\frac{\pi}{2}<\theta\le\pi$ הקוסינוס שלילי ואין נקודות, ולכן התיאור הזה נותן רק את החצי העליון של העיגול,
+          $y\ge0$. החצי התחתון מתקבל מהכיוונים $-\frac{\pi}{2}\le\theta<0$.
+        misconception: MC-c2-polar-region-center
       - text: '$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}$, $0\le r\le\cos\theta$'
         feedback: >-
           $r^2\le2r\cos\theta$ נותן $r\le2\cos\theta$. ב-$\theta=0$ הנקודה הרחוקה ביותר היא $(2,0)$, לא $(1,0)$.

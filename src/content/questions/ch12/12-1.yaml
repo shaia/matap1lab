@@ -251,7 +251,7 @@ questions:
     objectives: [OBJ-12.1-2]
     level: exam
     prompt: >-
-      חשבו את $\iint_Rx\cos(xy)\,dA$, כש-$R=[0,1]\times\left[0,\frac\pi2\right]$. (אפשר לכתוב ביטוי מדויק, למשל 3/pi.)
+      חשבו את $\iint_Rx\cos(xy)\,dA$, כש-$R=[0,1]\times\left[0,\frac\pi2\right]$. (אפשר לכתוב ביטוי מדויק.)
     answer: 0.636619772367581
     tolerance: 0.001
     correctFeedback: >-

@@ -121,7 +121,7 @@ questions:
       - text: 'תלוי ב-$f$'
         feedback: >-
           כל רכיב של $\nabla\times\nabla f$ הוא הפרש של שתי נגזרות מעורבות, כמו $f_{zy}-f_{yz}$, ולכן אפס לכל $f$.
-        misconception: MC-c11-div-grad-zero
+        misconception: MC-c11-identities-unused
     reasons:
       - text: 'כל רכיב הוא הפרש של נגזרות מעורבות שוות, למשל $f_{zy}-f_{yz}=0$'
         correct: true
@@ -277,7 +277,7 @@ questions:
       - text: 'כן'
         feedback: >-
           כל רוטור הוא שדה עם דיברגנץ אפס, ול-$(x,y,z)$ הדיברגנץ 3. לכן הוא לא יכול להיות רוטור של שום שדה.
-        misconception: MC-c11-div-grad-zero
+        misconception: MC-c11-identities-unused
     reasons:
       - text: 'הדיברגנץ של כל רוטור הוא 0, והדיברגנץ של $(x,y,z)$ הוא 3'
         correct: true

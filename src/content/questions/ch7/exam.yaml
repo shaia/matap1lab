@@ -103,8 +103,10 @@ questions:
           - expr: '-(t+1)*exp(-t)'
             feedback: 'זו קדומה, אבל $x(0)=-1$ לפיה. התנאי $x(0)=0$ קובע $C=1$.'
             misconception: MC-c7-drop-constant
-          - expr: '1 - (t-1)*exp(-t)'
-            feedback: '$\int e^{-t}dt=-e^{-t}$, ולכן $-te^{-t}+\int e^{-t}dt=-te^{-t}-e^{-t}$.'
+          - expr: '(1-t)*exp(-t) - 1'
+            feedback: >-
+              זה מתקבל מהקדומה $-te^{-t}+e^{-t}$ והתנאי $x(0)=0$. אבל $\int e^{-t}dt=-e^{-t}$, ולכן
+              $-te^{-t}+\int e^{-t}dt=-te^{-t}-e^{-t}$.
             misconception: MC-c7-parts-sign-repeat
 
       - label: ב
@@ -236,13 +238,15 @@ questions:
             text: >-
               ההצבה הופכת פונקציה רציונלית של $\cos x$ לפונקציה רציונלית של $t$; כאן תתקבל שורה מהטבלה, $\int\frac{dt}{t^2+a^2}$.
           - kind: definition
-            text: '$\cos x=\frac{1-t^2}{1+t^2}$, $dx=\frac{2\,dt}{1+t^2}$. הגבולות: $x=0\Rightarrow t=0$, $x=\frac\pi2\Rightarrow t=\tan\frac\pi4=1$.'
+            text: '$\cos x=\frac{1-t^2}{1+t^2}$, $dx=\frac{2\,dt}{1+t^2}$.'
           - kind: computation
             text: >-
               $2+\cos x=\frac{2(1+t^2)+1-t^2}{1+t^2}=\frac{3+t^2}{1+t^2}$, ולכן $\frac{dx}{2+\cos x}=\frac{1+t^2}{3+t^2}\cdot\frac{2\,dt}{1+t^2}=\frac{2\,dt}{t^2+3}$.
           - kind: computation
             text: >-
-              $\int_0^1\frac{2\,dt}{t^2+3}=\frac{2}{\sqrt3}\left[\arctan\frac{t}{\sqrt3}\right]_0^1=\frac{2}{\sqrt3}\cdot\frac\pi6=\frac{\pi}{3\sqrt3}$.
+              $\int\frac{2\,dt}{t^2+3}=\frac{2}{\sqrt3}\arctan\frac{t}{\sqrt3}+C$, ולכן
+              $F(x)=\frac{2}{\sqrt3}\arctan\left(\frac{1}{\sqrt3}\tan\frac x2\right)$ קדומה בקטע $\left[0,\frac\pi2\right]$. לפי
+              המשפט היסודי, $F\left(\frac\pi2\right)-F(0)=\frac{2}{\sqrt3}\arctan\frac{1}{\sqrt3}-0=\frac{2}{\sqrt3}\cdot\frac\pi6=\frac{\pi}{3\sqrt3}$.
           - kind: check
             text: >-
               $\frac{\pi}{3\sqrt3}\approx0.605$. סבירות: האינטגרנד בין $\frac13$ (ב-0) ל-$\frac12$ (ב-$\frac\pi2$), והקטע באורך
@@ -250,11 +254,13 @@ questions:
           - kind: result
             text: '$\int_0^{\pi/2}\frac{dx}{2+\cos x}=\frac{\pi}{3\sqrt3}=\frac{\sqrt3\,\pi}{9}$.'
         rubric:
-          - text: 'נוסחאות ההצבה נכונות, כולל $dx=\frac{2\,dt}{1+t^2}$ והגבולות החדשים 0 ו-1'
+          - text: 'נוסחאות ההצבה נכונות, כולל $dx=\frac{2\,dt}{1+t^2}$'
             weight: 3
           - text: 'צמצום נכון ל-$\frac{2}{t^2+3}$'
             weight: 3
-          - text: 'אינטגרציה עם $\frac1a\arctan\frac ta$, $a=\sqrt3$, וחישוב $\arctan\frac{1}{\sqrt3}=\frac\pi6$'
+          - text: >-
+              אינטגרציה עם $\frac1a\arctan\frac ta$, $a=\sqrt3$, חזרה ל-$x$ והצבת הגבולות במשפט היסודי, כולל
+              $\arctan\frac{1}{\sqrt3}=\frac\pi6$
             weight: 3
           - text: 'בדיקת סבירות של התוצאה'
             weight: 1

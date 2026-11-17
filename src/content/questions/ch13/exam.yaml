@@ -26,8 +26,9 @@ questions:
             misconception: MC-c11-sphere-normal-no-sin
           - text: '$0\le\theta\le2\pi$, $0\le\varphi\le\frac{\pi}{2}$, ו-$dS=\sin\theta\,d\theta\,d\varphi$'
             feedback: >-
-              $\theta$ היא הזווית מציר $z$, והיא שקובעת את הגובה. $\varphi\le\frac{\pi}{2}$ היה חותך רבע מהכיפה סביב ציר
-              $z$, ולא את החצי העליון.
+              $\theta$ היא הזווית מציר $z$, והיא שקובעת את הגובה: החצי העליון הוא $\theta\le\frac{\pi}{2}$. בטווחים האלה
+              $\varphi$ עוברת רק רבע סיבוב סביב ציר $z$, ו-$\theta$ יורדת מתחת לקו המשווה עד הקוטב הדרומי ואף מעבר לו: זה
+              לא החצי העליון.
             misconception: MC-c11-sphere-angle-convention
 
       - label: ב

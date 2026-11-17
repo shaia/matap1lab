@@ -89,9 +89,11 @@ questions:
       - { id: solve, label: 'פותרים אותה בלי לחלק במשתנה שעשוי להתאפס, ומוצאים את כל הנקודות' }
       - { id: degenerate, label: 'בודקים גם נקודות על העקום שבהן $\nabla g=0$, אם יש כאלה' }
       - { id: compare, label: 'מחשבים את $f$ בכל המועמדים ומשווים: הגדול מקסימום, הקטן מינימום' }
-    order: [grad, system, solve, degenerate, compare]
+    # the points with ∇g = 0 are found independently of the Lagrange system: the two steps are tied
+    order: [grad, system, [solve, degenerate], compare]
     correctFeedback: >-
-      נכון. מערכת לגרנז׳ נותנת מועמדים, ועל עקום סגור וחסום יש מקסימום ומינימום: ההשוואה בסוף מכריעה.
+      נכון. מערכת לגרנז׳ נותנת מועמדים, ועל עקום סגור וחסום יש מקסימום ומינימום: ההשוואה בסוף מכריעה. את הנקודות שבהן
+      $\nabla g=0$ אפשר לבדוק לפני פתרון המערכת או אחריו.
     wrongFeedback: >-
       קודם בונים את המערכת ופותרים אותה; רק אחרי שכל המועמדים נאספו משווים את ערכי $f$.
 
@@ -230,7 +232,8 @@ questions:
     objectives: [OBJ-10.9-3]
     level: exam
     prompt: >-
-      פתרו את הבעיה מהשאלה הקודמת: מהו הערך הקטן ביותר של $z$ על המעגל $x^2+y^2+z^2=1$, $x+y+z=1$?
+      פתרו בכופלי לגרנז׳ עם שני אילוצים: מהו הערך הקטן ביותר של $z$ על המעגל שבו נחתכים הספירה $x^2+y^2+z^2=1$ והמישור
+      $x+y+z=1$?
     answer: -0.333333333333
     tolerance: 0.001
     correctFeedback: >-

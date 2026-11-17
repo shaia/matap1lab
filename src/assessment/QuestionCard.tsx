@@ -305,7 +305,10 @@ export function AnswerArea({ q, draft, setDraft, locked, verdict }: AreaProps) {
             />
           </label>
           <span class="q-unit q">{q.unit}</span>
-          <p class="q-numeric-help">אפשר לכתוב שבר כך: <bdi dir="ltr">3/4</bdi>, ומספר עשרוני כך: <bdi dir="ltr">0.75</bdi></p>
+          <p class="q-numeric-help">
+            אפשר לכתוב שבר (<bdi dir="ltr">3/4</bdi>), ערך מדויק (<bdi dir="ltr">2π/3</bdi>, <bdi dir="ltr">√2</bdi>,{' '}
+            <bdi dir="ltr">ln 3</bdi>) או מספר עשרוני עם 4 ספרות משמעותיות לפחות (<bdi dir="ltr">0.6667</bdi>)
+          </p>
         </div>
       );
     }

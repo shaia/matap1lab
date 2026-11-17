@@ -152,7 +152,7 @@ questions:
         misconception: MC-c2-cyl-r-vs-sph-r
       - value: 7
         feedback: 'אורך אינו סכום הרכיבים: $\sqrt{3^2+4^2}=5$, לא $3+4$.'
-        misconception: MC-c2-square-not-root
+        misconception: MC-c1-length-sum
     hints: ['חזרו לשיעור 2.4 (גליליות) ולשיעור 1.1 (אורך של וקטור).']
 
   - id: Q-2-review-08

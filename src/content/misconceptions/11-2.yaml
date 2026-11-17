@@ -5,8 +5,10 @@
     בספירה $z=R\sin\theta$, או ש-$\theta$ היא זווית במישור $xy$ ו-$\varphi$ הזווית מציר $z$.
   truth: >-
     בקורס הזה $\theta$ היא הזווית מהציר החיובי של $z$ ($0\le\theta\le\pi$) ו-$\varphi$ הזווית במישור $xy$
-    ($0\le\varphi\le2\pi$): $(x,y,z)=(R\sin\theta\cos\varphi,\ R\sin\theta\sin\varphi,\ R\cos\theta)$. בספרים
-    שמשתמשים במוסכמה של תומס (Thomas) האותיות מתחלפות, ואז גם הנוסחאות.
+    ($0\le\varphi\le2\pi$): $(x,y,z)=(R\sin\theta\cos\varphi,\ R\sin\theta\sin\varphi,\ R\cos\theta)$. בסיכומי
+    ההרצאות הזווית האנכית נמדדת דווקא ממישור $xy$ (זווית רוחב, בין $-\frac{\pi}{2}$ ל-$\frac{\pi}{2}$), ולכן שם
+    $z=\rho\sin\varphi$; ובספרים שמשתמשים במוסכמה של תומס (Thomas) האותיות מתחלפות. בכל מקור בודקים קודם ממה נמדדת
+    כל זווית.
   remedy: { lesson: '11.2', label: 'פרמטריזציה של ספירה לפי מוסכמת הקורס' }
 
 - id: MC-c11-cone-vs-cylinder
