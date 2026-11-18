@@ -80,7 +80,7 @@ questions:
         feedback: >-
           $(6,-1,3)=A+B$ אינו כיוון הישר. הכיוון מ-$A$ ל-$B$ הוא $B-A$.
         misconception: MC-c1-ab-sum
-    hints: ['$\frac{x-x_0}{a}=\frac{y-y_0}{b}=\frac{z-z_0}{c}$, עם $(a,b,c)=\vec{AB}$.']
+    hints: ['$\frac{x-x_0}{v_1}=\frac{y-y_0}{v_2}=\frac{z-z_0}{v_3}$, עם $(v_1,v_2,v_3)=\vec{AB}$.']
 
   - id: Q-1.3-canonical-zero
     type: mc
@@ -275,7 +275,7 @@ questions:
     correctFeedback: >-
       נכון. $\frac{|2\cdot2-1+2\cdot(-1)-5|}{\sqrt{4+1+4}}=\frac{|-4|}{3}=\frac43$.
     wrongFeedback: >-
-      $\text{dist}=\frac{|ax_P+by_P+cz_P-d|}{\sqrt{a^2+b^2+c^2}}$.
+      $h=\frac{|ax_1+by_1+cz_1-d|}{\sqrt{a^2+b^2+c^2}}$, כש-$(x_1,y_1,z_1)$ היא הנקודה שמודדים ממנה.
     commonWrong:
       - value: 4
         feedback: >-

@@ -302,10 +302,17 @@
   /* inline math never wraps, so a long formula chain in a worked solution would widen the page; on a phone it
      scrolls inside its own paragraph instead. Only here: on desktop the term card is absolute and would be clipped. */
   .block p:has(.katex),
-  .block :is(ul, ol):has(.katex) {
+  .block :is(ul, ol):has(.katex),
+  .summary-body p:has(.katex),
+  .summary-body > :is(ul, ol):has(.katex) {
     /* a list scrolls as a whole: an overflowing <li> would clip its own bullet */
     overflow-x: auto;
     overflow-y: hidden;
+  }
+  /* beside a long label the "on the formula sheet" chip was squeezed into two lines */
+  .formula-label .chip {
+    flex: none;
+    white-space: nowrap;
   }
 }
 .term-en {

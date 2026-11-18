@@ -45,3 +45,53 @@
     וקטור שאורכו 1; הוא מייצג כיוון בלבד. וקטור היחידה בכיוון $\vec v\ne\vec0$ הוא $\hat u=\frac{\vec v}{|\vec v|}$. וקטורי
     היחידה בכיווני הצירים: $\hat\imath=(1,0,0)$, $\hat\jmath=(0,1,0)$, $\hat k=(0,0,1)$.
   lesson: '1.1'
+- id: component
+  term: רכיב
+  en: component
+  symbol: 'v_1,\ v_2,\ v_3'
+  definition: >-
+    אחד המספרים שרושמים וקטור בעזרתם במערכת צירים: כמה מתקדמים לאורך הציר מהזנב של החץ אל הראש שלו. לווקטור במישור שני
+    רכיבים, $(v_1,v_2)$, ולווקטור במרחב שלושה, $(v_1,v_2,v_3)$. רכיב יכול להיות שלילי.
+  lesson: '1.1'
+- id: zero-vector
+  term: וקטור האפס
+  en: zero vector
+  symbol: '\vec 0=(0,0,0)'
+  definition: >-
+    הווקטור שכל רכיביו 0. אורכו 0, אין לו כיוון, ו-$\vec v+\vec 0=\vec v$ לכל וקטור $\vec v$.
+  lesson: '1.1'
+- id: parallelogram-rule
+  term: כלל המקבילית
+  en: parallelogram rule
+  definition: >-
+    כששני וקטורים $\vec a$ ו-$\vec b$ יוצאים מאותה נקודה, הסכום $\vec a+\vec b$ הוא האלכסון של המקבילית שהם פורשים,
+    היוצא מאותה נקודה. האלכסון השני, מהקצה של $\vec b$ אל הקצה של $\vec a$, הוא ההפרש $\vec a-\vec b$.
+  lesson: '1.1'
+- id: triangle-inequality
+  term: אי-שוויון המשולש
+  en: triangle inequality
+  symbol: '|\vec a+\vec b|\le|\vec a|+|\vec b|'
+  definition: >-
+    אורך הסכום של שני וקטורים אינו גדול מסכום האורכים: $|\vec a+\vec b|\le|\vec a|+|\vec b|$, כי צלע במשולש אינה ארוכה
+    מסכום שתי האחרות. יש שוויון רק כששני הווקטורים באותו כיוון (או כשאחד מהם אפס).
+  lesson: '1.1'
+- id: resultant
+  term: כוח שקול
+  en: resultant (net) force
+  definition: >-
+    הסכום הווקטורי של כל הכוחות שפועלים על גוף. הגוף בשיווי משקל כשהכוח השקול הוא וקטור האפס.
+  lesson: '1.1'
+- id: parallel-vectors
+  term: וקטורים מקבילים
+  en: parallel vectors
+  symbol: '\vec u\parallel\vec v'
+  definition: >-
+    שני וקטורים שונים מאפס שאחד מהם הוא כפולה של השני במספר, $\vec v=\lambda\vec u$: באותו כיוון ($\lambda>0$) או בכיוונים
+    הפוכים ($\lambda<0$). הבדיקה: אותו מספר $\lambda$ מתאים לכל הרכיבים.
+  lesson: '1.1'
+- id: normalise
+  term: נרמול
+  en: normalisation
+  definition: >-
+    לנרמל וקטור $\vec v\ne\vec0$ פירושו לחלק אותו באורך שלו: מתקבל וקטור היחידה $\frac{\vec v}{|\vec v|}$, באותו כיוון ובאורך 1.
+  lesson: '1.1'

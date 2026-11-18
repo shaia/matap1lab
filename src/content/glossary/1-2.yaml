@@ -24,6 +24,14 @@
     "הצל" של $\vec a$ על הישר של $\vec b$, עם סימן. וקטור ההיטל הוא $\frac{\vec a\cdot\vec b}{|\vec b|^2}\vec b$, והשארית
     $\vec a-\operatorname{proj}_{\vec b}\vec a$ מאונכת ל-$\vec b$.
   lesson: '1.2'
+- id: orthonormal-basis
+  term: בסיס אורתונורמלי
+  en: orthonormal basis
+  symbol: '\hat u_1,\hat u_2,\hat u_3'
+  definition: >-
+    שלושה וקטורי יחידה במרחב שכל שניים מהם מאונכים, כמו $\hat\imath,\hat\jmath,\hat k$. כל וקטור $\vec v$ נכתב בעזרתם
+    בדרך אחת, $\vec v=\alpha_1\hat u_1+\alpha_2\hat u_2+\alpha_3\hat u_3$, והמקדמים הם ההיטלים: $\alpha_i=\vec v\cdot\hat u_i$.
+  lesson: '1.2'
 - id: work-constant-force
   term: עבודה של כוח קבוע
   en: work of a constant force

@@ -1,0 +1,29 @@
+# Videos of lesson 1.5 (the triple product and determinants). Every id verified by oEmbed on the date given.
+# No Hebrew lecture on the topic was found in this session; both clips are in English.
+- id: v-1-5-3b1b-determinant
+  youtubeId: Ip3X9LOh2dk
+  title: The determinant | Chapter 6, Essence of linear algebra
+  channel: 3Blue1Brown
+  lang: en
+  captions: [en]
+  start: 0
+  minutes: 10
+  why: >-
+    לפי תיאור הסרטון ודף השיעור באתר של היוצר: הדטרמיננטה כמספר שאומר פי כמה משתנים שטחים (ובמרחב, נפחים), דטרמיננטה
+    שלילית כהיפוך הכיוון (כמו דף שהופכים), כלל יד ימין בשלושה ממדים, ודטרמיננטה אפס כמעיכה למישור או לישר. הסרטון מדבר
+    בשפה של קורס אלגברה לינארית, שאינו נדרש כאן: התמקדו בתמונות של המקבילית ושל המקבילון, והשוו לסעיפים על שטח עם
+    סימן ועל נפח עם סימן.
+  verified: '2026-11-17'
+- id: v-1-5-mit-determinants
+  youtubeId: 9FLItlbBUPY
+  title: 'Lec 2: Determinants; cross product | MIT 18.02 Multivariable Calculus, Fall 2007'
+  channel: MIT OpenCourseWare
+  lang: en
+  captions: [en]
+  start: 0
+  minutes: 53
+  why: >-
+    הרצאה שלמה מקורס חשבון דיפרנציאלי ואינטגרלי בכמה משתנים של MIT. לפי הכותרת ולפי דף הקורס, הנושאים שלה הם
+    דטרמיננטות והמכפלה הווקטורית, כלומר החומר של שיעורים 1.4 ו-1.5 שלנו. היא ארוכה, כמעט שעה: צפו בה אם אתם רוצים
+    לשמוע את החומר פעם נוספת מפי מרצה, ועצרו בכל פעם שמופיעה דטרמיננטה כדי לחשב אותה בעצמכם לפני המרצה.
+  verified: '2026-11-17'
