@@ -1,0 +1,24 @@
+- id: v-1-1-technion-points
+  youtubeId: H6_STTWLwl8
+  title: וקטור ומרחק בין שתי נקודות - וקטור בין שתי נקודות במרחב
+  channel: הטכניון מלמדים - TECHNION TEACHES
+  lang: he
+  captions: []
+  start: 0
+  minutes: 7
+  why: >-
+    לפי הכותרת והתיאור: סרטון קצר מהפרק על וקטורים בקורס ההכנה במתמטיקה של הטכניון (מרצה: ד״ר אביב צנזור), על הווקטור
+    בין שתי נקודות במרחב ועל המרחק ביניהן. השוו למתכון "סוף פחות התחלה", $\vec{AB}=B-A$, ולנוסחת המרחק $|\vec{AB}|$.
+  verified: '2026-11-17'
+- id: v-1-1-3b1b
+  youtubeId: fNk_zzaMoSs
+  title: Vectors | Chapter 1, Essence of linear algebra
+  channel: 3Blue1Brown
+  lang: en
+  captions: [en, he]
+  start: 0
+  minutes: 10
+  why: >-
+    לפי הכותרת והתיאור: הסרטון הראשון בסדרה "Essence of linear algebra", שפותח אותה במושגי היסוד של וקטורים. בדקו איך
+    מוצגים בו שתי נקודות המבט של השיעור, החץ ורשימת המספרים, ואיך נראות בכל אחת מהן שתי הפעולות: חיבור וכפל במספר.
+  verified: '2026-11-17'

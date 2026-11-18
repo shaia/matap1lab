@@ -1,0 +1,10 @@
+---
+/**
+ * Chapter 1 figure: <Spread figure={SpaceLab} figureProps={{ mode, p0, n, a, v, q, b, c, showLine, showPoint, showNormal, swap, az, el, tasks }}>.
+ * mode: 'plane' (lesson 1.3), 'cross' (1.4), 'box' (1.5).
+ */
+import SpaceLab, { type SpaceLabProps } from './SpaceLab';
+type Props = SpaceLabProps;
+---
+
+<SpaceLab client:visible {...Astro.props} />

@@ -7,7 +7,7 @@
   truth: >-
     $\vec{AB}=B-A$: "סוף פחות התחלה", כי $A+\vec{AB}=B$. הסדר קובע את הכיוון: $\vec{BA}=-\vec{AB}$. במקבילית
     $\vec{BD}=\vec{AD}-\vec{AB}=\vec v-\vec u$.
-  remedy: { lesson: '1.1', label: 'הווקטור מנקודה לנקודה: סוף פחות התחלה' }
+  remedy: { lesson: '1.1', anchor: point-to-point, label: 'הווקטור מנקודה לנקודה: סוף פחות התחלה' }
 
 - id: MC-c1-ab-sum
   title: מחברים את שתי הנקודות כדי לקבל את הווקטור ביניהן
@@ -15,7 +15,7 @@
     הווקטור מ-$A$ ל-$B$ הוא $A+B$.
   truth: >-
     $A+B$ אינו קשור למיקום היחסי של הנקודות (והוא אפילו משתנה כשמזיזים את הראשית). ההעתק מ-$A$ ל-$B$ הוא ההפרש $B-A$.
-  remedy: { lesson: '1.1', label: 'הווקטור מנקודה לנקודה: סוף פחות התחלה' }
+  remedy: { lesson: '1.1', anchor: point-to-point, label: 'הווקטור מנקודה לנקודה: סוף פחות התחלה' }
 
 - id: MC-c1-length-sum
   title: מחשבים אורך של וקטור כסכום הרכיבים
@@ -24,7 +24,7 @@
   truth: >-
     האורך הוא $|\vec v|=\sqrt{v_1^2+v_2^2+v_3^2}$, פיתגורס פעמיים. $(\tfrac13,\tfrac13,\tfrac13)$ אורכו $\frac{1}{\sqrt3}$,
     לא 1. סכום הערכים המוחלטים גדול מהאורך כשיותר מרכיב אחד שונה מ-0.
-  remedy: { lesson: '1.1', label: 'אורך של וקטור מפיתגורס' }
+  remedy: { lesson: '1.1', anchor: length, label: 'אורך של וקטור מפיתגורס' }
 
 - id: MC-c1-length-no-root
   title: שוכחים את השורש באורך של וקטור
@@ -32,7 +32,7 @@
     $|\vec v|=v_1^2+v_2^2+v_3^2$, ולכן וקטור היחידה הוא $\frac{\vec v}{v_1^2+v_2^2+v_3^2}$.
   truth: >-
     $|\vec v|^2=v_1^2+v_2^2+v_3^2$, ו-$|\vec v|$ הוא השורש. בדיקה ביחידות: אם הרכיבים במטרים, הסכום במטר רבוע.
-  remedy: { lesson: '1.1', label: 'אורך ווקטור יחידה' }
+  remedy: { lesson: '1.1', anchor: length, label: 'אורך ווקטור יחידה' }
 
 - id: MC-c1-diagonal-sum
   title: חושבים ששני האלכסונים של מקבילית הם סכום הצלעות
@@ -41,7 +41,7 @@
   truth: >-
     האלכסון מהקודקוד המשותף הוא $\vec u+\vec v$ (כלל המקבילית); האלכסון השני מחבר את קצות הצלעות, והוא ההפרש $\vec v-\vec u$
     (או $\vec u-\vec v$, לפי הכיוון).
-  remedy: { lesson: '1.1', label: 'כלל המקבילית: סכום והפרש' }
+  remedy: { lesson: '1.1', anchor: parallelogram-diagonals, label: 'כלל המקבילית: סכום והפרש' }
 
 - id: MC-c1-negative-scalar
   title: חושבים שכפל בסקלר שלילי משמר כיוון או נותן אורך שלילי
@@ -50,7 +50,7 @@
   truth: >-
     $|\lambda\vec v|=|\lambda|\,|\vec v|$: אורך תמיד אי-שלילי. סקלר שלילי הופך את הכיוון: $-2\vec v$ ארוך פי 2 ומצביע
     בכיוון ההפוך.
-  remedy: { lesson: '1.1', label: 'כפל בסקלר: מתיחה והיפוך' }
+  remedy: { lesson: '1.1', anchor: scalar-multiple, label: 'כפל בסקלר: מתיחה והיפוך' }
 
 - id: MC-c1-section-ratio
   title: מחליפים את היחס כשמחלקים קטע
@@ -59,7 +59,7 @@
   truth: >-
     ביחס $1:2$ הקטע מתחלק לשלושה חלקים שווים, והנקודה במרחק חלק אחד מ-$A$: $P=A+\frac13\vec{AB}$. הנקודה
     $A+\frac23\vec{AB}$ מחלקת ביחס $2:1$.
-  remedy: { lesson: '1.1', label: 'נקודה על קטע: $A+t\vec{AB}$' }
+  remedy: { lesson: '1.1', anchor: segment, label: 'נקודה על קטע: $A+t\vec{AB}$' }
 
 - id: MC-c1-position-vs-displacement
   title: משתמשים בווקטור המקום במקום בווקטור ההעתק
@@ -68,7 +68,7 @@
   truth: >-
     כל מה שנוגע לתנועה או למיקום יחסי משתמש בהפרשים: ההעתק $P_1-P_0$, הווקטורים $\vec{AB}$ ו-$\vec{AC}$. וקטור המקום תלוי
     בבחירת הראשית; ההעתק לא.
-  remedy: { lesson: '1.1', label: 'וקטור מקום מול וקטור העתק' }
+  remedy: { lesson: '1.1', anchor: position-vs-displacement, label: 'וקטור מקום מול וקטור העתק' }
 
 - id: MC-c1-length-additive
   title: חושבים שאורך הסכום הוא סכום האורכים
@@ -77,4 +77,4 @@
   truth: >-
     זה נכון רק כשהווקטורים באותו כיוון. בכלל $|\vec u+\vec v|\le|\vec u|+|\vec v|$ (אי-שוויון המשולש): לשקול של
     $(3,4,0)$ ו-$(1,-2,2)$ אורך $\sqrt{24}\approx4.9$, ולא $5+3=8$.
-  remedy: { lesson: '1.1', label: 'חיבור וקטורים ואי-שוויון המשולש' }
+  remedy: { lesson: '1.1', anchor: triangle-inequality, label: 'חיבור וקטורים ואי-שוויון המשולש' }

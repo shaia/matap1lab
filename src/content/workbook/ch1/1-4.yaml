@@ -1,0 +1,539 @@
+# Workbook of lesson 1.4 — the cross product.
+# Objectives (src/course.ts):
+#   OBJ-1.4-1  compute a cross product in coordinates; its direction by the right-hand rule
+#   OBJ-1.4-2  |u x v| is the area of the parallelogram, and u x v is perpendicular to both factors
+#   OBJ-1.4-3  the normal to the plane spanned by two vectors; the torque of a force
+# Every number recomputed with sympy in screens/tools/lesson-1-4.py.
+lesson: '1.4'
+practice:
+  - id: W-1.4-01
+    level: basic
+    objectives: [OBJ-1.4-1]
+    prompt: >-
+      נתונים $\vec a=(3,0,-2)$ ו-$\vec b=(1,4,1)$.
+
+      (א) חשבו את $\vec a\times\vec b$ ובדקו את התוצאה בשתי מכפלות סקלריות.
+
+      (ב) בלי חישוב חדש, כתבו את $\vec b\times\vec a$ ואת $(2\vec a)\times\vec b$.
+    answer: >-
+      (א) $(8,-5,12)$. (ב) $(-8,5,-12)$ ו-$(16,-10,24)$.
+    solution:
+      - kind: idea
+        text: >-
+          הנוסחה ברכיבים, במעגל $1\to2\to3\to1$: כל רכיב של המכפלה בנוי משני הרכיבים האחרים. אחרי החישוב בודקים שהתוצאה
+          מאונכת לשני הגורמים. ב-(ב) משתמשים בתכונות: החלפת הסדר הופכת את הסימן, ומספר יוצא החוצה.
+      - kind: computation
+        text: >-
+          הרכיב הראשון: $a_2b_3-a_3b_2=0\cdot1-(-2)\cdot4=8$.
+      - kind: computation
+        text: >-
+          הרכיב השני: $a_3b_1-a_1b_3=(-2)\cdot1-3\cdot1=-5$. (זה הרכיב שבו קל לטעות בסימן: הסדר הוא 3 ואז 1.)
+      - kind: computation
+        text: >-
+          הרכיב השלישי: $a_1b_2-a_2b_1=3\cdot4-0\cdot1=12$. לכן $\vec a\times\vec b=(8,-5,12)$.
+      - kind: check
+        text: >-
+          $(8,-5,12)\cdot(3,0,-2)=24+0-24=0$ וגם $(8,-5,12)\cdot(1,4,1)=8-20+12=0$. התוצאה מאונכת לשני הגורמים.
+      - kind: step
+        text: >-
+          (ב) $\vec b\times\vec a=-\,\vec a\times\vec b=(-8,5,-12)$, ו-$(2\vec a)\times\vec b=2\,(\vec a\times\vec b)=(16,-10,24)$.
+      - kind: result
+        text: >-
+          (א) $\vec a\times\vec b=(8,-5,12)$; (ב) $\vec b\times\vec a=(-8,5,-12)$ ו-$(2\vec a)\times\vec b=(16,-10,24)$.
+
+  - id: W-1.4-02
+    level: basic
+    qualitative: true
+    objectives: [OBJ-1.4-1]
+    prompt: >-
+      ענו בלי הנוסחה ברכיבים, רק מהטבלה $\hat\imath\times\hat\jmath=\hat k$, $\hat\jmath\times\hat k=\hat\imath$,
+      $\hat k\times\hat\imath=\hat\jmath$, מכללי החשבון ומכלל יד ימין.
+
+      (א) מהו $\hat k\times\hat\imath$, ומהו $\hat\imath\times\hat k$?
+
+      (ב) חשבו את $\hat\imath\times(\hat\jmath+\hat k)$.
+
+      (ג) חשבו את $(\hat\imath+\hat\jmath)\times(\hat\imath-\hat\jmath)$.
+
+      (ד) על שעון קיר, וקטור אחד יוצא מהמרכז אל הספרה 12 ווקטור שני יוצא מהמרכז אל הספרה 3. המכפלה הווקטורית של
+      הראשון בשני יוצאת מהקיר אל החדר, או נכנסת לתוך הקיר?
+    answer: >-
+      (א) $\hat\jmath$ ו-$-\hat\jmath$. (ב) $\hat k-\hat\jmath$. (ג) $-2\hat k$. (ד) נכנסת לתוך הקיר.
+    solution:
+      - kind: idea
+        text: >-
+          במעגל $\hat\imath\to\hat\jmath\to\hat k\to\hat\imath$, מכפלה של שניים סמוכים בכיוון המעגל היא השלישי, ונגד כיוון
+          המעגל היא השלישי עם מינוס. סכומים פותחים לפי הפילוג, וזוכרים שווקטור כפול עצמו הוא $\vec0$.
+      - kind: step
+        text: >-
+          (א) $\hat k\times\hat\imath=\hat\jmath$ מופיע בטבלה. בסדר ההפוך הסימן מתהפך: $\hat\imath\times\hat k=-\hat\jmath$.
+      - kind: computation
+        text: >-
+          (ב) פילוג: $\hat\imath\times(\hat\jmath+\hat k)=\hat\imath\times\hat\jmath+\hat\imath\times\hat k=\hat k-\hat\jmath$.
+      - kind: computation
+        text: >-
+          (ג) פותחים את שני הסוגריים, ושומרים על הסדר בכל מכפלה:
+          $$\hat\imath\times\hat\imath-\hat\imath\times\hat\jmath+\hat\jmath\times\hat\imath-\hat\jmath\times\hat\jmath=\vec0-\hat k-\hat k-\vec0=-2\hat k .$$
+          שימו לב ששני המחוברים האמצעיים **אינם** מבטלים זה את זה, כמו שהיה קורה במכפלה סקלרית: כאן
+          $\hat\jmath\times\hat\imath=-\hat\imath\times\hat\jmath$, ולכן הם מצטברים.
+      - kind: step
+        text: >-
+          (ד) מהספרה 12 (למעלה) אל הספרה 3 (ימינה) מסתובבים עם כיוון השעון. אצבעות יד ימין מתכופפות עם כיוון השעון,
+          והאגודל מצביע הרחק מכם: המכפלה נכנסת לתוך הקיר, $\otimes$.
+      - kind: check
+        text: >-
+          (ג) בנוסחה של וקטורים על הדף: $(1,1)$ ו-$(1,-1)$ נותנים $a_1b_2-a_2b_1=1\cdot(-1)-1\cdot1=-2$. (ד) במספרים:
+          $(0,1)$ ו-$(1,0)$ נותנים $0\cdot0-1\cdot1=-1<0$, לתוך הדף.
+      - kind: result
+        text: >-
+          (א) $\hat\jmath$ ו-$-\hat\jmath$; (ב) $\hat k-\hat\jmath$; (ג) $-2\hat k$; (ד) נכנסת לתוך הקיר.
+
+  - id: W-1.4-03
+    level: basic
+    objectives: [OBJ-1.4-2]
+    prompt: >-
+      נתונים $\vec u=(1,2,2)$ ו-$\vec v=(3,0,1)$.
+
+      (א) חשבו את שטח המקבילית ששני הווקטורים פורשים.
+
+      (ב) מהו שטח המשולש ששתיים מצלעותיו הן $\vec u$ ו-$\vec v$?
+
+      (ג) האם השטח ב-(א) קטן ממכפלת האורכים $|\vec u|\,|\vec v|$, שווה לה או גדול ממנה? הסבירו בלי לחשב זווית.
+    answer: >-
+      (א) $\sqrt{65}\approx8.06$. (ב) $\frac{\sqrt{65}}{2}\approx4.03$. (ג) קטן: $\sqrt{65}<3\sqrt{10}=\sqrt{90}$, כי הווקטורים
+      אינם מאונכים.
+    solution:
+      - kind: idea
+        text: >-
+          שטח המקבילית הוא האורך של המכפלה הווקטורית. המשולש הוא חצי מהמקבילית.
+      - kind: computation
+        text: >-
+          $\vec u\times\vec v=(2\cdot1-2\cdot0,\ 2\cdot3-1\cdot1,\ 1\cdot0-2\cdot3)=(2,5,-6)$.
+      - kind: check
+        text: >-
+          $(2,5,-6)\cdot(1,2,2)=2+10-12=0$ ו-$(2,5,-6)\cdot(3,0,1)=6+0-6=0$.
+      - kind: computation
+        text: >-
+          (א) $|\vec u\times\vec v|=\sqrt{4+25+36}=\sqrt{65}\approx8.06$. (ב) חצי: $\frac{\sqrt{65}}{2}\approx4.03$.
+      - kind: step
+        text: >-
+          (ג) $|\vec u|=\sqrt{1+4+4}=3$ ו-$|\vec v|=\sqrt{9+0+1}=\sqrt{10}$, ומכפלת האורכים היא $3\sqrt{10}=\sqrt{90}\approx9.49$.
+          השטח הוא $|\vec u|\,|\vec v|\sin\theta$, ו-$\sin\theta<1$ כשהזווית אינה ישרה. והיא אכן אינה ישרה:
+          $\vec u\cdot\vec v=3+0+2=5\ne0$.
+      - kind: check
+        text: >-
+          הזהות $|\vec u\times\vec v|^2+(\vec u\cdot\vec v)^2=|\vec u|^2|\vec v|^2$ מתקיימת: $65+25=90$.
+      - kind: result
+        text: >-
+          (א) $\sqrt{65}\approx8.06$; (ב) $\frac{\sqrt{65}}{2}\approx4.03$; (ג) קטן ממכפלת האורכים, $\sqrt{90}\approx9.49$.
+
+  - id: W-1.4-04
+    level: mid
+    objectives: [OBJ-1.4-2]
+    prompt: >-
+      על שני וקטורים במרחב ידוע רק זה: $|\vec u|=2$, $|\vec v|=5$ ו-$\vec u\cdot\vec v=6$. הרכיבים אינם נתונים.
+
+      (א) מצאו את $|\vec u\times\vec v|$.
+
+      (ב) האם התשובה משתנה אם $\vec u\cdot\vec v=-6$?
+
+      (ג) מהו הערך הגדול ביותר ש-$|\vec u\times\vec v|$ יכול לקבל לשני וקטורים באורכים 2 ו-5, ומה אז $\vec u\cdot\vec v$?
+    answer: >-
+      (א) $8$. (ב) לא, שוב $8$. (ג) $10$, כשהווקטורים מאונכים, ואז $\vec u\cdot\vec v=0$.
+    solution:
+      - kind: idea
+        text: >-
+          המכפלה הסקלרית נותנת את $\cos\theta$, והמכפלה הווקטורית צריכה את $\sin\theta$. עוברים מאחד לשני בעזרת
+          $\sin^2\theta+\cos^2\theta=1$, וזוכרים שבין 0 ל-$\pi$ הסינוס אינו שלילי.
+      - kind: computation
+        text: >-
+          (א) $\cos\theta=\frac{\vec u\cdot\vec v}{|\vec u|\,|\vec v|}=\frac{6}{10}=\frac35$, ולכן
+          $\sin\theta=\sqrt{1-\frac{9}{25}}=\frac45$.
+      - kind: computation
+        text: >-
+          $|\vec u\times\vec v|=|\vec u|\,|\vec v|\sin\theta=2\cdot5\cdot\frac45=8$.
+      - kind: step
+        text: >-
+          (ב) עם $\vec u\cdot\vec v=-6$ מתקבל $\cos\theta=-\frac35$: הזווית קהה, אבל $\sin\theta=\frac45$ כמו קודם, והאורך שוב 8.
+          שתי המקביליות חופפות: אחת נטויה ימינה והאחרת שמאלה.
+      - kind: step
+        text: >-
+          (ג) $|\vec u\times\vec v|=10\sin\theta\le10$, עם שוויון ב-$\theta=\frac\pi2$: המקבילית היא מלבן של 2 על 5. אז הווקטורים
+          מאונכים ו-$\vec u\cdot\vec v=0$.
+      - kind: check
+        text: >-
+          דרך שנייה ל-(א), בלי זוויות: $|\vec u\times\vec v|^2=|\vec u|^2|\vec v|^2-(\vec u\cdot\vec v)^2=100-36=64$.
+      - kind: result
+        text: >-
+          (א) $|\vec u\times\vec v|=8$; (ב) אינה משתנה; (ג) לכל היותר $10$, כש-$\vec u\cdot\vec v=0$.
+
+  - id: W-1.4-05
+    level: mid
+    qualitative: true
+    objectives: [OBJ-1.4-1, OBJ-1.4-2]
+    prompt: >-
+      לכל טענה קבעו אם היא נכונה לכל הווקטורים במרחב. טענה נכונה נמקו; לטענה שאינה נכונה תנו דוגמה נגדית.
+
+      (א) אם $\vec a\ne\vec0$ ו-$\vec a\times\vec b=\vec a\times\vec c$, אז $\vec b=\vec c$.
+
+      (ב) $(\vec a\times\vec b)\times\vec c=\vec a\times(\vec b\times\vec c)$.
+
+      (ג) אם $\vec a\times\vec b=\vec0$ וגם $\vec a\cdot\vec b=0$, אז לפחות אחד משני הווקטורים הוא וקטור האפס.
+    answer: >-
+      (א) לא נכון: $\hat\imath\times\hat\jmath=\hat\imath\times(\hat\imath+\hat\jmath)=\hat k$. (ב) לא נכון:
+      $(\hat\imath\times\hat\imath)\times\hat\jmath=\vec0$ ואילו $\hat\imath\times(\hat\imath\times\hat\jmath)=-\hat\jmath$. (ג) נכון: שני וקטורים שונים
+      מאפס אינם יכולים להיות גם מקבילים וגם מאונכים.
+    solution:
+      - kind: idea
+        text: >-
+          המכפלה הווקטורית פותחת סוגריים, אבל אי אפשר לצמצם בה ואי אפשר לקבץ בה מחדש. דוגמאות נגדיות מחפשים קודם כול
+          בין וקטורי הצירים. ב-(ג) משתמשים בשני הגדלים: $|\vec a|\,|\vec b|\sin\theta$ ו-$|\vec a|\,|\vec b|\cos\theta$.
+      - kind: step
+        text: >-
+          (א) לא נכון. מעבירים אגף: $\vec a\times(\vec b-\vec c)=\vec0$, וזה אומר רק ש-$\vec b-\vec c$ מקביל ל-$\vec a$ (או אפס).
+          דוגמה: $\vec a=\hat\imath$, $\vec b=\hat\jmath$, $\vec c=\hat\imath+\hat\jmath$. אז
+          $\hat\imath\times\vec c=\hat\imath\times\hat\imath+\hat\imath\times\hat\jmath=\vec0+\hat k=\hat k=\hat\imath\times\vec b$, אבל $\vec b\ne\vec c$.
+      - kind: step
+        text: >-
+          (ב) לא נכון. עם $\vec a=\vec b=\hat\imath$ ו-$\vec c=\hat\jmath$: אגף שמאל הוא $(\hat\imath\times\hat\imath)\times\hat\jmath=\vec0\times\hat\jmath=\vec0$,
+          ואגף ימין הוא $\hat\imath\times(\hat\imath\times\hat\jmath)=\hat\imath\times\hat k=-\hat\jmath$.
+      - kind: step
+        text: >-
+          (ג) נכון. נניח ששני הווקטורים שונים מאפס. מ-$\vec a\times\vec b=\vec0$ נובע $|\vec a|\,|\vec b|\sin\theta=0$, ולכן
+          $\sin\theta=0$. מ-$\vec a\cdot\vec b=0$ נובע $|\vec a|\,|\vec b|\cos\theta=0$, ולכן $\cos\theta=0$. אבל
+          $\sin^2\theta+\cos^2\theta=1$, ושניהם אינם יכולים להתאפס יחד. סתירה, ולכן אחד הווקטורים הוא אפס.
+      - kind: check
+        text: >-
+          ב-(ג) אפשר לראות את אותו דבר מהזהות $|\vec a\times\vec b|^2+(\vec a\cdot\vec b)^2=|\vec a|^2|\vec b|^2$: אם אגף שמאל
+          אפס, אז $|\vec a|\,|\vec b|=0$.
+      - kind: result
+        text: >-
+          (א) לא נכון; (ב) לא נכון; (ג) נכון.
+
+  - id: W-1.4-06
+    level: mid
+    objectives: [OBJ-1.4-3]
+    prompt: >-
+      מישור עובר דרך הנקודה $P=(2,-1,1)$ ומקביל לשני הווקטורים $\vec v_1=(1,0,2)$ ו-$\vec v_2=(0,1,-1)$.
+
+      (א) מצאו את משוואת המישור.
+
+      (ב) אילו מהנקודות $(1,0,-2)$ ו-$(1,1,1)$ נמצאות על המישור?
+    answer: >-
+      (א) $2x-y-z=4$ (או $-2x+y+z=-4$). (ב) $(1,0,-2)$ על המישור; $(1,1,1)$ אינה עליו.
+    solution:
+      - kind: idea
+        text: >-
+          שני הווקטורים מונחים על המישור, ולכן הנורמל מאונך לשניהם: הוא המכפלה הווקטורית שלהם. אחר כך $d$ מהנקודה $P$,
+          כמו בשיעור 1.3.
+      - kind: computation
+        text: >-
+          $\vec n=\vec v_1\times\vec v_2=\big(0\cdot(-1)-2\cdot1,\ 2\cdot0-1\cdot(-1),\ 1\cdot1-0\cdot0\big)=(-2,1,1)$.
+      - kind: check
+        text: >-
+          $(-2,1,1)\cdot(1,0,2)=-2+0+2=0$ ו-$(-2,1,1)\cdot(0,1,-1)=0+1-1=0$.
+      - kind: computation
+        text: >-
+          $d=\vec n\cdot P=-4-1+1=-4$. המישור: $-2x+y+z=-4$, ואחרי כפל ב-$(-1)$: $2x-y-z=4$.
+      - kind: step
+        text: >-
+          (ב) מציבים ב-$2x-y-z$. הנקודה $(1,0,-2)$: $2-0+2=4$, על המישור. הנקודה $(1,1,1)$: $2-1-1=0\ne4$, לא על המישור.
+      - kind: check
+        text: >-
+          הנקודות $P+\vec v_1=(3,-1,3)$ ו-$P+\vec v_2=(2,0,0)$ צריכות להיות על המישור: $6+1-3=4$ ו-$4-0-0=4$.
+      - kind: result
+        text: >-
+          (א) $2x-y-z=4$; (ב) רק $(1,0,-2)$ על המישור.
+
+  - id: W-1.4-07
+    level: mid
+    objectives: [OBJ-1.4-3]
+    prompt: >-
+      מפתח ברגים באורך 0.25 מטר אוחז בבורג. בקצה המפתח פועל כוח של 40 ניוטון, במישור שבו המפתח מסתובב, בזווית של
+      $60^\circ$ לכיוון המפתח (הכיוון מהבורג אל הקצה).
+
+      (א) מהו גודל המומנט ביחס לבורג?
+
+      (ב) בוחרים צירים כך שהבורג בראשית והמפתח לאורך ציר $x$ החיובי, והכוח פונה אל $y$ חיובי. כתבו את $\vec r$ ואת
+      $\vec F$ ברכיבים, חשבו את $\vec\tau$, וקבעו אם הסיבוב עם כיוון השעון או נגדו (במבט מציר $z$ החיובי).
+
+      (ג) באותו כוח, באילו זוויות גודל המומנט הוא 5 ניוטון-מטר?
+    answer: >-
+      (א) $5\sqrt3\approx8.66$ ניוטון-מטר. (ב) $\vec\tau=(0,0,5\sqrt3)$, נגד כיוון השעון. (ג) $30^\circ$ או $150^\circ$.
+    solution:
+      - kind: idea
+        text: >-
+          $\vec\tau=\vec r\times\vec F$, וגודלו $|\vec r|\,|\vec F|\sin\theta$: רק הרכיב של הכוח המאונך למפתח מסובב.
+      - kind: computation
+        text: >-
+          (א) $|\vec\tau|=0.25\cdot40\cdot\sin60^\circ=10\cdot\frac{\sqrt3}{2}=5\sqrt3\approx8.66$ ניוטון-מטר.
+      - kind: computation
+        text: >-
+          (ב) $\vec r=(0.25,0,0)$ ו-$\vec F=(40\cos60^\circ,\ 40\sin60^\circ,\ 0)=(20,\ 20\sqrt3,\ 0)$. לשני וקטורים במישור $xy$
+          יש למכפלה רק רכיב $z$: $r_1F_2-r_2F_1=0.25\cdot20\sqrt3-0\cdot20=5\sqrt3$. לכן $\vec\tau=(0,0,5\sqrt3)$.
+      - kind: step
+        text: >-
+          המומנט בכיוון $z$ החיובי, אל הצופה. לפי כלל יד ימין, כשהאגודל פונה אל הצופה האצבעות מתכופפות נגד כיוון
+          השעון: זה כיוון הסיבוב.
+      - kind: computation
+        text: >-
+          (ג) $10\sin\theta=5$, כלומר $\sin\theta=\frac12$. בין $0^\circ$ ל-$180^\circ$ יש שתי זוויות כאלה: $30^\circ$ ו-$150^\circ$.
+      - kind: check
+        text: >-
+          הרכיב של הכוח לאורך המפתח, 20 ניוטון, אינו תורם דבר; הרכיב המאונך, $20\sqrt3\approx34.6$ ניוטון, כפול 0.25 מטר נותן
+          $8.66$. המומנט המרבי, כשהכוח מאונך למפתח, הוא $0.25\cdot40=10$ ניוטון-מטר, ו-$8.66<10$.
+      - kind: result
+        text: >-
+          (א) $5\sqrt3\approx8.66$ ניוטון-מטר; (ב) $\vec\tau=(0,0,5\sqrt3)$, סיבוב נגד כיוון השעון; (ג) $30^\circ$ או $150^\circ$.
+
+  - id: W-1.4-08
+    level: exam
+    objectives: [OBJ-1.4-3, OBJ-1.4-1]
+    prompt: >-
+      שני המישורים $x+2y-z=3$ ו-$2x-y+z=1$ אינם מקבילים, ולכן הם נחתכים לאורך ישר.
+
+      (א) הסבירו למה וקטור הכיוון של ישר החיתוך מאונך לנורמלים של שני המישורים, ומצאו וקטור כיוון.
+
+      (ב) מצאו נקודה אחת על ישר החיתוך (רמז: הציבו $z=0$), וכתבו את הישר בהצגה פרמטרית.
+
+      (ג) בדקו את התשובה בנקודה נוספת של הישר.
+    answer: >-
+      וקטור כיוון $(1,-3,-5)$; הישר $\vec r(t)=(1,1,0)+t\,(1,-3,-5)$.
+    solution:
+      - kind: idea
+        text: >-
+          ישר החיתוך מונח על שני המישורים. וקטור שמונח על מישור מאונך לנורמל שלו. לכן וקטור הכיוון מאונך לשני
+          הנורמלים בבת אחת, ווקטור כזה נותנת המכפלה הווקטורית של הנורמלים.
+      - kind: step
+        text: >-
+          (א) הנורמלים נקראים מהמקדמים (שיעור 1.3): $\vec n_1=(1,2,-1)$ ו-$\vec n_2=(2,-1,1)$. אם $A$ ו-$B$ שתי נקודות על
+          ישר החיתוך, שתיהן על המישור הראשון, ולכן $\vec n_1\cdot\vec{AB}=0$; ושתיהן על השני, ולכן $\vec n_2\cdot\vec{AB}=0$.
+      - kind: computation
+        text: >-
+          $\vec n_1\times\vec n_2=\big(2\cdot1-(-1)\cdot(-1),\ (-1)\cdot2-1\cdot1,\ 1\cdot(-1)-2\cdot2\big)=(1,-3,-5)$.
+      - kind: check
+        text: >-
+          $(1,-3,-5)\cdot(1,2,-1)=1-6+5=0$ ו-$(1,-3,-5)\cdot(2,-1,1)=2+3-5=0$.
+      - kind: computation
+        text: >-
+          (ב) עם $z=0$ נשארות שתי משוואות: $x+2y=3$ ו-$2x-y=1$. מהשנייה $y=2x-1$; מציבים בראשונה: $x+4x-2=3$, כלומר
+          $x=1$ ו-$y=1$. הנקודה $(1,1,0)$, והישר: $\vec r(t)=(1,1,0)+t\,(1,-3,-5)$.
+      - kind: check
+        text: >-
+          (ג) ב-$t=1$ מקבלים $(2,-2,-5)$. במישור הראשון: $2-4+5=3$. בשני: $4+2-5=1$. הנקודה על שני המישורים.
+      - kind: result
+        text: >-
+          וקטור כיוון $(1,-3,-5)$ (או כל כפולה שלו שונה מאפס), והישר $\vec r(t)=(1,1,0)+t\,(1,-3,-5)$.
+
+  - id: W-1.4-09
+    level: exam
+    objectives: [OBJ-1.4-2, OBJ-1.4-1]
+    prompt: >-
+      נתונות הנקודות $A=(1,2,0)$, $B=(3,1,2)$ ו-$C=(5,0,k)$, כש-$k$ פרמטר.
+
+      (א) חשבו את $\vec{AB}\times\vec{AC}$ כתלות ב-$k$.
+
+      (ב) לאיזה ערך של $k$ שלוש הנקודות על ישר אחד?
+
+      (ג) לאילו ערכים של $k$ שטח המשולש $ABC$ הוא $3\sqrt5$?
+
+      (ד) עבור $k=1$, מהו המרחק של $C$ מהישר $AB$?
+    answer: >-
+      (א) $(4-k,\ 8-2k,\ 0)$. (ב) $k=4$. (ג) $k=-2$ או $k=10$. (ד) $\sqrt5\approx2.24$.
+    solution:
+      - kind: idea
+        text: >-
+          המכפלה $\vec{AB}\times\vec{AC}$ עונה על כל הסעיפים: היא וקטור האפס בדיוק כששלוש הנקודות על ישר אחד, חצי
+          מהאורך שלה הוא שטח המשולש, והאורך שלה חלקי אורך הבסיס $AB$ הוא הגובה, כלומר המרחק של $C$ מהישר $AB$.
+      - kind: computation
+        text: >-
+          (א) $\vec{AB}=(2,-1,2)$ ו-$\vec{AC}=(4,-2,k)$. המכפלה:
+          $$\vec{AB}\times\vec{AC}=\big((-1)\cdot k-2\cdot(-2),\ 2\cdot4-2\cdot k,\ 2\cdot(-2)-(-1)\cdot4\big)=(4-k,\ 8-2k,\ 0).$$
+      - kind: step
+        text: >-
+          (ב) שלושת הרכיבים מתאפסים יחד בדיוק כש-$k=4$. אז $\vec{AC}=(4,-2,4)=2\,\vec{AB}$: הווקטורים מקבילים, והנקודות
+          על ישר אחד.
+      - kind: computation
+        text: >-
+          (ג) המכפלה היא $(4-k)\,(1,2,0)$, ואורכה $|4-k|\sqrt5$. שטח המשולש: $\frac{\sqrt5}{2}\,|4-k|$. הדרישה
+          $\frac{\sqrt5}{2}\,|4-k|=3\sqrt5$ נותנת $|4-k|=6$, כלומר $k=-2$ או $k=10$.
+      - kind: computation
+        text: >-
+          (ד) עבור $k=1$ המכפלה היא $(3,6,0)$, ואורכה $\sqrt{45}=3\sqrt5$. אורך הבסיס: $|\vec{AB}|=\sqrt{4+1+4}=3$. הגובה:
+          $\frac{3\sqrt5}{3}=\sqrt5\approx2.24$.
+      - kind: check
+        text: >-
+          עבור $k=1$: $(3,6,0)\cdot(2,-1,2)=6-6+0=0$ ו-$(3,6,0)\cdot(4,-2,1)=12-12+0=0$. ב-(ג) שני הערכים נמצאים במרחק
+          שווה, 6, מ-$k=4$, משני הצדדים שלו: הנקודה $C$ מתרחקת מהישר $AB$ באותה מידה בשני הכיוונים.
+      - kind: result
+        text: >-
+          (א) $(4-k,\ 8-2k,\ 0)$; (ב) $k=4$; (ג) $k=-2$ או $k=10$; (ד) $\sqrt5\approx2.24$.
+
+  - id: W-1.4-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-1.4-3, OBJ-1.4-1]
+    prompt: >-
+      תלמידה התבקשה למצוא את המישור דרך $A=(2,0,1)$, $B=(1,1,3)$ ו-$C=(0,2,1)$, וכתבה:
+
+      "$\vec{AB}=(-1,1,2)$, $\vec{AC}=(-2,2,0)$. הנורמל: $\vec n=\vec{AB}\times\vec{AC}=(-4,4,0)$. $d=\vec n\cdot A=-8$. המישור:
+      $-4x+4y=-8$, כלומר $x-y=2$. בדיקה: $A$ נותנת $2-0=2$. נכון."
+
+      (א) הראו שהתשובה שגויה.
+
+      (ב) למה הבדיקה של התלמידה לא גילתה את הטעות? איזו בדיקה הייתה מגלה אותה כבר בשלב הנורמל?
+
+      (ג) מצאו את הטעות ואת המישור הנכון.
+
+      (ד) תלמיד אחר חישב את הנורמל כ-$\vec{AC}\times\vec{AB}$, בלי טעויות חשבון. האם יקבל מישור אחר?
+    answer: >-
+      (א) $B$ נותנת $1-1=0\ne2$. (ב) $A$ מקיימת את המשוואה תמיד, כי ממנה חושב $d$; הבדיקה $\vec n\cdot\vec{AB}=0$ הייתה
+      מגלה. (ג) הרכיב האמצעי בסימן הפוך: $\vec n=(-4,-4,0)$, והמישור $x+y=2$. (ד) לא: אותו מישור.
+    solution:
+      - kind: idea
+        text: >-
+          שתי בדיקות שומרות על חישוב של מישור: הנורמל חייב להיות מאונך לשני הווקטורים שממנו הוא חושב, והמשוואה חייבת
+          להתקיים בנקודות שלא השתמשו בהן לחישוב $d$.
+      - kind: step
+        text: >-
+          (א) מציבים את $B=(1,1,3)$ ב-$x-y=2$: $1-1=0\ne2$. גם $C=(0,2,1)$: $0-2=-2\ne2$. המישור של התלמידה אינו עובר דרך $B$
+          ודרך $C$.
+      - kind: step
+        text: >-
+          (ב) $d$ הוגדר כ-$\vec n\cdot A$, ולכן $A$ מקיימת את המשוואה לכל $\vec n$, נכון או שגוי. זו אינה בדיקה. הבדיקה של
+          הנורמל: $(-4,4,0)\cdot(-1,1,2)=4+4+0=8\ne0$. הנורמל של התלמידה אינו מאונך ל-$\vec{AB}$.
+      - kind: computation
+        text: >-
+          (ג) מחשבים מחדש:
+          $$\vec{AB}\times\vec{AC}=\big(1\cdot0-2\cdot2,\ 2\cdot(-2)-(-1)\cdot0,\ (-1)\cdot2-1\cdot(-2)\big)=(-4,-4,0).$$
+          הרכיב האמצעי הוא $a_3b_1-a_1b_3=-4$. התלמידה חישבה $a_1b_3-a_3b_1=4$: הצלבה של העמודות 1 ו-3 בלי המינוס.
+      - kind: computation
+        text: >-
+          $d=(-4,-4,0)\cdot(2,0,1)=-8$. המישור: $-4x-4y=-8$, כלומר $x+y=2$.
+      - kind: check
+        text: >-
+          $(-4,-4,0)\cdot(-1,1,2)=4-4+0=0$ ו-$(-4,-4,0)\cdot(-2,2,0)=8-8+0=0$. $B$: $1+1=2$. $C$: $0+2=2$.
+      - kind: step
+        text: >-
+          (ד) $\vec{AC}\times\vec{AB}=-\,\vec{AB}\times\vec{AC}=(4,4,0)$, ואז $d=(4,4,0)\cdot(2,0,1)=8$ והמישור $4x+4y=8$: שוב
+          $x+y=2$. הנורמל התהפך, והמישור אותו מישור.
+      - kind: result
+        text: >-
+          הטעות היא הסימן של הרכיב האמצעי של המכפלה הווקטורית. הנורמל הנכון $(-4,-4,0)$, והמישור $x+y=2$. סדר הגורמים
+          במכפלה אינו משנה את המישור.
+
+challenge:
+  - id: W-1.4-c1
+    stars: 1
+    objectives: [OBJ-1.4-1, OBJ-1.4-2]
+    prompt: >-
+      (א) מצאו את כל הווקטורים $\vec w=(w_1,w_2,w_3)$ שמקיימים
+      $$(1,1,1)\times\vec w=(-1,-1,2).$$
+
+      (ב) הסבירו, בלי חישוב ברכיבים, למה אם יש פתרון אחד יש אינסוף פתרונות, ולמה כולם על ישר אחד. איזה מהפתרונות
+      הוא הקצר ביותר?
+
+      (ג) הראו, בלי לפתור משוואות, שלמשוואה $(1,1,1)\times\vec w=(1,0,0)$ אין אף פתרון.
+    answer: >-
+      (א) $\vec w=(-1,1,0)+s\,(1,1,1)$ לכל מספר $s$. (ב) הוספת כפולה של $(1,1,1)$ אינה משנה את המכפלה; הקצר ביותר הוא
+      $(-1,1,0)$. (ג) המכפלה חייבת להיות מאונכת ל-$(1,1,1)$, ו-$(1,0,0)\cdot(1,1,1)=1\ne0$.
+    solution:
+      - kind: idea
+        text: >-
+          במכפלה וקטורית אי אפשר "לחלק". כותבים את המכפלה ברכיבים ומקבלים שלוש משוואות בשלושה נעלמים. שתי התכונות
+          של המכפלה מסבירות מה יקרה: היא מאונכת לגורמים (ולכן לא לכל אגף ימין יש פתרון), ו-$\vec u\times\vec u=\vec0$
+          (ולכן פתרון אינו יחיד).
+      - kind: computation
+        text: >-
+          (א) עם $\vec u=(1,1,1)$: $\vec u\times\vec w=(1\cdot w_3-1\cdot w_2,\ 1\cdot w_1-1\cdot w_3,\ 1\cdot w_2-1\cdot w_1)$. המשוואות:
+          $$w_3-w_2=-1,\qquad w_1-w_3=-1,\qquad w_2-w_1=2 .$$
+      - kind: step
+        text: >-
+          כשמחברים את שלוש המשוואות, אגף שמאל מתאפס, וגם אגף ימין: $-1-1+2=0$. לכן המשוואה השלישית נובעת משתי
+          הראשונות, ונשארות שתי משוואות לשלושה נעלמים. מסמנים $w_3=s$: מהראשונה $w_2=s+1$, מהשנייה $w_1=s-1$.
+      - kind: computation
+        text: >-
+          $\vec w=(s-1,\ s+1,\ s)=(-1,1,0)+s\,(1,1,1)$, לכל מספר $s$. זה ישר דרך $(-1,1,0)$ בכיוון $(1,1,1)$.
+      - kind: step
+        text: >-
+          (ב) אם $\vec w_0$ פתרון, אז לפי הפילוג $\vec u\times(\vec w_0+s\vec u)=\vec u\times\vec w_0+s\,(\vec u\times\vec u)=\vec u\times\vec w_0$:
+          גם $\vec w_0+s\vec u$ פתרון. ולהפך, אם $\vec w$ ו-$\vec w_0$ שני פתרונות, אז $\vec u\times(\vec w-\vec w_0)=\vec0$, ולכן ההפרש
+          מקביל ל-$\vec u$ (או אפס). כלומר הפתרונות הם בדיוק הישר דרך $\vec w_0$ בכיוון $\vec u$.
+      - kind: step
+        text: >-
+          הנקודה הקרובה ביותר לראשית על הישר היא זו שהווקטור אליה מאונך לכיוון הישר:
+          $\big((-1,1,0)+s\,(1,1,1)\big)\cdot(1,1,1)=0+3s=0$, כלומר $s=0$. הפתרון הקצר ביותר הוא $(-1,1,0)$, ואורכו $\sqrt2$.
+      - kind: step
+        text: >-
+          (ג) $\vec u\times\vec w$ מאונך ל-$\vec u$ לכל $\vec w$. אבל $(1,0,0)\cdot(1,1,1)=1\ne0$, ולכן $(1,0,0)$ אינו יכול להיות מכפלה
+          וקטורית של $(1,1,1)$ בשום וקטור. (ב-(א) התנאי מתקיים: $(-1,-1,2)\cdot(1,1,1)=0$.)
+      - kind: check
+        text: >-
+          $(1,1,1)\times(-1,1,0)=(1\cdot0-1\cdot1,\ 1\cdot(-1)-1\cdot0,\ 1\cdot1-1\cdot(-1))=(-1,-1,2)$. ועם $s=1$:
+          $(1,1,1)\times(0,2,1)=(1-2,\ 0-1,\ 2-0)=(-1,-1,2)$.
+      - kind: result
+        text: >-
+          (א) $\vec w=(-1,1,0)+s\,(1,1,1)$; (ב) הפתרונות הם ישר בכיוון $(1,1,1)$, והקצר ביותר הוא $(-1,1,0)$; (ג) אין פתרון, כי
+          $(1,0,0)$ אינו מאונך ל-$(1,1,1)$.
+    source:
+      name: 'OpenStax, Calculus Volume 3 (Strang, Herman et al.), Section 2.4 The Cross Product'
+      year: 2016
+      problem: 'Section 2.4, Exercise 233'
+      url: 'https://openstax.org/books/calculus-volume-3/pages/2-4-the-cross-product#fs-id1163724065789'
+      verified: '2026-11-17'
+      adapted: true
+
+  - id: W-1.4-c2
+    stars: 1
+    objectives: [OBJ-1.4-3]
+    prompt: >-
+      מפתח ברגים באורך 20 ס״מ מונח לאורך ציר $y$ החיובי, והבורג שהוא אוחז בו נמצא בראשית. בקצה המפתח פועל כוח בכיוון
+      של הווקטור $(0,1,-2)$.
+
+      (א) מה צריך להיות גודל הכוח כדי שגודל המומנט ביחס לבורג יהיה 100 ניוטון-מטר?
+
+      (ב) לאיזה כיוון מצביע וקטור המומנט?
+
+      (ג) מהו הכוח הקטן ביותר, בכיוון כלשהו, שנותן בקצה המפתח מומנט באותו גודל? פי כמה הוא קטן מהכוח של (א)?
+    answer: >-
+      (א) $250\sqrt5\approx559$ ניוטון. (ב) בכיוון השלילי של ציר $x$. (ג) $500$ ניוטון, מאונך למפתח; קטן פי
+      $\frac{\sqrt5}{2}\approx1.12$.
+    solution:
+      - kind: idea
+        text: >-
+          כותבים את $\vec r$ ואת $\vec F$ ברכיבים, כש-$\vec F$ הוא הגודל הלא ידוע $F$ כפול וקטור היחידה של הכיוון הנתון,
+          ומחשבים $\vec\tau=\vec r\times\vec F$. שימו לב ליחידות: 20 ס״מ הם 0.2 מטר.
+      - kind: computation
+        text: >-
+          $\vec r=(0,\ 0.2,\ 0)$ מטר. האורך של $(0,1,-2)$ הוא $\sqrt5$, ולכן $\vec F=\frac{F}{\sqrt5}\,(0,1,-2)$.
+      - kind: computation
+        text: >-
+          מוציאים את המספרים ומחשבים את המכפלה של $(0,1,0)$ ב-$(0,1,-2)$:
+          $$(0,1,0)\times(0,1,-2)=\big(1\cdot(-2)-0\cdot1,\ 0\cdot0-0\cdot(-2),\ 0\cdot1-1\cdot0\big)=(-2,0,0).$$
+          לכן $\vec\tau=0.2\cdot\frac{F}{\sqrt5}\,(-2,0,0)=\left(-\frac{0.4F}{\sqrt5},\ 0,\ 0\right)$.
+      - kind: computation
+        text: >-
+          (א) $|\vec\tau|=\frac{0.4F}{\sqrt5}=100$, ולכן $F=\frac{100\sqrt5}{0.4}=250\sqrt5\approx559$ ניוטון.
+      - kind: step
+        text: >-
+          (ב) למומנט יש רק רכיב $x$, והוא שלילי: הוא מצביע בכיוון השלילי של ציר $x$. הוא מאונך גם למפתח (ציר $y$) וגם
+          לכוח (שנמצא במישור $yz$), כמו שצריך.
+      - kind: step
+        text: >-
+          (ג) $|\vec\tau|=|\vec r|\,|\vec F|\sin\theta$, ולגודל מומנט נתון הכוח הקטן ביותר מתקבל כש-$\sin\theta=1$: כוח מאונך
+          למפתח, בגודל $\frac{100}{0.2}=500$ ניוטון. היחס: $\frac{250\sqrt5}{500}=\frac{\sqrt5}{2}\approx1.12$.
+      - kind: check
+        text: >-
+          דרך שנייה ל-(א), מהזווית: $\cos\theta=\frac{(0,1,0)\cdot(0,1,-2)}{1\cdot\sqrt5}=\frac{1}{\sqrt5}$, ולכן
+          $\sin\theta=\frac{2}{\sqrt5}$, ו-$0.2\cdot250\sqrt5\cdot\frac{2}{\sqrt5}=100$. רק הרכיב של הכוח בכיוון $z$ מסובב;
+          הרכיב שלאורך המפתח מבוזבז, ולכן נדרש כוח גדול מ-500.
+      - kind: result
+        text: >-
+          (א) $250\sqrt5\approx559$ ניוטון; (ב) המומנט בכיוון $-\hat\imath$; (ג) 500 ניוטון, פי $\frac{\sqrt5}{2}\approx1.12$ פחות.
+    source:
+      name: 'OpenStax, Calculus Volume 3 (Strang, Herman et al.), Section 2.4 The Cross Product'
+      year: 2016
+      problem: 'Section 2.4, Exercise 237'
+      url: 'https://openstax.org/books/calculus-volume-3/pages/2-4-the-cross-product#fs-id1163723085773'
+      verified: '2026-11-17'
+      adapted: true
