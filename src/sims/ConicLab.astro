@@ -1,0 +1,10 @@
+---
+/**
+ * Chapter 2 figure: <Spread figure={ConicLab} figureProps={{ mode, a, b, h, k, t, c, kind, branch, sideways, showUnit, showAxes, showAsym, showBox, coef, presets, controls, kinds, tasks }}>.
+ * mode: 'ellipse' (lesson 2.1), 'parabola', 'hyperbola' and 'identify' (lesson 2.2). The full list is in ConicLab.tsx.
+ */
+import ConicLab, { type ConicLabProps } from './ConicLab';
+type Props = ConicLabProps;
+---
+
+<ConicLab client:visible {...Astro.props} />

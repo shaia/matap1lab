@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 2 figure: <Spread figure={CoordinateLab} figureProps={{ mode, … }}>.
+ * mode: 'polar' and 'curve' and 'region' (lesson 2.3), 'space' (lesson 2.4). The props, step keys and task ids
+ * are documented at the top of CoordinateLab.tsx.
+ */
+import CoordinateLab, { type CoordinateLabProps } from './CoordinateLab';
+type Props = CoordinateLabProps;
+---
+
+<CoordinateLab client:visible {...Astro.props} />

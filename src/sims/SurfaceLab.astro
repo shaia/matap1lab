@@ -1,0 +1,10 @@
+---
+/**
+ * Lesson 2.5 figure: <Spread figure={SurfaceLab} figureProps={{ surface, surfaces, axis, c, accumulate, mystery, options, az, el, controls, tasks }}>.
+ * See the header of SurfaceLab.tsx for the props, step keys, presets and tasks.
+ */
+import SurfaceLab, { type SurfaceLabProps } from './SurfaceLab';
+type Props = SurfaceLabProps;
+---
+
+<SurfaceLab client:visible {...Astro.props} />

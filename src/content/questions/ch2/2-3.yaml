@@ -4,7 +4,8 @@
 #   OBJ-2.3-2  sketch curves given by a polar equation, translate a Cartesian equation to polar
 #   OBJ-2.3-3  regions such as an annulus or a sector in polar coordinates
 # Convention in these questions: r >= 0, and each question states the range of θ it wants.
-# Every number recomputed in screens/tools/recompute-ch2.py.
+# Every number recomputed in screens/tools/recompute-ch2.py; the questions revised after the lesson review
+# (arctan-trap, identify, offcenter-disk, extreme-x) in screens/tools/lesson-2-3.py.
 chapter: 2
 questions:
   - id: Q-2.3-to-cartesian
@@ -35,7 +36,8 @@ questions:
     objectives: [OBJ-2.3-1]
     level: basic
     prompt: >-
-      מצאו את הזווית הקוטבית $\theta\in[0,2\pi)$ של הנקודה $(-1,-\sqrt3)$. (אפשר לכתוב למשל 3pi/4)
+      מצאו את הזווית הקוטבית של הנקודה $(-1,-\sqrt3)$, בטווח $0\le\theta<2\pi$. (כפולה של $\pi$ מקלידים בצורה
+      כמו 2pi/5.)
     answer: 4.1887902047863905
     tolerance: 0.001
     correctFeedback: >-
@@ -51,7 +53,7 @@ questions:
         misconception: MC-c2-arctan-quadrant
       - value: -2.0943951023931957
         feedback: >-
-          $-\frac{2\pi}{3}$ מגיע לאותה נקודה, אבל השאלה מבקשת $\theta\in[0,2\pi)$: מוסיפים $2\pi$.
+          $-\frac{2\pi}{3}$ מגיע לאותה נקודה, אבל השאלה מבקשת זווית בטווח $0\le\theta<2\pi$: מוסיפים $2\pi$.
         misconception: MC-c2-angle-range
 
   - id: Q-2.3-same-point
@@ -67,7 +69,7 @@ questions:
         feedback: 'נכון. $\frac{7\pi}{3}=\frac{\pi}{3}+2\pi$: סיבוב שלם נוסף מחזיר לאותה נקודה.'
       - text: 'לא'
         feedback: >-
-          לנקודה אחת יש אינסוף זוויות, שנבדלות בכפולות של $2\pi$. לכן שאלות קובעות קטע, כמו $[0,2\pi)$, כשהן רוצות
+          לנקודה אחת יש אינסוף זוויות, שנבדלות בכפולות של $2\pi$. לכן שאלות קובעות טווח, כמו $[0,2\pi)$, כשהן רוצות
           תשובה אחת.
         misconception: MC-c2-polar-unique
     reasons:
@@ -134,22 +136,29 @@ questions:
     qualitative: true
     level: mid
     prompt: >-
-      סטודנטית מחשבת את הזווית הקוטבית של $(-2,2)$ כך: $\theta=\arctan\frac{2}{-2}=\arctan(-1)=-\frac{\pi}{4}$. מה
-      נכון?
+      על נקודה במישור, שאינה הראשית, ידוע רק ש-$\tan\theta=-\sqrt3$, כאשר $\theta$ היא הזווית הקוטבית שלה. סטודנטית
+      מקישה במחשבון $\arctan(-\sqrt3)$, מקבלת $-\frac{\pi}{3}$, ומסיקה: "הנקודה ברביע הרביעי". מה נכון?
     choices:
-      - text: 'החישוב שגוי: הנקודה ברביע השני, ו-$\theta=\frac{3\pi}{4}$'
+      - text: 'אי אפשר לדעת מהנתון הזה: הנקודה ברביע הרביעי או ברביע השני, וצריך נתון נוסף, למשל הסימן של $y$'
         correct: true
         feedback: >-
-          נכון. $\arctan$ מחזיר ערכים רק בין $-\frac{\pi}{2}$ ל-$\frac{\pi}{2}$, כלומר ברביעים הראשון והרביעי. כש-$x<0$
-          מוסיפים $\pi$: $-\frac{\pi}{4}+\pi=\frac{3\pi}{4}$.
-      - text: 'החישוב נכון, כי $\tan\left(-\frac{\pi}{4}\right)=\frac{y}{x}$'
+          נכון. למשוואה $\tan\theta=-\sqrt3$ יש שני פתרונות בסיבוב, שנבדלים ב-$\pi$: $\theta=\frac{5\pi}{3}$ (ברביע
+          הרביעי, אותו כיוון כמו $-\frac{\pi}{3}$) ו-$\theta=\frac{2\pi}{3}$ (ברביע השני). המחשבון מחזיר תמיד את זה
+          שפונה ימינה. אם $y>0$ הנקודה ברביע השני, ואם $y<0$ ברביע הרביעי.
+      - text: 'היא צודקת: $\arctan$ מחזיר את הזווית של הנקודה'
         feedback: >-
-          גם $\tan\frac{3\pi}{4}=-1$. ל-$\tan\theta=-1$ יש שני פתרונות במחזור, ו-$-\frac{\pi}{4}$ מצביע לרביע הרביעי,
-          אל $(2,-2)$.
+          $\arctan$ מחזיר רק זוויות בין $-\frac{\pi}{2}$ ל-$\frac{\pi}{2}$, שפונות ימינה. גם $\tan\frac{2\pi}{3}$ הוא
+          $-\sqrt3$, ולכן הנקודה יכולה להיות גם ברביע השני, למשל $(-1,\sqrt3)$.
         misconception: MC-c2-arctan-quadrant
-      - text: 'החישוב נכון אחרי שמוסיפים $2\pi$: $\theta=\frac{7\pi}{4}$'
+      - text: 'היא טועה: לתוצאה של המחשבון תמיד מוסיפים $\pi$, ולכן הנקודה ברביע השני'
         feedback: >-
-          $\frac{7\pi}{4}$ היא אותה זווית כמו $-\frac{\pi}{4}$, ברביע הרביעי. הוספת $2\pi$ אינה מתקנת רביע שגוי.
+          $\pi$ מוסיפים רק כש-$x<0$, ואת הסימן של $x$ לא נתנו לנו. הנקודה $(1,-\sqrt3)$, למשל, מקיימת את הנתון והיא
+          ברביע הרביעי. את הרביע קובעים מהסימנים של $x$ ו-$y$, לא מהמחשבון.
+        misconception: MC-c2-arctan-quadrant
+      - text: 'הרביע נכון, אבל הזווית היא $\frac{5\pi}{3}$ ולא $-\frac{\pi}{3}$'
+        feedback: >-
+          $\frac{5\pi}{3}$ ו-$-\frac{\pi}{3}$ הן שני שמות לאותו כיוון, בשני טווחים. הבעיה אינה השם אלא הרביע: הטנגנס
+          לבדו אינו מבדיל בין הרביע הרביעי לרביע השני.
         misconception: MC-c2-angle-range
 
   - id: Q-2.3-line-to-polar
@@ -163,7 +172,7 @@ questions:
       - text: '$r=\frac{3}{\sin\theta}$, עם $0<\theta<\pi$'
         correct: true
         feedback: >-
-          נכון. $r\sin\theta=3$. ככל ש-$\theta$ מתקרב ל-0 או ל-$\pi$ הנקודה מתרחקת לאורך הישר, ו-$r\to\infty$.
+          נכון. $r\sin\theta=3$. ככל ש-$\theta$ מתקרב ל-0 או ל-$\pi$ הנקודה מתרחקת לאורך הישר, ו-$r$ גדל בלי גבול.
       - text: '$r=3$'
         feedback: >-
           $r=3$ אומר "מרחק 3 מהראשית": זה מעגל, לא ישר. בישר $y=3$ המרחק מהראשית משתנה.
@@ -179,20 +188,27 @@ questions:
     qualitative: true
     level: mid
     prompt: >-
-      מה העקום $r=2\sin\theta$, $0\le\theta\le\pi$?
+      מה העקום $r=-4\sin\theta$, $\pi\le\theta\le2\pi$?
     choices:
-      - text: 'מעגל שמרכזו $(0,1)$ ורדיוסו 1'
+      - text: 'מעגל שמרכזו $(0,-2)$ ורדיוסו 2'
         correct: true
         feedback: >-
-          נכון. כפלו ב-$r$: $x^2+y^2=2y$, כלומר $x^2+(y-1)^2=1$. העקום עובר בראשית ב-$\theta=0$ וב-$\theta=\pi$.
-      - text: 'גל סינוס בגובה 2'
+          נכון. כפלו ב-$r$: $x^2+y^2=-4y$, כלומר $x^2+(y+2)^2=4$. בטווח הנתון $\sin\theta\le0$, ולכן $r\ge0$: למשל
+          ב-$\theta=\frac{3\pi}{2}$ מתקבל $r=4$, הנקודה $(0,-4)$. העקום עובר בראשית ב-$\theta=\pi$ וב-$\theta=2\pi$.
+      - text: 'מעגל שמרכזו $(0,2)$ ורדיוסו 2'
         feedback: >-
-          זה הגרף של $y=2\sin x$ במישור $(x,y)$. במשוואה קוטבית $\theta$ הוא זווית ו-$r$ מרחק: לכל כיוון $\theta$
-          משרטטים נקודה במרחק $2\sin\theta$ מהראשית.
+          זה $r=4\sin\theta$. כאן יש מינוס: $x^2+y^2=-4y$, והשלמה לריבוע נותנת $(y+2)^2$. וגם בלי אלגברה: הכיוונים
+          $\pi\le\theta\le2\pi$ פונים למטה, ולכן כל הנקודות מתחת לציר $x$.
+        misconception: MC-c2-arctan-quadrant
+      - text: 'גל של סינוס, הפוך, בגובה 4'
+        feedback: >-
+          זה הגרף של $y=-4\sin x$ במישור $(x,y)$. במשוואה קוטבית $\theta$ הוא זווית ו-$r$ מרחק: לכל כיוון $\theta$
+          משרטטים נקודה במרחק שהנוסחה נותנת מהראשית.
         misconception: MC-c2-polar-graph-as-cartesian
-      - text: 'מעגל שמרכזו בראשית ורדיוסו 2'
+      - text: 'מעגל שמרכזו בראשית ורדיוסו 4'
         feedback: >-
-          $r$ אינו קבוע: ב-$\theta=0$ הוא 0 וב-$\theta=\frac{\pi}{2}$ הוא 2. המעגל הזה עובר דרך הראשית.
+          $r$ אינו קבוע: ב-$\theta=\pi$ הוא 0 וב-$\theta=\frac{3\pi}{2}$ הוא 4. המעגל הזה עובר דרך הראשית, ו-4 הוא
+          הקוטר שלו.
         misconception: MC-c2-polar-region-center
 
   - id: Q-2.3-intersection
@@ -229,10 +245,10 @@ questions:
     choices:
       - text: '$(1,1)$'
         correct: true
-        feedback: 'נכון. $r=\sqrt2\le2$ ו-$\theta=\frac{\pi}{4}$, על השפה של הגזרה.'
+        feedback: 'נכון. $r=\sqrt2\le2$ ו-$\theta=\frac{\pi}{4}$: על הקרן שתוחמת את הגזרה, והיא שייכת לה כי האי-שוויון כולל שוויון.'
       - text: '$\left(0,\frac32\right)$'
         correct: true
-        feedback: 'נכון. $r=\frac32$ ו-$\theta=\frac{\pi}{2}$, על ציר $y$, השפה השנייה.'
+        feedback: 'נכון. $r=\frac32$ ו-$\theta=\frac{\pi}{2}$, על ציר $y$, הקרן השנייה שתוחמת את הגזרה.'
       - text: '$(1,2)$'
         feedback: >-
           הזווית $\arctan2$ בין $\frac{\pi}{4}$ ל-$\frac{\pi}{2}$, אבל $r=\sqrt5>2$: הנקודה מחוץ לגזרה, רחוקה מדי.
@@ -252,49 +268,62 @@ questions:
     objectives: [OBJ-2.3-3, OBJ-2.3-2]
     level: exam
     prompt: >-
-      איך מתארים בקואורדינטות קוטביות את העיגול $(x-1)^2+y^2\le1$?
+      $D$ הוא החלק של העיגול $(x-1)^2+y^2\le1$ שנמצא מעל הישר $y=x$ או עליו. איך מתארים את $D$ בקואורדינטות
+      קוטביות?
     choices:
-      - text: '$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}$, $0\le r\le2\cos\theta$'
+      - text: '$\frac{\pi}{4}\le\theta\le\frac{\pi}{2}$, $0\le r\le2\cos\theta$'
         correct: true
         feedback: >-
-          נכון. $(x-1)^2+y^2\le1$ שקול ל-$r^2\le2r\cos\theta$, כלומר $r\le2\cos\theta$. כדי שיהיו נקודות עם $r>0$ צריך
-          $\cos\theta\ge0$: העיגול כולו מימין לציר $y$.
-      - text: '$0\le\theta\le2\pi$, $0\le r\le1$'
+          נכון. העיגול: $(x-1)^2+y^2\le1$ שקול ל-$r^2\le2r\cos\theta$, כלומר $r\le2\cos\theta$, ויש בו נקודות רק
+          בכיוונים שבהם $\cos\theta\ge0$, בין מינוס $\frac{\pi}{2}$ ל-$\frac{\pi}{2}$. התנאי $y\ge x$ הוא חצי המישור
+          $\frac{\pi}{4}\le\theta\le\frac{5\pi}{4}$. הכיוונים שמקיימים את שניהם: $\frac{\pi}{4}\le\theta\le\frac{\pi}{2}$.
+          בדיקה: הנקודה $(r,\theta)=\left(\frac12,\frac{\pi}{3}\right)$ היא $\left(\frac14,\frac{\sqrt3}{4}\right)$,
+          בתוך העיגול ומעל הישר.
+      - text: '$\frac{\pi}{4}\le\theta\le\frac{\pi}{2}$, $0\le r\le1$'
         feedback: >-
-          זה העיגול ברדיוס 1 **סביב הראשית**. העיגול כאן מרכזו $(1,0)$, והראשית על השפה שלו.
+          $0\le r\le1$ הוא עיגול ברדיוס 1 **סביב הראשית**. העיגול כאן מרכזו $(1,0)$, והראשית על המעגל שתוחם אותו,
+          ולכן הגבול של $r$ תלוי בכיוון. הנקודה $(0,1)$, למשל, מקיימת את התיאור הזה ואינה בעיגול: $(0-1)^2+1^2=2>1$.
         misconception: MC-c2-polar-region-center
-      - text: '$0\le\theta\le\pi$, $0\le r\le2\cos\theta$'
+      - text: '$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}$, $0\le r\le2\cos\theta$'
         feedback: >-
-          כש-$\frac{\pi}{2}<\theta\le\pi$ הקוסינוס שלילי ואין נקודות, ולכן התיאור הזה נותן רק את החצי העליון של העיגול,
-          $y\ge0$. החצי התחתון מתקבל מהכיוונים $-\frac{\pi}{2}\le\theta<0$.
+          זה העיגול כולו: טווח הזוויות שבו $\cos\theta\ge0$, בלי התנאי $y\ge x$. הנקודה $(1,0)$, למשל ($r=1$,
+          $\theta=0$), מקיימת את התיאור הזה ואינה ב-$D$, כי היא מתחת לישר: $0<1$. טווח הזוויות של $D$ צריך לקיים גם את
+          התנאי של חצי המישור, $\frac{\pi}{4}\le\theta\le\frac{5\pi}{4}$.
         misconception: MC-c2-polar-region-center
-      - text: '$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}$, $0\le r\le\cos\theta$'
+      - text: '$\frac{\pi}{4}\le\theta\le\frac{\pi}{2}$, $0\le r\le2\sin\theta$'
         feedback: >-
-          $r^2\le2r\cos\theta$ נותן $r\le2\cos\theta$. ב-$\theta=0$ הנקודה הרחוקה ביותר היא $(2,0)$, לא $(1,0)$.
-        misconception: MC-c2-polar-region-center
+          $r=2\sin\theta$ הוא המעגל $x^2+(y-1)^2=1$, שמרכזו על ציר $y$. כאן המרכז $(1,0)$ על ציר $x$:
+          $x^2+y^2\le2x$, ו-$x$ הולך עם הקוסינוס.
+        misconception: MC-c2-polar-r-theta-roles
 
-  - id: Q-2.3-cardioid-left
+  - id: Q-2.3-extreme-x
     type: numeric
     objectives: [OBJ-2.3-2]
     level: exam
     prompt: >-
-      על הקרדיואידה $r=1+\cos\theta$, $0\le\theta<2\pi$, מהי קואורדינטת $x$ הקטנה ביותר? (רמז: כתבו את $x$ כפונקציה
-      של $c=\cos\theta$.)
-    answer: -0.25
+      על העקום $r=3-2\cos\theta$, $0\le\theta<2\pi$, מהי קואורדינטת $x$ הגדולה ביותר? (אפשר להקליד שבר, כמו 7/3.)
+    answer: 1.125
     tolerance: 0.001
     correctFeedback: >-
-      נכון, $-\frac14$. $x=r\cos\theta=(1+c)c=c^2+c=\left(c+\frac12\right)^2-\frac14$, והמינימום ב-$c=-\frac12$,
-      כלומר ב-$\theta=\frac{2\pi}{3}$ ו-$\frac{4\pi}{3}$. הנקודה השמאלית ביותר אינה הראשית!
+      נכון, $\frac98$. $x=r\cos\theta=(3-2u)\,u$ עם $u=\cos\theta$, כלומר $x=-2u^2+3u=-2\left(u-\frac34\right)^2+\frac98$.
+      זו פרבולה "בוכה" שהקודקוד שלה ב-$u=\frac34$, בתוך הקטע $[-1,1]$, ולכן המקסימום הוא $\frac98$, כש-$\cos\theta=\frac34$.
+      הנקודה הימנית ביותר אינה על ציר $x$: ב-$\theta=0$ רק $x=1$.
     wrongFeedback: >-
-      $x=r\cos\theta=(1+\cos\theta)\cos\theta$. זו פונקציה ריבועית של $c=\cos\theta$ בקטע $[-1,1]$: השלימו לריבוע.
+      "הימנית ביותר" היא שאלה על $x=r\cos\theta$, לא על $r$ ולא על $\theta$. כתבו את $x$ בעזרת $\cos\theta$ בלבד, תנו
+      לו שם, והשלימו לריבוע. זכרו שקוסינוס מקבל רק ערכים בין מינוס 1 ל-1.
     commonWrong:
-      - value: 0
+      - value: 1
         feedback: >-
-          ב-$\theta=\pi$ אכן $r=0$ והעקום בראשית, אבל הנקודה השמאלית ביותר אינה דווקא שם. ב-$\theta=\frac{2\pi}{3}$:
-          $r=\frac12$ ו-$x=\frac12\cdot\left(-\frac12\right)=-\frac14<0$.
+          זה $x$ בכיוון $\theta=0$, שם $r=1$. פונים ימינה, אבל המרחק שם הוא הקטן ביותר. קצת מעל הציר המרחק גדל מהר
+          יותר ממה שהכיוון מפסיד: כש-$\cos\theta=\frac34$ מתקבל $r=\frac32$ ו-$x=\frac32\cdot\frac34=\frac98>1$.
         misconception: MC-c2-polar-extreme-r
-      - value: -2
+      - value: 5
         feedback: >-
-          $-2$ היה נכון אילו ב-$\theta=\pi$ היה $r=2$; אבל שם $r=1+\cos\pi=0$. $r$ הגדול ביותר, 2, הוא ב-$\theta=0$,
-          בצד ימין.
+          5 הוא ה-$r$ הגדול ביותר, והוא מתקבל ב-$\theta=\pi$, בצד **שמאל**: זו הנקודה $(-5,0)$, השמאלית ביותר. מרחק
+          גדול אינו אומר $x$ גדול.
         misconception: MC-c2-polar-extreme-r
+      - value: 0.75
+        feedback: >-
+          $\frac34$ הוא הערך של $\cos\theta$ שבו $x$ הגדול ביותר, לא $x$ עצמו: שם $r=3-2\cdot\frac34=\frac32$,
+          ו-$x=r\cos\theta=\frac32\cdot\frac34$.
+        misconception: MC-c2-polar-r-theta-roles
