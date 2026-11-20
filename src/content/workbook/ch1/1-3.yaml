@@ -409,7 +409,7 @@ challenge:
       - kind: computation
         text: >-
           (א) $\vec n=(2,4,-3)$, $|\vec n|=\sqrt{4+16+9}=\sqrt{29}$. ההצבה של $C$: $2\cdot(-3)+4\cdot2-3\cdot4-8=-6+8-12-8=-18$.
-          הרדיוס: $\frac{|-18|}{\sqrt{29}}=\frac{18}{\sqrt{29}}\approx3.34$.
+          הרדיוס: $\frac{|{-}18|}{\sqrt{29}}=\frac{18}{\sqrt{29}}\approx3.34$.
       - kind: computation
         text: >-
           (ב) הישר דרך $C$ בכיוון $\vec n$: $x=-3+2t$, $y=2+4t$, $z=4-3t$. הצבה במישור:

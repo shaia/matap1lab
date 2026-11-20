@@ -114,14 +114,14 @@ questions:
     reasons:
       - text: '$|\lambda\vec v|=|\lambda|\,|\vec v|$, וסקלר שלילי הופך את הכיוון'
         correct: true
-        feedback: 'בדיוק: האורך גדל פי $|-2|=2$, והחץ מסתובב בחצי סיבוב.'
+        feedback: 'בדיוק: האורך גדל פי $|{-}2|=2$, והחץ מסתובב בחצי סיבוב.'
       - text: 'כפל בסקלר משנה רק אורך, לעולם לא כיוון'
         feedback: >-
           סקלר חיובי משנה רק אורך. סקלר שלילי גם הופך את הכיוון: $-\vec v+\vec v=\vec 0$.
         misconception: MC-c1-negative-scalar
       - text: 'האורך הוא $-2|\vec v|$, ולכן הטענה שגויה רק באורך'
         feedback: >-
-          אורך הוא תמיד אי-שלילי: $|-2\vec v|=2|\vec v|$. מה שהמינוס משנה הוא הכיוון.
+          אורך הוא תמיד אי-שלילי: $|{-}2\vec v|=2|\vec v|$. מה שהמינוס משנה הוא הכיוון.
         misconception: MC-c1-negative-scalar
 
   - id: Q-1.1-section

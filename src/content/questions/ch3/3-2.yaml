@@ -43,7 +43,7 @@ questions:
     type: numeric
     objectives: [OBJ-3.2-2]
     level: basic
-    prompt: 'חשבו את $|-5+12i|$.'
+    prompt: 'חשבו את $|{-}5+12i|$.'
     answer: 13
     tolerance: 0.001
     correctFeedback: 'נכון. $\sqrt{25+144}=\sqrt{169}=13$.'

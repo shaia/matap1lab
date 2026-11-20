@@ -146,7 +146,7 @@ questions:
     answer: 13
     tolerance: 0.001
     correctFeedback: >-
-      נכון. $\begin{vmatrix}1&0&2\\0&3&1\\2&1&0\end{vmatrix}=1\cdot(0-1)-0+2\cdot(0-6)=-13$, והנפח $|-13|=13$. הסימן השלילי אומר
+      נכון. $\begin{vmatrix}1&0&2\\0&3&1\\2&1&0\end{vmatrix}=1\cdot(0-1)-0+2\cdot(0-6)=-13$, והנפח $|{-}13|=13$. הסימן השלילי אומר
       שהסדר הזה של הווקטורים הוא "יד שמאל".
     wrongFeedback: >-
       הנפח הוא $|\vec a\cdot(\vec b\times\vec c)|$, הערך המוחלט של הדטרמיננטה.
