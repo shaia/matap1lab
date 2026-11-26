@@ -53,7 +53,6 @@ questions:
         misconception: MC-c3-principal-arg-range
       - value: 1
         feedback: '1 הוא החלק **הממשי**, $\ln|{-}ei|=\ln e$.'
-        misconception: MC-c3-log-componentwise
 
   - id: Q-3.4-cos-exp
     type: mc
@@ -113,7 +112,10 @@ questions:
     commonWrong:
       - value: 3.141592653589793
         feedback: '$\pi$ הוא החלק **המדומה** של הפתרון הראשי. החלק הממשי נקבע מהערך המוחלט: $e^x=2$.'
-        misconception: MC-c3-log-componentwise
+      - value: -0.6931471805599453
+        feedback: >-
+          המינוס שב-$e^z=-2$ אינו נכנס לחלק הממשי. החלק הממשי הוא $\ln|{-2}|=\ln2$, חיובי; הסימן השלילי הוא כיוון, והוא
+          נכנס לחלק המדומה: $\operatorname{Arg}(-2)=\pi$.
 
   - id: Q-3.4-log-all
     type: mc
@@ -154,7 +156,7 @@ questions:
         feedback: 'בדיוק. השוויון נכון רק עד כדי $2\pi ki$, כלומר כשוויון בין קבוצות הערכים של $\log$.'
       - text: 'כי $\operatorname{Log}$ של מספר שלילי אינו מוגדר'
         feedback: 'במרוכבים $\operatorname{Log}(-1)=i\pi$, מוגדר היטב. הבעיה בחיבור הארגומנטים.'
-        misconception: MC-c3-log-single-valued
+        misconception: MC-c3-log-negative-undefined
       - text: 'כי $\ln|zw|\ne\ln|z|+\ln|w|$'
         feedback: '$|zw|=|z||w|$, ולכן החלקים הממשיים כן מסתדרים. ההפרש כולו בחלק המדומה.'
         misconception: MC-c3-log-rules-hold
@@ -164,8 +166,8 @@ questions:
     objectives: [OBJ-3.4-2]
     level: mid
     prompt: >-
-      יהי $z=x+iy\ne0$. כתבו את $\operatorname{Re}\operatorname{Log}z$ כפונקציה של $x$ ו-$y$. (השתמשו במשתנים $x,y$;
-      כתבו $\ln$ כ-ln או log)
+      יהי $z=x+iy\ne0$. כתבו את $\operatorname{Re}\operatorname{Log}z$ כפונקציה של $x$ ו-$y$. (השתמשו במשתנים $x,y$,
+      ואת הלוגריתם הטבעי הממשי $\ln$ הקלידו כ-ln)
     answer: 'log(x^2+y^2)/2'
     answerTex: '$\operatorname{Re}\operatorname{Log}z=\ln|z|=\frac12\ln(x^2+y^2)$'
     variables: [x, y]
@@ -222,3 +224,29 @@ questions:
         misconception: MC-c3-exp-pair-factor
       - value: 0.25
         feedback: '$\frac14$ הוא $b$, המקדם של $\cos3t$.'
+      - value: 3
+        feedback: >-
+          המכנה הוא $2^3=8$, לא 2: $\cos^3t=\left(\frac{e^{it}+e^{-it}}{2}\right)^3$. בדיקה ב-$t=0$: המקדמים צריכים
+          להסתכם ל-1.
+
+  - id: Q-3.4-cos-minus-two
+    type: numeric
+    objectives: [OBJ-3.4-3, OBJ-3.4-2]
+    level: exam
+    prompt: >-
+      לכל הפתרונות של $\cos z=-2$ שמקיימים $0\le\operatorname{Re}z<2\pi$ אותו חלק ממשי. מהו?
+    answer: 3.141592653589793
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\pi$. עם $u=e^{iz}$: $u+\frac1u=-4$, כלומר $u^2+4u+1=0$ ו-$u=-2\pm\sqrt3$. שני הפתרונות **שליליים**, ולכן
+      הארגומנט שלהם $\pi+2\pi k$, ו-$iz=\ln|u|+i(\pi+2\pi k)$. מחלקים ב-$i$: $z=\pi+2\pi k\pm i\ln\left(2+\sqrt3\right)$.
+    wrongFeedback: >-
+      כתבו $\cos z=\frac{e^{iz}+e^{-iz}}{2}$, הציבו $u=e^{iz}$ ופתרו משוואה ריבועית. אחר כך פתרו $e^{iz}=u$ בעזרת
+      הלוגריתם: מה הארגומנט של $u$?
+    commonWrong:
+      - value: 0
+        feedback: >-
+          זה החלק הממשי של הפתרונות של $\cos z=2$, שבהם $u=2\pm\sqrt3$ חיובי. כאן $u=-2\pm\sqrt3$ שלילי, הארגומנט שלו
+          $\pi$, והוא נכנס לחלק הממשי של $z$ אחרי החילוק ב-$i$.
+      - value: 1.3169578969248166
+        feedback: '$\ln\left(2+\sqrt3\right)$ הוא הגודל של החלק **המדומה** של הפתרונות, לא החלק הממשי.'

@@ -18,8 +18,8 @@
   en: Euler's formula
   symbol: 'e^{i\theta}=\cos\theta+i\sin\theta'
   definition: >-
-    $e^{i\theta}=\cos\theta+i\sin\theta$ לכל $\theta$ ממשי. בפרט $e^{i\pi}=-1$, ו-$e^{i\alpha}e^{i\beta}=e^{i(\alpha+\beta)}$
-    הוא נוסחאות הסכום של סינוס וקוסינוס.
+    $e^{i\theta}=\cos\theta+i\sin\theta$ לכל $\theta$ ממשי. בפרט $e^{i\pi}=-1$, והשוויון $e^{i\alpha}e^{i\beta}=e^{i(\alpha+\beta)}$
+    שקול לנוסחאות הסכום של סינוס וקוסינוס.
   reject: [נוסחת אויילר]
   lesson: '3.3'
 - id: de-moivre-formula
@@ -30,4 +30,12 @@
     לכל $n$ שלם: $(r\operatorname{cis}\theta)^n=r^n\operatorname{cis}n\theta$. משמשת לחישוב חזקות, ובהשוואת חלקים ממשיים
     ומדומים, לזהויות כמו $\cos3\theta=4\cos^3\theta-3\cos\theta$.
   reject: [דה מואבר, דמואבר]
+  lesson: '3.3'
+- id: phasor
+  term: פאזור
+  en: phasor
+  symbol: 'Ae^{i\varphi}'
+  definition: >-
+    המספר המרוכב הקבוע $Ae^{i\varphi}$, עם $A>0$, שמייצג את התנודה $A\cos(\omega t+\varphi)$. התנודה עצמה היא החלק
+    הממשי של החץ המסתובב $Ae^{i\varphi}\cdot e^{i\omega t}$: הפאזור הוא המקום של החץ הזה בזמן $t=0$.
   lesson: '3.3'

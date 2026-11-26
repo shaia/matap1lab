@@ -19,15 +19,15 @@ questions:
         feedback: 'נכון. החלק המדומה של $a+bi$ הוא המספר הממשי $b$: $3-4i=3+(-4)i$.'
       - text: '$-4i$'
         feedback: >-
-          $\operatorname{Im}z$ הוא מספר **ממשי**, המקדם של $i$. כך $z=\operatorname{Re}z+i\operatorname{Im}z$; עם $-4i$
-          היינו מקבלים $i\cdot(-4i)=4$.
+          $\operatorname{Im}z$ הוא מספר **ממשי**, המקדם של $i$. כך $z=\operatorname{Re}z+i\operatorname{Im}z$. אילו
+          החלק המדומה היה $-4i$, היינו מקבלים $3+i\cdot(-4i)=3+4=7$, ולא את $3-4i$.
         misconception: MC-c3-im-includes-i
       - text: '$4$'
         feedback: 'הסימן שייך לחלק המדומה: $3-4i=3+(-4)i$.'
         misconception: MC-c3-im-includes-i
       - text: '$3$'
-        feedback: '3 הוא החלק **הממשי**.'
-        misconception: MC-c3-im-includes-i
+        feedback: '3 הוא החלק **הממשי**, המספר שעומד לבד. החלק המדומה הוא המקדם של $i$.'
+        misconception: MC-c3-re-im-swap
 
   - id: Q-3.1-product
     type: numeric
@@ -126,8 +126,8 @@ questions:
         feedback: 'נכון. אחרי הכפל המכנה ממשי וחיובי, והחילוק בו הוא חילוק של החלק הממשי ושל המדומה בנפרד.'
       - text: 'כי הצמוד של $w$ הוא $\frac1w$'
         feedback: >-
-          $w\bar w=|w|^2$, ולכן $\bar w=\frac{|w|^2}{w}$. רק כש-$|w|=1$ הצמוד הוא ההפכי. למשל $\overline{1-2i}=1+2i$,
-          ו-$(1-2i)(1+2i)=5\ne1$.
+          ל-$w=c+di$: $w\bar w=c^2+d^2$, ולכן $\bar w=\frac{c^2+d^2}{w}$. רק כש-$c^2+d^2=1$ הצמוד הוא ההפכי. למשל
+          $\overline{1-2i}=1+2i$, ו-$(1-2i)(1+2i)=5\ne1$.
         misconception: MC-c3-conjugate-is-inverse
       - text: 'כי כך המכנה הופך ל-$c^2-d^2$'
         feedback: '$(c+di)(c-di)=c^2-d^2i^2=c^2+d^2$: הסימן מתהפך בגלל $i^2=-1$.'
@@ -146,15 +146,15 @@ questions:
       - text: '$\operatorname{Im}z=\frac{z-\bar z}{2i}$'
         correct: true
         feedback: 'נכון. $z-\bar z=2bi$, ומחלקים ב-$2i$.'
-      - text: '$z\bar z=|z|^2$, מספר ממשי שאינו שלילי'
+      - text: '$z\bar z=(\operatorname{Re}z)^2+(\operatorname{Im}z)^2$, מספר ממשי שאינו שלילי'
         correct: true
         feedback: 'נכון. $(a+bi)(a-bi)=a^2+b^2$.'
       - text: '$\operatorname{Im}z=\frac{z-\bar z}{2}$'
         feedback: '$\frac{z-\bar z}{2}=bi$, כלומר $i\operatorname{Im}z$. החלק המדומה הוא המספר הממשי $b$.'
         misconception: MC-c3-im-includes-i
       - text: '$z\bar z=z^2$'
-        feedback: 'רק כש-$z$ ממשי. ל-$z=i$: $z\bar z=1$ ואילו $z^2=-1$.'
-        misconception: MC-c3-conjugate-is-inverse
+        feedback: 'רק כש-$z$ ממשי. ל-$z=i$: $z\bar z=1$ ואילו $z^2=-1$. הצמוד אינו $z$ עצמו.'
+        misconception: MC-c3-conj-as-z
 
   - id: Q-3.1-re-inverse
     type: expr
@@ -176,7 +176,7 @@ questions:
         feedback: '$(x+iy)(x-iy)=x^2-i^2y^2=x^2+y^2$.'
         misconception: MC-c3-i-squared
       - expr: 'x'
-        feedback: 'זה $\operatorname{Re}\bar z$. $\frac1z=\frac{\bar z}{|z|^2}$: צריך גם לחלק ב-$|z|^2$.'
+        feedback: 'זה $\operatorname{Re}\bar z$. $\frac1z=\frac{\bar z}{z\bar z}$: צריך גם לחלק ב-$z\bar z=x^2+y^2$.'
         misconception: MC-c3-conjugate-is-inverse
 
   - id: Q-3.1-conjugate-roots
@@ -192,13 +192,13 @@ questions:
         feedback: 'נכון. במקדמים ממשיים השורשים הלא-ממשיים באים בזוגות צמודים. כאן $b=-2$, $c=5$.'
       - text: 'לא, השורש השני יכול להיות כל מספר'
         feedback: >-
-          סכום השורשים $-b$ ממשי. אם $1+2i$ שורש והשני $w$, אז $1+2i+w$ ממשי, ולכן $\operatorname{Im}w=-2$; והמכפלה
-          הממשית קובעת $w=1-2i$.
+          סכום השורשים, מינוס $b$, ממשי. אם $1+2i$ שורש והשני $w$, אז $1+2i+w$ ממשי, ולכן $w=p-2i$ עם $p$ ממשי. גם
+          המכפלה $c$ ממשית: $(1+2i)(p-2i)=(p+4)+(2p-2)i$, והחלק המדומה מתאפס רק כש-$p=1$. לכן $w=1-2i$.
         misconception: MC-c3-conjugate-root-any-coeffs
     reasons:
       - text: 'כש-$b,c$ ממשיים, $\overline{z^2+bz+c}=\bar z^2+b\bar z+c$, ולכן גם $\bar z$ שורש'
         correct: true
-        feedback: 'בדיוק. הצמדה של המשוואה $p(z_0)=0$ נותנת $p(\bar z_0)=0$.'
+        feedback: 'בדיוק. נסמן $p(z)=z^2+bz+c$. הצמדה של המשוואה $p(z_0)=0$ נותנת $p(\bar z_0)=0$.'
       - text: 'כי לכל משוואה ריבועית השורשים צמודים זה לזה'
         feedback: >-
           לא לכל משוואה: ל-$z^2-iz=0$ השורשים $0$ ו-$i$. התכונה נובעת מכך שהמקדמים ממשיים.
@@ -212,7 +212,7 @@ questions:
   - id: Q-3.1-conj-equation
     type: numeric
     objectives: [OBJ-3.1-2, OBJ-3.1-1]
-    level: exam
+    level: mid
     prompt: >-
       מצאו את המספר המרוכב $z$ שמקיים $2z+i\bar z=3+3i$, וכתבו את $\operatorname{Re}z$.
     answer: 1
@@ -226,11 +226,12 @@ questions:
       - value: 1.8
         feedback: >-
           $\frac95$ מתקבל אם מתייחסים ל-$\bar z$ כאילו היה $z$: $(2+i)z=3+3i$. אבל $\bar z\ne z$, ולכן כותבים $z=a+bi$.
+        misconception: MC-c3-conj-as-z
 
   - id: Q-3.1-build-quadratic
     type: numeric
     objectives: [OBJ-3.1-3, OBJ-3.1-1]
-    level: exam
+    level: mid
     prompt: >-
       מצאו משוואה $z^2+bz+c=0$ עם $b,c$ ממשיים שאחד משורשיה $3-2i$. מהו $c$?
     answer: 13
@@ -245,3 +246,50 @@ questions:
         misconception: MC-c3-i-squared
       - value: -6
         feedback: '$-6$ הוא $b$, המקדם של $z$. $c$ הוא האיבר החופשי, מכפלת השורשים.'
+
+  - id: Q-3.1-sqrt-product
+    type: mc
+    objectives: [OBJ-3.1-1]
+    qualitative: true
+    level: basic
+    prompt: 'כמה זה $\sqrt{-4}\cdot\sqrt{-9}$?'
+    choices:
+      - text: 'מינוס 6'
+        correct: true
+        feedback: 'נכון. $\sqrt{-4}=2i$ ו-$\sqrt{-9}=3i$, ולכן המכפלה היא $6i^2$, כלומר מינוס 6.'
+      - text: '6'
+        feedback: >-
+          $\sqrt{(-4)(-9)}=\sqrt{36}=6$ מפעיל את הכלל $\sqrt{x}\sqrt{y}=\sqrt{xy}$, שמובטח רק כש-$x,y\ge0$ ונכשל כששני
+          המספרים שליליים. מוציאים קודם את $i$ מכל שורש: $2i\cdot3i=6i^2$.
+        misconception: MC-c3-sqrt-product-rule
+      - text: '$6i$'
+        feedback: >-
+          יש $i$ בכל אחד משני השורשים: $\sqrt{-4}=2i$ וגם $\sqrt{-9}=3i$. המכפלה היא $6i^2$, מספר ממשי.
+        misconception: MC-c3-sqrt-product-rule
+
+  - id: Q-3.1-quotient-root
+    type: numeric
+    objectives: [OBJ-3.1-3, OBJ-3.1-1, OBJ-3.1-2]
+    level: exam
+    prompt: >-
+      המספר $\frac{1+3i}{1-i}$ הוא שורש של משוואה $z^2+bz+c=0$ שבה $b$ ו-$c$ ממשיים. מהו $c$?
+    answer: 5
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $z_0=\frac{1+3i}{1-i}=\frac{(1+3i)(1+i)}{2}=\frac{-2+4i}{2}=-1+2i$. המקדמים ממשיים, ולכן השורש השני הוא
+      הצמוד, $\bar z_0=-1-2i$, ו-$c$ היא מכפלת השורשים: $(-1)^2+2^2=5$. (וגם $b=2$: מינוס הסכום.)
+    wrongFeedback: >-
+      שלושה צעדים: חלקו (כפל בצמוד של המכנה), מצאו את השורש השני (הצמוד, כי המקדמים ממשיים), וחשבו את מכפלת השורשים.
+    commonWrong:
+      - value: 10
+        feedback: >-
+          10 מתקבל מהשורש $1-3i$, כלומר מחילוק רכיב ברכיב: $\frac11+\frac{3}{-1}i$. מחלקים בכפל בצמוד: השורש הוא
+          $z_0=-1+2i$.
+        misconception: MC-c3-divide-componentwise
+      - value: -3
+        feedback: '$(-1+2i)(-1-2i)=1-4i^2=1+4$, לא $1-4$.'
+        misconception: MC-c3-i-squared
+      - value: 20
+        feedback: >-
+          20 מתקבל מהשורש $z_0=-2+4i$: זה המונה $(1+3i)(1+i)$ לפני החלוקה במכנה $(1-i)(1+i)=2$.
+        misconception: MC-c3-conjugate-is-inverse

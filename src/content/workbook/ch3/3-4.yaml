@@ -1,0 +1,569 @@
+# Workbook of lesson 3.4 — the complex exponential and logarithm.
+# Objectives (src/course.ts):
+#   OBJ-3.4-1  compute the exponential of a complex number; it is periodic in the imaginary direction
+#   OBJ-3.4-2  all the values of the logarithm of a complex number, and the principal value
+#   OBJ-3.4-3  sine and cosine through the complex exponential, and computations with them
+# Conventions: Log w = ln|w| + i Arg w with Arg in (-π, π]; no hyperbolic functions (chapter 4), no derivatives,
+# no Taylor. Every number recomputed with sympy in screens/tools/lesson-3-4.py.
+lesson: '3.4'
+practice:
+  - id: W-3.4-01
+    level: basic
+    objectives: [OBJ-3.4-1]
+    prompt: >-
+      כתבו כל מספר בצורה $a+bi$:
+
+      (א) $e^{2+i\pi/2}$
+
+      (ב) $e^{-\ln2-i\pi/6}$
+
+      (ג) $e^{1-i\pi/4}$
+
+      (ד) $e^{i\pi}+e^{-i\pi}$
+    answer: >-
+      (א) $e^2i$. (ב) $\frac{\sqrt3}{4}-\frac14i$. (ג) $\frac{\sqrt2\,e}{2}-\frac{\sqrt2\,e}{2}i\approx1.922-1.922i$. (ד) $e^{i\pi}+e^{-i\pi}=-2$.
+    solution:
+      - kind: idea
+        text: >-
+          $e^{x+iy}=e^x(\cos y+i\sin y)$: מפרידים את המעריך לחלק ממשי $x$, שנותן את הגודל $e^x$, ולחלק מדומה $y$, שנותן
+          את הזווית. רק בסוף כופלים ומקבלים $a+bi$.
+      - kind: computation
+        text: >-
+          (א) $x=2$, $y=\frac{\pi}{2}$. $\cos\frac{\pi}{2}=0$ ו-$\sin\frac{\pi}{2}=1$, ולכן $e^{2+i\pi/2}=e^2(0+i)=e^2i$:
+          נקודה על החלק החיובי של הציר המדומה, במרחק $e^2\approx7.39$.
+      - kind: computation
+        text: >-
+          (ב) $x=-\ln2$, ולכן הגודל $e^{-\ln2}=\frac{1}{e^{\ln2}}=\frac12$. הזווית היא מינוס $\frac{\pi}{6}$:
+          הקוסינוס שלה $\frac{\sqrt3}{2}$ והסינוס שלה מינוס $\frac12$. לכן
+          $e^{-\ln2-i\pi/6}=\frac12\left(\frac{\sqrt3}{2}-\frac12i\right)=\frac{\sqrt3}{4}-\frac14i$.
+      - kind: computation
+        text: >-
+          (ג) הגודל $e$, הזווית מינוס $\frac{\pi}{4}$, שהקוסינוס שלה $\frac{\sqrt2}{2}$ והסינוס שלה מינוס
+          $\frac{\sqrt2}{2}$. לכן $e^{1-i\pi/4}=\frac{\sqrt2\,e}{2}-\frac{\sqrt2\,e}{2}i\approx1.922-1.922i$.
+      - kind: computation
+        text: >-
+          (ד) $e^{i\pi}=\cos\pi+i\sin\pi=-1$, וגם $e^{-i\pi}=\cos\pi-i\sin\pi=-1$: סיבוב של חצי מעגל לכל כיוון מגיע
+          לאותה נקודה. הסכום הוא $(-1)+(-1)=-2$. (זה גם $2\cos\pi$, לפי הנוסחה של הקוסינוס דרך האקספוננט.)
+      - kind: check
+        text: >-
+          הגדלים: $|e^2i|=e^2$, $\left|\frac{\sqrt3}{4}-\frac14i\right|=\sqrt{\frac{3}{16}+\frac{1}{16}}=\frac12=e^{-\ln2}$,
+          ו-$\sqrt{1.922^2+1.922^2}\approx2.718=e$. גם הרביעים מתאימים לזוויות: (ב) ו-(ג) ברביע הרביעי.
+      - kind: result
+        text: >-
+          $e^2i$; $\frac{\sqrt3}{4}-\frac14i$; $\frac{\sqrt2\,e}{2}-\frac{\sqrt2\,e}{2}i$; ובסעיף (ד) מינוס 2.
+
+  - id: W-3.4-02
+    level: basic
+    qualitative: true
+    objectives: [OBJ-3.4-1]
+    prompt: >-
+      בלי מחשבון: באיזה רביע של מישור גאוס נמצא $e^z$ לכל אחד מהמספרים הבאים? נמקו.
+
+      (א) $z=5+2i$
+
+      (ב) $z=5+4i$
+
+      (ג) $z=-3-i$
+
+      (ד) $z=0.1+7i$
+
+      ואחר כך: האם הרביע של $e^z$ תלוי בחלק הממשי של $z$?
+    answer: >-
+      (א) השני. (ב) השלישי. (ג) הרביעי. (ד) הראשון. הרביע תלוי רק ב-$\operatorname{Im}z$, לא בחלק הממשי.
+    solution:
+      - kind: idea
+        text: >-
+          $e^{x+iy}=e^x\operatorname{cis}y$ עם $e^x>0$: הגודל אינו משפיע על הכיוון. לכן הרביע נקבע רק על ידי הזווית
+          $y=\operatorname{Im}z$, ברדיאנים. משווים את $y$ לנקודות הציון $\frac{\pi}{2}\approx1.57$, $\pi\approx3.14$,
+          $\frac{3\pi}{2}\approx4.71$ ו-$2\pi\approx6.28$.
+      - kind: step
+        text: >-
+          (א) $y=2$: בין $1.57$ ל-$3.14$, הרביע השני. (ב) $y=4$: בין $3.14$ ל-$4.71$, הרביע השלישי.
+      - kind: step
+        text: >-
+          (ג) $y=-1$: זווית שלילית קטנה מ-$\frac{\pi}{2}$ בגודלה, כלומר מעט מתחת לכיוון החיובי של הציר הממשי: הרביע
+          הרביעי.
+      - kind: step
+        text: >-
+          (ד) $y=7$ גדול מ-$2\pi\approx6.28$. מחסירים סיבוב שלם: $7-2\pi\approx0.72$, בין 0 ל-$1.57$. הרביע הראשון.
+      - kind: check
+        text: >-
+          במחשבון (ברדיאנים), ב-(א): $\cos2\approx-0.42$ ו-$\sin2\approx0.91$, קוסינוס שלילי וסינוס חיובי, הרביע השני.
+          ב-(ב): $\cos4\approx-0.65$ ו-$\sin4\approx-0.76$, שניהם שליליים, הרביע השלישי.
+      - kind: result
+        text: >-
+          (א) השני; (ב) השלישי; (ג) הרביעי; (ד) הראשון. הרביע תלוי רק ב-$\operatorname{Im}z$: החלק הממשי משנה רק את
+          המרחק מהראשית.
+
+  - id: W-3.4-03
+    level: basic
+    objectives: [OBJ-3.4-2]
+    prompt: >-
+      מצאו את כל הערכים של הלוגריתם ואת הערך הראשי של כל מספר:
+
+      (א) $w=-5$
+
+      (ב) $w=2i$
+
+      (ג) $w=1-i$
+
+      (ד) $w=-1-\sqrt3\,i$
+    answer: >-
+      (א) $\ln5+i(\pi+2\pi k)$, $\operatorname{Log}=\ln5+i\pi$. (ב) $\ln2+i\left(\frac{\pi}{2}+2\pi k\right)$,
+      $\operatorname{Log}=\ln2+\frac{\pi}{2}i$. (ג) $\frac12\ln2+i\left(-\frac{\pi}{4}+2\pi k\right)$,
+      $\operatorname{Log}=\frac12\ln2-\frac{\pi}{4}i$. (ד) $\ln2+i\left(-\frac{2\pi}{3}+2\pi k\right)$,
+      $\operatorname{Log}=\ln2-\frac{2\pi}{3}i$.
+    solution:
+      - kind: idea
+        text: >-
+          $\log w=\ln|w|+i(\operatorname{Arg}w+2\pi k)$, והערך הראשי הוא $k=0$. העבודה היא למצוא את $|w|$ ואת
+          הארגומנט הראשי, בטווח $(-\pi,\pi]$, ברביע הנכון.
+      - kind: computation
+        text: >-
+          (א) $|-5|=5$, והמספר על החלק השלילי של הציר הממשי: $\operatorname{Arg}=\pi$. לכן
+          $\log(-5)=\ln5+i(\pi+2\pi k)$ ו-$\operatorname{Log}(-5)=\ln5+i\pi$.
+      - kind: computation
+        text: >-
+          (ב) $|2i|=2$, על החלק החיובי של הציר המדומה: $\operatorname{Arg}=\frac{\pi}{2}$. לכן
+          $\log(2i)=\ln2+i\left(\frac{\pi}{2}+2\pi k\right)$.
+      - kind: computation
+        text: >-
+          (ג) $|1-i|=\sqrt2$, ו-$\ln\sqrt2=\frac12\ln2\approx0.347$. הרביע הרביעי, הזווית מינוס $\frac{\pi}{4}$ (לא
+          $\frac{7\pi}{4}$, שאינה בטווח). לכן $\operatorname{Log}(1-i)=\frac12\ln2-\frac{\pi}{4}i$.
+      - kind: computation
+        text: >-
+          (ד) $|-1-\sqrt3\,i|=\sqrt{1+3}=2$. הרביע השלישי. הזווית החדה עם הציר הממשי היא $\frac{\pi}{3}$ (כי
+          $\tan=\sqrt3$). המספר הזה הוא הנגדי של $1+\sqrt3\,i$, שהזווית שלו $\frac{\pi}{3}$, כלומר הוא
+          מצביע לכיוון ההפוך: $\frac{\pi}{3}+\pi=\frac{4\pi}{3}$. הזווית הזו גדולה מ-$\pi$, ולכן בטווח $(-\pi,\pi]$
+          מחסירים סיבוב שלם: $\frac{4\pi}{3}-2\pi$, כלומר מינוס $\frac{2\pi}{3}$. (זה אותו דבר כמו $\frac{\pi}{3}-\pi$:
+          ברביע השלישי, בטווח הזה, מחסירים $\pi$ מהזווית החדה, כמו בשיעור 2.3.) לכן $\operatorname{Log}(-1-\sqrt3\,i)=\ln2-\frac{2\pi}{3}i$.
+      - kind: check
+        text: >-
+          מציבים בחזרה את (ד): $e^{\ln2-2\pi i/3}=2\left(\cos\frac{2\pi}{3}-i\sin\frac{2\pi}{3}\right)=2\left(-\frac12-\frac{\sqrt3}{2}i\right)=-1-\sqrt3\,i$.
+          ובכל הסעיפים החלק המדומה של הערך הראשי בטווח $(-\pi,\pi]$.
+      - kind: result
+        text: >-
+          $\operatorname{Log}(-5)=\ln5+i\pi$, $\operatorname{Log}(2i)=\ln2+\frac{\pi}{2}i$,
+          $\operatorname{Log}(1-i)=\frac12\ln2-\frac{\pi}{4}i$, $\operatorname{Log}(-1-\sqrt3\,i)=\ln2-\frac{2\pi}{3}i$; כל
+          הערכים מתקבלים בהוספת $2\pi ki$.
+
+  - id: W-3.4-04
+    level: mid
+    objectives: [OBJ-3.4-1, OBJ-3.4-2]
+    prompt: >-
+      מצאו את כל הפתרונות של המשוואה $e^{3z}=8i$. כמה מהם הם בעלי חלק מדומה בטווח $(-\pi,\pi]$, ומהם? שרטטו אותם
+      במישור.
+    answer: >-
+      $z=\ln2+i\left(\frac{\pi}{6}+\frac{2\pi k}{3}\right)$, $k$ שלם. בטווח שלושה: $\ln2+\frac{\pi}{6}i$,
+      $\ln2+\frac{5\pi}{6}i$ ו-$\ln2-\frac{\pi}{2}i$.
+    solution:
+      - kind: idea
+        text: >-
+          נותנים שם למעריך, $u=3z$, ופותרים $e^u=8i$ בעזרת הלוגריתם: כל הערכים של $\log(8i)$. אחר כך מחלקים ב-3. שימו
+          לב: גם המחזור $2\pi k$ מתחלק ב-3, ולכן המרחקים בין הפתרונות קטנים פי 3.
+      - kind: computation
+        text: >-
+          $|8i|=8$ ו-$\operatorname{Arg}(8i)=\frac{\pi}{2}$, ולכן $u=\ln8+i\left(\frac{\pi}{2}+2\pi k\right)$.
+      - kind: computation
+        text: >-
+          מחלקים ב-3. $\frac{\ln8}{3}=\frac{3\ln2}{3}=\ln2$, ו-$\frac{1}{3}\left(\frac{\pi}{2}+2\pi k\right)=\frac{\pi}{6}+\frac{2\pi k}{3}$:
+          $z=\ln2+i\left(\frac{\pi}{6}+\frac{2\pi k}{3}\right)$.
+      - kind: step
+        text: >-
+          בטווח $(-\pi,\pi]$: ב-$k=0$ החלק המדומה $\frac{\pi}{6}$; ב-$k=1$, $\frac{\pi}{6}+\frac{2\pi}{3}=\frac{5\pi}{6}$; ב-$k=-1$,
+          $\frac{\pi}{6}-\frac{2\pi}{3}$, כלומר מינוס $\frac{\pi}{2}$. ב-$k=2$ כבר $\frac{3\pi}{2}>\pi$, וב-$k=-2$ מינוס
+          $\frac{7\pi}{6}$, קטן ממינוס $\pi$. לכן שלושה פתרונות בטווח.
+      - kind: step
+        text: >-
+          כל הפתרונות על הישר האנכי $\operatorname{Re}z=\ln2\approx0.69$, במרחקים של $\frac{2\pi}{3}$ זה מזה.
+      - kind: check
+        text: >-
+          ב-$z=\ln2+\frac{5\pi}{6}i$: $3z=\ln8+\frac{5\pi}{2}i$, ו-$e^{3z}=8\operatorname{cis}\frac{5\pi}{2}=8\operatorname{cis}\frac{\pi}{2}=8i$,
+          כי $\frac{5\pi}{2}=\frac{\pi}{2}+2\pi$.
+      - kind: result
+        text: >-
+          $z=\ln2+i\left(\frac{\pi}{6}+\frac{2\pi k}{3}\right)$; בטווח: $\ln2+\frac{\pi}{6}i$, $\ln2+\frac{5\pi}{6}i$,
+          $\ln2-\frac{\pi}{2}i$.
+
+  - id: W-3.4-05
+    level: mid
+    objectives: [OBJ-3.4-3]
+    prompt: >-
+      בעזרת $\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2}$ ו-$\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i}$, הראו ש-
+
+      $$\sin^2\theta\cos^2\theta=\frac{1-\cos4\theta}{8}$$
+
+      לכל $\theta$ ממשי, ובדקו בזווית אחת.
+    answer: >-
+      $\sin^2\theta\cos^2\theta=\frac{\left(e^{2i\theta}-e^{-2i\theta}\right)^2}{-16}=\frac{e^{4i\theta}-2+e^{-4i\theta}}{-16}=\frac{2-2\cos4\theta}{16}$.
+    solution:
+      - kind: idea
+        text: >-
+          לפני שפותחים בינום, שמים לב לקיצור: $\sin\theta\cos\theta$ הוא מכפלה של הפרש וסכום של אותם שני
+          אקספוננטים, כלומר הפרש ריבועים. אחר כך מעלים בריבוע ומצרפים זוגות, כמו במתכון של השיעור.
+      - kind: computation
+        text: >-
+          $\sin\theta\cos\theta=\frac{\left(e^{i\theta}-e^{-i\theta}\right)\left(e^{i\theta}+e^{-i\theta}\right)}{2i\cdot2}=\frac{e^{2i\theta}-e^{-2i\theta}}{4i}$,
+          כי $(a-b)(a+b)=a^2-b^2$ ו-$\left(e^{i\theta}\right)^2=e^{2i\theta}$.
+      - kind: computation
+        text: >-
+          מעלים בריבוע. במכנה $(4i)^2=16i^2=-16$. במונה,
+          $\left(e^{2i\theta}-e^{-2i\theta}\right)^2=e^{4i\theta}-2+e^{-4i\theta}$, כי המכפלה האמצעית היא
+          $2e^{2i\theta}e^{-2i\theta}=2e^{0}=2$.
+      - kind: computation
+        text: >-
+          מצרפים את הזוג: $e^{4i\theta}+e^{-4i\theta}=2\cos4\theta$. לכן
+          $\sin^2\theta\cos^2\theta=\frac{2\cos4\theta-2}{-16}=\frac{2-2\cos4\theta}{16}=\frac{1-\cos4\theta}{8}$.
+      - kind: check
+        text: >-
+          ב-$\theta=\frac{\pi}{4}$: בצד שמאל $\left(\frac{\sqrt2}{2}\right)^2\left(\frac{\sqrt2}{2}\right)^2=\frac14$; בצד ימין
+          $\frac{1-\cos\pi}{8}=\frac{2}{8}=\frac14$. וב-$\theta=0$ שני הצדדים 0. (דרך נוספת: זה $\frac14\sin^22\theta$,
+          והנוסחה של $\sin^2$ מהשיעור נותנת אותה תוצאה.)
+      - kind: result
+        text: >-
+          $\sin^2\theta\cos^2\theta=\frac{1-\cos4\theta}{8}$ לכל $\theta$.
+
+  - id: W-3.4-06
+    level: mid
+    qualitative: true
+    objectives: [OBJ-3.4-2]
+    prompt: >-
+      לכל טענה קבעו אם היא נכונה לכל $z\ne0$, ונמקו. לטענה שגויה תנו דוגמה נגדית, ואמרו לאילו $z$ היא בכל זאת
+      נכונה.
+
+      (א) $\operatorname{Log}\bar z=\overline{\operatorname{Log}z}$
+
+      (ב) $\operatorname{Log}\frac{1}{z}=-\operatorname{Log}z$
+
+      (ג) $e^{\operatorname{Log}z}=z$
+
+      (ד) $\operatorname{Log}\left(e^z\right)=z$ (כאן לכל $z$)
+    answer: >-
+      (א) לא: $z=-1$; נכון לכל $z$ שאינו על החלק השלילי של הציר הממשי. (ב) לא: $z=-1$; נכון לאותם $z$. (ג) נכון.
+      (ד) לא: $z=2\pi i$; נכון בדיוק כש-$\operatorname{Im}z\in(-\pi,\pi]$.
+    solution:
+      - kind: idea
+        text: >-
+          $\operatorname{Log}z=\ln|z|+i\operatorname{Arg}z$. הערכים המוחלטים תמיד מסתדרים ($|\bar z|=|z|$,
+          $\left|\frac1z\right|=\frac{1}{|z|}$), ולכן כל השאלה היא על הארגומנט הראשי: האם הוא נשאר בטווח
+          $(-\pi,\pi]$. הקצה $\pi$ שייך לטווח והקצה מינוס $\pi$ אינו שייך, ולכן החשודים הם המספרים השליליים.
+      - kind: step
+        text: >-
+          (א) הצמוד הופך את הזווית: $\operatorname{Arg}\bar z$ הוא מינוס $\operatorname{Arg}z$, כל עוד המינוס נשאר
+          בטווח. ב-$z=-1$: $\bar z=-1$ ו-$\operatorname{Log}(-1)=i\pi$, אבל $\overline{\operatorname{Log}(-1)}=\overline{i\pi}$,
+          כלומר מינוס $i\pi$. לא נכון. לכל $z$ אחר הזווית בטווח הפתוח $(-\pi,\pi)$ והמינוס שלה גם, והשוויון נכון.
+      - kind: step
+        text: >-
+          (ב) $\frac1z$ בצורה קוטבית: $\frac{1}{|z|}\operatorname{cis}(-\operatorname{Arg}z)$. ב-$z=-1$:
+          $\operatorname{Log}\frac{1}{-1}=\operatorname{Log}(-1)=i\pi$, ואילו מינוס $\operatorname{Log}(-1)$ הוא מינוס
+          $i\pi$. ההפרש $2\pi i$. נכון לכל $z$ שאינו שלילי ממשי, מאותה סיבה כמו ב-(א).
+      - kind: step
+        text: >-
+          (ג) נכון לכל $z\ne0$: $e^{\ln|z|+i\operatorname{Arg}z}=|z|\operatorname{cis}(\operatorname{Arg}z)=z$. זו
+          ההגדרה של לוגריתם: מספר שהאקספוננט שלו הוא $z$.
+      - kind: step
+        text: >-
+          (ד) $e^{2\pi i}=1$ ו-$\operatorname{Log}1=0\ne2\pi i$. בכלל, $\operatorname{Log}(e^z)$ הוא $z$ אחרי שהזזנו את
+          החלק המדומה בכפולה של $2\pi$ אל תוך הטווח $(-\pi,\pi]$; הוא שווה ל-$z$ בדיוק כש-$\operatorname{Im}z$ כבר שם.
+      - kind: check
+        text: >-
+          (א) במספר שאינו שלילי, $z=2i$: $\operatorname{Log}(-2i)=\ln2-\frac{\pi}{2}i$ ו-$\overline{\ln2+\frac{\pi}{2}i}$
+          הוא אותו מספר. (ב) ב-$z=1+i$: $\frac{1}{1+i}=\frac{1-i}{2}$, ו-$\operatorname{Log}\frac{1-i}{2}=\ln\frac{\sqrt2}{2}-\frac{\pi}{4}i$,
+          שהוא בדיוק מינוס $\left(\ln\sqrt2+\frac{\pi}{4}i\right)$.
+      - kind: result
+        text: >-
+          (א) ו-(ב) נכונות לכל $z$ חוץ מהמספרים השליליים הממשיים; (ג) נכונה תמיד; (ד) נכונה רק כש-$\operatorname{Im}z\in(-\pi,\pi]$.
+
+  - id: W-3.4-07
+    level: mid
+    qualitative: true
+    objectives: [OBJ-3.4-1]
+    prompt: >-
+      לאן שולח האקספוננט $w=e^z$ כל אחת מהקבוצות במישור ה-$z$? תארו את התמונה במילים ושרטטו.
+
+      (א) הישר האופקי $\operatorname{Im}z=\frac{\pi}{2}$.
+
+      (ב) הקטע האנכי $\operatorname{Re}z=0$, $0\le\operatorname{Im}z\le\pi$.
+
+      (ג) הרצועה $0<\operatorname{Im}z<\pi$ (כל ה-$z$ שהחלק המדומה שלהם בין 0 ל-$\pi$).
+
+      (ד) הישר האנכי $\operatorname{Re}z=\ln2$.
+    answer: >-
+      (א) החלק החיובי של הציר המדומה, בלי 0. (ב) חצי מעגל היחידה העליון, מ-1 עד מינוס 1. (ג) חצי המישור העליון
+      $\operatorname{Im}w>0$. (ד) המעגל $|w|=2$, שעוברים עליו אינסוף פעמים.
+    solution:
+      - kind: idea
+        text: >-
+          $e^{x+iy}$ הוא הנקודה במרחק $e^x$ מהראשית, בזווית $y$. לכן מספיק לשאול על כל קבוצה: אילו מרחקים ($e^x$) ואילו
+          זוויות ($y$) מופיעים בה. כש-$x$ עובר על כל הממשיים, $e^x$ עובר על כל המספרים החיוביים, ורק עליהם.
+      - kind: step
+        text: >-
+          (א) הזווית קבועה, $\frac{\pi}{2}$, והמרחק $e^x$ עובר על כל המספרים החיוביים: הקרן מהראשית כלפי מעלה, כלומר
+          החלק החיובי של הציר המדומה, $w=e^xi$. הראשית עצמה לא בתמונה, כי $e^x>0$.
+      - kind: step
+        text: >-
+          (ב) המרחק קבוע, $e^0=1$, והזווית עוברת מ-0 עד $\pi$: חצי מעגל היחידה העליון, מהנקודה 1 (ב-$y=0$) עד הנקודה
+          $e^{i\pi}=-1$ (ב-$y=\pi$), דרך $i$.
+      - kind: step
+        text: >-
+          (ג) כל מרחק חיובי וכל זווית בין 0 ל-$\pi$, בלי הקצוות: כל הנקודות שמעל הציר הממשי. חצי המישור העליון,
+          $\operatorname{Im}w>0$. הרצועה, שהרוחב שלה $\pi$, "נפתחת כמו מניפה" לחצי מישור.
+      - kind: step
+        text: >-
+          (ד) המרחק קבוע, $e^{\ln2}=2$, והזווית $y$ עוברת על כל הממשיים: המעגל $|w|=2$. כל קטע של הישר באורך $2\pi$
+          מקיף את המעגל פעם אחת, ולכן הישר כולו מקיף אותו אינסוף פעמים. זו המחזוריות.
+      - kind: check
+        text: >-
+          נקודה אחת מכל קבוצה: (א) $z=\frac{\pi}{2}i$ נותן $e^{i\pi/2}=i$, על הציר המדומה. (ג) $z=1+\frac{\pi}{4}i$ נותן
+          $e\operatorname{cis}\frac{\pi}{4}$, שהחלק המדומה שלו $\frac{\sqrt2\,e}{2}>0$. (ד) $z=\ln2+\pi i$ נותן $e^{\ln2+\pi i}=-2$, על
+          המעגל $|w|=2$. אפשר לבדוק את (ד) גם באיור 3.4ב, עם הישר האנכי.
+      - kind: result
+        text: >-
+          (א) החלק החיובי של הציר המדומה בלי 0; (ב) חצי מעגל היחידה העליון; (ג) חצי המישור העליון; (ד) המעגל ברדיוס 2
+          סביב הראשית.
+
+  - id: W-3.4-08
+    level: exam
+    objectives: [OBJ-3.4-3, OBJ-3.4-2]
+    prompt: >-
+      מצאו את כל המספרים המרוכבים $z$ שמקיימים $\sin z=i$, והראו שהם יוצרים שתי משפחות. בדקו פתרון אחד מכל משפחה.
+    answer: >-
+      $z=2\pi k+i\ln\left(1+\sqrt2\right)$ או $z=\pi+2\pi k-i\ln\left(1+\sqrt2\right)$, $k$ שלם;
+      $\ln\left(1+\sqrt2\right)\approx0.881$.
+    solution:
+      - kind: idea
+        text: >-
+          כותבים את הסינוס דרך האקספוננט, $\sin z=\frac{e^{iz}-e^{-iz}}{2i}$, ונותנים שם ל-$u=e^{iz}$ (שאינו 0). מקבלים
+          משוואה ריבועית ב-$u$. לכל פתרון $u$ פותרים $e^{iz}=u$ בעזרת הלוגריתם: שם צריך את הארגומנט של $u$, וכאן
+          פתרון שלילי מביא $\pi$.
+      - kind: computation
+        text: >-
+          $\frac{e^{iz}-e^{-iz}}{2i}=i$. כופלים ב-$2i$: $e^{iz}-e^{-iz}=2i^2=-2$. עם $u=e^{iz}$: $u-\frac1u=-2$, וכפל
+          ב-$u$ נותן $u^2+2u-1=0$.
+      - kind: computation
+        text: >-
+          $u=\frac{-2\pm\sqrt{4+4}}{2}=-1\pm\sqrt2$. שני פתרונות ממשיים: $u_1=\sqrt2-1\approx0.414$, חיובי, ו-$u_2=-1-\sqrt2\approx-2.414$,
+          שלילי.
+      - kind: computation
+        text: >-
+          $e^{iz}=\sqrt2-1$: הארגומנט $2\pi k$, ולכן $iz=\ln\left(\sqrt2-1\right)+2\pi ki$. מכיוון ש-$\left(\sqrt2-1\right)\left(\sqrt2+1\right)=1$,
+          $\ln\left(\sqrt2-1\right)$ הוא מינוס $\ln\left(1+\sqrt2\right)$. מחלקים ב-$i$ (כלומר כופלים ב-$(-i)$):
+          $z=2\pi k+i\ln\left(1+\sqrt2\right)$.
+      - kind: computation
+        text: >-
+          $e^{iz}=-1-\sqrt2$: הערך המוחלט $1+\sqrt2$ והארגומנט $\pi+2\pi k$, ולכן
+          $iz=\ln\left(1+\sqrt2\right)+i(\pi+2\pi k)$, ואחרי כפל ב-$(-i)$: $z=\pi+2\pi k-i\ln\left(1+\sqrt2\right)$.
+      - kind: check
+        text: >-
+          ב-$z=i\ln\left(1+\sqrt2\right)$: $iz=-\ln\left(1+\sqrt2\right)$, ולכן $e^{iz}=\sqrt2-1$ ו-$e^{-iz}=\sqrt2+1$, ו-
+          $\sin z=\frac{\left(\sqrt2-1\right)-\left(\sqrt2+1\right)}{2i}=\frac{-2}{2i}=i$. ב-$z=\pi-i\ln\left(1+\sqrt2\right)$:
+          $iz=i\pi+\ln\left(1+\sqrt2\right)$, $e^{iz}=-\left(1+\sqrt2\right)$ ו-$e^{-iz}=-\left(\sqrt2-1\right)$, וההפרש
+          שוב מינוס 2.
+      - kind: result
+        text: >-
+          $z=2\pi k+i\ln\left(1+\sqrt2\right)$ או $z=\pi+2\pi k-i\ln\left(1+\sqrt2\right)$, $k$ שלם.
+
+  - id: W-3.4-09
+    level: exam
+    objectives: [OBJ-3.4-3]
+    prompt: >-
+      (א) הראו ש-$2\sin\theta\cos k\theta=\sin(k+1)\theta-\sin(k-1)\theta$ לכל $\theta$ ולכל $k$ שלם, בעזרת הנוסחאות
+      של סינוס וקוסינוס דרך האקספוננט.
+
+      (ב) הסיקו ש-
+
+      $$\cos\theta+\cos3\theta+\cos5\theta=\frac{\sin6\theta}{2\sin\theta}$$
+
+      לכל $\theta$ שבו $\sin\theta\ne0$, ובדקו ב-$\theta=\frac{\pi}{3}$.
+    answer: >-
+      (א) פותחים את המכפלה ומצרפים זוגות. (ב) כופלים את הסכום ב-$2\sin\theta$; לפי (א) הוא נעשה סכום טלסקופי שנשאר
+      ממנו רק $\sin6\theta$. ב-$\theta=\frac{\pi}{3}$ שני הצדדים 0.
+    solution:
+      - kind: idea
+        text: >-
+          (א) הוא "מכפלה לסכום": מחליפים לאקספוננטים, פותחים, ומצרפים זוגות של הפרשים לסינוסים. (ב) הרעיון הוא סכום
+          טלסקופי: כופלים את כל הסכום ב-$2\sin\theta$, כל מחובר נעשה הפרש של שני סינוסים, והאיברים האמצעיים מבטלים
+          זה את זה.
+      - kind: computation
+        text: >-
+          (א) $2\sin\theta\cos k\theta=2\cdot\frac{e^{i\theta}-e^{-i\theta}}{2i}\cdot\frac{e^{ik\theta}+e^{-ik\theta}}{2}=\frac{e^{i(k+1)\theta}+e^{-i(k-1)\theta}-e^{i(k-1)\theta}-e^{-i(k+1)\theta}}{2i}$.
+      - kind: computation
+        text: >-
+          מצרפים: $\frac{e^{i(k+1)\theta}-e^{-i(k+1)\theta}}{2i}=\sin(k+1)\theta$, ו-$\frac{e^{-i(k-1)\theta}-e^{i(k-1)\theta}}{2i}$
+          הוא מינוס $\sin(k-1)\theta$. יחד: $\sin(k+1)\theta-\sin(k-1)\theta$.
+      - kind: computation
+        text: >-
+          (ב) לפי (א) עם $k=1,3,5$: $2\sin\theta\cos\theta=\sin2\theta-\sin0$, $2\sin\theta\cos3\theta=\sin4\theta-\sin2\theta$,
+          $2\sin\theta\cos5\theta=\sin6\theta-\sin4\theta$. מחברים: $\sin2\theta$ ו-$\sin4\theta$ מבטלים זה את זה, ו-$\sin0=0$,
+          ולכן $2\sin\theta\left(\cos\theta+\cos3\theta+\cos5\theta\right)=\sin6\theta$.
+      - kind: step
+        text: >-
+          מחלקים ב-$2\sin\theta$, שאינו 0 לפי ההנחה, ומקבלים את הנוסחה.
+      - kind: check
+        text: >-
+          ב-$\theta=\frac{\pi}{3}$: $\cos\frac{\pi}{3}+\cos\pi+\cos\frac{5\pi}{3}=\frac12-1+\frac12=0$, ו-$\frac{\sin2\pi}{2\sin\frac{\pi}{3}}=0$.
+          ב-$\theta=\frac{\pi}{2}$: שלושת הקוסינוסים 0, וגם $\sin3\pi=0$.
+      - kind: result
+        text: >-
+          $\cos\theta+\cos3\theta+\cos5\theta=\frac{\sin6\theta}{2\sin\theta}$ לכל $\theta$ עם $\sin\theta\ne0$.
+
+  - id: W-3.4-10
+    level: exam
+    objectives: [OBJ-3.4-1]
+    prompt: >-
+      תנודה מרוסנת (תנודה שהגודל שלה דועך עם הזמן) מתוארת כחלק הממשי של $z(t)=e^{(-0.2+2i)t}$, כש-$t\ge0$ הוא
+      הזמן.
+
+      (א) מהם $|z(t)|$ וארגומנט של $z(t)$? תארו במילים את המסלול של הנקודה $z(t)$ במישור גאוס.
+
+      (ב) באילו זמנים $z(t)$ ממשי וחיובי? באיזה מספר מוכפל הגודל שלו בין שני זמנים כאלה סמוכים?
+
+      (ג) מתי, לראשונה, $|z(t)|=\frac12$?
+
+      (ד) חשבו את $z\left(\frac{\pi}{2}\right)$.
+    answer: >-
+      (א) $|z(t)|=e^{-0.2t}$, ארגומנט $2t$: ספירלה פנימה נגד כיוון השעון. (ב) $t=\pi k$, $k=0,1,2,\ldots$; הגודל מוכפל
+      ב-$e^{-0.2\pi}\approx0.533$, כלומר קטן פי $e^{0.2\pi}\approx1.87$. (ג) $t=5\ln2\approx3.47$. (ד) $z\left(\frac{\pi}{2}\right)=-e^{-\pi/10}\approx-0.730$.
+    solution:
+      - kind: idea
+        text: >-
+          $z(t)=e^{x+iy}$ עם $x=-0.2t$ ו-$y=2t$: החלק הממשי של המעריך קובע את הגודל, $e^{-0.2t}$, והחלק המדומה את
+          הזווית, $2t$. כל שאלה היא שאלה על אחד מהשניים.
+      - kind: step
+        text: >-
+          (א) $|z(t)|=e^{-0.2t}$, שקטן כש-$t$ גדל, ו-$2t$ ארגומנט, שגדל: הנקודה מסתובבת נגד כיוון השעון ומתקרבת
+          לראשית, בספירלה פנימה. החלק הממשי, $e^{-0.2t}\cos2t$, הוא התנודה הדועכת.
+      - kind: computation
+        text: >-
+          (ב) $z(t)$ ממשי וחיובי כשהזווית $2t$ היא כפולה של $2\pi$: $t=\pi k$, $k=0,1,2,\ldots$. בין $t=\pi k$ ל-$t=\pi(k+1)$
+          הגודל מוכפל ב-$\frac{e^{-0.2\pi(k+1)}}{e^{-0.2\pi k}}=e^{-0.2\pi}\approx0.533$, כלומר קטן פי $e^{0.2\pi}\approx1.87$, כמעט חצי, בכל סיבוב.
+      - kind: computation
+        text: >-
+          (ג) $e^{-0.2t}=\frac12$. לוקחים $\ln$: $(-0.2)\cdot t=\ln\frac12$, שהוא מינוס $\ln2$, ולכן $t=\frac{\ln2}{0.2}=5\ln2\approx3.47$.
+          הגודל קטן כל הזמן, ולכן זו הפעם הראשונה (והיחידה).
+      - kind: computation
+        text: >-
+          (ד) $z\left(\frac{\pi}{2}\right)=e^{-0.1\pi+i\pi}=e^{-\pi/10}\cdot e^{i\pi}=-e^{-\pi/10}\approx-0.730$.
+      - kind: check
+        text: >-
+          (ד) מתאים ל-(א): בזמן $\frac{\pi}{2}$ הזווית היא $\pi$, ולכן המספר ממשי ושלילי, והגודל $e^{-0.2\cdot\pi/2}=e^{-\pi/10}$.
+          ו-(ב) מתאים ל-(ג): אחרי סיבוב אחד ($t=\pi\approx3.14$) הגודל $0.533$, עוד מעט מעל חצי, ולכן הזמן של חצי,
+          $3.47$, מעט אחרי $\pi$.
+      - kind: result
+        text: >-
+          $|z(t)|=e^{-0.2t}$ וארגומנט $2t$ (ספירלה פנימה); ממשי וחיובי ב-$t=\pi k$, עם יחס $e^{-0.2\pi}\approx0.533$;
+          $|z|=\frac12$ ב-$t=5\ln2\approx3.47$; $z\left(\frac{\pi}{2}\right)=-e^{-\pi/10}\approx-0.730$.
+
+challenge:
+  - id: W-3.4-c1
+    stars: 1
+    objectives: [OBJ-3.4-2]
+    prompt: >-
+      עבור הלוגריתם עם כל הערכים: האם יש הבדל בין קבוצת כל הערכים של $\log\left(z^2\right)$ לבין קבוצת כל הערכים של
+      $2\log z$ (כלומר כל המספרים $2u$, כש-$u$ ערך של $\log z$)?
+
+      (א) בדקו ב-$z=i$: רשמו את שתי הקבוצות.
+
+      (ב) הוכיחו שלכל $z\ne0$, הקבוצה של $2\log z$ מוכלת בקבוצה של $\log\left(z^2\right)$, ושהן אינן שוות.
+
+      (ג) ומה לגבי $\log z+\log z$, כלומר כל הסכומים $u+v$ של שני ערכים, לאו דווקא שווים, של $\log z$?
+    answer: >-
+      (א) $\log(-1)=i(\pi+2\pi m)$ ו-$2\log i=i(\pi+4\pi k)$: למשל מינוס $i\pi$ בראשונה ולא בשנייה. (ב) $2\log z$
+      מכיל רק את הכפולות הזוגיות של $2\pi i$ מעל $2\operatorname{Log}z$, ו-$\log\left(z^2\right)$ את כולן. (ג)
+      $\log z+\log z=\log\left(z^2\right)$.
+    solution:
+      - kind: idea
+        text: >-
+          כותבים את כל הקבוצות בצורה המפורשת: לוגריתם של הגודל, ועוד $i$ כפול זווית ועוד כפולה שלמה של $2\pi$. ומשווים את החלקים
+          המדומים: החלקים הממשיים שווים בכל מקרה, כי $\ln\left|z^2\right|=2\ln|z|$. ההבדל הוא איזה מספרים שלמים מופיעים.
+      - kind: computation
+        text: >-
+          (א) $z^2=i^2=-1$, ו-$\log(-1)=i(\pi+2\pi m)$: החלקים המדומים הם $\ldots,-3\pi,-\pi,\pi,3\pi,5\pi,\ldots$ (כל
+          הכפולות האי-זוגיות של $\pi$). מנגד, $\log i=i\left(\frac{\pi}{2}+2\pi k\right)$, ולכן $2\log i=i(\pi+4\pi k)$:
+          החלקים המדומים $\ldots,-3\pi,\pi,5\pi,9\pi,\ldots$. המספר מינוס $i\pi$ נמצא בראשונה ולא בשנייה. (הוא
+          לוגריתם של $i^2$, כי $e^{-i\pi}=-1=i^2$.)
+      - kind: computation
+        text: >-
+          (ב) נסמן $L=\operatorname{Log}z=\ln|z|+i\operatorname{Arg}z$. ערכי $\log z$ הם $L+2\pi ki$, ולכן ערכי
+          $2\log z$ הם $2L+4\pi ki$. מנגד $e^{2L}=\left(e^L\right)^2=z^2$, כלומר $2L$ הוא אחד הלוגריתמים של $z^2$, ולכן
+          כל ערכי $\log\left(z^2\right)$ הם $2L+2\pi mi$, $m$ שלם.
+      - kind: step
+        text: >-
+          כל ערך של $2\log z$ הוא $2L+2\pi mi$ עם $m=2k$ זוגי, ולכן הוא ערך של $\log\left(z^2\right)$: הכלה. אבל $2L+2\pi i$
+          ($m=1$, אי-זוגי) הוא ערך של $\log\left(z^2\right)$ שאינו מהצורה $2L+4\pi ki$. לכן הקבוצות שונות, לכל $z\ne0$.
+      - kind: computation
+        text: >-
+          (ג) $u+v=(L+2\pi ki)+(L+2\pi ji)=2L+2\pi(k+j)i$, ו-$k+j$ עובר על **כל** המספרים השלמים (למשל $j=0$). לכן
+          $\log z+\log z$ שווה ל-$\log\left(z^2\right)$. החילוק לשני ערכים בלתי תלויים הוא מה ש"מחזיר" את הכפולות
+          האי-זוגיות.
+      - kind: check
+        text: >-
+          ב-$z=i$: $u=\frac{\pi}{2}i$ ו-$v=\frac{\pi}{2}i-2\pi i$ נותנים $u+v=-i\pi$, הערך שחסר ב-(א) בקבוצה של $2\log i$.
+          ואכן $e^{-i\pi}=-1=i^2$.
+      - kind: result
+        text: >-
+          לכל $z\ne0$, כל ערך של $2\log z$ הוא ערך של $\log\left(z^2\right)$, אבל לא להפך: $2\log z$ מגיע רק לכפולות
+          הזוגיות של $2\pi i$ מעל $2\operatorname{Log}z$. ואילו $\log z+\log z=\log\left(z^2\right)$.
+    source:
+      name: 'Beck, Marchesi, Pixton, Sabalka, A First Course in Complex Analysis, edition 1.6'
+      year: 2025
+      problem: 'Exercise 3.6.42'
+      url: https://matthbeck.github.io/papers/complex.pdf
+      verified: '2026-11-26'
+      adapted: true
+
+  - id: W-3.4-c2
+    stars: 1
+    objectives: [OBJ-3.4-3, OBJ-3.4-1]
+    prompt: >-
+      יהי $z=x+iy$ עם $x,y$ ממשיים.
+
+      (א) הראו ש-
+
+      $$\sin z=\sin x\cdot\frac{e^{y}+e^{-y}}{2}+i\cos x\cdot\frac{e^{y}-e^{-y}}{2}.$$
+
+      (ב) הסיקו ש-$|\sin z|^2=\sin^2x+\left(\frac{e^{y}-e^{-y}}{2}\right)^2$.
+
+      (ג) הוכיחו שכל האפסים של $\sin z$ ממשיים, ולכן הם בדיוק הכפולות השלמות של $\pi$.
+    answer: >-
+      (א) מציבים ב-$\sin z=\frac{e^{iz}-e^{-iz}}{2i}$ עם $e^{\pm iz}=e^{\mp y}\operatorname{cis}(\pm x)$. (ב) סכום ריבועי
+      החלקים, בעזרת $(a+b)^2-(a-b)^2=4ab$. (ג) שני המחוברים ב-(ב) אינם שליליים, ולכן $\sin z=0$ רק כש-$\sin x=0$ ו-$y=0$:
+      $z=k\pi$.
+    solution:
+      - kind: idea
+        text: >-
+          מציבים $z=x+iy$ בהגדרה של $\sin z$ דרך האקספוננט, ומפרידים לחלק ממשי ולחלק מדומה בעזרת
+          $e^{a+ib}=e^a\operatorname{cis}b$. את הגודל בריבוע מחשבים כסכום ריבועי החלקים. ב-(ג), סכום של שני ריבועים של
+          מספרים ממשיים הוא 0 רק כששניהם 0.
+      - kind: computation
+        text: >-
+          (א) $iz=-y+ix$ ו-$(-i)z=y-ix$, ולכן $e^{iz}=e^{-y}(\cos x+i\sin x)$ ו-$e^{-iz}=e^{y}(\cos x-i\sin x)$. ההפרש:
+          $e^{iz}-e^{-iz}=\cos x\left(e^{-y}-e^{y}\right)+i\sin x\left(e^{-y}+e^{y}\right)$.
+      - kind: computation
+        text: >-
+          מחלקים ב-$2i$, ו-$\frac{1}{i}=-i$: החלק $i\sin x\left(e^{-y}+e^{y}\right)$ נעשה $\sin x\cdot\frac{e^{y}+e^{-y}}{2}$, והחלק
+          $\cos x\left(e^{-y}-e^{y}\right)$ נעשה $i\cos x\cdot\frac{e^{y}-e^{-y}}{2}$. זו הנוסחה של (א).
+      - kind: computation
+        text: >-
+          (ב) נסמן $A=\frac{e^{y}+e^{-y}}{2}$ ו-$B=\frac{e^{y}-e^{-y}}{2}$. אז $|\sin z|^2=A^2\sin^2x+B^2\cos^2x$. מכיוון
+          ש-$A^2-B^2=\frac{(e^y+e^{-y})^2-(e^y-e^{-y})^2}{4}=\frac{4e^ye^{-y}}{4}=1$, כלומר $A^2=1+B^2$:
+          $|\sin z|^2=\left(1+B^2\right)\sin^2x+B^2\cos^2x=\sin^2x+B^2$.
+      - kind: step
+        text: >-
+          (ג) אם $\sin z=0$ אז $|\sin z|^2=0$, כלומר $\sin^2x+B^2=0$. שני המחוברים ריבועים של מספרים ממשיים, ולכן שניהם
+          0: $\sin x=0$, ו-$e^{y}=e^{-y}$, כלומר $e^{2y}=1$ ו-$y=0$. לכן $z=x$ ממשי ו-$\sin x=0$: $z=k\pi$. ולהפך, $\sin k\pi=0$.
+      - kind: check
+        text: >-
+          ב-$z=2i$ ($x=0$, $y=2$): הנוסחה של (א) נותנת $i\cdot\frac{e^2-e^{-2}}{2}\approx3.63i$, כמו בשיעור. ו-(ב):
+          $|\sin(2i)|^2=0+\left(\frac{e^2-e^{-2}}{2}\right)^2\approx13.15$.
+      - kind: result
+        text: >-
+          $|\sin(x+iy)|^2=\sin^2x+\left(\frac{e^{y}-e^{-y}}{2}\right)^2$, ולכן $\sin z=0$ בדיוק כש-$z=k\pi$, $k$ שלם: לסינוס
+          המרוכב אין אפסים מחוץ לציר הממשי.
+    source:
+      name: 'Beck, Marchesi, Pixton, Sabalka, A First Course in Complex Analysis, edition 1.6'
+      year: 2025
+      problem: 'Exercises 3.6.31 and 3.6.35(a)'
+      url: https://matthbeck.github.io/papers/complex.pdf
+      verified: '2026-11-26'
+      adapted: true

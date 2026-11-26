@@ -6,7 +6,7 @@
   truth: >-
     זה נכון בממשיים. במרוכבים לכל $w\ne0$ יש בדיוק $n$ שורשים מסדר $n$: $z^4=-16$ נותן
     $2\operatorname{cis}\left(\frac{\pi}{4}+\frac{k\pi}{2}\right)$, $k=0,1,2,3$, כלומר $\pm\sqrt2\pm\sqrt2i$.
-  remedy: { lesson: '3.5', label: 'כמה שורשים מסדר n' }
+  remedy: { lesson: '3.5', anchor: why-n, label: 'למה בדיוק n שורשים' }
 
 - id: MC-c3-roots-plus-minus
   title: חושבים שלכל שורש יש בדיוק שני ערכים, פלוס ומינוס
@@ -15,7 +15,7 @@
   truth: >-
     יש בדיוק $n$ שורשים מסדר $n$, על מעגל ברדיוס $|w|^{1/n}$, במרווחים של $\frac{2\pi}{n}$. רק כש-$n$ זוגי הם באים
     בזוגות נגדיים; לשלושת השורשים השלישיים של 1 אין נגדי ביניהם.
-  remedy: { lesson: '3.5', label: 'n שורשים על מצולע משוכלל' }
+  remedy: { lesson: '3.5', anchor: regular-polygon, label: 'n שורשים על מצולע משוכלל' }
 
 - id: MC-c3-root-modulus
   title: שוכחים להוציא שורש מהערך המוחלט
@@ -24,16 +24,16 @@
   truth: >-
     $(\rho\operatorname{cis}\alpha)^n=\rho^n\operatorname{cis}n\alpha$, ולכן לשורש מסדר $n$ של $w$ הערך המוחלט
     $|w|^{1/n}$: $8^{1/3}=2$.
-  remedy: { lesson: '3.5', label: 'הערך המוחלט של שורש' }
+  remedy: { lesson: '3.5', anchor: root-modulus, label: 'הערך המוחלט של שורש' }
 
 - id: MC-c3-root-angle-not-divided
   title: לא מחלקים את הזווית ב-n
   belief: >-
     השורשים השלישיים של $8i$ הם $2\operatorname{cis}\left(\frac{\pi}{2}+\frac{2\pi k}{3}\right)$.
   truth: >-
-    $z^n=w$ עם $z=\rho\operatorname{cis}\alpha$ נותן $n\alpha=\arg w+2\pi k$, ולכן $\alpha=\frac{\arg w+2\pi k}{n}$: גם
+    $z^n=w$ עם $z=\rho\operatorname{cis}\theta$ נותן $n\theta=\arg w+2\pi k$, ולכן $\theta=\frac{\arg w+2\pi k}{n}$: גם
     $\arg w$ וגם $2\pi k$ מתחלקים ב-$n$. לשורשים של $8i$: $\frac{\pi}{6},\frac{5\pi}{6},\frac{3\pi}{2}$.
-  remedy: { lesson: '3.5', label: 'הזווית של שורש' }
+  remedy: { lesson: '3.5', anchor: root-angle, label: 'הזווית של שורש' }
 
 - id: MC-c3-roots-spacing-pi-over-n
   title: חושבים שהמרווח בין שורשים סמוכים הוא פאי חלקי n
@@ -41,7 +41,7 @@
     השורשים מסדר 6 נמצאים במרווחים של $\frac{\pi}{6}$.
   truth: >-
     $n$ השורשים מחלקים את המעגל כולו, $2\pi$, ל-$n$ חלקים שווים: מרווח $\frac{2\pi}{n}$. לסדר 6: $\frac{\pi}{3}$.
-  remedy: { lesson: '3.5', label: 'n שורשים על מצולע משוכלל' }
+  remedy: { lesson: '3.5', anchor: regular-polygon, label: 'n שורשים על מצולע משוכלל' }
 
 - id: MC-c3-roots-of-unity-any-unit
   title: חושבים שכל מספר על מעגל היחידה הוא שורש יחידה מסדר נתון
@@ -50,13 +50,13 @@
   truth: >-
     שורשי היחידה מסדר $n$ הם רק $n$ הנקודות $\operatorname{cis}\frac{2\pi k}{n}$. $i^6=-1$
     ו-$\left(\frac{1+i}{\sqrt2}\right)^6=-i$, ולכן הם אינם שורשים מסדר 6 (הם שורשים מסדר 4 ומסדר 8).
-  remedy: { lesson: '3.5', label: 'שורשי היחידה' }
+  remedy: { lesson: '3.5', anchor: roots-of-unity, label: 'שורשי היחידה' }
 
 - id: MC-c3-roots-sum-n
-  title: חושבים שסכום שורשי היחידה הוא n
+  title: חושבים שסכום שורשי היחידה הוא n, או 1
   belief: >-
-    כל שורש יחידה "שווה 1 בחזקת $n$", ולכן סכום $n$ השורשים הוא $n$.
+    כל שורש יחידה "שווה 1 בחזקת $n$", ולכן סכום $n$ השורשים הוא $n$; או: הם "שורשים של 1", ולכן סכומם 1.
   truth: >-
     לכל $n\ge2$ סכום שורשי היחידה מסדר $n$ הוא 0: הם קודקודים של מצולע משוכלל שמרכזו בראשית, וגם
     $1+\omega+\dots+\omega^{n-1}=\frac{\omega^n-1}{\omega-1}=0$ כש-$\omega=\operatorname{cis}\frac{2\pi}{n}$.
-  remedy: { lesson: '3.5', label: 'סכום שורשי היחידה' }
+  remedy: { lesson: '3.5', anchor: roots-sum, label: 'סכום שורשי היחידה' }

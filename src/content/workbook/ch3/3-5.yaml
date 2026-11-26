@@ -1,0 +1,521 @@
+# Workbook of lesson 3.5 — n-th roots.
+# Objectives (src/course.ts):
+#   OBJ-3.5-1  all n n-th roots of a complex number, in polar form
+#   OBJ-3.5-2  the roots as the vertices of a regular polygon; the roots of unity
+#   OBJ-3.5-3  simple polynomial equations over the complex numbers, and factoring a polynomial
+# Every number recomputed with sympy in screens/tools/lesson-3-5.py.
+lesson: '3.5'
+practice:
+  - id: W-3.5-01
+    level: basic
+    objectives: [OBJ-3.5-1]
+    prompt: >-
+      מצאו את כל הפתרונות של $z^3=-27i$, בצורה הקוטבית ובצורה האלגברית.
+    answer: >-
+      $3\operatorname{cis}\left(-\frac{\pi}{6}\right)=\frac{3\sqrt3}{2}-\frac32i$,
+      $3\operatorname{cis}\frac{\pi}{2}=3i$ ו-$3\operatorname{cis}\frac{7\pi}{6}=-\frac{3\sqrt3}{2}-\frac32i$.
+    solution:
+      - kind: idea
+        text: >-
+          המתכון: כותבים את $-27i$ בצורה הקוטבית, מוציאים שורש שלישי מהערך המוחלט, ומחלקים ב-3 את הזווית ועוד
+          $2\pi k$, ל-$k=0,1,2$.
+      - kind: computation
+        text: >-
+          $-27i$ נמצא על החלק השלילי של הציר המדומה: ערך מוחלט 27, וארגומנט ראשי $-\frac{\pi}{2}$. כלומר
+          $-27i=27\operatorname{cis}\left(-\frac{\pi}{2}\right)$.
+      - kind: computation
+        text: >-
+          $\rho=27^{1/3}=3$, והזוויות $\theta_k=\frac{-\frac{\pi}{2}+2\pi k}{3}=-\frac{\pi}{6}+k\cdot\frac{2\pi}{3}$:
+          $-\frac{\pi}{6}$, $\frac{\pi}{2}$ ו-$\frac{7\pi}{6}$.
+      - kind: computation
+        text: >-
+          בצורה האלגברית: $3\operatorname{cis}\left(-\frac{\pi}{6}\right)=3\left(\frac{\sqrt3}{2}-\frac12i\right)$,
+          כלומר $\frac{3\sqrt3}{2}-\frac32i$; $3\operatorname{cis}\frac{\pi}{2}=3i$; והזווית $\frac{7\pi}{6}$ ברביע
+          השלישי, עם זווית חדה $\frac{\pi}{6}$, ולכן $3\operatorname{cis}\frac{7\pi}{6}=-\frac{3\sqrt3}{2}-\frac32i$.
+      - kind: check
+        text: >-
+          $(3i)^3=27i^3=-27i$. ועוד בדיקה: סכום השורשים צריך להיות 0. בחלק הממשי
+          $\frac{3\sqrt3}{2}+0-\frac{3\sqrt3}{2}=0$, ובחלק המדומה $-\frac32+3-\frac32=0$.
+      - kind: result
+        text: >-
+          $\frac{3\sqrt3}{2}-\frac32i$, $3i$ ו-$-\frac{3\sqrt3}{2}-\frac32i$: משולש שווה צלעות על מעגל ברדיוס 3.
+
+  - id: W-3.5-02
+    level: basic
+    objectives: [OBJ-3.5-2]
+    prompt: >-
+      (א) כתבו את כל שורשי היחידה מסדר 8 בצורה האלגברית, ותארו אותם במישור גאוס.
+
+
+      (ב) אילו מהם הם גם שורשי יחידה מסדר 4? נמקו.
+    answer: >-
+      (א) $\pm1$, $\pm i$ ו-$\frac{\pm1\pm i}{\sqrt2}$, קודקודי מתומן משוכלל על מעגל היחידה. (ב) $1$, $i$, מינוס 1
+      ו-$-i$: אלה של $k$ זוגי.
+    solution:
+      - kind: idea
+        text: >-
+          שורשי היחידה מסדר $n$ הם $\operatorname{cis}\frac{2\pi k}{n}$. כאן $\frac{2\pi k}{8}=\frac{k\pi}{4}$: זוויות של
+          $45^\circ$. ב-(ב) מעלים בחזקה רביעית לפי נוסחת דה-מואבר.
+      - kind: computation
+        text: >-
+          (א) $k=0,\dots,7$ נותנים את הזוויות $0,\frac{\pi}{4},\frac{\pi}{2},\dots,\frac{7\pi}{4}$: 1, $\frac{1+i}{\sqrt2}$,
+          $i$, $\frac{-1+i}{\sqrt2}$, מינוס 1, $\frac{-1-i}{\sqrt2}$, $-i$ ו-$\frac{1-i}{\sqrt2}$. (בזווית $\frac{\pi}{4}$
+          הקוסינוס והסינוס שניהם $\frac{1}{\sqrt2}$.)
+      - kind: step
+        text: >-
+          הם קודקודי מתומן משוכלל על מעגל היחידה, עם קודקוד ב-1 ובמרווחים של $\frac{2\pi}{8}=\frac{\pi}{4}$.
+      - kind: computation
+        text: >-
+          (ב) $\left(\operatorname{cis}\frac{k\pi}{4}\right)^4=\operatorname{cis}(k\pi)$. זה 1 כש-$k$ זוגי, ומינוס 1
+          כש-$k$ אי-זוגי. לכן שורשי היחידה מסדר 4 שבין שמונת השורשים הם אלה של $k=0,2,4,6$: 1, $i$, מינוס 1 ו-$-i$.
+      - kind: check
+        text: >-
+          $\left(\frac{1+i}{\sqrt2}\right)^2=\frac{1+2i+i^2}{2}=i$, ולכן החזקה הרביעית היא $i^2=-1$, לא 1: אכן $k=1$
+          אינו שורש מסדר 4. ו-$i^4=1$.
+      - kind: result
+        text: >-
+          (א) $\pm1$, $\pm i$, $\frac{\pm1\pm i}{\sqrt2}$. (ב) 1, $i$, מינוס 1 ו-$-i$, הקודקודים של $k$ זוגי: ריבוע בתוך
+          המתומן.
+
+  - id: W-3.5-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-3.5-2, OBJ-3.5-1]
+    prompt: >-
+      ענו על השאלות הבאות על הפתרונות של $z^5=32$ **בלי** לחשב אותם בצורה האלגברית, ונמקו כל תשובה.
+
+
+      (א) כמה פתרונות יש, על איזה מעגל הם יושבים, ומה הזווית בין שני פתרונות סמוכים?
+
+
+      (ב) כמה מהם ממשיים?
+
+
+      (ג) האם יש ביניהם שני פתרונות נגדיים?
+
+
+      (ד) האם יש ביניהם זוגות של מספרים צמודים?
+    answer: >-
+      (א) חמישה, על מעגל ברדיוס 2 סביב הראשית, במרווחים של $\frac{2\pi}{5}$, כלומר $72^\circ$. (ב) אחד, 2. (ג) לא,
+      כי 5 אי-זוגי. (ד) כן, שני זוגות: $2\operatorname{cis}\left(\pm\frac{2\pi}{5}\right)$
+      ו-$2\operatorname{cis}\left(\pm\frac{4\pi}{5}\right)$.
+    solution:
+      - kind: idea
+        text: >-
+          הצורה של השורשים נקראת מהנוסחה: ערך מוחלט אחד, $R^{1/n}$, ומרווחים שווים של $\frac{2\pi}{n}$. נגדיים וצמודים
+          בודקים בעזרת שני כללים מהשיעור.
+      - kind: step
+        text: >-
+          (א) $32=32\operatorname{cis}0$, ולכן יש $n=5$ שורשים, כולם בערך מוחלט $32^{1/5}=2$, במרווחים של
+          $\frac{2\pi}{5}$: קודקודי מחומש משוכלל.
+      - kind: step
+        text: >-
+          (ב) הזוויות הן $\frac{2\pi k}{5}$, $k=0,\dots,4$. מספר ממשי על המעגל הזה נמצא בזווית 0 או $\pi$. הזווית 0 היא
+          $k=0$, והשורש 2. הזווית $\pi$ הייתה דורשת $\frac{2k}{5}=1$, ואין $k$ שלם כזה. לכן יש שורש ממשי אחד.
+      - kind: step
+        text: >-
+          (ג) אם $z$ ו-$-z$ שניהם שורשים, אז $(-z)^5=-z^5$, כלומר $-32=32$: סתירה. כשהמעלה אי-זוגית אין שורשים
+          נגדיים. בדיקה: $(-2)^5=-32$, ולכן מינוס 2 אינו שורש.
+      - kind: step
+        text: >-
+          (ד) למשוואה $z^5-32=0$ מקדמים ממשיים, ולכן כל שורש לא-ממשי בא עם הצמוד שלו. ארבעת השורשים הלא-ממשיים
+          מתחלקים לשני זוגות: הזוויות $\pm\frac{2\pi}{5}$ (שהן $k=1$ ו-$k=4$, כי $\frac{8\pi}{5}=2\pi-\frac{2\pi}{5}$)
+          ו-$\pm\frac{4\pi}{5}$ ($k=2$ ו-$k=3$).
+      - kind: check
+        text: >-
+          במחשבון, $2\operatorname{cis}\frac{2\pi}{5}\approx0.618+1.902i$ ו-$2\operatorname{cis}\frac{8\pi}{5}\approx0.618-1.902i$:
+          באמת צמודים.
+      - kind: result
+        text: >-
+          חמישה שורשים על מעגל ברדיוס 2, במרווחים של $72^\circ$; אחד ממשי (2); אין נגדיים; שני זוגות צמודים.
+
+  - id: W-3.5-04
+    level: mid
+    objectives: [OBJ-3.5-1, OBJ-3.5-2]
+    prompt: >-
+      (א) פתרו את המשוואה $(z-1)^3=8$.
+
+
+      (ב) שלושת הפתרונות הם קודקודים של משולש שווה צלעות. מה המרכז שלו, ולמה?
+    answer: >-
+      (א) $z=3$, $z=\sqrt3\,i$, $z=-\sqrt3\,i$. (ב) המרכז הוא הנקודה 1: הפתרונות של $u^3=8$ הם משולש סביב הראשית,
+      ו-$z=u+1$ מזיז אותו ב-1.
+    solution:
+      - kind: idea
+        text: >-
+          מסמנים $u=z-1$. המשוואה $u^3=8$ היא בדיוק המשוואה של השיעור. אחר כך חוזרים ל-$z=u+1$: הזזה של כל הנקודות
+          באותו וקטור.
+      - kind: computation
+        text: >-
+          $8=8\operatorname{cis}0$, ולכן $u_k=2\operatorname{cis}\frac{2\pi k}{3}$: $u_0=2$,
+          $u_1=2\left(-\frac12+\frac{\sqrt3}{2}i\right)=-1+\sqrt3\,i$, $u_2=-1-\sqrt3\,i$. אלה 2 כפול שורשי היחידה מסדר 3.
+      - kind: computation
+        text: >-
+          $z=u+1$: $z_0=3$, $z_1=\sqrt3\,i$, $z_2=-\sqrt3\,i$.
+      - kind: step
+        text: >-
+          (ב) הנקודות $u_k$ הן קודקודי משולש שווה צלעות שמרכזו בראשית (קודקודי מצולע משוכלל על מעגל ברדיוס 2). הוספת 1
+          היא הזזה ימינה ב-1, שאינה משנה את הצורה. לכן הנקודות $z_k$ הן משולש שווה צלעות שמרכזו 1, על מעגל ברדיוס 2
+          סביב 1.
+      - kind: check
+        text: >-
+          $(\sqrt3\,i-1)^3$: הריבוע $(-1+\sqrt3\,i)^2=1-2\sqrt3\,i-3=-2-2\sqrt3\,i$, וכפול $-1+\sqrt3\,i$ שוב:
+          $2-2\sqrt3\,i+2\sqrt3\,i-6i^2=8$. והמרחקים מ-1: $|3-1|=2$ ו-$|\sqrt3\,i-1|=\sqrt{3+1}=2$.
+      - kind: result
+        text: >-
+          $z=3$, $\sqrt3\,i$, $-\sqrt3\,i$: משולש שווה צלעות שמרכזו 1, לא הראשית.
+
+  - id: W-3.5-05
+    level: mid
+    objectives: [OBJ-3.5-3, OBJ-3.5-1]
+    prompt: >-
+      פתרו את $z^2-2z+(1-2i)=0$ בשתי דרכים: פעם בהשלמה לריבוע, ופעם בנוסחת השורשים. בדקו בעזרת הקשר בין השורשים
+      למקדמים.
+    answer: '$z=2+i$ ו-$z=-i$.'
+    solution:
+      - kind: idea
+        text: >-
+          בשתי הדרכים מגיעים לשורש ריבועי של מספר מרוכב, ומוצאים אותו באלגברה: $x^2-y^2$, $2xy$ והערך המוחלט.
+      - kind: computation
+        text: >-
+          השלמה לריבוע: $z^2-2z=(z-1)^2-1$, ולכן המשוואה היא $(z-1)^2-1+1-2i=0$, כלומר $(z-1)^2=2i$.
+      - kind: computation
+        text: >-
+          השורשים הריבועיים של $2i$: $x^2-y^2=0$, $2xy=2$, ו-$x^2+y^2=|2i|=2$. לכן $x^2=y^2=1$, ו-$xy=1>0$ אומר
+          שהסימנים שווים: $\pm(1+i)$. בדיקה: $(1+i)^2=1+2i+i^2=2i$.
+      - kind: computation
+        text: >-
+          $z-1=\pm(1+i)$: $z=2+i$ או $z=1-1-i=-i$.
+      - kind: computation
+        text: >-
+          בנוסחה: $\Delta=(-2)^2-4(1-2i)=4-4+8i=8i$. שורש ריבועי: $(2+2i)^2=4+8i+4i^2=8i$, ולכן $s=2+2i$.
+          $z=\frac{2\pm(2+2i)}{2}$: $\frac{4+2i}{2}=2+i$ ו-$\frac{-2i}{2}=-i$. אותה תשובה.
+      - kind: check
+        text: >-
+          הסכום $(2+i)+(-i)=2$, מינוס המקדם של $z$. המכפלה $(2+i)(-i)=-2i-i^2=1-2i$, המקדם החופשי. (השורשים אינם
+          צמודים: המקדם החופשי אינו ממשי.)
+      - kind: result
+        text: >-
+          $z=2+i$ ו-$z=-i$.
+
+  - id: W-3.5-06
+    level: mid
+    objectives: [OBJ-3.5-3]
+    prompt: >-
+      (א) פתרו את המשוואה הדו-ריבועית $z^4+2z^2+4=0$.
+
+
+      (ב) פרקו את $z^4+2z^2+4$ למכפלה של שני גורמים ממשיים ממעלה 2, ובדקו בכפל.
+    answer: >-
+      (א) $z=\pm\left(\frac{\sqrt2}{2}+\frac{\sqrt6}{2}i\right)$ ו-$z=\pm\left(\frac{\sqrt2}{2}-\frac{\sqrt6}{2}i\right)$.
+      (ב) $\left(z^2-\sqrt2\,z+2\right)\left(z^2+\sqrt2\,z+2\right)$.
+    solution:
+      - kind: idea
+        text: >-
+          מציבים $u=z^2$ ופותרים משוואה ריבועית ב-$u$. כל ערך של $u$ נותן שני ערכים נגדיים של $z$, שורשים ריבועיים
+          שמוצאים בצורה הקוטבית. ב-(ב) מצמידים כל שורש לצמוד שלו.
+      - kind: computation
+        text: >-
+          $u^2+2u+4=0$: $\Delta=4-16=-12$, ולכן $u=\frac{-2\pm2\sqrt3\,i}{2}=-1\pm\sqrt3\,i$. בצורה הקוטבית:
+          $|u|=\sqrt{1+3}=2$, ו-$-1+\sqrt3\,i$ ברביע השני עם זווית חדה $\frac{\pi}{3}$, כלומר $u=2\operatorname{cis}\frac{2\pi}{3}$;
+          והשני הוא הצמוד, $2\operatorname{cis}\left(-\frac{2\pi}{3}\right)$.
+      - kind: computation
+        text: >-
+          $z^2=2\operatorname{cis}\frac{2\pi}{3}$: ערך מוחלט $\sqrt2$ וזוויות $\frac{\pi}{3}$ ו-$\frac{\pi}{3}+\pi$, כלומר
+          $z=\pm\sqrt2\operatorname{cis}\frac{\pi}{3}=\pm\sqrt2\left(\frac12+\frac{\sqrt3}{2}i\right)=\pm\left(\frac{\sqrt2}{2}+\frac{\sqrt6}{2}i\right)$.
+          באותה דרך מ-$2\operatorname{cis}\left(-\frac{2\pi}{3}\right)$:
+          $z=\pm\left(\frac{\sqrt2}{2}-\frac{\sqrt6}{2}i\right)$.
+      - kind: computation
+        text: >-
+          (ב) הזוג $\frac{\sqrt2}{2}\pm\frac{\sqrt6}{2}i$: חלק ממשי $\frac{\sqrt2}{2}$ וערך מוחלט בריבוע
+          $\frac24+\frac64=2$. הגורם: $z^2-2\cdot\frac{\sqrt2}{2}z+2=z^2-\sqrt2\,z+2$. הזוג
+          $-\frac{\sqrt2}{2}\pm\frac{\sqrt6}{2}i$ נותן $z^2+\sqrt2\,z+2$.
+      - kind: check
+        text: >-
+          $(A-B)(A+B)=A^2-B^2$ עם $A=z^2+2$ ו-$B=\sqrt2\,z$: $(z^2+2)^2-2z^2=z^4+4z^2+4-2z^2=z^4+2z^2+4$.
+      - kind: result
+        text: >-
+          (א) $\pm\left(\frac{\sqrt2}{2}+\frac{\sqrt6}{2}i\right)$, $\pm\left(\frac{\sqrt2}{2}-\frac{\sqrt6}{2}i\right)$.
+          (ב) $z^4+2z^2+4=\left(z^2-\sqrt2\,z+2\right)\left(z^2+\sqrt2\,z+2\right)$.
+
+  - id: W-3.5-07
+    level: mid
+    qualitative: true
+    objectives: [OBJ-3.5-2]
+    prompt: >-
+      (א) הסבירו, בעזרת סיבוב, למה סכום חמשת שורשי היחידה מסדר 5 הוא 0.
+
+
+      (ב) הסיקו מ-(א) ש-$\cos\frac{2\pi}{5}+\cos\frac{4\pi}{5}=-\frac12$.
+    answer: >-
+      (א) סיבוב ב-$\frac{2\pi}{5}$ מעביר את המחומש לעצמו, ולכן $\omega S=S$ עם $\omega\ne1$, ו-$S=0$. (ב) בחלק הממשי:
+      $1+2\cos\frac{2\pi}{5}+2\cos\frac{4\pi}{5}=0$.
+    solution:
+      - kind: idea
+        text: >-
+          (א) הטיעון של השיעור: הסכום אינו משתנה בסיבוב שמעביר את הקבוצה לעצמה. (ב) מספר מרוכב שהוא 0 הוא 0 גם בחלק
+          הממשי; וזוויות סימטריות ביחס לציר הממשי נותנות אותו קוסינוס.
+      - kind: step
+        text: >-
+          (א) נסמן $\omega=\operatorname{cis}\frac{2\pi}{5}$ ו-$S=1+\omega+\omega^2+\omega^3+\omega^4$. כפל ב-$\omega$ הוא
+          סיבוב בזווית $\frac{2\pi}{5}$, והוא מעביר כל שורש לבא אחריו, ואת $\omega^4$ ל-$\omega^5=1$. לכן
+          $\omega S=\omega+\omega^2+\omega^3+\omega^4+1=S$. מכאן $(\omega-1)S=0$, ומכיוון ש-$\omega\ne1$, $S=0$.
+      - kind: computation
+        text: >-
+          (ב) החלק הממשי של $\omega^k$ הוא $\cos\frac{2\pi k}{5}$. הזוויות $\frac{6\pi}{5}$ ו-$\frac{8\pi}{5}$ הן
+          $2\pi-\frac{4\pi}{5}$ ו-$2\pi-\frac{2\pi}{5}$, ולכן הקוסינוסים שלהן שווים לאלה של $\frac{4\pi}{5}$ ושל
+          $\frac{2\pi}{5}$. החלק הממשי של $S=0$:
+          $1+\cos\frac{2\pi}{5}+\cos\frac{4\pi}{5}+\cos\frac{4\pi}{5}+\cos\frac{2\pi}{5}=0$.
+      - kind: computation
+        text: >-
+          כלומר $1+2\left(\cos\frac{2\pi}{5}+\cos\frac{4\pi}{5}\right)=0$, ומכאן $\cos\frac{2\pi}{5}+\cos\frac{4\pi}{5}=-\frac12$.
+      - kind: check
+        text: >-
+          במחשבון: $\cos72^\circ\approx0.309$ ו-$\cos144^\circ\approx-0.809$, וסכומם $-0.5$.
+      - kind: result
+        text: >-
+          $S=0$ כי $\omega S=S$ ו-$\omega\ne1$; ולכן $\cos\frac{2\pi}{5}+\cos\frac{4\pi}{5}=-\frac12$.
+
+  - id: W-3.5-08
+    level: exam
+    objectives: [OBJ-3.5-3, OBJ-3.5-2]
+    prompt: >-
+      (א) הראו ש-$z^5-1=(z-1)(z^4+z^3+z^2+z+1)$, והסבירו למה השורשים של הגורם השני הם ארבעת שורשי היחידה מסדר 5
+      שאינם 1.
+
+
+      (ב) הסבירו למה $z^4+z^3+z^2+z+1=(z^2+az+1)(z^2+bz+1)$ עם $a=-2\cos\frac{2\pi}{5}$ ו-$b=-2\cos\frac{4\pi}{5}$.
+
+
+      (ג) מצאו את $a$ ואת $b$ בהשוואת מקדמים, והסיקו את הערך המדויק של $\cos\frac{2\pi}{5}$.
+    answer: >-
+      (ג) $a=\frac{1-\sqrt5}{2}$, $b=\frac{1+\sqrt5}{2}$, ולכן $\cos\frac{2\pi}{5}=\frac{\sqrt5-1}{4}$ (וגם
+      $\cos\frac{4\pi}{5}=-\frac{1+\sqrt5}{4}$).
+    solution:
+      - kind: idea
+        text: >-
+          פירוק לגורמים ממשיים בעזרת זוגות צמודים, ואז השוואת מקדמים עם הפירוק "הלא ידוע". שתי הדרכים חייבות לתת את
+          אותם מקדמים, ומזה יוצא קוסינוס מדויק.
+      - kind: computation
+        text: >-
+          (א) $(z-1)(z^4+z^3+z^2+z+1)=z^5+z^4+z^3+z^2+z-z^4-z^3-z^2-z-1=z^5-1$. שורשי $z^5-1$ הם חמשת שורשי היחידה. 1
+          הוא השורש של הגורם $z-1$, ולכן ארבעת האחרים הם השורשים של הגורם השני (ו-1 אינו שורש שלו: $1+1+1+1+1=5$).
+      - kind: step
+        text: >-
+          (ב) ארבעת השורשים $\operatorname{cis}\frac{2\pi k}{5}$, $k=1,2,3,4$, הם שני זוגות צמודים: $k=1,4$ (זוויות
+          $\pm\frac{2\pi}{5}$) ו-$k=2,3$ (זוויות $\pm\frac{4\pi}{5}$). זוג $z_0,\bar z_0$ נותן
+          $z^2-2\operatorname{Re}(z_0)\,z+|z_0|^2$, וכאן $|z_0|=1$ ו-$\operatorname{Re}z_0$ הוא הקוסינוס של הזווית. לכן
+          הגורמים הם $z^2-2\cos\frac{2\pi}{5}\,z+1$ ו-$z^2-2\cos\frac{4\pi}{5}\,z+1$.
+      - kind: computation
+        text: >-
+          (ג) פותחים: $(z^2+az+1)(z^2+bz+1)=z^4+(a+b)z^3+(ab+2)z^2+(a+b)z+1$. משווים ל-$z^4+z^3+z^2+z+1$:
+          $a+b=1$ ו-$ab+2=1$, כלומר $ab=-1$.
+      - kind: computation
+        text: >-
+          שני מספרים שסכומם 1 ומכפלתם מינוס 1 הם השורשים של $t^2-t-1=0$: $t=\frac{1\pm\sqrt5}{2}$.
+      - kind: step
+        text: >-
+          מי מהם $a$? הזווית $\frac{2\pi}{5}=72^\circ$ ברביע הראשון, ולכן $\cos\frac{2\pi}{5}>0$ ו-$a<0$:
+          $a=\frac{1-\sqrt5}{2}$. מכאן $\cos\frac{2\pi}{5}=-\frac{a}{2}=\frac{\sqrt5-1}{4}$. ובאותה דרך
+          $b=\frac{1+\sqrt5}{2}$ נותן $\cos\frac{4\pi}{5}=-\frac{1+\sqrt5}{4}$.
+      - kind: check
+        text: >-
+          במחשבון $\frac{\sqrt5-1}{4}\approx0.309\approx\cos72^\circ$. והסכום
+          $\frac{\sqrt5-1}{4}-\frac{1+\sqrt5}{4}=-\frac12$, כמו ב-W-3.5-07.
+      - kind: result
+        text: >-
+          $z^5-1=(z-1)\left(z^2+\frac{1-\sqrt5}{2}z+1\right)\left(z^2+\frac{1+\sqrt5}{2}z+1\right)$, ו-$\cos\frac{2\pi}{5}=\frac{\sqrt5-1}{4}$.
+
+  - id: W-3.5-09
+    level: exam
+    qualitative: true
+    objectives: [OBJ-3.5-3]
+    prompt: >-
+      (א) מצאו פולינום עם מקדמים ממשיים, מהמעלה הנמוכה ביותר האפשרית ועם מקדם מוביל 1, ששני מבין השורשים שלו הם 2
+      ו-$1-i$.
+
+
+      (ב) נכון או לא נכון: יש פולינום ממעלה 3 עם מקדמים ממשיים שהשורשים שלו הם 2, $i$ ו-$1+i$. נמקו.
+    answer: >-
+      (א) $z^3-4z^2+6z-4$. (ב) לא נכון: גם $-i$ ו-$1-i$ היו שורשים, חמישה שורשים לפולינום ממעלה 3.
+    solution:
+      - kind: idea
+        text: >-
+          מקדמים ממשיים מחייבים שגם הצמוד של כל שורש לא-ממשי יהיה שורש. לכן השורשים הנתונים "מביאים" איתם שורשים
+          נוספים, והמשפט היסודי מגביל כמה שורשים יכולים להיות.
+      - kind: step
+        text: >-
+          (א) גם $1+i$ חייב להיות שורש. לכן יש לפחות שלושה שורשים, 2, $1-i$ ו-$1+i$, והמעלה לפחות 3. מעלה 3 מספיקה:
+          המכפלה של שלושת הגורמים.
+      - kind: computation
+        text: >-
+          הזוג $1\pm i$: $z^2-2z+2$ (חלק ממשי 1, ערך מוחלט בריבוע 2). המכפלה:
+          $(z-2)(z^2-2z+2)=z^3-2z^2+2z-2z^2+4z-4=z^3-4z^2+6z-4$.
+      - kind: step
+        text: >-
+          (ב) אם המקדמים ממשיים, הצמודים $-i$ ו-$1-i$ הם גם שורשים. ביחד עם 2, $i$ ו-$1+i$ אלה חמישה שורשים שונים. אבל
+          לפי המשפט היסודי לפולינום ממעלה 3 יש בדיוק 3 שורשים, עם ריבוי. לכן פולינום כזה אינו קיים. (פולינום ממעלה 3
+          עם השורשים האלה קיים, $(z-2)(z-i)(z-1-i)$, אבל המקדמים שלו אינם ממשיים.)
+      - kind: check
+        text: >-
+          ב-(א) מציבים $1-i$: $(1-i)^2=-2i$ ו-$(1-i)^3=-2i(1-i)=-2-2i$. לכן
+          $(-2-2i)-4(-2i)+6(1-i)-4=-2-2i+8i+6-6i-4=0$. וב-2: $8-16+12-4=0$.
+      - kind: result
+        text: >-
+          (א) $z^3-4z^2+6z-4$. (ב) לא נכון.
+
+  - id: W-3.5-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-3.5-1, OBJ-3.5-3]
+    prompt: >-
+      (א) מצאו את כל המספרים המרוכבים $z$ שמקיימים $z^3=\bar z$.
+
+
+      (ב) סטודנטית אמרה: "למשוואה מסדר 3 יש לכל היותר 3 פתרונות, ולכן משהו בתשובה ל-(א) שגוי". מה עונים לה?
+    answer: >-
+      (א) חמישה פתרונות: 0, 1, מינוס 1, $i$ ו-$-i$. (ב) המשפט היסודי מדבר על פולינום ב-$z$, ו-$\bar z$ אינו פולינום
+      ב-$z$; המשוואה אינה משוואה פולינומית.
+    solution:
+      - kind: idea
+        text: >-
+          משווים קודם ערכים מוחלטים, ואחר כך משתמשים בכך שעל מעגל היחידה הצמוד הוא ההפכי: $z\bar z=|z|^2=1$.
+      - kind: computation
+        text: >-
+          (א) $|z^3|=|\bar z|$, כלומר $|z|^3=|z|$, ולכן $|z|\left(|z|^2-1\right)=0$: $|z|=0$ או $|z|=1$.
+      - kind: step
+        text: >-
+          אם $|z|=0$, אז $z=0$, והוא באמת פתרון. אם $|z|=1$, אז $\bar z=\frac{1}{z}$, והמשוואה היא $z^3=\frac{1}{z}$,
+          כלומר $z^4=1$: שורשי היחידה מסדר 4, 1, $i$, מינוס 1 ו-$-i$. כל אחד מהם באמת על מעגל היחידה.
+      - kind: step
+        text: >-
+          (ב) המשפט היסודי של האלגברה עוסק בפולינום ב-$z$, עם מקדמים קבועים. $\bar z$ אינו פולינום ב-$z$: אם כותבים
+          $z=x+yi$, הוא $x-yi$, ואין דרך לבנות אותו מ-$z$ בחיבור ובכפל. לכן המשוואה $z^3-\bar z=0$ אינה משוואה
+          פולינומית, והמשפט אינו מגביל את מספר הפתרונות שלה. אין סתירה.
+      - kind: check
+        text: >-
+          $i^3=-i=\bar i$, $(-i)^3=i=\overline{-i}$, $(-1)^3=-1=\overline{-1}$. ובצורה הקוטבית, עם $|z|=1$ ו-$z=\operatorname{cis}\theta$:
+          $\operatorname{cis}3\theta=\operatorname{cis}(-\theta)$, כלומר $4\theta=2\pi k$: שוב ארבע זוויות.
+      - kind: result
+        text: >-
+          (א) $z\in\{0,1,-1,i,-i\}$. (ב) אין סתירה: המשוואה אינה פולינומית ב-$z$.
+
+challenge:
+  - id: W-3.5-c1
+    stars: 1
+    objectives: [OBJ-3.5-3, OBJ-3.5-2]
+    prompt: >-
+      (א) פתרו את $(z+i)^4-(z-i)^4=0$. (רמז: הפרש ריבועים, פעמיים.)
+
+
+      (ב) יהי $n\ge2$ שלם. הראו שהפתרונות של $(z+i)^n-(z-i)^n=0$ הם $z=\cot\frac{r\pi}{n}$, $r=1,2,\dots,n-1$, כאשר
+      $\cot\alpha=\frac{\cos\alpha}{\sin\alpha}$. (רמז: חלקו ב-$(z-i)^n$.)
+
+
+      (ג) למה יש רק $n-1$ פתרונות ולא $n$?
+    answer: >-
+      (א) $z=0$, $z=1$, $z=-1$. (ב) $\frac{z+i}{z-i}$ הוא שורש יחידה $\omega\ne1$, ומכאן
+      $z=i\frac{\omega+1}{\omega-1}=\cot\frac{r\pi}{n}$. (ג) $z^n$ מצטמצם, והפולינום ממעלה $n-1$.
+    solution:
+      - kind: idea
+        text: >-
+          המשוואה אומרת ש-$\left(\frac{z+i}{z-i}\right)^n=1$: המנה היא שורש יחידה. פותרים את המשוואה הלינארית
+          $\frac{z+i}{z-i}=\omega$, ומפשטים בעזרת חצי הזווית, כמו בשיעור 3.4 (קוסינוס וסינוס דרך האקספוננט).
+      - kind: computation
+        text: >-
+          (א) $A^4-B^4=(A^2-B^2)(A^2+B^2)$ עם $A=z+i$, $B=z-i$. $A^2-B^2=(A-B)(A+B)=2i\cdot2z=4iz$, ו-
+          $A^2+B^2=(z^2+2iz-1)+(z^2-2iz-1)=2z^2-2$. לכן המשוואה היא $8iz(z^2-1)=0$: $z=0$ או $z=\pm1$.
+      - kind: computation
+        text: >-
+          (ב) $z=i$ אינו פתרון, כי שם $(2i)^n\ne0$. לכן מותר לחלק ב-$(z-i)^n$:
+          $\left(\frac{z+i}{z-i}\right)^n=1$, כלומר $\frac{z+i}{z-i}=\omega$ עם $\omega=\operatorname{cis}\frac{2\pi r}{n}$,
+          $r=0,\dots,n-1$. ב-$r=0$, $\omega=1$, והמשוואה $z+i=z-i$ סותרת. לכן $r=1,\dots,n-1$.
+      - kind: computation
+        text: >-
+          פותרים: $z+i=\omega(z-i)$, כלומר $z(\omega-1)=i(\omega+1)$, ו-$z=i\cdot\frac{\omega+1}{\omega-1}$. נסמן
+          $\varphi=\frac{2\pi r}{n}$ ונוציא $e^{i\varphi/2}$ מהמונה ומהמכנה:
+          $\omega+1=e^{i\varphi/2}\left(e^{i\varphi/2}+e^{-i\varphi/2}\right)=e^{i\varphi/2}\cdot2\cos\frac{\varphi}{2}$
+          ו-$\omega-1=e^{i\varphi/2}\cdot2i\sin\frac{\varphi}{2}$.
+      - kind: computation
+        text: >-
+          לכן $\frac{\omega+1}{\omega-1}=\frac{\cos(\varphi/2)}{i\sin(\varphi/2)}=-i\cot\frac{\varphi}{2}$, ו-
+          $z=i\cdot(-i)\cot\frac{\varphi}{2}=\cot\frac{\varphi}{2}=\cot\frac{r\pi}{n}$. המכנה אינו מתאפס, כי
+          $0<\frac{r\pi}{n}<\pi$. והערכים שונים זה מזה, כי $\cot$ יורד ממש בקטע $(0,\pi)$.
+      - kind: step
+        text: >-
+          (ג) לפי הבינום של ניוטון, $(z+c)^n=z^n+n\,c\,z^{n-1}+\dots$ (שני האיברים הראשונים). בפיתוח של $(z+i)^n$ ושל
+          $(z-i)^n$ האיבר $z^n$ מופיע בשניהם עם מקדם 1, ומצטמצם. המקדם של $z^{n-1}$ בהפרש הוא
+          $n\cdot i-n\cdot(-i)=2ni\ne0$. לכן זה פולינום ממעלה $n-1$, ולפי המשפט היסודי יש לו $n-1$ שורשים, עם ריבוי:
+          בדיוק אלה שמצאנו.
+      - kind: check
+        text: >-
+          ב-$n=4$: $\cot\frac{\pi}{4}=1$, $\cot\frac{\pi}{2}=0$, $\cot\frac{3\pi}{4}=-1$, כמו ב-(א). ב-$n=3$:
+          $(z+i)^3-(z-i)^3=6iz^2-2i$, ששורשיו $\pm\frac{1}{\sqrt3}$, כלומר $\cot\frac{\pi}{3}$ ו-$\cot\frac{2\pi}{3}$.
+      - kind: result
+        text: >-
+          (א) $0,\pm1$. (ב) $z=\cot\frac{r\pi}{n}$, $r=1,\dots,n-1$: כל הפתרונות ממשיים. (ג) הפולינום ממעלה $n-1$.
+    source:
+      name: 'G. G. Ross, Complex Numbers & ODEs, Problem Set 2 (Complex Numbers II), University of Oxford, Department of Physics'
+      year: 2008
+      problem: 'Problem 8'
+      url: https://users.physics.ox.ac.uk/~ross/complexproblems22005.pdf
+      verified: '2026-11-26'
+      adapted: true
+
+  - id: W-3.5-c2
+    stars: 2
+    objectives: [OBJ-3.5-2, OBJ-3.5-3]
+    prompt: >-
+      $P_1P_2\cdots P_n$ הוא מצולע משוכלל שמרכזו $O$, ו-$X$ נקודה על הקרן שיוצאת מ-$O$ דרך $P_1$, מעבר ל-$P_1$ (כלומר
+      $OX>OP_1$).
+
+
+      (א) הוכיחו ש-$XP_1\cdot XP_2\cdots XP_n+OP_1^{\,n}=OX^{\,n}$.
+
+
+      (ב) הוכיחו שאם רדיוס המעגל החוסם הוא 1, מכפלת המרחקים מ-$P_1$ לשאר $n-1$ הקודקודים היא $n$.
+    answer: >-
+      (א) עם $O=0$, $P_k=R\omega^{k-1}$ ו-$X=r>R$: $(r-P_1)(r-P_2)\cdots(r-P_n)=r^n-R^n$, ולכן מכפלת המרחקים היא
+      $r^n-R^n$. (ב) $(z-\omega)(z-\omega^2)\cdots(z-\omega^{n-1})=1+z+\dots+z^{n-1}$, וב-$z=1$ מתקבל $n$.
+    solution:
+      - kind: idea
+        text: >-
+          מניחים את המצולע במישור גאוס כך שהקודקודים הם $R$ כפול שורשי היחידה. אז הם בדיוק השורשים של $z^n-R^n$, והפירוק
+          של הפולינום הזה לגורמים לינאריים הופך מכפלה של מרחקים לערך מוחלט של פולינום אחד.
+      - kind: step
+        text: >-
+          (א) נבחר $O=0$, $R=OP_1$, $P_1=R$ על הציר הממשי החיובי, ו-$P_k=R\omega^{k-1}$ עם $\omega=\operatorname{cis}\frac{2\pi}{n}$.
+          אז $X$ הוא מספר ממשי $r>R$, ו-$XP_k=|r-R\omega^{k-1}|$.
+      - kind: theorem
+        text: >-
+          $n$ המספרים $R\omega^{k-1}$ הם $n$ השורשים של $z^n=R^n$ (שורש אחד, $R$, כפול שורשי היחידה). לפי המשפט היסודי,
+          הפולינום $z^n-R^n$, עם מקדם מוביל 1, מתפרק לגורמים לינאריים לפי השורשים שלו:
+          $z^n-R^n=(z-P_1)(z-P_2)\cdots(z-P_n)$.
+      - kind: computation
+        text: >-
+          מציבים $z=r$ ולוקחים ערך מוחלט; הערך המוחלט של מכפלה הוא מכפלת הערכים המוחלטים:
+          $XP_1\cdots XP_n=|r^n-R^n|=r^n-R^n$, כי $r>R>0$. כלומר $XP_1\cdots XP_n+R^n=r^n$, וזה $OP_1^{\,n}$ ו-$OX^{\,n}$.
+      - kind: computation
+        text: >-
+          (ב) עם $R=1$: $z^n-1=(z-1)(1+z+\dots+z^{n-1})$ (פתחו סוגריים). השורשים של הגורם השני הם $\omega^k$,
+          $k=1,\dots,n-1$: עבורם $(\omega^k)^n-1=0$ ו-$\omega^k-1\ne0$. זה פולינום ממעלה $n-1$ עם מקדם מוביל 1 ו-$n-1$
+          שורשים שונים, ולכן לפי המשפט היסודי $1+z+\dots+z^{n-1}=(z-\omega)(z-\omega^2)\cdots(z-\omega^{n-1})$.
+      - kind: computation
+        text: >-
+          מציבים $z=1$: אגף שמאל הוא $n$ (סכום של $n$ אחדות), ואגף ימין הוא $(1-\omega)\cdots(1-\omega^{n-1})$. בערך
+          מוחלט: $P_1P_2\cdot P_1P_3\cdots P_1P_n=n$.
+      - kind: check
+        text: >-
+          ריבוע, $n=4$, $R=1$, $X=2$: המרחקים מ-2 אל $1,i,-1,-i$ הם $1,\sqrt5,3,\sqrt5$, ומכפלתם 15, ואכן $15+1=2^4$.
+          ב-(ב) לריבוע: $|1-i|\cdot|1+1|\cdot|1+i|=\sqrt2\cdot2\cdot\sqrt2=4$. ולמשולש, $n=3$: הצלע של משולש שווה צלעות
+          החסום במעגל היחידה היא $\sqrt3$, ו-$\sqrt3\cdot\sqrt3=3$.
+      - kind: result
+        text: >-
+          (א) $XP_1\cdots XP_n=OX^{\,n}-OP_1^{\,n}$. (ב) מכפלת המרחקים מקודקוד אחד לכל האחרים היא $n$.
+    source:
+      name: 'The 15th William Lowell Putnam Mathematical Competition (1955), problem and solution in the Kalva Putnam archive'
+      year: 1955
+      problem: 'Problem A2'
+      url: https://prase.cz/kalva/putnam/psoln/psol552.html
+      verified: '2026-11-26'
+      adapted: true
