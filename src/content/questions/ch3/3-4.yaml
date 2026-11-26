@@ -52,7 +52,7 @@ questions:
         feedback: '$\frac{3\pi}{2}$ מצביע לאותו כיוון, אבל הערך הראשי משתמש ב-$\operatorname{Arg}\in(-\pi,\pi]$.'
         misconception: MC-c3-principal-arg-range
       - value: 1
-        feedback: '1 הוא החלק **הממשי**, $\ln|-ei|=\ln e$.'
+        feedback: '1 הוא החלק **הממשי**, $\ln|{-}ei|=\ln e$.'
         misconception: MC-c3-log-componentwise
 
   - id: Q-3.4-cos-exp
@@ -109,7 +109,7 @@ questions:
     correctFeedback: >-
       נכון, $\ln2$. $e^{x+iy}=e^x\operatorname{cis}y=2\operatorname{cis}\pi$, ולכן $e^x=2$ ו-$y=\pi+2\pi k$:
       $z=\ln2+i(\pi+2\pi k)$.
-    wrongFeedback: 'השוו ערכים מוחלטים: $|e^z|=e^{\operatorname{Re}z}$ ו-$|-2|=2$.'
+    wrongFeedback: 'השוו ערכים מוחלטים: $|e^z|=e^{\operatorname{Re}z}$ ו-$|{-}2|=2$.'
     commonWrong:
       - value: 3.141592653589793
         feedback: '$\pi$ הוא החלק **המדומה** של הפתרון הראשי. החלק הממשי נקבע מהערך המוחלט: $e^x=2$.'

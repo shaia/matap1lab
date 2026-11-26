@@ -85,7 +85,7 @@ questions:
         misconception: MC-c4-parity-by-exponents
       - text: '$|x|^3$'
         feedback: >-
-          $|-x|^3=|x|^3$: זוגית, למרות המעריך 3. בודקים את $f(-x)$, לא את המעריך.
+          $|{-}x|^3=|x|^3$: זוגית, למרות המעריך 3. בודקים את $f(-x)$, לא את המעריך.
         misconception: MC-c4-parity-by-exponents
 
   - id: Q-4.2-period-sin3x

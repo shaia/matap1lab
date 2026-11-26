@@ -273,7 +273,7 @@ questions:
     answer: 1.33333333333333
     tolerance: 0.001
     correctFeedback: >-
-      נכון. $\frac{|2\cdot2-1+2\cdot(-1)-5|}{\sqrt{4+1+4}}=\frac{|-4|}{3}=\frac43$.
+      נכון. $\frac{|2\cdot2-1+2\cdot(-1)-5|}{\sqrt{4+1+4}}=\frac{|{-}4|}{3}=\frac43$.
     wrongFeedback: >-
       $h=\frac{|ax_1+by_1+cz_1-d|}{\sqrt{a^2+b^2+c^2}}$, כש-$(x_1,y_1,z_1)$ היא הנקודה שמודדים ממנה.
     commonWrong:

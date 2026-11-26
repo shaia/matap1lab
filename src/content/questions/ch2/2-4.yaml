@@ -5,7 +5,9 @@
 #   OBJ-2.4-3  solids such as a ball, a cylinder and a cone in the fitting coordinates
 # Convention (CLAUDE.md): cylindrical (r, θ, z); spherical (r, θ, φ), θ from the positive z-axis, φ the azimuth.
 # The notes measure their angle φ from the xy-plane (a latitude, -π/2..π/2) and call the azimuth θ: translated here.
-# Every number recomputed in screens/tools/recompute-ch2.py.
+# Every number recomputed in screens/tools/recompute-ch2.py; the questions revised after the lesson's review
+# (theta-const, solid-cylinder, notes-translate, cone-translate, sphere-cyl, cyl-in-sph, under-cone,
+# cone-sphere-circle, two-ceilings) in screens/tools/lesson-2-4.py.
 chapter: 2
 questions:
   - id: Q-2.4-cyl-to-cart
@@ -57,17 +59,23 @@ questions:
     objectives: [OBJ-2.4-2]
     level: basic
     prompt: >-
-      מהו המשטח $\theta=\frac{\pi}{4}$ בקואורדינטות כדוריות (עם $r\ge0$)?
+      איזה משטח מתארת המשוואה $\theta=\frac{3\pi}{4}$ בקואורדינטות כדוריות?
     choices:
-      - text: 'חצי חרוט עליון סביב ציר $z$, בזווית $\frac{\pi}{4}$ מהציר'
+      - text: 'חרוט שהקודקוד שלו בראשית והוא פונה למטה, סביב ציר $z$ השלילי'
         correct: true
         feedback: >-
-          נכון. כל הנקודות שהקרן אליהן יוצרת זווית $\frac{\pi}{4}$ עם ציר $z$: $z=\sqrt{x^2+y^2}$.
-      - text: 'חצי מישור שמכיל את ציר $z$'
+          נכון. כל הקרניים מהראשית שנוטות $\frac{3\pi}{4}$ מציר $z$ החיובי. הנטייה גדולה מ-$\frac{\pi}{2}$, ולכן
+          $z=r\cos\theta<0$: החרוט מתחת למישור $xy$, והוא $z=-\sqrt{x^2+y^2}$.
+      - text: 'חרוט שהקודקוד שלו בראשית והוא פונה למעלה, סביב ציר $z$ החיובי'
         feedback: >-
-          זה $\varphi=\frac{\pi}{4}$: אזימוט קבוע. $\theta$ קבוע מסתובב סביב ציר $z$ ונותן חרוט.
+          חרוט שפונה למעלה הוא $\theta$ קטן מ-$\frac{\pi}{2}$, למשל $\theta=\frac{\pi}{4}$. כאן
+          $\cos\frac{3\pi}{4}<0$, ולכן כל הנקודות מתחת למישור $xy$.
+        misconception: MC-c2-angle-range
+      - text: 'חצי מישור שהשפה שלו היא ציר $z$'
+        feedback: >-
+          זה $\varphi=\frac{3\pi}{4}$: אזימוט קבוע. כש-$\theta$ קבוע האזימוט מקיף את ציר $z$, והקרן משרטטת חרוט.
         misconception: MC-c2-angle-const-plane
-      - text: 'ספירה ברדיוס $\frac{\pi}{4}$'
+      - text: 'ספירה ברדיוס $\frac{3\pi}{4}$'
         feedback: >-
           ספירה היא $r$ קבוע. $\theta$ היא זווית, ולא מרחק.
         misconception: MC-c2-polar-r-theta-roles
@@ -77,15 +85,15 @@ questions:
     objectives: [OBJ-2.4-3]
     level: basic
     prompt: >-
-      איך מתארים את הגליל המלא $x^2+y^2\le4$, $0\le z\le3$ בקואורדינטות גליליות?
+      איך מתארים את הגליל המלא $x^2+y^2\le9$, $1\le z\le5$ בקואורדינטות גליליות?
     choices:
-      - text: '$0\le r\le2$, $0\le\theta<2\pi$, $0\le z\le3$'
+      - text: '$0\le r\le3$, $0\le\theta<2\pi$, $1\le z\le5$'
         correct: true
-        feedback: 'נכון. בכל גובה עיגול ברדיוס 2 סביב ציר $z$.'
-      - text: '$0\le r\le4$, $0\le\theta<2\pi$, $0\le z\le3$'
-        feedback: '$x^2+y^2=r^2\le4$, ולכן $r\le2$.'
+        feedback: 'נכון. בכל גובה בין 1 ל-5 החתך הוא עיגול ברדיוס 3 סביב ציר $z$.'
+      - text: '$0\le r\le9$, $0\le\theta<2\pi$, $1\le z\le5$'
+        feedback: '$x^2+y^2=r^2\le9$, ולכן $r\le3$.'
         misconception: MC-c2-square-not-root
-      - text: '$0\le r\le2$, $0\le\theta\le\pi$, $0\le z\le3$'
+      - text: '$0\le r\le3$, $0\le\theta\le\pi$, $1\le z\le5$'
         feedback: 'זה חצי גליל בלבד, $y\ge0$. גליל מלא סביב ציר $z$ מכסה את כל הכיוונים, $0\le\theta<2\pi$.'
         misconception: MC-c2-theta-cyl-vs-sph
 
@@ -140,25 +148,25 @@ questions:
     qualitative: true
     level: mid
     prompt: >-
-      בסיכומי ההרצאות כתוב $x=\rho\cos\theta\cos\varphi$, $y=\rho\sin\theta\cos\varphi$, $z=\rho\sin\varphi$, עם
-      $-\frac{\pi}{2}\le\varphi\le\frac{\pi}{2}$ (זווית ממישור $xy$). איך מתרגמים לקואורדינטות של הקורס
-      $(r,\theta,\varphi)$, שבהן $\theta$ מציר $z$ ו-$\varphi$ האזימוט?
+      בספר שלא הכרתם כתוב על קואורדינטות כדוריות רק זה: $x=\rho\cos\theta\cos\varphi$,
+      $y=\rho\sin\theta\cos\varphi$, $z=\rho\sin\varphi$. מה אפשר להסיק על הזווית שמסומנת שם $\varphi$?
     choices:
-      - text: '$r=\rho$; ה-$\theta$ של הקורס שווה $\frac{\pi}{2}$ פחות ה-$\varphi$ של הסיכומים; ה-$\varphi$ של הקורס הוא ה-$\theta$ של הסיכומים'
+      - text: 'היא נמדדת ממישור $xy$ (זווית רוחב); הזווית של הקורס מציר $z$ שווה $\frac{\pi}{2}$ פחות הזווית הזו'
         correct: true
         feedback: >-
-          נכון. הזווית מציר $z$ והזווית ממישור $xy$ משלימות זו את זו ל-$\frac{\pi}{2}$, ולכן $\cos$ של האחת הוא $\sin$
-          של השנייה: $z=\rho\sin\varphi_{\text{notes}}=r\cos\theta$. האזימוט רק החליף שם.
-      - text: 'אותן נוסחאות בדיוק, רק עם $r$ במקום $\rho$'
+          נכון. מסתכלים על הנוסחה של $z$: יש בה סינוס, ולכן בזווית 0 הגובה הוא 0, כלומר הזווית נמדדת ממישור
+          $xy$. אם נסמן אותה $\beta$, אז $z=\rho\sin\beta=r\cos\theta$ עם $\theta=\frac{\pi}{2}-\beta$: שתי זוויות
+          שמשלימות זו את זו ל-$\frac{\pi}{2}$ מחליפות סינוס בקוסינוס. אלה הנוסחאות של סיכומי ההרצאות.
+      - text: 'היא נמדדת מציר $z$ החיובי; זו הזווית $\theta$ של הקורס, ורק האות שלה אחרת'
         feedback: >-
-          בסיכומים הזווית נמדדת ממישור $xy$; אצלנו מציר $z$. נקודה על ציר $z$ החיובי היא $\varphi=\frac{\pi}{2}$
-          אצלם ו-$\theta=0$ אצלנו.
+          אילו נמדדה מציר $z$, בזווית 0 הנקודה הייתה על הציר והגובה היה $\rho$: בנוסחה של $z$ היה קוסינוס. כאן
+          כתוב סינוס, ובזווית 0 הגובה הוא 0.
         misconception: MC-c2-spherical-convention
-      - text: 'מחליפים רק את האותיות: ה-$\theta$ של הקורס הוא ה-$\varphi$ של הסיכומים, וה-$\varphi$ של הקורס הוא ה-$\theta$ שלהם'
+      - text: 'היא האזימוט, כמו הזווית $\varphi$ של הקורס, כי היא מסומנת באותה אות'
         feedback: >-
-          החלפת האותיות לבדה אינה מספיקה: גם נקודת האפס של הזווית שונה. זווית רוחב 0 (קו המשווה) היא
-          $\theta=\frac{\pi}{2}$ אצלנו.
-        misconception: MC-c2-spherical-convention
+          האות אינה אומרת דבר. האזימוט אינו משפיע על הגובה, וכאן $z$ תלוי בזווית הזו. האזימוט של הספר הוא
+          הזווית שמסומנת שם $\theta$: היא מופיעה ב-$x$ עם קוסינוס וב-$y$ עם סינוס, כמו בקוטביות.
+        misconception: MC-c2-theta-cyl-vs-sph
 
   - id: Q-2.4-planes
     type: multi
@@ -193,22 +201,29 @@ questions:
     objectives: [OBJ-2.4-2, OBJ-2.4-1]
     level: mid
     prompt: >-
-      בסיכומים (עמ׳ 35) מתרגמים את $x^2+y^2-z^2=0$, $z\ge0$. מה המשוואה שלו בקואורדינטות כדוריות של הקורס, ומה
-      בגליליות?
+      נתון המשטח $x^2+y^2=3z^2$, $z\ge0$. מה המשוואה של המשטח הזה בקואורדינטות הכדוריות של הקורס, ומה המשוואה
+      שלו בקואורדינטות גליליות?
     choices:
-      - text: 'כדוריות: $\theta=\frac{\pi}{4}$; גליליות: $z=r$'
+      - text: 'כדוריות: $\theta=\frac{\pi}{3}$; גליליות: $r=\sqrt3\,z$'
         correct: true
         feedback: >-
-          נכון. $x^2+y^2=r^2\sin^2\theta$ ו-$z^2=r^2\cos^2\theta$, ולכן $\tan^2\theta=1$, ועם $z\ge0$:
-          $\theta=\frac{\pi}{4}$. בגליליות $x^2+y^2=r^2$, ולכן $r^2=z^2$, ועם $z\ge0$: $z=r$. (בסיכומים יוצא גם
-          $\varphi=\frac{\pi}{4}$, במקרה, כי $\frac{\pi}{2}-\frac{\pi}{4}=\frac{\pi}{4}$.)
-      - text: 'כדוריות: $r=\frac{\pi}{4}$; גליליות: $z=r$'
+          נכון. בכדוריות $x^2+y^2=r^2\sin^2\theta$ ו-$z^2=r^2\cos^2\theta$, ולכן $\tan^2\theta=3$, ועם $z\ge0$:
+          $\tan\theta=\sqrt3$, $\theta=\frac{\pi}{3}$. בגליליות $x^2+y^2=r^2$, ולכן $r^2=3z^2$, ועם $z\ge0$:
+          $r=\sqrt3\,z$. זה חרוט רחב שפונה למעלה: המרחק מהציר גדול פי $\sqrt3$ מהגובה.
+      - text: 'כדוריות: $\theta=\frac{\pi}{6}$; גליליות: $r=\sqrt3\,z$'
         feedback: >-
-          ב-$x^2+y^2=z^2$ אין מרחק מסוים מהראשית: הקרן הולכת לאינסוף. מה שקבוע הוא הזווית.
+          $\tan\theta$ הוא המרחק מהציר חלקי הגובה, $\frac{r\sin\theta}{r\cos\theta}$, וכאן הוא $\sqrt3$, לא
+          $\frac{1}{\sqrt3}$. $\frac{\pi}{6}$ היא הזווית שהדופן יוצרת עם מישור $xy$, לא עם ציר $z$.
+        misconception: MC-c2-spherical-convention
+      - text: 'כדוריות: $r=\sqrt3$; גליליות: $r=\sqrt3\,z$'
+        feedback: >-
+          $r=\sqrt3$ בכדוריות הוא ספירה. על המשטח הזה אין מרחק קבוע מהראשית: כל קרן שלו נמשכת בלי סוף. מה
+          שקבוע הוא הזווית מציר $z$.
         misconception: MC-c2-polar-r-theta-roles
-      - text: 'כדוריות: $\varphi=\frac{\pi}{4}$; גליליות: $\theta=\frac{\pi}{4}$'
+      - text: 'כדוריות: $\varphi=\frac{\pi}{3}$; גליליות: $\theta=\frac{\pi}{3}$'
         feedback: >-
-          אזימוט קבוע הוא חצי מישור. החרוט סימטרי סביב ציר $z$, ולכן הוא לא תלוי באזימוט בכלל.
+          אזימוט קבוע הוא חצי מישור. המשטח הזה נראה אותו דבר מכל צד של ציר $z$, ולכן האזימוט אינו מופיע
+          במשוואה שלו בכלל.
         misconception: MC-c2-angle-const-plane
 
   - id: Q-2.4-sphere-cyl
@@ -216,27 +231,58 @@ questions:
     objectives: [OBJ-2.4-2, OBJ-2.4-3]
     level: mid
     prompt: >-
-      כתבו את חצי הספירה העליון $x^2+y^2+z^2=9$, $z\ge0$, בקואורדינטות גליליות כ-$z$ כפונקציה של $r$. (השתמשו
-      במשתנה $r$)
-    answer: 'sqrt(9-r^2)'
-    answerTex: '$z=\sqrt{9-r^2},\quad 0\le r\le3$'
+      כתבו את חצי הספירה **התחתון**, $x^2+y^2+z^2=16$ עם $z\le0$, בקואורדינטות גליליות, כ-$z$ כפונקציה של $r$.
+      (השתמשו במשתנה $r$)
+    answer: '-sqrt(16-r^2)'
+    answerTex: '$z=-\sqrt{16-r^2},\quad 0\le r\le4$'
     variables: [r]
-    domain: [0, 2.8]
+    domain: [0, 3.8]
     correctFeedback: >-
-      נכון. $x^2+y^2=r^2$, ולכן $r^2+z^2=9$ ו-$z=\sqrt{9-r^2}$ (השורש החיובי, כי $z\ge0$).
+      נכון. $x^2+y^2=r^2$, ולכן $r^2+z^2=16$ ו-$z^2=16-r^2$. מאחר ש-$z\le0$ לוקחים את השורש השלילי. בדיקה:
+      מתחת לראשית ($r=0$) הגובה הוא מינוס 4, ובשפה ($r=4$) הוא 0.
     wrongFeedback: >-
-      החליפו את $x^2+y^2$ ב-$r^2$ ופתרו עבור $z$.
+      החליפו את $x^2+y^2$ ב-$r^2$, פתרו עבור $z$, ובחרו את הסימן לפי $z\le0$.
     commonWrong:
-      - expr: '3-r'
-        feedback: >-
-          $\sqrt{9-r^2}\ne3-r$: ב-$r=2$ השמאלי $\sqrt5$ והימני 1. $z=3-r$ הוא חרוט, לא ספירה.
-        misconception: MC-c2-sqrt-of-difference
-      - expr: '9-r^2'
-        feedback: 'זה $z^2$. צריך את השורש.'
-        misconception: MC-c2-square-not-root
-      - expr: '-sqrt(9-r^2)'
-        feedback: 'זה חצי הספירה **התחתון**. עם $z\ge0$ לוקחים את השורש החיובי.'
+      - expr: 'sqrt(16-r^2)'
+        feedback: 'זה חצי הספירה **העליון**. עם $z\le0$ לוקחים את השורש השלילי.'
         misconception: MC-c2-sqrt-half-curve
+      - expr: 'r-4'
+        feedback: >-
+          $\sqrt{16-r^2}$ אינו $4-r$: שורש של הפרש אינו הפרש של שורשים. ב-$r=2$ הגובה של הספירה הוא
+          $z=-\sqrt{12}\approx-3.46$, ואילו $2-4=-2$. המשטח $z=r-4$ הוא חרוט שהקודקוד שלו ב-$(0,0,-4)$.
+        misconception: MC-c2-sqrt-of-difference
+      - expr: 'r^2-16'
+        feedback: 'זה מינוס $z^2$. צריך להוציא שורש מ-$16-r^2$ ורק אז לשים את הסימן.'
+        misconception: MC-c2-square-not-root
+
+  - id: Q-2.4-cyl-in-sph
+    type: mc
+    objectives: [OBJ-2.4-2]
+    level: mid
+    prompt: >-
+      הגליל $x^2+y^2=25$ הוא משטח קואורדינטה בגליליות, אבל לא בכדוריות. מה המשוואה שלו בקואורדינטות הכדוריות
+      של הקורס?
+    choices:
+      - text: '$r=\dfrac{5}{\sin\theta}$'
+        correct: true
+        feedback: >-
+          נכון. המרחק מציר $z$ הוא $r\sin\theta$, ועל הגליל הוא שווה 5: $r\sin\theta=5$. בדיקה: על הרצפה
+          ($\theta=\frac{\pi}{2}$) המרחק מהראשית הוא 5, וככל שהקרן קרובה יותר לציר $z$ היא פוגעת בגליל רחוק
+          יותר.
+      - text: '$r=5$'
+        feedback: >-
+          $r=5$ בכדוריות הוא ספירה: מרחק 5 **מהראשית**. על הגליל המרחק **מציר $z$** הוא 5, והוא $r\sin\theta$.
+        misconception: MC-c2-cyl-r-vs-sph-r
+      - text: '$r=\dfrac{5}{\cos\theta}$'
+        feedback: >-
+          $r\cos\theta$ הוא הגובה $z$, ולכן זו המשוואה של המישור $z=5$. המרחק מציר $z$ הוא $r\sin\theta$, כי
+          $\theta$ נמדדת מהציר ולא ממישור $xy$.
+        misconception: MC-c2-spherical-convention
+      - text: '$r=5\sin\theta$'
+        feedback: >-
+          מ-$r\sin\theta=5$ מחלקים ב-$\sin\theta$, לא כופלים. בדיקה: ב-$\theta=\frac{\pi}{6}$ הנוסחה הזו נותנת
+          $r=2.5$, והמרחק מהציר הוא אז $2.5\cdot\frac12=1.25$, לא 5.
+        misconception: MC-c2-polar-r-theta-roles
 
   - id: Q-2.4-choose
     type: mc
@@ -259,49 +305,90 @@ questions:
         feedback: '$r^2$ בין 1 ל-4, ולכן $r$ בין 1 ל-2.'
         misconception: MC-c2-square-not-root
 
-  - id: Q-2.4-ice-cream
+  - id: Q-2.4-under-cone
     type: mc
     objectives: [OBJ-2.4-3, OBJ-2.4-2]
     level: exam
     prompt: >-
-      הגוף $E$ נמצא מעל החרוט $z=\sqrt{x^2+y^2}$ ובתוך הכדור $x^2+y^2+z^2\le4$ ("גביע גלידה"). איך מתארים אותו
-      בקואורדינטות כדוריות?
+      הגוף $E$ הוא כל הנקודות שבתוך הכדור $x^2+y^2+z^2\le36$, מעל מישור $xy$ ($z\ge0$) ו**מתחת** לחרוט
+      $\sqrt3\,z=\sqrt{x^2+y^2}$. איך מתארים אותו בקואורדינטות כדוריות?
     choices:
-      - text: '$0\le r\le2$, $0\le\theta\le\frac{\pi}{4}$, $0\le\varphi<2\pi$'
+      - text: '$0\le r\le6$, $\frac{\pi}{3}\le\theta\le\frac{\pi}{2}$, $0\le\varphi<2\pi$'
         correct: true
         feedback: >-
-          נכון. החרוט הוא $\theta=\frac{\pi}{4}$, ו"מעל" פירושו קרוב יותר לציר $z$: $\theta$ קטן. הכדור הוא $r\le2$, והגוף
-          סימטרי סביב ציר $z$.
-      - text: '$0\le r\le2$, $\frac{\pi}{4}\le\theta\le\frac{\pi}{2}$, $0\le\varphi<2\pi$'
+          נכון. על החרוט המרחק מהציר הוא $\sqrt3$ כפול הגובה: $r\sin\theta=\sqrt3\,r\cos\theta$, כלומר
+          $\tan\theta=\sqrt3$ ו-$\theta=\frac{\pi}{3}$. "מתחת לחרוט" פירושו רחוק יותר מציר $z$, $\theta$ גדול, ו"מעל
+          מישור $xy$" עוצר את $\theta$ ב-$\frac{\pi}{2}$. הכדור הוא $r\le6$, והגוף מקיף את ציר $z$ כולו.
+      - text: '$0\le r\le6$, $\frac{\pi}{6}\le\theta\le\frac{\pi}{2}$, $0\le\varphi<2\pi$'
         feedback: >-
-          זה החלק של חצי הכדור העליון **מתחת** לחרוט, בין החרוט למישור $xy$. בנקודה $(0,0,1)$, שמעל החרוט,
-          $\theta=0$.
+          $\tan\theta$ הוא המרחק מהציר חלקי הגובה, וכאן הוא $\sqrt3$, לא $\frac{1}{\sqrt3}$. $\frac{\pi}{6}$ היא
+          הזווית שהדופן של החרוט יוצרת עם מישור $xy$; $\theta$ נמדדת מציר $z$.
+        misconception: MC-c2-spherical-convention
+      - text: '$0\le r\le6$, $0\le\theta\le\frac{\pi}{3}$, $0\le\varphi<2\pi$'
+        feedback: >-
+          זה החלק של הכדור ש**מעל** החרוט, סביב ציר $z$. בדיקה: הנקודה $(1,0,0)$ נמצאת ב-$E$ (על הרצפה, מתחת
+          לחרוט), והזווית שלה היא $\theta=\frac{\pi}{2}$.
         misconception: MC-c2-cone-inside-outside
-      - text: '$0\le r\le4$, $0\le\theta\le\frac{\pi}{4}$, $0\le\varphi<2\pi$'
-        feedback: '$r^2\le4$ נותן $r\le2$.'
+      - text: '$0\le r\le36$, $\frac{\pi}{3}\le\theta\le\frac{\pi}{2}$, $0\le\varphi<2\pi$'
+        feedback: '$r^2\le36$ נותן $r\le6$.'
         misconception: MC-c2-square-not-root
-      - text: '$0\le r\le2$, $0\le\theta\le\frac{\pi}{4}$, $0\le\varphi\le\frac{\pi}{4}$'
-        feedback: >-
-          הגבלת $\varphi$ חותכת פרוסה צרה מהגביע. הגוף מסתובב סביב ציר $z$ כולו; רק $\theta$ מוגבל.
-        misconception: MC-c2-theta-cyl-vs-sph
 
-  - id: Q-2.4-cone-sphere-height
+  - id: Q-2.4-cone-sphere-circle
     type: numeric
     objectives: [OBJ-2.4-3, OBJ-2.4-1]
     level: exam
     prompt: >-
-      באיזה גובה $z$ החרוט $z=\sqrt{x^2+y^2}$ פוגש את הספירה $x^2+y^2+z^2=4$? (זו שפת הגביע מהשאלה הקודמת.)
-    answer: 1.4142135623730951
+      החרוט $\sqrt3\,z=\sqrt{x^2+y^2}$ פוגש את הספירה $x^2+y^2+z^2=36$ במעגל אופקי. מה **הרדיוס** של המעגל הזה?
+    answer: 5.196152422706632
     tolerance: 0.001
     correctFeedback: >-
-      נכון, $z=\sqrt2$. על החרוט $x^2+y^2=z^2$, ולכן $2z^2=4$. בכדוריות: $z=r\cos\theta=2\cos\frac{\pi}{4}=\sqrt2$.
+      נכון, $3\sqrt3\approx5.196$. על החרוט $x^2+y^2=3z^2$, ולכן בספירה $4z^2=36$ ו-$z=3$; הרדיוס של המעגל הוא
+      המרחק מציר $z$, $\sqrt{x^2+y^2}=\sqrt3\cdot3$. בכדוריות: החרוט הוא $\theta=\frac{\pi}{3}$, והרדיוס הוא
+      $r\sin\theta=6\sin\frac{\pi}{3}=3\sqrt3$.
     wrongFeedback: >-
-      הציבו $x^2+y^2=z^2$ במשוואת הספירה.
+      הציבו $x^2+y^2=3z^2$ במשוואת הספירה כדי למצוא את הגובה, ואז חשבו את המרחק מציר $z$. הרדיוס של מעגל אופקי
+      סביב ציר $z$ הוא המרחק של הנקודות שלו מהציר, לא מהראשית.
     commonWrong:
-      - value: 2
-        feedback: 'זה $z^2$. מ-$2z^2=4$ מקבלים $z^2=2$ ו-$z=\sqrt2$.'
-        misconception: MC-c2-square-not-root
-      - value: 1.7320508075688772
+      - value: 3
         feedback: >-
-          $\sqrt3=2\sin\frac{\pi}{3}$ או $2\cos\frac{\pi}{6}$: זווית שאינה זווית החרוט. החרוט $z=\sqrt{x^2+y^2}$ הוא
-          $\theta=\frac{\pi}{4}$, ו-$z=2\cos\frac{\pi}{4}$.
+          3 הוא **הגובה** של המעגל, $z=6\cos\frac{\pi}{3}$. הרדיוס שלו הוא המרחק מציר $z$:
+          $\sqrt{x^2+y^2}=\sqrt3\,z=3\sqrt3$.
+        misconception: MC-c2-polar-r-theta-roles
+      - value: 6
+        feedback: >-
+          6 הוא המרחק של נקודות המעגל **מהראשית**, הרדיוס של הספירה. הרדיוס של המעגל הוא המרחק שלהן **מציר
+          $z$**: $6\sin\frac{\pi}{3}=3\sqrt3$.
+        misconception: MC-c2-cyl-r-vs-sph-r
+      - value: 27
+        feedback: 'זה $x^2+y^2$, ריבוע הרדיוס. הרדיוס הוא $\sqrt{27}=3\sqrt3$.'
+        misconception: MC-c2-square-not-root
+
+  - id: Q-2.4-two-ceilings
+    type: mc
+    objectives: [OBJ-2.4-3]
+    level: exam
+    prompt: >-
+      הגוף $E$ הוא כל הנקודות שבתוך הכדור $x^2+y^2+z^2\le36$, מעל מישור $xy$ ($z\ge0$) ומתחת לחרוט
+      $\sqrt3\,z=\sqrt{x^2+y^2}$. איך מתארים אותו בקואורדינטות **גליליות**? (בכל התשובות $0\le\theta<2\pi$.)
+    choices:
+      - text: 'ל-$0\le r\le3\sqrt3$: $0\le z\le\frac{r}{\sqrt3}$; ל-$3\sqrt3\le r\le6$: $0\le z\le\sqrt{36-r^2}$'
+        correct: true
+        feedback: >-
+          נכון. בגליליות החרוט הוא $z=\frac{r}{\sqrt3}$ והספירה $z=\sqrt{36-r^2}$, ושניהם חוסמים את $z$ מלמעלה: שתי
+          תקרות, וקובעת הנמוכה. הן נפגשות כש-$\frac{r^2}{3}=36-r^2$, כלומר $r=3\sqrt3$. עד שם החרוט נמוך יותר
+          (ב-$r=3$: $\sqrt3\approx1.73$ מול $\sqrt{27}\approx5.2$), ומשם והלאה הספירה.
+      - text: 'ל-$0\le r\le6$: $0\le z\le\frac{r}{\sqrt3}$'
+        feedback: >-
+          זה מתעלם מהכדור. ב-$r=6$ התיאור הזה מרשה גובה $\frac{6}{\sqrt3}\approx3.46$, אבל נקודה במרחק 6
+          מהציר נמצאת בכדור רק בגובה 0. צריך להיות מתחת לשתי התקרות.
+        misconception: MC-c2-cone-inside-outside
+      - text: 'ל-$0\le r\le3\sqrt3$: $\frac{r}{\sqrt3}\le z\le\sqrt{36-r^2}$'
+        feedback: >-
+          זה החלק של הכדור ש**מעל** החרוט: כאן החרוט הוא רצפה. בגוף $E$ החרוט הוא תקרה, והרצפה היא מישור
+          $xy$.
+        misconception: MC-c2-cone-inside-outside
+      - text: 'ל-$0\le r\le3\sqrt3$: $0\le z\le\frac{r}{\sqrt3}$; ל-$3\sqrt3\le r\le6$: $0\le z\le6-r$'
+        feedback: >-
+          הפיצול נכון, אבל הספירה בגליליות היא $z=\sqrt{36-r^2}$, ולא $6-r$: שורש של הפרש אינו הפרש של שורשים.
+          ב-$r=3\sqrt3$ הגובה של הספירה הוא 3, ואילו $6-3\sqrt3\approx0.8$.
+        misconception: MC-c2-sqrt-of-difference

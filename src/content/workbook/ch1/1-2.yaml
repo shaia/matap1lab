@@ -259,7 +259,7 @@ practice:
           כש-$|\vec a|=|\vec b|$ או כשהווקטורים מאונכים (ואז שני ההיטלים 0).
       - kind: step
         text: >-
-          (ג) נכון. מציבים $-\vec b$ בנוסחה: $\frac{\vec a\cdot(-\vec b)}{|-\vec b|^2}(-\vec b)=\frac{-(\vec a\cdot\vec b)}{|\vec b|^2}\,(-\vec b)=\frac{\vec a\cdot\vec b}{|\vec b|^2}\,\vec b$:
+          (ג) נכון. מציבים $-\vec b$ בנוסחה: $\frac{\vec a\cdot(-\vec b)}{|{-}\vec b|^2}(-\vec b)=\frac{-(\vec a\cdot\vec b)}{|\vec b|^2}\,(-\vec b)=\frac{\vec a\cdot\vec b}{|\vec b|^2}\,\vec b$:
           שני המינוסים מבטלים זה את זה. הצל של $\vec a$ על ישר אינו תלוי בכיוון שבחרנו לאורך הישר. ההיטל **הסקלרי**
           דווקא הופך סימן.
       - kind: computation

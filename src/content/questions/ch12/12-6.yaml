@@ -87,7 +87,7 @@ questions:
     choices:
       - text: לא נכון
         correct: true
-        feedback: 'נכון. המקדם הוא $|-2|=2$.'
+        feedback: 'נכון. המקדם הוא $|{-}2|=2$.'
       - text: נכון
         feedback: >-
           לפי זה השטח של $D$ ($f\equiv1$) היה יוצא שלילי. באינטגרל כפול משתמשים בערך המוחלט של היעקוביאן.
@@ -116,7 +116,7 @@ questions:
     answer: 2.66666666666667
     tolerance: 0.001
     correctFeedback: >-
-      נכון. $D^*=[0,2]\times[0,2]$, $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|=|-2|=2$, ולכן $dx\,dy=\frac12du\,dv$.
+      נכון. $D^*=[0,2]\times[0,2]$, $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|=|{-}2|=2$, ולכן $dx\,dy=\frac12du\,dv$.
       $\frac12\int_0^2\!\int_0^2u^2\,dv\,du=\frac12\cdot\frac83\cdot2=\frac83$.
     wrongFeedback: >-
       במשתנים החדשים התחום מלבן והאינטגרנד $u^2$. המקדם הוא ההופכי של $\left|\frac{\partial(u,v)}{\partial(x,y)}\right|$.

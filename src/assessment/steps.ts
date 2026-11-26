@@ -4,7 +4,8 @@ import type { STEP_KINDS } from '~/lib/schemas';
 
 export const STEP_LABEL: Record<(typeof STEP_KINDS)[number], string> = {
   given: 'נתון',
-  goal: 'צריך להוכיח',
+  // most goals in this course are a computation, not a proof: the label must fit both
+  goal: 'מבקשים',
   idea: 'רעיון',
   definition: 'הגדרה',
   theorem: 'משפט',
