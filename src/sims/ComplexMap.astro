@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 3 figure: <Spread figure={ComplexMap} figureProps={{ mode, … }}>.
+ * mode: 'euler' (unit circle, e^(iθ) and e^(−iθ), cos and sin), 'exp' (z-plane to w-plane by w = e^z), 'log' (the values
+ * of log w in the z-plane). The props, step keys and task ids are documented at the top of ComplexMap.tsx.
+ */
+import ComplexMap, { type ComplexMapProps } from './ComplexMap';
+type Props = ComplexMapProps;
+---
+
+<ComplexMap client:visible {...Astro.props} />

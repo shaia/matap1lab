@@ -1,0 +1,27 @@
+- id: v-3-4-3b1b-dynamics
+  youtubeId: v0YEaeIClKY
+  title: e^(iπ) in 3.14 minutes, using dynamics | DE5
+  channel: 3Blue1Brown
+  lang: en
+  captions: [en, he]
+  start: 0
+  minutes: 4
+  why: >-
+    לפי הכותרת והתיאור: נוסחת אוילר ו-$e^{i\pi}=-1$ דרך תנועה, "ממהירויות למקומות": נקודה שזזה על מעגל היחידה. הסרטון
+    נשען על העובדה מהתיכון שהנגזרת של $e^t$ היא $e^t$; את הנגזרות נפגוש שוב בפרק 5. השוו לאיור 3.4א: איפה הנקודה
+    אחרי שעברה מרחק $\pi$ על המעגל?
+  verified: '2026-11-26'
+- id: v-3-4-brunton-log
+  youtubeId: CpKD9aYEdms
+  title: 'Complex Analysis L04: The Complex Logarithm, Log(z)'
+  channel: Steve Brunton
+  lang: en
+  captions: [en]
+  start: 0
+  end: 1392
+  minutes: 23
+  why: >-
+    לפי התיאור ורשימת הפרקים: הלוגריתם המרוכב כפעולה ההפוכה לאקספוננט, עם אינסוף ערכים, הנוסחה המלאה שלו, ו"גרם
+    המדרגות הלולייני" של כל הפתרונות. הקטע עד 23:12 (ההגדרה, השרטוט, הנוסחה המלאה, הסיכום והחתך לאורך הציר השלילי).
+    השוו את הנוסחה המלאה שם ל-$\log w=\ln|w|+i(\operatorname{Arg}w+2\pi k)$ של השיעור.
+  verified: '2026-11-26'

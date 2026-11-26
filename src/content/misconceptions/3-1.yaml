@@ -5,7 +5,7 @@
     בפתיחת סוגריים $i\cdot i=1$, או ש-$(c+di)(c-di)=c^2-d^2$.
   truth: >-
     $i^2=-1$, וזו כל ההגדרה של $i$. לכן $(2+3i)(1-4i)=2-8i+3i-12i^2=14-5i$, ו-$(c+di)(c-di)=c^2-d^2i^2=c^2+d^2$.
-  remedy: { lesson: '3.1', label: 'כפל מספרים מרוכבים' }
+  remedy: { lesson: '3.1', anchor: 'complex-multiply', label: 'כפל מספרים מרוכבים' }
 
 - id: MC-c3-im-includes-i
   title: חושבים שהחלק המדומה כולל את i
@@ -14,7 +14,7 @@
   truth: >-
     $\operatorname{Re}z$ ו-$\operatorname{Im}z$ הם שני מספרים **ממשיים**: $z=a+bi$ עם $\operatorname{Re}z=a$
     ו-$\operatorname{Im}z=b$. לכן $\operatorname{Im}(3-4i)=-4$, ו-$z=\operatorname{Re}z+i\operatorname{Im}z$.
-  remedy: { lesson: '3.1', label: 'החלק הממשי והחלק המדומה' }
+  remedy: { lesson: '3.1', anchor: 're-im', label: 'החלק הממשי והחלק המדומה' }
 
 - id: MC-c3-i-power-cycle
   title: חושבים שכל חזקה זוגית של i היא 1
@@ -23,26 +23,28 @@
   truth: >-
     החזקות של $i$ חוזרות במחזור של 4: $i,-1,-i,1$. $i^n$ נקבע לפי השארית של $n$ בחלוקה ב-4: $102=4\cdot25+2$,
     ולכן $i^{102}=i^2=-1$. רק חזקות שמתחלקות ב-4 נותנות 1.
-  remedy: { lesson: '3.1', label: 'החזקות של i' }
+  remedy: { lesson: '3.1', anchor: 'i-powers', label: 'החזקות של i' }
 
 - id: MC-c3-divide-componentwise
   title: כופלים או מחלקים מספרים מרוכבים רכיב ברכיב
   belief: >-
     $(a+bi)(c+di)=ac+bdi$, $\frac{a+bi}{c+di}=\frac{a}{c}+\frac{b}{d}i$, או $\operatorname{Re}\frac1z=\frac{1}{\operatorname{Re}z}$.
   truth: >-
-    חילוק אינו פועל רכיב ברכיב. כופלים את המונה ואת המכנה בצמוד של המכנה:
+    הכפל אינו פועל רכיב ברכיב: $(a+bi)(c+di)=(ac-bd)+(ad+bc)i$. גם החילוק אינו פועל כך: כופלים את המונה ואת המכנה
+    בצמוד של המכנה:
     $\frac{a+bi}{c+di}=\frac{(a+bi)(c-di)}{c^2+d^2}$. למשל $\frac{1}{x+iy}=\frac{x-iy}{x^2+y^2}$, ולכן
     $\operatorname{Re}\frac1z=\frac{x}{x^2+y^2}$.
-  remedy: { lesson: '3.1', label: 'חילוק בעזרת הצמוד' }
+  remedy: { lesson: '3.1', anchor: 'complex-divide', label: 'חילוק בעזרת הצמוד' }
 
 - id: MC-c3-conjugate-is-inverse
   title: חושבים שהצמוד הוא ההפכי
   belief: >-
     $\bar z=\frac1z$ לכל $z\ne0$, ולכן כפל בצמוד "מבטל" את המכנה.
   truth: >-
-    $z\bar z=|z|^2$, ולכן $\frac1z=\frac{\bar z}{|z|^2}$. הצמוד שווה להפכי רק כש-$|z|=1$. כופלים בצמוד כי
+    ל-$z=a+bi$: $z\bar z=a^2+b^2$, ולכן $\frac1z=\frac{\bar z}{z\bar z}=\frac{\bar z}{a^2+b^2}$. הצמוד שווה להפכי רק כש-$a^2+b^2=1$.
+    כופלים בצמוד כי
     $(c+di)(c-di)=c^2+d^2$ הוא מספר **ממשי**, ובו אפשר לחלק רכיב ברכיב.
-  remedy: { lesson: '3.1', label: 'למה כופלים בצמוד' }
+  remedy: { lesson: '3.1', anchor: 'why-conjugate', label: 'למה כופלים בצמוד' }
 
 - id: MC-c3-conjugate-root-any-coeffs
   title: חושבים ששורשים של כל משוואה ריבועית באים בזוגות צמודים
@@ -51,7 +53,7 @@
   truth: >-
     זה נכון כשהמקדמים **ממשיים**: אז $\overline{p(z)}=p(\bar z)$. עם מקדמים מרוכבים זה נכשל: ל-$z^2-iz=0$ השורשים
     $0$ ו-$i$, ו-$-i$ אינו שורש.
-  remedy: { lesson: '3.1', label: 'שורשים צמודים ומקדמים ממשיים' }
+  remedy: { lesson: '3.1', anchor: 'conjugate-roots', label: 'שורשים צמודים ומקדמים ממשיים' }
 
 - id: MC-c3-square-termwise
   title: מעלים בריבוע כל איבר בנפרד
@@ -59,7 +61,7 @@
     $(3-i)^2=9+i^2=8$, או $(z^2+2)^2=z^4+4$.
   truth: >-
     $(a+b)^2=a^2+2ab+b^2$ גם במרוכבים: $(3-i)^2=9-6i+i^2=8-6i$. האיבר האמצעי הוא בדיוק החלק המדומה.
-  remedy: { lesson: '3.1', label: 'פתיחת סוגריים במרוכבים' }
+  remedy: { lesson: '3.1', anchor: 'complex-square', label: 'פתיחת סוגריים במרוכבים' }
 
 - id: MC-c3-quadratic-forget-2a
   title: שוכחים לחלק ב-2a בנוסחת השורשים
@@ -68,4 +70,33 @@
   truth: >-
     $z=\frac{-b\pm\sqrt{\Delta}}{2a}$, ו-$\sqrt{-36}=6i$, ולכן $z=\frac{4\pm6i}{2}=2\pm3i$. בדיקה: סכום השורשים
     $-\frac{b}{a}=4$ ומכפלתם $\frac{c}{a}=13=2^2+3^2$.
-  remedy: { lesson: '3.1', label: 'משוואה ריבועית עם דיסקרימיננטה שלילית' }
+  remedy: { lesson: '3.1', anchor: 'quadratic-negative', label: 'משוואה ריבועית עם דיסקרימיננטה שלילית' }
+
+- id: MC-c3-sqrt-product-rule
+  title: מפעילים את כלל השורשים של התיכון על מספרים שליליים
+  belief: >-
+    $\sqrt{-4}\cdot\sqrt{-9}=\sqrt{(-4)(-9)}=\sqrt{36}=6$.
+  truth: >-
+    הכלל $\sqrt{x}\sqrt{y}=\sqrt{xy}$ מובטח רק כש-$x,y\ge0$, וכששני המספרים שליליים הוא נכשל. מוציאים קודם את $i$
+    מכל שורש: $\sqrt{-4}=2i$ ו-$\sqrt{-9}=3i$,
+    ולכן המכפלה היא $6i^2$, כלומר מינוס 6.
+  remedy: { lesson: '3.1', anchor: 'sqrt-negative', label: 'שורש של מספר שלילי' }
+
+# Added after the review of lesson 3.1 (2026-11-26): the slips behind two distractors that had no fitting tag.
+- id: MC-c3-re-im-swap
+  title: מחליפים בין החלק הממשי לחלק המדומה
+  belief: >-
+    $\operatorname{Im}(3-4i)=3$: החלק המדומה הוא המספר שעומד לבד.
+  truth: >-
+    ל-$z=a+bi$ החלק הממשי הוא $a$, המספר שעומד לבד, והחלק המדומה הוא $b$, המקדם של $i$. לכן
+    $\operatorname{Re}(3-4i)=3$ ו-$\operatorname{Im}(3-4i)$ הוא מינוס 4.
+  remedy: { lesson: '3.1', anchor: 're-im', label: 'החלק הממשי והחלק המדומה' }
+
+- id: MC-c3-conj-as-z
+  title: מתייחסים לצמוד כאילו היה המספר עצמו
+  belief: >-
+    $z\bar z=z^2$, או שבמשוואה $2z+i\bar z=3+3i$ אפשר לכנס את $z$ ואת $\bar z$ כאיברים דומים.
+  truth: >-
+    $\bar z=a-bi$ שונה מ-$z=a+bi$ בכל מספר שאינו ממשי. $z\bar z=a^2+b^2$, ואילו $z^2=(a^2-b^2)+2abi$; למשל ל-$z=i$:
+    $z\bar z=1$ ו-$z^2$ הוא מינוס 1. במשוואה עם $z$ ועם $\bar z$ כותבים $z=a+bi$ ומשווים חלק ממשי וחלק מדומה.
+  remedy: { lesson: '3.1', anchor: 'conj-equations', label: 'משוואה עם z ועם הצמוד' }

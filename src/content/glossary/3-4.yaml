@@ -22,3 +22,20 @@
     $\operatorname{Log}w=\ln|w|+i\operatorname{Arg}w$, הערך עם החלק המדומה ב-$(-\pi,\pi]$. החוק
     $\operatorname{Log}(zw)=\operatorname{Log}z+\operatorname{Log}w$ נכון רק עד כדי $2\pi ki$.
   lesson: '3.4'
+- id: complex-cos-sin
+  term: קוסינוס וסינוס של מספר מרוכב
+  en: cosine and sine of a complex number
+  symbol: '\cos z=\frac{e^{iz}+e^{-iz}}{2},\ \sin z=\frac{e^{iz}-e^{-iz}}{2i}'
+  definition: >-
+    לכל $z$ מרוכב מגדירים $\cos z=\frac{e^{iz}+e^{-iz}}{2}$ ו-$\sin z=\frac{e^{iz}-e^{-iz}}{2i}$. כש-$z$ ממשי אלה
+    הקוסינוס והסינוס הרגילים. מתקיים $\cos z+i\sin z=e^{iz}$ ו-$\cos^2z+\sin^2z=1$, אבל החסם 1 אינו נשמר:
+    $\cos i=\frac{e+e^{-1}}{2}\approx1.54$.
+  lesson: '3.4'
+- id: one-to-one
+  term: חד-חד-ערכית
+  en: one-to-one (injective)
+  symbol: 'f(a)=f(b)\Rightarrow a=b'
+  definition: >-
+    פונקציה שנותנת ערכים שונים לנקודות שונות: אם $f(a)=f(b)$ אז $a=b$. האקספוננט הממשי $e^x$ חד-חד-ערכי; האקספוננט
+    המרוכב אינו כזה, כי $e^{z+2\pi i}=e^z$.
+  lesson: '3.4'

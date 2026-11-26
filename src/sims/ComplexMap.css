@@ -1,0 +1,56 @@
+/* ComplexMap readout and toggles. Colours come from tokens.css only. */
+
+.cm-readout {
+  flex: 1 1 100%;
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+.cm-row {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+}
+.cm-lab {
+  color: var(--ink-2);
+}
+.cm-math {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+  color: var(--ink);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.cm-row.strong .cm-math {
+  font-weight: 600;
+}
+.cm-note {
+  color: var(--ink);
+  font-weight: 600;
+}
+.cm-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+  color: var(--ink);
+}
+.cm-list li {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+.cm-list li.principal {
+  font-weight: 700;
+}
+.cm-toggles {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

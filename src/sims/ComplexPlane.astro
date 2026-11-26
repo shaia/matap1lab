@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 3 figure: <Spread figure={ComplexPlane} figureProps={{ mode, … }}>.
+ * mode: add, multiply, polar, region, power, roots, quadratic (chapter 3), rotate, sum (physics use). The props, step
+ * keys and task ids are documented at the top of ComplexPlane.tsx.
+ */
+import ComplexPlane, { type ComplexPlaneProps } from './ComplexPlane';
+type Props = ComplexPlaneProps;
+---
+
+<ComplexPlane client:visible {...Astro.props} />

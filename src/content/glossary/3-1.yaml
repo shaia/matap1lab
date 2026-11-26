@@ -29,3 +29,26 @@
     ל-$z=a+bi$: $\bar z=a-bi$. מתקיים $z\bar z=a^2+b^2$ (ממשי), $\operatorname{Re}z=\frac{z+\bar z}{2}$,
     $\operatorname{Im}z=\frac{z-\bar z}{2i}$, ו-$\overline{zw}=\bar z\bar w$. כדי לחלק כופלים מונה ומכנה בצמוד של המכנה.
   lesson: '3.1'
+- id: purely-imaginary
+  term: מדומה טהור
+  en: purely imaginary
+  symbol: 'bi'
+  definition: >-
+    מספר מרוכב שהחלק הממשי שלו 0 והחלק המדומה שלו אינו 0, כמו $3i$ או $i$. הוא יושב על הציר האנכי.
+  lesson: '3.1'
+- id: discriminant
+  term: דיסקרימיננטה
+  en: discriminant
+  symbol: '\Delta=b^2-4ac'
+  definition: >-
+    של המשוואה $az^2+bz+c=0$: המספר $\Delta=b^2-4ac$, שמופיע מתחת לשורש בנוסחת השורשים. כשהמקדמים ממשיים: $\Delta>0$
+    נותן שני שורשים ממשיים, $\Delta=0$ שורש אחד, ו-$\Delta<0$ שני שורשים מרוכבים צמודים.
+  lesson: '3.1'
+- id: algebraic-form
+  term: הצורה האלגברית
+  en: algebraic (Cartesian) form
+  symbol: 'z=a+bi'
+  definition: >-
+    הכתיבה של מספר מרוכב כ-$a+bi$, עם החלק הממשי $a$ והחלק המדומה $b$. בצורה הזו מחברים, כופלים ומחלקים (בעזרת הצמוד).
+    בשיעור 3.3 תפגשו צורה נוספת, הצורה הקוטבית.
+  lesson: '3.1'

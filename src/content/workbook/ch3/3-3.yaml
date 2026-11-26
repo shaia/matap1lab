@@ -1,0 +1,517 @@
+# Workbook of lesson 3.3 — polar form and Euler's formula.
+# Objectives (src/course.ts):
+#   OBJ-3.3-1  write a complex number in polar form, with cis and with the complex exponential
+#   OBJ-3.3-2  multiply and divide in polar form; multiplication as rotation and stretching
+#   OBJ-3.3-3  de Moivre's formula for powers and for trigonometric identities
+# Convention: r = |z| > 0; Arg in (-π, π]; cis θ = cos θ + i sin θ = e^{iθ}.
+# Every number recomputed with sympy (scratchpad lesson33.py of the writing session).
+lesson: '3.3'
+practice:
+  - id: W-3.3-01
+    level: basic
+    objectives: [OBJ-3.3-1]
+    prompt: >-
+      כתבו כל מספר בצורה קוטבית, עם $\operatorname{cis}$ ועם הכתיב האקספוננציאלי, וארגומנט ראשי:
+
+      $$3i,\qquad -1-\sqrt3\,i,\qquad \sqrt6-\sqrt2\,i .$$
+
+      לפני החישוב אמרו באיזה רביע, או על איזה ציר, נמצא כל מספר.
+    answer: >-
+      $3i=3\operatorname{cis}\frac{\pi}{2}=3e^{i\pi/2}$; $-1-\sqrt3\,i=2\operatorname{cis}\left(-\frac{2\pi}{3}\right)=2e^{-2\pi i/3}$;
+      $\sqrt6-\sqrt2\,i=2\sqrt2\operatorname{cis}\left(-\frac{\pi}{6}\right)=2\sqrt2\,e^{-i\pi/6}$.
+    solution:
+      - kind: idea
+        text: >-
+          המרחק $r=\sqrt{a^2+b^2}$, אחר כך הרביע לפי הסימנים, ורק אז הזווית, מ-$\cos\theta=\frac{a}{r}$ ו-$\sin\theta=\frac{b}{r}$.
+          הארגומנט הראשי בקטע $(-\pi,\pi]$, ולכן לנקודות שמתחת לציר הממשי הזווית שלילית.
+      - kind: computation
+        text: >-
+          $3i$: על החלק החיובי של הציר המדומה, $r=3$ ו-$\theta=\frac{\pi}{2}$. אין מנה לחשב; קוראים את הזווית מהציר.
+      - kind: computation
+        text: >-
+          $-1-\sqrt3\,i$: $r=\sqrt{1+3}=2$. הרביע השלישי. $\cos\theta=-\frac12$ ו-$\sin\theta=-\frac{\sqrt3}{2}$; הזווית
+          החדה עם הציר היא $\frac{\pi}{3}$. בקטע $(-\pi,\pi]$ הכיוון הזה הוא $-\pi+\frac{\pi}{3}=-\frac{2\pi}{3}$.
+      - kind: computation
+        text: >-
+          $\sqrt6-\sqrt2\,i$: $r=\sqrt{6+2}=\sqrt8=2\sqrt2$. הרביע הרביעי. $\cos\theta=\frac{\sqrt6}{2\sqrt2}=\frac{\sqrt3}{2}$
+          (כי $\frac{\sqrt6}{\sqrt2}=\sqrt{\frac62}=\sqrt3$) ו-$\sin\theta=-\frac{\sqrt2}{2\sqrt2}=-\frac12$, ולכן $\theta=-\frac{\pi}{6}$.
+      - kind: check
+        text: >-
+          פותחים בחזרה: $2\operatorname{cis}\left(-\frac{2\pi}{3}\right)=2\left(-\frac12\right)+2\left(-\frac{\sqrt3}{2}\right)i=-1-\sqrt3\,i$,
+          ו-$2\sqrt2\left(\frac{\sqrt3}{2}-\frac12 i\right)=\sqrt6-\sqrt2\,i$.
+      - kind: result
+        text: >-
+          $3e^{i\pi/2}$, $2e^{-2\pi i/3}$ ו-$2\sqrt2\,e^{-i\pi/6}$.
+
+  - id: W-3.3-02
+    level: basic
+    objectives: [OBJ-3.3-1]
+    prompt: >-
+      כתבו בצורה אלגברית $a+bi$:
+
+      $$4\operatorname{cis}\frac{5\pi}{6},\qquad 2e^{-3\pi i/4},\qquad 7e^{i\pi},\qquad \sqrt2\,e^{7\pi i/4}.$$
+    answer: >-
+      $-2\sqrt3+2i$; $-\sqrt2-\sqrt2\,i$; $-7$; $1-i$.
+    solution:
+      - kind: idea
+        text: >-
+          $re^{i\theta}=r\cos\theta+ir\sin\theta$: הקוסינוס נותן את החלק הממשי והסינוס את המדומה. את הערכים קוראים
+          מהזווית החדה ומהרביע.
+      - kind: computation
+        text: >-
+          $4\operatorname{cis}\frac{5\pi}{6}$: הרביע השני, הזווית החדה $\frac{\pi}{6}$. $4\cdot\left(-\frac{\sqrt3}{2}\right)+4\cdot\frac12\,i=-2\sqrt3+2i$.
+      - kind: computation
+        text: >-
+          $2e^{-3\pi i/4}$: הזווית $-\frac{3\pi}{4}$ ברביע השלישי, הזווית החדה $\frac{\pi}{4}$, ושני הערכים שליליים:
+          $2\cdot\left(-\frac{\sqrt2}{2}\right)+2\cdot\left(-\frac{\sqrt2}{2}\right)i=-\sqrt2-\sqrt2\,i$.
+      - kind: computation
+        text: >-
+          $7e^{i\pi}=7(\cos\pi+i\sin\pi)=7\cdot(-1)+0$, כלומר מינוס 7. $\sqrt2\,e^{7\pi i/4}$: הזווית $\frac{7\pi}{4}$
+          ברביע הרביעי, ולכן $\sqrt2\left(\frac{\sqrt2}{2}-\frac{\sqrt2}{2}i\right)=1-i$.
+      - kind: check
+        text: >-
+          הערכים המוחלטים חוזרים: $|{-2\sqrt3+2i}|=\sqrt{12+4}=4$, $|{-\sqrt2-\sqrt2\,i}|=\sqrt{2+2}=2$, $|1-i|=\sqrt2$.
+      - kind: result
+        text: >-
+          $-2\sqrt3+2i$, $-\sqrt2-\sqrt2\,i$, $-7$, $1-i$.
+
+  - id: W-3.3-03
+    level: basic
+    objectives: [OBJ-3.3-2]
+    prompt: >-
+      נתונים $z=6e^{i\pi/4}$ ו-$w=2e^{i\pi/12}$. חשבו בצורה קוטבית, ואחר כך בצורה אלגברית:
+
+      (א) $zw$
+
+      (ב) $\frac{z}{w}$
+
+      (ג) $\bar z$ ו-$\frac{1}{z}$ (בצורה קוטבית בלבד)
+    answer: >-
+      (א) $12e^{i\pi/3}=6+6\sqrt3\,i$. (ב) $3e^{i\pi/6}=\frac{3\sqrt3}{2}+\frac32 i$. (ג) $\bar z=6e^{-i\pi/4}$,
+      $\frac1z=\frac16e^{-i\pi/4}$.
+    solution:
+      - kind: idea
+        text: >-
+          בכפל כופלים את הערכים המוחלטים ומחברים זוויות; בחילוק מחלקים ומחסירים. הצמוד הופך את סימן הזווית, וההפכי
+          הופך גם את הערך המוחלט.
+      - kind: computation
+        text: >-
+          (א) $zw=6\cdot2\,e^{i(\pi/4+\pi/12)}=12e^{i\pi/3}$, כי $\frac{\pi}{4}+\frac{\pi}{12}=\frac{3\pi+\pi}{12}=\frac{\pi}{3}$.
+          בצורה אלגברית: $12\cdot\frac12+12\cdot\frac{\sqrt3}{2}i=6+6\sqrt3\,i$.
+      - kind: computation
+        text: >-
+          (ב) $\frac zw=\frac62e^{i(\pi/4-\pi/12)}=3e^{i\pi/6}$, כי $\frac{3\pi-\pi}{12}=\frac{\pi}{6}$. בצורה אלגברית:
+          $\frac{3\sqrt3}{2}+\frac32 i$.
+      - kind: computation
+        text: >-
+          (ג) $\bar z=6e^{-i\pi/4}$: אותו מרחק, זווית נגדית. $\frac1z=\frac{1}{6e^{i\pi/4}}=\frac16e^{-i\pi/4}$: גם הזווית
+          נגדית, וגם הערך המוחלט הופכי.
+      - kind: check
+        text: >-
+          $\frac zw\cdot w$ צריך להחזיר את $z$: $3\cdot2\,e^{i(\pi/6+\pi/12)}=6e^{i\pi/4}$. ו-$z\cdot\frac1z=6\cdot\frac16e^{0}=1$.
+      - kind: result
+        text: >-
+          $zw=12e^{i\pi/3}=6+6\sqrt3\,i$, $\frac zw=3e^{i\pi/6}$, $\bar z=6e^{-i\pi/4}$, $\frac1z=\frac16e^{-i\pi/4}$.
+
+  - id: W-3.3-04
+    level: mid
+    qualitative: true
+    objectives: [OBJ-3.3-1, OBJ-3.3-2]
+    prompt: >-
+      בכל סעיף כתוב חלק מפתרון של סטודנט. מצאו את הטעות, הסבירו אותה ותקנו.
+
+      (א) "$\arctan\frac{-1}{-1}=\arctan1=\frac{\pi}{4}$, ולכן $-1-i=\sqrt2\operatorname{cis}\frac{\pi}{4}$."
+
+      (ב) "$\operatorname{cis}\frac{\pi}{3}\cdot\operatorname{cis}\frac{\pi}{6}=\operatorname{cis}\frac{\pi^2}{18}$."
+
+      (ג) "כפל ב-$2i$ מסובב ברבע סיבוב, ולכן התמונה של $1+i$ היא $-1+i$."
+
+      (ד) "תמיד $\operatorname{Arg}(z^2)=2\operatorname{Arg}z$."
+    answer: >-
+      (א) הרביע השלישי: $-1-i=\sqrt2\operatorname{cis}\left(-\frac{3\pi}{4}\right)$. (ב) מחברים זוויות:
+      $\operatorname{cis}\frac{\pi}{2}=i$. (ג) גם מתיחה פי 2: התמונה $-2+2i$. (ד) לא תמיד; למשל $z=-1+i$:
+      $\operatorname{Arg}(z^2)=-\frac{\pi}{2}$ ולא $\frac{3\pi}{2}$.
+    solution:
+      - kind: idea
+        text: >-
+          ארבע הטעויות הן ארבעה כללים של השיעור: הרביע נקבע לפני $\arctan$; בכפל הזוויות מתחברות; כפל מסובב **ומותח**
+          לפי הערך המוחלט; וסכום ארגומנטים ראשיים אינו תמיד ראשי.
+      - kind: step
+        text: >-
+          (א) $\frac{-1}{-1}=1$ היא גם המנה של $1+i$, ו-$\arctan$ מחזיר את הזווית של $1+i$. הצבה חזרה מגלה זאת:
+          $\sqrt2\operatorname{cis}\frac{\pi}{4}=1+i$. הנקודה ברביע השלישי, הזווית החדה $\frac{\pi}{4}$, ובקטע
+          $(-\pi,\pi]$: $\theta=-\pi+\frac{\pi}{4}=-\frac{3\pi}{4}$.
+      - kind: step
+        text: >-
+          (ב) הזוויות מתחברות, לא נכפלות: $\operatorname{cis}\left(\frac{\pi}{3}+\frac{\pi}{6}\right)=\operatorname{cis}\frac{\pi}{2}=i$.
+          הסיבה: נוסחאות הסכום, $\cos\alpha\cos\beta-\sin\alpha\sin\beta=\cos(\alpha+\beta)$.
+      - kind: step
+        text: >-
+          (ג) $2i=2\operatorname{cis}\frac{\pi}{2}$: רבע סיבוב **וגם** מתיחה פי 2. $2i(1+i)=2i+2i^2=-2+2i$. רק כפל במספר
+          שהערך המוחלט שלו 1, כמו $i$, הוא סיבוב טהור.
+      - kind: step
+        text: >-
+          (ד) $2\operatorname{Arg}z$ הוא ארגומנט של $z^2$, אבל יכול לצאת מהקטע $(-\pi,\pi]$. ב-$z=-1+i$:
+          $\operatorname{Arg}z=\frac{3\pi}{4}$, ו-$2\cdot\frac{3\pi}{4}=\frac{3\pi}{2}$. אבל $z^2=1-2i+i^2=-2i$, שהארגומנט
+          הראשי שלו $-\frac{\pi}{2}$, כלומר $\frac{3\pi}{2}-2\pi$.
+      - kind: check
+        text: >-
+          (א) $\sqrt2\left(\cos\left(-\frac{3\pi}{4}\right)+i\sin\left(-\frac{3\pi}{4}\right)\right)=\sqrt2\left(-\frac{\sqrt2}{2}-\frac{\sqrt2}{2}i\right)=-1-i$.
+          (ג) $|{-2+2i}|=2\sqrt2=|2i|\cdot|1+i|$.
+      - kind: result
+        text: >-
+          (א) $\sqrt2\operatorname{cis}\left(-\frac{3\pi}{4}\right)$; (ב) $i$; (ג) $-2+2i$; (ד) הטענה שגויה, ונכון רק
+          ש-$2\operatorname{Arg}z$ הוא **ארגומנט** של $z^2$.
+
+  - id: W-3.3-05
+    level: mid
+    objectives: [OBJ-3.3-2]
+    prompt: >-
+      (א) כפלו את $x+iy$ ב-$\operatorname{cis}\alpha$, וכתבו את הנקודה שמתקבלת מ-$(x,y)$ בסיבוב בזווית $\alpha$ סביב
+      הראשית.
+
+      (ב) סובבו את הנקודה $(2,-1)$ בזווית $\frac{2\pi}{3}$ נגד כיוון השעון סביב הראשית.
+
+      (ג) משושה משוכלל שמרכזו בראשית, ואחד מקודקודיו הוא 2. מצאו את כל ששת הקודקודים בצורה אלגברית, בעזרת כפל
+      חוזר במספר אחד. מהו המספר?
+    answer: >-
+      (א) $(x\cos\alpha-y\sin\alpha,\ x\sin\alpha+y\cos\alpha)$. (ב) $\left(-1+\frac{\sqrt3}{2},\ \frac12+\sqrt3\right)$.
+      (ג) כפל ב-$e^{i\pi/3}$: $2$, $1+\sqrt3\,i$, $-1+\sqrt3\,i$, $-2$, $-1-\sqrt3\,i$, $1-\sqrt3\,i$.
+    solution:
+      - kind: idea
+        text: >-
+          סיבוב בזווית $\alpha$ סביב הראשית הוא כפל ב-$\operatorname{cis}\alpha$, מספר שהערך המוחלט שלו 1. במשושה משוכלל
+          שמרכזו בראשית כל הקודקודים באותו מרחק מהמרכז, וקודקודים סמוכים נבדלים בזווית $\frac{2\pi}{6}=\frac{\pi}{3}$.
+      - kind: computation
+        text: >-
+          (א) $(x+iy)(\cos\alpha+i\sin\alpha)=x\cos\alpha+ix\sin\alpha+iy\cos\alpha+i^2y\sin\alpha$. האיבר האחרון ממשי
+          ושלילי. מסדרים: $(x\cos\alpha-y\sin\alpha)+i(x\sin\alpha+y\cos\alpha)$.
+      - kind: computation
+        text: >-
+          (ב) $\cos\frac{2\pi}{3}=-\frac12$ ו-$\sin\frac{2\pi}{3}=\frac{\sqrt3}{2}$. עם $x=2$, $y=-1$: הרכיב הראשון
+          $2\cdot\left(-\frac12\right)-(-1)\cdot\frac{\sqrt3}{2}=-1+\frac{\sqrt3}{2}\approx-0.13$, והשני
+          $2\cdot\frac{\sqrt3}{2}+(-1)\cdot\left(-\frac12\right)=\sqrt3+\frac12\approx2.23$.
+      - kind: computation
+        text: >-
+          (ג) מכפילים שוב ושוב ב-$e^{i\pi/3}=\frac12+\frac{\sqrt3}{2}i$. הקודקודים הם $2e^{ik\pi/3}$, $k=0,\dots,5$:
+          $2$, $1+\sqrt3\,i$, $-1+\sqrt3\,i$, $-2$, $-1-\sqrt3\,i$, $1-\sqrt3\,i$. הכפל השישי מחזיר ל-2, כי
+          $e^{2\pi i}=1$.
+      - kind: check
+        text: >-
+          (ב) המרחק מהראשית נשמר: $|2-i|=\sqrt5$, ו-$\left(-1+\frac{\sqrt3}{2}\right)^2+\left(\frac12+\sqrt3\right)^2=\left(1-\sqrt3+\frac34\right)+\left(\frac14+\sqrt3+3\right)=5$.
+          (ג) כל הקודקודים במרחק 2: $|1+\sqrt3\,i|=\sqrt{1+3}=2$. והקודקודים הסמוכים $2$ ו-$1+\sqrt3\,i$ במרחק
+          $|{-1+\sqrt3\,i}|=2$ זה מזה, כמו במשושה משוכלל.
+      - kind: result
+        text: >-
+          הסיבוב: $(x\cos\alpha-y\sin\alpha,\ x\sin\alpha+y\cos\alpha)$; התמונה של $(2,-1)$ היא
+          $\left(-1+\frac{\sqrt3}{2},\ \frac12+\sqrt3\right)$; קודקודי המשושה הם $2e^{ik\pi/3}$.
+
+  - id: W-3.3-06
+    level: mid
+    objectives: [OBJ-3.3-3]
+    prompt: >-
+      (א) חשבו את $(\sqrt3-i)^7$ בצורה אלגברית, ומצאו את הארגומנט הראשי שלו.
+
+      (ב) חשבו את $(-1+i)^{-6}$.
+    answer: >-
+      (א) $-64\sqrt3+64i$, הארגומנט הראשי $\frac{5\pi}{6}$. (ב) $-\frac{i}{8}$.
+    solution:
+      - kind: idea
+        text: >-
+          דה-מואבר: $(re^{i\theta})^n=r^ne^{in\theta}$, גם ל-$n$ שלילי. אחרי הכפל ב-$n$ מורידים או מוסיפים כפולות של
+          $2\pi$ עד שהזווית בקטע $(-\pi,\pi]$.
+      - kind: computation
+        text: >-
+          (א) $\sqrt3-i$: $r=2$, הרביע הרביעי, $\theta=-\frac{\pi}{6}$. לכן $(\sqrt3-i)^7=2^7e^{-7\pi i/6}=128e^{-7\pi i/6}$.
+          $-\frac{7\pi}{6}<-\pi$, ולכן מוסיפים $2\pi$: $-\frac{7\pi}{6}+2\pi=\frac{5\pi}{6}$.
+      - kind: computation
+        text: >-
+          $128e^{5\pi i/6}=128\cdot\left(-\frac{\sqrt3}{2}\right)+128\cdot\frac12\,i=-64\sqrt3+64i$.
+      - kind: computation
+        text: >-
+          (ב) $-1+i=\sqrt2\,e^{3\pi i/4}$. לכן $(-1+i)^{-6}=(\sqrt2)^{-6}e^{-18\pi i/4}=\frac18e^{-9\pi i/2}$. מוסיפים
+          $4\pi=\frac{8\pi}{2}$: $e^{-9\pi i/2}=e^{-i\pi/2}=-i$. התוצאה $-\frac{i}{8}$.
+      - kind: check
+        text: >-
+          (ב) דרך שנייה: $(-1+i)^2=1-2i+i^2=-2i$, ולכן $(-1+i)^6=(-2i)^3=-8i^3=8i$, ו-$\frac{1}{8i}=\frac{-i}{8}$ (כפל
+          מונה ומכנה ב-$-i$). (א) $|{-64\sqrt3+64i}|=64\sqrt{3+1}=128=2^7$.
+      - kind: result
+        text: >-
+          (א) $(\sqrt3-i)^7=-64\sqrt3+64i$, עם ארגומנט ראשי $\frac{5\pi}{6}$; (ב) $(-1+i)^{-6}=-\frac{i}{8}$.
+
+  - id: W-3.3-07
+    level: mid
+    qualitative: true
+    objectives: [OBJ-3.3-3, OBJ-3.3-1]
+    prompt: >-
+      (א) לאילו $n$ טבעיים המספר $(1+i)^n$ ממשי? לאילו הוא ממשי וחיובי? לאילו הוא מדומה טהור (חלקו הממשי 0)?
+
+      (ב) סטודנטית אומרת: "אם $z^n$ ממשי, אז גם $z$ ממשי." הפריכו בעזרת (א), והסבירו במילים מתי $z^n$ ממשי.
+    answer: >-
+      (א) ממשי כש-$n$ כפולה של 4; ממשי וחיובי כש-$n$ כפולה של 8; מדומה טהור כש-$n$ זוגי ואינו כפולה של 4. (ב) למשל
+      $(1+i)^4=-4$; $z^n$ ממשי בדיוק כש-$n\theta$ היא כפולה של $\pi$.
+    solution:
+      - kind: idea
+        text: >-
+          בצורה הקוטבית $(1+i)^n=2^{n/2}e^{in\pi/4}$. הערך המוחלט חיובי ואינו משפיע על הכיוון, ולכן הכול נקבע לפי
+          הזווית $\frac{n\pi}{4}$: מספר ממשי הוא כיוון 0 או $\pi$, ומדומה טהור הוא כיוון $\pm\frac{\pi}{2}$.
+      - kind: step
+        text: >-
+          (א) ממשי: $\frac{n\pi}{4}$ כפולה של $\pi$, כלומר $n$ כפולה של 4. ממשי וחיובי: $\frac{n\pi}{4}$ כפולה של
+          $2\pi$, כלומר $n$ כפולה של 8. מדומה טהור: $\frac{n\pi}{4}=\frac{\pi}{2}+k\pi$, כלומר $n=2+4k$: $n$ זוגי שאינו
+          כפולה של 4.
+      - kind: step
+        text: >-
+          (ב) $1+i$ אינו ממשי, אבל $(1+i)^4=4e^{i\pi}=-4$. באופן כללי, לכל $z=re^{i\theta}$ ש-$z\ne0$: $z^n$ ממשי בדיוק
+          כש-$n\theta$ היא כפולה של $\pi$, כלומר כש-$\theta=\frac{k\pi}{n}$ עם $k$ שלם. ב-$1+i$, למשל, $\theta=\frac{\pi}{4}$ ו-$n=4$. בתמונה:
+          אחרי $n$ סיבובים בזווית $\theta$ הנקודה נוחתת על הציר הממשי.
+      - kind: check
+        text: >-
+          הטבלה הראשונה: $(1+i)^2=2i$ (מדומה טהור), $(1+i)^4=(2i)^2=-4$ (ממשי שלילי), $(1+i)^8=16$ (ממשי חיובי),
+          $(1+i)^6=(2i)^3=-8i$ (מדומה טהור).
+      - kind: result
+        text: >-
+          $(1+i)^n$ ממשי כש-$n$ כפולה של 4, ממשי וחיובי כש-$n$ כפולה של 8, ומדומה טהור כש-$n$ זוגי ואינו כפולה של 4
+          ($n=2,6,10,\dots$); $z^n$ ממשי כש-$n\theta$ כפולה של $\pi$, גם כש-$z$ אינו ממשי.
+
+  - id: W-3.3-08
+    level: exam
+    objectives: [OBJ-3.3-3]
+    prompt: >-
+      (א) בעזרת $\cos3\theta=\cos^3\theta-3\cos\theta\sin^2\theta$ ו-$\sin3\theta=3\cos^2\theta\sin\theta-\sin^3\theta$
+      (מנוסחת דה-מואבר עם $n=3$), הראו שכאשר $\cos\theta\ne0$ ו-$\cos3\theta\ne0$,
+
+      $$\tan3\theta=\frac{3\tan\theta-\tan^3\theta}{1-3\tan^2\theta}.$$
+
+      (ב) בדקו את הנוסחה ב-$\theta=\frac{\pi}{12}$, כשנתון ש-$\tan\frac{\pi}{12}=2-\sqrt3$.
+
+      (ג) מה קורה בנוסחה ב-$\theta=\frac{\pi}{6}$, ולמה?
+    answer: >-
+      (א) מחלקים מונה ומכנה ב-$\cos^3\theta$. (ב) שני האגפים 1. (ג) המכנה מתאפס, כי $\tan\frac{\pi}{2}$ אינו מוגדר.
+    solution:
+      - kind: idea
+        text: >-
+          $\tan3\theta=\frac{\sin3\theta}{\cos3\theta}$. כדי שיופיע רק $\tan\theta=\frac{\sin\theta}{\cos\theta}$, מחלקים
+          את המונה ואת המכנה באותו ביטוי, $\cos^3\theta$: כל איבר הוא מכפלה של שלושה גורמים מתוך $\cos\theta$
+          ו-$\sin\theta$, ולכן כל איבר הופך לחזקה של $\tan\theta$.
+      - kind: computation
+        text: >-
+          (א) נסמן $t=\tan\theta$. במונה: $\frac{3\cos^2\theta\sin\theta}{\cos^3\theta}=3t$ ו-$\frac{\sin^3\theta}{\cos^3\theta}=t^3$.
+          במכנה: $\frac{\cos^3\theta}{\cos^3\theta}=1$ ו-$\frac{3\cos\theta\sin^2\theta}{\cos^3\theta}=3t^2$. לכן
+          $\tan3\theta=\frac{3t-t^3}{1-3t^2}$.
+      - kind: computation
+        text: >-
+          (ב) $3\theta=\frac{\pi}{4}$, ולכן אגף שמאל הוא 1. אגף ימין עם $t=2-\sqrt3$: $t^2=7-4\sqrt3$ ו-$t^3=t\cdot t^2=(2-\sqrt3)(7-4\sqrt3)=26-15\sqrt3$.
+          המונה: $3(2-\sqrt3)-(26-15\sqrt3)=-20+12\sqrt3$. המכנה: $1-3(7-4\sqrt3)=-20+12\sqrt3$. המנה 1.
+      - kind: step
+        text: >-
+          (ג) ב-$\theta=\frac{\pi}{6}$: $\tan^2\frac{\pi}{6}=\frac13$, והמכנה $1-3\cdot\frac13=0$. זה מתאים: $3\theta=\frac{\pi}{2}$,
+          שם $\cos3\theta=0$ והטנגנס אינו מוגדר. זה המקרה שהתנאי $\cos3\theta\ne0$ מוציא.
+      - kind: check
+        text: >-
+          עוד שתי זוויות נוחות. ב-$\theta=\frac{\pi}{3}$: $\tan\frac{\pi}{3}=\sqrt3$ ו-$(\sqrt3)^3=3\sqrt3$, ולכן הנוסחה
+          נותנת $\frac{3\sqrt3-3\sqrt3}{1-9}=0$, ואכן $\tan\pi=0$. ב-$\theta=\frac{\pi}{4}$: $\frac{3-1}{1-3}$ הוא מינוס 1,
+          ואכן $\tan\frac{3\pi}{4}$ הוא מינוס 1.
+      - kind: result
+        text: >-
+          $\tan3\theta=\frac{3\tan\theta-\tan^3\theta}{1-3\tan^2\theta}$, נכון ב-$\frac{\pi}{12}$; ב-$\frac{\pi}{6}$
+          המכנה מתאפס כי $\tan\frac{\pi}{2}$ אינו מוגדר.
+
+  - id: W-3.3-09
+    level: exam
+    objectives: [OBJ-3.3-2, OBJ-3.3-1]
+    prompt: >-
+      הנקודות $A=1+i$ ו-$B=3+2i$ הן שני קודקודים של משולש שווה צלעות $ABC$.
+
+      (א) הסבירו למה $C=A+(B-A)e^{i\pi/3}$ או $C=A+(B-A)e^{-i\pi/3}$.
+
+      (ב) מצאו את שתי האפשרויות ל-$C$ בצורה אלגברית.
+
+      (ג) מצאו את שטח המשולש.
+    answer: >-
+      (ב) $C=\left(2-\frac{\sqrt3}{2}\right)+\left(\frac32+\sqrt3\right)i$ או $C=\left(2+\frac{\sqrt3}{2}\right)+\left(\frac32-\sqrt3\right)i$.
+      (ג) $\frac{5\sqrt3}{4}$.
+    solution:
+      - kind: idea
+        text: >-
+          במשולש שווה צלעות הזווית שליד $A$ היא $\frac{\pi}{3}$ והצלעות $AB$ ו-$AC$ שוות. לכן הווקטור $C-A$ הוא הווקטור
+          $B-A$ מסובב ב-$\frac{\pi}{3}$, באחד משני הכיוונים: כפל ב-$e^{\pm i\pi/3}$, שהערך המוחלט שלו 1.
+      - kind: step
+        text: >-
+          (א) $C-A=(B-A)e^{\pm i\pi/3}$: אותו אורך כמו $B-A$ וזווית של $\frac{\pi}{3}$ ממנו. מוסיפים $A$ ומקבלים את שתי
+          הנוסחאות. סימן הפלוס נותן $C$ משמאל ל-$AB$ (המשולש נגד כיוון השעון), והמינוס מימין.
+      - kind: computation
+        text: >-
+          (ב) $B-A=2+i$ ו-$e^{i\pi/3}=\frac12+\frac{\sqrt3}{2}i$. המכפלה: $(2+i)\left(\frac12+\frac{\sqrt3}{2}i\right)=1+\sqrt3\,i+\frac12i+\frac{\sqrt3}{2}i^2=\left(1-\frac{\sqrt3}{2}\right)+\left(\sqrt3+\frac12\right)i$.
+          מוסיפים $A=1+i$: $C=\left(2-\frac{\sqrt3}{2}\right)+\left(\frac32+\sqrt3\right)i$.
+      - kind: computation
+        text: >-
+          עם $e^{-i\pi/3}=\frac12-\frac{\sqrt3}{2}i$: $(2+i)\left(\frac12-\frac{\sqrt3}{2}i\right)=\left(1+\frac{\sqrt3}{2}\right)+\left(\frac12-\sqrt3\right)i$,
+          ו-$C=\left(2+\frac{\sqrt3}{2}\right)+\left(\frac32-\sqrt3\right)i$.
+      - kind: computation
+        text: >-
+          (ג) אורך הצלע $|B-A|=\sqrt{4+1}=\sqrt5$. שטח משולש שווה צלעות עם צלע $a$ הוא $\frac{\sqrt3}{4}a^2$, כלומר
+          $\frac{\sqrt3}{4}\cdot5=\frac{5\sqrt3}{4}\approx2.17$.
+      - kind: check
+        text: >-
+          ב-$C$ הראשון: $C-B=\left(-1-\frac{\sqrt3}{2}\right)+\left(-\frac12+\sqrt3\right)i$, והריבוע של האורך שלו הוא
+          $\left(1+\sqrt3+\frac34\right)+\left(\frac14-\sqrt3+3\right)=5$. שלוש הצלעות באורך $\sqrt5$. אותו חישוב נותן 5
+          גם ל-$C$ השני.
+      - kind: result
+        text: >-
+          $C=\left(2-\frac{\sqrt3}{2}\right)+\left(\frac32+\sqrt3\right)i$ או $C=\left(2+\frac{\sqrt3}{2}\right)+\left(\frac32-\sqrt3\right)i$;
+          השטח $\frac{5\sqrt3}{4}$.
+
+  - id: W-3.3-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-3.3-3, OBJ-3.3-2]
+    prompt: >-
+      יהי $z=\frac{1+i}{2}$.
+
+      (א) כתבו את $z$ בצורה קוטבית. נכון או לא נכון: כל חזקה של $z$ קרובה לראשית יותר מהחזקה הקודמת. נמקו.
+
+      (ב) אילו מבין $z,z^2,\dots,z^8$ ממשיים? חשבו אותם.
+
+      (ג) מהו ה-$n$ הקטן ביותר שבו $|z^n|<\frac{1}{100}$? חשבו את $z^n$ הזה בצורה אלגברית.
+    answer: >-
+      (א) $z=\frac{\sqrt2}{2}e^{i\pi/4}$; נכון, כי $|z^{n+1}|=\frac{\sqrt2}{2}|z^n|<|z^n|$. (ב) $z^4=-\frac14$ ו-$z^8=\frac{1}{16}$.
+      (ג) $n=14$, $z^{14}=-\frac{i}{128}$.
+    solution:
+      - kind: idea
+        text: >-
+          כל כפל ב-$z$ מסובב ב-$\arg z$ ומכפיל את המרחק מהראשית ב-$|z|$. כש-$|z|<1$ המרחק קטן בכל צעד, והחזקות
+          נעות בספירלה פנימה (כמו באיור 3.3ב). הזווית קובעת מתי החזקה ממשית, והערך המוחלט קובע כמה היא קרובה לראשית.
+      - kind: computation
+        text: >-
+          (א) $|z|=\frac{|1+i|}{2}=\frac{\sqrt2}{2}\approx0.707$, והזווית של $1+i$ היא $\frac{\pi}{4}$: $z=\frac{\sqrt2}{2}e^{i\pi/4}$.
+          $|z^{n+1}|=|z|\cdot|z^n|$, ו-$|z|<1$, ולכן כל חזקה קרובה לראשית יותר מהקודמת. הטענה נכונה.
+      - kind: computation
+        text: >-
+          (ב) $z^n=\left(\frac{\sqrt2}{2}\right)^ne^{in\pi/4}$ ממשי כש-$\frac{n\pi}{4}$ כפולה של $\pi$: $n=4$ ו-$n=8$.
+          $\left(\frac{\sqrt2}{2}\right)^4=\frac14$ ו-$e^{i\pi}=-1$, ולכן $z^4=-\frac14$. $\left(\frac{\sqrt2}{2}\right)^8=\frac{1}{16}$
+          ו-$e^{2\pi i}=1$, ולכן $z^8=\frac1{16}$.
+      - kind: computation
+        text: >-
+          (ג) $|z^n|=\left(\frac{\sqrt2}{2}\right)^n=2^{-n/2}$. צריך $2^{-n/2}<\frac{1}{100}$, כלומר $2^{n/2}>100$. $2^6=64$
+          ו-$2^7=128$, ולכן צריך $\frac n2\ge7$, כלומר $n\ge14$ (ב-$n=13$: $2^{6.5}\approx90.5<100$).
+      - kind: computation
+        text: >-
+          $z^{14}=2^{-7}e^{14\pi i/4}=\frac{1}{128}e^{7\pi i/2}$. מורידים $4\pi$: $e^{7\pi i/2}=e^{-i\pi/2}=-i$. לכן
+          $z^{14}=-\frac{i}{128}$.
+      - kind: check
+        text: >-
+          $z^2=\frac{(1+i)^2}{4}=\frac{2i}{4}=\frac i2$, ולכן $z^4=\left(\frac i2\right)^2=-\frac14$ ו-$z^8=\frac{1}{16}$, כמו
+          בחישוב הקוטבי. ו-$z^{14}=z^8\cdot z^4\cdot z^2=\frac{1}{16}\cdot\left(-\frac14\right)\cdot\frac i2=-\frac{i}{128}$.
+      - kind: result
+        text: >-
+          $z=\frac{\sqrt2}{2}e^{i\pi/4}$; החזקות מתקרבות לראשית; $z^4=-\frac14$, $z^8=\frac1{16}$; $n=14$ ו-$z^{14}=-\frac{i}{128}$.
+
+challenge:
+  - id: W-3.3-c1
+    stars: 1
+    objectives: [OBJ-3.3-3]
+    prompt: >-
+      (א) מצאו את החלק הממשי ואת החלק המדומה של $(1+i)^{100}$.
+
+      (ב) נוסחת הבינום של ניוטון אומרת ש-$(a+b)^n=\sum_{k=0}^{n}\binom nk a^{n-k}b^k$. כאן
+      $\binom nk=\frac{n!}{k!\,(n-k)!}$ הוא המקדם הבינומי ("$n$ מעל $k$", מספר הדרכים לבחור $k$ מתוך $n$), והסימן
+      $\sum_{k=0}^{n}$ פירושו סכום של האיברים עבור $k=0,1,\dots,n$. למשל עם $n=3$ זו הנוסחה של $(a+b)^3$ מהשיעור.
+      היעזרו בה וב-(א) כדי לחשב את הסכום
+
+      $$\binom{100}{0}-\binom{100}{2}+\binom{100}{4}-\binom{100}{6}+\dots+\binom{100}{100}.$$
+
+      (ג) מהו הסכום $\binom{100}{1}-\binom{100}{3}+\binom{100}{5}-\dots-\binom{100}{99}$?
+    answer: >-
+      (א) $(1+i)^{100}=-2^{50}$: החלק הממשי $-2^{50}$ והמדומה 0. (ב) $-2^{50}$. (ג) 0.
+    solution:
+      - kind: idea
+        text: >-
+          את $(1+i)^{100}$ אפשר לחשב בשתי דרכים: בדה-מואבר, ובפיתוח הבינום. בפיתוח, החזקות של $i$ חוזרות במחזור
+          $1,i,-1,-i$, ולכן החלק הממשי הוא בדיוק הסכום המתחלף של המקדמים הבינומיים במקומות הזוגיים, והחלק המדומה
+          הוא הסכום המתחלף במקומות האי-זוגיים. משווים.
+      - kind: computation
+        text: >-
+          (א) $1+i=\sqrt2\,e^{i\pi/4}$, ולכן $(1+i)^{100}=(\sqrt2)^{100}e^{100\pi i/4}=2^{50}e^{25\pi i}$. $25\pi=\pi+12\cdot2\pi$,
+          ולכן $e^{25\pi i}=e^{i\pi}=-1$, ו-$(1+i)^{100}=-2^{50}$.
+      - kind: computation
+        text: >-
+          (ב) לפי הבינום עם $a=1$, $b=i$: $(1+i)^{100}=\sum_{k=0}^{100}\binom{100}{k}i^k$. ב-$k$ זוגי, $k=2m$, מתקבל
+          $i^{2m}=(-1)^m$: ממשי, עם סימנים מתחלפים $+,-,+,\dots$. ב-$k$ אי-זוגי, $k=2m+1$, מתקבל $i^{2m+1}=(-1)^m i$:
+          מדומה.
+      - kind: step
+        text: >-
+          לכן החלק הממשי של $(1+i)^{100}$ הוא $\binom{100}{0}-\binom{100}{2}+\binom{100}{4}-\dots+\binom{100}{100}$ (האיבר
+          האחרון עם $m=50$, זוגי, ולכן עם פלוס). לפי (א) הוא שווה ל-$-2^{50}$.
+      - kind: step
+        text: >-
+          (ג) החלק המדומה הוא $\binom{100}{1}-\binom{100}{3}+\dots-\binom{100}{99}$ (האיבר האחרון עם $m=49$, אי-זוגי, ולכן
+          עם מינוס). לפי (א) הוא 0.
+      - kind: check
+        text: >-
+          (א) בדרך אחרת: $(1+i)^2=2i$, ולכן $(1+i)^{100}=(2i)^{50}=2^{50}i^{50}=2^{50}\cdot(-1)$, כי $50=4\cdot12+2$.
+          ו-(ג) גם מסימטריה. ב-(ג) האיבר $\binom{100}{k}$, עם $k=2m+1$, בא עם הסימן $(-1)^m$. בן הזוג שלו הוא
+          $\binom{100}{100-k}$, ששווה לו ($\binom nk=\binom n{n-k}$: לבחור $k$ זה לבחור את ה-$n-k$ שנשארים). בן הזוג
+          נמצא במקום $100-k=2(49-m)+1$, ולכן הסימן שלו $(-1)^{49-m}$. המעריכים $m$ ו-$49-m$ נבדלים ב-$49-2m$, מספר
+          אי-זוגי, ולכן הסימנים הפוכים: כל איבר מתבטל עם בן הזוג שלו, והסכום 0. (למשל $\binom{100}{1}$ עם פלוס
+          ו-$\binom{100}{99}$ עם מינוס.) חישוב ישיר של שני הסכומים במחשב נותן $-2^{50}=-1125899906842624$ ו-0.
+      - kind: result
+        text: >-
+          $(1+i)^{100}=-2^{50}$; הסכום המתחלף של המקדמים הזוגיים הוא $-2^{50}$, ושל האי-זוגיים 0.
+    source:
+      name: 'Imperial College London, M1F Foundations of Analysis (K. Buzzard), Problem Sheet 4'
+      year: 2001
+      problem: 'Problem 1'
+      url: https://www.ma.imperial.ac.uk/~buzzard/maths/teaching/repository/M1F/sheets/2001/exsht4.pdf
+      verified: '2026-11-26'
+      adapted: true
+
+  - id: W-3.3-c2
+    stars: 1
+    objectives: [OBJ-3.3-2, OBJ-3.3-1]
+    prompt: >-
+      (א) כתבו את $\dfrac{1+i}{\sqrt3+i}$ פעם בצורה אלגברית ופעם בצורה קוטבית.
+
+      (ב) הסיקו ש-$\cos\frac{\pi}{12}=\frac{\sqrt6+\sqrt2}{4}$ ו-$\sin\frac{\pi}{12}=\frac{\sqrt6-\sqrt2}{4}$.
+
+      (ג) האם $\cos\frac{\pi}{12}$ רציונלי? נמקו (מותר להשתמש בכך ש-$\sqrt3$ אינו רציונלי).
+    answer: >-
+      (א) $\frac{(\sqrt3+1)+(\sqrt3-1)i}{4}=\frac{\sqrt2}{2}e^{i\pi/12}$. (ב) משווים חלקים ממשיים ומדומים. (ג) לא:
+      אחרת $\sqrt3=4\cos^2\frac{\pi}{12}-2$ היה רציונלי.
+    solution:
+      - kind: idea
+        text: >-
+          אותו מספר בשתי צורות. בצורה הקוטבית הזווית היא הפרש הזוויות, $\frac{\pi}{4}-\frac{\pi}{6}=\frac{\pi}{12}$; בצורה
+          האלגברית מקבלים מספרים מפורשים. כששני מספרים מרוכבים שווים, החלקים הממשיים שווים והחלקים המדומים שווים.
+      - kind: computation
+        text: >-
+          (א) בצורה אלגברית: כופלים מונה ומכנה בצמוד $\sqrt3-i$. המכנה $(\sqrt3+i)(\sqrt3-i)=3+1=4$. המונה
+          $(1+i)(\sqrt3-i)=\sqrt3-i+\sqrt3\,i-i^2=(\sqrt3+1)+(\sqrt3-1)i$.
+      - kind: computation
+        text: >-
+          בצורה קוטבית: $1+i=\sqrt2\,e^{i\pi/4}$ ו-$\sqrt3+i=2e^{i\pi/6}$, ולכן המנה היא $\frac{\sqrt2}{2}e^{i(\pi/4-\pi/6)}=\frac{\sqrt2}{2}e^{i\pi/12}$.
+      - kind: computation
+        text: >-
+          (ב) $\frac{\sqrt2}{2}\cos\frac{\pi}{12}=\frac{\sqrt3+1}{4}$, ולכן $\cos\frac{\pi}{12}=\frac{\sqrt3+1}{2\sqrt2}=\frac{(\sqrt3+1)\sqrt2}{4}=\frac{\sqrt6+\sqrt2}{4}$.
+          באותה דרך מהחלק המדומה: $\sin\frac{\pi}{12}=\frac{\sqrt3-1}{2\sqrt2}=\frac{\sqrt6-\sqrt2}{4}$.
+      - kind: step
+        text: >-
+          (ג) נסמן $q=\cos\frac{\pi}{12}$. $q^2=\frac{6+2\sqrt{12}+2}{16}=\frac{8+4\sqrt3}{16}=\frac{2+\sqrt3}{4}$, ולכן
+          $\sqrt3=4q^2-2$. אילו $q$ היה רציונלי, גם $4q^2-2$ היה רציונלי, כלומר $\sqrt3$ רציונלי, וזה לא נכון. לכן $q$
+          אינו רציונלי.
+      - kind: check
+        text: >-
+          $\frac{\sqrt6+\sqrt2}{4}\approx\frac{2.449+1.414}{4}\approx0.966$, ובמחשבון $\cos15^\circ\approx0.966$. וגם
+          $\cos^2+\sin^2=\frac{(8+4\sqrt3)+(8-4\sqrt3)}{16}=1$.
+      - kind: result
+        text: >-
+          $\frac{1+i}{\sqrt3+i}=\frac{(\sqrt3+1)+(\sqrt3-1)i}{4}=\frac{\sqrt2}{2}e^{i\pi/12}$, ומכאן
+          $\cos\frac{\pi}{12}=\frac{\sqrt6+\sqrt2}{4}$, $\sin\frac{\pi}{12}=\frac{\sqrt6-\sqrt2}{4}$; $\cos\frac{\pi}{12}$
+          אינו רציונלי.
+    source:
+      name: 'Imperial College London, M1F Foundations of Analysis (K. Buzzard), Problem Sheet 4'
+      year: 2001
+      problem: 'Problem 2'
+      url: https://www.ma.imperial.ac.uk/~buzzard/maths/teaching/repository/M1F/sheets/2001/exsht4.pdf
+      verified: '2026-11-26'
+      adapted: true

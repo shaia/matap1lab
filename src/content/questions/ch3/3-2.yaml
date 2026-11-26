@@ -38,6 +38,12 @@ questions:
     commonWrong:
       - value: 3
         feedback: '3 הוא החלק המדומה של $z_1-z_2=-2+3i$, האלכסון השני. הקודקוד מול $0$ הוא הסכום.'
+        misconception: MC-c1-diagonal-sum
+      - value: -3
+        feedback: 'מינוס 3 הוא החלק המדומה של $z_2-z_1=2-3i$, האלכסון השני בכיוון ההפוך. הקודקוד מול $0$ הוא הסכום.'
+        misconception: MC-c1-diagonal-sum
+      - value: 4
+        feedback: '4 הוא החלק **הממשי** של $z_1+z_2=4+i$. השאלה מבקשת את החלק המדומה, המספר שליד $i$.'
 
   - id: Q-3.2-modulus
     type: numeric
@@ -56,11 +62,32 @@ questions:
         feedback: '169 הוא $|z|^2$. צריך שורש.'
         misconception: MC-c3-modulus-no-root
 
+  - id: Q-3.2-modulus-squared
+    type: mc
+    objectives: [OBJ-3.2-2]
+    qualitative: true
+    level: basic
+    prompt: 'איזה מהביטויים שווה ל-$|z|^2$ לכל מספר מרוכב $z$?'
+    choices:
+      - text: '$z\bar z$'
+        correct: true
+        feedback: 'נכון. ל-$z=a+bi$: $(a+bi)(a-bi)=a^2-(bi)^2=a^2+b^2$, וזה $|z|^2$.'
+      - text: '$z^2$'
+        feedback: >-
+          $z^2$ אינו אפילו ממשי בדרך כלל: $(1+i)^2=2i$, ואילו $|1+i|^2=2$. ול-$z=i$: $i^2$ הוא מינוס 1, ו-$|i|^2=1$.
+          השוויון $|z|^2=z^2$ נכון רק למספרים ממשיים.
+        misconception: MC-c3-modulus-squared-is-z-squared
+      - text: '$(|\operatorname{Re}z|+|\operatorname{Im}z|)^2$'
+        feedback: >-
+          זה הריבוע של הדרך "לאורך הצירים". ל-$z=1+i$ הוא 4, ואילו $|1+i|^2=1+1=2$: הערך המוחלט הוא אורך היתר, לפי
+          פיתגורס.
+        misconception: MC-c3-modulus-components-sum
+
   - id: Q-3.2-arg-q3
     type: numeric
     objectives: [OBJ-3.2-2]
     level: basic
-    prompt: 'מצאו את $\operatorname{Arg}(-1-\sqrt3i)$ (בקטע $(-\pi,\pi]$).'
+    prompt: 'מצאו את $\operatorname{Arg}(-1-\sqrt3\,i)$ (בקטע $(-\pi,\pi]$).'
     answer: -2.0943951023931957
     tolerance: 0.001
     correctFeedback: >-
@@ -68,11 +95,16 @@ questions:
     wrongFeedback: 'שרטטו את הנקודה וקבעו את הרביע לפני שאתם מחשבים זווית.'
     commonWrong:
       - value: 1.0471975511965976
-        feedback: '$\arctan\frac{-\sqrt3}{-1}=\frac{\pi}{3}$ היא הזווית של $1+\sqrt3i$, ברביע הראשון. כאן מחסירים $\pi$.'
+        feedback: '$\arctan\frac{-\sqrt3}{-1}=\frac{\pi}{3}$ היא הזווית של $1+\sqrt3\,i$, ברביע הראשון. כאן מחסירים $\pi$.'
         misconception: MC-c3-arg-arctan
       - value: 4.1887902047863905
         feedback: '$\frac{4\pi}{3}$ מצביע לאותו כיוון, אבל אינו בקטע $(-\pi,\pi]$: מחסירים $2\pi$.'
         misconception: MC-c3-principal-arg-range
+      - value: -1.0471975511965976
+        feedback: >-
+          $-\frac{\pi}{3}$ היא הזווית של $1-\sqrt3\,i$, ברביע הרביעי: הסימן נכון (הנקודה מתחת לציר), אבל החץ פונה ימינה.
+          $-1-\sqrt3\,i$ פונה שמאלה ולמטה, ולכן הזווית בין $-\pi$ ל-$-\frac{\pi}{2}$: $\frac{\pi}{3}-\pi=-\frac{2\pi}{3}$.
+        misconception: MC-c3-arg-arctan
 
   - id: Q-3.2-circle-set
     type: mc
@@ -110,14 +142,16 @@ questions:
       - text: 'כי $|a+bi|=|a|+|b|$, ולכן הערך המוחלט חיבורי'
         feedback: '$|a+bi|=\sqrt{a^2+b^2}$, לא $|a|+|b|$. גם $|1+i|=\sqrt2$ מראה זאת.'
         misconception: MC-c3-modulus-components-sum
-      - text: 'כי ערך מוחלט של מרוכב יכול להיות שלילי'
-        feedback: 'ערך מוחלט הוא אורך, ואינו שלילי. הבעיה היא הכיוונים, לא הסימן.'
+      - text: 'כי הערך המוחלט חיבורי רק למספרים ממשיים חיוביים, ובמרוכבים אין לו שום כלל'
+        feedback: >-
+          גם במספרים ממשיים $|z+w|=|z|+|w|$ רק כשהם באותו סימן ($|3+(-1)|=2<4$), כלומר באותו כיוון על הישר. ובמרוכבים יש
+          כלל: $|z+w|\le|z|+|w|$, אי-שוויון המשולש.
         misconception: MC-c3-modulus-additive
 
   - id: Q-3.2-arg-axis
     type: numeric
     objectives: [OBJ-3.2-2]
-    level: mid
+    level: basic
     prompt: 'מהו $\operatorname{Arg}(-4)$?'
     answer: 3.141592653589793
     tolerance: 0.001
@@ -151,9 +185,11 @@ questions:
       - text: 'כי הצמוד הוא שיקוף דרך הציר המדומה, שמחליף $\theta$ ב-$\pi-\theta$'
         feedback: 'הצמוד $a-bi$ הוא שיקוף דרך הציר **הממשי**, שמחליף $\theta$ ב-$-\theta$.'
         misconception: MC-c3-conj-reflect-wrong-axis
-      - text: 'כי ל-$z$ ממשי חיובי $\operatorname{Arg}z=0$, ו-$-0\ne0$'
-        feedback: '$-0=0$: עבור ממשיים חיוביים השוויון מתקיים. הבעיה רק בממשיים שליליים.'
-        misconception: MC-c3-principal-arg-range
+      - text: 'כי $\bar z=-z$, ולכן הזווית של $\bar z$ היא הזווית של $z$ ועוד חצי סיבוב'
+        feedback: >-
+          $\bar z=-z$ רק למספרים מדומים טהורים. בכלל $\bar z$ הוא השיקוף דרך הציר הממשי, ו-$-z$ הוא חצי סיבוב. למשל
+          $z=1+i$: $\bar z=1-i$, ואילו $-z=-1-i$.
+        misconception: MC-c3-conj-reflect-wrong-axis
 
   - id: Q-3.2-ray
     type: mc
@@ -164,13 +200,12 @@ questions:
     choices:
       - text: 'הקרן מהראשית (בלי הראשית) בכיוון $1+i$'
         correct: true
-        feedback: 'נכון. כל $r\operatorname{cis}\frac{\pi}{4}$ עם $r>0$: הנקודות $(t,t)$ עם $t>0$.'
+        feedback: 'נכון. כל המספרים $t+ti$ עם $t>0$: הנקודות $(t,t)$ שברביע הראשון.'
       - text: 'הישר $y=x$ כולו'
         feedback: 'בחצי השני של הישר, $-1-i$ למשל, $\operatorname{Arg}=-\frac{3\pi}{4}$. ארגומנט קבוע הוא קרן.'
         misconception: MC-c3-arg-set-line
       - text: 'מעגל ברדיוס $\frac{\pi}{4}$'
         feedback: 'מעגל הוא תנאי על $|z|$. התנאי כאן על הכיוון, ו-$|z|$ חופשי.'
-        misconception: MC-c3-arg-set-line
 
   - id: Q-3.2-bisector
     type: mc
@@ -189,7 +224,6 @@ questions:
         misconception: MC-c3-set-center-sign
       - text: 'מעגל שמרכזו $1-i$'
         feedback: 'שוויון של שני מרחקים משתי נקודות הוא האנך האמצעי, ישר. מעגל הוא מרחק קבוע מנקודה אחת.'
-        misconception: MC-c3-set-center-sign
 
   - id: Q-3.2-max-modulus
     type: numeric
@@ -223,11 +257,12 @@ questions:
       - text: '$1+i$'
         correct: true
         feedback: 'נכון. $|1+i|=\sqrt2$ ו-$\operatorname{Arg}=\frac{\pi}{4}$.'
-      - text: '$\sqrt2+\sqrt2i$'
+      - text: '$\sqrt2+\sqrt2\,i$'
         correct: true
         feedback: 'נכון. $|z|=\sqrt{2+2}=2$ ו-$\operatorname{Arg}=\frac{\pi}{4}$.'
       - text: '$1$'
         feedback: '$|1|=1$, והתנאי $1<|z|$ חזק: המעגל הפנימי אינו בקבוצה.'
+        misconception: MC-c3-strict-boundary
       - text: '$-1+i$'
         feedback: '$|z|=\sqrt2$, אבל $\operatorname{Arg}(-1+i)=\frac{3\pi}{4}$, ברביע השני. ($\arctan(-1)=-\frac{\pi}{4}$ טועה ברביע.)'
         misconception: MC-c3-arg-arctan

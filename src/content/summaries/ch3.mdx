@@ -1,0 +1,389 @@
+---
+chapter: 3
+title: 'סיכום פרק 3: מספרים מרוכבים'
+---
+
+## הרעיון הגדול
+
+למשוואה $x^2+1=0$ אין פתרון ממשי, ולכן מוסיפים מספר חדש, $i$, עם כלל אחד בלבד: $i^2=-1$. כל השאר נובע מהכלל הזה ומהדרישה שחוקי החשבון הרגילים ימשיכו לפעול. מחברים וכופלים $a+bi$ כמו ביטוי אלגברי, ומחליפים כל $i^2$ במינוס 1; כדי לחלק הופכים את המכנה לממשי בעזרת **הצמוד**, כי $z\bar z=a^2+b^2$ הוא מספר ממשי. ומשוואה אחת בין מספרים מרוכבים היא תמיד שתי משוואות ממשיות: אחת לחלקים הממשיים ואחת לחלקים המדומים. כך כל משוואה ריבועית עם מקדמים ממשיים נעשית פתירה, והשורשים הלא-ממשיים שלה באים בזוג צמוד; משוואות עם מקדמים מרוכבים מגיעות בשיעור 3.5.
+
+הצעד השני הוא לצייר. המספר $a+bi$ הוא הנקודה $(a,b)$ של מישור גאוס, והחץ מהראשית אליה. ככה לכל מספר יש **אורך**, $|z|$, ו**כיוון**, הארגומנט: בדיוק הקואורדינטות הקוטביות של פרק 2. בשפה הזו חיבור הוא חיבור וקטורים, $|z-a|$ הוא מרחק, ותנאי על $z$ הוא צורה (מעגל, ישר, קרן, גזרה). והגילוי המרכזי של הפרק: **כפל הוא סיבוב ומתיחה**. בכפל האורכים נכפלים והזוויות מתחברות, כמו מעריכים בחוק החזקות, ולכן כותבים $re^{i\theta}$. מכאן חזקה היא סיבוב חוזר (דה-מואבר), האקספוננט $e^{x+iy}$ מותח לפי $x$ ומסובב לפי $y$, והמחיר של כל זה הוא שזווית נקבעת רק עד כדי סיבוב שלם. המחיר הזה הוא גם המקור של התופעות החדשות: לאקספוננט יש מחזור $2\pi i$, ללוגריתם יש אינסוף ערכים, ולמשוואה $z^n=w$ יש בדיוק $n$ פתרונות, קודקודים של מצולע משוכלל. והמשפט היסודי של האלגברה סוגר את הסיפור: אחרי שהוספנו את $i$, לכל משוואה פולינומית כבר יש פתרון.
+
+## מה חייבים לזכור
+
+### חשבון עם מספרים מרוכבים (<LessonLink id="3.1">שיעור 3.1</LessonLink>)
+
+- **הגדרה.** <LessonLink id="3.1" anchor="complex-definition">היחידה המדומה היא מספר $i$ שמקיים $i^2=-1$</LessonLink>. מספר מרוכב הוא $z=a+bi$ עם $a,b$ ממשיים; אוסף המספרים המרוכבים מסומן $\mathbb{C}$, והכתיבה $a+bi$ נקראת הצורה האלגברית. <LessonLink id="3.1" anchor="re-im">$\operatorname{Re}z=a$ ו-$\operatorname{Im}z=b$ הם שני מספרים **ממשיים**</LessonLink>: החלק המדומה של $5-2i$ הוא מינוס 2, המקדם של $i$ בלי $i$ עצמו. כש-$b=0$ המספר ממשי, וכש-$a=0$ ו-$b\ne0$ הוא מדומה טהור.
+- **שוויון.** $a+bi=c+di$ רק כש-$a=c$ **וגם** $b=d$: משוואה אחת בין מספרים מרוכבים היא שתי משוואות ממשיות.
+- **שורש של מספר שלילי.** <LessonLink id="3.1" anchor="sqrt-negative">$\sqrt{-p}=i\sqrt p$ כש-$p>0$</LessonLink>, למשל $\sqrt{-9}=3i$. הסימן $\sqrt{-p}$ הוא מוסכמה: מבין שני הפתרונות של $z^2=-p$ בוחרים את זה שהחלק המדומה שלו חיובי. הכלל $\sqrt x\sqrt y=\sqrt{xy}$ מובטח רק כששני המספרים אינם שליליים, וכששניהם שליליים הוא נכשל: $\sqrt{-4}\cdot\sqrt{-9}=2i\cdot3i$, כלומר מינוס 6, ולא 6. מוציאים קודם את $i$ מכל שורש, ורק אחר כך מחשבים.
+- **חיבור וחיסור.** <LessonLink id="3.1" anchor="complex-add">רכיב-רכיב, כמו וקטורים</LessonLink>; גם כפל במספר ממשי הוא רכיב-רכיב.
+- **כפל.** <LessonLink id="3.1" anchor="complex-multiply">פותחים סוגריים ומחליפים כל $i^2$ במינוס 1</LessonLink>. בחלק הממשי $ac-bd$ משתתפים גם שני החלקים המדומים, ולכן הכפל **אינו** רכיב ברכיב. <LessonLink id="3.1" anchor="complex-square">בריבוע האיבר האמצעי הוא החלק המדומה</LessonLink>: $(1+i)^2=2i$ ו-$(3+2i)^2=5+12i$.
+- **החזקות של $i$.** <LessonLink id="3.1" anchor="i-powers">המחזור באורך 4: $i$, מינוס 1, מינוס $i$, 1</LessonLink>. כדי לחשב $i^n$ מחלקים את $n$ ב-4, והשארית קובעת: $i^{23}=i^3=-i$. רק חזקה שמתחלקת ב-4 נותנת 1; $i^2$, $i^6$ ו-$i^{10}$ כולם מינוס 1.
+- **הצמוד.** <LessonLink id="3.1" anchor="conjugate">$\bar z=a-bi$: אותו חלק ממשי, וחלק מדומה בסימן הפוך</LessonLink>; בתמונה, שיקוף בציר האופקי. העובדות: הנוסחאות שלמטה, ו-$\overline{z+w}=\bar z+\bar w$, $\overline{zw}=\bar z\,\bar w$. החשובה מכולן: $z\bar z=a^2+b^2$ ממשי ואינו שלילי, ו-0 רק כש-$z=0$. בנוסחה של $\operatorname{Im}z$ מחלקים ב-$2i$, לא ב-2.
+- **חילוק.** <LessonLink id="3.1" anchor="complex-divide">כופלים את המונה ואת המכנה בצמוד של המכנה</LessonLink>, והמכנה נעשה $c^2+d^2$, ממשי וחיובי; ובסוף בודקים בכפל חזרה. <LessonLink id="3.1" anchor="why-conjugate">הצמוד אינו ההפכי</LessonLink>: $\frac1z=\frac{\bar z}{z\bar z}$, והם שווים רק כש-$a^2+b^2=1$. כופלים בצמוד כי הוא הופך את המכנה ל**ממשי**.
+- **משוואה עם $z$ ועם $\bar z$.** <LessonLink id="3.1" anchor="conj-equations">כותבים $z=a+bi$ ומשווים חלק ממשי וחלק מדומה</LessonLink>: $z+2\bar z=6-i$ נותן $3a=6$ ו-$b=1$, כלומר $z=2+i$.
+- **משוואה ריבועית עם דיסקרימיננטה שלילית.** <LessonLink id="3.1" anchor="quadratic-negative">אותה נוסחת שורשים, עם $\sqrt{\Delta}=i\sqrt{|\Delta|}$</LessonLink>, ומחלקים ב-$2a$ את **שני** החלקים. למשל $z^2+2z+5=0$ נותן $z=-1\pm2i$. <LessonLink id="3.1" anchor="sum-product">הבדיקה בלי הצבה</LessonLink>: ל-$z^2+bz+c$ סכום השורשים מינוס $b$ ומכפלתם $c$ (כשהמקדם של $z^2$ אינו 1, מחלקים בו קודם).
+- **שורשים צמודים.** <LessonLink id="3.1" anchor="conjugate-roots">כשהמקדמים **ממשיים**, אם $z_0$ שורש גם $\bar z_0$ שורש</LessonLink>, כי צמוד של המשוואה מחליף רק את $z_0$ ב-$\bar z_0$. התנאי הכרחי: ל-$z^2-iz=0$ השורשים 0 ו-$i$, ומינוס $i$ אינו שורש. ומהשורש בונים את המשוואה: מ-$2-i$ מקבלים $z^2-4z+5$.
+- **בפיזיקה.** <LessonLink id="3.1" anchor="complex-physics">זרם חילופין, תנודות של קפיץ עם חיכוך, ומשוואת שרדינגר</LessonLink>.
+
+$$
+i^2=-1,\qquad z=a+bi=\operatorname{Re}z+i\operatorname{Im}z
+$$
+
+$$
+(a+bi)(c+di)=(ac-bd)+(ad+bc)i,\qquad \frac{a+bi}{c+di}=\frac{(a+bi)(c-di)}{c^2+d^2}
+$$
+
+$$
+z\bar z=a^2+b^2,\qquad \operatorname{Re}z=\frac{z+\bar z}{2},\qquad \operatorname{Im}z=\frac{z-\bar z}{2i},\qquad \frac1z=\frac{\bar z}{z\bar z}
+$$
+
+$$
+z=\frac{-b\pm i\sqrt{|\Delta|}}{2a}\qquad(\Delta=b^2-4ac<0)
+$$
+
+### מישור גאוס: ערך מוחלט, ארגומנט וצמוד (<LessonLink id="3.2">שיעור 3.2</LessonLink>)
+
+- **מישור גאוס.** <LessonLink id="3.2" anchor="plane">המספר $a+bi$ הוא הנקודה $(a,b)$, או החץ מהראשית אליה</LessonLink>. הציר האופקי הוא הציר הממשי ($b=0$), והאנכי הציר המדומה ($a=0$). חיבור הוא חיבור וקטורים לפי כלל המקבילית; $z-w$ הוא **החץ מ-$w$ אל $z$**; כפל במספר ממשי חיובי מותח, ובשלילי גם הופך כיוון.
+- **שלושה שיקופים.** <LessonLink id="3.2" anchor="conjugate-reflection">$\bar z$ הוא השיקוף דרך הציר **הממשי**</LessonLink>, הנגדי (מינוס $z$) הוא השיקוף דרך הראשית (חצי סיבוב), ומינוס $\bar z$ הוא השיקוף דרך הציר **המדומה**. מספר ממשי הוא הצמוד של עצמו, ולמדומה טהור $\bar z=-z$.
+- **ערך מוחלט.** <LessonLink id="3.2" anchor="modulus">$|z|=\sqrt{a^2+b^2}$, האורך של החץ</LessonLink> (פיתגורס): $|3+4i|=5$, $|{-8}+6i|=10$. לא $|a|+|b|$, ולא בלי השורש. למספר ממשי זה הערך המוחלט הרגיל. $|z|\ge0$, ו-0 רק כש-$z=0$.
+- **תכונות.** <LessonLink id="3.2" anchor="modulus-properties">$|z|^2=z\bar z$, ולא $z^2$</LessonLink>: $|1+i|^2=2$ ואילו $(1+i)^2=2i$. הערך המוחלט כפלי: $|zw|=|z||w|$, $\left|\frac zw\right|=\frac{|z|}{|w|}$, $|z^n|=|z|^n$, $|\bar z|=|{-z}|=|z|$. למשל $|(1+i)^8|=(\sqrt2)^8=16$.
+- **אורך של סכום.** <LessonLink id="3.2" anchor="triangle-inequality">לסכום יש רק אי-שוויון, אי-שוויון המשולש</LessonLink> (הנוסחה שלמטה): שוויון מימין רק כששני החצים באותו כיוון (או אחד מהם 0), ושוויון משמאל כשהם בכיוונים הפוכים (או אחד מהם 0). ל-$z=3+4i$ ו-$w=-3+4i$: $|z+w|=|8i|=8$, לא 10.
+- **מרחק.** <LessonLink id="3.2" anchor="distance">$|z-w|$ הוא המרחק בין שתי הנקודות</LessonLink>, נוסחת המרחק מהתיכון. את $|z-a|$ קוראים "המרחק של $z$ מ-$a$", ואת $|z+w|=|z-(-w)|$ כמרחק מהנקודה מינוס $w$.
+- **ארגומנט.** <LessonLink id="3.2" anchor="argument">לכל $z\ne0$, ארגומנט $\arg z$ הוא זווית $\theta$ מהכיוון החיובי של הציר הממשי אל החץ, נגד כיוון השעון</LessonLink>: $a=|z|\cos\theta$ ו-$b=|z|\sin\theta$, ושני התנאים **יחד** קובעים את הכיוון. הוא נקבע עד כדי $2\pi k$, ולמספר 0 אין ארגומנט.
+- **הארגומנט הראשי.** <LessonLink id="3.2" anchor="principal-argument">$\operatorname{Arg}z$ הוא הארגומנט היחיד בקטע $(-\pi,\pi]$</LessonLink>. מעל הציר הממשי הוא בין 0 ל-$\pi$, מתחתיו שלילי (זווית שיצאה גדולה מ-$\pi$ מתקנים בהחסרה של $2\pi$), ועל החלק השלילי של הציר הממשי $\operatorname{Arg}z=\pi$, לא מינוס $\pi$.
+- **הארגומנט ברביע הנכון.** <LessonLink id="3.2" anchor="argument-quadrant">קודם הרביע לפי הסימנים, אחר כך המחשבון</LessonLink>. על ציר קוראים את הזווית מהשרטוט ($0$, $\frac{\pi}{2}$, $\pi$, או מינוס $\frac{\pi}{2}$); אחרת זווית העזר $\arctan\frac ba$, והתיקון של הנוסחה שלמטה: משמאל לציר המדומה מוסיפים $\pi$ מעל הציר הממשי ומחסירים $\pi$ מתחתיו. בסוף בודקים שהקוסינוס והסינוס מחזירים את $a$ ואת $b$ עם הסימנים. למשל $\operatorname{Arg}(-2-i)=\arctan\frac12-\pi\approx-2.678$.
+- **צמוד ונגדי.** <LessonLink id="3.2" anchor="argument-quadrant">$\operatorname{Arg}\bar z=-\operatorname{Arg}z$ לכל $z\ne0$ חוץ מהמספרים הממשיים השליליים</LessonLink> (שם שני הצדדים $\pi$ ומינוס $\pi$); הארגומנט הראשי של הנגדי, $\operatorname{Arg}(-z)$, הוא $\operatorname{Arg}z\pm\pi$, לפי מה שנשאר בטווח.
+- **קבוצות: המילון.** <LessonLink id="3.2" anchor="sets">$|z-a|$ הוא מרחק מ-$a$, $\operatorname{Re}z$ ו-$\operatorname{Im}z$ הם $x$ ו-$y$, ו-$\operatorname{Arg}z$ הוא הכיוון מהראשית</LessonLink>; כשהמילים אינן מספיקות מציבים $z=x+iy$.
+- **מעגל, עיגול, טבעת.** <LessonLink id="3.2" anchor="distance-sets">$|z-a|=r$ הוא המעגל שמרכזו $a$ ורדיוסו $r$</LessonLink>, $|z-a|\le r$ העיגול עם המעגל, $|z-a|<r$ בלי המעגל, ו-$r_1<|z|<r_2$ טבעת. באי-שוויון חזק השפה אינה בקבוצה, ובחלש היא בקבוצה: בודקים את התנאי עצמו בנקודה שעל השפה. המרכז הוא הנקודה שבה הביטוי שבתוך הערך המוחלט מתאפס: $|z-2i|=3$ סביב $2i$, ו-$|z+3|\le1$ סביב מינוס 3.
+- **שני מרחקים שווים.** <LessonLink id="3.2" anchor="bisector">כש-$a\ne b$, התנאי $|z-a|=|z-b|$ הוא האנך האמצעי לקטע שבין $a$ ל-$b$</LessonLink>, ישר: אחרי העלאה בריבוע ה-$x^2$ וה-$y^2$ מצטמצמים. (כש-$a=b$ התנאי מתקיים בכל המישור.) $|z-1|=|z-i|$ הוא הישר $y=x$, ו-$|z-1|<|z-i|$ חצי המישור של הנקודות הקרובות ל-1.
+- **חצאי מישור ורצועות.** <LessonLink id="3.2" anchor="half-planes">תנאי על $\operatorname{Re}z$ או על $\operatorname{Im}z$ הוא תנאי על $x$ או על $y$</LessonLink>: $\operatorname{Re}z>1$ חצי מישור בלי הישר, $\operatorname{Im}z\le0$ חצי המישור התחתון עם הציר, $|\operatorname{Re}z|<1$ רצועה אנכית.
+- **קרן וגזרה.** <LessonLink id="3.2" anchor="arg-sets">$\operatorname{Arg}z=\alpha$ היא קרן מהראשית, בלי הראשית</LessonLink>, לא ישר שלם; $\alpha\le\operatorname{Arg}z\le\beta$ היא גזרה. קבוצה שמוגדרת בעזרת $\operatorname{Arg}z$ אינה מכילה את 0 לעולם, כי לראשית אין ארגומנט. גזרה שחוצה את הכיוון $\pi$ מתפרקת בטווח $(-\pi,\pi]$ לשני חלקים, $\operatorname{Arg}z\ge\frac{3\pi}{4}$ או $\operatorname{Arg}z\le-\frac{3\pi}{4}$, כלומר $|\operatorname{Arg}z|\ge\frac{3\pi}{4}$; הכתיבה "בין $\frac{3\pi}{4}$ ל-$\frac{5\pi}{4}$" אינה עובדת, כי הארגומנט הראשי אינו גדול מ-$\pi$.
+- **כמה תנאים יחד.** <LessonLink id="3.2" anchor="combined-sets">הקבוצה היא החיתוך: הנקודות שעוברות את כל התנאים</LessonLink>. $1<|z|\le2$ עם $0\le\operatorname{Arg}z\le\frac{\pi}{2}$ הוא רבע טבעת. בעיגול $|z-a|\le r$ הערך הגדול ביותר של $|z|$ הוא $|a|+r$; הקטן ביותר הוא $|a|-r$ רק כשהראשית מחוץ לעיגול ($|a|>r$), ו-0 כשהיא בתוכו. הקרובה והרחוקה נמצאות על הישר מהראשית דרך המרכז.
+- **בפיזיקה.** <LessonLink id="3.2" anchor="gauss-physics">כל גודל שיש לו גודל ופאזה, וההסתברות בקוונטים, $|z|^2=z\bar z$</LessonLink>.
+
+$$
+|z|=\sqrt{a^2+b^2},\qquad |z|^2=z\bar z,\qquad |zw|=|z|\,|w|,\qquad |z-w|=\sqrt{(a-c)^2+(b-d)^2}
+$$
+
+$$
+\big|\,|z|-|w|\,\big|\le|z+w|\le|z|+|w|
+$$
+
+$$
+\operatorname{Arg}z=
+\begin{cases}
+\arctan\frac{b}{a} & a>0\\[2pt]
+\arctan\frac{b}{a}+\pi & a<0,\ b>0\\[2pt]
+\arctan\frac{b}{a}-\pi & a<0,\ b<0
+\end{cases}
+\qquad(-\pi<\operatorname{Arg}z\le\pi)
+$$
+
+בשורה הראשונה $z=a+bi$ ו-$w=c+di$. על הצירים קוראים את הזווית מהשרטוט.
+
+### הצורה הקוטבית ונוסחת אוילר (<LessonLink id="3.3">שיעור 3.3</LessonLink>)
+
+- **הצורה הקוטבית.** <LessonLink id="3.3" anchor="polar-form">$\operatorname{cis}\theta=\cos\theta+i\sin\theta$ הוא הנקודה על מעגל היחידה בזווית $\theta$, ו-$z=r\operatorname{cis}\theta$ עם $r=|z|>0$ ו-$\theta=\arg z$</LessonLink>. הקוסינוס נותן את החלק **הממשי** והסינוס את **המדומה**. מהאלגברית לקוטבית: $r=\sqrt{a^2+b^2}$, הרביע, הזווית מ-$\cos\theta=\frac ar$ ו-$\sin\theta=\frac br$ (או מזווית העזר עם התיקון), ובדיקה בפתיחה. למשל $1-i=\sqrt2\operatorname{cis}\left(-\frac{\pi}{4}\right)$. מהקוטבית לאלגברית פשוט פותחים.
+- **שלוש הסכמות.** <LessonLink id="3.3" anchor="polar-positive-r">$r$ חיובי</LessonLink>: המספר $w=-3\operatorname{cis}\frac{\pi}{5}$ אינו כתוב בצורה קוטבית; סימן מינוס הוא חצי סיבוב, $\operatorname{cis}\pi=-1$, ולכן $w=3\operatorname{cis}\frac{6\pi}{5}=3\operatorname{cis}\left(-\frac{4\pi}{5}\right)$. הזווית נקבעת עד כדי $2\pi$: $r_1\operatorname{cis}\theta_1=r_2\operatorname{cis}\theta_2$ בדיוק כש-$r_1=r_2$ והזוויות נבדלות בכפולה שלמה של $2\pi$. ולאפס אין צורה קוטבית.
+- **כפל וחילוק.** <LessonLink id="3.3" anchor="polar-multiply">כופלים את הערכים המוחלטים ומחברים את הזוויות; בחילוק מחלקים ומחסירים</LessonLink>. הסיבה: נוסחאות הסכום של קוסינוס וסינוס, שנותנות $\operatorname{cis}\alpha\operatorname{cis}\beta=\operatorname{cis}(\alpha+\beta)$, עם $i^2=-1$ בתפקיד הסימן. הצמוד: $\overline{r\operatorname{cis}\theta}=r\operatorname{cis}(-\theta)$. סכום של שני ארגומנטים ראשיים הוא ארגומנט של המכפלה, אבל לא תמיד הראשי: $(-1)(-1)=1$, ו-$\operatorname{Arg}1=0$, לא $2\pi$.
+- **כפל הוא סיבוב ומתיחה.** <LessonLink id="3.3" anchor="multiply-geometry">כפל ב-$w=\rho\operatorname{cis}\alpha$ מסובב את כל המישור סביב הראשית בזווית $\alpha$, נגד כיוון השעון, ומותח אותו פי $\rho$</LessonLink>; הראשית נשארת במקומה. כפל ב-$1+i$ מסובב ב-$45^\circ$ ומותח פי $\sqrt2$. **חיבור** הוא הזזה.
+- **מקרים פרטיים.** <LessonLink id="3.3" anchor="multiply-by-i">$w$ ממשי חיובי: מתיחה בלבד; $|w|=1$: סיבוב בלבד</LessonLink>. כפל ב-$i$ הוא רבע סיבוב **נגד** כיוון השעון ($1\mapsto i\mapsto-1\mapsto-i$), במינוס $i$ רבע סיבוב עם כיוון השעון, וכפל במינוס 1 חצי סיבוב. סיבוב של $(x,y)$ בזווית $\alpha$ סביב הראשית נותן $(x\cos\alpha-y\sin\alpha,\ x\sin\alpha+y\cos\alpha)$.
+- **סיבוב סביב נקודה אחרת.** <LessonLink id="3.3" anchor="rotate-about-point">מזיזים את $c$ לראשית, מסובבים ומחזירים</LessonLink>: הנוסחה שלמטה. סיבוב של $5+i$ סביב $2+i$ ברבע סיבוב נגד כיוון השעון נותן $2+4i$; בלי ההזזה מתקבל $(5+i)i=-1+5i$, הסיבוב סביב הראשית.
+- **נוסחת דה-מואבר.** <LessonLink id="3.3" anchor="de-moivre">$(r\operatorname{cis}\theta)^n=r^n\operatorname{cis}n\theta$</LessonLink>, גם ל-$n$ שלילי. הערך המוחלט **מועלה בחזקה**, והחזקה פועלת על **הזווית**, לא על כל רכיב: $(\cos\theta+i\sin\theta)^2$ אינו $\cos^2\theta+i\sin^2\theta$. המתכון: צורה קוטבית, $r^n$ וזווית $n\theta$, הורדה של כפולות $2\pi$ אל הקטע המבוקש, ופתיחה אם צריך. למשל $(1+\sqrt3\,i)^9=512\operatorname{cis}3\pi=-512$. כש-$|z|=1$ החזקות נשארות על מעגל היחידה, כש-$|z|>1$ הן מתרחקות בספירלה, וכש-$|z|<1$ מתקרבות לראשית.
+- **זהויות מדה-מואבר.** <LessonLink id="3.3" anchor="demoivre-trig">מחשבים את $(\cos\theta+i\sin\theta)^n$ פעמיים, לפי דה-מואבר ולפי הבינום, ומשווים חלק ממשי וחלק מדומה</LessonLink>. ב-$n=2$ יוצאות נוסחאות הזווית הכפולה, וב-$n=3$ הזהויות שלמטה. בפיתוח, ב-$(is)^k$ מחליפים את החזקה של $i$ לפי המחזור, ובודקים בזווית נוחה. $\cos3\theta$ **אינו** $3\cos\theta$.
+- **נוסחת אוילר.** <LessonLink id="3.3" anchor="euler-formula">$e^{i\theta}=\cos\theta+i\sin\theta$ לכל $\theta$ ממשי</LessonLink>: בשיעור הזה שם ל-$\operatorname{cis}\theta$, מוצדק כי כלל הכפל של cis הוא חוק החזקות; ההצדקה המלאה בשיעור 3.4 ובפרק 6. לכן $z=re^{i\theta}$, וכל הכללים נעשים חוקי חזקות (שלמטה). $e^{i\pi}=-1$, $e^{i\pi/2}=i$, $e^{2\pi i}=1$; $|e^{i\theta}|=1$, ו-$e^{i\theta}=e^{i(\theta+2\pi k)}$.
+- **בפיזיקה.** <LessonLink id="3.3" anchor="polar-physics">סיבובים במישור הם כפל ב-$e^{i\alpha}$</LessonLink>, ותנודה היא הצל של חץ מסתובב: $A\cos(\omega t+\varphi)$ הוא החלק הממשי של $Ae^{i\varphi}e^{i\omega t}$. המספר הקבוע $Ae^{i\varphi}$, המקום של החץ בזמן 0, נקרא פאזור: הערך המוחלט שלו הוא גודל התנודה, והזווית שלו השלב שממנו היא מתחילה. בחילוק מתח בעכבה מחלקים גדלים ומחסירים זוויות.
+
+$$
+z=r\operatorname{cis}\theta=r(\cos\theta+i\sin\theta)=re^{i\theta},\qquad r=|z|>0,\quad \theta=\arg z
+$$
+
+$$
+r_1e^{i\alpha}\cdot r_2e^{i\beta}=r_1r_2\,e^{i(\alpha+\beta)},\qquad \frac{r_1e^{i\alpha}}{r_2e^{i\beta}}=\frac{r_1}{r_2}\,e^{i(\alpha-\beta)},\qquad \overline{re^{i\theta}}=re^{-i\theta}
+$$
+
+$$
+\left(re^{i\theta}\right)^n=r^ne^{in\theta},\qquad (\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta
+$$
+
+$$
+\cos3\theta=4\cos^3\theta-3\cos\theta,\qquad \sin3\theta=3\sin\theta-4\sin^3\theta
+$$
+
+$$
+z\longmapsto c+(z-c)\,e^{i\alpha}
+$$
+
+האחרונה היא סיבוב בזווית $\alpha$ סביב הנקודה $c$.
+
+### האקספוננט והלוגריתם המרוכבים (<LessonLink id="3.4">שיעור 3.4</LessonLink>)
+
+- **אוילר, ומה שבמראה.** <LessonLink id="3.4" anchor="euler-recap">$e^{i\theta}$ היא הנקודה על מעגל היחידה בזווית $\theta$, ו-$e^{-i\theta}=\overline{e^{i\theta}}=\frac{1}{e^{i\theta}}$</LessonLink>: לסובב אחורה זה לבטל את הסיבוב קדימה. למה דווקא הבסיס $e$: גם $2^a2^b=2^{a+b}$, אבל $2^{i\theta}=e^{i\theta\ln2}=\operatorname{cis}(\theta\ln2)$ מסתובב לאט יותר, ו-$2^{i\pi}\approx-0.57+0.82i$, לא מינוס 1. רק בבסיס $e$ המעריך $i\theta$ הוא בדיוק הזווית $\theta$.
+- **קוסינוס וסינוס דרך האקספוננט.** <LessonLink id="3.4" anchor="cos-sin-exp">הנוסחאות שלמטה: הקוסינוס הוא חצי **סכום**, והסינוס חצי **הפרש** חלקי $i$</LessonLink>. הבדיקה שמונעת החלפה: ב-$\theta=0$ הקוסינוס 1 והסינוס 0.
+- **הורדת חזקות ומכפלה לסכום.** <LessonLink id="3.4" anchor="cos-sin-uses">מחליפים כל $\cos$ וכל $\sin$ באקספוננטים, פותחים סוגריים, ומצרפים זוגות</LessonLink>: $e^{ik\theta}+e^{-ik\theta}=2\cos k\theta$ ו-$e^{ik\theta}-e^{-ik\theta}=2i\sin k\theta$, **עם הגורם 2**. כך $\cos^2\theta=\frac{1+\cos2\theta}{2}$, $\sin^2\theta=\frac{1-\cos2\theta}{2}$ ו-$\cos\alpha\cos\beta=\frac{\cos(\alpha+\beta)+\cos(\alpha-\beta)}{2}$ יוצאות בלי לזכור אותן. בודקים ב-$\theta=0$.
+- **האקספוננט של כל מספר מרוכב.** <LessonLink id="3.4" anchor="exp-definition">$e^{x+iy}=e^x(\cos y+i\sin y)$</LessonLink>: ההגדרה היחידה ששומרת על $e^{z+w}=e^ze^w$, והיא מתאימה גם ל-$e^x$ (כש-$y=0$) וגם לאוילר (כש-$x=0$). אקספוננט של סכום הוא **מכפלה**: $e^{1+i\pi}=e\cdot e^{i\pi}=-e$. למשל $e^{2+i\pi/3}=\frac{e^2}{2}+\frac{\sqrt3\,e^2}{2}i$.
+- **גודל וכיוון.** <LessonLink id="3.4" anchor="exp-modulus">$|e^z|=e^{\operatorname{Re}z}$, ו-$\operatorname{Im}z$ הוא ארגומנט של $e^z$</LessonLink>: החלק הממשי של המעריך מותח, והחלק המדומה מסובב. הגודל תלוי רק ב-$\operatorname{Re}z$, לא ב-$|z|$; והזווית $\operatorname{Im}z$ אינה תמיד הארגומנט **הראשי**. $e^z\ne0$ לכל $z$.
+- **מה קורה לישרים.** <LessonLink id="3.4" anchor="exp-lines">ישר אופקי ($y$ קבוע) הולך לקרן מהראשית בזווית $y$, בלי הראשית; ישר אנכי ($x$ קבוע) הולך למעגל ברדיוס $e^x$</LessonLink>, ומתלפף עליו אינסוף פעמים. הציר המדומה הולך למעגל היחידה.
+- **מחזוריות.** <LessonLink id="3.4" anchor="exp-periodic">$e^{z+2\pi i}=e^z$: האקספוננט מחזורי עם מחזור $2\pi i$</LessonLink>, ואינו חד-חד-ערכי. $e^z=1$ בדיוק כש-$z=2\pi ki$, $k$ שלם. הפתרונות של $e^z=w$, לכל $w\ne0$, הם $z=\ln|w|+i(\varphi+2\pi k)$ עם $\varphi$ ארגומנט של $w$: אינסוף נקודות על ישר אנכי אחד. ל-$w=0$ אין פתרון.
+- **קוסינוס וסינוס של מספר מרוכב.** <LessonLink id="3.4" anchor="cos-complex">אותן נוסחאות, עם $z$ במקום $\theta$, הן ההגדרה לכל $z$</LessonLink>. $\cos z+i\sin z=e^{iz}$ ו-$\cos^2z+\sin^2z=1$ נשארים נכונים, אבל החסם 1 נשבר: $\cos(2i)=\frac{e^{-2}+e^{2}}{2}\approx3.76$. הסיבה: $|e^{iz}|=e^{-\operatorname{Im}z}$, ולכן $e^{iz}$ על מעגל היחידה רק כש-$z$ ממשי.
+- **הלוגריתם.** <LessonLink id="3.4" anchor="log-all">ל-$w\ne0$, $\log w$ הוא קבוצת **כל** הפתרונות של $e^z=w$</LessonLink> (הנוסחה שלמטה): לכולם אותו חלק ממשי, $\ln|w|$, והחלקים המדומים הם כל הארגומנטים של $w$. **שלושה סימנים:** $\log$ בלי בסיס הוא הלוגריתם הטבעי המרוכב, קבוצה של אינסוף ערכים (ולא הלוגריתם בבסיס 10 של התיכון); $\operatorname{Log}$ הוא הערך הראשי, מספר אחד; ו-$\ln$ הוא הלוגריתם הממשי של מספר חיובי. <LessonLink id="3.4" anchor="log-recipe">המתכון</LessonLink>: $\ln|w|$, $\operatorname{Arg}w$ ברביע הנכון, כל הערכים, ובדיקה $e^{\ln|w|+i\operatorname{Arg}w}=w$. למשל $\log(1+\sqrt3\,i)=\ln2+i\left(\frac{\pi}{3}+2\pi k\right)$. החלק הממשי הוא $\ln$ של **הגודל**, לא של החלק הממשי.
+- **הערך הראשי.** <LessonLink id="3.4" anchor="log-principal">$\operatorname{Log}w=\ln|w|+i\operatorname{Arg}w$, הערך עם $k=0$, שהחלק המדומה שלו בטווח $(-\pi,\pi]$</LessonLink>: $\operatorname{Log}(-i)=-\frac{\pi}{2}i$, ולא $\frac{3\pi}{2}i$. האות הגדולה מבדילה בין הערך הראשי לקבוצת כל הערכים.
+- **מספרים שליליים.** <LessonLink id="3.4" anchor="log-negative">ל-$a>0$: $\operatorname{Log}(-a)=\ln a+i\pi$</LessonLink>, ובפרט $\operatorname{Log}(-1)=i\pi$. למספר חיובי $\operatorname{Log}a=\ln a$, הלוגריתם הרגיל, אבל גם לו יש אינסוף ערכים: $\log1=2\pi ki$.
+- **חוקי הלוגריתם.** <LessonLink id="3.4" anchor="log-rules">$e^{\operatorname{Log}w}=w$ תמיד, אבל $\operatorname{Log}(zw)$ ו-$\operatorname{Log}z+\operatorname{Log}w$ יכולים להיבדל ב-$2\pi ki$</LessonLink>: $\operatorname{Log}(-1)+\operatorname{Log}(-1)=2\pi i$, ואילו $\operatorname{Log}1=0$. החוק בטוח כשסכום הארגומנטים הראשיים נשאר בטווח, למשל כששני המספרים בחצי המישור הימני; ועם כל הערכים הוא נכון כשוויון בין קבוצות. גם $\operatorname{Log}(e^z)=z$ נכון רק כש-$\operatorname{Im}z$ בטווח: $\operatorname{Log}\left(e^{3\pi i}\right)=i\pi$.
+- **בפיזיקה.** <LessonLink id="3.4" anchor="exp-physics">גלים, זרם חילופין ותנודה מרוסנת</LessonLink>: $e^{-\gamma t}\cos\omega t$ הוא החלק הממשי של $e^{(-\gamma+i\omega)t}$, נקודה שנעה בספירלה פנימה; בקוונטים $e^{-iEt/\hbar}$ הוא סיבוב טהור.
+
+$$
+e^{x+iy}=e^x(\cos y+i\sin y),\qquad |e^z|=e^{\operatorname{Re}z},\qquad e^{z+2\pi i}=e^z
+$$
+
+$$
+\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2},\qquad \sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i},\qquad \cos z=\frac{e^{iz}+e^{-iz}}{2},\qquad \sin z=\frac{e^{iz}-e^{-iz}}{2i}
+$$
+
+$$
+\log w=\ln|w|+i(\operatorname{Arg}w+2\pi k),\qquad \operatorname{Log}w=\ln|w|+i\operatorname{Arg}w,\qquad -\pi<\operatorname{Arg}w\le\pi
+$$
+
+$$
+\operatorname{Log}(zw)=\operatorname{Log}z+\operatorname{Log}w+2\pi ki
+$$
+
+בנוסחה האחרונה $k$ הוא מספר שלם כלשהו, לפעמים 0 ולפעמים לא.
+
+### שורשים מסדר n (<LessonLink id="3.5">שיעור 3.5</LessonLink>)
+
+- **הגדרה.** <LessonLink id="3.5" anchor="nth-roots">שורש מסדר $n$ של $w$ הוא כל מספר $z$ שמקיים $z^n=w$</LessonLink>. דה-מואבר בכיוון ההפוך: מוציאים שורש מהערך המוחלט ומחלקים את הזווית ב-$n$; השורשים הנוספים באים מכך שלזווית של $w$ אין שם אחד.
+- **המתכון.** <LessonLink id="3.5" anchor="root-recipe">כותבים $w=R\operatorname{cis}\alpha$ ו-$z=\rho\operatorname{cis}\theta$, ומשווים בצורה הקוטבית</LessonLink>: <LessonLink id="3.5" anchor="root-modulus">$\rho^n=R$, ולכן $\rho=R^{1/n}$, השורש החיובי הרגיל</LessonLink>; <LessonLink id="3.5" anchor="root-angle">ו-$n\theta=\alpha+2\pi k$, ומחלקים ב-$n$ את **כל** אגף ימין</LessonLink>, גם את $\alpha$ וגם את $2\pi k$. רושמים את $k=0,1,\dots,n-1$ ובודקים שורש אחד בחזקה $n$. למשל השורשים של $z^3=8i$ הם $z_0=\sqrt3+i$, $z_1=-\sqrt3+i$ ו-$z_2=-2i$.
+- **בדיוק $n$.** <LessonLink id="3.5" anchor="why-n">$k=n$ מחזיר את $k=0$ (סיבוב שלם), ולכן יש בדיוק $n$ שורשים שונים לכל $w\ne0$</LessonLink>; ל-$w=0$ רק $z=0$. בממשיים ל-$x^4=-16$ אין פתרון; במרוכבים יש ארבעה, $\pm\sqrt2\pm\sqrt2\,i$.
+- **הסימון.** <LessonLink id="3.5" anchor="root-notation">בקורס לא כותבים $\sqrt[n]{w}$ כש-$w$ אינו ממשי חיובי</LessonLink>: אין שורש מועדף, וכותבים "השורשים של $z^n=w$" ורושמים את כולם. בשפת שיעור 3.4, השורשים הם $e^{\frac1n\log w}$: אינסוף ערכי הלוגריתם נותנים רק $n$ שורשים, כי האקספוננט מחזורי.
+- **מצולע משוכלל.** <LessonLink id="3.5" anchor="regular-polygon">השורשים על מעגל אחד ברדיוס $R^{1/n}$, במרווחים של $\frac{2\pi}{n}$ (לא $\frac{\pi}{n}$): קודקודים של מצולע משוכלל בעל $n$ צלעות שמרכזו בראשית</LessonLink>. $\frac{\alpha}{n}$ קובע רק כמה המצולע מסובב. כש-$n$ זוגי כל שורש בא עם הנגדי לו, בהפרש זווית $\pi$ (חצי סיבוב הוא $\frac n2$ מרווחים); כש-$n$ אי-זוגי אין אף זוג נגדי, ולשורשים השלישיים של מינוס 8 אין שניים נגדיים. קודקוד אחד קובע את כל המצולע.
+- **שורשי היחידה.** <LessonLink id="3.5" anchor="roots-of-unity">הפתרונות של $z^n=1$ הם $\omega_k=\operatorname{cis}\frac{2\pi k}{n}=\omega^k$ עם $\omega=\operatorname{cis}\frac{2\pi}{n}$</LessonLink>, ואחד מהם תמיד 1. בשמם: ל-$n=3$, 1 ו-$\frac{-1\pm\sqrt3\,i}{2}$; ל-$n=4$, $\pm1$ ו-$\pm i$; ל-$n=6$, $\pm1$ ו-$\pm\frac12\pm\frac{\sqrt3}{2}i$. לא כל נקודה של מעגל היחידה היא שורש מסדר נתון: $i^6=-1$. **כל השורשים של $z^n=w$ הם שורש אחד כפול שורשי היחידה**, $z_0\omega^k$: כפל ב-$\omega$ הוא סיבוב שמעביר קודקוד לקודקוד הבא.
+- **הסכום.** <LessonLink id="3.5" anchor="roots-sum">לכל $n\ge2$ סכום שורשי היחידה הוא 0</LessonLink>: סיבוב ב-$\frac{2\pi}{n}$ אינו משנה את הסכום $S$, כלומר $\omega S=S$ עם $\omega\ne1$; או בסדרה הנדסית. הסכום **אינו** $n$. גם סכום כל השורשים של $z^n=w$ הוא 0.
+- **שורש ריבועי באלגברה.** <LessonLink id="3.5" anchor="complex-sqrt">מחפשים $x+yi$ עם $(x+yi)^2=p+qi$: שלוש המשוואות שלמטה</LessonLink> (הנתון נקרא $p+qi$, כי $a$, $b$ ו-$c$ שמורים למקדמים של המשוואה הריבועית); מחברים ומחסירים את הראשונה והשלישית, והסימנים לפי $2xy=q$: אותו סימן כש-$q>0$, סימנים הפוכים כש-$q<0$. כש-$q=0$ השורשים הם $\pm\sqrt p$ אם $p>0$, ו-$\pm i\sqrt{-p}$ אם $p<0$. השורשים הריבועיים של $3+4i$ הם $\pm(2+i)$, בלי אף זווית.
+- **נוסחת השורשים עם מקדמים מרוכבים.** <LessonLink id="3.5" anchor="quadratic-formula">$z=\frac{-b\pm s}{2a}$, כש-$s$ הוא אחד משני השורשים הריבועיים של $\Delta$</LessonLink>; הבדיקה בסכום ובמכפלה עובדת גם כאן. $z^2-3z+(3+i)=0$ נותן $2-i$ ו-$1+i$, שאינם צמודים.
+- **משוואות $z^n+a=0$ ודו-ריבועיות.** <LessonLink id="3.5" anchor="binomial-equations">$z^n+a=0$ היא $z^n=-a$; במשוואה דו-ריבועית מציבים $u=z^2$, פותרים ריבועית, ואז פותרים $z^2=u$ לכל שורש</LessonLink>.
+- **המשפט היסודי של האלגברה.** <LessonLink id="3.5" anchor="fta">לכל פולינום ממעלה $n\ge1$ עם מקדמים מרוכבים יש שורש מרוכב; לכן הוא מתפרק לגורמים לינאריים ויש לו בדיוק $n$ שורשים, עם ריבוי</LessonLink>. הקורס אינו מוכיח אותו. מהשורש אל הפירוק עוברים בעזרת עובדה על פולינומים, שגם בה משתמשים בלי הוכחה: אם $p(z_1)=0$, אז $z-z_1$ מחלק את $p$ בלי שארית. ריבוי הוא מספר הפעמים שהגורם $z-z_0$ מופיע: ב-$(z-1)^2(z+2)$ לשורש 1 ריבוי 2.
+- **מקדמים ממשיים.** <LessonLink id="3.5" anchor="conjugate-pairs">שורשים לא-ממשיים באים בזוגות צמודים, וכל זוג נותן גורם ממשי ממעלה 2</LessonLink> (הנוסחה שלמטה): $1\pm i$ נותן $z^2-2z+2$. הכלל דורש מקדמים ממשיים.
+- **פירוק ממשי.** <LessonLink id="3.5" anchor="real-factoring">כל פולינום ממשי מתפרק לגורמים ממשיים ממעלה 1 (שורש ממשי) וממעלה 2 עם דיסקרימיננטה שלילית (זוג צמוד)</LessonLink>. דוגמאות: $z^3-1=(z-1)(z^2+z+1)$, $z^4+1=\left(z^2-\sqrt2\,z+1\right)\left(z^2+\sqrt2\,z+1\right)$, $z^6-1=(z-1)(z+1)(z^2-z+1)(z^2+z+1)$. לפולינום ממשי ממעלה אי-זוגית יש תמיד שורש ממשי. הפירוק הזה הוא הבסיס לשברים החלקיים של פרק 7.
+- **בפיזיקה.** <LessonLink id="3.5" anchor="roots-physics">כוחות מאוזנים בזוויות שוות וזרם תלת-פאזי: סכום שורשי היחידה הוא 0</LessonLink>; שורשים צמודים של פולינום ממשי נותנים תנועה ממשית.
+
+$$
+z^n=R\operatorname{cis}\alpha\iff z=R^{1/n}\operatorname{cis}\frac{\alpha+2\pi k}{n},\qquad k=0,1,\dots,n-1
+$$
+
+$$
+z^n=1\iff z=\operatorname{cis}\frac{2\pi k}{n},\qquad 1+\omega+\omega^2+\dots+\omega^{n-1}=0\quad(n\ge2)
+$$
+
+$$
+x^2-y^2=p,\qquad 2xy=q,\qquad x^2+y^2=|p+qi|=\sqrt{p^2+q^2}
+$$
+
+$$
+z=\frac{-b\pm s}{2a},\qquad s^2=\Delta=b^2-4ac
+$$
+
+$$
+p(z)=a_n(z-z_1)(z-z_2)\cdots(z-z_n),\qquad (z-z_0)(z-\bar z_0)=z^2-2\operatorname{Re}(z_0)\,z+|z_0|^2
+$$
+
+בשורה השלישית: המשוואות לשורש הריבועי $x+yi$ של $p+qi$, עם $p,q$ ממשיים.
+
+## טעויות נפוצות
+
+- **טועים בסימן של $i^2$.** $i\cdot i=-1$, וזו כל ההגדרה: $(2+3i)(1-4i)=14-5i$, ו-$(c+di)(c-di)=c^2+d^2$, לא $c^2-d^2$. <LessonLink id="3.1" anchor="complex-multiply">כפל מספרים מרוכבים</LessonLink>.
+- **חושבים שהחלק המדומה כולל את $i$.** $\operatorname{Im}(3-4i)$ הוא מינוס 4, לא מינוס $4i$: שני החלקים ממשיים, ו-$z=\operatorname{Re}z+i\operatorname{Im}z$. <LessonLink id="3.1" anchor="re-im">החלק הממשי והחלק המדומה</LessonLink>.
+- **חושבים שכל חזקה זוגית של $i$ היא 1.** המחזור באורך 4: $102=4\cdot25+2$, ולכן $i^{102}=i^2=-1$. רק חזקות שמתחלקות ב-4 נותנות 1. <LessonLink id="3.1" anchor="i-powers">החזקות של i</LessonLink>.
+- **כופלים או מחלקים רכיב ברכיב.** $(a+bi)(c+di)$ אינו $ac+bdi$, ו-$\frac{a+bi}{c+di}$ אינו $\frac ac+\frac bd i$: מחלקים בעזרת הצמוד של המכנה. למשל $\operatorname{Re}\frac1z=\frac{x}{x^2+y^2}$ ל-$z=x+iy$, ולא $\frac1x$. <LessonLink id="3.1" anchor="complex-divide">חילוק בעזרת הצמוד</LessonLink>.
+- **חושבים שהצמוד הוא ההפכי.** $z\bar z=|z|^2$, ולכן $\frac1z=\frac{\bar z}{|z|^2}$; הם שווים רק כש-$|z|=1$. כופלים בצמוד כי הוא הופך את המכנה לממשי. <LessonLink id="3.1" anchor="why-conjugate">למה כופלים בצמוד</LessonLink>.
+- **חושבים ששורשים של כל משוואה ריבועית באים בזוגות צמודים.** רק כשהמקדמים ממשיים: ל-$z^2-iz=0$ השורשים 0 ו-$i$, ומינוס $i$ אינו שורש. <LessonLink id="3.1" anchor="conjugate-roots">שורשים צמודים ומקדמים ממשיים</LessonLink>.
+- **מעלים בריבוע כל איבר בנפרד.** $(3-i)^2=9-6i+i^2=8-6i$, לא 8: האיבר האמצעי הוא בדיוק החלק המדומה. <LessonLink id="3.1" anchor="complex-square">פתיחת סוגריים במרוכבים</LessonLink>.
+- **שוכחים לחלק ב-$2a$.** השורשים של $z^2-4z+13=0$ הם $\frac{4\pm6i}{2}=2\pm3i$, לא $4\pm6i$. בדיקה: הסכום 4 והמכפלה $13=2^2+3^2$. <LessonLink id="3.1" anchor="quadratic-negative">משוואה ריבועית עם דיסקרימיננטה שלילית</LessonLink>.
+- **מפעילים את כלל השורשים של התיכון על מספרים שליליים.** $\sqrt{-4}\cdot\sqrt{-9}=2i\cdot3i=6i^2$, כלומר מינוס 6, ולא $\sqrt{36}=6$. הכלל $\sqrt x\sqrt y=\sqrt{xy}$ מובטח רק כששני המספרים אינם שליליים, וכששניהם שליליים הוא נכשל. מוציאים קודם את $i$. <LessonLink id="3.1" anchor="sqrt-negative">שורש של מספר שלילי</LessonLink>.
+- **מחליפים בין החלק הממשי לחלק המדומה.** ל-$z=a+bi$ החלק הממשי הוא $a$, המספר שעומד לבד, והחלק המדומה הוא $b$, המקדם של $i$: $\operatorname{Re}(3-4i)=3$, ו-$\operatorname{Im}(3-4i)$ הוא מינוס 4, לא 3. <LessonLink id="3.1" anchor="re-im">החלק הממשי והחלק המדומה</LessonLink>.
+- **מתייחסים לצמוד כאילו היה המספר עצמו.** $\bar z$ שונה מ-$z$ בכל מספר שאינו ממשי: $z\bar z=a^2+b^2$, ואילו $z^2=(a^2-b^2)+2abi$; ל-$z=i$, $z\bar z=1$ ו-$z^2$ הוא מינוס 1. במשוואה עם $z$ ועם $\bar z$ אין לכנס אותם כאיברים דומים: כותבים $z=a+bi$ ומשווים חלקים. <LessonLink id="3.1" anchor="conj-equations">משוואה עם z ועם הצמוד</LessonLink>.
+- **מחשבים ערך מוחלט כסכום הרכיבים.** $|{-5}+12i|=\sqrt{25+144}=13$, לא 17: הסכום $|a|+|b|$ הוא הדרך לאורך הצירים. <LessonLink id="3.2" anchor="modulus">הערך המוחלט כאורך</LessonLink>.
+- **שוכחים את השורש בערך המוחלט.** $|1+i|=\sqrt2$, ולכן $|(1+i)^8|=16$, לא $2^8$. בלי שורש נכון רק $z\bar z=|z|^2$. <LessonLink id="3.2" anchor="modulus-properties">ערך מוחלט ושורש</LessonLink>.
+- **מחשבים ארגומנט כ-$\arctan\frac ba$ בלי לבדוק את הרביע.** המספר $z=-1-\sqrt3\,i$ ברביע השלישי, ו-$\operatorname{Arg}(-1-\sqrt3\,i)=\frac{\pi}{3}-\pi=-\frac{2\pi}{3}$, לא $\frac{\pi}{3}$. על הצירים קוראים מהשרטוט: $\operatorname{Arg}(-4)=\pi$. <LessonLink id="3.2" anchor="argument-quadrant">הארגומנט ברביע הנכון</LessonLink>.
+- **נותנים ארגומנט ראשי מחוץ לקטע $(-\pi,\pi]$.** $\frac{4\pi}{3}$ מתוקן ל-$\frac{4\pi}{3}-2\pi=-\frac{2\pi}{3}$, ו-$\operatorname{Arg}(-1)=\pi$, לא מינוס $\pi$. בגלל אותו קצה, $\operatorname{Arg}\bar z=-\operatorname{Arg}z$ נכשל במספרים הממשיים השליליים. <LessonLink id="3.2" anchor="principal-argument">הארגומנט הראשי</LessonLink>.
+- **משקפים את הצמוד דרך הציר הלא נכון.** $\bar z$ הוא השיקוף דרך הציר **הממשי**; השיקוף דרך הציר המדומה הוא מינוס $\bar z$, ומינוס $z$ הוא חצי סיבוב סביב הראשית. <LessonLink id="3.2" anchor="conjugate-reflection">הצמוד כשיקוף</LessonLink>.
+- **חושבים ש-$|z+w|=|z|+|w|$.** חיבור הוא חיבור וקטורים, ולכן יש רק אי-שוויון המשולש, עם שוויון כשהחצים באותו כיוון: $|1+i|=\sqrt2<2=|1|+|i|$. <LessonLink id="3.2" anchor="triangle-inequality">חיבור כחיבור וקטורים</LessonLink>.
+- **טועים בסימן של המרכז בקבוצה כמו $|z-a|=r$.** $|z-2i|=3$ הוא מעגל שמרכזו $2i$, ו-$|z+i|=|z-(-i)|$ הוא המרחק מהנקודה מינוס $i$. <LessonLink id="3.2" anchor="distance-sets">ערך מוחלט של הפרש כמרחק</LessonLink>.
+- **חושבים שארגומנט קבוע הוא ישר שלם.** $\operatorname{Arg}z=\frac{\pi}{4}$ היא קרן מהראשית, בלי הראשית; החצי השני של הישר $y=x$ הוא $\operatorname{Arg}z=-\frac{3\pi}{4}$. <LessonLink id="3.2" anchor="arg-sets">קבוצות לפי ארגומנט</LessonLink>.
+- **חושבים ש-$|z|^2=z^2$.** $|z|^2=z\bar z=a^2+b^2$, ממשי ואינו שלילי, ואילו $z^2$ בדרך כלל אינו ממשי: $(1+i)^2=2i$ ו-$|1+i|^2=2$. השוויון נכון רק כש-$z$ ממשי. <LessonLink id="3.2" anchor="modulus-properties">הריבוע של הערך המוחלט</LessonLink>.
+- **מכלילים בקבוצה את השפה גם כשאי-השוויון חזק.** 1 אינו בקבוצה $1<|z|\le2$: שם $|z|=1$, ו-$1<1$ לא נכון. באי-שוויון חזק השפה אינה בקבוצה, ובחלש היא בקבוצה; בודקים את התנאי עצמו, לא את הציור. <LessonLink id="3.2" anchor="distance-sets">עיגול עם השפה ובלעדיה</LessonLink>.
+- **מחליפים בין קוסינוס לסינוס בצורה הקוטבית.** $r\operatorname{cis}\theta=r\cos\theta+ir\sin\theta$: הקוסינוס הוא החלק הממשי, והזווית נמדדת מהציר הממשי, ולכן $\tan\theta=\frac ba$. <LessonLink id="3.3" anchor="polar-form">מהצורה הקוטבית לאלגברית</LessonLink>.
+- **כותבים צורה קוטבית עם מקדם שלילי.** בצורה קוטבית $r=|z|>0$, וסימן מינוס הוא סיבוב ב-$\pi$: $w=-3\operatorname{cis}\frac{\pi}{5}=3\operatorname{cis}\frac{6\pi}{5}=3\operatorname{cis}\left(-\frac{4\pi}{5}\right)$. <LessonLink id="3.3" anchor="polar-positive-r">הצורה הקוטבית: r חיובי</LessonLink>.
+- **כופלים או מחלקים ארגומנטים.** בכפל הערכים המוחלטים נכפלים והארגומנטים **מתחברים**; בחילוק הארגומנטים **מתחסרים**, כמו מעריכים. <LessonLink id="3.3" anchor="polar-multiply">כפל וחילוק בצורה קוטבית</LessonLink>.
+- **חושבים שכפל הוא סיבוב בלבד, או הזזה.** כפל ב-$1+i$ מסובב ב-$\frac{\pi}{4}$ **ומותח** פי $\sqrt2$; הזזה היא חיבור. רק כפל במספר עם $|w|=1$ הוא סיבוב טהור. <LessonLink id="3.3" anchor="multiply-geometry">כפל כסיבוב ומתיחה</LessonLink>.
+- **טועים בכיוון הסיבוב, של כפל ב-$i$ או של זווית שלילית.** $i=\operatorname{cis}\frac{\pi}{2}$ מסובב **נגד** כיוון השעון: $1\mapsto i\mapsto-1\mapsto-i$. זווית שלילית נמדדת **עם** כיוון השעון, אל מתחת לציר הממשי, ואינה מצביעה לאותו מקום כמו הזווית החיובית: $\sin\left(-\frac{\pi}{3}\right)=-\frac{\sqrt3}{2}$. כפל במינוס $i$ מסובב עם כיוון השעון. <LessonLink id="3.3" anchor="multiply-by-i">כפל ב-i</LessonLink>.
+- **מסובבים סביב הראשית כשהסיבוב הוא סביב נקודה אחרת.** $z\operatorname{cis}\alpha$ מסובב סביב הראשית; סביב $c$ הסיבוב הוא $c+(z-c)\operatorname{cis}\alpha$. <LessonLink id="3.3" anchor="rotate-about-point">סיבוב סביב נקודה</LessonLink>.
+- **מעלים בחזקה את הקוסינוס ואת הסינוס בנפרד.** $(\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta$: החזקה פועלת על הזווית. כבר ב-$n=2$ יש איבר מעורב, $2i\sin\theta\cos\theta$. <LessonLink id="3.3" anchor="de-moivre">נוסחת דה-מואבר</LessonLink>.
+- **שוכחים להעלות בחזקה את הערך המוחלט.** $(r\operatorname{cis}\theta)^n=r^n\operatorname{cis}n\theta$: למשל $(1+i)^8=(\sqrt2)^8\operatorname{cis}2\pi=16$. <LessonLink id="3.3" anchor="de-moivre">חזקות בצורה קוטבית</LessonLink>.
+- **חושבים ש-$\cos3t=3\cos t$, או טועים בסימן בפיתוח.** $\cos3t=\cos^3t-3\cos t\sin^2t=4\cos^3t-3\cos t$: האיבר עם $(i\sin t)^2$ ממשי, ו-$i^2=-1$ הופך את הסימן שלו. <LessonLink id="3.3" anchor="demoivre-trig">זהויות טריגונומטריות מדה-מואבר</LessonLink>.
+- **מפרקים את האקספוננט של סכום לסכום אקספוננטים.** $e^{a+ib}=e^a\cdot e^{ib}$, מכפלה: $e^{1+i\pi}=-e$, לא $e-1$. <LessonLink id="3.4" anchor="exp-definition">האקספוננט המרוכב</LessonLink>.
+- **חושבים שהגודל של האקספוננט תלוי בגודל של המעריך.** $|e^{x+iy}|=e^x$: $|e^{3-4i}|=e^3$, לא $e^5$. החלק המדומה קובע רק את הכיוון. <LessonLink id="3.4" anchor="exp-modulus">גודל וכיוון של האקספוננט</LessonLink>.
+- **חושבים שהאקספוננט המרוכב חד-חד-ערכי.** $e^{z+2\pi i}=e^z$, ולכן $e^z=1$ בדיוק כש-$z=2\pi ki$, ולמשוואה $e^z=w$ ($w\ne0$) יש אינסוף פתרונות. <LessonLink id="3.4" anchor="exp-periodic">המחזוריות של האקספוננט</LessonLink>.
+- **חושבים שללוגריתם מרוכב יש ערך אחד.** $\log(1+i)=\ln\sqrt2+i\left(\frac{\pi}{4}+2\pi k\right)$, $k$ שלם; $\ln\sqrt2+\frac{\pi}{4}i$ הוא רק הערך הראשי, $\operatorname{Log}(1+i)$. <LessonLink id="3.4" anchor="log-all">כל הערכים של הלוגריתם</LessonLink>.
+- **מניחים ש-$\operatorname{Log}(zw)=\operatorname{Log}z+\operatorname{Log}w$ תמיד.** השוויון נכון רק עד כדי $2\pi ki$: $\operatorname{Log}(-1)+\operatorname{Log}(-1)=2\pi i$, אבל $\operatorname{Log}1=0$. <LessonLink id="3.4" anchor="log-rules">חוקי הלוגריתם במרוכבים</LessonLink>.
+- **לוקחים לוגריתם רכיב ברכיב.** $\operatorname{Re}\operatorname{Log}(x+iy)=\ln\sqrt{x^2+y^2}=\frac12\ln(x^2+y^2)$, לא $\ln x$: החלק הממשי של הלוגריתם תלוי בגודל. <LessonLink id="3.4" anchor="log-recipe">הלוגריתם מהצורה הקוטבית</LessonLink>.
+- **מחליפים בין הנוסחאות של סינוס וקוסינוס דרך האקספוננט.** הקוסינוס הוא חצי הסכום, והסינוס חצי ההפרש **חלקי $i$**; בודקים ב-$\theta=0$, שם הקוסינוס 1 והסינוס 0. <LessonLink id="3.4" anchor="cos-sin-exp">סינוס וקוסינוס דרך האקספוננט</LessonLink>.
+- **שוכחים את הגורם 2 בצירוף של שני אקספוננטים צמודים.** $e^{i\theta}+e^{-i\theta}=2\cos\theta$. לכן $\cos^3t=\frac{(e^{it}+e^{-it})^3}{8}=\frac{2\cos3t+6\cos t}{8}$. <LessonLink id="3.4" anchor="cos-sin-uses">הורדת חזקות בעזרת האקספוננט</LessonLink>.
+- **חושבים שקוסינוס של מספר מרוכב חסום ב-1.** $\cos i=\frac{e+e^{-1}}{2}\approx1.543$, ו-$\cos(iy)$ גדל בלי חסם. החסם $|\cos x|\le1$ בא מ-$|e^{ix}|=1$, שנכון רק ל-$x$ ממשי. <LessonLink id="3.4" anchor="cos-complex">קוסינוס של מספר מרוכב</LessonLink>.
+- **חושבים ש-$e^{iz}$ נמצא תמיד על מעגל היחידה.** $|e^{iz}|=e^{-\operatorname{Im}z}$, ו-1 רק כש-$z$ ממשי: $|e^{i\cdot i}|=e^{-1}$. <LessonLink id="3.4" anchor="cos-complex">קוסינוס של מספר מרוכב</LessonLink>.
+- **חושבים שלמספר שלילי אין לוגריתם גם במרוכבים.** במרוכבים לכל $w\ne0$ יש לוגריתם. מספר שלילי נמצא על החלק השלילי של הציר הממשי, הארגומנט הראשי שלו $\pi$, ולכן $\operatorname{Log}w=\ln|w|+i\pi$; למשל $\operatorname{Log}(-1)=i\pi$, כי $e^{i\pi}=-1$. <LessonLink id="3.4" anchor="log-negative">לוגריתם של מספר שלילי</LessonLink>.
+- **חושבים שלמספר שלילי אין שורשים.** במרוכבים לכל $w\ne0$ יש בדיוק $n$ שורשים מסדר $n$: $z^4=-16$ נותן $\pm\sqrt2\pm\sqrt2\,i$. <LessonLink id="3.5" anchor="why-n">למה בדיוק n שורשים</LessonLink>.
+- **חושבים שלכל שורש יש בדיוק שני ערכים, פלוס ומינוס.** יש בדיוק $n$ שורשים, במרווחים של $\frac{2\pi}{n}$; זוגות נגדיים, בהפרש זווית $\pi$, יש רק כש-$n$ זוגי, ולשלושת השורשים השלישיים של 1 אין נגדי ביניהם. <LessonLink id="3.5" anchor="regular-polygon">n שורשים על מצולע משוכלל</LessonLink>.
+- **שוכחים להוציא שורש מהערך המוחלט.** לשורש מסדר $n$ של $w$ הערך המוחלט $|w|^{1/n}$: לשורשים השלישיים של $8i$ הערך המוחלט 2, לא 8. <LessonLink id="3.5" anchor="root-modulus">הערך המוחלט של שורש</LessonLink>.
+- **לא מחלקים את הזווית ב-$n$.** $\theta_k=\frac{\alpha+2\pi k}{n}$: גם $\alpha$ וגם $2\pi k$ מתחלקים. לשורשים של $z^3=8i$ הזוויות $\frac{\pi}{6}$, $\frac{5\pi}{6}$ ו-$\frac{3\pi}{2}$, לא $\frac{\pi}{2}+\frac{2\pi k}{3}$. <LessonLink id="3.5" anchor="root-angle">הזווית של שורש</LessonLink>.
+- **חושבים שהמרווח בין שורשים סמוכים הוא $\frac{\pi}{n}$.** $n$ השורשים מחלקים את המעגל כולו, $2\pi$: המרווח $\frac{2\pi}{n}$, ולסדר 6 הוא $\frac{\pi}{3}$. <LessonLink id="3.5" anchor="regular-polygon">n שורשים על מצולע משוכלל</LessonLink>.
+- **חושבים שכל מספר על מעגל היחידה הוא שורש יחידה מסדר נתון.** רק $n$ הנקודות $\operatorname{cis}\frac{2\pi k}{n}$: $i^6=-1$ ו-$\left(\frac{1+i}{\sqrt2}\right)^6=-i$, ולכן אף אחד מהם אינו שורש מסדר 6. <LessonLink id="3.5" anchor="roots-of-unity">שורשי היחידה</LessonLink>.
+- **חושבים שסכום שורשי היחידה הוא $n$, או 1.** לא $n$ ("כל שורש שווה 1 בחזקת $n$") ולא 1 ("הם שורשים של 1"): לכל $n\ge2$ הסכום 0: קודקודי מצולע משוכלל שמרכזו בראשית, או $\frac{\omega^n-1}{\omega-1}=0$. $\omega_k^n=1$, אבל השורשים עצמם אינם 1. <LessonLink id="3.5" anchor="roots-sum">סכום שורשי היחידה</LessonLink>.
+
+## איך פותרים
+
+### חשבון בצורה האלגברית: כפל, ריבוע וחזקות של i
+
+- **מזהים:** "כתבו בצורה $a+bi$", "חשבו את $\operatorname{Re}$ ואת $\operatorname{Im}$", חזקה גבוהה של $i$, "נכון או לא נכון" על החלקים.
+- **המתכון:** (1) פותחים סוגריים כמו בביטוי אלגברי (בריבוע: $(a+b)^2=a^2+2ab+b^2$). (2) מחליפים כל $i^2$ במינוס 1, ואת $i^n$ לפי השארית של $n$ בחלוקה ב-4. (3) מכנסים חלק ממשי וחלק מדומה. (4) $\operatorname{Re}$ ו-$\operatorname{Im}$ הם המקדמים, בלי $i$ ועם הסימן.
+- **המלכודת:** $i\cdot i=1$; לכפול רכיב ברכיב; להעלות בריבוע כל איבר לחוד; לכתוב $\operatorname{Im}z$ עם $i$; לחשוב שכל חזקה זוגית של $i$ היא 1.
+- **דוגמאות פתורות:** <LessonLink id="3.1" anchor="ex-3-1-1">ארבע פעולות בצורה האלגברית</LessonLink>, <LessonLink id="3.1" anchor="ex-3-1-3">נכון או לא נכון? חמש טענות על מספרים מרוכבים</LessonLink>.
+
+### חילוק והפכי
+
+- **מזהים:** מנה שבמכנה שלה מספר שאינו ממשי; "חשבו את $\frac1z$", "את $\operatorname{Re}\frac1z$".
+- **המתכון:** (1) כותבים את הצמוד של המכנה. (2) כופלים בו את המונה ואת המכנה. (3) המכנה הוא $c^2+d^2$; את המונה מחשבים בכפל רגיל. (4) מחלקים כל חלק של המונה במכנה. (5) בודקים: התוצאה כפול המכנה המקורי מחזירה את המונה.
+- **המלכודת:** לחלק רכיב ברכיב; לכפול רק את המכנה; לחשוב שהצמוד הוא ההפכי ($\frac1z=\frac{\bar z}{|z|^2}$).
+- **דוגמה פתורה:** <LessonLink id="3.1" anchor="ex-3-1-2">חילוק בעזרת הצמוד</LessonLink>.
+
+### משוואה עם $z$ ועם $\bar z$
+
+- **מזהים:** במשוואה מופיעים גם $z$ וגם $\bar z$ (או $|z|$, $\operatorname{Re}z$), ואי אפשר לבודד את $z$ כרגיל.
+- **המתכון:** (1) מציבים $z=a+bi$ ו-$\bar z=a-bi$. (2) מסדרים כל אגף לחלק ממשי ולחלק מדומה. (3) משווים: שתי משוואות ממשיות ב-$a$ וב-$b$. (4) פותרים, ובודקים בהצבה במשוואה המקורית.
+- **המלכודת:** לנסות "לחלק ב-$z$"; לשכוח שהחלק המדומה של $\bar z$ הוא מינוס $b$; לשכוח פתרון כשהמשוואות הממשיות אינן לינאריות.
+- **דוגמה פתורה:** <LessonLink id="3.1" anchor="ex-3-1-5">משוואות עם z ועם הצמוד שלו</LessonLink>.
+
+### משוואה ריבועית עם מקדמים ממשיים ודיסקרימיננטה שלילית
+
+- **מזהים:** $az^2+bz+c=0$ עם מקדמים ממשיים ו-$\Delta<0$; "מצאו את כל הפתרונות", "מצאו משוואה ששורשה...", "מצאו את הטעות בפתרון".
+- **המתכון:** (1) $\Delta=b^2-4ac$. (2) $\sqrt{\Delta}=i\sqrt{|\Delta|}$. (3) מציבים בנוסחה, ומחלקים ב-$2a$ את החלק הממשי **ואת** החלק המדומה; או משלימים לריבוע ומוציאים שורש עם פלוס ומינוס. (4) בודקים: הסכום מינוס $\frac ba$ והמכפלה $\frac ca$. (5) מהשורש למשוואה: השורש השני הוא הצמוד, והמשוואה היא $z^2-sz+p=0$, עם $s$ סכום השורשים ו-$p$ מכפלתם.
+- **המלכודת:** לשכוח לחלק ב-$2a$; לכתוב $\sqrt{\Delta}=\sqrt{|\Delta|}$ בלי $i$; להניח זוג צמוד כשהמקדמים אינם ממשיים.
+- **דוגמאות פתורות:** <LessonLink id="3.1" anchor="ex-3-1-4">מצאו את הטעות: שני פתרונות שגויים של משוואה ריבועית</LessonLink>, <LessonLink id="3.1" anchor="ex-3-1-6">הסיפור של בומבלי: שלושה שורשים ממשיים דרך מספר מדומה</LessonLink>.
+
+### ערך מוחלט וארגומנט ראשי
+
+- **מזהים:** "מצאו את $|z|$ ואת $\operatorname{Arg}z$", "שרטטו", נקודה ברביע השני או השלישי, או על אחד הצירים; "נכון או לא נכון" על אורכים וזוויות.
+- **המתכון:** (1) $|z|=\sqrt{a^2+b^2}$, עם השורש. (2) משרטטים וקובעים רביע, **לפני** המחשבון. (3) על ציר קוראים את הזווית מהשרטוט. (4) אחרת זווית העזר $\arctan\frac ba$, ועוד $\pi$ (מעל הציר הממשי) או פחות $\pi$ (מתחתיו) כש-$a<0$. (5) בודקים: $|z|\cos\theta=a$ ו-$|z|\sin\theta=b$, עם הסימנים, ו-$\operatorname{Arg}z\in(-\pi,\pi]$. לכפל, למנה ולחזקה: $|zw|=|z||w|$ בלי לכפול.
+- **המלכודת:** $|a|+|b|$ במקום השורש; לשכוח את השורש; לסמוך על $\arctan$ משמאל לציר המדומה; זווית גדולה מ-$\pi$, או מינוס $\pi$ במקום $\pi$; $|z|^2=z^2$; $|z+w|=|z|+|w|$.
+- **דוגמאות פתורות:** <LessonLink id="3.2" anchor="ex-3-2-1">חיבור, חיסור, שיקופים ומרחק</LessonLink>, <LessonLink id="3.2" anchor="ex-3-2-2">ערך מוחלט וארגומנט ראשי, בכל רביע ועל הצירים</LessonLink>, <LessonLink id="3.2" anchor="ex-3-2-3">נכון או לא נכון? חמש טענות על אורכים וזוויות</LessonLink>.
+
+### קבוצה במישור גאוס: לקרוא תנאי כצורה
+
+- **מזהים:** "תארו את הקבוצה", "שרטטו את כל ה-$z$ שמקיימים...", תנאי עם $|z-a|$, $\operatorname{Re}z$, $\operatorname{Im}z$ או $\operatorname{Arg}z$; "מה הערך הגדול ביותר של $|z|$ בתחום".
+- **המתכון:** (1) מביאים כל ערך מוחלט לצורה "$z$ פחות משהו", וקוראים לפי המילון: מרחק, קואורדינטה, כיוון. (2) מרחק קבוע: מעגל; חסום: עיגול; בין שני מספרים: טבעת; שני מרחקים שווים: האנך האמצעי. (3) $\operatorname{Re}$ ו-$\operatorname{Im}$: ישרים, חצאי מישור, רצועות. (4) $\operatorname{Arg}$ קבוע: קרן בלי הראשית; בין שני ערכים: גזרה, ובחציית החלק השלילי של הציר הממשי שני חלקים. (5) כמה תנאים: חיתוך. (6) כשהמילים אינן מספיקות (למשל מרחק אחד **כפול** מהשני): מציבים $z=x+iy$, מעלים בריבוע ומשלימים לריבוע. (7) בודקים בנקודה אחת בפנים ובנקודה אחת על השפה. ולמרחק הקיצוני מהראשית בעיגול: הגדול $|a|+r$, והקטן $|a|-r$ כש-$|a|>r$ (ו-0 כשהראשית בעיגול), על הישר מהראשית דרך המרכז. לטווח הכיוונים של עיגול שאינו מכיל את הראשית: חצי זווית הפתיחה $\alpha$ מקיים $\sin\alpha=\frac{r}{|a|}$ (משולש ישר זווית עם המשיק), ו-$\alpha=\arcsin\frac{r}{|a|}$, הזווית בין 0 ל-$\frac{\pi}{2}$ שזה הסינוס שלה ($\sin^{-1}$ של המחשבון; את $\arcsin$ לומדים בשיעור 4.4).
+- **המלכודת:** סימן הפוך למרכז; ישר שלם במקום קרן; לשכוח אם השפה שייכת; להעלות בריבוע $2|z+1|$ ולקבל $2|z+1|^2$ במקום $4|z+1|^2$; לצפות לישר כשהמרחקים אינם שווים.
+- **דוגמאות פתורות:** <LessonLink id="3.2" anchor="ex-3-2-4">ארבע קבוצות: לקרוא תנאי כצורה</LessonLink>, <LessonLink id="3.2" anchor="ex-3-2-5">עיגול רחוק מהראשית: הכי קרוב, הכי רחוק, ובאילו כיוונים</LessonLink>, <LessonLink id="3.2" anchor="ex-3-2-6">מצאו את הטעות: ישר או מעגל?</LessonLink>.
+
+### מעבר בין הצורה האלגברית לצורה הקוטבית
+
+- **מזהים:** "כתבו בצורה קוטבית", "בכתיב האקספוננציאלי", "בצורה $a+bi$", ביטוי כמו $w=-3\operatorname{cis}\frac{\pi}{5}$.
+- **המתכון:** לקוטבית: (1) $r=\sqrt{a^2+b^2}$. (2) הרביע. (3) $\cos\theta=\frac ar$ ו-$\sin\theta=\frac br$, או זווית העזר עם התיקון, ובקטע $(-\pi,\pi]$ אם מבקשים ארגומנט ראשי. (4) $z=r\operatorname{cis}\theta=re^{i\theta}$. (5) בודקים בפתיחה. לאלגברית: פותחים, $a=r\cos\theta$ ו-$b=r\sin\theta$. מקדם שלילי: מחליפים אותו ב-$\operatorname{cis}\pi$ ומחברים זוויות.
+- **המלכודת:** להחליף בין הקוסינוס לסינוס; $r$ שלילי; זווית ברביע הלא נכון.
+- **דוגמה פתורה:** <LessonLink id="3.3" anchor="ex-3-3-1">מהצורה האלגברית לקוטבית ובחזרה</LessonLink>.
+
+### כפל, חילוק וחזקות בצורה הקוטבית
+
+- **מזהים:** מכפלה, מנה או חזקה גבוהה, כמו $(1+\sqrt3\,i)^9$ או $\frac{(1+i)^{10}}{(\sqrt3+i)^6}$; "מתי $z^n$ ממשי", "ממשי וחיובי".
+- **המתכון:** (1) כל גורם בצורה קוטבית. (2) כופלים או מחלקים את הערכים המוחלטים, ומעלים בחזקה. (3) מחברים, מחסירים או כופלים ב-$n$ את הזוויות. (4) מורידים כפולות של $2\pi$ עד שהזווית בקטע המבוקש. (5) פותחים לצורה אלגברית, ובודקים בדרך שנייה ($(1+i)^2=2i$ חוסך הרבה). (6) "ממשי": $n\theta$ כפולה של $\pi$; "ממשי וחיובי": כפולה של $2\pi$.
+- **המלכודת:** לשכוח להעלות בחזקה את $r$; להעלות בחזקה כל רכיב לחוד; לכפול ארגומנטים במקום לחבר; לא להחזיר את הזווית לקטע; לבלבל בין "ממשי" ל"ממשי וחיובי".
+- **דוגמאות פתורות:** <LessonLink id="3.3" anchor="ex-3-3-2">מכפלה ומנה בצורה הקוטבית, ובדיקה בצורה האלגברית</LessonLink>, <LessonLink id="3.3" anchor="ex-3-3-3">נכון או לא נכון? שש טענות על הצורה הקוטבית</LessonLink>, <LessonLink id="3.3" anchor="ex-3-3-5">חזקות של מנות: מתי החזקה ממשית?</LessonLink>.
+
+### סיבוב: גאומטריה בכפל
+
+- **מזהים:** "סובבו את הנקודה בזווית... סביב...", "מצאו את הקודקודים האחרים של ריבוע או של משולש", "לאן עוברת הנקודה".
+- **המתכון:** (1) סיבוב בזווית $\alpha$ סביב הראשית הוא כפל ב-$\operatorname{cis}\alpha$ (רבע סיבוב נגד כיוון השעון: כפל ב-$i$). (2) סביב נקודה $c$: $c+(z-c)\operatorname{cis}\alpha$. (3) צלע של ריבוע היא הצלע הסמוכה מסובבת ברבע סיבוב. (4) בודקים מרחקים: לתמונה אותו מרחק מהמרכז.
+- **המלכודת:** לסובב סביב הראשית במקום סביב $c$; כיוון הסיבוב של $i$; לחשוב שכפל ב-$w$ עם $|w|\ne1$ אינו מותח.
+- **דוגמה פתורה:** <LessonLink id="3.3" anchor="ex-3-3-4">ריבוע וסיבוב סביב נקודה</LessonLink>.
+
+### זהויות טריגונומטריות מדה-מואבר
+
+- **מזהים:** "בטאו את $\cos3\theta$ (או $\sin3\theta$) בעזרת $\cos\theta$ (או $\sin\theta$)", "מצאו את הטעות", משוואה ממעלה שלישית כמו $4x^3-3x=\frac12$.
+- **המתכון:** (1) כותבים $(\cos\theta+i\sin\theta)^n$ לפי דה-מואבר ולפי הבינום. (2) מחליפים חזקות של $i$. (3) משווים חלק ממשי וחלק מדומה. (4) מחליפים לפי $\cos^2\theta+\sin^2\theta=1$ אם צריך. (5) בודקים בזווית נוחה. למשוואה: מזהים בה צד של זהות, מציבים $x=\cos\theta$, פותרים את המשוואה הטריגונומטרית, ואוספים את הערכים **השונים** של $\cos\theta$.
+- **המלכודת:** $\cos3\theta=\cos^3\theta$ או $3\cos\theta$; לשכוח ש-$(is)^2$ ממשי ושלילי; לספור פתרון אחד פעמיים.
+- **דוגמה פתורה:** <LessonLink id="3.3" anchor="ex-3-3-6">מצאו את הטעות, ופתרו משוואה ממעלה שלישית בעזרת cos 3θ</LessonLink>.
+
+### לחשב $e^z$
+
+- **מזהים:** אקספוננט שהמעריך שלו מרוכב; "מצאו את הגודל ואת הארגומנט הראשי של $e^z$", "נכון או לא נכון" על $e^z$.
+- **המתכון:** (1) מפרידים $z=x+iy$. (2) הגודל $e^x$. (3) הזווית $y$, ברדיאנים; לארגומנט הראשי מזיזים בכפולה של $2\pi$ אל $(-\pi,\pi]$. (4) הצורה $a+bi$: $e^x\cos y+ie^x\sin y$.
+- **המלכודת:** $e^{x+iy}=e^x+e^{iy}$; הגודל $e^{|z|}$; לתת את $y$ כארגומנט ראשי כשהוא מחוץ לטווח; לחשוב ש-$e^z$ יכול להיות 0.
+- **דוגמאות פתורות:** <LessonLink id="3.4" anchor="ex-3-4-1">לחשב אקספוננט: הגודל, הכיוון והצורה a+bi</LessonLink>, <LessonLink id="3.4" anchor="ex-3-4-3">נכון או לא נכון? חמש טענות על האקספוננט המרוכב</LessonLink>.
+
+### לוגריתם, והמשוואה $e^z=w$
+
+- **מזהים:** "מצאו את כל הפתרונות של $e^z=w$", "חשבו את $\log w$ ואת $\operatorname{Log}w$", לוגריתם של מספר שלילי, "מצאו את הטעות" בחוקי הלוגריתם, $e^{2z}=w$.
+- **המתכון:** (1) $|w|$ ו-$\ln|w|$: החלק הממשי. (2) $\operatorname{Arg}w$ ברביע הנכון. (3) כל הערכים: $\ln|w|+i(\operatorname{Arg}w+2\pi k)$; הערך הראשי הוא $k=0$. (4) כשהמעריך הוא $mz$: פותרים עבור $u=mz$ ומחלקים ב-$m$ בסוף, **גם את המחזור**. (5) בודקים: $e^{z}$ מחזיר את $w$. (6) בחוקי הלוגריתם: מחשבים את שני הצדדים ובודקים אם החלק המדומה בטווח $(-\pi,\pi]$.
+- **המלכודת:** ערך אחד בלבד; $\ln x$ במקום $\ln|w|$; ארגומנט ראשי מחוץ לטווח; $\operatorname{Log}(z^2)=2\operatorname{Log}z$ בלי לבדוק; לא לחלק את $2\pi k$ ב-$m$.
+- **דוגמאות פתורות:** <LessonLink id="3.4" anchor="ex-3-4-2">כל הערכים של הלוגריתם, והערך הראשי</LessonLink>, <LessonLink id="3.4" anchor="ex-3-4-4">מצאו את הטעות: הלוגריתם הראשי של ריבוע</LessonLink>, <LessonLink id="3.4" anchor="ex-3-4-5">לפתור משוואות עם אקספוננט וקוסינוס</LessonLink> (סעיף א).
+
+### משוואה עם $\cos z$ או $\sin z$
+
+- **מזהים:** "מצאו את כל המספרים המרוכבים שמקיימים $\cos z=2$", ערך שהקוסינוס הממשי אינו מקבל.
+- **המתכון:** (1) כותבים את הקוסינוס (או הסינוס) דרך האקספוננט. (2) מציבים $u=e^{iz}$, ו-$e^{-iz}=\frac1u$. (3) כופלים ב-$u$: משוואה ריבועית ב-$u$. (4) פותרים $e^{iz}=u$ לכל פתרון, בעזרת הלוגריתם, ומחלקים ב-$i$. (5) מפשטים ובודקים בהצבה.
+- **המלכודת:** להכריז "אין פתרון" כמו בממשיים; לשכוח את $2\pi k$; טעות בחלוקה ב-$i$ (כפל במינוס $i$).
+- **דוגמה פתורה:** <LessonLink id="3.4" anchor="ex-3-4-5">לפתור משוואות עם אקספוננט וקוסינוס</LessonLink> (סעיף ב).
+
+### הורדת חזקות ומכפלה לסכום
+
+- **מזהים:** "כתבו את $\cos^4\theta$ כסכום של קוסינוסים בלי חזקות", "כתבו את $\sin\alpha\cos\beta$ כסכום".
+- **המתכון:** (1) מחליפים כל $\cos$ ו-$\sin$ באקספוננטים. (2) פותחים לפי הבינום; במכפלה המעריכים מתחברים. (3) מצרפים זוגות: $e^{ik\theta}+e^{-ik\theta}=2\cos k\theta$, $e^{ik\theta}-e^{-ik\theta}=2i\sin k\theta$. (4) בודקים ב-$\theta=0$ ובזווית נוספת.
+- **המלכודת:** לשכוח את הגורם 2 בזוג; לשכוח את המכנה $(2i)^n$ בסינוס, ש-$(2i)^2=-4$; להחליף בין נוסחת הקוסינוס לנוסחת הסינוס.
+- **דוגמה פתורה:** <LessonLink id="3.4" anchor="ex-3-4-6">הורדת חזקות ומכפלה לסכום</LessonLink>.
+
+### כל השורשים מסדר n
+
+- **מזהים:** "פתרו $z^n=w$", "מצאו את כל השורשים הרביעיים של...", "שרטטו את השורשים", "נכון או לא נכון" על מספר השורשים.
+- **המתכון:** (1) $w=R\operatorname{cis}\alpha$, עם $\alpha=\operatorname{Arg}w$. (2) הרדיוס $R^{1/n}$. (3) הזוויות $\frac{\alpha+2\pi k}{n}$, $k=0,1,\dots,n-1$. (4) צורה אלגברית כשהזוויות נוחות. (5) בודקים: שורש אחד בחזקה $n$, וכל השורשים על מעגל ברדיוס $R^{1/n}$ במרווחים של $\frac{2\pi}{n}$; הסכום 0.
+- **המלכודת:** לשכוח את השורש של $R$; לא לחלק את $\alpha$ ב-$n$; מרווח $\frac{\pi}{n}$; רק שני שורשים, פלוס ומינוס; "אין שורש למספר שלילי".
+- **דוגמאות פתורות:** <LessonLink id="3.5" anchor="ex-3-5-1">ארבעה שורשים רביעיים על ריבוע</LessonLink>, <LessonLink id="3.5" anchor="ex-3-5-2">נכון או לא נכון? חמש טענות על שורשים</LessonLink>.
+
+### מצולע משוכלל מקודקוד אחד
+
+- **מזהים:** "נתון קודקוד אחד של מצולע משוכלל שמרכזו בראשית, מצאו את האחרים", "מהו $w$ שהקודקודים הם השורשים שלו", "מהו סכום הקודקודים".
+- **המתכון:** (1) הקודקודים הם $z_0\omega^k$ עם $\omega=\operatorname{cis}\frac{2\pi}{n}$: כופלים את הקודקוד הידוע בשורשי היחידה. (2) $w=z_0^n$, וכל הקודקודים הם השורשים של $z^n=w$. (3) הסכום 0. (4) בודקים: כל הקודקודים באותו מרחק מהראשית.
+- **המלכודת:** לחבר במקום לכפול (הזזה במקום סיבוב); לחשב $w$ מקודקוד אחר ולקבל תוצאה שונה (אם כן, יש טעות).
+- **דוגמה פתורה:** <LessonLink id="3.5" anchor="ex-3-5-3">משולש שווה צלעות שמרכזו בראשית</LessonLink>.
+
+### משוואה ריבועית עם מקדמים מרוכבים
+
+- **מזהים:** $az^2+bz+c=0$ שאחד המקדמים בה אינו ממשי; "מצאו שורש ריבועי של $p+qi$".
+- **המתכון:** (1) $\Delta=b^2-4ac$, מספר מרוכב. (2) שורש ריבועי $s=x+yi$ של $\Delta=p+qi$: $x^2-y^2=p$, $2xy=q$, $x^2+y^2=|\Delta|$; הסימנים לפי $2xy=q$ (וכש-$q=0$: $\pm\sqrt p$ אם $p>0$, $\pm i\sqrt{-p}$ אם $p<0$). (3) $z=\frac{-b\pm s}{2a}$. (4) בודקים בסכום ובמכפלה.
+- **המלכודת:** לכתוב $\sqrt{\Delta}$ כאילו הוא מספר אחד מוגדר; לשים שורש גם באגף שמאל של $x^2+y^2=|\Delta|$; לטעות בסימנים של $x$ ו-$y$; להניח שהשורשים צמודים.
+- **דוגמה פתורה:** <LessonLink id="3.5" anchor="ex-3-5-4">משוואה ריבועית עם מקדמים מרוכבים, וטעות של סטודנט</LessonLink>.
+
+### פולינום ממשי: שורשים ופירוק לגורמים ממשיים
+
+- **מזהים:** "פרקו לגורמים ממשיים", "נתון ש-$3i$ שורש, מצאו את כל השורשים", פולינום כמו $z^6+64$, "נכון או לא נכון: לכל פולינום ממשי ממעלה אי-זוגית יש שורש ממשי".
+- **המתכון:** (1) מוצאים שורשים: מ-$z^n=w$, או משורש נתון ומהצמוד שלו (המקדמים ממשיים). (2) כל זוג צמוד נותן $z^2-2\operatorname{Re}(z_0)\,z+|z_0|^2$. (3) את הגורם שנשאר מוצאים בהשוואת מקדמים, בלי חילוק ארוך. (4) שורשי הגורמים הריבועיים מנוסחת השורשים. (5) בודקים במקדם אחד או שניים. במשוואה דו-ריבועית: $u=z^2$, ואז $z^2=u$.
+- **המלכודת:** לשכוח את הצמוד; להשתמש בזוגות צמודים כשהמקדמים אינם ממשיים; גורם ריבועי עם דיסקרימיננטה חיובית שעוד מתפרק; לחשוב שבלי שורש ממשי אין פירוק ממשי ($z^4+1$ מתפרק).
+- **דוגמאות פתורות:** <LessonLink id="3.5" anchor="ex-3-5-5">שורשים ופירוק לגורמים ממשיים של פולינום ממעלה 6</LessonLink>, <LessonLink id="3.5" anchor="ex-3-5-6">פולינום ממשי שאחד משורשיו ידוע</LessonLink>.
+
+## רשימת בדיקה לפני מבחן
+
+בדקו שאתם יכולים, בלי להציץ:
+
+- לחבר, לכפול ולחלק מספרים מרוכבים בצורה האלגברית, לחשב חזקות של $i$, ולומר מה $\operatorname{Re}z$ ו-$\operatorname{Im}z$ (מספרים ממשיים).
+- להשתמש בצמוד: לחילוק, לחלקים ($\operatorname{Re}z=\frac{z+\bar z}{2}$, $\operatorname{Im}z=\frac{z-\bar z}{2i}$), ולפתרון משוואה עם $z$ ועם $\bar z$ בהשוואת חלקים.
+- לפתור משוואה ריבועית עם דיסקרימיננטה שלילית, לבדוק בסכום ובמכפלה, ולהסביר למה עם מקדמים ממשיים השורשים באים בזוג צמוד (ולמה זה נכשל עם מקדמים מרוכבים).
+- לשרטט מספר מרוכב כנקודה וכחץ, לפרש חיבור כחיבור וקטורים ו-$z-w$ כחץ מ-$w$ אל $z$, ולהבדיל בין $\bar z$, מינוס $z$ ומינוס $\bar z$ כשיקופים.
+- לחשב $|z|$ ואת הארגומנט הראשי ברביע הנכון ובטווח $(-\pi,\pi]$, כולל על הצירים, ולהשתמש ב-$|z|^2=z\bar z$, ב-$|zw|=|z||w|$ ובאי-שוויון המשולש.
+- לקרוא תנאי על $z$ כצורה: מעגל, עיגול, טבעת, האנך האמצעי, חצי מישור, רצועה, קרן וגזרה, וחיתוך של כמה תנאים; ולמצוא את המרחק הקטן והגדול מהראשית בעיגול.
+- לעבור בין הצורה האלגברית, הצורה הקוטבית $r\operatorname{cis}\theta$ והכתיב $re^{i\theta}$, עם $r>0$, ולתקן מקדם שלילי בעזרת $\operatorname{cis}\pi$.
+- לכפול, לחלק ולהעלות בחזקה בצורה הקוטבית (דה-מואבר), להחזיר את הזווית לקטע, ולקבוע מתי חזקה ממשית או ממשית וחיובית.
+- לפרש כפל כסיבוב ומתיחה, ולסובב נקודה סביב נקודה אחרת בנוסחה $c+(z-c)e^{i\alpha}$.
+- לגזור מדה-מואבר זהויות כמו $\cos3\theta=4\cos^3\theta-3\cos\theta$, ולהשתמש בהן לפתרון משוואה.
+- לכתוב את $\cos\theta$ ואת $\sin\theta$ דרך $e^{i\theta}$ ו-$e^{-i\theta}$ ולהוריד חזקות; לחשב $e^z$ (גודל $e^{\operatorname{Re}z}$, זווית $\operatorname{Im}z$), ולהסביר למה הוא מחזורי עם מחזור $2\pi i$ ולמה $\cos z$ אינו חסום.
+- לחשב את כל הערכים של $\log w$ ואת הערך הראשי $\operatorname{Log}w$ (גם למספר שלילי), לפתור $e^z=w$ ו-$\cos z=c$, ולתת דוגמה שבה $\operatorname{Log}(zw)\ne\operatorname{Log}z+\operatorname{Log}w$.
+- למצוא את כל $n$ השורשים של $z^n=w$, לשרטט אותם כמצולע משוכלל, לזהות את שורשי היחידה ואת סכומם, ולקבל את כל השורשים משורש אחד.
+- למצוא שורש ריבועי של מספר מרוכב באלגברה, לפתור משוואה ריבועית עם מקדמים מרוכבים ומשוואה דו-ריבועית, לנסח את המשפט היסודי של האלגברה, ולפרק פולינום ממשי לגורמים ממשיים ממעלה 1 ו-2.

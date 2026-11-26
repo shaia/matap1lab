@@ -1,0 +1,25 @@
+- id: v-3-1-bombelli
+  youtubeId: DThAoT3q2V4
+  title: "Imaginary Numbers Are Real [Part 4: Bombelli's Solution]"
+  channel: Welch Labs
+  lang: en
+  captions: []
+  start: 0
+  minutes: 3
+  why: >-
+    לפי הכותרת והתיאור: החלק הרביעי מתוך 13 בסדרה באנגלית Imaginary Numbers Are Real, וכותרתו "הפתרון של בומבלי", אחרי
+    החלק השלישי על הבעיה של קרדנו. זה הסיפור שפותח את השיעור: צפו בו אחרי שבדקתם בעצמכם ש-$(2+i)^3=2+11i$.
+  verified: '2026-11-26'
+- id: v-3-1-division
+  youtubeId: yKxa6EyQ0AE
+  title: מספרים מרוכבים-שיעור 3-חילוק של מספרים מרוכבים והכרת המספר הצמוד
+  channel: עובד לב ארי
+  lang: he
+  captions: [he]
+  start: 0
+  minutes: 13
+  why: >-
+    לפי הכותרת ורשימת הפרקים בתיאור: שיעור בעברית לבגרות של 5 יחידות, שעובר על חילוק במספר ממשי, על הבעיה של $i$
+    במכנה, על המספר הצמוד, ועל הכפל של המונה ושל המכנה בצמוד, עם נוסחת הכפל המקוצר לפישוט המכנה. השוו למתכון של
+    השיעור.
+  verified: '2026-11-26'
