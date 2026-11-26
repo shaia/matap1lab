@@ -246,21 +246,28 @@ describe('parametrisations: points of the parametrised curve satisfy its equatio
   });
 
   it('every point sampled from every classified curve satisfies the ORIGINAL polynomial equation', () => {
+    // ~1.2 million points: one expect() per point costs seconds (a CI timeout), so failures are collected and asserted
+    // once; every point is still held to the same bound
+    const empty: string[] = [];
+    const off: string[] = [];
     for (const k of GRID) {
       const cl = classifyConic(k);
       if (cl.shape.kind === 'none' || cl.shape.kind === 'point') continue;
       const polylines = samplePolylines(cl.shape, BOX);
-      expect(polylines.length).toBeGreaterThan(0);
+      if (polylines.length === 0) empty.push(fmtPoly(k));
+      // a point at the origin has scale 0 and a residual of rounding size: the absolute floor is 1e-12 times the
+      // coefficients' size, which is what cancels there (errors of the coordinates are ~1e-16)
+      const floor = 1e-12 * (Math.abs(k.A) + Math.abs(k.C) + Math.abs(k.D) + Math.abs(k.E) + Math.abs(k.F));
       for (const pl of polylines) {
         for (const [x, y] of pl) {
           const scale = Math.abs(k.A) * x * x + Math.abs(k.C) * y * y + Math.abs(k.D * x) + Math.abs(k.E * y) + Math.abs(k.F);
-          // a point at the origin has scale 0 and a residual of rounding size: the absolute floor is 1e-12 times the
-          // coefficients' size, which is what cancels there (errors of the coordinates are ~1e-16)
-          const floor = 1e-12 * (Math.abs(k.A) + Math.abs(k.C) + Math.abs(k.D) + Math.abs(k.E) + Math.abs(k.F));
-          expect(Math.abs(evalPoly(k, x, y))).toBeLessThan(1e-9 * scale + floor);
+          const r = Math.abs(evalPoly(k, x, y));
+          if (!(r < 1e-9 * scale + floor) && off.length < 10) off.push(`${fmtPoly(k)} at (${x}, ${y}): residual ${r}`);
         }
       }
     }
+    expect(empty).toEqual([]);
+    expect(off).toEqual([]);
   });
 });
 
