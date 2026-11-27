@@ -97,7 +97,7 @@ questions:
     type: expr
     objectives: [OBJ-7.3-1]
     level: mid
-    prompt: 'חשבו $\int x^6\ln x\,dx$ ל-$x>0$ (עמ׳ 14 במחברת).'
+    prompt: 'חשבו $\int x^6\ln x\,dx$ ל-$x>0$ (מתוך סיכומי ההרצאות שהקורס נבנה לפיהם).'
     answer: 'x^7*log(x)/7 - x^7/49'
     answerTex: '$\frac{x^7\ln x}{7}-\frac{x^7}{49}+C$'
     variables: [x]
@@ -160,6 +160,31 @@ questions:
         feedback: '$\int e^x\cos x\,dx=e^x\cos x+\int e^x\sin x\,dx$; לפני זה יש מינוס, ולכן $-e^x\cos x$.'
         misconception: MC-c7-parts-sign-repeat
     hints: ['סמנו את האינטגרל $I$, וחפשו אותו שוב אחרי שתי אינטגרציות.']
+
+  - id: Q-7.3-cycle-coef
+    type: expr
+    objectives: [OBJ-7.3-2]
+    level: exam
+    prompt: 'חשבו $\int e^{-x}\cos(2x)\,dx$.'
+    answer: 'exp(-x)*(2*sin(2*x) - cos(2*x))/5'
+    answerTex: '$\frac{e^{-x}\left(2\sin(2x)-\cos(2x)\right)}{5}+C$'
+    variables: [x]
+    domain: [-2, 2]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. פעמיים בחלקים, ובשתיהן גוזרים את הפונקציה הטריגונומטרית ($v=-e^{-x}$):
+      $I=-e^{-x}\cos(2x)-2\int e^{-x}\sin(2x)\,dx$ ו-$\int e^{-x}\sin(2x)\,dx=-e^{-x}\sin(2x)+2I$. לכן
+      $I=e^{-x}\left(2\sin(2x)-\cos(2x)\right)-4I$, כלומר $k=-4$ ומחלקים ב-$1-k=5$.
+    wrongFeedback: >-
+      אחרי שני סיבובים מתקבל $I=A+kI$. חשבו את $k$ בזהירות: כל גזירה של $\cos(2x)$ או של $\sin(2x)$ מוציאה גורם 2.
+    commonWrong:
+      - expr: 'exp(-x)*(2*sin(2*x) - cos(2*x))/2'
+        feedback: 'כאן $k$ אינו מינוס 1 אלא מינוס 4 (שני גורמי 2 מהגזירות): $5I=A$, ומחלקים ב-5, לא ב-2.'
+        misconception: MC-c7-parts-cycle-divide
+      - expr: 'exp(-x)*(2*sin(2*x) - cos(2*x))'
+        feedback: 'מ-$I=A-4I$ מתקבל $5I=A$: צריך לחלק ב-5.'
+        misconception: MC-c7-parts-cycle-divide
+    hints: ['סמנו $I$, עשו שני סיבובים, וכתבו $I=A+kI$. מהו $k$?']
 
   - id: Q-7.3-cycle-qual
     type: twotier

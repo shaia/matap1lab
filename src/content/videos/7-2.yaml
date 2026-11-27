@@ -1,0 +1,25 @@
+- id: v-7-2-intro
+  youtubeId: b76wePnIBdU
+  title: _-substitution intro | AP Calculus AB | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 5
+  why: >-
+    לפי הכותרת: סרטון הפתיחה של חאן אקדמי על הצבה באינטגרל (באנגלית קוראים לשיטה u-substitution, ו-u הוא המשתנה החדש,
+    כמו בשיעור). השוו את הדרך שבה המרצה מזהה את הביטוי הפנימי ואת הנגזרת שלו למתכון בסעיף "המתכון", ושימו לב שגם שם
+    חוזרים בסוף ל-$x$.
+  verified: '2026-11-27'
+- id: v-7-2-back
+  youtubeId: J-NC1M6obKo
+  title: U-substitution and back substitution
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 6
+  why: >-
+    לפי הכותרת: הצבה שבה נשאר $x$ שצריך לבטא בעזרת $u$ ("back substitution"), כמו בדוגמה 5 של השיעור, שבה $x=u-1$. השוו
+    לסעיף "הכול במשתנה u".
+  verified: '2026-11-27'

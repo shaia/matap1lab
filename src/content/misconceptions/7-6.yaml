@@ -1,0 +1,9 @@
+# Misconceptions first detected in lesson 7.6 (tables of integrals and strategy).
+- id: MC-c7-no-formula-no-antiderivative
+  title: חושבים שפונקציה בלי נוסחה לקדומה היא פונקציה בלי קדומה
+  belief: >-
+    ל-$e^{-x^2}$ אין פונקציה קדומה, כי אף שיטה לא מוצאת לה נוסחה; או: אם לא מצאתי נוסחה, טעיתי בשיטה.
+  truth: >-
+    לכל פונקציה רציפה בקטע יש פונקציה קדומה: פונקציית השטח $A(x)=\int_0^xe^{-t^2}\,dt$ של המשפט היסודי. היא רק אינה
+    אלמנטרית: אין לה נוסחה מהטבלה. מחשבים אותה בטור (שיעור 6.3) או בקירוב מספרי.
+  remedy: { lesson: '7.6', anchor: 'no-formula', label: 'כשהטבלה נגמרת' }

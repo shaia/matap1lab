@@ -1,0 +1,479 @@
+# Workbook of lesson 7.3 — integration by parts.
+# Objectives (src/course.ts):
+#   OBJ-7.3-1  integrate by parts and choose which factor to differentiate and which to integrate
+#   OBJ-7.3-2  apply integration by parts several times, and handle an integral that comes back
+#   OBJ-7.3-3  integrals of the logarithm and of the inverse trigonometric functions
+# Order of knowledge: chapters 1–6, lessons 7.1–7.2 (table, substitution with f'/f), no partial fractions (7.4), no
+# sec / csc / cot. Every antiderivative and value recomputed with sympy in screens/tools/lesson-7-3.py.
+lesson: '7.3'
+practice:
+  - id: W-7.3-01
+    level: basic
+    objectives: [OBJ-7.3-1]
+    prompt: >-
+      חשבו את $\int x\sin(2x)\,dx$.
+    answer: >-
+      $\frac{\sin(2x)}{4}-\frac{x\cos(2x)}{2}+C$
+    solution:
+      - kind: idea
+        text: >-
+          מכפלה של חזקה בפונקציה טריגונומטרית: גוזרים את החזקה, $u=x$, ומבצעים אינטגרציה לגורם הטריגונומטרי, $v'=\sin(2x)$.
+      - kind: computation
+        text: >-
+          $u'=1$. פונקציה קדומה של $\sin(2x)$, עם פונקציה לינארית פנימית (שיעור 7.2): $v=-\frac{\cos(2x)}{2}$. בדיקה:
+          $\left(-\frac{\cos(2x)}{2}\right)'=\frac{2\sin(2x)}{2}=\sin(2x)$.
+      - kind: computation
+        text: >-
+          $\int x\sin(2x)\,dx=-\frac{x\cos(2x)}{2}-\int\left(-\frac{\cos(2x)}{2}\right)dx$, כלומר
+          $\int x\sin(2x)\,dx=-\frac{x\cos(2x)}{2}+\frac12\int\cos(2x)\,dx$.
+      - kind: computation
+        text: >-
+          $\int\cos(2x)\,dx=\frac{\sin(2x)}{2}$, ולכן $\frac12\int\cos(2x)\,dx=\frac{\sin(2x)}{4}$.
+      - kind: check
+        text: >-
+          גוזרים: $\left(\frac{\sin(2x)}{4}\right)'=\frac{\cos(2x)}{2}$, ו-$\left(-\frac{x\cos(2x)}{2}\right)'=-\frac{\cos(2x)}{2}+x\sin(2x)$.
+          הסכום $x\sin(2x)$. ✓
+      - kind: result
+        text: >-
+          $\int x\sin(2x)\,dx=\frac{\sin(2x)}{4}-\frac{x\cos(2x)}{2}+C$.
+
+  - id: W-7.3-02
+    level: basic
+    objectives: [OBJ-7.3-1, OBJ-7.3-3]
+    prompt: >-
+      חשבו את $\int\frac{\ln x}{x^2}\,dx$, כש-$x>0$.
+    answer: >-
+      $\int\frac{\ln x}{x^2}\,dx=-\frac{\ln x+1}{x}+C$
+    solution:
+      - kind: idea
+        text: >-
+          זו מכפלה $\ln x\cdot x^{-2}$. לוגריתם קודם לחזקה: גוזרים את $\ln x$, ומבצעים אינטגרציה ל-$x^{-2}$, שאינה מסתבכת.
+          (הצבה $w=\ln x$ לא מתאימה כאן: היא דורשת גורם $\frac1x$, ויש $\frac{1}{x^2}$.)
+      - kind: computation
+        text: >-
+          $u=\ln x$, $v'=x^{-2}$, ולכן $u'=\frac1x$ ו-$v=\frac{x^{-1}}{-1}=-\frac1x$.
+      - kind: computation
+        text: >-
+          $\int\frac{\ln x}{x^2}\,dx=-\frac{\ln x}{x}-\int\left(-\frac1x\right)\cdot\frac1x\,dx=-\frac{\ln x}{x}+\int\frac{dx}{x^2}$.
+      - kind: computation
+        text: >-
+          $\int\frac{dx}{x^2}=-\frac1x$.
+      - kind: check
+        text: >-
+          $\left(-\frac{\ln x}{x}\right)'=-\frac{\frac1x\cdot x-\ln x}{x^2}=\frac{\ln x-1}{x^2}$, ו-$\left(-\frac1x\right)'=\frac1{x^2}$.
+          הסכום $\frac{\ln x}{x^2}$. ✓
+      - kind: result
+        text: >-
+          $\int\frac{\ln x}{x^2}\,dx=-\frac{\ln x}{x}-\frac1x+C=-\frac{\ln x+1}{x}+C$.
+
+  - id: W-7.3-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-7.3-1]
+    prompt: >-
+      ארבעה סטודנטים חישבו את $\int xe^{2x}\,dx$ וקיבלו ארבע תשובות (בלי $+C$):
+
+      (א) $\frac{xe^{2x}}{2}-\frac{e^{2x}}{4}$
+
+      (ב) $\frac{xe^{2x}}{2}$
+
+      (ג) $\frac{x^2e^{2x}}{4}$
+
+      (ד) $\frac{(2x-1)e^{2x}}{4}+7$
+
+      בלי לחשב את האינטגרל, קבעו בגזירה אילו תשובות נכונות. לכל תשובה שגויה, נחשו מה הטעות שהובילה אליה.
+    answer: >-
+      (א) ו-(ד) נכונות. ב-(ב) נשכח האינטגרל שנשאר. ב-(ג) חושבה פונקציה קדומה לכל גורם לחוד.
+    solution:
+      - kind: idea
+        text: >-
+          תשובה היא פונקציה קדומה של $xe^{2x}$ בדיוק כשהנגזרת שלה היא $xe^{2x}$. שתי תשובות נכונות יכולות להיראות שונה
+          ולהיבדל בקבוע.
+      - kind: computation
+        text: >-
+          (א) $\left(\frac{xe^{2x}}{2}\right)'=\frac{e^{2x}}{2}+xe^{2x}$, ו-$\left(\frac{e^{2x}}{4}\right)'=\frac{e^{2x}}{2}$. ההפרש
+          $xe^{2x}$: נכונה.
+      - kind: computation
+        text: >-
+          (ב) $\left(\frac{xe^{2x}}{2}\right)'=xe^{2x}+\frac{e^{2x}}{2}$: עודף של $\frac{e^{2x}}{2}$. זה בדיוק מה שהאינטגרל שנשאר,
+          מינוס $\int\frac{e^{2x}}{2}\,dx$, היה מבטל: הוא נשכח.
+      - kind: computation
+        text: >-
+          (ג) $\left(\frac{x^2e^{2x}}{4}\right)'=\frac{xe^{2x}}{2}+\frac{x^2e^{2x}}{2}=\frac{x(x+1)e^{2x}}{2}$: לא נכונה. כאן חושבה
+          פונקציה קדומה ל-$x$ ($\frac{x^2}{2}$) ול-$e^{2x}$ ($\frac{e^{2x}}{2}$), והתוצאות נכפלו, אבל אינטגרל של מכפלה אינו
+          מכפלת האינטגרלים.
+      - kind: computation
+        text: >-
+          (ד) $\frac{(2x-1)e^{2x}}{4}+7=\frac{xe^{2x}}{2}-\frac{e^{2x}}{4}+7$: זו (א) ועוד הקבוע 7, ולכן הנגזרת שלה זהה: נכונה.
+      - kind: check
+        text: >-
+          (א) ו-(ד) נבדלות בקבוע בדיוק, כמו שצריך לשתי פונקציות קדומות של אותה פונקציה על קטע.
+      - kind: result
+        text: >-
+          (א) ו-(ד) נכונות; (ב) שגויה (חסר האינטגרל שנשאר); (ג) שגויה (אינטגרציה לכל גורם לחוד).
+
+  - id: W-7.3-04
+    level: mid
+    objectives: [OBJ-7.3-1]
+    prompt: >-
+      חשבו את $\int\frac{x}{\cos^2x}\,dx$ בקטע $|x|<\frac\pi2$.
+    answer: >-
+      $x\tan x+\ln(\cos x)+C$
+    solution:
+      - kind: idea
+        text: >-
+          מכפלה של $x$ ב-$\frac1{\cos^2x}$, שיש לה פונקציה קדומה בטבלה: $\tan x$. גוזרים את $x$ ומבצעים אינטגרציה
+          ל-$\frac1{\cos^2x}$.
+      - kind: computation
+        text: >-
+          $u=x$, $v'=\frac1{\cos^2x}$, ולכן $u'=1$ ו-$v=\tan x$. לפי הנוסחה:
+          $\int\frac{x}{\cos^2x}\,dx=x\tan x-\int\tan x\,dx$.
+      - kind: step
+        text: >-
+          את $\int\tan x\,dx$ כותבים כ-$\int\frac{\sin x}{\cos x}\,dx$. המונה הוא מינוס הנגזרת של המכנה, ולכן (שיעור 7.2,
+          נגזרת חלקי הפונקציה): $\int\frac{\sin x}{\cos x}\,dx=-\ln|\cos x|$. בקטע הנתון $\cos x>0$, ולכן זה $-\ln(\cos x)$.
+      - kind: computation
+        text: >-
+          $\int\frac{x}{\cos^2x}\,dx=x\tan x-\bigl(-\ln(\cos x)\bigr)+C=x\tan x+\ln(\cos x)+C$.
+      - kind: check
+        text: >-
+          $\left(x\tan x\right)'=\tan x+\frac{x}{\cos^2x}$, ו-$\left(\ln(\cos x)\right)'=\frac{-\sin x}{\cos x}=-\tan x$. הסכום
+          $\frac{x}{\cos^2x}$. ✓ ובדיקת סימטריה: $x\tan x$ זוגית (מכפלה של שתי פונקציות אי-זוגיות) וגם $\ln(\cos x)$ זוגית, והנגזרת של פונקציה
+          זוגית היא אי-זוגית, כמו האינטגרנד $\frac{x}{\cos^2x}$.
+      - kind: result
+        text: >-
+          $\int\frac{x}{\cos^2x}\,dx=x\tan x+\ln(\cos x)+C$ בקטע $|x|<\frac\pi2$.
+
+  - id: W-7.3-05
+    level: mid
+    objectives: [OBJ-7.3-2]
+    prompt: >-
+      חשבו את $\int x^2\sin x\,dx$.
+    answer: >-
+      $2x\sin x+(2-x^2)\cos x+C$
+    solution:
+      - kind: idea
+        text: >-
+          $x^2$ כפול פונקציה טריגונומטרית: שני סיבובים של אינטגרציה בחלקים, ובשניהם גוזרים את החזקה. בכל סיבוב החזקה
+          יורדת באחת.
+      - kind: computation
+        text: >-
+          סיבוב ראשון: $u=x^2$, $v'=\sin x$, ולכן $u'=2x$ ו-$v=-\cos x$:
+          $\int x^2\sin x\,dx=-x^2\cos x+2\int x\cos x\,dx$.
+      - kind: computation
+        text: >-
+          סיבוב שני: $u=x$, $v'=\cos x$, ולכן $u'=1$ ו-$v=\sin x$:
+          $\int x\cos x\,dx=x\sin x-\int\sin x\,dx=x\sin x+\cos x$.
+      - kind: computation
+        text: >-
+          מציבים בסוגריים: $\int x^2\sin x\,dx=-x^2\cos x+2\left(x\sin x+\cos x\right)+C$, כלומר $2x\sin x+(2-x^2)\cos x+C$.
+      - kind: check
+        text: >-
+          $\left(-x^2\cos x\right)'=-2x\cos x+x^2\sin x$; $\left(2x\sin x\right)'=2\sin x+2x\cos x$; $\left(2\cos x\right)'=-2\sin x$.
+          הסכום $x^2\sin x$. ✓
+      - kind: result
+        text: >-
+          $\int x^2\sin x\,dx=-x^2\cos x+2x\sin x+2\cos x+C$.
+
+  - id: W-7.3-06
+    level: mid
+    objectives: [OBJ-7.3-2]
+    prompt: >-
+      חשבו את $\int e^{2x}\cos x\,dx$.
+    answer: >-
+      $\frac{e^{2x}(2\cos x+\sin x)}{5}+C$
+    solution:
+      - kind: idea
+        text: >-
+          אף גורם לא נעשה פשוט יותר בגזירה: אחרי שני סיבובים האינטגרל חוזר. בשני הסיבובים גוזרים את הפונקציה הטריגונומטרית
+          ומבצעים אינטגרציה ל-$e^{2x}$, ואז פותרים בשביל האינטגרל כמו בשביל נעלם.
+      - kind: computation
+        text: >-
+          נסמן $I=\int e^{2x}\cos x\,dx$. סיבוב ראשון: $u=\cos x$, $v'=e^{2x}$, ולכן $u'=-\sin x$ ו-$v=\frac{e^{2x}}{2}$:
+          $I=\frac{e^{2x}\cos x}{2}+\frac12\int e^{2x}\sin x\,dx$.
+      - kind: computation
+        text: >-
+          סיבוב שני: $u=\sin x$, $v'=e^{2x}$, ולכן $u'=\cos x$ ו-$v=\frac{e^{2x}}{2}$:
+          $\int e^{2x}\sin x\,dx=\frac{e^{2x}\sin x}{2}-\frac12I$.
+      - kind: computation
+        text: >-
+          מציבים: $I=\frac{e^{2x}\cos x}{2}+\frac{e^{2x}\sin x}{4}-\frac14I$. מעבירים אגף: $\frac54I=\frac{e^{2x}(2\cos x+\sin x)}{4}$,
+          ולכן $I=\frac{e^{2x}(2\cos x+\sin x)}{5}$. כאן מחלקים ב-$\frac54$, לא ב-2: המקדם תלוי בקבועים.
+      - kind: check
+        text: >-
+          $\left(\frac{e^{2x}(2\cos x+\sin x)}{5}\right)'=\frac{2e^{2x}(2\cos x+\sin x)+e^{2x}(-2\sin x+\cos x)}{5}$, והמונה
+          הוא $e^{2x}(4\cos x+2\sin x-2\sin x+\cos x)=5e^{2x}\cos x$. לכן הנגזרת $e^{2x}\cos x$. ✓
+      - kind: result
+        text: >-
+          $\int e^{2x}\cos x\,dx=\frac{e^{2x}(2\cos x+\sin x)}{5}+C$.
+
+  - id: W-7.3-07
+    level: mid
+    qualitative: true
+    objectives: [OBJ-7.3-3]
+    prompt: >-
+      נכון או לא נכון? נמקו כל סעיף.
+
+      (א) $\int\ln(2x)\,dx$ ו-$\int\ln x\,dx$ (כש-$x>0$) נבדלים רק בקבוע, כי $\ln(2x)=\ln2+\ln x$.
+
+      (ב) את $\int\arctan x\,dx$ אי אפשר לחשב באינטגרציה בחלקים, כי יש באינטגרנד גורם אחד בלבד.
+
+      (ג) ב-$\int\ln x\,dx$ אפשר לבחור באותה מידה $u=1$ ו-$v'=\ln x$.
+    answer: >-
+      (א) לא נכון: ההפרש הוא $x\ln2$. (ב) לא נכון: $\arctan x=1\cdot\arctan x$. (ג) לא נכון: הבחירה דורשת פונקציה קדומה של
+      $\ln x$, שהיא בדיוק מה שמחפשים.
+    solution:
+      - kind: idea
+        text: >-
+          בכל סעיף בודקים מה הטענה אומרת באמת: (א) על ההפרש בין אינטגרנדים, (ב) ו-(ג) על הבחירה של $u$ ו-$v'$ בגורם 1.
+      - kind: step
+        text: >-
+          (א) האינטגרנדים נבדלים בקבוע $\ln2$, ולכן הפונקציות הקדומות נבדלות ב-$\int\ln2\,dx=x\ln2$, פונקציה ולא קבוע.
+          בחישוב: $\int\ln(2x)\,dx=x\ln(2x)-x$ (בחלקים, $u=\ln(2x)$, ולפי כלל השרשרת $u'=\frac{1}{2x}\cdot2=\frac1x$; $v=x$) ו-$\int\ln x\,dx=x\ln x-x$, וההפרש
+          $x\ln(2x)-x\ln x=x\ln2$. לא נכון.
+      - kind: step
+        text: >-
+          (ב) תמיד אפשר לכתוב גורם שני, $1$: $u=\arctan x$, $v'=1$, ולכן $u'=\frac1{1+x^2}$, $v=x$, ו-
+          $\int\arctan x\,dx=x\arctan x-\int\frac{x}{1+x^2}\,dx$, אינטגרל שנפתר בהצבה. לא נכון.
+      - kind: step
+        text: >-
+          (ג) עם $v'=\ln x$ צריך את $v$, פונקציה קדומה של $\ln x$, וזה בדיוק האינטגרל שמחפשים. (ואם מכניסים את התשובה,
+          $v=x\ln x-x$, ו-$u'=0$, מקבלים $\int\ln x\,dx=x\ln x-x-0$: נכון, אבל רק כי התשובה כבר הייתה ידועה.) לא נכון.
+      - kind: check
+        text: >-
+          (א) גזירה: $\left(x\ln(2x)-x\right)'=\ln(2x)+1-1=\ln(2x)$. ✓ ו-$x\ln2$ אינו קבוע: ב-$x=1$ הוא $\ln2$ וב-$x=2$ הוא
+          $2\ln2$.
+      - kind: result
+        text: >-
+          שלוש הטענות לא נכונות.
+
+  - id: W-7.3-08
+    level: exam
+    objectives: [OBJ-7.3-2]
+    prompt: >-
+      נסמן $I_n=\int x^ne^x\,dx$ לכל $n$ טבעי, ו-$I_0=\int e^x\,dx$.
+
+      (א) הוכיחו את נוסחת הנסיגה $I_n=x^ne^x-nI_{n-1}$.
+
+      (ב) השתמשו בה כדי לחשב את $I_4$.
+
+      (ג) חשבו את $\int_0^1x^4e^x\,dx$ ובדקו שהתוצאה סבירה.
+    answer: >-
+      (ב) $I_4=e^x\left(x^4-4x^3+12x^2-24x+24\right)+C$. (ג) $9e-24\approx0.4645$.
+    solution:
+      - kind: idea
+        text: >-
+          (א) סיבוב אחד של אינטגרציה בחלקים, עם $u=x^n$ (החזקה יורדת) ו-$v'=e^x$. (ב) מפעילים את הנוסחה ארבע פעמים, מ-$I_0$
+          למעלה, וכל פעם מציבים בסוגריים.
+      - kind: computation
+        text: >-
+          (א) $u=x^n$, $v'=e^x$, ולכן $u'=nx^{n-1}$ ו-$v=e^x$: $I_n=x^ne^x-\int nx^{n-1}e^x\,dx=x^ne^x-nI_{n-1}$.
+      - kind: computation
+        text: >-
+          (ב) בלי הקבוע: $I_0=e^x$; $I_1=xe^x-I_0=(x-1)e^x$; $I_2=x^2e^x-2I_1=\left(x^2-2x+2\right)e^x$;
+          $I_3=x^3e^x-3I_2=\left(x^3-3x^2+6x-6\right)e^x$.
+      - kind: computation
+        text: >-
+          $I_4=x^4e^x-4I_3=e^x\left(x^4-4x^3+12x^2-24x+24\right)$, ובסוף מוסיפים $+C$.
+      - kind: computation
+        text: >-
+          (ג) $F(x)=e^x\left(x^4-4x^3+12x^2-24x+24\right)$: $F(1)=e\,(1-4+12-24+24)=9e$, ו-$F(0)=24$. לכן
+          $\int_0^1x^4e^x\,dx=9e-24\approx0.4645$.
+      - kind: check
+        text: >-
+          (ג) בקטע $[0,1]$ מתקיים $0\le x^4e^x\le x^4e$, ולכן התוצאה בין 0 ל-$\int_0^1x^4e\,dx=\frac e5\approx0.544$. ✓ ובגזירה:
+          לפי כלל המכפלה, $F'(x)$ הוא הסכום של $e^x\left(x^4-4x^3+12x^2-24x+24\right)$ ושל
+          $e^x\left(4x^3-12x^2+24x-24\right)$. בסכום הסוגריים כל האיברים מלבד $x^4$ מתבטלים, ולכן $F'(x)=x^4e^x$. ✓
+      - kind: result
+        text: >-
+          $I_n=x^ne^x-nI_{n-1}$; $I_4=e^x\left(x^4-4x^3+12x^2-24x+24\right)+C$; $\int_0^1x^4e^x\,dx=9e-24\approx0.4645$.
+
+  - id: W-7.3-09
+    level: exam
+    objectives: [OBJ-7.3-3]
+    prompt: >-
+      (א) חשבו את $\int\ln\left(1+x^2\right)dx$.
+
+      (ב) חשבו את $\int_0^1\ln\left(1+x^2\right)dx$.
+    answer: >-
+      (א) $x\ln\left(1+x^2\right)-2x+2\arctan x+C$. (ב) $\ln2-2+\frac\pi2\approx0.2639$.
+    solution:
+      - kind: idea
+        text: >-
+          לוגריתם בלי גורם שני: מוסיפים את הגורם 1 וגוזרים את הלוגריתם. מה שנשאר הוא שבר שהמונה והמכנה שלו מאותה מעלה:
+          כותבים את המונה בעזרת המכנה ומפצלים.
+      - kind: computation
+        text: >-
+          $u=\ln\left(1+x^2\right)$, $v'=1$, ולכן (כלל השרשרת) $u'=\frac{2x}{1+x^2}$ ו-$v=x$:
+          $\int\ln\left(1+x^2\right)dx=x\ln\left(1+x^2\right)-\int\frac{2x^2}{1+x^2}\,dx$.
+      - kind: step
+        text: >-
+          $2x^2=2\left(1+x^2\right)-2$, ולכן $\frac{2x^2}{1+x^2}=2-\frac{2}{1+x^2}$, ו-$\int\frac{2x^2}{1+x^2}\,dx=2x-2\arctan x$.
+      - kind: computation
+        text: >-
+          (א) $\int\ln\left(1+x^2\right)dx=x\ln\left(1+x^2\right)-2x+2\arctan x+C$.
+      - kind: computation
+        text: >-
+          (ב) $F(1)=\ln2-2+2\cdot\frac\pi4=\ln2-2+\frac\pi2$ ו-$F(0)=0$, ולכן התוצאה $\ln2-2+\frac\pi2\approx0.2639$.
+      - kind: check
+        text: >-
+          גזירה: $\ln\left(1+x^2\right)+\frac{2x^2}{1+x^2}-2+\frac{2}{1+x^2}=\ln\left(1+x^2\right)+\frac{2x^2+2}{1+x^2}-2=\ln\left(1+x^2\right)$.
+          ✓ ובקטע $[0,1]$ האינטגרנד עולה מ-0 ל-$\ln2\approx0.693$, ולכן התוצאה בין 0 ל-$0.693$. ✓
+      - kind: result
+        text: >-
+          (א) $x\ln\left(1+x^2\right)-2x+2\arctan x+C$. (ב) $\ln2-2+\frac\pi2\approx0.2639$.
+
+  - id: W-7.3-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-7.3-2]
+    prompt: >-
+      סטודנט רצה לחשב את $I=\int e^{-x}\sin x\,dx$. בסיבוב הראשון בחר $u=\sin x$, $v'=e^{-x}$; בסיבוב השני בחר $u=e^{-x}$,
+      $v'=\cos x$, וקיבל $I=I$. הוא הסיק שלאינטגרל אין פונקציה קדומה בנוסחה.
+
+      (א) הסבירו מה קרה בסיבוב השני, ומה פסול במסקנה.
+
+      (ב) חשבו את $I$ נכון.
+
+      (ג) תנודה מרוסנת: חשבו את $\int_0^\pi e^{-x}\sin x\,dx$ ובדקו שהתוצאה סבירה.
+    answer: >-
+      (א) בסיבוב השני הוחלפו התפקידים, והוא ביטל את הראשון. (ב) $I=-\frac{e^{-x}(\sin x+\cos x)}{2}+C$. (ג)
+      $\frac{1+e^{-\pi}}{2}\approx0.5216$.
+    solution:
+      - kind: idea
+        text: >-
+          כשהאינטגרל חוזר אחרי שני סיבובים, גוזרים בשניהם את אותו סוג גורם. אם מחליפים תפקידים, הסיבוב השני מחזיר
+          בדיוק את מה שהראשון עשה, ו-$I=I$ אינה אומרת דבר על קיום פונקציה קדומה.
+      - kind: step
+        text: >-
+          (א) סיבוב ראשון: $u=\sin x$, $v=-e^{-x}$, ולכן $I=-e^{-x}\sin x+\int e^{-x}\cos x\,dx$. בסיבוב השני הוא גזר את
+          $e^{-x}$ וביצע אינטגרציה ל-$\cos x$, כלומר הפך את מה שעשה בראשון: $\int e^{-x}\cos x\,dx=e^{-x}\sin x+I$, והצבה
+          נותנת $I=I$. זו זהות נכונה ולא מידע חדש, ולא הוכחה שאין פונקציה קדומה.
+      - kind: computation
+        text: >-
+          (ב) בסיבוב השני גוזרים שוב את הפונקציה הטריגונומטרית: $u=\cos x$, $v'=e^{-x}$, ולכן $u'=-\sin x$, $v=-e^{-x}$:
+          $\int e^{-x}\cos x\,dx=-e^{-x}\cos x-\int e^{-x}\sin x\,dx=-e^{-x}\cos x-I$.
+      - kind: computation
+        text: >-
+          מציבים: $I=-e^{-x}\sin x-e^{-x}\cos x-I$, ולכן $2I=-e^{-x}(\sin x+\cos x)$ ו-$I=-\frac{e^{-x}(\sin x+\cos x)}{2}+C$.
+      - kind: computation
+        text: >-
+          (ג) $F(\pi)=-\frac{e^{-\pi}(0-1)}{2}=\frac{e^{-\pi}}{2}$, ו-$F(0)=-\frac{1\cdot(0+1)}{2}=-\frac12$. לכן
+          $\int_0^\pi e^{-x}\sin x\,dx=\frac{e^{-\pi}}{2}+\frac12=\frac{1+e^{-\pi}}{2}\approx0.5216$.
+      - kind: check
+        text: >-
+          גזירה של $F$: $\frac{e^{-x}(\sin x+\cos x)}{2}-\frac{e^{-x}(\cos x-\sin x)}{2}=e^{-x}\sin x$. ✓ (ג) בקטע $[0,\pi]$ האינטגרנד
+          חיובי וקטן מ-$\sin x$, ולכן התוצאה בין 0 ל-$\int_0^\pi\sin x\,dx=2$. ✓ הריסון "אוכל" את רוב השטח: בלעדיו היה יוצא 2.
+      - kind: result
+        text: >-
+          (א) הסיבוב השני ביטל את הראשון; $I=I$ אינה הוכחה לכלום. (ב) $I=-\frac{e^{-x}(\sin x+\cos x)}{2}+C$. (ג)
+          $\frac{1+e^{-\pi}}{2}\approx0.5216$.
+
+challenge:
+  - id: W-7.3-c1
+    stars: 1
+    objectives: [OBJ-7.3-1]
+    prompt: >-
+      הגרף של $y=x\cos x$ מתנדנד, והקשתות שלו גדלות ככל ש-$x$ גדל.
+
+      (א) מצאו את השטח שבין הגרף לציר $x$ בקטע $\frac{11\pi}{2}\le x\le\frac{13\pi}{2}$.
+
+      (ב) הראו שלכל $n$ טבעי, השטח של הקשת שבין שני האפסים העוקבים $\left(n-\frac12\right)\pi$ ו-$\left(n+\frac12\right)\pi$
+      הוא $2n\pi$. מה הסימן של האינטגרל על הקשת, לפי הזוגיות של $n$?
+    answer: >-
+      (א) $12\pi$. (ב) $\int_{(n-1/2)\pi}^{(n+1/2)\pi}x\cos x\,dx=(-1)^n\,2n\pi$: האינטגרל חיובי כש-$n$ זוגי ושלילי כש-$n$
+      אי-זוגי, והשטח בכל מקרה $2n\pi$.
+    solution:
+      - kind: idea
+        text: >-
+          פונקציה קדומה של $x\cos x$ בחלקים ($u=x$, $v'=\cos x$). בנקודות שבהן $\cos x=0$ הפונקציה הקדומה מצטמצמת ל-$x\sin x$,
+          וב-$\sin$ של כפולה אי-זוגית של $\frac\pi2$ יש רק $\pm1$.
+      - kind: computation
+        text: >-
+          $\int x\cos x\,dx=x\sin x-\int\sin x\,dx=x\sin x+\cos x+C$. נסמן $F(x)=x\sin x+\cos x$.
+      - kind: step
+        text: >-
+          (א) בקטע, $\cos x\ge0$: $\frac{11\pi}{2}=6\pi-\frac\pi2$ ו-$\frac{13\pi}{2}=6\pi+\frac\pi2$, וסביב $6\pi$ הקוסינוס חיובי. גם
+          $x>0$, ולכן האינטגרנד אינו שלילי והשטח הוא האינטגרל עצמו.
+      - kind: computation
+        text: >-
+          $\sin\frac{13\pi}{2}=\sin\frac\pi2=1$ ו-$\sin\frac{11\pi}{2}=\sin\left(-\frac\pi2\right)=-1$, והקוסינוס 0 בשתי הנקודות.
+          לכן $F\left(\frac{13\pi}{2}\right)-F\left(\frac{11\pi}{2}\right)=\frac{13\pi}{2}+\frac{11\pi}{2}=12\pi$.
+      - kind: computation
+        text: >-
+          (ב) ב-$a=\left(n-\frac12\right)\pi$ וב-$b=\left(n+\frac12\right)\pi$ הקוסינוס מתאפס. את הסינוסים נותנת נוסחת החיבור,
+          עם $\cos\frac\pi2=0$, $\sin\frac\pi2=1$, $\sin(n\pi)=0$ ו-$\cos(n\pi)=(-1)^n$:
+          $\sin b=\sin(n\pi)\cos\frac\pi2+\cos(n\pi)\sin\frac\pi2=(-1)^n$, ובאותו אופן $\sin a=\sin(n\pi)\cos\frac\pi2-\cos(n\pi)\sin\frac\pi2=-(-1)^n$. לכן
+          $F(b)-F(a)=(-1)^n\left(n+\frac12\right)\pi+(-1)^n\left(n-\frac12\right)\pi=(-1)^n\,2n\pi$.
+      - kind: step
+        text: >-
+          בקשת הזו $x>0$ והקוסינוס בעל סימן קבוע $(-1)^n$ (סביב $n\pi$, $\cos(n\pi)=(-1)^n$), ולכן השטח הוא הערך המוחלט:
+          $2n\pi$. הקשתות גדלות לינארית, כי הגובה שלהן, בערך $x$, גדל לינארית, והרוחב קבוע ($\pi$).
+      - kind: check
+        text: >-
+          (א) הוא המקרה $n=6$: $2\cdot6\pi=12\pi$. ✓ ובקשת של $n=0$, בקטע $\left[-\frac\pi2,\frac\pi2\right]$, האינטגרנד אי-זוגי
+          והאינטגרל 0, בהתאם לנוסחה $(-1)^0\cdot0$. ✓ הערכה גסה ל-(א): גובה בערך $6\pi\approx18.8$, קשת של קוסינוס
+          שהשטח שלה 2, ולכן בערך $2\cdot6\pi$. ✓
+      - kind: result
+        text: >-
+          (א) $12\pi\approx37.70$. (ב) השטח של הקשת ה-$n$-ית הוא $2n\pi$; האינטגרל עליה $(-1)^n\,2n\pi$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.1 (Integration by Parts), exercise 65; part (ב) added'
+      url: https://openstax.org/books/calculus-volume-2/pages/3-1-integration-by-parts
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-7.3-c2
+    stars: 1
+    objectives: [OBJ-7.3-1]
+    prompt: >-
+      הצבה, ואחריה אינטגרציה בחלקים. חשבו:
+
+      (א) $\int t^3\sin\left(t^2\right)dt$ (רמז: $w=t^2$)
+
+      (ב) $\int s^5e^{s^3}\,ds$
+
+      (ג) $\int e^{2t}\cos\left(e^t\right)dt$ (רמז: $e^{2t}=e^t\cdot e^t$), ואת $\int_0^{\ln\pi}e^{2t}\cos\left(e^t\right)dt$.
+    answer: >-
+      (א) $\frac{\sin\left(t^2\right)-t^2\cos\left(t^2\right)}{2}+C$. (ב) $\frac{\left(s^3-1\right)e^{s^3}}{3}+C$. (ג)
+      $e^t\sin\left(e^t\right)+\cos\left(e^t\right)+C$, והאינטגרל המסוים שווה ל-$(-1-\sin1-\cos1)\approx-2.382$.
+    solution:
+      - kind: idea
+        text: >-
+          בכל אחד מפצלים חזקה אחת (או $e^t$ אחד) לטובת הדיפרנציאל של ההצבה, ומה שנשאר אחרי ההצבה הוא מכפלה מהסוג של השיעור:
+          $w\sin w$, $we^w$, $w\cos w$.
+      - kind: computation
+        text: >-
+          (א) $t^3\sin\left(t^2\right)dt=t^2\sin\left(t^2\right)\cdot t\,dt$. עם $w=t^2$, $dw=2t\,dt$: $\frac12\int w\sin w\,dw$.
+          בחלקים ($u=w$, $v=-\cos w$): $\int w\sin w\,dw=\sin w-w\cos w$. לכן התשובה $\frac{\sin\left(t^2\right)-t^2\cos\left(t^2\right)}{2}+C$.
+      - kind: computation
+        text: >-
+          (ב) $s^5e^{s^3}ds=s^3e^{s^3}\cdot s^2\,ds$. עם $w=s^3$, $dw=3s^2\,ds$: $\frac13\int we^w\,dw=\frac13(w-1)e^w$. לכן
+          $\frac{\left(s^3-1\right)e^{s^3}}{3}+C$.
+      - kind: computation
+        text: >-
+          (ג) $e^{2t}\cos\left(e^t\right)dt=e^t\cos\left(e^t\right)\cdot e^t\,dt$. עם $w=e^t$, $dw=e^t\,dt$: $\int w\cos w\,dw$. בחלקים
+          ($u=w$, $v=\sin w$): $w\sin w+\cos w$. לכן $e^t\sin\left(e^t\right)+\cos\left(e^t\right)+C$.
+      - kind: computation
+        text: >-
+          האינטגרל המסוים: ב-$t=\ln\pi$, $e^t=\pi$, והפונקציה הקדומה $\pi\sin\pi+\cos\pi=-1$; ב-$t=0$, $e^t=1$, והיא $\sin1+\cos1$.
+          ההפרש הוא $(-1-\sin1-\cos1)\approx-2.382$.
+      - kind: check
+        text: >-
+          (ג) גזירה: $\left(e^t\sin\left(e^t\right)\right)'=e^t\sin\left(e^t\right)+e^{2t}\cos\left(e^t\right)$, ו-$\left(\cos\left(e^t\right)\right)'=-e^t\sin\left(e^t\right)$:
+          הסכום $e^{2t}\cos\left(e^t\right)$. ✓ סימן: כש-$t$ עובר מ-0 ל-$\ln\pi$, $e^t$ עובר מ-1 ל-$\pi$, והקוסינוס שלילי ברוב
+          הקטע (כש-$e^t>\frac\pi2$), שם גם $e^{2t}$ גדול: תוצאה שלילית סבירה. (ב) גזירה:
+          $\frac{3s^2e^{s^3}+\left(s^3-1\right)3s^2e^{s^3}}{3}=s^5e^{s^3}$. ✓
+      - kind: result
+        text: >-
+          (א) $\frac{\sin\left(t^2\right)-t^2\cos\left(t^2\right)}{2}+C$. (ב) $\frac{\left(s^3-1\right)e^{s^3}}{3}+C$. (ג)
+          $e^t\sin\left(e^t\right)+\cos\left(e^t\right)+C$; $\int_0^{\ln\pi}e^{2t}\cos\left(e^t\right)dt=-1-\sin1-\cos1\approx-2.382$.
+    source:
+      name: 'M. Boelkins, D. Austin, S. Schlicker, Active Calculus (LibreTexts edition)'
+      year: 2022
+      problem: 'Section 5.4 (Integration by Parts), Activity 5.4.3, parts (c), (d) and (e); the definite integral added'
+      url: https://math.libretexts.org/Bookshelves/Calculus/Active_Calculus_(Boelkins_et_al.)/05%3A_Finding_Antiderivatives_and_Evaluating_Integrals/5.04%3A_Integration_by_Parts
+      verified: '2026-11-27'
+      adapted: true

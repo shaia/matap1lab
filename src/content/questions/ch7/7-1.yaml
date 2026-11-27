@@ -19,7 +19,7 @@ questions:
         feedback: 'נכון. $\left(x^2+7\right)''=2x$: הקבוע נעלם בגזירה.'
       - text: '$x^2-\pi$'
         correct: true
-        feedback: 'נכון. גם $-\pi$ הוא קבוע.'
+        feedback: 'נכון. גם מינוס $\pi$ הוא קבוע.'
       - text: '$(x+1)^2-2x$'
         correct: true
         feedback: 'נכון, אף שאינו נראה כך: $(x+1)^2-2x=x^2+1$, והנגזרת $2x$.'
@@ -42,11 +42,11 @@ questions:
     domain: [0.3, 3]
     upToConstant: true
     correctFeedback: >-
-      נכון. $\int x^a\,dx=\frac{x^{a+1}}{a+1}+C$ לכל $a\ne-1$: $-4\cdot\frac{x^{-2}}{-2}=2x^{-2}$ ו-$\frac{x^{3/2}}{3/2}=\frac23x^{3/2}$.
-    wrongFeedback: 'כתבו כל מחובר כחזקה ($x^{-3}$, $x^{1/2}$) והפעילו $\int x^a\,dx=\frac{x^{a+1}}{a+1}+C$. בדקו בגזירה.'
+      נכון. $\int x^a\,dx=\frac{x^{a+1}}{a+1}+C$ לכל $a\ne-1$: $(-4)\cdot\frac{x^{-2}}{-2}=2x^{-2}$ ו-$\frac{x^{3/2}}{3/2}=\frac23x^{3/2}$.
+    wrongFeedback: 'כתבו כל איבר כחזקה ($x^{-3}$, $x^{1/2}$) והפעילו $\int x^a\,dx=\frac{x^{a+1}}{a+1}+C$. בדקו בגזירה.'
     commonWrong:
       - expr: 'x^3 - 2/x^2 + 2/3*x^(3/2)'
-        feedback: 'הסימן: $\int x^{-3}\,dx=\frac{x^{-2}}{-2}$, ולכן $-4\cdot\frac{x^{-2}}{-2}=+\frac{2}{x^2}$.'
+        feedback: 'הסימן: $\int x^{-3}\,dx=\frac{x^{-2}}{-2}$, ולכן $(-4)\cdot\frac{x^{-2}}{-2}=\frac{2}{x^2}$.'
         misconception: MC-c7-power-negative-exponent
       - expr: 'x^3 + 2/x^2 + 3/2*x^(3/2)'
         feedback: 'בחזקה מחלקים במעריך החדש, לא כופלים בו: $\int x^{1/2}\,dx=\frac{x^{3/2}}{3/2}=\frac23x^{3/2}$.'
@@ -57,20 +57,20 @@ questions:
     type: expr
     objectives: [OBJ-7.1-3]
     level: basic
-    prompt: 'חשבו $\int\left(2\cos x-3\sin x+\frac{1}{\cos^2x}\right)dx$.'
+    prompt: 'חשבו $\int\left(2\cos x-3\sin x+\frac{1}{\cos^2x}\right)dx$ בקטע $|x|<\frac\pi2$.'
     answer: '2*sin(x) + 3*cos(x) + tan(x)'
     answerTex: '$2\sin x+3\cos x+\tan x+C$'
     variables: [x]
     domain: [-1, 1]
     upToConstant: true
     correctFeedback: >-
-      נכון. מהטבלה (עמ׳ 9 במחברת): $\int\cos x\,dx=\sin x$, $\int\sin x\,dx=-\cos x$ ו-$\int\frac{dx}{\cos^2x}=\tan x$; ולכן
-      $-3\int\sin x\,dx=+3\cos x$.
-    wrongFeedback: 'השתמשו בליניאריות ובשלוש שורות של הטבלה. בדקו סימן בגזירה: $(\cos x)''=-\sin x$.'
+      נכון. מהטבלה: $\int\cos x\,dx=\sin x$, $\int\sin x\,dx=-\cos x$ ו-$\int\frac{dx}{\cos^2x}=\tan x$; ולכן
+      $(-3)\int\sin x\,dx=3\cos x$.
+    wrongFeedback: 'השתמשו בלינאריות ובשלוש שורות של הטבלה. בדקו סימן בגזירה: $(\cos x)''=-\sin x$.'
     commonWrong:
       - expr: '2*sin(x) - 3*cos(x) + tan(x)'
         feedback: >-
-          $\int\sin x\,dx=-\cos x$, ולכן $-3\int\sin x\,dx=+3\cos x$. גזרו את התשובה שלכם: מתקבל $+3\sin x$ במקום $-3\sin x$.
+          $\int\sin x\,dx=-\cos x$, ולכן $(-3)\int\sin x\,dx=3\cos x$. גזרו את התשובה שלכם: מתקבל $+3\sin x$ במקום $-3\sin x$.
         misconception: MC-c7-trig-integral-sign
     hints: ['איזו פונקציה נגזרתה $\sin x$?']
 
@@ -86,9 +86,9 @@ questions:
     domain: [-3, -0.3]
     upToConstant: true
     correctFeedback: >-
-      נכון. מחלקים: $\frac{x^2+1}{x}=x+\frac1x$. ו-$\int\frac{dx}{x}=\ln|x|+C$: ל-$x<0$, $\left(\ln(-x)\right)'=\frac{-1}{-x}=\frac1x$
-      (עמ׳ 14 במחברת). $\ln x$ אינו מוגדר בכלל כש-$x<0$.
-    wrongFeedback: 'פרקו לשני מחוברים לפני האינטגרציה. ושימו לב: $\ln x$ לא מוגדר ל-$x<0$.'
+      נכון. מחלקים: $\frac{x^2+1}{x}=x+\frac1x$. ו-$\int\frac{dx}{x}=\ln|x|+C$: ל-$x<0$, $\left(\ln(-x)\right)'=\frac{-1}{-x}=\frac1x$.
+      $\ln x$ אינו מוגדר בכלל כש-$x<0$.
+    wrongFeedback: 'פרקו לשני איברים לפני האינטגרציה. ושימו לב: $\ln x$ לא מוגדר ל-$x<0$.'
     commonWrong:
       - expr: '(x^3/3 + x)/(x^2/2)'
         feedback: >-
@@ -100,7 +100,7 @@ questions:
   - id: Q-7.1-exp-table
     type: expr
     objectives: [OBJ-7.1-3]
-    level: mid
+    level: basic
     prompt: 'חשבו $\int\left(5e^x+2^x\right)dx$.'
     answer: '5*exp(x) + 2^x/log(2)'
     answerTex: '$5e^x+\frac{2^x}{\ln2}+C$'
@@ -108,7 +108,7 @@ questions:
     domain: [-2, 2]
     upToConstant: true
     correctFeedback: >-
-      נכון. $\left(2^x\right)'=\ln2\cdot2^x$ (עמ׳ 13 במחברת), ולכן $\int2^x\,dx=\frac{2^x}{\ln2}+C$.
+      נכון. $\left(2^x\right)'=\ln2\cdot2^x$, ולכן $\int2^x\,dx=\frac{2^x}{\ln2}+C$.
     wrongFeedback: 'מה הנגזרת של $2^x$? חלקו בגורם שהיא מוסיפה.'
     commonWrong:
       - expr: '5*exp(x) + 2^(x+1)/(x+1)'
@@ -125,7 +125,7 @@ questions:
     type: numeric
     objectives: [OBJ-7.1-2]
     level: basic
-    prompt: 'חשבו את השטח מתחת לקשת של $\sin x$ בין 0 ל-$\pi$, כלומר $\int_0^\pi\sin x\,dx$ (עמ׳ 10 במחברת).'
+    prompt: 'חשבו את השטח מתחת לקשת של $\sin x$ בין 0 ל-$\pi$, כלומר $\int_0^\pi\sin x\,dx$.'
     answer: 2
     tolerance: 0.001
     correctFeedback: >-
@@ -155,7 +155,7 @@ questions:
         misconception: MC-c7-ftc-order
       - value: 5.41666666667
         feedback: >-
-          זה מתקבל עם $F=\frac23x^{3/2}-\frac1x$. $\int x^{-2}\,dx=\frac{x^{-1}}{-1}=-\frac1x$, ולכן $-\int x^{-2}\,dx=+\frac1x$.
+          זה מתקבל עם $F=\frac23x^{3/2}-\frac1x$. $\int x^{-2}\,dx=\frac{x^{-1}}{-1}=-\frac1x$, ולכן $(-1)\cdot\int x^{-2}\,dx=\frac1x$.
         misconception: MC-c7-power-negative-exponent
     hints: ['$\int x^{-2}\,dx=-x^{-1}+C$.']
 
@@ -177,7 +177,7 @@ questions:
       - text: '$(F-G)''=0$ בקטע, ולכן $F-G$ קבועה, אבל לא בהכרח אפס'
         correct: true
         feedback: >-
-          בדיוק. פונקציה שנגזרתה אפס בקטע קבועה בו: אין לה איפה לעלות או לרדת (זה משפט הערך הממוצע מאינפי, שבקורס משתמשים
+          בדיוק. פונקציה שנגזרתה אפס בקטע קבועה בו: אין לה איפה לעלות או לרדת (זה משפט הערך הממוצע משיעור 5.5, שבקורס משתמשים
           בו בלי הוכחה). זו הסיבה ל-"$+C$".
       - text: 'גזירה היא פעולה הפיכה, ולכן הנגזרת קובעת את הפונקציה'
         feedback: 'גזירה מאבדת את הקבוע: היא אינה חד-חד-ערכית. לכן האינטגרל הלא מסוים הוא משפחה של פונקציות.'
@@ -224,7 +224,7 @@ questions:
     choices:
       - text: '$\int(3f+g)\,dx=3\int f\,dx+\int g\,dx$'
         correct: true
-        feedback: 'נכון. זו הליניאריות (עמ׳ 10 במחברת): גזירה היא לינארית, ולכן גם הפעולה ההפוכה לה.'
+        feedback: 'נכון. זו הלינאריות: גזירה היא לינארית, ולכן גם הפעולה ההפוכה לה.'
       - text: '$\int fg\,dx=\int f\,dx\cdot\int g\,dx$'
         feedback: >-
           דוגמה נגדית: $f=g=x$. $\int x^2\,dx=\frac{x^3}{3}$, ואילו $\left(\frac{x^2}{2}\right)^2=\frac{x^4}{4}$. למכפלה יש
@@ -278,3 +278,53 @@ questions:
           $G$ מוגדרת רק ב-$x\ne0$, ובכל נקודה של התחום היא רציפה וגזירה. הקפיצה "ב-0" היא בנקודה שאינה בתחום.
         misconception: MC-c7-constant-same-everywhere
     hints: ['האם התחום $x\ne0$ הוא קטע אחד?']
+
+  - id: Q-7.1-area-function
+    type: mc
+    objectives: [OBJ-7.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      $A(x)=\int_0^xe^{-t^2}\,dt$, פונקציית השטח של עקומת הפעמון מ-0. מה הנגזרת $A'(x)$?
+    choices:
+      - text: '$A''(x)=e^{-x^2}$'
+        correct: true
+        feedback: >-
+          נכון. לפי החלק הראשון של המשפט היסודי, הנגזרת של פונקציית השטח היא הגובה של הגרף בקצה הנע: הפס הצר ברוחב
+          $dx$ מוסיף שטח $e^{-x^2}\,dx$ בקירוב. לא צריך נוסחה ל-$A$ כדי לגזור אותה.
+      - text: '$A''(x)=-2xe^{-x^2}$'
+        feedback: >-
+          זו הנגזרת של $e^{-x^2}$, כלומר גזרתם את הפונקציה שבתוך האינטגרל. אבל $A$ היא קדומה של $e^{-x^2}$, ולכן
+          $A'=e^{-x^2}$ עצמה.
+        misconception: MC-c7-antideriv-is-derivative
+      - text: 'אי אפשר לדעת: ל-$e^{-x^2}$ אין פונקציה קדומה בנוסחה, ולכן אין ל-$A$ נוסחה לגזור'
+        feedback: >-
+          אין ל-$A$ נוסחה מהטבלה, אבל היא קיימת וגזירה, כי $e^{-x^2}$ רציפה: המשפט היסודי נותן את $A'$ בלי נוסחה ל-$A$.
+          לכל פונקציה רציפה יש קדומה, פונקציית השטח שלה.
+        misconception: MC-c7-no-formula-no-antiderivative
+    hints: ['כמה שטח מוסיף פס צר ברוחב $dx$ בקצה $x$?']
+
+  - id: Q-7.1-distance
+    type: numeric
+    objectives: [OBJ-7.1-2, OBJ-7.1-3]
+    level: exam
+    prompt: >-
+      גוף נע לאורך ישר במהירות $v(t)=6t-3t^2$ (מטר לשנייה, $t$ בשניות). מה הדרך הכוללת (במטרים) שהוא עובר בין $t=0$
+      ל-$t=3$?
+    answer: 8
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $v(t)=3t(2-t)$: חיובית ב-$(0,2)$ ושלילית ב-$(2,3)$, כלומר הגוף מחליף כיוון ב-$t=2$. עם הקדומה
+      $F(t)=3t^2-t^3$: מ-0 עד 2 ההעתק $F(2)-F(0)=4$, ומ-2 עד 3 ההעתק $F(3)-F(2)=0-4=-4$. הדרך: $4+4=8$ מטר.
+    wrongFeedback: >-
+      מצאו מתי $v$ מחליפה סימן, חשבו את ההעתק בכל קטע זמן לפי המשפט היסודי, וחברו את הגדלים בלי הסימנים.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          זה ההעתק, $\int_0^3v\,dt=F(3)-F(0)=0$: הגוף חזר לנקודת המוצא. הדרך סופרת גם את החזרה, כי ב-$(2,3)$ המהירות
+          שלילית.
+        misconception: MC-c8-displacement-vs-distance
+      - value: 4
+        feedback: >-
+          זו רק הדרך עד $t=2$. אחרי $t=2$ הגוף חוזר אחורה עוד 4 מטרים, והדרך מוסיפה גם אותם.
+    hints: ['איפה $v(t)=0$? בכל קטע זמן שבו $v$ שומרת על סימן, ההעתק הוא אינטגרל מסוים.']

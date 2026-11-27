@@ -13,7 +13,7 @@
   en: indefinite integral
   symbol: '\int f(x)\,dx=F(x)+C'
   definition: >-
-    משפחת כל הפונקציות הקדומות של $f$ בקטע: $\int f(x)\,dx=F(x)+C$, כש-$F$ קדומה אחת ו-$C$ קבוע כלשהו (עמ׳ 9 במחברת).
+    משפחת כל הפונקציות הקדומות של $f$ בקטע: $\int f(x)\,dx=F(x)+C$, כש-$F$ קדומה אחת ו-$C$ קבוע כלשהו.
   reject: [אינטגרל בלתי מסויים]
   lesson: '7.1'
 - id: integration-constant
@@ -30,7 +30,64 @@
   en: fundamental theorem of calculus
   symbol: '\int_a^bf(x)\,dx=F(b)-F(a)'
   definition: >-
-    אם $f$ רציפה ב-$[a,b]$ ו-$F$ קדומה שלה, אז $\int_a^bf(x)\,dx=F(b)-F(a)$ (נוסחת ניוטון-לייבניץ, עמ׳ 10 במחברת). הוא
-    מקשר בין שטח לפונקציה קדומה, והקבוע של $F$ מתבטל בהפרש.
+    אם $f$ רציפה ב-$[a,b]$ ו-$F$ קדומה שלה, אז $\int_a^bf(x)\,dx=F(b)-F(a)$ (נוסחת ניוטון-לייבניץ). הוא
+    מקשר בין שטח לפונקציה קדומה, והקבוע של $F$ מתבטל בהפרש. חלקו הראשון: פונקציית השטח $A(x)=\int_a^xf(t)\,dt$ מקיימת
+    $A'(x)=f(x)$.
+  reject: []
+  lesson: '7.1'
+- id: area-function
+  term: פונקציית השטח
+  en: area function
+  symbol: 'A(x)=\int_a^x f(t)\,dt'
+  definition: >-
+    לפונקציה רציפה $f$ ולנקודה קבועה $a$: $A(x)=\int_a^xf(t)\,dt$, השטח עם הסימן שבין הגרף של $f$ לציר מ-$a$ עד $x$.
+    $t$ הוא משתנה האינטגרציה ו-$x$ הוא הגבול. $A(a)=0$, ולפי המשפט היסודי $A'(x)=f(x)$: פונקציית השטח היא פונקציה
+    קדומה של $f$, גם כשאין ל-$f$ קדומה בנוסחה מהטבלה.
+  reject: []
+  lesson: '7.1'
+- id: integrand
+  term: אינטגרנד
+  en: integrand
+  symbol: 'f(x)'
+  definition: >-
+    הפונקציה שעושים לה אינטגרציה: $f(x)$ ב-$\int f(x)\,dx$ או ב-$\int_a^bf(x)\,dx$. במילים: "הפונקציה שבתוך
+    האינטגרל".
+  reject: []
+  lesson: '7.1'
+- id: immediate-integral
+  term: אינטגרל מיידי
+  en: basic (table) integral
+  symbol: '\int\left(a\,f+b\,g\right)dx'
+  definition: >-
+    אינטגרל שהתשובה עליו נקראת ישר מטבלת האינטגרלים: שורה אחת מהטבלה, או סכום של שורות כפולות בקבועים (בלינאריות),
+    אולי אחרי פישוט אלגברי של האינטגרנד. לאינטגרל שאינו מיידי צריך שיטה: הצבה, אינטגרציה בחלקים וכן הלאה.
+  reject: []
+  lesson: '7.1'
+- id: linearity-of-integral
+  term: לינאריות של האינטגרל
+  en: linearity of the integral
+  symbol: '\int(af+bg)\,dx=a\int f\,dx+b\int g\,dx'
+  definition: >-
+    אינטגרל של סכום הוא סכום האינטגרלים, וקבוע כופל יוצא מחוץ לאינטגרל: $\int(af+bg)\,dx=a\int f\,dx+b\int g\,dx$. זה
+    נכון כי גם גזירה מכבדת סכום וכפל בקבוע. למכפלה ולמנה של פונקציות אין כלל כזה.
+  reject: []
+  lesson: '7.1'
+- id: definite-integral
+  term: אינטגרל מסוים
+  en: definite integral
+  symbol: '\int_a^b f(x)\,dx'
+  definition: >-
+    לפונקציה רציפה $f$ בקטע $[a,b]$: מספר, השטח **עם הסימן** שבין הגרף של $f$ לציר $x$, מ-$a$ עד $b$ (מהתיכון). כש-$b<a$
+    מגדירים $\int_a^bf\,dx=-\int_b^af\,dx$, ו-$\int_a^af\,dx=0$. לפי המשפט היסודי, אם $F$ קדומה של $f$, אז
+    $\int_a^bf(x)\,dx=F(b)-F(a)$. אם $f$ היא מהירות, האינטגרל הוא ההעתק. בשיעור 8.1 נראה שזה גבול של סכומי רימן.
+  reject: [אינטגרל מסויים]
+  lesson: '7.1'
+- id: signed-area
+  term: שטח עם סימן
+  en: signed area
+  symbol: '\int_a^b f(x)\,dx'
+  definition: >-
+    השטח שבין הגרף לציר $x$, כשחלקים מעל הציר נספרים בחיוב וחלקים מתחתיו בשלילה. זה מה שהאינטגרל המסוים מודד.
+    השטח הגיאומטרי הוא $\int_a^b|f(x)|\,dx$.
   reject: []
   lesson: '7.1'

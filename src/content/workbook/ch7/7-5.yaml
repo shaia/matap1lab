@@ -1,0 +1,507 @@
+# Workbook of lesson 7.5 — trigonometric integrals and trigonometric substitutions.
+# Objectives (src/course.ts):
+#   OBJ-7.5-1  integrals of powers of sine and cosine by identities
+#   OBJ-7.5-2  the tangent half-angle substitution for a rational function of sine and cosine
+#   OBJ-7.5-3  trigonometric substitution for integrals with the square root of a quadratic expression
+# No sec, csc, cot: 1/cos x, 1/sin x. A definite integral is computed from an antiderivative in x and the fundamental
+# theorem (changing the limits under a substitution is lesson 8.2).
+# Every number recomputed with sympy in screens/tools/lesson-7-5.py.
+lesson: '7.5'
+practice:
+  - id: W-7.5-01
+    level: basic
+    objectives: [OBJ-7.5-1]
+    prompt: >-
+      (א) חשבו $\int\cos^2\frac x2\,dx$.
+
+
+      (ב) חשבו $\int\sin3x\cos3x\,dx$.
+    answer: >-
+      (א) $\frac x2+\frac{\sin x}{2}+C$. (ב) $\frac{\sin^23x}{6}+C$ (או, בצורה שנבדלת בקבוע, $\frac{-\cos6x}{12}+C$).
+    solution:
+      - kind: idea
+        text: >-
+          ב-(א) חזקה זוגית: מורידים חזקה. הזהות $\cos^2u=\frac{1+\cos2u}{2}$ נכונה לכל זווית, גם ל-$u=\frac x2$, שהזווית
+          הכפולה שלה היא $x$. ב-(ב) שתי החזקות אי-זוגיות (1 ו-1): מציבים $u=\sin3x$, או משתמשים ב-$\sin u\cos u=\frac{\sin2u}{2}$.
+      - kind: computation
+        text: >-
+          (א) $\cos^2\frac x2=\frac{1+\cos x}{2}$, ולכן $\int\cos^2\frac x2\,dx=\int\left(\frac12+\frac{\cos x}{2}\right)dx=\frac x2+\frac{\sin x}{2}+C$.
+      - kind: computation
+        text: >-
+          (ב) $u=\sin3x$, $du=3\cos3x\,dx$, כלומר $\cos3x\,dx=\frac{du}{3}$: $\int u\,\frac{du}{3}=\frac{u^2}{6}=\frac{\sin^23x}{6}+C$.
+      - kind: check
+        text: >-
+          (א) בגזירה: $\frac12+\frac{\cos x}{2}=\frac{1+\cos x}{2}=\cos^2\frac x2$. ✓ (ב) בגזירה: $\frac{2\sin3x\cdot3\cos3x}{6}=\sin3x\cos3x$.
+          ✓ ובדרך השנייה, $\sin3x\cos3x=\frac{\sin6x}{2}$, שהקדומה שלו $\frac{-\cos6x}{12}$; ההפרש בין שתי התשובות הוא
+          $\frac{\sin^23x}{6}+\frac{\cos6x}{12}=\frac{2\sin^23x+1-2\sin^23x}{12}=\frac{1}{12}$, קבוע. ✓
+      - kind: result
+        text: >-
+          (א) $\frac x2+\frac{\sin x}{2}+C$. (ב) $\frac{\sin^23x}{6}+C$.
+
+  - id: W-7.5-02
+    level: basic
+    objectives: [OBJ-7.5-1]
+    prompt: >-
+      חשבו $\int\cos^5x\,dx$.
+    answer: >-
+      $\sin x-\frac{2\sin^3x}{3}+\frac{\sin^5x}{5}+C$.
+    solution:
+      - kind: idea
+        text: >-
+          החזקה אי-זוגית: מפרידים $\cos x$ אחד, שהוא $du$ עבור $u=\sin x$. את $\cos^4x$ שנשאר כותבים כ-$\left(\cos^2x\right)^2=\left(1-\sin^2x\right)^2$.
+      - kind: step
+        text: >-
+          $\cos^5x\,dx=\left(1-\sin^2x\right)^2\cos x\,dx$. עם $u=\sin x$ ו-$du=\cos x\,dx$ זה $\left(1-u^2\right)^2du$.
+      - kind: computation
+        text: >-
+          פותחים את הריבוע: $\left(1-u^2\right)^2=1-2u^2+u^4$, ולכן $\int\left(1-2u^2+u^4\right)du=u-\frac{2u^3}{3}+\frac{u^5}{5}+C$.
+      - kind: step
+        text: >-
+          חוזרים ל-$x$ עם $u=\sin x$.
+      - kind: check
+        text: >-
+          בגזירה מתקבל $\cos x-2\sin^2x\cos x+\sin^4x\cos x$. מוציאים $\cos x$ כגורם משותף: זה $\cos x\left(1-\sin^2x\right)^2$, ו-$\left(1-\sin^2x\right)^2=\cos^4x$, ולכן
+          הנגזרת $\cos x\cdot\cos^4x=\cos^5x$. ✓ ובמספר:
+          השטח מ-0 עד $\frac\pi2$ הוא $1-\frac23+\frac15=\frac{8}{15}\approx0.53$, חיובי וקטן מ-$\frac\pi2\approx1.57$, כמו
+          שצריך לפונקציה שבין 0 ל-1.
+      - kind: result
+        text: >-
+          $\int\cos^5x\,dx=\sin x-\frac{2\sin^3x}{3}+\frac{\sin^5x}{5}+C$.
+
+  - id: W-7.5-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-7.5-1, OBJ-7.5-2, OBJ-7.5-3]
+    prompt: >-
+      לכל אינטגרל כתבו איזו דרך הכי מתאימה לו, ומה הצעד הראשון. אל תחשבו.
+
+
+      (א) $\int\sin^4x\cos^3x\,dx$ (ב) $\int\sin^2x\cos^4x\,dx$ (ג) $\int\frac{dx}{2+\sin x}$
+
+
+      (ד) $\int\sqrt{25-x^2}\,dx$ (ה) $\int\frac{x}{\sqrt{25-x^2}}\,dx$
+    answer: >-
+      (א) מפרידים $\cos x$ ומציבים $u=\sin x$. (ב) הורדת חזקה. (ג) הצבת טנגנס חצי הזווית. (ד) $x=5\sin\theta$. (ה) הצבה
+      רגילה $u=25-x^2$.
+    solution:
+      - kind: idea
+        text: >-
+          בחזקות של סינוס וקוסינוס מסתכלים על הזוגיות; בפונקציה רציונלית אחרת של סינוס וקוסינוס, טנגנס חצי הזווית; בשורש של
+          ביטוי ריבועי, הצבה טריגונומטרית, אבל רק אחרי שבודקים אם אין נגזרת פנימית.
+      - kind: step
+        text: >-
+          (א) החזקה של $\cos x$ אי-זוגית (3): מפרידים $\cos x$ אחד, $\cos^2x=1-\sin^2x$, ו-$u=\sin x$ נותן את הפולינום
+          $u^4\left(1-u^2\right)$.
+      - kind: step
+        text: >-
+          (ב) שתי החזקות זוגיות: אין גורם להפריד. מורידים חזקה, למשל $\sin^2x\cos^4x=\left(\sin x\cos x\right)^2\cos^2x=\frac{\sin^22x}{4}\cdot\frac{1+\cos2x}{2}$,
+          וממשיכים.
+      - kind: step
+        text: >-
+          (ג) אין חזקה, אין גורם להפריד: פונקציה רציונלית של $\sin x$. ההצבה $t=\tan\frac x2$ הופכת אותה ל-$\frac{2\,dt}{2t^2+2t+2}=\frac{dt}{t^2+t+1}$,
+          ואחר כך השלמה לריבוע ו-$\arctan$.
+      - kind: step
+        text: >-
+          (ד) $25-x^2=a^2-x^2$ עם $a=5$, ואין $x$ מחוץ לשורש: $x=5\sin\theta$, $\sqrt{25-x^2}=5\cos\theta$.
+      - kind: step
+        text: >-
+          (ה) $x$ במונה הוא, עד קבוע, הנגזרת של $25-x^2$: $u=25-x^2$, $du=-2x\,dx$, ומתקבל $\int u^{-1/2}\left(-\frac12\,du\right)$.
+          הצבה טריגונומטרית אפשרית, אבל ארוכה יותר.
+      - kind: check
+        text: >-
+          ב-(ג) נוודא את הצעד: $2+\frac{2t}{1+t^2}=\frac{2t^2+2t+2}{1+t^2}$. האינטגרנד הוא ההופכי של המכנה הזה, כפול $dx$:
+          $\frac{1+t^2}{2t^2+2t+2}\cdot\frac{2\,dt}{1+t^2}=\frac{2\,dt}{2t^2+2t+2}$. ✓ ב-(ה) התשובה היא מינוס $\sqrt{25-x^2}$, ועוד קבוע, והנגזרת שלה $\frac{x}{\sqrt{25-x^2}}$. ✓
+      - kind: result
+        text: >-
+          (א) הפרדת $\cos x$ ו-$u=\sin x$; (ב) הורדת חזקה; (ג) $t=\tan\frac x2$; (ד) $x=5\sin\theta$; (ה) $u=25-x^2$.
+
+  - id: W-7.5-04
+    level: mid
+    objectives: [OBJ-7.5-1]
+    prompt: >-
+      חשבו $\int_0^{\pi/2}\sin^3x\cos^4x\,dx$.
+    answer: >-
+      $\frac{2}{35}\approx0.0571$.
+    solution:
+      - kind: idea
+        text: >-
+          החזקה של $\sin x$ אי-זוגית: מפרידים $\sin x$ אחד ומציבים $u=\cos x$. מוצאים קדומה ב-$x$, ואז מפעילים את המשפט
+          היסודי.
+      - kind: step
+        text: >-
+          $\sin^3x\cos^4x\,dx=\left(1-\cos^2x\right)\cos^4x\,\sin x\,dx$. עם $u=\cos x$, $du=-\sin x\,dx$, זה
+          $\left(u^2-1\right)u^4\,du=\left(u^6-u^4\right)du$.
+      - kind: computation
+        text: >-
+          $\int\left(u^6-u^4\right)du=\frac{u^7}{7}-\frac{u^5}{5}+C$, ולכן קדומה ב-$x$ היא $F(x)=\frac{\cos^7x}{7}-\frac{\cos^5x}{5}$.
+      - kind: computation
+        text: >-
+          $F\left(\frac\pi2\right)=0$, ו-$F(0)=\frac17-\frac15=-\frac{2}{35}$. לכן האינטגרל $0-\left(-\frac{2}{35}\right)=\frac{2}{35}$.
+      - kind: check
+        text: >-
+          בגזירה: $F'(x)=\cos^4x\sin x-\cos^6x\sin x$. מוציאים גורם משותף: $\sin x\cos^4x\left(1-\cos^2x\right)$, וזה
+          $\sin^3x\cos^4x$. ✓ סבירות: האינטגרנד
+          חיובי בקטע, ולכן גם האינטגרל; והוא קטן, כי $\sin^3x\cos^4x$ קטן מ-0.1 לכל $x$ בקטע (בערך $0.092$ במקסימום), ולכן
+          האינטגרל קטן מ-$0.1\cdot\frac\pi2\approx0.157$; ו-$\frac{2}{35}\approx0.057$. ✓
+      - kind: result
+        text: >-
+          $\int_0^{\pi/2}\sin^3x\cos^4x\,dx=\frac{2}{35}$.
+
+  - id: W-7.5-05
+    level: mid
+    qualitative: true
+    objectives: [OBJ-7.5-1]
+    prompt: >-
+      נכון או לא נכון? נמקו.
+
+
+      (א) $\int_0^{2\pi}\cos^2(5x)\,dx=\pi$.
+
+
+      (ב) $\int_0^{\pi}\sin^2x\,dx=\int_0^{\pi}\cos^2x\,dx$.
+
+
+      (ג) $\int\sin x\cos x\,dx=\int\sin x\,dx\cdot\int\cos x\,dx$, כלומר הקדומה היא מינוס $\sin x\cos x$, ועוד קבוע.
+    answer: >-
+      (א) נכון. (ב) נכון, שניהם $\frac\pi2$. (ג) לא נכון.
+    solution:
+      - kind: idea
+        text: >-
+          ב-(א) ו-(ב) מורידים חזקה ומפרידים חלק קבוע וחלק מתנודד. ב-(ג) בודקים בגזירה: קדומה נכונה נגזרת בחזרה לאינטגרנד.
+      - kind: computation
+        text: >-
+          (א) $\cos^2(5x)=\frac{1+\cos10x}{2}$, וקדומה $\frac x2+\frac{\sin10x}{20}$. ב-$2\pi$: $\pi+\frac{\sin20\pi}{20}=\pi$; ב-0: 0. נכון.
+      - kind: computation
+        text: >-
+          (ב) ההפרש: $\sin^2x-\cos^2x=-\cos2x$, שהקדומה שלו $\frac{-\sin2x}{2}$, שווה 0 גם ב-0 וגם ב-$\pi$. לכן ההפרש בין
+          האינטגרלים 0, והם שווים. וכל אחד: $\frac x2\pm\frac{\sin2x}{4}$ בין 0 ל-$\pi$ נותן $\frac\pi2$. נכון.
+      - kind: step
+        text: >-
+          (ג) לא נכון. אינטגרל של מכפלה אינו מכפלת האינטגרלים. גזירה של $(-\sin x)\cos x$ בכלל המכפלה נותנת
+          $\sin^2x-\cos^2x$, שאינו $\sin x\cos x$: ב-$x=0$ הוא מינוס 1, ו-$\sin0\cos0=0$. הנכון: $\frac{\sin^2x}{2}+C$ (עם $u=\sin x$).
+      - kind: check
+        text: >-
+          (א) הממוצע של $\cos^2$ על מספר שלם של מחזורים הוא $\frac12$, והקטע באורך $2\pi$ מכיל חמישה מחזורים של $\cos5x$. ✓
+          (ב) $\cos^2x=\sin^2\left(x+\frac\pi2\right)$: הגרף של $\cos^2x$ הוא הגרף של $\sin^2x$ מוזז ב-$\frac\pi2$. לשתיהן מחזור
+          $\pi$, ולכן על קטע באורך מחזור שלם, כמו $[0,\pi]$, השטחים שמתחתיהן שווים. ✓
+      - kind: result
+        text: >-
+          (א) נכון; (ב) נכון, שניהם $\frac\pi2$; (ג) לא נכון, $\int\sin x\cos x\,dx=\frac{\sin^2x}{2}+C$.
+
+  - id: W-7.5-06
+    level: mid
+    objectives: [OBJ-7.5-2]
+    prompt: >-
+      חשבו $\int\frac{dx}{1+\sin x+\cos x}$ בקטע $x\in\left(-\frac\pi2,\pi\right)$.
+    answer: >-
+      $\ln\left|1+\tan\frac x2\right|+C$.
+    solution:
+      - kind: idea
+        text: >-
+          פונקציה רציונלית של $\sin x$ ו-$\cos x$, בלי חזקות שאפשר להוריד: הצבת טנגנס חצי הזווית, $t=\tan\frac x2$.
+      - kind: computation
+        text: >-
+          במכנה: $1+\frac{2t}{1+t^2}+\frac{1-t^2}{1+t^2}=\frac{1+t^2+2t+1-t^2}{1+t^2}=\frac{2(1+t)}{1+t^2}$.
+      - kind: computation
+        text: >-
+          עם $dx=\frac{2\,dt}{1+t^2}$: $\frac{1+t^2}{2(1+t)}\cdot\frac{2\,dt}{1+t^2}=\frac{dt}{1+t}$, ולכן הקדומה $\ln|1+t|+C$.
+      - kind: step
+        text: >-
+          חוזרים ל-$x$: $\ln\left|1+\tan\frac x2\right|+C$. בקטע הנתון $\frac x2\in\left(-\frac\pi4,\frac\pi2\right)$, ולכן $t>-1$
+          והמכנה $1+t$ חיובי; בקצה $x=-\frac\pi2$ (שם $t=-1$) ובקצה $x=\pi$ המכנה של האינטגרנד המקורי מתאפס.
+      - kind: check
+        text: >-
+          גזירה לפי $x$: $\frac{1}{1+t}\cdot\frac{dt}{dx}=\frac{1}{1+t}\cdot\frac{1+t^2}{2}$, ומהחישוב הראשון זה בדיוק
+          $\frac{1}{1+\sin x+\cos x}$. ✓ ובמספר: ב-$x=0$ האינטגרנד $\frac12$, והנגזרת ב-$t=0$ היא $1\cdot\frac12$. ✓
+      - kind: result
+        text: >-
+          $\int\frac{dx}{1+\sin x+\cos x}=\ln\left|1+\tan\frac x2\right|+C$, בקטע $x\in\left(-\frac\pi2,\pi\right)$.
+
+  - id: W-7.5-07
+    level: mid
+    objectives: [OBJ-7.5-3, OBJ-7.5-1]
+    prompt: >-
+      (א) חשבו $\int\frac{x^3}{\sqrt{x^2+1}}\,dx$ בהצבה $x=\tan\theta$.
+
+
+      (ב) בדקו את התשובה בדרך שנייה: הצבה רגילה $u=x^2+1$.
+    answer: >-
+      $\frac{\left(x^2+1\right)^{3/2}}{3}-\sqrt{x^2+1}+C=\frac{\left(x^2-2\right)\sqrt{x^2+1}}{3}+C$.
+    solution:
+      - kind: idea
+        text: >-
+          $\sqrt{x^2+1}=\sqrt{a^2+x^2}$ עם $a=1$: $x=\tan\theta$, $|\theta|<\frac\pi2$, והזהות $1+\tan^2\theta=\frac{1}{\cos^2\theta}$ מעלימה את
+          השורש. אחרי ההצבה תופיע חזקה אי-זוגית של $\sin\theta$, ולכן מפרידים גורם אחד ומציבים $u=\cos\theta$.
+      - kind: definition
+        text: >-
+          $x=\tan\theta$, $dx=\frac{d\theta}{\cos^2\theta}$, $\sqrt{x^2+1}=\frac{1}{\cos\theta}$ (כי $\cos\theta>0$), $x^3=\frac{\sin^3\theta}{\cos^3\theta}$.
+      - kind: computation
+        text: >-
+          $\frac{x^3\,dx}{\sqrt{x^2+1}}=\frac{\sin^3\theta}{\cos^3\theta}\cdot\cos\theta\cdot\frac{d\theta}{\cos^2\theta}=\frac{\sin^3\theta}{\cos^4\theta}\,d\theta$.
+      - kind: computation
+        text: >-
+          מפרידים $\sin\theta$ אחד: $\frac{\sin^2\theta}{\cos^4\theta}\sin\theta\,d\theta=\frac{1-\cos^2\theta}{\cos^4\theta}\sin\theta\,d\theta$. עם $u=\cos\theta$,
+          $\sin\theta\,d\theta=-du$: $\int\frac{u^2-1}{u^4}\,du=\int\left(u^{-2}-u^{-4}\right)du=\frac{1}{3u^3}-\frac1u+C$.
+      - kind: step
+        text: >-
+          חוזרים ל-$x$: $\frac1u=\frac{1}{\cos\theta}=\sqrt{x^2+1}$, ולכן הקדומה $\frac{\left(x^2+1\right)^{3/2}}{3}-\sqrt{x^2+1}$. מוציאים
+          $\sqrt{x^2+1}$ כגורם משותף: $\sqrt{x^2+1}\left(\frac{x^2+1}{3}-1\right)=\frac{\left(x^2-2\right)\sqrt{x^2+1}}{3}$.
+      - kind: computation
+        text: >-
+          (ב) $u=x^2+1$, $du=2x\,dx$, ו-$x^3\,dx=x^2\cdot x\,dx=(u-1)\frac{du}{2}$: $\frac12\int\frac{u-1}{\sqrt u}\,du=\frac12\int\left(u^{1/2}-u^{-1/2}\right)du=\frac{u^{3/2}}{3}-u^{1/2}+C$,
+          אותה תשובה.
+      - kind: check
+        text: >-
+          בגזירה: $\left(\frac{\left(x^2+1\right)^{3/2}}{3}\right)'=x\sqrt{x^2+1}$ ו-$\left(\sqrt{x^2+1}\right)'=\frac{x}{\sqrt{x^2+1}}$, וההפרש
+          $\frac{x\left(x^2+1\right)-x}{\sqrt{x^2+1}}=\frac{x^3}{\sqrt{x^2+1}}$. ✓ ובמספר: ב-$x=0$ הקדומה $\frac{-2}{3}$, ו-$\frac13-1$ אותו דבר. ✓
+      - kind: result
+        text: >-
+          $\int\frac{x^3}{\sqrt{x^2+1}}\,dx=\frac{\left(x^2-2\right)\sqrt{x^2+1}}{3}+C$.
+
+  - id: W-7.5-08
+    level: exam
+    objectives: [OBJ-7.5-3, OBJ-7.5-1]
+    prompt: >-
+      (א) הראו שהשטח של האליפסה $\frac{x^2}{a^2}+\frac{y^2}{b^2}\le1$, עם $a,b>0$, הוא $\pi ab$.
+
+
+      (ב) חשבו את השטח של החלק של העיגול $x^2+y^2\le4$ שבו $x\ge1$, ובדקו מול שטח של גזרה פחות שטח של משולש.
+    answer: >-
+      (א) $\pi ab$. (ב) $\frac{4\pi}{3}-\sqrt3\approx2.457$.
+    solution:
+      - kind: idea
+        text: >-
+          בשני הסעיפים השטח הוא אינטגרל של שורש של $a^2-x^2$, שאותו פותרים בהצבה $x=a\sin\theta$ והורדת חזקה. הקדומה מהשיעור:
+          $F(x)=\frac{a^2}{2}\arcsin\frac xa+\frac x2\sqrt{a^2-x^2}$.
+      - kind: step
+        text: >-
+          (א) מהמשוואה, $y=\pm\frac ba\sqrt{a^2-x^2}$: החצי העליון של האליפסה הוא השטח שמתחת לגרף של $\frac ba\sqrt{a^2-x^2}$ בין $x=-a$ ל-$x=a$,
+          והחצי התחתון הוא תמונת הראי שלו.
+      - kind: computation
+        text: >-
+          לפי המשפט היסודי, $\int_{-a}^{a}\sqrt{a^2-x^2}\,dx=F(a)-F(-a)=\frac{a^2}{2}\left(\frac\pi2+\frac\pi2\right)=\frac{\pi a^2}{2}$. לכן החצי
+          העליון $\frac ba\cdot\frac{\pi a^2}{2}=\frac{\pi ab}{2}$, והאליפסה כולה $\pi ab$.
+      - kind: step
+        text: >-
+          (ב) עם $a=2$: לכל $x$ בין 1 ל-2 החתך הוא הקטע $|y|\le\sqrt{4-x^2}$, באורך $2\sqrt{4-x^2}$. השטח
+          $\int_1^2 2\sqrt{4-x^2}\,dx=2\bigl(F(2)-F(1)\bigr)$, עם $F(x)=2\arcsin\frac x2+\frac x2\sqrt{4-x^2}$.
+      - kind: computation
+        text: >-
+          $F(2)=2\cdot\frac\pi2=\pi$, ו-$F(1)=2\cdot\frac\pi6+\frac12\sqrt3=\frac\pi3+\frac{\sqrt3}{2}$. לכן השטח
+          $2\left(\pi-\frac\pi3-\frac{\sqrt3}{2}\right)=\frac{4\pi}{3}-\sqrt3\approx2.457$.
+      - kind: check
+        text: >-
+          (א) כש-$a=b=r$ מתקבל $\pi r^2$, שטח העיגול. ✓ (ב) הישר $x=1$ חותך את המעגל ב-$\left(1,\pm\sqrt3\right)$. הזווית
+          המרכזית בין שתי הנקודות היא $\frac{2\pi}{3}$ (כל אחת בזווית $\frac\pi3$ מציר $x$, כי $\cos\frac\pi3=\frac12$), ולכן
+          הגזרה $\frac12\cdot2^2\cdot\frac{2\pi}{3}=\frac{4\pi}{3}$. המשולש שקודקודיו הראשית ושתי הנקודות: בסיס $2\sqrt3$
+          וגובה 1, שטח $\sqrt3$. ההפרש $\frac{4\pi}{3}-\sqrt3$. ✓
+      - kind: result
+        text: >-
+          (א) $\pi ab$. (ב) $\frac{4\pi}{3}-\sqrt3\approx2.457$.
+
+  - id: W-7.5-09
+    level: exam
+    objectives: [OBJ-7.5-2]
+    prompt: >-
+      (א) חשבו $\int\frac{dx}{\sin x\,(1+\cos x)}$ בקטע $0<x<\pi$.
+
+
+      (ב) חשבו $\int_{\pi/3}^{\pi/2}\frac{dx}{\sin x\,(1+\cos x)}$, ובדקו שהתוצאה סבירה.
+    answer: >-
+      (א) $\frac12\ln\left|\tan\frac x2\right|+\frac14\tan^2\frac x2+C$. (ב) $\frac{\ln3}{4}+\frac16\approx0.441$.
+    solution:
+      - kind: idea
+        text: >-
+          פונקציה רציונלית של $\sin x$ ו-$\cos x$: הצבת טנגנס חצי הזווית. הכול יצטמצם לפונקציה רציונלית פשוטה של $t$.
+      - kind: definition
+        text: >-
+          $\sin x=\frac{2t}{1+t^2}$, $\cos x=\frac{1-t^2}{1+t^2}$, $dx=\frac{2\,dt}{1+t^2}$, עם $t=\tan\frac x2>0$ בקטע.
+      - kind: computation
+        text: >-
+          $1+\cos x=\frac{2}{1+t^2}$, ולכן $\sin x\,(1+\cos x)=\frac{2t}{1+t^2}\cdot\frac{2}{1+t^2}=\frac{4t}{\left(1+t^2\right)^2}$.
+      - kind: computation
+        text: >-
+          $\frac{dx}{\sin x(1+\cos x)}=\frac{\left(1+t^2\right)^2}{4t}\cdot\frac{2\,dt}{1+t^2}=\frac{1+t^2}{2t}\,dt=\left(\frac{1}{2t}+\frac t2\right)dt$.
+      - kind: computation
+        text: >-
+          (א) $\int\left(\frac{1}{2t}+\frac t2\right)dt=\frac12\ln|t|+\frac{t^2}{4}+C$, ובחזרה ל-$x$:
+          $\frac12\ln\left|\tan\frac x2\right|+\frac14\tan^2\frac x2+C$.
+      - kind: computation
+        text: >-
+          (ב) ב-$\frac\pi2$: $t=\tan\frac\pi4=1$, והקדומה $0+\frac14$. ב-$\frac\pi3$: $t=\tan\frac\pi6=\frac{1}{\sqrt3}$, והקדומה
+          $\frac12\ln\frac{1}{\sqrt3}+\frac{1}{12}=\frac{1}{12}-\frac{\ln3}{4}$. ההפרש: $\frac14-\frac{1}{12}+\frac{\ln3}{4}=\frac16+\frac{\ln3}{4}\approx0.441$.
+      - kind: check
+        text: >-
+          גזירה של (א) לפי $x$, דרך $t$: $\left(\frac{1}{2t}+\frac t2\right)\cdot\frac{1+t^2}{2}=\frac{\left(1+t^2\right)^2}{4t}$, ומהחישוב
+          השלישי זה $\frac{1}{\sin x(1+\cos x)}$. ✓ סבירות של (ב): המכנה $\sin x+\frac{\sin2x}{2}$ יורד בקטע (הנגזרת שלו
+          $\cos x+\cos2x=(2\cos x-1)(\cos x+1)\le0$ כש-$\cos x\le\frac12$), ולכן האינטגרנד עולה, מ-$\frac{4}{3\sqrt3}\approx0.770$ ל-1.
+          כפול אורך הקטע $\frac\pi6\approx0.524$: בין $0.403$ ל-$0.524$. ✓
+      - kind: result
+        text: >-
+          (א) $\frac12\ln\left|\tan\frac x2\right|+\frac14\tan^2\frac x2+C$. (ב) $\frac16+\frac{\ln3}{4}\approx0.441$.
+
+  - id: W-7.5-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-7.5-2]
+    prompt: >-
+      בשיעור מצאנו ש-$F(x)=\frac23\arctan\left(\frac13\tan\frac x2\right)$ היא קדומה של $\frac{1}{5+4\cos x}$ בקטע $|x|<\pi$. סטודנט
+      חישב: "$\int_0^{2\pi}\frac{dx}{5+4\cos x}=F(2\pi)-F(0)=0-0=0$".
+
+
+      (א) הסבירו בלי חישוב למה התוצאה 0 בלתי אפשרית.
+
+
+      (ב) מצאו את הטעות.
+
+
+      (ג) חשבו את האינטגרל נכון. (רמז: פונקציית השטח $A(x)=\int_0^x\frac{ds}{5+4\cos s}$ רציפה ונגזרת בכל הישר.)
+    answer: >-
+      (א) האינטגרנד חיובי. (ב) $F$ אינה קדומה בכל הקטע $[0,2\pi]$: היא קופצת ב-$\pi$. (ג) $\frac{2\pi}{3}\approx2.094$.
+    solution:
+      - kind: idea
+        text: >-
+          המשפט היסודי דורש קדומה בכל הקטע. ההצבה $t=\tan\frac x2$ מכסה רק את $|x|<\pi$, ובכל קטע באורך $2\pi$ שבין שתי
+          כפולות אי-זוגיות של $\pi$ הנוסחה היא קדומה עם קבוע משלה. מחברים את החלקים דרך פונקציית השטח, שהיא רציפה.
+      - kind: step
+        text: >-
+          (א) $5+4\cos x\ge1>0$, ולכן האינטגרנד חיובי, בין $\frac19$ ל-1. האינטגרל של פונקציה חיובית על קטע באורך $2\pi$ חיובי,
+          ולמעשה לפחות $\frac{2\pi}{9}\approx0.70$.
+      - kind: step
+        text: >-
+          (ב) כש-$x\to\pi^-$, $\tan\frac x2\to+\infty$ ו-$F(x)\to\frac23\cdot\frac\pi2=\frac\pi3$; כש-$x\to\pi^+$, $\tan\frac x2\to-\infty$ ו-$F(x)\to-\frac\pi3$.
+          $F$ קופצת ב-$\pi$ (ובכלל אינה מוגדרת שם), ולכן היא אינה קדומה בכל $[0,2\pi]$, והמשפט היסודי אינו חל עליה בקטע הזה.
+      - kind: theorem
+        text: >-
+          לפי המשפט היסודי (שיעור 7.1), $A(x)=\int_0^x\frac{ds}{5+4\cos s}$ היא קדומה רציפה בכל הישר, כי האינטגרנד רציף. שתי
+          קדומות באותו קטע נבדלות בקבוע.
+      - kind: computation
+        text: >-
+          (ג) בקטע $|x|<\pi$: $A$ ו-$F$ קדומות ושתיהן 0 ב-0, ולכן $A=F$ שם. מהרציפות של $A$: $A(\pi)=\lim_{x\to\pi^-}F(x)=\frac\pi3$.
+      - kind: computation
+        text: >-
+          בקטע $\pi<x<3\pi$, $F$ שוב קדומה (הנוסחה של הנגזרת לא תלויה בקטע), ולכן $A=F+c$ שם. הרציפות ב-$\pi$:
+          $\frac\pi3=A(\pi)=\lim_{x\to\pi^+}F(x)+c=-\frac\pi3+c$, כלומר $c=\frac{2\pi}{3}$. לכן
+          $\int_0^{2\pi}\frac{dx}{5+4\cos x}=A(2\pi)=F(2\pi)+\frac{2\pi}{3}=0+\frac{2\pi}{3}$.
+      - kind: check
+        text: >-
+          $\frac{2\pi}{3}\approx2.094$, בין $\frac{2\pi}{9}\approx0.70$ ל-$2\pi\approx6.28$. ✓ ומהסימטריה: בקטעים $[0,\pi]$ ו-$[\pi,2\pi]$ הגרף של
+          האינטגרנד הוא תמונת ראי סביב $x=\pi$, ובראשון השטח $A(\pi)=\frac\pi3$; פעמיים $\frac\pi3$ זה $\frac{2\pi}{3}$. ✓
+      - kind: result
+        text: >-
+          התוצאה 0 שגויה כי $F$ קופצת ב-$\pi$; $\int_0^{2\pi}\frac{dx}{5+4\cos x}=\frac{2\pi}{3}$.
+
+challenge:
+  - id: W-7.5-c1
+    stars: 1
+    objectives: [OBJ-7.5-1]
+    prompt: >-
+      $m$ ו-$n$ מספרים טבעיים.
+
+
+      (א) חשבו $\int_{-\pi}^{\pi}\sin(mx)\cos(nx)\,dx$.
+
+
+      (ב) חשבו $\int_{-\pi}^{\pi}\sin(mx)\sin(nx)\,dx$, בנפרד כש-$m\ne n$ וכש-$m=n$.
+
+
+      (רמז: מנוסחאות החיבור $\sin(A\pm B)$ ו-$\cos(A\pm B)$ אפשר לכתוב מכפלה של סינוס וקוסינוס כסכום.) אלה יחסי
+      הניצבות שעליהם בנויים טורי פורייה: גלים עומדים על מיתר.
+    answer: >-
+      (א) 0 תמיד. (ב) 0 כש-$m\ne n$, ו-$\pi$ כש-$m=n$.
+    solution:
+      - kind: idea
+        text: >-
+          מכפלה של שתי פונקציות טריגונומטריות בזוויות שונות הופכת, בנוסחאות החיבור, לסכום של סינוסים או קוסינוסים בזוויות
+          $(m+n)x$ ו-$(m-n)x$, שלכל אחד מהם יודעים קדומה. בקצוות $\pm\pi$ הקדומות האלה שוות, כי $\cos(k\pi)=\cos(-k\pi)$
+          ו-$\sin(\pm k\pi)=0$ לכל שלם $k$. המקרה $m=n$ שונה, כי שם $m-n=0$.
+      - kind: theorem
+        text: >-
+          מחברים $\sin(A+B)=\sin A\cos B+\cos A\sin B$ ו-$\sin(A-B)=\sin A\cos B-\cos A\sin B$: $\sin A\cos B=\frac{\sin(A+B)+\sin(A-B)}{2}$.
+          מחסרים $\cos(A+B)=\cos A\cos B-\sin A\sin B$ מ-$\cos(A-B)=\cos A\cos B+\sin A\sin B$: $\sin A\sin B=\frac{\cos(A-B)-\cos(A+B)}{2}$.
+      - kind: computation
+        text: >-
+          (א) כש-$m\ne n$: קדומה של $\frac{\sin((m+n)x)+\sin((m-n)x)}{2}$ היא $G(x)=-\frac{\cos((m+n)x)}{2(m+n)}-\frac{\cos((m-n)x)}{2(m-n)}$.
+          הקוסינוס זוגי, ולכן $G(\pi)=G(-\pi)$, והאינטגרל $G(\pi)-G(-\pi)=0$. כש-$m=n$: $\sin(mx)\cos(mx)=\frac{\sin(2mx)}{2}$,
+          שהקדומה שלו $\frac{-\cos(2mx)}{4m}$, שוב שווה ב-$\pm\pi$: האינטגרל 0.
+      - kind: computation
+        text: >-
+          (ב) כש-$m\ne n$: קדומה של $\frac{\cos((m-n)x)-\cos((m+n)x)}{2}$ היא $H(x)=\frac{\sin((m-n)x)}{2(m-n)}-\frac{\sin((m+n)x)}{2(m+n)}$,
+          ו-$H(\pm\pi)=0$, כי $\sin(k\pi)=0$. האינטגרל 0.
+      - kind: computation
+        text: >-
+          (ב) כש-$m=n$: הורדת חזקה, $\sin^2(mx)=\frac{1-\cos(2mx)}{2}$, וקדומה $\frac x2-\frac{\sin(2mx)}{4m}$. ב-$\pi$ היא $\frac\pi2$
+          וב-$(-\pi)$ היא $\left(-\frac\pi2\right)$: האינטגרל $\pi$.
+      - kind: check
+        text: >-
+          דוגמה: $m=1$, $n=2$. $\sin x\sin2x=2\sin^2x\cos x$, וקדומה $\frac{2\sin^3x}{3}$ (חזקה אי-זוגית של הקוסינוס,
+          $u=\sin x$), שהיא 0 ב-$\pm\pi$. ✓ ו-$m=n=3$: $\pi$, חצי מאורך הקטע, כמו כל $\sin^2$ על מספר שלם של חצאי-מחזורים. ✓
+      - kind: result
+        text: >-
+          $\int_{-\pi}^{\pi}\sin(mx)\cos(nx)\,dx=0$; $\int_{-\pi}^{\pi}\sin(mx)\sin(nx)\,dx=0$ כש-$m\ne n$, ו-$\pi$ כש-$m=n$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.2 (Trigonometric Integrals), exercise 122; the sine-sine integral added'
+      url: https://openstax.org/books/calculus-volume-2/pages/3-2-trigonometric-integrals
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-7.5-c2
+    stars: 1
+    objectives: [OBJ-7.5-3]
+    prompt: >-
+      חשבו $\int\frac{dx}{x\sqrt{x^2-1}}$ בקטע $x>1$ בשתי הצבות שונות: $x=\frac{1}{\cos\theta}$ ו-$x=\frac{1}{\sin\theta}$, כש-$0<\theta<\frac\pi2$.
+
+
+      (א) הראו שהתשובות נראות שונות, ושהן נבדלות בקבוע. מהו הקבוע?
+
+
+      (ב) מצאו צורה שלישית בעזרת $\arctan$, וחשבו $\int_{\sqrt2}^{2}\frac{dx}{x\sqrt{x^2-1}}$.
+    answer: >-
+      $\arccos\frac1x+C$, או $C$ פחות $\arcsin\frac1x$; הן נבדלות ב-$\frac\pi2$. צורה שלישית $\arctan\sqrt{x^2-1}+C$. האינטגרל
+      המסוים $\frac{\pi}{12}$.
+    solution:
+      - kind: idea
+        text: >-
+          $\sqrt{x^2-1}$ מבקש הצבה שהזהות שלה הופכת $x^2-1$ לריבוע. גם $x=\frac{1}{\cos\theta}$ וגם $x=\frac{1}{\sin\theta}$ עושות
+          זאת ($\frac{1}{\sin^2\theta}-1=\frac{\cos^2\theta}{\sin^2\theta}$). שתי ההצבות נותנות שתי זוויות שונות באותו משולש,
+          ושתי הזוויות החדות במשולש ישר זווית משלימות זו את זו ל-$\frac\pi2$.
+      - kind: computation
+        text: >-
+          $x=\frac{1}{\cos\theta}$: $dx=\frac{\sin\theta}{\cos^2\theta}\,d\theta$ ו-$\sqrt{x^2-1}=\frac{\sin\theta}{\cos\theta}$, ולכן
+          $x\sqrt{x^2-1}=\frac{\sin\theta}{\cos^2\theta}$, והאינטגרנד הוא $d\theta$. הקדומה $\theta=\arccos\frac1x$, ועוד קבוע.
+      - kind: computation
+        text: >-
+          $x=\frac{1}{\sin\theta}$: $dx=\frac{-\cos\theta}{\sin^2\theta}\,d\theta$ ו-$\sqrt{x^2-1}=\frac{\cos\theta}{\sin\theta}$, ולכן
+          $x\sqrt{x^2-1}=\frac{\cos\theta}{\sin^2\theta}$, והאינטגרנד הוא מינוס $d\theta$. הקדומה היא מינוס $\theta$, כלומר מינוס
+          $\arcsin\frac1x$, ועוד קבוע.
+      - kind: step
+        text: >-
+          (א) במשולש עם יתר $x$ וניצב 1: לזווית שהניצב 1 צמוד לה, $\cos=\frac1x$; לזווית שמולו, $\sin=\frac1x$. שתיהן זוויות
+          חדות באותו משולש ישר זווית, ולכן $\arccos\frac1x+\arcsin\frac1x=\frac\pi2$. ההפרש בין שתי התשובות,
+          $\arccos\frac1x-\left(-\arcsin\frac1x\right)$, הוא הקבוע $\frac\pi2$.
+      - kind: step
+        text: >-
+          (ב) באותו משולש הניצב השני $\sqrt{x^2-1}$, ולזווית $\theta=\arccos\frac1x$ הוא הניצב שמולה: $\tan\theta=\sqrt{x^2-1}$,
+          ו-$\theta$ בין 0 ל-$\frac\pi2$, ולכן $\theta=\arctan\sqrt{x^2-1}$. זו אותה פונקציה, בצורה שלישית.
+      - kind: computation
+        text: >-
+          לפי המשפט היסודי, עם $\arccos\frac12=\frac\pi3$ ו-$\arccos\frac{1}{\sqrt2}=\frac\pi4$:
+          $\int_{\sqrt2}^{2}\frac{dx}{x\sqrt{x^2-1}}=\frac\pi3-\frac\pi4=\frac{\pi}{12}$. (ובצורה השלישית: $\arctan\sqrt3-\arctan1$, אותו דבר.)
+      - kind: check
+        text: >-
+          בגזירה: $\left(\arctan\sqrt{x^2-1}\right)'=\frac{1}{1+\left(x^2-1\right)}\cdot\frac{x}{\sqrt{x^2-1}}=\frac{1}{x\sqrt{x^2-1}}$. ✓
+          סבירות: בקטע האינטגרנד יורד מ-$\frac{1}{\sqrt2}\approx0.71$ (ב-$\sqrt2$) ל-$\frac{1}{2\sqrt3}\approx0.29$, והקטע באורך
+          $2-\sqrt2\approx0.59$, ולכן האינטגרל בין $0.17$ ל-$0.41$; $\frac{\pi}{12}\approx0.262$. ✓
+      - kind: result
+        text: >-
+          $\int\frac{dx}{x\sqrt{x^2-1}}=\arccos\frac1x+C=\arctan\sqrt{x^2-1}+C$; עם ההצבה השנייה מתקבל מינוס $\arcsin\frac1x$, שנבדל
+          בקבוע $\frac\pi2$. $\int_{\sqrt2}^{2}\frac{dx}{x\sqrt{x^2-1}}=\frac{\pi}{12}$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.3 (Trigonometric Substitution), exercise 168; sec and csc written as 1/cos and 1/sin, the arctan form and the definite integral added'
+      url: https://openstax.org/books/calculus-volume-2/pages/3-3-trigonometric-substitution
+      verified: '2026-11-27'
+      adapted: true

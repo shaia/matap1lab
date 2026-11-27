@@ -1,0 +1,417 @@
+# Workbook of lesson 7.2 — integration by substitution.
+# Objectives (src/course.ts):
+#   OBJ-7.2-1  recognise when a substitution fits and choose it
+#   OBJ-7.2-2  carry out a substitution in an indefinite integral and return to the original variable
+#   OBJ-7.2-3  substitution with the inner derivative, as in f'/f
+# Definite integrals are computed from an antiderivative in x and the fundamental theorem (changing the limits is 8.2).
+# Every antiderivative and number recomputed with sympy in screens/tools/lesson-7-2.py.
+lesson: '7.2'
+practice:
+  - id: W-7.2-01
+    level: basic
+    objectives: [OBJ-7.2-2]
+    prompt: >-
+      חשבו $\int x^2\left(x^3+2\right)^4dx$.
+    answer: >-
+      $\frac{\left(x^3+2\right)^5}{15}+C$
+    solution:
+      - kind: idea
+        text: >-
+          הביטוי הפנימי $x^3+2$ נמצא בחזקה, והנגזרת שלו $3x^2$ מופיעה כגורם, עד הקבוע 3. מציבים $u=x^3+2$.
+      - kind: computation
+        text: >-
+          $du=3x^2\,dx$, ולכן $x^2\,dx=\frac{du}{3}$.
+      - kind: computation
+        text: >-
+          $\int x^2\left(x^3+2\right)^4dx=\frac13\int u^4\,du=\frac13\cdot\frac{u^5}{5}+C=\frac{\left(x^3+2\right)^5}{15}+C$.
+      - kind: check
+        text: >-
+          גזירה בכלל השרשרת: $\left(\frac{(x^3+2)^5}{15}\right)'=\frac{5(x^3+2)^4\cdot3x^2}{15}=x^2(x^3+2)^4$. ✓
+      - kind: result
+        text: >-
+          $\int x^2\left(x^3+2\right)^4dx=\frac{\left(x^3+2\right)^5}{15}+C$.
+
+  - id: W-7.2-02
+    level: basic
+    objectives: [OBJ-7.2-2]
+    prompt: >-
+      חשבו בהצבה לינארית.
+
+      (א) $\int\sin(5x)\,dx$ (ב) $\int\frac{dx}{(3x+1)^2}$ (ג) $\int\sqrt{4x+1}\,dx$
+    answer: >-
+      (א) $-\frac{\cos(5x)}{5}+C$ (ב) $-\frac{1}{3(3x+1)}+C$ (ג) $\frac{(4x+1)^{3/2}}{6}+C$
+    solution:
+      - kind: idea
+        text: >-
+          בכל אחד הביטוי הפנימי לינארי, $u=ax+b$, ולכן $dx=\frac{du}{a}$: מבצעים אינטגרציה לפי הטבלה ומחלקים במקדם של $x$.
+      - kind: computation
+        text: >-
+          (א) $u=5x$, $dx=\frac{du}{5}$: $\frac15\int\sin u\,du=-\frac{\cos u}{5}+C=-\frac{\cos(5x)}{5}+C$.
+      - kind: computation
+        text: >-
+          (ב) $u=3x+1$, $dx=\frac{du}{3}$: $\frac13\int u^{-2}\,du=\frac13\cdot\frac{u^{-1}}{-1}+C=-\frac{1}{3(3x+1)}+C$, בכל קטע
+          של התחום $x\ne-\frac13$.
+      - kind: computation
+        text: >-
+          (ג) $u=4x+1$, $dx=\frac{du}{4}$: $\frac14\int u^{1/2}\,du=\frac14\cdot\frac23u^{3/2}+C=\frac{(4x+1)^{3/2}}{6}+C$.
+      - kind: check
+        text: >-
+          (א) $\left(-\frac{\cos5x}{5}\right)'=\frac{5\sin5x}{5}=\sin5x$. ✓ (ב) $\left(-\frac13(3x+1)^{-1}\right)'=\frac13(3x+1)^{-2}\cdot3=\frac{1}{(3x+1)^2}$.
+          ✓ (ג) $\left(\frac{(4x+1)^{3/2}}{6}\right)'=\frac{\frac32(4x+1)^{1/2}\cdot4}{6}=\sqrt{4x+1}$. ✓
+      - kind: result
+        text: >-
+          (א) $-\frac{\cos(5x)}{5}+C$; (ב) $-\frac{1}{3(3x+1)}+C$; (ג) $\frac{(4x+1)^{3/2}}{6}+C$.
+
+  - id: W-7.2-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-7.2-1]
+    prompt: >-
+      לכל אינטגרל כתבו איזו הצבה מתאימה, מה $du$, ולאיזה אינטגרל ב-$u$ הוא הופך. אחר כך סיימו את החישוב.
+
+      (א) $\int\cos x\,e^{\sin x}dx$ (ב) $\int\frac{x}{\left(x^2+4\right)^3}\,dx$ (ג) $\int\frac{(\ln x)^3}{x}\,dx$, כש-$x>0$
+      (ד) $\int\frac{\cos x}{\sin^2x}\,dx$ (בקטע שבו $\sin x\ne0$)
+    answer: >-
+      (א) $u=\sin x$: $e^{\sin x}+C$. (ב) $u=x^2+4$: $-\frac{1}{4\left(x^2+4\right)^2}+C$. (ג) $u=\ln x$: $\frac{(\ln x)^4}{4}+C$.
+      (ד) $u=\sin x$: $-\frac{1}{\sin x}+C$.
+    solution:
+      - kind: idea
+        text: >-
+          בכל אינטגרנד מחפשים ביטוי פנימי שהנגזרת שלו מופיעה כגורם, ובודקים שאחרי ההצבה לא נשאר $x$.
+      - kind: step
+        text: >-
+          (א) הביטוי הפנימי $\sin x$, והנגזרת שלו $\cos x$ היא הגורם. $u=\sin x$, $du=\cos x\,dx$, ומתקבל $\int e^u\,du=e^{\sin x}+C$.
+      - kind: step
+        text: >-
+          (ב) $u=x^2+4$, $du=2x\,dx$, ולכן $x\,dx=\frac{du}{2}$. מתקבל $\frac12\int u^{-3}\,du=\frac12\cdot\frac{u^{-2}}{-2}+C=-\frac{1}{4\left(x^2+4\right)^2}+C$.
+          זו חזקה של $u$, לא לוגריתם: המכנה בחזקה שלישית.
+      - kind: step
+        text: >-
+          (ג) $u=\ln x$, $du=\frac{dx}{x}$. מתקבל $\int u^3\,du=\frac{u^4}{4}+C=\frac{(\ln x)^4}{4}+C$.
+      - kind: step
+        text: >-
+          (ד) הביטוי הפנימי $\sin x$, והנגזרת שלו $\cos x$ היא המונה. $u=\sin x$, $du=\cos x\,dx$, ומתקבל
+          $\int u^{-2}\,du=-u^{-1}+C=-\frac{1}{\sin x}+C$. המכנה הוא $u^2$, לא $u$, ולכן התשובה חזקה ולא לוגריתם.
+      - kind: check
+        text: >-
+          (ב) $\left(-\frac14(x^2+4)^{-2}\right)'=\frac12(x^2+4)^{-3}\cdot2x=\frac{x}{(x^2+4)^3}$. ✓ (ד)
+          $\left(-(\sin x)^{-1}\right)'=(\sin x)^{-2}\cos x=\frac{\cos x}{\sin^2x}$. ✓ (א) ו-(ג) בכלל השרשרת באותה דרך.
+      - kind: result
+        text: >-
+          (א) $e^{\sin x}+C$; (ב) $-\frac{1}{4\left(x^2+4\right)^2}+C$; (ג) $\frac{(\ln x)^4}{4}+C$; (ד) $-\frac{1}{\sin x}+C$.
+
+  - id: W-7.2-04
+    level: mid
+    objectives: [OBJ-7.2-3]
+    prompt: >-
+      חשבו.
+
+      (א) $\int\frac{x^2+1}{x^3+3x}\,dx$, כש-$x>0$.
+
+      (ב) $\int\frac{\cos x}{3+\sin x}\,dx$.
+    answer: >-
+      (א) $\frac13\ln\left(x^3+3x\right)+C$ (ב) $\ln\left(3+\sin x\right)+C$
+    solution:
+      - kind: idea
+        text: >-
+          בשני השברים גוזרים את המכנה ומשווים למונה. אם המונה הוא קבוע כפול הנגזרת, ההצבה שבה $u$ הוא המכנה נותנת
+          $\int\frac{du}{u}=\ln|u|$.
+      - kind: computation
+        text: >-
+          (א) $\left(x^3+3x\right)'=3x^2+3=3\left(x^2+1\right)$: המונה הוא שליש מהנגזרת. $u=x^3+3x$, $\left(x^2+1\right)dx=\frac{du}{3}$:
+          $\frac13\int\frac{du}{u}=\frac13\ln|u|+C$. כש-$x>0$ המכנה חיובי, ולכן $\frac13\ln\left(x^3+3x\right)+C$.
+      - kind: computation
+        text: >-
+          (ב) $(3+\sin x)'=\cos x$, בדיוק המונה. $u=3+\sin x$: $\int\frac{du}{u}=\ln|3+\sin x|+C$, ו-$3+\sin x\ge2>0$,
+          ולכן $\ln\left(3+\sin x\right)+C$.
+      - kind: check
+        text: >-
+          (א) $\left(\frac13\ln(x^3+3x)\right)'=\frac{3x^2+3}{3\left(x^3+3x\right)}=\frac{x^2+1}{x^3+3x}$. ✓ (ב)
+          $\left(\ln(3+\sin x)\right)'=\frac{\cos x}{3+\sin x}$. ✓
+      - kind: result
+        text: >-
+          (א) $\frac13\ln\left(x^3+3x\right)+C$; (ב) $\ln\left(3+\sin x\right)+C$.
+
+  - id: W-7.2-05
+    level: mid
+    objectives: [OBJ-7.2-2]
+    prompt: >-
+      חשבו $\int e^x\sqrt{1+e^x}\,dx$.
+    answer: >-
+      $\frac23\left(1+e^x\right)^{3/2}+C$
+    solution:
+      - kind: idea
+        text: >-
+          הביטוי שמתחת לשורש, $1+e^x$, הוא הביטוי הפנימי, והנגזרת שלו $e^x$ היא הגורם שלפני השורש.
+      - kind: computation
+        text: >-
+          $u=1+e^x$, $du=e^x\,dx$. אז $\int e^x\sqrt{1+e^x}\,dx=\int u^{1/2}\,du=\frac23u^{3/2}+C$.
+      - kind: step
+        text: >-
+          חוזרים ל-$x$: $\frac23\left(1+e^x\right)^{3/2}+C$.
+      - kind: check
+        text: >-
+          $\left(\frac23(1+e^x)^{3/2}\right)'=\frac23\cdot\frac32(1+e^x)^{1/2}\cdot e^x=e^x\sqrt{1+e^x}$. ✓
+      - kind: result
+        text: >-
+          $\int e^x\sqrt{1+e^x}\,dx=\frac23\left(1+e^x\right)^{3/2}+C$.
+
+  - id: W-7.2-06
+    level: mid
+    qualitative: true
+    objectives: [OBJ-7.2-1, OBJ-7.2-2]
+    prompt: >-
+      נכון או לא? נמקו כל טענה בגזירה.
+
+      (א) $\int\sin\left(x^3\right)dx=-\frac{\cos\left(x^3\right)}{3x^2}+C$.
+
+      (ב) $\int\frac{dx}{\sqrt{3x+2}}=\frac23\sqrt{3x+2}+C$.
+
+      (ג) $\int x\cos\left(x^2\right)dx=\frac{\sin\left(x^2\right)}{2}+C$.
+    answer: >-
+      (א) לא נכון. (ב) נכון. (ג) נכון.
+    solution:
+      - kind: idea
+        text: >-
+          טענה על קדומה בודקים בגזירה. חלוקה בנגזרת הפנימית מותרת רק כשהיא מספר (ביטוי פנימי לינארי), או כשהנגזרת
+          הפנימית כבר מופיעה באינטגרל כגורם.
+      - kind: step
+        text: >-
+          (א) לא נכון. הביטוי הפנימי $x^3$ אינו לינארי, ובאינטגרל אין גורם $x^2$. בגזירה, כלל המנה מוסיף איבר:
+          $\left(-\frac{\cos(x^3)}{3x^2}\right)'=\sin\left(x^3\right)+\frac{2\cos\left(x^3\right)}{3x^3}\ne\sin\left(x^3\right)$.
+      - kind: step
+        text: >-
+          (ב) נכון. הביטוי הפנימי לינארי: $u=3x+2$, $dx=\frac{du}{3}$, ו-$\frac13\int u^{-1/2}du=\frac13\cdot2u^{1/2}+C$. בגזירה:
+          $\left(\frac23(3x+2)^{1/2}\right)'=\frac23\cdot\frac12(3x+2)^{-1/2}\cdot3=\frac{1}{\sqrt{3x+2}}$.
+      - kind: step
+        text: >-
+          (ג) נכון. כאן הגורם $x$ הוא חצי הנגזרת של $x^2$: $u=x^2$, $x\,dx=\frac{du}{2}$, $\frac12\int\cos u\,du=\frac{\sin u}{2}+C$.
+          בגזירה: $\left(\frac{\sin(x^2)}{2}\right)'=\frac{\cos(x^2)\cdot2x}{2}=x\cos\left(x^2\right)$.
+      - kind: check
+        text: >-
+          ההבדל בין (א) ל-(ג): ב-(ג) החלוקה ב-2 היא חלוקה **בקבוע**, כי ה-$x$ של הנגזרת הפנימית כבר נמצא באינטגרל.
+          ב-(א) מנסים לחלק ב-$3x^2$, שתלוי ב-$x$.
+      - kind: result
+        text: >-
+          (א) לא נכון; (ב) נכון; (ג) נכון.
+
+  - id: W-7.2-07
+    level: mid
+    objectives: [OBJ-7.2-3]
+    prompt: >-
+      חשבו $\int\frac{dx}{x(\ln x)^2}$ בתחום $x>1$.
+    answer: >-
+      $-\frac{1}{\ln x}+C$
+    solution:
+      - kind: idea
+        text: >-
+          הגורם $\frac1x$ הוא הנגזרת של $\ln x$, ולכן $u=\ln x$. אחרי ההצבה נשארת חזקה של $u$, לא $\frac{du}{u}$: המכנה הוא
+          $u^2$.
+      - kind: computation
+        text: >-
+          $u=\ln x$, $du=\frac{dx}{x}$: $\int\frac{du}{u^2}=\int u^{-2}\,du=-u^{-1}+C=-\frac{1}{\ln x}+C$.
+      - kind: check
+        text: >-
+          $\left(-(\ln x)^{-1}\right)'=(\ln x)^{-2}\cdot\frac1x=\frac{1}{x(\ln x)^2}$. ✓ התשובה $\ln|\ln x|$ הייתה מתאימה
+          ל-$\frac{1}{x\ln x}$, עם $\ln x$ בחזקה ראשונה.
+      - kind: result
+        text: >-
+          $\int\frac{dx}{x(\ln x)^2}=-\frac{1}{\ln x}+C$ כש-$x>1$.
+
+  - id: W-7.2-08
+    level: exam
+    objectives: [OBJ-7.2-1, OBJ-7.2-2]
+    prompt: >-
+      חשבו $\int x^5\sqrt{1+x^3}\,dx$. רמז: $x^5=x^3\cdot x^2$.
+    answer: >-
+      $\frac{2}{15}\left(1+x^3\right)^{5/2}-\frac29\left(1+x^3\right)^{3/2}+C$
+    solution:
+      - kind: idea
+        text: >-
+          הביטוי הפנימי $1+x^3$, והנגזרת שלו $3x^2$. מפרידים מ-$x^5$ את הגורם $x^2$ בשביל $du$, ואת מה שנשאר, $x^3$,
+          מבטאים בעזרת $u$: $x^3=u-1$.
+      - kind: computation
+        text: >-
+          $u=1+x^3$, $du=3x^2\,dx$, ולכן $x^2\,dx=\frac{du}{3}$ ו-$x^3=u-1$.
+      - kind: computation
+        text: >-
+          $\int x^3\sqrt{1+x^3}\cdot x^2\,dx=\frac13\int(u-1)\sqrt u\,du=\frac13\int\left(u^{3/2}-u^{1/2}\right)du$.
+      - kind: computation
+        text: >-
+          $=\frac13\left(\frac25u^{5/2}-\frac23u^{3/2}\right)+C=\frac{2}{15}u^{5/2}-\frac29u^{3/2}+C$, וחוזרים ל-$x$ עם $u=1+x^3$.
+      - kind: check
+        text: >-
+          גזירה: $\left(\frac{2}{15}u^{5/2}-\frac29u^{3/2}\right)'=\left(\frac13u^{3/2}-\frac13u^{1/2}\right)\cdot u'$ ו-$u'=3x^2$,
+          ולכן הנגזרת היא $x^2\sqrt u\,(u-1)=x^2\sqrt{1+x^3}\cdot x^3=x^5\sqrt{1+x^3}$. ✓
+      - kind: result
+        text: >-
+          $\int x^5\sqrt{1+x^3}\,dx=\frac{2}{15}\left(1+x^3\right)^{5/2}-\frac29\left(1+x^3\right)^{3/2}+C$.
+
+  - id: W-7.2-09
+    level: exam
+    qualitative: true
+    objectives: [OBJ-7.2-2, OBJ-7.2-3]
+    prompt: >-
+      סטודנטית כתבה: "$\int\frac{x}{\left(x^2+1\right)^2}\,dx$. נציב $u=x^2+1$, $du=2x\,dx$, ולכן האינטגרל הוא
+      $\frac12\int\frac{du}{u^2}=\frac12\ln\left(u^2\right)+C=\ln\left(x^2+1\right)+C$."
+
+      (א) בדקו את התשובה בגזירה. (ב) מצאו את הטעות. (ג) חשבו את האינטגרל נכון.
+    answer: >-
+      (א) $\left(\ln(x^2+1)\right)'=\frac{2x}{x^2+1}$, לא האינטגרנד. (ב) $\int\frac{du}{u^2}$ אינו לוגריתם של $u^2$: זו חזקה של $u$.
+      (ג) $-\frac{1}{2\left(x^2+1\right)}+C$.
+    solution:
+      - kind: idea
+        text: >-
+          הבחירה $u=x^2+1$ נכונה, וגם $x\,dx=\frac{du}{2}$. את המעבר לתשובה בודקים בגזירה, ואחר כך מחפשים את המעבר
+          השגוי.
+      - kind: step
+        text: >-
+          (א) $\left(\ln(x^2+1)\right)'=\frac{2x}{x^2+1}$, ואילו האינטגרנד הוא $\frac{x}{(x^2+1)^2}$. התשובה שגויה.
+      - kind: step
+        text: >-
+          (ב) הכלל $\int\frac{du}{u}=\ln|u|$ חל רק על $u$ בחזקה ראשונה במכנה. $\frac{1}{u^2}=u^{-2}$ היא חזקה, וכלל
+          החזקה נותן $\int u^{-2}\,du=-u^{-1}+C$. "לוגריתם של המכנה" הוא הטעות.
+      - kind: computation
+        text: >-
+          (ג) $\frac12\int u^{-2}\,du=\frac12\cdot\left(-u^{-1}\right)+C=-\frac{1}{2\left(x^2+1\right)}+C$.
+      - kind: check
+        text: >-
+          $\left(-\frac12(x^2+1)^{-1}\right)'=\frac12(x^2+1)^{-2}\cdot2x=\frac{x}{(x^2+1)^2}$. ✓
+      - kind: result
+        text: >-
+          הטעות: $\int\frac{du}{u^2}$ חושב כלוגריתם. הנכון: $\int\frac{x}{\left(x^2+1\right)^2}\,dx=-\frac{1}{2\left(x^2+1\right)}+C$.
+
+  - id: W-7.2-10
+    level: exam
+    objectives: [OBJ-7.2-2, OBJ-7.2-3]
+    prompt: >-
+      סירה מכבה את המנוע ברגע $t=0$, וההתנגדות של המים מאטה אותה כך שהמהירות שלה היא $v(t)=\frac{4}{1+2t}$ מטר לשנייה
+      ($t$ בשניות).
+
+      (א) מצאו את המיקום $x(t)$, אם $x(0)=0$.
+
+      (ב) כמה מטרים עברה הסירה אחרי 10 שניות?
+
+      (ג) אחרי כמה זמן היא תעבור 10 מטרים, ומה תהיה אז המהירות שלה? האם הסירה נעצרת אי פעם, והאם המרחק שהיא עוברת חסום?
+    answer: >-
+      (א) $x(t)=2\ln(1+2t)$. (ב) $2\ln21\approx6.09$ מטר. (ג) $t=\frac{e^5-1}{2}\approx73.7$ שניות, ואז
+      $v=4e^{-5}\approx0.027$ מטר לשנייה. היא לא נעצרת, והמרחק אינו חסום.
+    solution:
+      - kind: idea
+        text: >-
+          המיקום הוא פונקציה קדומה של המהירות (שיעור 7.1), והתנאי $x(0)=0$ קובע את הקבוע. המונה 4 הוא פעמיים הנגזרת 2
+          של המכנה $1+2t$: הצבה לינארית שנותנת לוגריתם.
+      - kind: computation
+        text: >-
+          (א) $u=1+2t$, $dt=\frac{du}{2}$: $x(t)=\int\frac{4\,dt}{1+2t}=2\int\frac{du}{u}=2\ln(1+2t)+C$ (כש-$t\ge0$, $1+2t>0$).
+          $x(0)=2\ln1+C=C$, ולכן $C=0$ ו-$x(t)=2\ln(1+2t)$.
+      - kind: computation
+        text: >-
+          (ב) $x(10)=2\ln21\approx6.089$ מטר.
+      - kind: computation
+        text: >-
+          (ג) $2\ln(1+2t)=10$ פירושו $1+2t=e^5$, כלומר $t=\frac{e^5-1}{2}\approx73.7$ שניות. אז $v=\frac{4}{e^5}\approx0.027$
+          מטר לשנייה.
+      - kind: step
+        text: >-
+          המהירות חיובית בכל רגע, ולכן הסירה לא נעצרת; והלוגריתם גדל בלי גבול, ולכן גם המרחק. אבל לאט מאוד: כל 10 מטרים
+          נוספים דורשים לכפול את $1+2t$ פי $e^5\approx148$.
+      - kind: check
+        text: >-
+          $x'(t)=2\cdot\frac{2}{1+2t}=\frac{4}{1+2t}=v(t)$ ✓, ו-$x(0)=0$ ✓.
+      - kind: result
+        text: >-
+          (א) $x(t)=2\ln(1+2t)$; (ב) בערך $6.09$ מטר; (ג) אחרי בערך $73.7$ שניות, במהירות של בערך $0.027$ מטר לשנייה; המרחק
+          אינו חסום.
+
+challenge:
+  - id: W-7.2-c1
+    stars: 1
+    objectives: [OBJ-7.2-1, OBJ-7.2-2]
+    prompt: >-
+      (א) חשבו $\int x(1-x)^{99}dx$ בעזרת הצבה מתאימה. למה לא כדאי לפתוח את הסוגריים?
+
+      (ב) חשבו את $\int_0^1x(1-x)^{99}dx$.
+    answer: >-
+      (א) $\frac{(1-x)^{101}}{101}-\frac{(1-x)^{100}}{100}+C$. (ב) $\frac{1}{10100}$.
+    solution:
+      - kind: idea
+        text: >-
+          פתיחת הסוגריים נותנת 100 איברים. במקום זה נותנים שם לביטוי שבחזקה, $u=1-x$, ומבטאים בעזרתו גם את הגורם $x$:
+          $x=1-u$. נשארים שני איברים בלבד.
+      - kind: computation
+        text: >-
+          (א) $u=1-x$, $du=-dx$, $x=1-u$:
+          $\int x(1-x)^{99}dx=-\int(1-u)u^{99}\,du$, כלומר $-\int\left(u^{99}-u^{100}\right)du$, וזה
+          $\frac{u^{101}}{101}-\frac{u^{100}}{100}+C$.
+      - kind: step
+        text: >-
+          חוזרים ל-$x$: $\int x(1-x)^{99}dx=\frac{(1-x)^{101}}{101}-\frac{(1-x)^{100}}{100}+C$.
+      - kind: computation
+        text: >-
+          (ב) לפי המשפט היסודי, עם הקדומה של (א): ב-$x=1$ שני האיברים מתאפסים, וב-$x=0$ הערך הוא $\frac{1}{101}-\frac{1}{100}$.
+          לכן האינטגרל הוא $0-\left(\frac{1}{101}-\frac{1}{100}\right)=\frac{1}{100}-\frac{1}{101}=\frac{1}{10100}$.
+      - kind: check
+        text: >-
+          גזירה: הנגזרת של $\frac{(1-x)^{101}}{101}-\frac{(1-x)^{100}}{100}$ היא $(1-x)^{99}-(1-x)^{100}$, כלומר
+          $(1-x)^{99}\bigl(1-(1-x)\bigr)=x(1-x)^{99}$. ✓ וגודל: האינטגרנד חיובי ב-$(0,1)$ ומאוד קטן חוץ מליד 0, כי $(1-x)^{99}$ דועך מהר: שטח זעיר וחיובי. ✓
+      - kind: result
+        text: >-
+          (א) $\frac{(1-x)^{101}}{101}-\frac{(1-x)^{100}}{100}+C$; (ב) $\frac{1}{10100}$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 1 (OpenStax)'
+      year: 2016
+      problem: 'Section 5.5 (Substitution), exercise 271; part (b) added'
+      url: https://openstax.org/books/calculus-volume-1/pages/5-5-substitution
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-7.2-c2
+    stars: 1
+    objectives: [OBJ-7.2-1, OBJ-7.2-2, OBJ-7.2-3]
+    prompt: >-
+      $\int\frac{\sin x}{\cos^3x}\,dx$ בתחום $|x|<\frac{\pi}{2}$.
+
+      (א) חשבו בהצבה $u=\tan x$. רמז: $\frac{\sin x}{\cos^3x}=\tan x\cdot\frac{1}{\cos^2x}$.
+
+      (ב) חשבו שוב בהצבה $u=\cos x$.
+
+      (ג) התשובות של (א) ו-(ב) נראות שונות. האם אחת מהן שגויה? הסבירו.
+
+      (ד) חשבו את $\int_0^{\pi/4}\frac{\sin x}{\cos^3x}\,dx$ בעזרת כל אחת משתי התשובות.
+    answer: >-
+      (א) $\frac{\tan^2x}{2}+C$. (ב) $\frac{1}{2\cos^2x}+C$. (ג) שתיהן נכונות: $\frac{\tan^2x}{2}=\frac{1}{2\cos^2x}-\frac12$,
+      והן נבדלות בקבוע. (ד) $\frac12$ בשתי הדרכים.
+    solution:
+      - kind: idea
+        text: >-
+          לאינטגרנד יש שתי "נגזרות פנימיות" אפשריות: $\frac{1}{\cos^2x}$ היא הנגזרת של $\tan x$, ו-$\sin x$ היא (מינוס)
+          הנגזרת של $\cos x$. כל הצבה נותנת קדומה, ושתי קדומות של אותה פונקציה בקטע נבדלות בקבוע (שיעור 7.1).
+      - kind: computation
+        text: >-
+          (א) $u=\tan x$, $du=\frac{dx}{\cos^2x}$: $\int\tan x\cdot\frac{dx}{\cos^2x}=\int u\,du=\frac{u^2}{2}+C=\frac{\tan^2x}{2}+C$.
+      - kind: computation
+        text: >-
+          (ב) $u=\cos x$, $du=-\sin x\,dx$: $\int\frac{\sin x\,dx}{\cos^3x}=-\int u^{-3}\,du=\frac{u^{-2}}{2}+C=\frac{1}{2\cos^2x}+C$.
+      - kind: step
+        text: >-
+          (ג) אף אחת אינה שגויה. מהזהות $\sin^2x+\cos^2x=1$, אחרי חלוקה ב-$\cos^2x$: $\tan^2x=\frac{1}{\cos^2x}-1$. לכן
+          $\frac{\tan^2x}{2}=\frac{1}{2\cos^2x}-\frac12$: שתי הפונקציות נבדלות בקבוע $\frac12$, וה-$C$ בולע אותו.
+      - kind: computation
+        text: >-
+          (ד) לפי המשפט היסודי, עם (א): $\frac{\tan^2(\pi/4)}{2}-\frac{\tan^20}{2}=\frac12-0=\frac12$. עם (ב):
+          $\frac{1}{2\cos^2(\pi/4)}-\frac{1}{2\cos^20}=\frac{1}{2\cdot\frac12}-\frac12=\frac12$. הקבוע מתבטל בהפרש.
+      - kind: check
+        text: >-
+          גזירה של (א): $\left(\frac{\tan^2x}{2}\right)'=\tan x\cdot\frac{1}{\cos^2x}=\frac{\sin x}{\cos^3x}$. ✓ של (ב):
+          $\left(\frac12(\cos x)^{-2}\right)'=-(\cos x)^{-3}\cdot(-\sin x)=\frac{\sin x}{\cos^3x}$. ✓
+      - kind: result
+        text: >-
+          $\int\frac{\sin x}{\cos^3x}\,dx=\frac{\tan^2x}{2}+C=\frac{1}{2\cos^2x}+C$ (שתי צורות שנבדלות בקבוע), ו-$\int_0^{\pi/4}\frac{\sin x}{\cos^3x}\,dx=\frac12$.
+    source:
+      name: 'MIT 18.01SC Single Variable Calculus (MIT OpenCourseWare)'
+      year: 2010
+      problem: 'Session 38 (Integration by Substitution), problem "Antiderivative of tan x sec² x"; sec written as 1/cos, part (b) with u = cos x, part (d) added'
+      url: https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/6b123e1ffe830e9ae2a4e61dfecbbb3b_MIT18_01SCF10_ex38sol.pdf
+      verified: '2026-11-27'
+      adapted: true

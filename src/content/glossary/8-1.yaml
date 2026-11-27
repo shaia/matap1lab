@@ -18,22 +18,4 @@
     **האמצעים** אמצע הקטע. הסכום הוא קירוב לאינטגרל המסוים.
   reject: [סכום רימאן]
   lesson: '8.1'
-- id: definite-integral
-  term: אינטגרל מסוים
-  en: definite integral
-  symbol: '\int_a^b f(x)\,dx'
-  definition: >-
-    הגבול של סכומי רימן של $f$ ב-$[a,b]$ כשרוחב הקטעים שואף ל-0: מספר, השטח **עם הסימן** שבין הגרף לציר $x$. לפי
-    המשפט היסודי, אם $F$ קדומה ל-$f$ הרציפה, אז $\int_a^bf(x)\,dx=F(b)-F(a)$. אם $f$ היא מהירות, האינטגרל הוא
-    ההעתק.
-  reject: [אינטגרל מסויים]
-  lesson: '8.1'
-- id: signed-area
-  term: שטח עם סימן
-  en: signed area
-  symbol: '\int_a^b f(x)\,dx'
-  definition: >-
-    השטח שבין הגרף לציר $x$, כשחלקים מעל הציר נספרים בחיוב וחלקים מתחתיו בשלילה. זה מה שהאינטגרל המסוים מודד.
-    השטח הגיאומטרי הוא $\int_a^b|f(x)|\,dx$.
-  reject: []
-  lesson: '8.1'
+# definite-integral and signed-area are first used in lesson 7.1: their entries are in 7-1.yaml.

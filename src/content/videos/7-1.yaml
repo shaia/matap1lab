@@ -1,0 +1,25 @@
+- id: v-7-1-3b1b-ftc
+  youtubeId: rfG8ce4nNh0
+  title: Integration and the fundamental theorem of calculus | Chapter 8, Essence of calculus
+  channel: 3Blue1Brown
+  lang: en
+  captions: []
+  start: 0
+  minutes: 21
+  why: >-
+    לפי הכותרת והתיאור: פרק מהסדרה "Essence of calculus" שבונה אינטואיציה לאינטגרל ומסביר למה הוא ההפך של הנגזרת. לפי
+    רשימת הפרקים בתיאור, הוא פותח בדוגמה של מכונית, ממשיך לשטח מתחת לגרף ולמשפט היסודי, ומסיים ב"שטח שלילי". השוו
+    לפתיחה של השיעור ולסעיף על הפס הצר.
+  verified: '2026-11-27'
+- id: v-7-1-khan-antiderivative
+  youtubeId: MMv-027KEqU
+  title: Antiderivatives and indefinite integrals | AP Calculus AB | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 4
+  why: >-
+    לפי הכותרת: סרטון קצר על פונקציה קדומה ועל האינטגרל הלא מסוים כפעולה ההפוכה לגזירה. השוו לסעיף "למה רק עד כדי
+    קבוע" ולסימון $\int f(x)\,dx=F(x)+C$.
+  verified: '2026-11-27'

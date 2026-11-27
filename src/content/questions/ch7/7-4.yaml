@@ -12,12 +12,12 @@ questions:
     objectives: [OBJ-7.4-1]
     level: basic
     prompt: >-
-      מפרקים (עמ׳ 14 במחברת): $\frac{3x-1}{(x-1)(x-2)}=\frac{A}{x-1}+\frac{B}{x-2}$. מהו $A$?
+      מפרקים (הדוגמה מסיכומי ההרצאות שהקורס נבנה לפיהם): $\frac{3x-1}{(x-1)(x-2)}=\frac{A}{x-1}+\frac{B}{x-2}$. מהו $A$?
     answer: -2
     tolerance: 0.001
     correctFeedback: >-
       נכון. כופלים ב-$(x-1)(x-2)$: $3x-1=A(x-2)+B(x-1)$. מציבים $x=1$: $2=A\cdot(1-2)$, ולכן $A=-2$. (ו-$x=2$ נותן $B=5$.)
-    wrongFeedback: 'כפלו במכנה המשותף והציבו $x=1$: המחובר עם $B$ נעלם.'
+    wrongFeedback: 'כפלו במכנה המשותף והציבו $x=1$: האיבר עם $B$ נעלם.'
     commonWrong:
       - value: 2
         feedback: 'ב-$x=1$ הגורם $x-2$ שווה $1-2$, שלילי: $A=\frac{3\cdot1-1}{1-2}$.'
@@ -37,7 +37,7 @@ questions:
     domain: [2.2, 4]
     upToConstant: true
     correctFeedback: >-
-      נכון. $x^2-3x+2=(x-1)(x-2)$, הפירוק $\frac{-2}{x-1}+\frac{5}{x-2}$, וכל שבר נותן לוגריתם (עמ׳ 15 במחברת:
+      נכון. $x^2-3x+2=(x-1)(x-2)$, הפירוק $\frac{-2}{x-1}+\frac{5}{x-2}$, וכל שבר נותן לוגריתם (כמו בסיכומי ההרצאות:
       $\int\frac{dx}{x+a}=\ln|x+a|+C$).
     wrongFeedback: 'פרקו את המכנה לגורמים, מצאו $A$ ו-$B$, ובצעו אינטגרציה לכל שבר.'
     commonWrong:
@@ -57,19 +57,19 @@ questions:
     level: basic
     prompt: 'מהי הצורה הנכונה של הפירוק לשברים חלקיים של $\frac{x+5}{(x-1)^2(x^2+1)}$?'
     choices:
-      - text: '$\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{Cx+D}{x^2+1}$'
+      - text: '$\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{Dx+E}{x^2+1}$'
         correct: true
         feedback: >-
           נכון. גורם חוזר $(x-1)^2$ נותן שני שברים, לכל חזקה עד 2; וגורם ריבועי שאין לו שורשים ממשיים מקבל מונה לינארי.
           ארבעה נעלמים, כמו המעלה של המכנה.
-      - text: '$\frac{A}{(x-1)^2}+\frac{Cx+D}{x^2+1}$'
+      - text: '$\frac{A}{(x-1)^2}+\frac{Dx+E}{x^2+1}$'
         feedback: 'לגורם חוזר צריך שבר לכל חזקה: גם $\frac{A}{x-1}$ וגם $\frac{B}{(x-1)^2}$. בלי זה יש רק שלושה נעלמים למעלה 4.'
         misconception: MC-c7-repeated-factor-once
-      - text: '$\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{C}{x^2+1}$'
-        feedback: 'מעל גורם ריבועי המונה לינארי, $Cx+D$: מונה קבוע לא מספיק באופן כללי.'
+      - text: '$\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{D}{x^2+1}$'
+        feedback: 'מעל גורם ריבועי המונה לינארי, $Dx+E$: מונה קבוע לא מספיק באופן כללי.'
         misconception: MC-c7-quadratic-numerator-const
-      - text: '$\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{C}{x-1}+\frac{D}{x+1}$'
-        feedback: '$x^2+1$ אינו מתפרק ל-$(x-1)(x+1)$: זה $x^2-1$. ל-$x^2+1$ אין שורשים ממשיים.'
+      - text: '$\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{D}{(x-1)^3}+\frac{E}{x+1}$'
+        feedback: 'זו הצורה של מכנה $(x-1)^3(x+1)$, כאילו $x^2+1=(x-1)(x+1)$. אבל זה $x^2-1$: ל-$x^2+1$ אין שורשים ממשיים, והוא נשאר גורם ריבועי עם מונה לינארי.'
         misconception: MC-c7-quadratic-factor-wrong
     hints: ['כמה שברים נותן גורם בריבוע? ומה המונה מעל גורם ריבועי?']
 
@@ -78,18 +78,18 @@ questions:
     objectives: [OBJ-7.4-1]
     level: mid
     prompt: >-
-      $\frac{x+5}{(x-1)^2(x+2)}=\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{C}{x+2}$. מהו $C$?
+      $\frac{x+5}{(x-1)^2(x+2)}=\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{D}{x+2}$. מהו $D$?
     answer: 0.333333333333
     tolerance: 0.001
     correctFeedback: >-
-      נכון. כופלים ב-$x+2$ ומציבים $x=-2$: $C=\frac{-2+5}{(-2-1)^2}=\frac39=\frac13$. (ובאותה דרך $B=\frac{1+5}{1+2}=2$,
+      נכון. כופלים ב-$x+2$ ומציבים $x=-2$: $D=\frac{-2+5}{(-2-1)^2}=\frac39=\frac13$. (ובאותה דרך $B=\frac{1+5}{1+2}=2$,
       ו-$A=-\frac13$ מהשוואת מקדמים.)
     wrongFeedback: 'הציבו $x=-2$ במה שנשאר אחרי שמכסים את $x+2$: $\frac{x+5}{(x-1)^2}$.'
     commonWrong:
       - value: -1
         feedback: 'שכחתם את הריבוע: $(x-1)^2$ ב-$x=-2$ הוא $(-3)^2=9$, לא $-3$.'
         misconception: MC-c7-coverup-drop-square
-    hints: ['$C=\left.\frac{x+5}{(x-1)^2}\right|_{x=-2}$.']
+    hints: ['$D=\left.\frac{x+5}{(x-1)^2}\right|_{x=-2}$.']
 
   - id: Q-7.4-repeated
     type: expr
@@ -103,7 +103,7 @@ questions:
     upToConstant: true
     correctFeedback: >-
       נכון. $\frac{1}{x(x+1)^2}=\frac1x-\frac{1}{x+1}-\frac{1}{(x+1)^2}$, ו-$-\int\frac{dx}{(x+1)^2}=+\frac{1}{x+1}$.
-    wrongFeedback: 'הפירוק: $\frac Ax+\frac{B}{x+1}+\frac{C}{(x+1)^2}$. השבר האחרון נותן חזקה, לא לוגריתם.'
+    wrongFeedback: 'הפירוק: $\frac Ax+\frac{B}{x+1}+\frac{D}{(x+1)^2}$. השבר האחרון נותן חזקה, לא לוגריתם.'
     commonWrong:
       - expr: 'log(abs(x)) - log(abs(x+1)) - 1/(x+1)'
         feedback: '$\int(x+1)^{-2}dx=-(x+1)^{-1}$, ולכן $-\int\frac{dx}{(x+1)^2}=+\frac{1}{x+1}$.'
@@ -111,7 +111,7 @@ questions:
       - expr: 'log(abs(x)) - 2*log(abs(x+1))'
         feedback: '$\int\frac{dx}{(x+1)^2}$ אינו לוגריתם: זו חזקה, $\int u^{-2}du=-u^{-1}$.'
         misconception: MC-c7-repeated-as-log
-    hints: ['$A=1$, $C=-1$ (כיסוי), ו-$B=-1$ ממקדם $x^2$.']
+    hints: ['$A=1$, $D=-1$ (כיסוי), ו-$B=-1$ ממקדם $x^2$.']
 
   - id: Q-7.4-division
     type: expr
@@ -158,7 +158,7 @@ questions:
       - text: 'כי $x^2-4$ אינו מתפרק לגורמים'
         feedback: '$x^2-4=(x-2)(x+2)$. הבעיה היא במעלות, לא במכנה.'
         misconception: MC-c7-quadratic-factor-wrong
-      - text: 'אפשר, אבל צריך גם שבר $\frac{C}{x^2-4}$'
+      - text: 'אפשר, אבל צריך גם שבר $\frac{D}{x^2-4}$'
         feedback: 'שום צירוף של שברים עם מכנים אלה לא גדל כמו $x$. חסר החלק הפולינומי מהחילוק.'
         misconception: MC-c7-skip-division
     hints: ['מה קורה לשני האגפים כש-$x\to\infty$?']
@@ -256,7 +256,7 @@ questions:
     type: rank
     objectives: [OBJ-7.4-1, OBJ-7.4-2]
     qualitative: true
-    level: mid
+    level: basic
     prompt: 'סדרו את שלבי השיטה לחישוב $\int\frac{P(x)}{Q(x)}\,dx$ כש-$P,Q$ פולינומים.'
     help: סדרו את שלבי השיטה מהראשון לאחרון.
     items:
@@ -284,13 +284,13 @@ questions:
     answer: 1.35138404024
     tolerance: 0.001
     correctFeedback: >-
-      נכון, $\frac{\ln2}{4}+\frac{3\pi}{8}$. הפירוק $\frac{1/2}{x+1}+\frac{-\frac12x+\frac32}{x^2+1}$, והקדומה
+      נכון, $\frac{\ln2}{4}+\frac{3\pi}{8}$. הפירוק $\frac{1/2}{x+1}+\frac{-\frac12x+\frac32}{x^2+1}$, והפונקציה הקדומה
       $\frac12\ln(x+1)-\frac14\ln(x^2+1)+\frac32\arctan x$. בין 0 ל-1: $\frac12\ln2-\frac14\ln2+\frac32\cdot\frac\pi4$.
-    wrongFeedback: 'כיסוי ב-$x=-1$ נותן את המקדם של $\frac{1}{x+1}$; את $B,C$ של $\frac{Bx+C}{x^2+1}$ מוצאים בהשוואת מקדמים.'
+    wrongFeedback: 'כיסוי ב-$x=-1$ נותן את המקדם של $\frac{1}{x+1}$; את $D,E$ של $\frac{Dx+E}{x^2+1}$ מוצאים בהשוואת מקדמים.'
     commonWrong:
       - value: 1.52467083538
         feedback: >-
-          זה $\frac{\ln2}{2}+\frac{3\pi}{8}$, בלי האיבר $-\frac12x$ במונה של $\frac{Bx+C}{x^2+1}$. מעל גורם ריבועי המונה לינארי,
+          זה $\frac{\ln2}{2}+\frac{3\pi}{8}$, בלי האיבר $-\frac12x$ במונה של $\frac{Dx+E}{x^2+1}$. מעל גורם ריבועי המונה לינארי,
           והאיבר $-\frac{x}{2(x^2+1)}$ תורם $-\frac14\ln2$.
         misconception: MC-c7-quadratic-numerator-const
     hints: ['$A=\frac{-1+2}{(-1)^2+1}=\frac12$.']

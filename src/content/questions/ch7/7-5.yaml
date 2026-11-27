@@ -61,7 +61,8 @@ questions:
     tolerance: 0.001
     correctFeedback: >-
       נכון, $\frac\pi4$. $\cos^2x=\frac{1+\cos2x}{2}$, וקדומה $\frac x2+\frac{\sin2x}{4}$; ב-$\frac\pi2$ היא $\frac\pi4$ וב-0 היא 0.
-      (בדיקת שפיות: הממוצע של $\cos^2$ על רבע מחזור הוא $\frac12$, כפול אורך $\frac\pi2$.)
+      החלק המתנודד, $\frac{\sin2x}{4}$, מתאפס בכל כפולה של $\frac\pi2$ (שם $\sin2x=0$), ולכן על הקטע מ-0 עד $\frac\pi2$ השטח הוא
+      בדיוק חצי מאורך הקטע: $\frac12\cdot\frac\pi2$.
     wrongFeedback: 'השתמשו ב-$\cos^2x=\frac{1+\cos2x}{2}$.'
     commonWrong:
       - value: 1.57079632679
@@ -84,7 +85,7 @@ questions:
     wrongFeedback: 'הפרידו $\sin x$ אחד, כתבו $\sin^2x=1-\cos^2x$, והציבו $u=\cos x$.'
     commonWrong:
       - expr: 'cos(x) - cos(x)^3/3'
-        feedback: '$du=-\sin x\,dx$: המינוס הופך את הסימן של שני המחוברים.'
+        feedback: '$du=-\sin x\,dx$: המינוס הופך את הסימן של שני האיברים.'
         misconception: MC-c7-fprime-f-sign
       - expr: 'sin(x)^4/4'
         feedback: 'כלל החזקה עובד רק עם $du$ באינטגרל. גזרו: $\left(\frac{\sin^4x}{4}\right)''=\sin^3x\cos x$.'
@@ -97,15 +98,15 @@ questions:
     qualitative: true
     level: mid
     prompt: >-
-      שלושה סטודנטים חישבו את $\int\sin x\cos x\,dx$ וקיבלו $\frac{\sin^2x}{2}$, $-\frac{\cos^2x}{2}$ ו-$-\frac{\cos2x}{4}$.
-      נכון או לא: לכל היותר אחד מהם צודק.
+      שלושה סטודנטים חישבו את $\int\sin x\cos x\,dx$ וקיבלו $\frac{\sin^2x}{2}$, $\frac{-\cos^2x}{2}$ ו-$\frac{-\cos2x}{4}$.
+      נכון או לא: שלושתם צודקים.
     choices:
-      - text: לא נכון
+      - text: נכון
         correct: true
         feedback: >-
-          נכון. שלושתם צודקים: $\frac{\sin^2x}{2}-\left(-\frac{\cos^2x}{2}\right)=\frac12$ ו-$-\frac{\cos2x}{4}=\frac{\sin^2x}{2}-\frac14$.
+          נכון. $\frac{\sin^2x}{2}-\left(-\frac{\cos^2x}{2}\right)=\frac12$ ו-$\frac{-\cos2x}{4}=\frac{\sin^2x}{2}-\frac14$.
           הם נבדלים בקבועים, וכל אחד נגזר ל-$\sin x\cos x$.
-      - text: נכון
+      - text: לא נכון
         feedback: 'גזרו כל אחת: שלושתן נותנות $\sin x\cos x$. קדומות נבדלות בקבוע, ושלוש הצורות נבדלות בדיוק בקבועים.'
         misconception: MC-c7-unique-antiderivative-form
     reasons:
@@ -115,7 +116,7 @@ questions:
       - text: 'כי לאינטגרל יש תשובה אחת, והאחרות שגויות'
         feedback: '$\sin^2x+\cos^2x=1$: ההפרש בין שתי הראשונות הוא $\frac12$, קבוע. "$+C$" בולע אותו.'
         misconception: MC-c7-unique-antiderivative-form
-      - text: 'רק $-\frac{\cos2x}{4}$ נכונה, כי היא היחידה שמשתמשת בזהות $\sin2x=2\sin x\cos x$'
+      - text: 'רק $\frac{-\cos2x}{4}$ נכונה, כי היא היחידה שמשתמשת בזהות $\sin2x=2\sin x\cos x$'
         feedback: 'הדרך לא משנה: $u=\sin x$ ו-$u=\cos x$ הן הצבות נכונות לא פחות, ונותנות את שתי הצורות האחרות.'
         misconception: MC-c7-unique-antiderivative-form
     hints: ['גזרו את שלוש התשובות.']
@@ -169,15 +170,16 @@ questions:
       - text: נכון
         correct: true
         feedback: >-
-          נכון. $\sin x$, $\cos x$ ו-$\frac{dx}{dt}$ כולם רציונליים ב-$t$, ולכן כל ביטוי רציונלי בהם נשאר רציונלי, ואותו פותרים
-          בשברים חלקיים. היא תמיד עובדת, גם אם לא תמיד בדרך הקצרה.
+          נכון. $\sin x$, $\cos x$ ו-$\frac{dx}{dt}$ כולם רציונליים ב-$t$, ולכן כל ביטוי רציונלי בהם נשאר רציונלי. לכל פונקציה
+          רציונלית יש קדומה, ושברים חלקיים מוצאים אותה (בקורס פוגשים רק את המכנים של שיעור 7.4). ההצבה תמיד עובדת, גם אם
+          לא תמיד בדרך הקצרה.
       - text: לא נכון
         feedback: 'שלוש הנוסחאות רציונליות ב-$t$, ולכן ההרכבה רציונלית. זו בדיוק הסיבה שקוראים לה ההצבה ה"אוניברסלית".'
         misconception: MC-c7-weierstrass-formulas
     reasons:
       - text: '$\sin x$, $\cos x$ ו-$dx$ מתבטאים כולם כמנות של פולינומים ב-$t$'
         correct: true
-        feedback: 'בדיוק. ואחר כך שברים חלקיים (שיעור 7.4) מסיימים את העבודה.'
+        feedback: 'בדיוק. ואחר כך שברים חלקיים מסיימים את העבודה; בקורס, עם המכנים של שיעור 7.4.'
       - text: 'כי $\tan$ היא עצמה פונקציה רציונלית'
         feedback: '$\tan$ אינה פונקציה רציונלית של $x$. מה שחשוב הוא ש-$\sin$, $\cos$ ו-$dx$ רציונליים ב-$t$.'
         misconception: MC-c7-weierstrass-formulas
@@ -198,7 +200,7 @@ questions:
         feedback: >-
           נכון. $4-4\sin^2\theta=4\cos^2\theta$, ולכן $\sqrt{4-x^2}=2\cos\theta$ (כש-$|\theta|\le\frac\pi2$). השורש נעלם.
       - text: '$x=2\tan\theta$'
-        feedback: '$4-4\tan^2\theta$ אינו ריבוע של כלום. $\tan$ מתאים ל-$\sqrt{4+x^2}$, כי $1+\tan^2\theta=\frac{1}{\cos^2\theta}$.'
+        feedback: '$4-4\tan^2\theta=4\left(1-\tan^2\theta\right)$, ואין זהות שהופכת את $1-\tan^2\theta$ לריבוע. $\tan$ מתאים ל-$\sqrt{4+x^2}$, כי $1+\tan^2\theta=\frac{1}{\cos^2\theta}$.'
         misconception: MC-c7-trig-sub-wrong-identity
       - text: '$x=4\sin\theta$'
         feedback: 'המקדם הוא השורש של 4: עם $x=4\sin\theta$ מתקבל $\sqrt{4-16\sin^2\theta}$, שאינו מתפשט.'
@@ -230,18 +232,49 @@ questions:
     type: numeric
     objectives: [OBJ-7.5-3]
     level: mid
-    prompt: 'חשבו $\int_{-2}^{2}\sqrt{4-x^2}\,dx$ בהצבה טריגונומטרית, ובדקו מול שטח של צורה מוכרת.'
-    answer: 6.28318530718
+    prompt: >-
+      מצאו בהצבה טריגונומטרית קדומה של $\sqrt{4-x^2}$, וחשבו בעזרתה את $\int_0^{1}\sqrt{4-x^2}\,dx$ (השטח שמתחת לחלק של חצי
+      המעגל ברדיוס 2).
+    answer: 1.91322295498
     tolerance: 0.001
     correctFeedback: >-
-      נכון, $2\pi$. עם $x=2\sin\theta$ מתקבל $\int4\cos^2\theta\,d\theta=2\theta+\sin2\theta+C$, ובחזרה ל-$x$ הקדומה
-      $F(x)=2\arcsin\frac x2+\frac{x\sqrt{4-x^2}}{2}$. לפי המשפט היסודי: $F(2)-F(-2)=2\cdot\frac\pi2-2\cdot\left(-\frac\pi2\right)=2\pi$. זה חצי עיגול ברדיוס 2: $\frac12\pi\cdot2^2$.
-    wrongFeedback: 'אחרי ההצבה $x=2\sin\theta$ מתקבל $\int4\cos^2\theta\,d\theta$; הורידו חזקה, חזרו ל-$x$ והציבו את הגבולות $\pm2$.'
+      נכון, $\frac\pi3+\frac{\sqrt3}{2}\approx1.913$. עם $x=2\sin\theta$ מתקבל $\int4\cos^2\theta\,d\theta=2\theta+\sin2\theta+C$, ובחזרה
+      ל-$x$ הקדומה $F(x)=2\arcsin\frac x2+\frac{x\sqrt{4-x^2}}{2}$. לפי המשפט היסודי: $F(1)-F(0)=2\cdot\frac\pi6+\frac{\sqrt3}{2}$.
+      בדיקה בגאומטריה: משולש עם קודקודים $(0,0)$, $(1,0)$, $\left(1,\sqrt3\right)$, ששטחו $\frac{\sqrt3}{2}$, ועוד גזרה של עיגול ברדיוס
+      2 בזווית $\frac\pi6$, ששטחה $\frac12\cdot4\cdot\frac\pi6=\frac\pi3$.
+    wrongFeedback: 'אחרי ההצבה $x=2\sin\theta$ מתקבל $\int4\cos^2\theta\,d\theta$; הורידו חזקה, חזרו ל-$x$ דרך המשולש והציבו 1 ו-0.'
     commonWrong:
-      - value: 12.5663706144
-        feedback: 'זה $4\pi$, שטח עיגול שלם. בזהות $\cos^2\theta=\frac{1+\cos2\theta}{2}$ חסרה החלוקה ב-2.'
+      - value: 3.82644590996
+        feedback: 'זה $\frac{2\pi}{3}+\sqrt3$, פי שניים מהנכון: בזהות $\cos^2\theta=\frac{1+\cos2\theta}{2}$ חסרה החלוקה ב-2.'
         misconception: MC-c7-double-angle-half
-    hints: ['הגרף של $\sqrt{4-x^2}$ הוא חצי מעגל.']
+    hints: ['$x=2\sin\theta$, ובחזרה $\sin2\theta=2\sin\theta\cos\theta=2\cdot\frac x2\cdot\frac{\sqrt{4-x^2}}{2}$.']
+
+  - id: Q-7.5-tan-sub
+    type: expr
+    objectives: [OBJ-7.5-3]
+    level: mid
+    prompt: 'חשבו $\int\frac{dx}{\left(x^2+4\right)^{3/2}}$ בהצבה $x=2\tan\theta$.'
+    answer: 'x/(4*sqrt(x^2+4))'
+    answerTex: '$\frac{x}{4\sqrt{x^2+4}}+C$'
+    variables: [x]
+    domain: [-3, 3]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. $dx=\frac{2}{\cos^2\theta}\,d\theta$ ו-$x^2+4=\frac{4}{\cos^2\theta}$, ולכן $\left(x^2+4\right)^{3/2}=\frac{8}{\cos^3\theta}$. האינטגרנד הופך
+      ל-$\frac{\cos\theta}{4}\,d\theta$, והקדומה $\frac{\sin\theta}{4}$. במשולש הניצבים 2 ו-$x$ והיתר $\sqrt{x^2+4}$, ולכן
+      $\sin\theta=\frac{x}{\sqrt{x^2+4}}$.
+    wrongFeedback: 'הציבו $x=2\tan\theta$, כתבו $x^2+4=\frac{4}{\cos^2\theta}$, והעלו בחזקת $\frac32$: גם את ה-4.'
+    commonWrong:
+      - expr: 'x/(2*sqrt(x^2+4))'
+        feedback: >-
+          $\left(\frac{4}{\cos^2\theta}\right)^{3/2}=\frac{8}{\cos^3\theta}$: גם ה-4 עולה בחזקת $\frac32$, ונותן $2^3=8$, לא 4. גזרו את
+          התשובה שלכם: היא נותנת פי 2 מהאינטגרנד.
+        misconception: MC-c7-trig-sub-power-of-a
+      - expr: 'x/sqrt(x^2+4)'
+        feedback: >-
+          זה $\sin\theta$ בלי המקדם. $dx$ תורם $2$ ו-$\left(x^2+4\right)^{3/2}$ תורם $\frac18$, ולכן נשאר $\frac14\cos\theta\,d\theta$.
+        misconception: MC-c7-trig-sub-power-of-a
+    hints: ['$1+\tan^2\theta=\frac{1}{\cos^2\theta}$, ולכן $4+4\tan^2\theta=\frac{4}{\cos^2\theta}$.']
 
   - id: Q-7.5-csc
     type: expr
