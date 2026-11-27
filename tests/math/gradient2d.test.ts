@@ -60,6 +60,7 @@ describe('exact identities: the numbers lesson 5.4 quotes', () => {
   });
 
   it('the maximum of θ ↦ D_v f(a) over a fine grid of directions is ‖∇f(a)‖₂, and the minimum is −‖∇f(a)‖₂ (Cauchy–Schwarz)', () => {
+    const off: string[] = [];
     for (const id of PRESET_IDS)
       for (const a of PTS) {
         const p = PRESETS[id];
@@ -70,12 +71,13 @@ describe('exact identities: the numbers lesson 5.4 quotes', () => {
           const r = rate(p, a, k / 100);
           mx = Math.max(mx, r);
           mn = Math.min(mn, r);
-          expect(Math.abs(r)).toBeLessThanOrEqual(n * (1 + 1e-12));
+          if (!(Math.abs(r) <= n * (1 + 1e-12))) off.push(`${id} (${a}) θ=${k / 100}°: |D| > ‖∇f‖`);
         }
         // the grid step is 0.01°, so the grid maximum is within n(1 − cos(0.005°)) ≈ 4e-9·n of n
-        expect(relativeError(mx, n)).toBeLessThan(1e-8);
-        expect(relativeError(mn, -n)).toBeLessThan(1e-8);
+        if (!(relativeError(mx, n) < 1e-8)) off.push(`${id} (${a}): max ${mx} ≠ ${n}`);
+        if (!(relativeError(mn, -n) < 1e-8)) off.push(`${id} (${a}): min ${mn} ≠ ${-n}`);
       }
+    expect(off).toEqual([]);
   });
 
   it('the tangent direction is a unit vector orthogonal to ∇f(a), so D_v f(a) = 0 there', () => {
