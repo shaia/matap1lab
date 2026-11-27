@@ -79,7 +79,7 @@ questions:
     objectives: [OBJ-9.3-1]
     level: mid
     prompt: >-
-      חשבו את אורך העקום $\vec r(t)=\left(t^2,t^3\right)$, $0\le t\le1$. (תשובה עשרונית.)
+      חשבו את אורך העקום $\vec r(t)=\left(t^2,t^3\right)$, $0\le t\le1$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
     answer: 1.4397098733716
     tolerance: 0.001
     correctFeedback: >-
@@ -94,6 +94,11 @@ questions:
       - value: 1.4142135624
         feedback: '$\sqrt2$ הוא אורך המיתר מ-$(0,0)$ ל-$(1,1)$. העקום מתעקל, ולכן הוא ארוך יותר.'
         misconception: MC-c9-length-chord
+      - value: 25.914777720688
+        feedback: >-
+          $\frac23\left(13^{3/2}-8\right)\approx25.91$ הוא $\int_4^{13}\sqrt u\,du$ בלי הגורם $\frac1{18}$: מ-$u=4+9t^2$ יוצא
+          $du=18t\,dt$, ולכן $t\,dt=\frac{du}{18}$. בדיקה מהירה: 25 ארוך בהרבה מכל דרך סבירה בין $(0,0)$ ל-$(1,1)$.
+        misconception: MC-c7-subst-forget-factor
     hints: ['$\int t\sqrt{4+9t^2}\,dt$ בהצבה $u=4+9t^2$.']
 
   - id: Q-9.3-twice-around
@@ -119,7 +124,7 @@ questions:
       - text: '$\vec r_2$ עוברת את המעגל פעמיים, והאינטגרל סופר את הדרך שעברה'
         correct: true
         feedback: 'בדיוק. על $[0,\pi]$ גם $\vec r_2$ הייתה נותנת $2\pi$.'
-      - text: 'המהירות של $\vec r_2$ כפולה, ולכן כל אורך שהיא נותנת כפול'
+      - text: 'המהירות של $\vec r_2$ כפולה, ולכן האינטגרל של $\vec r_2$ יוצא כפול על כל קטע של $t$, גם קצר'
         feedback: >-
           מהירות כפולה לבדה אינה משנה את האורך: היא מקצרת את הזמן באותו יחס. כאן הזמן **לא** קוצר, ולכן נעבר סיבוב
           נוסף.
@@ -133,27 +138,27 @@ questions:
     objectives: [OBJ-9.3-2]
     level: mid
     prompt: >-
-      $\vec r(s)=\left(\cos(s^2),\ \sin(s^2)\right)$, $0\le s\le\sqrt\pi$. חשבו את אורך העקום. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+      $\vec r(t)=\left(\cos(t^2),\ \sin(t^2)\right)$, $0\le t\le\sqrt\pi$. חשבו את אורך העקום. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
     answer: 3.1415926535898
     tolerance: 0.001
     correctFeedback: >-
-      נכון, $\pi$. $|\vec r\,'(s)|=2s$, ו-$\int_0^{\sqrt\pi}2s\,ds=\pi$. העקום הוא חצי מעגל היחידה (הזווית $s^2$ עוברת
+      נכון, $\pi$. $|\vec r\,'(t)|=2t$, ו-$\int_0^{\sqrt\pi}2t\,dt=\pi$. העקום הוא חצי מעגל היחידה (הזווית $t^2$ עוברת
       מ-0 עד $\pi$), ואורכו $\pi$ בכל פרמטריזציה.
     wrongFeedback: >-
-      גזרו בכלל השרשרת: $(\cos s^2)'=-2s\sin s^2$. מה האורך של $\vec r\,'(s)$?
+      גזרו בכלל השרשרת: $(\cos t^2)'=-2t\sin t^2$. מה האורך של $\vec r\,'(t)$?
     commonWrong:
       - value: 1.7724538509
-        feedback: '$\sqrt\pi$ הוא אורך קטע הפרמטר. האורך הוא אינטגרל של גודל המהירות, $2s$, לא של 1.'
+        feedback: '$\sqrt\pi$ הוא אורך קטע הפרמטר. האורך הוא אינטגרל של גודל המהירות, $2t$, לא של 1.'
         misconception: MC-c9-length-parameter-interval
-    hints: ['$|\vec r\,''(s)|=2s\sqrt{\sin^2s^2+\cos^2s^2}$.']
+    hints: ['$|\vec r\,''(t)|=2t\sqrt{\sin^2t^2+\cos^2t^2}$.']
 
   - id: Q-9.3-arclength-param
     type: expr
     objectives: [OBJ-9.3-2]
     level: mid
     prompt: >-
-      לסליל $\vec r(t)=\left(3\cos t,\ 3\sin t,\ 4t\right)$ האורך מ-$t=0$ הוא $s=5t$. כתבו את הפרמטריזציה לפי אורך,
-      $\vec\rho(s)=\vec r\left(\frac s5\right)$. הקלידו את הרכיב השלישי, $z(s)$.
+      לסליל $\vec r(t)=\left(3\cos t,\ 3\sin t,\ 4t\right)$ מצאו פרמטריזציה לפי אורך $\vec\rho(s)$, כש-$s$ נמדד
+      מ-$t=0$, והקלידו את הרכיב השלישי, $z(s)$.
     answer: '4*s/5'
     answerTex: '$\vec\rho(s)=\left(3\cos\tfrac s5,\ 3\sin\tfrac s5,\ \tfrac{4s}{5}\right)$'
     variables: [s]
@@ -171,7 +176,7 @@ questions:
       - expr: '4*s/3'
         feedback: 'חילקתם ברדיוס 3 ולא במהירות 5. $s=5t$ כי גודל המהירות הוא $\sqrt{3^2+4^2}$.'
         misconception: MC-c9-length-projection
-    hints: ['$t=\frac s5$.']
+    hints: ['$|\vec r\,''|=5$, ולכן $s=5t$.']
 
   - id: Q-9.3-unit-speed
     type: mc

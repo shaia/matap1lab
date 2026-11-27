@@ -1,0 +1,28 @@
+# Videos of lesson 9.1 (parametrised curves). Every id verified by oEmbed on 2026-11-27 (HTTP 200, title and channel as
+# below); durations from the watch page (lengthSeconds 350 and 668), descriptions read there. No Hebrew video on
+# parametrised curves beyond 2.1's Technion clip was found in this session, so both are English (Khan Academy).
+- id: v-9-1-khan-curves
+  youtubeId: bb4bSCjlFAw
+  title: Parametric curves | Multivariable calculus | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 6
+  why: >-
+    לפי הכותרת והתיאור: סרטון מהקורס של Khan Academy בחשבון של כמה משתנים, על פונקציה שהקלט שלה חד-ממדי והפלט שלה
+    רב-ממדי, ועל העקום שהיא משרטטת במרחב. השוו לסעיף "נקודה נעה: פונקציה וקטורית": העקום הוא קבוצת הפלטים, והפונקציה
+    היא מה שמחבר כל $t$ לנקודה שלו.
+  verified: '2026-11-27'
+- id: v-9-1-khan-cliff
+  youtubeId: m6c6dlmUT1c
+  title: Parametric equations 1 | Parametric equations and polar coordinates | Precalculus | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 11
+  why: >-
+    לפי הכותרת והתיאור: מבוא למשוואות פרמטריות של Khan Academy, שבו המקום האופקי והגובה של מכונית שנוסעת מעבר לקצה
+    של צוק נכתבים כפונקציות של הזמן. השוו לסילוק הפרמטר בסעיף "מפרמטריזציה למשוואה קרטזית" ולמסלול של כדור שנזרק.
+  verified: '2026-11-27'

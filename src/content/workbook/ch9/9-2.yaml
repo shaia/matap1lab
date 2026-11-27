@@ -1,0 +1,591 @@
+# Workbook of lesson 9.2 — the velocity vector and the tangent line.
+# Objectives (src/course.ts):
+#   OBJ-9.2-1  differentiate a vector function componentwise and read the derivative as the velocity vector
+#   OBJ-9.2-2  find the tangent line to a curve at a point as a linear approximation
+#   OBJ-9.2-3  compute acceleration and use the differential of a vector function
+# Order of knowledge: chapters 1–8 and 9.1–9.2 (no arc length, no T, N, a_T, a_N, curvature, no partial derivatives).
+# Every number recomputed with sympy in screens/tools/lesson-9-2.py.
+lesson: '9.2'
+practice:
+  - id: W-9.2-01
+    level: basic
+    objectives: [OBJ-9.2-1]
+    prompt: >-
+      נקודה נעה על הספירלה $\vec r(t)=\left(t\cos t,\ t\sin t\right)$, $t\ge0$.
+
+
+      (א) חשבו את $\vec v(t)$ ואת $|\vec v(t)|$, ופשטו את גודל המהירות ככל האפשר.
+
+
+      (ב) מה המקום ומה המהירות ב-$t=0$ וב-$t=\pi$? האם הנקודה מאיצה או מאטה ככל שהזמן עובר?
+    answer: >-
+      (א) $\vec v=\left(\cos t-t\sin t,\ \sin t+t\cos t\right)$, $|\vec v|=\sqrt{1+t^2}$. (ב) ב-$t=0$: המקום $(0,0)$, המהירות
+      $(1,0)$; ב-$t=\pi$: המקום $(-\pi,0)$, המהירות $(-1,-\pi)$. גודל המהירות עולה: הנקודה מאיצה.
+    solution:
+      - kind: idea
+        text: >-
+          כל רכיב הוא מכפלה של שתי פונקציות, ולכן גוזרים אותו בכלל המכפלה. גודל המהירות הוא אורך הנגזרת, לפי פיתגורס.
+      - kind: computation
+        text: >-
+          (א) $(t\cos t)'=\cos t-t\sin t$ ו-$(t\sin t)'=\sin t+t\cos t$. לכן $\vec v(t)=\left(\cos t-t\sin t,\ \sin t+t\cos t\right)$.
+      - kind: computation
+        text: >-
+          מעלים בריבוע ומחברים. האיברים המעורבים מתבטלים ($2t\sin t\cos t$ מופיע פעם עם מינוס ופעם עם פלוס):
+          $|\vec v|^2=\cos^2t+t^2\sin^2t+\sin^2t+t^2\cos^2t=1+t^2$. לכן $|\vec v(t)|=\sqrt{1+t^2}$.
+      - kind: computation
+        text: >-
+          (ב) ב-$t=0$: $\vec r(0)=(0,0)$ ו-$\vec v(0)=(1,0)$. ב-$t=\pi$: $\cos\pi=-1$, $\sin\pi=0$, ולכן $\vec r(\pi)=(-\pi,0)$
+          ו-$\vec v(\pi)=(-1,-\pi)$.
+      - kind: step
+        text: >-
+          $\sqrt{1+t^2}$ עולה כש-$t\ge0$, ולכן הנקודה מאיצה: כל סיבוב של הספירלה ארוך מהקודם, והיא עוברת עליו מהר יותר.
+      - kind: check
+        text: >-
+          $|\vec v(\pi)|=\sqrt{1+\pi^2}\approx3.30$, ובנוסחה $\sqrt{1+t^2}$ ב-$t=\pi$ אותו מספר ✓. ושימו לב: $|\vec r(\pi)|=\pi\approx3.14$
+          הוא המרחק מהראשית, מספר אחר.
+      - kind: result
+        text: >-
+          $\vec v(t)=\left(\cos t-t\sin t,\ \sin t+t\cos t\right)$, $|\vec v(t)|=\sqrt{1+t^2}$; $\vec v(0)=(1,0)$, $\vec v(\pi)=(-1,-\pi)$;
+          הנקודה מאיצה.
+
+  - id: W-9.2-02
+    level: basic
+    objectives: [OBJ-9.2-3]
+    prompt: >-
+      $\vec r(t)=\left(t^2,\ e^{2t},\ \cos t\right)$.
+
+
+      (א) חשבו את $\vec a(t)$ ואת $|\vec a(0)|$.
+
+
+      (ב) העריכו בעזרת הדיפרנציאל את $\vec r(0.05)$, והשוו לערך המדויק.
+    answer: >-
+      (א) $\vec a(t)=\left(2,\ 4e^{2t},\ -\cos t\right)$, $|\vec a(0)|=\sqrt{21}\approx4.58$. (ב) $\vec r(0.05)\approx(0,\ 1.1,\ 1)$; המדויק
+      $\approx(0.0025,\ 1.1052,\ 0.9988)$.
+    solution:
+      - kind: idea
+        text: >-
+          התאוצה היא הנגזרת השנייה, רכיב-רכיב. הדיפרנציאל מחליף את העקום בישר המשיק: $\vec r(t_0+dt)\approx\vec r(t_0)+\vec v(t_0)\,dt$.
+      - kind: computation
+        text: >-
+          (א) $\vec v(t)=\left(2t,\ 2e^{2t},\ -\sin t\right)$ (ב-$e^{2t}$ כלל השרשרת נותן גורם 2). גוזרים שוב:
+          $\vec a(t)=\left(2,\ 4e^{2t},\ -\cos t\right)$.
+      - kind: computation
+        text: >-
+          $\vec a(0)=(2,\ 4,\ -1)$, ו-$|\vec a(0)|=\sqrt{4+16+1}=\sqrt{21}\approx4.58$.
+      - kind: computation
+        text: >-
+          (ב) $\vec r(0)=(0,1,1)$ ו-$\vec v(0)=(0,2,0)$. עם $dt=0.05$: $d\vec r=(0,\ 0.1,\ 0)$, ולכן $\vec r(0.05)\approx(0,\ 1.1,\ 1)$.
+      - kind: check
+        text: >-
+          המדויק: $\left(0.0025,\ e^{0.1},\ \cos0.05\right)\approx(0.0025,\ 1.1052,\ 0.9988)$. כל רכיב רחוק מההערכה בפחות מ-$0.006$,
+          בסדר גודל של $dt^2=0.0025$ ✓. ברכיב הראשון ההפרש בדיוק $dt^2$, כי $x=t^2$.
+      - kind: result
+        text: >-
+          $\vec a(t)=\left(2,\ 4e^{2t},\ -\cos t\right)$, $|\vec a(0)|=\sqrt{21}$; $\vec r(0.05)\approx(0,\ 1.1,\ 1)$.
+
+  - id: W-9.2-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-9.2-1]
+    prompt: >-
+      שלוש נקודות נעות על מעגל היחידה, ובזמן $t=0$ שלושתן בנקודה $(1,0)$: $\vec r_1(t)=(\cos t,\sin t)$,
+      $\vec r_2(t)=(\cos3t,\sin3t)$ ו-$\vec r_3(t)=(\cos t,-\sin t)$.
+
+
+      (א) חשבו את המהירות של כל אחת מהן ב-$t=0$. במה הן דומות, ובמה הן שונות?
+
+
+      (ב) נקודה רביעית נעה לפי $\vec r_4(t)=\left(\cos t^2,\ \sin t^2\right)$. חשבו את המהירות שלה ב-$t=0$. האם היא קובעת את
+      כיוון המשיק למעגל ב-$(1,0)$?
+    answer: >-
+      (א) $(0,1)$, $(0,3)$, $(0,-1)$: כולן אנכיות, משיקות למעגל, אבל בגדלים ובכיוונים שונים. (ב) $\vec v_4(0)=(0,0)$: היא לא
+      קובעת כיוון, אף שלמעגל יש שם משיק אנכי.
+    solution:
+      - kind: idea
+        text: >-
+          המהירות תלויה בפרמטריזציה: באיזה קצב ובאיזה כיוון עוברים על העקום. הישר המשיק, כשהמהירות שונה מאפס, תלוי רק
+          בעקום.
+      - kind: computation
+        text: >-
+          (א) $\vec r_1\,'(t)=(-\sin t,\cos t)$, וב-0: $(0,1)$. $\vec r_2\,'(t)=(-3\sin3t,\ 3\cos3t)$ (כלל השרשרת), וב-0: $(0,3)$.
+          $\vec r_3\,'(t)=(-\sin t,-\cos t)$, וב-0: $(0,-1)$.
+      - kind: step
+        text: >-
+          שלוש המהירויות מקבילות לציר $y$, כלומר משיקות למעגל ב-$(1,0)$, ולכן הישר המשיק זהה: $x=1$. אבל גודל המהירות
+          1, 3, 1, והשלישית נעה בכיוון השעון, למטה.
+      - kind: computation
+        text: >-
+          (ב) $\vec r_4\,'(t)=\left(-2t\sin t^2,\ 2t\cos t^2\right)$, וב-$t=0$: $(0,0)$.
+      - kind: step
+        text: >-
+          לווקטור האפס אין כיוון, ולכן המתכון של הישר המשיק לא עובד ב-$t=0$. העקום עצמו, המעגל, חלק לגמרי ויש לו משיק
+          $x=1$: האפס בא מהפרמטריזציה, שמתחילה ממנוחה ($|\vec v_4|=2|t|$), לא מהעקום.
+      - kind: check
+        text: >-
+          $\vec r_2(t)=\vec r_1(3t)$, ולפי כלל השרשרת $\vec r_2\,'(0)=3\,\vec r_1\,'(0)=(0,3)$ ✓.
+      - kind: result
+        text: >-
+          (א) $(0,1)$, $(0,3)$, $(0,-1)$: אותו ישר משיק, גדלים וכיוונים שונים. (ב) $\vec v_4(0)=\vec 0$, ולא קובעת כיוון.
+
+  - id: W-9.2-04
+    level: mid
+    objectives: [OBJ-9.2-2]
+    prompt: >-
+      האליפסה $\vec r(t)=\left(2\cos t,\ 3\sin t\right)$.
+
+
+      (א) כתבו את הישר המשיק בנקודה שבה $t=\frac\pi3$, בצורה פרמטרית ובצורה $y=mx+b$.
+
+
+      (ב) מצאו את השיפוע שוב, בגזירה סתומה של $\frac{x^2}{4}+\frac{y^2}{9}=1$ (שיעור 5.4), והשוו.
+    answer: >-
+      (א) $\vec L(s)=\left(1,\frac{3\sqrt3}{2}\right)+s\left(-\sqrt3,\frac32\right)$, כלומר $y=-\frac{\sqrt3}{2}x+2\sqrt3$. (ב) $\frac{dy}{dx}=-\frac{9x}{4y}=-\frac{\sqrt3}{2}$.
+    solution:
+      - kind: idea
+        text: >-
+          נקודה מ-$\vec r\left(\frac\pi3\right)$, כיוון מ-$\vec r\,'\left(\frac\pi3\right)$, ושיפוע $\frac{y'(t)}{x'(t)}$ (נגזרות לפי $t$).
+          בגזירה סתומה גוזרים את המשוואה כולה לפי $x$, עם $y=y(x)$, ומקבלים את $\frac{dy}{dx}$ ישירות.
+      - kind: computation
+        text: >-
+          (א) $\vec r\left(\frac\pi3\right)=\left(2\cdot\frac12,\ 3\cdot\frac{\sqrt3}{2}\right)=\left(1,\frac{3\sqrt3}{2}\right)$.
+      - kind: computation
+        text: >-
+          $\vec r\,'(t)=(-2\sin t,\ 3\cos t)$, ולכן $\vec r\,'\left(\frac\pi3\right)=\left(-\sqrt3,\ \frac32\right)$, שונה מאפס.
+          הישר: $\vec L(s)=\left(1,\frac{3\sqrt3}{2}\right)+s\left(-\sqrt3,\frac32\right)$.
+      - kind: computation
+        text: >-
+          השיפוע $\frac{y'}{x'}=\frac{3/2}{-\sqrt3}=-\frac{\sqrt3}{2}$, והישר דרך הנקודה:
+          $y=\frac{3\sqrt3}{2}-\frac{\sqrt3}{2}(x-1)=-\frac{\sqrt3}{2}x+2\sqrt3$.
+      - kind: computation
+        text: >-
+          (ב) גוזרים לפי $x$, עם $y=y(x)$: $\frac{2x}{4}+\frac{2y}{9}\cdot\frac{dy}{dx}=0$, ולכן $\frac{dy}{dx}=-\frac{9x}{4y}$. בנקודה:
+          $\frac{dy}{dx}=-\frac{9\cdot1}{4\cdot\frac{3\sqrt3}{2}}=-\frac{9}{6\sqrt3}=-\frac{\sqrt3}{2}$. אותו שיפוע.
+      - kind: check
+        text: >-
+          $\vec L(0)$ היא הנקודה שעל האליפסה ✓. והישר $y=-\frac{\sqrt3}{2}x+2\sqrt3$ חותך את ציר $x$ ב-$x=4$, מחוץ לאליפסה
+          (שמגיעה רק עד $x=2$), כמו שמשיק לאליפסה צריך ✓.
+      - kind: result
+        text: >-
+          $\vec L(s)=\left(1,\frac{3\sqrt3}{2}\right)+s\left(-\sqrt3,\frac32\right)$, כלומר $y=-\frac{\sqrt3}{2}x+2\sqrt3$; השיפוע
+          $m=-\frac{\sqrt3}{2}$ בשתי הדרכים.
+
+  - id: W-9.2-05
+    level: exam
+    qualitative: true
+    objectives: [OBJ-9.2-2]
+    prompt: >-
+      האסטרואידה $\vec r(t)=\left(\cos^3t,\ \sin^3t\right)$, $0\le t<2\pi$.
+
+
+      (א) באילו ערכים של $t$ המהירות מתאפסת, ובאילו נקודות?
+
+
+      (ב) הראו שבשאר הנקודות השיפוע של המשיק הוא $\frac{dy}{dx}=-\tan t$, וכתבו את הישר המשיק ב-$t=\frac\pi4$.
+
+
+      (ג) ב-$t=0$ אי אפשר להשתמש במתכון. חשבו את הכיוון של המיתר מ-$\vec r(0)$ אל $\vec r(h)$ כש-$h=\pm0.1$, ותארו
+      במילים מה קורה בנקודה $(1,0)$.
+    answer: >-
+      (א) $t=0,\frac\pi2,\pi,\frac{3\pi}{2}$: הנקודות $(\pm1,0)$, $(0,\pm1)$. (ב) $x+y=\frac{\sqrt2}{2}$. (ג) משני הצדדים המיתר
+      כמעט בכיוון $(-1,0)$: שני הקטעים נכנסים ל-$(1,0)$ משמאל, משיקים לציר $x$, ושם חוד.
+    solution:
+      - kind: idea
+        text: >-
+          גוזרים בכלל השרשרת. במקומות שבהם $\vec v\ne\vec0$ המתכון עובד; במקומות שבהם $\vec v=\vec0$ צריך להסתכל על
+          כיוון המיתרים.
+      - kind: computation
+        text: >-
+          (א) $\vec v(t)=\left(-3\cos^2t\sin t,\ 3\sin^2t\cos t\right)=3\sin t\cos t\,(-\cos t,\ \sin t)$. הווקטור $(-\cos t,\sin t)$
+          אינו אפס אף פעם, ולכן $\vec v=\vec0$ בדיוק כש-$\sin t\cos t=0$: $t=0,\frac\pi2,\pi,\frac{3\pi}{2}$, בנקודות
+          $(1,0)$, $(0,1)$, $(-1,0)$, $(0,-1)$.
+      - kind: computation
+        text: >-
+          (ב) בשאר הנקודות $\frac{y'}{x'}=\frac{3\sin^2t\cos t}{-3\cos^2t\sin t}=-\frac{\sin t}{\cos t}=-\tan t$.
+      - kind: computation
+        text: >-
+          ב-$t=\frac\pi4$: $\cos\frac\pi4=\sin\frac\pi4=\frac{\sqrt2}{2}$, ולכן הנקודה $\left(\frac{\sqrt2}{4},\frac{\sqrt2}{4}\right)$
+          ($\left(\frac{\sqrt2}{2}\right)^3=\frac{\sqrt2}{4}$), והשיפוע מינוס 1. הישר: $y-\frac{\sqrt2}{4}=-\left(x-\frac{\sqrt2}{4}\right)$,
+          כלומר $x+y=\frac{\sqrt2}{2}$.
+      - kind: computation
+        text: >-
+          (ג) $\vec r(0.1)-\vec r(0)\approx(-0.0149,\ 0.0010)$ ו-$\vec r(-0.1)-\vec r(0)\approx(-0.0149,\ -0.0010)$. אחרי
+          חלוקה באורך: $(-0.998,\ \pm0.067)$.
+      - kind: step
+        text: >-
+          משני הצדדים המיתר כמעט אופקי ומצביע שמאלה: הקטע שמעל ציר $x$ והקטע שמתחתיו נכנסים ל-$(1,0)$ מאותו צד ומשיקים
+          לציר $x$. זה חוד: הנקודה מגיעה, נעצרת, וחוזרת לאותו צד.
+      - kind: check
+        text: >-
+          הישר $x+y=\frac{\sqrt2}{2}$ עובר בנקודה: $\frac{\sqrt2}{4}+\frac{\sqrt2}{4}=\frac{\sqrt2}{2}$ ✓. ו-$x^{2/3}+y^{2/3}=\cos^2t+\sin^2t=1$:
+          האסטרואידה סימטרית לשני הצירים ולישר $y=x$ (המשוואה לא משתנה כשמחליפים בין $x$ ל-$y$), ולכן כל ארבע הנקודות של
+          (א) הן חודים.
+      - kind: result
+        text: >-
+          (א) $t=\frac{k\pi}{2}$, בנקודות $(\pm1,0)$, $(0,\pm1)$. (ב) $x+y=\frac{\sqrt2}{2}$. (ג) ב-$(1,0)$ חוד שמשיק לציר $x$.
+
+  - id: W-9.2-06
+    level: mid
+    qualitative: true
+    objectives: [OBJ-9.2-3]
+    prompt: >-
+      נכון או לא נכון? נמקו כל טענה בהוכחה או בדוגמה נגדית.
+
+
+      (א) אם $\vec a(t)=\vec0$ לכל $t$, הנקודה נעה בקו ישר במהירות קבועה (או עומדת).
+
+
+      (ב) אם $\vec v(t)\cdot\vec a(t)=0$ לכל $t$, המסלול הוא מעגל.
+
+
+      (ג) אם נקודה נעה על ישר קבוע, $\vec r(t)=P_0+f(t)\,\vec d$, התאוצה שלה מקבילה לישר (או אפס).
+    answer: >-
+      (א) נכון. (ב) לא נכון: למשל הסליל, או קו ישר במהירות קבועה. (ג) נכון: $\vec a=f''(t)\,\vec d$.
+    solution:
+      - kind: idea
+        text: >-
+          חוזרים מהתאוצה למקום באינטגרציה רכיב-רכיב; וטענה כללית מפריכים בדוגמה אחת.
+      - kind: computation
+        text: >-
+          (א) $\vec v\,'=\vec0$ פירושו שכל רכיב של $\vec v$ קבוע (נגזרת אפס בקטע), כלומר $\vec v=\vec v_0$. אז
+          $\vec r(t)=\vec r(0)+t\,\vec v_0$: ישר (או נקודה, אם $\vec v_0=\vec0$). נכון.
+      - kind: computation
+        text: >-
+          (ב) הסליל $\vec r=(\cos t,\sin t,t)$: $\vec v=(-\sin t,\cos t,1)$, $\vec a=(-\cos t,-\sin t,0)$, ו-$\vec v\cdot\vec a=\sin t\cos t-\sin t\cos t+0=0$.
+          המסלול אינו מעגל. גם $\vec r=(t,0,0)$ מקיים $\vec a=\vec0$ ולכן $\vec v\cdot\vec a=0$, והמסלול ישר. לא נכון.
+      - kind: step
+        text: >-
+          מה כן נובע מ-$\vec v\cdot\vec a=0$? מ-$\left(|\vec v|^2\right)'=2\,\vec v\cdot\vec a=0$ נובע רק שגודל המהירות קבוע.
+      - kind: computation
+        text: >-
+          (ג) $P_0$ ו-$\vec d$ קבועים, ולכן $\vec v=f'(t)\,\vec d$ ו-$\vec a=f''(t)\,\vec d$: כפולה של $\vec d$. נכון.
+      - kind: check
+        text: >-
+          (ג) בדוגמה: נפילה חופשית ישר למטה, $\vec r=\left(0,\ 20-5t^2\right)$, נותנת $\vec a=(0,-10)$, מקבילה לציר $y$ ✓.
+      - kind: result
+        text: >-
+          (א) נכון; (ב) לא נכון (הסליל); (ג) נכון, $\vec a=f''\,\vec d$.
+
+  - id: W-9.2-07
+    level: mid
+    qualitative: true
+    objectives: [OBJ-9.2-3]
+    prompt: >-
+      (א) הראו שלכל פונקציה וקטורית גזירה פעמיים במרחב, $\left(\vec r\times\vec v\right)'=\vec r\times\vec a$.
+
+
+      (ב) בדקו את (א) על הסליל $\vec r(t)=(\cos t,\ \sin t,\ t)$: חשבו את $\vec r\times\vec v$, גזרו אותו, והשוו ל-$\vec r\times\vec a$.
+
+
+      (ג) הסיקו: אם התאוצה מקבילה תמיד לווקטור המקום (כמו בתנועה מעגלית אחידה סביב הראשית), אז $\vec r\times\vec v$ קבוע.
+    answer: >-
+      (א) כלל המכפלה, ו-$\vec v\times\vec v=\vec0$. (ב) $\vec r\times\vec v=\left(\sin t-t\cos t,\ -\cos t-t\sin t,\ 1\right)$, והנגזרת
+      $\left(t\sin t,\ -t\cos t,\ 0\right)=\vec r\times\vec a$. (ג) $\vec r\times\vec a=\vec0$, ולכן הנגזרת אפס.
+    solution:
+      - kind: idea
+        text: >-
+          כלל המכפלה של המכפלה הווקטורית, עם הסדר נשמר, ועובדה משיעור 1.4: מכפלה וקטורית של וקטור בעצמו היא אפס.
+      - kind: computation
+        text: >-
+          (א) $\left(\vec r\times\vec v\right)'=\vec r\,'\times\vec v+\vec r\times\vec v\,'=\vec v\times\vec v+\vec r\times\vec a=\vec r\times\vec a$.
+      - kind: computation
+        text: >-
+          (ב) $\vec v=(-\sin t,\ \cos t,\ 1)$. רכיב אחרי רכיב, $\vec r\times\vec v=\bigl(\sin t\cdot1-t\cos t,\ t\cdot(-\sin t)-\cos t\cdot1,\ \cos^2t+\sin^2t\bigr)$,
+          כלומר $\left(\sin t-t\cos t,\ -t\sin t-\cos t,\ 1\right)$.
+      - kind: computation
+        text: >-
+          גוזרים: $(\sin t-t\cos t)'=\cos t-\cos t+t\sin t=t\sin t$, $(-t\sin t-\cos t)'=-\sin t-t\cos t+\sin t=-t\cos t$,
+          והרכיב הקבוע 1 נותן 0. הנגזרת: $(t\sin t,\ -t\cos t,\ 0)$.
+      - kind: computation
+        text: >-
+          מצד שני $\vec a=(-\cos t,\ -\sin t,\ 0)$, ו-$\vec r\times\vec a=\bigl(\sin t\cdot0-t\cdot(-\sin t),\ t\cdot(-\cos t)-\cos t\cdot0,\ -\cos t\sin t+\sin t\cos t\bigr)=(t\sin t,\ -t\cos t,\ 0)$.
+          אותו וקטור.
+      - kind: step
+        text: >-
+          (ג) אם $\vec a$ מקביל ל-$\vec r$, אז $\vec r\times\vec a=\vec0$, ולפי (א) הנגזרת של $\vec r\times\vec v$ אפס בכל רכיב:
+          הווקטור קבוע. בפיזיקה, $m\,\vec r\times\vec v$ הוא התנע הזוויתי, והוא נשמר בכל כוח שמכוון אל הראשית (כוח
+          מרכזי), למשל כוח המשיכה של השמש על כוכב לכת.
+      - kind: check
+        text: >-
+          (ג) בתנועה מעגלית אחידה $\vec r=(3\cos2t,\ 3\sin2t,\ 0)$: $\vec r\times\vec v=(0,\ 0,\ 18)$, קבוע ✓ ($3\cdot6=18$:
+          רדיוס כפול גודל המהירות, כי הם ניצבים).
+      - kind: result
+        text: >-
+          $\left(\vec r\times\vec v\right)'=\vec r\times\vec a$; בסליל שני האגפים $(t\sin t,\ -t\cos t,\ 0)$; כש-$\vec a\parallel\vec r$,
+          $\vec r\times\vec v$ קבוע.
+
+  - id: W-9.2-08
+    level: mid
+    objectives: [OBJ-9.2-3, OBJ-9.2-2]
+    prompt: >-
+      לחלקיק במרחב התאוצה $\vec a(t)=(6t,\ 2,\ 0)$. ב-$t=0$ הוא בנקודה $(1,0,0)$ ומהירותו $(0,0,1)$.
+
+
+      (א) מצאו את $\vec v(t)$ ואת $\vec r(t)$.
+
+
+      (ב) מה המקום, המהירות וגודל המהירות ב-$t=2$?
+
+
+      (ג) ב-$t=2$ הכוח מפסיק לפעול, והחלקיק ממשיך במהירות קבועה, על הישר המשיק $\vec L(s)$, כש-$s=t-2$ הוא הזמן
+      שעבר מאז. האם אחרי $t=2$ הוא מגיע למישור $z=0$? ובאיזו נקודה הישר הזה חוצה את המישור?
+    answer: >-
+      (א) $\vec v=\left(3t^2,\ 2t,\ 1\right)$, $\vec r=\left(1+t^3,\ t^2,\ t\right)$. (ב) $(9,4,2)$, $(12,4,1)$, $\sqrt{161}\approx12.69$.
+      (ג) אחרי $t=2$ הרכיב $z$ רק גדל, ולכן לא; הישר המשיק חוצה את $z=0$ ב-$s=-2$, בנקודה $(-15,-4,0)$.
+    solution:
+      - kind: idea
+        text: >-
+          $\vec v(t)=\vec v(0)+\int_0^t\vec a$, ו-$\vec r(t)=\vec r(0)+\int_0^t\vec v$, רכיב-רכיב. אחרי שהכוח נעלם החלקיק נע
+          על הישר המשיק.
+      - kind: computation
+        text: >-
+          (א) $\int_0^t(6u,\ 2,\ 0)\,du=\left(3t^2,\ 2t,\ 0\right)$, ולכן $\vec v(t)=(0,0,1)+\left(3t^2,2t,0\right)=\left(3t^2,\ 2t,\ 1\right)$.
+      - kind: computation
+        text: >-
+          $\int_0^t\left(3u^2,\ 2u,\ 1\right)du=\left(t^3,\ t^2,\ t\right)$, ולכן $\vec r(t)=\left(1+t^3,\ t^2,\ t\right)$.
+      - kind: computation
+        text: >-
+          (ב) $\vec r(2)=(9,4,2)$, $\vec v(2)=(12,4,1)$, $|\vec v(2)|=\sqrt{144+16+1}=\sqrt{161}\approx12.69$.
+      - kind: computation
+        text: >-
+          (ג) אחרי $t=2$: $\vec L(s)=(9,4,2)+s\,(12,4,1)$, עם $s=t-2$ הזמן מאז שהכוח נעלם. הרכיב השלישי $2+s$ מתאפס
+          ב-$s=-2$.
+      - kind: step
+        text: >-
+          $s=-2$ הוא **לפני** השחרור, ולכן אחרי $t=2$ החלקיק לא מגיע ל-$z=0$: הרכיב $z$ רק גדל. אילו נע על הישר
+          הזה גם קודם, היה חוצה את המישור ב-$\vec L(-2)=(9-24,\ 4-8,\ 0)=(-15,-4,0)$.
+      - kind: check
+        text: >-
+          גוזרים את $\vec r$ פעמיים: $\vec r\,''=(6t,\ 2,\ 0)=\vec a$ ✓, ו-$\vec r(0)=(1,0,0)$, $\vec r\,'(0)=(0,0,1)$ ✓. החלקיק
+          האמיתי היה ב-$z=0$ ב-$t=0$, בנקודה $(1,0,0)$, רחוק מ-$(-15,-4,0)$: הקירוב הלינארי טוב רק ליד $t=2$.
+      - kind: result
+        text: >-
+          $\vec r(t)=\left(1+t^3,\ t^2,\ t\right)$; ב-$t=2$: $(9,4,2)$, $\vec v=(12,4,1)$, $|\vec v|=\sqrt{161}$; אחרי השחרור הוא לא
+          חוצה את $z=0$; הישר המשיק חוצה אותו ב-$(-15,-4,0)$.
+
+  - id: W-9.2-09
+    level: exam
+    objectives: [OBJ-9.2-2]
+    prompt: >-
+      העקום $\vec r(t)=\left(t^3-3t,\ t^2\right)$, $t\in\mathbb R$.
+
+
+      (א) מצאו את הנקודות שבהן המשיק אופקי ואת הנקודות שבהן הוא אנכי.
+
+
+      (ב) העקום חוצה את עצמו בנקודה אחת. מצאו אותה, ואת שני הישרים המשיקים בה.
+
+
+      (ג) הראו שהעקום מקיים $x^2=y\,(y-3)^2$.
+    answer: >-
+      (א) אופקי ב-$(0,0)$ ($t=0$); אנכי ב-$(2,1)$ ($t=-1$) וב-$(-2,1)$ ($t=1$). (ב) $(0,3)$, ב-$t=\pm\sqrt3$; המשיקים
+      $y=3\pm\frac{\sqrt3}{3}x$. (ג) $x^2=t^2\left(t^2-3\right)^2=y(y-3)^2$.
+    solution:
+      - kind: idea
+        text: >-
+          משיק אופקי: $y'=0$ ו-$x'\ne0$; אנכי: $x'=0$ ו-$y'\ne0$. נקודת חיתוך עצמי: שני ערכים שונים של $t$ שנותנים
+          אותה נקודה, ובכל אחד משיק משלו.
+      - kind: computation
+        text: >-
+          (א) $\vec v(t)=\left(3t^2-3,\ 2t\right)$. $y'=2t=0$ רק ב-$t=0$, ושם $x'=-3\ne0$: משיק אופקי ב-$\vec r(0)=(0,0)$.
+      - kind: computation
+        text: >-
+          $x'=3t^2-3=0$ ב-$t=\pm1$, ושם $y'=\pm2\ne0$: משיק אנכי ב-$\vec r(1)=(-2,1)$ וב-$\vec r(-1)=(2,1)$.
+      - kind: step
+        text: >-
+          (ב) שני רגעים שונים עם אותו $y=t^2$ הם בהכרח $t$ ו-$(-t)$, עם $t\ne0$. מאחר ש-$x(-t)=-x(t)$, הנקודות שוות
+          בדיוק כש-$x(t)=-x(t)$, כלומר $x(t)=0$:
+          $t\left(t^2-3\right)=0$, כלומר $t=\pm\sqrt3$, בנקודה $(0,3)$.
+      - kind: computation
+        text: >-
+          ב-$t=\sqrt3$: $\vec v=\left(6,\ 2\sqrt3\right)$, שיפוע $\frac{2\sqrt3}{6}=\frac{\sqrt3}{3}$. ב-$t=-\sqrt3$: $\vec v=\left(6,\ -2\sqrt3\right)$,
+          שיפוע $m=-\frac{\sqrt3}{3}$. המשיקים: $y=3+\frac{\sqrt3}{3}x$ ו-$y=3-\frac{\sqrt3}{3}x$.
+      - kind: computation
+        text: >-
+          (ג) $x^2=\left(t^3-3t\right)^2=t^2\left(t^2-3\right)^2$, ועם $y=t^2$ זה $y\,(y-3)^2$.
+      - kind: check
+        text: >-
+          המשוואה ב-$(0,3)$: $0=3\cdot0$ ✓; ב-$(2,1)$: $4=1\cdot4$ ✓. ושני המשיקים ב-$(0,3)$ סימטריים זה לזה ביחס לציר
+          $y$, כמו העקום עצמו ✓.
+      - kind: result
+        text: >-
+          אופקי ב-$(0,0)$; אנכי ב-$(\pm2,1)$; חיתוך עצמי ב-$(0,3)$ עם המשיקים $y=3\pm\frac{\sqrt3}{3}x$.
+
+  - id: W-9.2-10
+    level: exam
+    objectives: [OBJ-9.2-1, OBJ-9.2-3]
+    prompt: >-
+      נקודה נעה על הספירלה הלוגריתמית $\vec r(t)=e^{-t}(\cos t,\ \sin t)$, $t\ge0$, ומתקרבת לראשית.
+
+
+      (א) חשבו את $\vec v(t)$ ואת גודל המהירות.
+
+
+      (ב) הראו שהזווית בין $\vec r(t)$ ל-$\vec v(t)$ קבועה, ומצאו אותה.
+
+
+      (ג) חשבו את $\vec a(t)$, והראו שהיא ניצבת ל-$\vec r(t)$.
+
+
+      (ד) חשבו את $\vec v\cdot\vec a$, והסיקו אם הנקודה מאיצה או מאטה. בדקו מול גודל המהירות מ-(א).
+    answer: >-
+      (א) $\vec v=e^{-t}\left(-\cos t-\sin t,\ \cos t-\sin t\right)$, $|\vec v|=\sqrt2\,e^{-t}$. (ב) $135^\circ$. (ג) $\vec a=2e^{-t}(\sin t,\ -\cos t)$,
+      $\vec a\cdot\vec r=0$. (ד) $\vec v\cdot\vec a=-2e^{-2t}<0$: מאטה; $\frac{d|\vec v|}{dt}=-\sqrt2\,e^{-t}$.
+    solution:
+      - kind: idea
+        text: >-
+          כלל המכפלה, כשגורם אחד הוא $e^{-t}$ והשני וקטור. את הזווית מוצאים במכפלה סקלרית (שיעור 1.2), ואת השינוי
+          בגודל המהירות מהסימן של $\vec v\cdot\vec a$.
+      - kind: computation
+        text: >-
+          (א) $\vec v=\left(e^{-t}\right)'(\cos t,\sin t)+e^{-t}(-\sin t,\cos t)=e^{-t}\left(-\cos t-\sin t,\ \cos t-\sin t\right)$.
+      - kind: computation
+        text: >-
+          $|\vec v|^2=e^{-2t}\left[(\cos t+\sin t)^2+(\cos t-\sin t)^2\right]=e^{-2t}\cdot2$ (האיברים המעורבים מתבטלים), ולכן
+          $|\vec v|=\sqrt2\,e^{-t}$.
+      - kind: computation
+        text: >-
+          (ב) $\vec r\cdot\vec v=e^{-2t}\left[\cos t(-\cos t-\sin t)+\sin t(\cos t-\sin t)\right]=-e^{-2t}$, ו-$|\vec r|=e^{-t}$. לכן
+          $\cos\theta=\frac{-e^{-2t}}{e^{-t}\cdot\sqrt2\,e^{-t}}=-\frac{1}{\sqrt2}$, כלומר $\theta=135^\circ$, לכל $t$.
+      - kind: computation
+        text: >-
+          (ג) גוזרים את $\vec v=e^{-t}\vec w$ עם $\vec w=\left(-\cos t-\sin t,\ \cos t-\sin t\right)$:
+          $\vec a=-e^{-t}\vec w+e^{-t}\vec w\,'$, ו-$\vec w\,'=\left(\sin t-\cos t,\ -\sin t-\cos t\right)$.
+      - kind: computation
+        text: >-
+          לכן $\vec a=e^{-t}\left(\cos t+\sin t+\sin t-\cos t,\ -\cos t+\sin t-\sin t-\cos t\right)=2e^{-t}(\sin t,\ -\cos t)$,
+          ו-$\vec a\cdot\vec r=2e^{-2t}\left(\sin t\cos t-\cos t\sin t\right)=0$.
+      - kind: computation
+        text: >-
+          (ד) $\vec v\cdot\vec a=2e^{-2t}\left[(-\cos t-\sin t)\sin t-(\cos t-\sin t)\cos t\right]=2e^{-2t}\cdot(-1)=-2e^{-2t}$,
+          שלילי תמיד: הזווית בין המהירות לתאוצה קהה, והנקודה מאטה.
+      - kind: check
+        text: >-
+          מ-(א), $\frac{d}{dt}\left(\sqrt2\,e^{-t}\right)=-\sqrt2\,e^{-t}$, ומהנוסחה $\frac{\vec v\cdot\vec a}{|\vec v|}=\frac{-2e^{-2t}}{\sqrt2\,e^{-t}}=-\sqrt2\,e^{-t}$ ✓.
+          וב-$t=0$: $\vec v(0)=(-1,1)$ ו-$\vec r(0)=(1,0)$, והזווית ביניהם באמת $135^\circ$ ✓.
+      - kind: result
+        text: >-
+          $|\vec v|=\sqrt2\,e^{-t}$; הזווית בין $\vec r$ ל-$\vec v$ תמיד $135^\circ$; $\vec a=2e^{-t}(\sin t,-\cos t)\perp\vec r$;
+          $\vec v\cdot\vec a=-2e^{-2t}<0$, והנקודה מאטה.
+
+challenge:
+  - id: W-9.2-c1
+    stars: 1
+    objectives: [OBJ-9.2-3]
+    prompt: >-
+      (א) הראו שאם גודל המהירות של נקודה נעה קבוע, אז המהירות ניצבת לתאוצה בכל רגע.
+
+
+      (ב) האם גם ההפך נכון: אם $\vec v(t)\cdot\vec a(t)=0$ לכל $t$, האם גודל המהירות קבוע?
+
+
+      (ג) חלקיק טעון בשדה מגנטי אחיד נע כך ש-$\vec a(t)=\vec v(t)\times\hat k$ (ביחידות שבהן כל הקבועים 1), ו-$\vec v(0)=(1,0,1)$.
+      הראו, בלי לפתור את התנועה, שגודל המהירות נשאר $\sqrt2$ ושהרכיב השלישי של המהירות נשאר 1.
+
+
+      (ד) בדקו ש-$\vec v(t)=(\cos t,\ -\sin t,\ 1)$ מקיימת את התנאים של (ג), ומצאו את המסלול כש-$\vec r(0)=\vec0$. מה הצורה שלו?
+    answer: >-
+      (א) $\left(|\vec v|^2\right)'=2\,\vec v\cdot\vec a=0$. (ב) כן, מאותה זהות. (ג) $\vec v\cdot\left(\vec v\times\hat k\right)=0$ והרכיב השלישי
+      של $\vec v\times\hat k$ הוא 0. (ד) $\vec r(t)=(\sin t,\ \cos t-1,\ t)$: סליל ברדיוס 1 סביב הישר $x=0$, $y=-1$.
+    solution:
+      - kind: idea
+        text: >-
+          גודל המהירות קבוע בדיוק כש-$|\vec v|^2=\vec v\cdot\vec v$ קבוע, ואת הנגזרת שלו נותן כלל המכפלה של המכפלה
+          הסקלרית.
+      - kind: computation
+        text: >-
+          (א) $\left(\vec v\cdot\vec v\right)'=\vec v\,'\cdot\vec v+\vec v\cdot\vec v\,'=2\,\vec v\cdot\vec a$. אם $|\vec v|^2$ קבוע, האגף
+          השמאלי אפס, ולכן $\vec v\cdot\vec a=0$: המהירות ניצבת לתאוצה (או שאחת מהן אפס).
+      - kind: step
+        text: >-
+          (ב) כן. אם $\vec v\cdot\vec a=0$ לכל $t$, אותה זהות נותנת $\left(|\vec v|^2\right)'=0$ בכל הקטע, ולכן $|\vec v|^2$ קבוע
+          (פונקציה שהנגזרת שלה אפס בקטע קבועה, שיעור 5.5), וגם $|\vec v|$.
+      - kind: step
+        text: >-
+          (ג) $\vec v\times\hat k$ ניצב ל-$\vec v$ (שיעור 1.4), ולכן $\vec v\cdot\vec a=\vec v\cdot\left(\vec v\times\hat k\right)=0$, ולפי (ב)
+          $|\vec v|=|\vec v(0)|=\sqrt{1+0+1}=\sqrt2$ תמיד.
+      - kind: computation
+        text: >-
+          לפי נוסחת הרכיבים, $\vec v\times\hat k=(v_2,\ -v_1,\ 0)$. הרכיב השלישי של $\vec a$ הוא $v_3\,'$, ולכן $v_3\,'=0$
+          ו-$v_3=v_3(0)=1$ תמיד.
+      - kind: computation
+        text: >-
+          (ד) $\vec v(0)=(1,0,1)$ ✓. $\vec v\,'(t)=(-\sin t,\ -\cos t,\ 0)$, ו-$\vec v\times\hat k=(v_2,-v_1,0)=(-\sin t,\ -\cos t,\ 0)$:
+          שווים ✓.
+      - kind: computation
+        text: >-
+          $\vec r(t)=\int_0^t\vec v(u)\,du=\left(\sin t,\ \cos t-1,\ t\right)$. כאן $x^2+(y+1)^2=\sin^2t+\cos^2t=1$, ו-$z=t$
+          עולה בקצב קבוע.
+      - kind: check
+        text: >-
+          $|\vec v(t)|^2=\cos^2t+\sin^2t+1=2$ ✓, כמו ב-(ג). והמסלול סליל ברדיוס 1 סביב הישר $x=0$, $y=-1$, שעולה $2\pi$ בכל
+          סיבוב: כך חלקיקים טעונים נעים בשדה מגנטי, למשל לאורך קווי השדה של כדור הארץ.
+      - kind: result
+        text: >-
+          (א) ו-(ב): $|\vec v|$ קבוע אם ורק אם $\vec v\cdot\vec a=0$ בכל רגע. (ג) $|\vec v|=\sqrt2$, $v_3=1$. (ד) $\vec r(t)=(\sin t,\ \cos t-1,\ t)$, סליל.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 3 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.2 (Calculus of Vector-Valued Functions), exercise 73 is part (a); parts (b)–(d) added'
+      url: https://openstax.org/books/calculus-volume-3/pages/3-2-calculus-of-vector-valued-functions#fs-id1169736976861
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-9.2-c2
+    stars: 1
+    objectives: [OBJ-9.2-1, OBJ-9.2-2]
+    prompt: >-
+      נקודה נעה לפי $\vec r(t)=(t+\cos t,\ t-\sin t)$, $0\le t<2\pi$.
+
+
+      (א) מצאו את גודל המהירות המינימלי ואת המקסימלי, ובאילו רגעים הם מתקבלים.
+
+
+      (ב) האם יש רגע שבו המהירות מתאפסת? מה זה אומר על הישר המשיק לאורך העקום?
+
+
+      (ג) כתבו את הישר המשיק ברגע שבו גודל המהירות מינימלי.
+    answer: >-
+      (א) $|\vec v|^2=3-2(\sin t+\cos t)$; מינימום $\sqrt2-1$ ב-$t=\frac\pi4$, מקסימום $\sqrt2+1$ ב-$t=\frac{5\pi}{4}$. (ב) לא: בכל
+      נקודה יש ישר משיק בכיוון המהירות. (ג) $\vec L(s)=\left(\frac\pi4+\frac{\sqrt2}{2},\ \frac\pi4-\frac{\sqrt2}{2}\right)+s\,(1,1)$, שיפוע 1.
+    solution:
+      - kind: idea
+        text: >-
+          קל יותר לחקור את $|\vec v|^2$, שאין בו שורש: הוא גדל וקטן יחד עם $|\vec v|$. את $\cos t+\sin t$ כותבים כתנודה אחת
+          (שיעור 4.4).
+      - kind: computation
+        text: >-
+          (א) $\vec v(t)=(1-\sin t,\ 1-\cos t)$, ולכן
+          $|\vec v|^2=1-2\sin t+\sin^2t+1-2\cos t+\cos^2t=3-2(\sin t+\cos t)$.
+      - kind: computation
+        text: >-
+          לפי חיבור תנודות באותו קצב (שיעור 4.4), $\cos t+\sin t=\sqrt2\cos\left(t-\frac\pi4\right)$. בדיקה בנוסחת הקוסינוס
+          של הפרש: $\sqrt2\left(\cos t\cos\frac\pi4+\sin t\sin\frac\pi4\right)=\sqrt2\cdot\frac{\sqrt2}{2}(\cos t+\sin t)=\cos t+\sin t$. הביטוי נע בין מינוס $\sqrt2$ ל-$\sqrt2$. המקסימום $\sqrt2$ ב-$t=\frac\pi4$, והמינימום,
+          מינוס $\sqrt2$, ב-$t=\frac{5\pi}{4}$ (שניהם בתוך $[0,2\pi)$).
+      - kind: computation
+        text: >-
+          לכן $|\vec v|^2$ מינימלי ב-$t=\frac\pi4$: $3-2\sqrt2=\left(\sqrt2-1\right)^2$, כלומר $|\vec v|=\sqrt2-1\approx0.414$. ומקסימלי
+          ב-$t=\frac{5\pi}{4}$: $3+2\sqrt2=\left(\sqrt2+1\right)^2$, כלומר $|\vec v|=\sqrt2+1\approx2.414$.
+      - kind: step
+        text: >-
+          (ב) $|\vec v|\ge\sqrt2-1>0$ תמיד, ולכן המהירות אף פעם אינה וקטור האפס, ובכל נקודה הישר המשיק נתון במתכון
+          $\vec r(t_0)+s\,\vec v(t_0)$. אין חודים.
+      - kind: computation
+        text: >-
+          (ג) ב-$t=\frac\pi4$: $\vec r=\left(\frac\pi4+\frac{\sqrt2}{2},\ \frac\pi4-\frac{\sqrt2}{2}\right)$ ו-$\vec v=\left(1-\frac{\sqrt2}{2}\right)(1,1)$.
+          כיוון $(1,1)$ מתאים באותה מידה (כפולה חיובית), ולכן $\vec L(s)=\left(\frac\pi4+\frac{\sqrt2}{2},\ \frac\pi4-\frac{\sqrt2}{2}\right)+s\,(1,1)$, בשיפוע 1.
+      - kind: check
+        text: >-
+          ב-$t=0$: $\vec v=(1,0)$ ו-$|\vec v|^2=1$, ובנוסחה $3-2(0+1)=1$ ✓; והערך 1 בין $0.414$ ל-$2.414$ ✓. ובנגזרת:
+          $\left(|\vec v|^2\right)'=-2(\cos t-\sin t)$ מתאפסת בדיוק כש-$\tan t=1$, כלומר ב-$\frac\pi4$ וב-$\frac{5\pi}{4}$ ✓.
+      - kind: result
+        text: >-
+          מינימום $\sqrt2-1$ ב-$t=\frac\pi4$, מקסימום $\sqrt2+1$ ב-$t=\frac{5\pi}{4}$; המהירות לא מתאפסת; המשיק ב-$\frac\pi4$
+          בשיפוע 1.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 3 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.2 (Calculus of Vector-Valued Functions), exercise 93; the maximum and parts (b), (c) added'
+      url: https://openstax.org/books/calculus-volume-3/pages/3-2-calculus-of-vector-valued-functions#fs-id1169736692410
+      verified: '2026-11-27'
+      adapted: true

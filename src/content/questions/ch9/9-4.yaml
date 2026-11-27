@@ -48,7 +48,7 @@ questions:
         misconception: MC-c9-accel-vs-velocity
       - text: 'תלוי בכיוון התנועה: פנימה נגד כיוון השעון, החוצה בכיוון השעון'
         feedback: >-
-          היפוך הכיוון הופך את $\vec T$, אבל גם את $\vec T\,'$ פעמיים, ו-$\vec N$ נשאר מצביע פנימה.
+          היפוך הכיוון הופך את $\vec T$, אבל גם את כיוון הזמן, ולכן $\vec T\,'$ נשאר אותו וקטור, ו-$\vec N$ מצביע פנימה.
         misconception: MC-c9-N-outward
 
   - id: Q-9.4-helix-tangent
@@ -185,7 +185,7 @@ questions:
     choices:
       - text: 'לא נכון'
         correct: true
-        feedback: 'נכון. לסליל $(3\cos t,3\sin t,4t)$ העקמומיות קבועה, $\frac{3}{25}$, והוא אינו מעגל.'
+        feedback: 'נכון. לסליל $(3\cos t,3\sin t,4t)$ העקמומיות קבועה וחיובית (את ערכה מחשבים בשאלה על עקמומיות הסליל), והוא אינו מעגל.'
       - text: 'נכון'
         feedback: 'במישור זה נכון, אבל במרחב העקום יכול גם לעלות: הסליל מתעקל באותו קצב לאורך כל הדרך.'
         misconception: MC-c9-constant-curvature-circle
@@ -194,16 +194,16 @@ questions:
         correct: true
         feedback: 'בדיוק. עקמומיות מודדת רק כמה מהר $\vec T$ מסתובב, לא אם העקום נשאר במישור אחד.'
       - text: 'עקמומיות קבועה פירושה רדיוס קבוע, ולכן מעגל'
-        feedback: 'רדיוס המעגל הצמוד קבוע לאורך הסליל ($\frac{25}{3}$), אבל המעגל הצמוד משתנה ממקום למקום.'
+        feedback: 'רדיוס המעגל הצמוד אכן קבוע לאורך הסליל, אבל המעגל הצמוד עצמו משתנה ממקום למקום: המרכז שלו זז ועולה יחד עם הסליל.'
         misconception: MC-c9-constant-curvature-circle
       - text: 'לסליל העקמומיות אינה קבועה, ולכן אין סתירה'
-        feedback: 'היא קבועה: $\frac{|\vec v\times\vec a|}{|\vec v|^3}=\frac{15}{125}$ לכל $t$.'
+        feedback: 'היא קבועה: $|\vec v|$ ו-$|\vec v\times\vec a|$ אינם תלויים ב-$t$, ולכן גם $\frac{|\vec v\times\vec a|}{|\vec v|^3}$.'
         misconception: MC-c9-helix-curvature-projection
 
   - id: Q-9.4-helix-curvature
     type: numeric
     objectives: [OBJ-9.4-3]
-    level: exam
+    level: mid
     prompt: >-
       חשבו את העקמומיות של הסליל $\vec r(t)=\left(3\cos t,\ 3\sin t,\ 4t\right)$. (אפשר לכתוב שבר.)
     answer: 0.12
@@ -214,13 +214,45 @@ questions:
     wrongFeedback: >-
       השתמשו ב-$\kappa=\frac{|\vec v\times\vec a|}{|\vec v|^3}$, או ב-$\kappa=\frac{a_N}{|\vec v|^2}$.
     commonWrong:
-      - value: 0.3333333333
+      - value: 0.333333333333333
         feedback: '$\frac13$ היא העקמומיות של המעגל ברדיוס 3, ההיטל. העלייה "מיישרת" את הסליל.'
         misconception: MC-c9-helix-curvature-projection
       - value: 3
         feedback: '3 הוא $a_N=|\vec a|$. העקמומיות היא $\frac{a_N}{|\vec v|^2}$.'
         misconception: MC-c9-aN-is-a
+      - value: 0.6
+        feedback: >-
+          $\frac35$ הוא $|\vec T\,'(t)|$, קצב הסיבוב של $\vec T$ לכל יחידת **זמן**. העקמומיות היא לכל יחידת אורך:
+          $\kappa=\frac{|\vec T\,'|}{|\vec v|}=\frac{3/5}{5}$.
+        misconception: MC-c9-curvature-per-time
     hints: ['$a_N=\kappa|\vec v|^2$.']
+
+  - id: Q-9.4-braking-turn
+    type: mc
+    objectives: [OBJ-9.4-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      מכונית נוסעת בפנייה מעגלית ובולמת: גודל המהירות שלה קטן. לאן מצביעה התאוצה שלה?
+    choices:
+      - text: 'בין "פנימה, אל המרכז" לבין "אחורה, נגד המהירות"'
+        correct: true
+        feedback: >-
+          נכון. $\vec a=a_T\vec T+a_N\vec N$: המכונית מאטה, ולכן $a_T<0$ והחלק המשיקי מצביע אחורה; היא פונה, ולכן
+          $a_N>0$ והחלק הנורמלי מצביע אל המרכז.
+      - text: 'בדיוק אל מרכז המעגל'
+        feedback: >-
+          אל המרכז מצביע רק החלק $a_N\vec N$. כשגודל המהירות משתנה יש גם $a_T\ne0$, ו-$\vec a$ נוטה ממנו: כאן אחורה.
+        misconception: MC-c9-circle-accel-centre
+      - text: 'אחורה, נגד כיוון המהירות'
+        feedback: >-
+          זה רק החלק המשיקי, $a_T\vec T$ עם $a_T<0$. המכונית גם פונה, ולכן יש גם $a_N\vec N$ אל המרכז.
+        misconception: MC-c9-accel-vs-velocity
+      - text: 'החוצה מהמרכז ואחורה'
+        feedback: >-
+          $a_N\ge0$ ו-$\vec N$ מצביע לצד שאליו העקום מתעקל, אל המרכז. "נזרקים החוצה" היא התחושה בתוך המכונית, לא
+          התאוצה שלה.
+        misconception: MC-c9-accel-outward
 
   - id: Q-9.4-projectile-top
     type: numeric
@@ -241,6 +273,6 @@ questions:
         feedback: '$0.1$ הוא העקמומיות. הרדיוס הוא ההפכי שלה.'
         misconception: MC-c9-curvature-equals-radius
       - value: 1
-        feedback: '$\frac{|\vec v|}{a_N}=1$: הנוסחה היא $R=\frac{|\vec v|^2}{a_N}$, עם המהירות **בריבוע**.'
+        feedback: '$\frac{|\vec v|}{a_N}=1$: הנוסחה היא $\rho=\frac{|\vec v|^2}{a_N}$, עם המהירות **בריבוע**.'
         misconception: MC-c9-aN-is-a
-    hints: ['$a_N=\frac{|\vec v|^2}{R}$, כמו בתנועה מעגלית.']
+    hints: ['$a_N=\frac{|\vec v|^2}{\rho}$, כמו בתנועה מעגלית ברדיוס $\rho$.']

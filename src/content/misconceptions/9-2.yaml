@@ -6,7 +6,7 @@
   truth: >-
     $|\vec r(t)|$ הוא המרחק מהראשית. גודל המהירות הוא האורך של הנגזרת: $|\vec v(t)|=|\vec r\,'(t)|=\sqrt{x'^2+y'^2+z'^2}$.
     נקודה על מעגל סביב הראשית נמצאת תמיד באותו מרחק, ובכל זאת נעה.
-  remedy: { lesson: '9.2', label: 'וקטור המהירות וגודלו' }
+  remedy: { lesson: '9.2', anchor: speed, label: 'וקטור המהירות וגודלו' }
 
 - id: MC-c9-speed-sum-components
   title: מחשבים את אורך הווקטור בלי פיתגורס, מסכום הרכיבים או מרכיב אחד
@@ -15,7 +15,7 @@
   truth: >-
     $|\vec v|=\sqrt{v_1^2+v_2^2+v_3^2}$ (פיתגורס). סכום הרכיבים תלוי בבחירת הצירים ויכול אפילו להתאפס כשהווקטור אינו
     אפס.
-  remedy: { lesson: '9.2', label: 'גודל המהירות: שורש סכום הריבועים' }
+  remedy: { lesson: '9.2', anchor: speed, label: 'גודל המהירות: שורש סכום הריבועים' }
 
 - id: MC-c9-velocity-parallel-position
   title: חושבים שהמהירות מצביעה בכיוון וקטור המקום
@@ -24,7 +24,7 @@
   truth: >-
     המהירות $\vec r\,'(t)$ משיקה למסלול. בתנועה במעגל סביב הראשית היא אפילו **מאונכת** ל-$\vec r$, כי
     $\frac{d}{dt}|\vec r|^2=2\,\vec r\cdot\vec r\,'=0$.
-  remedy: { lesson: '9.2', label: 'המהירות משיקה למסלול' }
+  remedy: { lesson: '9.2', anchor: tangent-velocity, label: 'המהירות משיקה למסלול' }
 
 - id: MC-c9-tangent-missing-point
   title: בונים את הישר המשיק בלי הנקודה, או מחליפים בין הנקודה לכיוון
@@ -33,7 +33,7 @@
   truth: >-
     $\vec L(s)=\vec r(t_0)+s\,\vec r\,'(t_0)$: עובר **בנקודה** $\vec r(t_0)$ שעל העקום, בכיוון **המהירות**. בדיקה:
     $\vec L(0)$ צריך להיות על העקום.
-  remedy: { lesson: '9.2', label: 'הישר המשיק: נקודה וכיוון' }
+  remedy: { lesson: '9.2', anchor: tangent-line, label: 'הישר המשיק: נקודה וכיוון' }
 
 - id: MC-c9-slope-inverted
   title: הופכים את השיפוע של עקום פרמטרי
@@ -41,7 +41,7 @@
     השיפוע של העקום $(x(t),y(t))$ הוא $\frac{x'(t)}{y'(t)}$.
   truth: >-
     $\frac{dy}{dx}=\frac{y'(t)}{x'(t)}$: שינוי ב-$y$ חלקי שינוי ב-$x$, כשהמהירות $(x',y')$ מקבילה ל-$(1,\frac{y'}{x'})$.
-  remedy: { lesson: '9.2', label: 'שיפוע של עקום פרמטרי' }
+  remedy: { lesson: '9.2', anchor: parametric-slope, label: 'שיפוע של עקום פרמטרי' }
 
 - id: MC-c9-slope-dydt
   title: מבלבלים בין השיפוע dy/dx לבין קצב השינוי dy/dt
@@ -50,7 +50,7 @@
   truth: >-
     $y'(t)$ הוא קצב השינוי של $y$ בזמן. השיפוע בגרף הוא $\frac{dy}{dx}=\frac{y'(t)}{x'(t)}$; הוא אינו תלוי בקצב שבו
     עוברים על העקום.
-  remedy: { lesson: '9.2', label: 'שיפוע של עקום פרמטרי' }
+  remedy: { lesson: '9.2', anchor: parametric-slope, label: 'שיפוע של עקום פרמטרי' }
 
 - id: MC-c9-tangent-uses-t-not-dt
   title: כופלים את המהירות בזמן במקום במרווח הזמן
@@ -59,7 +59,7 @@
   truth: >-
     הקירוב הלינארי הוא $\vec r(t_0+\Delta t)\approx\vec r(t_0)+\Delta t\,\vec v(t_0)$: המהירות כפול **הזמן שעבר מאז
     $t_0$**.
-  remedy: { lesson: '9.2', label: 'הישר המשיק כקירוב לינארי' }
+  remedy: { lesson: '9.2', anchor: linear-approx, label: 'הישר המשיק כקירוב לינארי' }
 
 - id: MC-c9-zero-velocity-tangent
   title: חושבים שוקטור המהירות תמיד קובע את כיוון המשיק
@@ -68,7 +68,7 @@
   truth: >-
     רק כש-$\vec r\,'(t_0)\ne\vec 0$. כשהמהירות מתאפסת לעקום יכול להיות חוד, כמו $(t^2,t^3)$ ב-$t=0$, אף שהרכיבים
     גזירים.
-  remedy: { lesson: '9.2', label: 'כשהמהירות מתאפסת' }
+  remedy: { lesson: '9.2', anchor: zero-velocity, label: 'כשהמהירות מתאפסת' }
 
 - id: MC-c9-accel-vs-velocity
   title: מבלבלים בין תאוצה לבין מהירות
@@ -77,7 +77,7 @@
   truth: >-
     $\vec a=\vec v\,'=\vec r\,''$, הנגזרת השנייה. היא אינה משיקה בהכרח: בתנועה מעגלית אחידה היא מאונכת למהירות
     ומצביעה אל המרכז.
-  remedy: { lesson: '9.2', label: 'וקטור התאוצה' }
+  remedy: { lesson: '9.2', anchor: acceleration, label: 'וקטור התאוצה' }
 
 - id: MC-c9-constant-speed-zero-accel
   title: חושבים שמהירות בגודל קבוע פירושה תאוצה אפס
@@ -86,7 +86,7 @@
   truth: >-
     תאוצה היא נגזרת של **הווקטור** $\vec v$, וגם שינוי כיוון הוא שינוי. בתנועה מעגלית אחידה $|\vec a|=R\omega^2\ne0$.
     $|\vec v|$ קבוע גורר רק $\vec v\cdot\vec a=0$.
-  remedy: { lesson: '9.2', label: 'תאוצה בתנועה מעגלית' }
+  remedy: { lesson: '9.2', anchor: circular-accel, label: 'תאוצה בתנועה מעגלית' }
 
 - id: MC-c9-accel-outward
   title: חושבים שבתנועה מעגלית התאוצה מצביעה החוצה
@@ -95,7 +95,7 @@
   truth: >-
     $\vec r=R(\cos\omega t,\sin\omega t)$ נותן $\vec a=-\omega^2\vec r$: אל המרכז. התחושה של "דחיפה החוצה" שייכת
     למערכת המסתובבת, לא לתאוצה של הגוף.
-  remedy: { lesson: '9.2', label: 'תאוצה בתנועה מעגלית' }
+  remedy: { lesson: '9.2', anchor: circular-accel, label: 'תאוצה בתנועה מעגלית' }
 
 - id: MC-c9-componentwise-rules
   title: שוכחים את כללי הגזירה כשגוזרים פונקציה וקטורית
@@ -104,4 +104,25 @@
   truth: >-
     $\vec r\,'(t)=\left(x'(t),y'(t),z'(t)\right)$: כל רכיב נגזר כמו פונקציה רגילה של משתנה אחד, עם כל הכללים (שרשרת,
     מכפלה, מנה). התוצאה וקטור, לא מספר.
-  remedy: { lesson: '9.2', label: 'גזירה לפי רכיבים' }
+  remedy: { lesson: '9.2', anchor: componentwise, label: 'גזירה לפי רכיבים' }
+
+- id: MC-c9-speed-rate-is-accel
+  title: חושבים שקצב השינוי של גודל המהירות הוא גודל התאוצה
+  belief: >-
+    גודל המהירות משתנה בקצב $|\vec a|$: ככל שהתאוצה גדולה, הגוף מאיץ יותר. או: הקצב הוא המכפלה הסקלרית
+    $\vec v\cdot\vec a$ עצמה.
+  truth: >-
+    $\frac{d|\vec v|}{dt}=\frac{\vec v\cdot\vec a}{|\vec v|}$, עם החלוקה ב-$|\vec v|$: רק החלק של התאוצה שבכיוון המהירות משנה את גודלה. תאוצה ניצבת
+    למהירות (כמו בתנועה מעגלית אחידה) לא משנה אותו בכלל, ותאוצה בזווית קהה למהירות מאטה את הגוף.
+  remedy: { lesson: '9.2', anchor: speed-change, label: 'מתי גודל המהירות משתנה' }
+
+# Added with the chapter math review (2026-11-27): Q-9-review-05's common wrong value.
+- id: MC-c9-ignore-accel
+  title: שוכחים שהתאוצה משנה את רכיב המהירות
+  belief: >-
+    רכיב של המהירות ההתחלתית נשאר קבוע גם כשיש תאוצה באותו כיוון: כדור שנבעט במהירות אנכית 4 עולה $4t$ מטרים
+    בזמן $t$.
+  truth: >-
+    $\vec v(t)=\vec v(0)+\int_0^t\vec a$: עם $\vec a=(0,-10)$, $v_y=4-10t$, ולכן $y=4t-5t^2$. רק רכיב שהתאוצה בכיוונו
+    אפס, כמו $v_x$ כאן, נשאר קבוע.
+  remedy: { lesson: '9.2', anchor: integrate-back, label: 'חזרה מהמהירות למקום' }

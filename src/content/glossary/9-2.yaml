@@ -13,8 +13,7 @@
   en: speed
   symbol: '|\vec v(t)|'
   definition: >-
-    האורך של וקטור המהירות, $|\vec v|=\sqrt{x'^2+y'^2+z'^2}$: כמה מהר הנקודה נעה, בלי הכיוון. זה הקצב שבו גדל
-    אורך הדרך, $\frac{ds}{dt}=|\vec v|$.
+    האורך של וקטור המהירות, $|\vec v|=\sqrt{x'^2+y'^2+z'^2}$: כמה מהר הנקודה נעה, בלי הכיוון.
   reject: []
   lesson: '9.2'
 - id: acceleration-vector
@@ -24,5 +23,41 @@
   definition: >-
     הנגזרת של וקטור המהירות, $\vec a=(x'',y'',z'')$. לפי החוק השני של ניוטון $\vec a=\frac{\vec F}{m}$. הוא אינו
     אפס גם כשרק כיוון המהירות משתנה, כמו בתנועה מעגלית.
+  reject: []
+  lesson: '9.2'
+- id: tangent-line-curve
+  term: הישר המשיק לעקום
+  en: tangent line to a parametric curve
+  symbol: '\vec L(s)=\vec r(t_0)+s\,\vec r\,''(t_0)'
+  definition: >-
+    הישר דרך הנקודה $\vec r(t_0)$ שעל העקום בכיוון וקטור המהירות $\vec r\,'(t_0)$, כשהוא שונה מאפס. לגרף
+    $(t,f(t))$ זה הישר המשיק של שיעור 5.2. ליד $s=0$ הוא מקרב את העקום: $\vec r(t_0+s)\approx\vec L(s)$.
+  reject: []
+  lesson: '9.2'
+- id: cusp
+  term: חוד
+  en: cusp
+  definition: >-
+    נקודה חדה של עקום: שני הקטעים שנפגשים בה משיקים שם לאותו ישר ונמצאים באותו צד של הנקודה, והנקודה הנעה הופכת
+    בה את כיוון התנועה. למשל $(t^2,t^3)$ ב-$t=0$, או הציקלואידה כשהיא נוגעת בקרקע. בחוד של עקום עם רכיבים גזירים
+    המהירות היא וקטור האפס.
+  reject: []
+  lesson: '9.2'
+- id: cycloid
+  term: ציקלואידה
+  en: cycloid
+  symbol: '\vec r(t)=(t-\sin t,\ 1-\cos t)'
+  definition: >-
+    המסלול של נקודה על השפה של גלגל ברדיוס 1 שמתגלגל על ציר $x$ בלי להחליק. ברגעים $t=2\pi k$ הנקודה נוגעת
+    בקרקע, המהירות שלה אפס, ולעקום יש שם חוד.
+  reject: []
+  lesson: '9.2'
+- id: centripetal-acceleration
+  term: תאוצה צנטריפטלית
+  en: centripetal acceleration
+  symbol: '\vec a=-\omega^2\vec r,\ |\vec a|=\frac{|\vec v|^2}{R}'
+  definition: >-
+    התאוצה של גוף בתנועה מעגלית אחידה, ברדיוס $R$ ובמהירות זוויתית $\omega$: היא מצביעה אל המרכז וגודלה
+    $R\omega^2=\frac{|\vec v|^2}{R}$. היא קיימת אף שגודל המהירות קבוע, כי כיוון המהירות משתנה.
   reject: []
   lesson: '9.2'

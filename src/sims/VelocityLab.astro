@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 9.2 / 9.4 figure: <Spread figure={VelocityLab} figureProps={{ mode, f, … }}>.
+ * mode: secant, motion, frame. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the top
+ * of VelocityLab.tsx; the preset ids are those of the registry VC in src/math/velocity.ts.
+ */
+import VelocityLab, { type VelocityLabProps } from './VelocityLab';
+type Props = VelocityLabProps;
+---
+
+<VelocityLab client:visible {...Astro.props} />

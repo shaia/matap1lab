@@ -64,7 +64,7 @@ questions:
       - label: ד
         points: 10
         type: open
-        objectives: [OBJ-9.3-1, OBJ-8.2-1]
+        objectives: [OBJ-9.3-1, OBJ-8.2-1, OBJ-8.2-2]
         prompt: >-
           חשבו את אורך המסלול של הכדור מהבעיטה עד הנחיתה. אפשר להשתמש בנוסחה מהטבלה
           $\int\sqrt{a^2+u^2}\,du=\frac u2\sqrt{a^2+u^2}+\frac{a^2}{2}\ln\left(u+\sqrt{a^2+u^2}\right)+C$.
@@ -89,7 +89,7 @@ questions:
               לפי הטבלה עם $a=2$: $\int_0^2\sqrt{4+u^2}\,du=\left[\tfrac u2\sqrt{4+u^2}+2\ln\left(u+\sqrt{4+u^2}\right)\right]_0^2=\sqrt8+2\ln\left(2+\sqrt8\right)-2\ln2=2\sqrt2+2\ln\left(1+\sqrt2\right)$.
           - kind: check
             text: >-
-              $L=40\sqrt2+40\ln(1+\sqrt2)\approx56.57+35.26=91.82$. זה יותר מהמרחק האופקי 80 ומהמיתר, וגם פחות מ-$80+2\cdot20=120$
+              $L=40\sqrt2+40\ln(1+\sqrt2)\approx56.57+35.26=91.82$. זה יותר מהמיתר, 80 מטר, וגם פחות מ-$80+2\cdot20=120$
               (הליכה אופקית ועלייה וירידה של 20 מטר): סביר.
           - kind: result
             text: '$L=40\sqrt2+40\ln\left(1+\sqrt2\right)\approx91.8$ מטרים.'
@@ -137,8 +137,10 @@ questions:
             correct: true
             feedback: 'נכון. $x^2+y^2=e^{2t}(\cos^2t+\sin^2t)=e^{2t}=z^2$.'
           - text: 'על הגליל $x^2+y^2=1$'
-            feedback: 'המרחק מציר $z$ הוא $e^t$, לא קבוע: הספירלה מתרחבת כשהיא עולה. זה לא סליל רגיל.'
-            misconception: MC-c9-semi-axes-squared
+            feedback: >-
+              הנקודה $\vec r(0)=(1,0,1)$ אכן על הגליל הזה, אבל נקודות אחרות לא: המרחק מציר $z$ הוא $e^t$, לא קבוע, והספירלה
+              מתרחבת כשהיא עולה. זה לא סליל רגיל.
+            misconception: MC-c9-surface-check-one-point
           - text: 'על הספירה $x^2+y^2+z^2=2$'
             feedback: 'הנקודה $\vec r(0)=(1,0,1)$ אכן על הספירה הזו, אבל באופן כללי $x^2+y^2+z^2=2e^{2t}$, לא קבוע.'
             misconception: MC-c9-surface-check-one-point
@@ -155,11 +157,16 @@ questions:
           $\vec r(t)$, וכתבו פרמטריזציה לפי אורך.
         solution:
           - kind: given
-            text: '$|\vec v(t)|=\sqrt3\,e^t$ (מסעיף א).'
+            text: '$\vec r(t)=\left(e^t\cos t,\ e^t\sin t,\ e^t\right)$, $-\infty<t\le0$.'
           - kind: goal
             text: '(1) $\int_{-\infty}^{0}|\vec v|\,dt$. (2) $s(t)=\int_{-\infty}^{t}|\vec v|$, ו-$\vec\rho(s)=\vec r(t(s))$.'
           - kind: idea
             text: 'האורך הוא אינטגרל לא אמיתי של גודל המהירות; האקספוננט הדועך כש-$t\to-\infty$ נותן ערך סופי.'
+          - kind: computation
+            text: >-
+              בכלל המכפלה $\vec v=e^t\left(\cos t-\sin t,\ \sin t+\cos t,\ 1\right)$, ולכן
+              $|\vec v|^2=e^{2t}\left[(\cos t-\sin t)^2+(\sin t+\cos t)^2+1\right]=e^{2t}(2+1)=3e^{2t}$, כלומר
+              $|\vec v|=\sqrt3\,e^t$.
           - kind: computation
             text: >-
               $\int_R^0\sqrt3\,e^t\,dt=\sqrt3\left(1-e^R\right)\to\sqrt3$ כש-$R\to-\infty$. לכן האורך $\sqrt3$: הנקודה מקיפה
@@ -175,10 +182,12 @@ questions:
           - kind: result
             text: '(1) $L=\sqrt3$. (2) $s=\sqrt3\,e^t$ ו-$\vec\rho(s)=\frac{s}{\sqrt3}\left(\cos\ln\frac{s}{\sqrt3},\sin\ln\frac{s}{\sqrt3},1\right)$.'
         rubric:
-          - text: 'אינטגרל לא אמיתי מוגדר נכון כגבול, והתוצאה $\sqrt3$'
-            weight: 4
-          - text: '$s(t)=\sqrt3e^t$'
+          - text: 'גודל המהירות לכל $t$, $|\vec v(t)|=\sqrt3\,e^t$'
             weight: 2
+          - text: 'אינטגרל לא אמיתי מוגדר נכון כגבול, והתוצאה $\sqrt3$'
+            weight: 3
+          - text: '$s(t)=\sqrt3e^t$'
+            weight: 1
           - text: 'היפוך $t=\ln\frac{s}{\sqrt3}$ והצבה ב-$\vec r$'
             weight: 3
           - text: 'בדיקה ($s(0)=\sqrt3$, או $|\vec\rho\,''|=1$)'
@@ -285,7 +294,7 @@ questions:
       - label: ד
         points: 5
         type: numeric
-        objectives: [OBJ-8.2-1, OBJ-8.5-1]
+        objectives: [OBJ-9.2-3, OBJ-8.2-1]
         prompt: >-
           חשבו את השטח שמתחת לקשת אחת (בין הקשת לציר $x$) בעזרת $\int y\,dx=\int_0^{2\pi}y(t)\,x'(t)\,dt$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
         answer: 9.4247779607694

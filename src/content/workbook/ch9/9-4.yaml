@@ -1,0 +1,553 @@
+# Workbook of lesson 9.4 — tangential and normal acceleration (enrichment, from the notes; not the 80114 syllabus).
+# Objectives (src/course.ts):
+#   OBJ-9.4-1  compute the unit tangent and the unit normal of a curve
+#   OBJ-9.4-2  split the acceleration into a tangential and a normal component and interpret each
+#   OBJ-9.4-3  compute the curvature and the radius of the osculating circle
+# Order of knowledge: chapters 1–8 and 9.1–9.4 (cross product 1.4, chain rule 5.3, cosh/sinh 4.5, arc length 9.3).
+# Every number recomputed with sympy in screens/tools/lesson-9-4.py.
+lesson: '9.4'
+practice:
+  - id: W-9.4-01
+    level: basic
+    objectives: [OBJ-9.4-1]
+    prompt: >-
+      $\vec r(t)=\left(e^t\cos t,\ e^t\sin t\right)$, ספירלה שמתרחקת מהראשית. חשבו את $\vec T(t)$, ואת $\vec T(0)$.
+    answer: >-
+      $\vec T(t)=\frac{1}{\sqrt2}\left(\cos t-\sin t,\ \sin t+\cos t\right)$, $\vec T(0)=\frac{1}{\sqrt2}(1,1)$.
+    solution:
+      - kind: idea
+        text: >-
+          גוזרים בכלל המכפלה, מוציאים את הגורם $e^t$ מחוץ לסוגריים, ומחלקים את $\vec v$ באורכו.
+      - kind: computation
+        text: >-
+          $\vec v=\left(e^t\cos t-e^t\sin t,\ e^t\sin t+e^t\cos t\right)=e^t\left(\cos t-\sin t,\ \sin t+\cos t\right)$.
+      - kind: computation
+        text: >-
+          $(\cos t-\sin t)^2+(\sin t+\cos t)^2=2\cos^2t+2\sin^2t=2$ (האיברים המעורבים מתבטלים), ולכן
+          $|\vec v|=\sqrt2\,e^t$.
+      - kind: computation
+        text: >-
+          $\vec T=\frac{\vec v}{|\vec v|}=\frac{1}{\sqrt2}\left(\cos t-\sin t,\ \sin t+\cos t\right)$, ו-$\vec T(0)=\frac{1}{\sqrt2}(1,1)$.
+      - kind: check
+        text: >-
+          $|\vec T(0)|^2=\frac{1+1}{2}=1$ ✓. ב-$t=0$: $\vec v(0)=(1,1)$, ובאמת $\frac{(1,1)}{|(1,1)|}=\frac{1}{\sqrt2}(1,1)$ ✓.
+      - kind: result
+        text: >-
+          $\vec T(t)=\frac{1}{\sqrt2}\left(\cos t-\sin t,\ \sin t+\cos t\right)$, $\vec T(0)=\frac{1}{\sqrt2}(1,1)$.
+
+  - id: W-9.4-02
+    level: basic
+    objectives: [OBJ-9.4-3]
+    prompt: >-
+      $\vec r(t)=\left(5\cos3t,\ 5\sin3t\right)$.
+
+
+      (א) חשבו את העקמומיות בנוסחה $\kappa=\frac{|\vec v\times\vec a|}{|\vec v|^3}$ (כתבו את העקום כ-$(x,y,0)$).
+
+
+      (ב) האם התשובה הייתה משתנה עבור $(5\cos t,\ 5\sin t)$? למה?
+    answer: >-
+      (א) $\kappa=\frac15$. (ב) לא: זה אותו מעגל ברדיוס 5, ועקמומיות תלויה רק בצורה.
+    solution:
+      - kind: idea
+        text: >-
+          גוזרים פעמיים, מחשבים את המכפלה הווקטורית ואת האורך. במעגל הרכיב השלישי של $\vec v\times\vec a$ מתקצר בעזרת
+          $\sin^2+\cos^2=1$.
+      - kind: computation
+        text: >-
+          $\vec v=(-15\sin3t,\ 15\cos3t,\ 0)$ ו-$\vec a=(-45\cos3t,\ -45\sin3t,\ 0)$, ולכן $|\vec v|=15$.
+      - kind: computation
+        text: >-
+          $\vec v\times\vec a=\left(0,\ 0,\ (-15\sin3t)(-45\sin3t)-(15\cos3t)(-45\cos3t)\right)=(0,0,675)$.
+      - kind: computation
+        text: >-
+          $\kappa=\frac{675}{15^3}=\frac{675}{3375}=\frac15$.
+      - kind: step
+        text: >-
+          (ב) $(5\cos t,5\sin t)$ עוברת על אותו מעגל, רק לאט פי 3. עקמומיות היא קצב הסיבוב של $\vec T$ **לכל יחידת
+          אורך**, ולכן אינה תלויה בקצב: גם שם $\kappa=\frac15$.
+      - kind: check
+        text: >-
+          במעגל ברדיוס $R$, $\kappa=\frac1R=\frac15$ ✓. ו-$a_N=\kappa|\vec v|^2=\frac{225}{5}=45=|\vec a|$, כמו שצריך בגודל
+          מהירות קבוע ($a_T=0$) ✓.
+      - kind: result
+        text: >-
+          $\kappa=\frac15$ בשתי הפרמטריזציות.
+
+  - id: W-9.4-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-9.4-2]
+    prompt: >-
+      בכל אחד מהמצבים קבעו את הסימן של $a_T$ (חיובי, שלילי או אפס), והאם $a_N=0$ או $a_N>0$.
+
+
+      (א) מכונית בולמת על כביש ישר.
+
+
+      (ב) מכונית בפנייה, ומד המהירות עומד על אותו מספר.
+
+
+      (ג) מכונית עדיין בפנייה, לקראת היציאה ממנה, ולוחצת על הגז.
+
+
+      (ד) מכונית נוסעת לאחור על כביש ישר, ומהירותה גדלה.
+    answer: >-
+      (א) $a_T<0$, $a_N=0$. (ב) $a_T=0$, $a_N>0$. (ג) $a_T>0$, $a_N>0$. (ד) $a_T>0$, $a_N=0$.
+    solution:
+      - kind: idea
+        text: >-
+          $a_T=\frac{d|\vec v|}{dt}$ אומר אם **גודל** המהירות גדל או קטן, בלי קשר לכיוון התנועה. $a_N=\kappa|\vec v|^2$
+          אפס על ישר וחיובי בפנייה.
+      - kind: step
+        text: >-
+          (א) הגודל קטן: $a_T<0$. הכביש ישר: $\kappa=0$, ולכן $a_N=0$.
+      - kind: step
+        text: >-
+          (ב) הגודל קבוע: $a_T=0$. פנייה: $\kappa>0$, ולכן $a_N>0$, וכל התאוצה ניצבת למהירות.
+      - kind: step
+        text: >-
+          (ג) עדיין בפנייה ($a_N>0$), והגודל גדל ($a_T>0$).
+      - kind: step
+        text: >-
+          (ד) "לאחור" הוא כיוון, לא גודל. גודל המהירות גדל, ולכן $a_T>0$; הכביש ישר, ולכן $a_N=0$. סימן שלילי של $a_T$
+          פירושו האטה, לא נסיעה אחורה.
+      - kind: check
+        text: >-
+          $a_N\ge0$ בכל ארבעת המצבים, כמו שצריך: $a_N=|\vec v|\,|\vec T\,'|$ הוא אורך כפול אורך ✓.
+      - kind: result
+        text: >-
+          (א) $a_T<0$, $a_N=0$; (ב) $a_T=0$, $a_N>0$; (ג) $a_T>0$, $a_N>0$; (ד) $a_T>0$, $a_N=0$.
+
+  - id: W-9.4-04
+    level: mid
+    objectives: [OBJ-9.4-2, OBJ-9.4-3]
+    prompt: >-
+      $\vec r(t)=\left(t^2,\ t^3\right)$. ב-$t=1$:
+
+
+      (א) חשבו את $a_T$ ואת $a_N$.
+
+
+      (ב) מצאו את $\vec N$ בלי לגזור את $\vec T$.
+
+
+      (ג) חשבו את העקמומיות ואת רדיוס העקמומיות.
+    answer: >-
+      (א) $a_T=\frac{22}{\sqrt{13}}\approx6.10$, $a_N=\frac{6}{\sqrt{13}}\approx1.66$. (ב) $\vec N=\frac{1}{\sqrt{13}}(-3,2)$.
+      (ג) $\kappa=\frac{6}{13\sqrt{13}}\approx0.128$, $\rho=\frac{13\sqrt{13}}{6}\approx7.81$.
+    solution:
+      - kind: idea
+        text: >-
+          המתכון: $\vec v$, $\vec a$, $a_T=\frac{\vec v\cdot\vec a}{|\vec v|}$, $a_N=\sqrt{|\vec a|^2-a_T^2}$. את $\vec N$ נותן
+          $\vec a-a_T\vec T$ חלקי $a_N$, ואת $\kappa$ נותן $\frac{a_N}{|\vec v|^2}$.
+      - kind: computation
+        text: >-
+          $\vec v=\left(2t,3t^2\right)=(2,3)$ ו-$\vec a=(2,6t)=(2,6)$. $|\vec v|=\sqrt{13}$, $|\vec a|^2=40$.
+      - kind: computation
+        text: >-
+          (א) $a_T=\frac{4+18}{\sqrt{13}}=\frac{22}{\sqrt{13}}$, ו-$a_N^2=40-\frac{484}{13}=\frac{520-484}{13}=\frac{36}{13}$,
+          כלומר $a_N=\frac{6}{\sqrt{13}}$.
+      - kind: computation
+        text: >-
+          (ב) $a_T\vec T=\frac{22}{\sqrt{13}}\cdot\frac{(2,3)}{\sqrt{13}}=\frac{(44,66)}{13}$, ולכן
+          $\vec a-a_T\vec T=\frac{(26-44,\ 78-66)}{13}=\frac{(-18,12)}{13}$. מחלקים ב-$a_N=\frac{6}{\sqrt{13}}$:
+          $\vec N=\frac{(-18,12)}{13}\cdot\frac{\sqrt{13}}{6}=\frac{(-3,2)}{\sqrt{13}}$.
+      - kind: computation
+        text: >-
+          (ג) $\kappa=\frac{a_N}{|\vec v|^2}=\frac{6/\sqrt{13}}{13}=\frac{6}{13\sqrt{13}}$, ו-$\rho=\frac1\kappa=\frac{13\sqrt{13}}{6}$.
+      - kind: check
+        text: >-
+          במכפלה וקטורית: $(2,3,0)\times(2,6,0)=(0,0,12-6)=(0,0,6)$, ו-$\frac{6}{\sqrt{13}}=a_N$ ✓. $\vec N\cdot\vec v=-6+6=0$ ✓,
+          ו-$\vec N\cdot\vec a=\frac{-6+12}{\sqrt{13}}>0$: $\vec N$ בצד של התאוצה ✓.
+      - kind: result
+        text: >-
+          $a_T=\frac{22}{\sqrt{13}}$, $a_N=\frac{6}{\sqrt{13}}$, $\vec N=\frac{1}{\sqrt{13}}(-3,2)$, $\kappa=\frac{6}{13\sqrt{13}}$,
+          $\rho=\frac{13\sqrt{13}}{6}$.
+
+  - id: W-9.4-05
+    level: mid
+    objectives: [OBJ-9.4-1, OBJ-9.4-3]
+    prompt: >-
+      $\vec r(t)=(\cosh t,\ \sinh t)$, ענף של ההיפרבולה $x^2-y^2=1$.
+
+
+      (א) הראו ש-$|\vec v|=\sqrt{\cosh2t}$. (רמז: כתבו בעזרת $e^t$ ו-$e^{-t}$.)
+
+
+      (ב) ב-$t=0$, מצאו את $\vec T$ ואת $\vec N$, ואמרו לאיזה צד $\vec N$ פונה.
+
+
+      (ג) חשבו את $\kappa(t)$. איפה העקמומיות הכי גדולה, ומה מרכז המעגל הצמוד שם?
+    answer: >-
+      (ב) $\vec T=(0,1)$, $\vec N=(1,0)$, אל תוך הענף. (ג) $\kappa=\frac{1}{(\cosh2t)^{3/2}}$, מקסימלית ב-$t=0$, בקודקוד $(1,0)$:
+      $\kappa=1$, והמרכז $(2,0)$.
+    solution:
+      - kind: idea
+        text: >-
+          $\vec v=(\sinh t,\cosh t)$ ו-$\vec a=(\cosh t,\sinh t)=\vec r$ (שיעור 4.5). את $|\vec v|$ מפשטים באקספוננטים, ואת
+          $\kappa$ נותנת המכפלה הווקטורית, שבה מופיע $\cosh^2t-\sinh^2t=1$.
+      - kind: computation
+        text: >-
+          (א) $\sinh^2t+\cosh^2t=\frac{e^{2t}-2+e^{-2t}}{4}+\frac{e^{2t}+2+e^{-2t}}{4}=\frac{e^{2t}+e^{-2t}}{2}=\cosh2t$.
+      - kind: computation
+        text: >-
+          (ב) ב-$t=0$: $\vec v=(0,1)$, $|\vec v|=1$, ולכן $\vec T=(0,1)$, למעלה. $\vec a=(1,0)$ ניצב ל-$\vec v$, ולכן $a_T=0$ ו-$\vec a=a_N\vec N$:
+          $\vec N=\frac{\vec a}{|\vec a|}=(1,0)$, ימינה, אל תוך הענף שנפתח ימינה.
+      - kind: computation
+        text: >-
+          (ג) $\vec v\times\vec a=\left(0,0,\sinh^2t-\cosh^2t\right)=(0,0,-1)$, שאורכו 1. לכן
+          $\kappa=\frac{1}{|\vec v|^3}=\frac{1}{(\cosh2t)^{3/2}}$.
+      - kind: step
+        text: >-
+          $\cosh2t\ge1$, ושווה 1 רק ב-$t=0$. לכן $\kappa\le1$, והמקסימום בקודקוד $(1,0)$: $\kappa=1$, $\rho=1$, והמרכז
+          $(1,0)+1\cdot(1,0)=(2,0)$.
+      - kind: check
+        text: >-
+          $|\vec v(0)|=\sqrt{\cosh0}=1$ ✓, ובישירות $|(0,1)|=1$ ✓. רחוק מהקודקוד $\kappa\to0$: ההיפרבולה מתקרבת לאסימפטוטות,
+          שהן ישרים ✓.
+      - kind: result
+        text: >-
+          $\vec T(0)=(0,1)$, $\vec N(0)=(1,0)$; $\kappa(t)=(\cosh2t)^{-3/2}$, מקסימום 1 בקודקוד, מעגל צמוד ברדיוס 1 סביב $(2,0)$.
+
+  - id: W-9.4-06
+    level: exam
+    qualitative: true
+    objectives: [OBJ-9.4-1, OBJ-9.4-2]
+    prompt: >-
+      $\vec r(t)$ עקום עם $\vec v\ne\vec 0$. מגדירים שתי פרמטריזציות חדשות: $\vec q_1(u)=\vec r(2u)$ ו-$\vec q_2(u)=\vec r(-u)$.
+      בנקודה משותפת של העקום (למשל $\vec q_1(u)=\vec r(t)$ כש-$t=2u$), מה קורה ל-$\vec T$, ל-$\vec N$, ל-$\kappa$,
+      ל-$a_T$ ול-$a_N$ בכל אחת מהן, לעומת $\vec r$? בדקו על $\vec r(t)=\left(t,t^2\right)$ בנקודה
+      $\left(\frac12,\frac14\right)$.
+    answer: >-
+      $\vec q_1$: $\vec T$, $\vec N$, $\kappa$ לא משתנים, $a_T$ ו-$a_N$ גדלים פי 4. $\vec q_2$: $\vec T$ מתהפך, $\vec N$ ו-$\kappa$
+      לא משתנים, $a_T$ מחליף סימן, $a_N$ לא משתנה. בפרבולה: $a_T=a_N=\sqrt2$ ב-$\vec r$, $4\sqrt2$ ב-$\vec q_1$, ו-$a_T=-\sqrt2$,
+      $a_N=\sqrt2$ ב-$\vec q_2$.
+    solution:
+      - kind: idea
+        text: >-
+          כלל השרשרת: $\vec q_1\,'(u)=2\vec r\,'(2u)$ ו-$\vec q_1\,''(u)=4\vec r\,''(2u)$; $\vec q_2\,'(u)=-\vec r\,'(-u)$
+          ו-$\vec q_2\,''(u)=\vec r\,''(-u)$. ומה שתלוי רק בצורה ($\kappa$, והישר שעליו $\vec T$) לא משתנה.
+      - kind: step
+        text: >-
+          $\vec q_1$: המהירות כפולה ובאותו כיוון, ולכן $\vec T$ זהה; גם $\vec N$, שנקבע לפי הצד שאליו העקום מתעקל,
+          ו-$\kappa$, שתלוי רק בצורה. $a_N=\kappa|\vec v|^2$ גדל פי $2^2=4$. ו-$|\vec q_1\,'(u)|=2|\vec v(2u)|$, שהנגזרת
+          שלו לפי $u$ היא, בכלל השרשרת, $2\cdot2\,\frac{d|\vec v|}{dt}$: גם $a_T$ גדל פי 4.
+      - kind: step
+        text: >-
+          $\vec q_2$: אותו גודל מהירות, בכיוון ההפוך: $\vec T$ מתהפך. $\vec N$ ו-$\kappa$ לא משתנים (הצד של הקשת לא
+          תלוי בכיוון התנועה), ו-$a_N=\kappa|\vec v|^2$ זהה. $a_T$ מחליף סימן: $\vec q_2$ עוברת על אותן נקודות בסדר
+          הפוך, ולכן בנקודה שבה $\vec r$ מאיצה, $\vec q_2$ מאטה, ולהפך.
+      - kind: computation
+        text: >-
+          בפרבולה, ב-$t=\frac12$: $\vec v=(1,1)$, $\vec a=(0,2)$, $a_T=\frac{2}{\sqrt2}=\sqrt2$, $a_N=\sqrt{4-2}=\sqrt2$.
+      - kind: computation
+        text: >-
+          $\vec q_1(u)=\left(2u,4u^2\right)$ מגיעה ל-$\left(\frac12,\frac14\right)$ כש-$2u=\frac12$, כלומר $u=\frac14$:
+          $\vec q_1\,'=(2,8u)=(2,2)$, $\vec q_1\,''=(0,8)$, $a_T=\frac{16}{2\sqrt2}=4\sqrt2$, $a_N=\sqrt{64-32}=4\sqrt2$.
+      - kind: computation
+        text: >-
+          $\vec q_2(u)=\left(-u,u^2\right)$ מגיעה לנקודה כש-$-u=\frac12$, כלומר $u=-\frac12$ (שלילי, כי $\vec q_2$ מציבה
+          ב-$\vec r$ את $-u$): $\vec q_2\,'=(-1,2u)=(-1,-1)$, $\vec q_2\,''=(0,2)$, ולכן $\vec T=-\frac{1}{\sqrt2}(1,1)$,
+          $a_T=\frac{-2}{\sqrt2}=-\sqrt2$, $a_N=\sqrt{4-2}=\sqrt2$.
+      - kind: check
+        text: >-
+          $\vec N$ בשלושתן: $\frac{\vec a-a_T\vec T}{a_N}=\frac{1}{\sqrt2}(-1,1)$ ✓ (ב-$\vec q_2$: $a_T\vec T=(1,1)$, ו-$(0,2)-(1,1)=(-1,1)$,
+          חלקי $\sqrt2$). ו-$\kappa=\frac{a_N}{|\vec v|^2}$: $\frac{\sqrt2}{2}$, $\frac{4\sqrt2}{8}$, $\frac{\sqrt2}{2}$, שווה בשלושתן ✓.
+      - kind: result
+        text: >-
+          מהירות כפולה: $a_T$ ו-$a_N$ פי 4, השאר זהה. כיוון הפוך: $\vec T$ ו-$a_T$ מתהפכים, $\vec N$, $\kappa$, $a_N$ זהים.
+
+  - id: W-9.4-07
+    level: mid
+    objectives: [OBJ-9.4-3]
+    prompt: >-
+      (א) מצאו את העקמומיות, את רדיוס העקמומיות ואת מרכז המעגל הצמוד של הגרף $y=x^3$ בנקודה $(1,1)$.
+
+
+      (ב) בלי חישוב נוסף: מה העקמומיות ומה מרכז המעגל הצמוד בנקודה $(-1,-1)$? נמקו.
+    answer: >-
+      (א) $\kappa=\frac{6}{10\sqrt{10}}\approx0.190$, $\rho=\frac{5\sqrt{10}}{3}\approx5.27$, מרכז $\left(-4,\frac83\right)$.
+      (ב) אותה עקמומיות, ומרכז $\left(4,-\frac83\right)$, בגלל הסימטריה של $x^3$ סביב הראשית.
+    solution:
+      - kind: idea
+        text: >-
+          נוסחת העקמומיות לגרף, וכיוון $\vec N$: ניצב למשיק, לצד שאליו הגרף מתעקל (כאן $f''>0$, למעלה). המרכז: הנקודה
+          ועוד $\rho\vec N$.
+      - kind: computation
+        text: >-
+          $f'=3x^2$, $f''=6x$. ב-$x=1$: $f'=3$, $f''=6$, ולכן $\kappa=\frac{6}{(1+9)^{3/2}}=\frac{6}{10\sqrt{10}}$ ו-$\rho=\frac{10\sqrt{10}}{6}=\frac{5\sqrt{10}}{3}$.
+      - kind: step
+        text: >-
+          $\vec T=\frac{(1,3)}{\sqrt{10}}$. שני הניצבים באורך 1 הם $\pm\frac{(-3,1)}{\sqrt{10}}$. $f''>0$: הגרף מתעקל למעלה
+          (קמור), ולכן $\vec N=\frac{(-3,1)}{\sqrt{10}}$, שהרכיב השני שלו חיובי.
+      - kind: computation
+        text: >-
+          המרכז: $(1,1)+\frac{5\sqrt{10}}{3}\cdot\frac{(-3,1)}{\sqrt{10}}=(1,1)+\frac53(-3,1)=\left(-4,\ \frac83\right)$.
+      - kind: step
+        text: >-
+          (ב) $x^3$ אי-זוגית: הגרף סימטרי לסיבוב בחצי סיבוב סביב הראשית, שמעביר את $(1,1)$ ל-$(-1,-1)$ ושומר על אורכים
+          וזוויות. לכן העקמומיות זהה, והמרכז עובר ל-$\left(4,-\frac83\right)$.
+      - kind: check
+        text: >-
+          המרחק מ-$(1,1)$ ל-$\left(-4,\frac83\right)$: $\sqrt{25+\frac{25}{9}}=\frac{5\sqrt{10}}{3}=\rho$ ✓. ובנוסחה ב-$x=-1$:
+          $|f''|=6$, $f'=3$, אותו $\kappa$ ✓.
+      - kind: result
+        text: >-
+          $\kappa=\frac{6}{10\sqrt{10}}$, $\rho=\frac{5\sqrt{10}}{3}$, מרכז $\left(-4,\frac83\right)$; ב-$(-1,-1)$ אותו $\kappa$ ומרכז $\left(4,-\frac83\right)$.
+
+  - id: W-9.4-08
+    level: mid
+    objectives: [OBJ-9.4-2, OBJ-9.4-3]
+    prompt: >-
+      מכונית יוצאת ממנוחה על מסלול מעגלי ברדיוס 100 מטר ונעה לפי
+      $\vec r(t)=100\left(\cos\frac{t^2}{100},\ \sin\frac{t^2}{100}\right)$ (מטרים, שניות).
+
+
+      (א) חשבו את גודל המהירות, את $a_T$ ואת $a_N$ כפונקציות של $t$.
+
+
+      (ב) מתי $a_T=a_N$? מה הזווית בין $\vec a$ ל-$\vec v$ ברגע זה?
+
+
+      (ג) הצמיגים יכולים לתת תאוצה בגודל 5 מטר לשנייה בריבוע לכל היותר. מתי המכונית מתחילה להחליק, ובאיזה גודל
+      מהירות?
+    answer: >-
+      (א) $|\vec v|=2t$, $a_T=2$, $a_N=\frac{t^2}{25}$. (ב) $t=5\sqrt2\approx7.07$ שניות, $45^\circ$. (ג) $t=5\sqrt[4]{21}\approx10.70$
+      שניות, $|\vec v|\approx21.4$ מטר לשנייה.
+    solution:
+      - kind: idea
+        text: >-
+          כותבים $\vec r=100(\cos\theta,\ \sin\theta)$ עם $\theta(t)=\frac{t^2}{100}$ וגוזרים בכלל השרשרת. אחר כך
+          $a_T=\frac{d|\vec v|}{dt}$, ו-$a_N=\kappa|\vec v|^2=\frac{|\vec v|^2}{100}$ (מעגל ברדיוס 100). ההחלקה מתחילה כש-$|\vec a|=\sqrt{a_T^2+a_N^2}$
+          מגיע ל-5.
+      - kind: computation
+        text: >-
+          (א) $\theta'=\frac{t}{50}$, ולכן $\vec v=100\,\theta'(-\sin\theta,\ \cos\theta)=2t\left(-\sin\frac{t^2}{100},\ \cos\frac{t^2}{100}\right)$.
+          הסוגריים הם וקטור יחידה, ולכן $|\vec v|=2t$ ($t\ge0$).
+      - kind: computation
+        text: >-
+          $a_T=\frac{d}{dt}(2t)=2$, ו-$a_N=\frac{(2t)^2}{100}=\frac{t^2}{25}$.
+      - kind: computation
+        text: >-
+          (ב) $\frac{t^2}{25}=2$ נותן $t^2=50$, $t=5\sqrt2\approx7.07$. אז $\vec a=2\vec T+2\vec N$, באמצע בין $\vec T$ ל-$\vec N$:
+          זווית $45^\circ$ עם $\vec v$.
+      - kind: computation
+        text: >-
+          (ג) $|\vec a|^2=4+\frac{t^4}{625}=25$ נותן $t^4=21\cdot625$, כלומר $t=5\sqrt[4]{21}\approx10.70$. גודל המהירות
+          אז $2t=10\sqrt[4]{21}\approx21.4$.
+      - kind: check
+        text: >-
+          ב-$t=5\sqrt[4]{21}$: $a_N=\frac{25\sqrt{21}}{25}=\sqrt{21}$, ו-$\sqrt{4+21}=5$ ✓. וגם $a_N=\frac{|\vec v|^2}{R}$:
+          $\frac{100\sqrt{21}}{100}=\sqrt{21}$ ✓. לפני ההחלקה $a_N\approx4.58$ כבר גדול בהרבה מ-$a_T=2$: בסוף, הפנייה היא
+          שדורשת את רוב האחיזה.
+      - kind: result
+        text: >-
+          $|\vec v|=2t$, $a_T=2$, $a_N=\frac{t^2}{25}$; $a_T=a_N$ ב-$t=5\sqrt2$ ($45^\circ$); החלקה ב-$t=5\sqrt[4]{21}\approx10.7$,
+          בגודל מהירות $\approx21.4$ מטר לשנייה.
+
+  - id: W-9.4-09
+    level: exam
+    objectives: [OBJ-9.4-1, OBJ-9.4-2, OBJ-9.4-3]
+    prompt: >-
+      $\vec r(t)=\left(e^t,\ e^{-t},\ \sqrt2\,t\right)$.
+
+
+      (א) הראו ש-$|\vec v|=e^t+e^{-t}$, וחשבו את $a_T$ ואת $a_N$ לכל $t$.
+
+
+      (ב) חשבו את $\kappa(t)$.
+
+
+      (ג) ב-$t=0$, מצאו את $\vec T$, את $\vec N$ ואת מרכז המעגל הצמוד.
+    answer: >-
+      (א) $a_T=e^t-e^{-t}$, $a_N=\sqrt2$. (ב) $\kappa=\frac{\sqrt2}{\left(e^t+e^{-t}\right)^2}$. (ג) $\vec T=\frac12\left(1,-1,\sqrt2\right)$,
+      $\vec N=\frac{1}{\sqrt2}(1,1,0)$, מרכז $(3,3,0)$.
+    solution:
+      - kind: idea
+        text: >-
+          הסכום מתחת לשורש הוא ריבוע שלם, כמו $1+2t^2$ בדוגמה 3 של השיעור. אז $a_T$ הוא נגזרת פשוטה, $a_N$ בא מפיתגורס,
+          ו-$\vec N$ מ-$\vec a-a_T\vec T$.
+      - kind: computation
+        text: >-
+          (א) $\vec v=\left(e^t,-e^{-t},\sqrt2\right)$, ו-$|\vec v|^2=e^{2t}+e^{-2t}+2=\left(e^t+e^{-t}\right)^2$. לכן $|\vec v|=e^t+e^{-t}$,
+          ו-$a_T=\frac{d|\vec v|}{dt}=e^t-e^{-t}$.
+      - kind: computation
+        text: >-
+          $\vec a=\left(e^t,e^{-t},0\right)$, $|\vec a|^2=e^{2t}+e^{-2t}$. לכן $a_N^2=e^{2t}+e^{-2t}-\left(e^{2t}-2+e^{-2t}\right)=2$, ו-$a_N=\sqrt2$.
+      - kind: computation
+        text: >-
+          (ב) $\kappa=\frac{a_N}{|\vec v|^2}=\frac{\sqrt2}{\left(e^t+e^{-t}\right)^2}$.
+      - kind: computation
+        text: >-
+          (ג) ב-$t=0$: $\vec v=\left(1,-1,\sqrt2\right)$, $|\vec v|=2$, $\vec T=\frac12\left(1,-1,\sqrt2\right)$; $\vec a=(1,1,0)$, $a_T=0$,
+          ולכן $\vec N=\frac{\vec a}{a_N}=\frac{1}{\sqrt2}(1,1,0)$.
+      - kind: computation
+        text: >-
+          $\kappa(0)=\frac{\sqrt2}{4}$, $\rho=2\sqrt2$, והמרכז $(1,1,0)+2\sqrt2\cdot\frac{1}{\sqrt2}(1,1,0)=(3,3,0)$.
+      - kind: check
+        text: >-
+          $a_T$ בדרך השנייה: $\frac{\vec v\cdot\vec a}{|\vec v|}=\frac{e^{2t}-e^{-2t}}{e^t+e^{-t}}=e^t-e^{-t}$ ✓. ב-$t=0$: $\vec T\cdot\vec N=\frac{1-1+0}{2\sqrt2}=0$ ✓,
+          ובמכפלה וקטורית $\left(1,-1,\sqrt2\right)\times(1,1,0)=\left(-\sqrt2,\sqrt2,2\right)$, שאורכה $\sqrt8$, ו-$\frac{\sqrt8}{8}=\frac{\sqrt2}{4}=\kappa(0)$ ✓.
+      - kind: result
+        text: >-
+          $a_T=e^t-e^{-t}$, $a_N=\sqrt2$, $\kappa=\frac{\sqrt2}{\left(e^t+e^{-t}\right)^2}$; ב-$t=0$: $\vec T=\frac12\left(1,-1,\sqrt2\right)$,
+          $\vec N=\frac{1}{\sqrt2}(1,1,0)$, מרכז $(3,3,0)$.
+
+  - id: W-9.4-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-9.4-2, OBJ-9.4-3]
+    prompt: >-
+      (א) הסיקו מהפירוק $\vec a=a_T\vec T+a_N\vec N$ ש-$|\vec v\times\vec a|=|\vec v|\,a_N$, ומכאן ש-$\kappa=\frac{|\vec v\times\vec a|}{|\vec v|^3}$.
+
+
+      (ב) נכון או לא נכון: אם $\vec v\cdot\vec a=0$ בכל $t$, גודל המהירות קבוע.
+
+
+      (ג) נכון או לא נכון: אם $|\vec a|$ קבוע, גם $a_N$ קבוע. (היעזרו בכדור $\vec r(t)=\left(6t,\ 8t-5t^2\right)$.)
+    answer: >-
+      (א) $\vec v\times\vec a=|\vec v|\,a_N\,\vec T\times\vec N$, ו-$|\vec T\times\vec N|=1$. (ב) נכון: $\frac{d}{dt}|\vec v|^2=2\vec v\cdot\vec a=0$.
+      (ג) לא נכון: בכדור $\vec a=(0,-10)$ קבוע, אבל $a_N=6$ ב-$t=0$ ו-$a_N=10$ ב-$t=0.8$.
+    solution:
+      - kind: idea
+        text: >-
+          (א) מכפלה וקטורית מתפרקת על סכום, ו-$\vec T\times\vec T=\vec 0$. (ב) גוזרים את $|\vec v|^2=\vec v\cdot\vec v$. (ג) טענה
+          כללית מפריכים בדוגמה אחת: מחשבים $a_N$ בשני רגעים.
+      - kind: computation
+        text: >-
+          (א) $\vec v=|\vec v|\vec T$, ולכן $\vec v\times\vec a=|\vec v|\left(a_T\,\vec T\times\vec T+a_N\,\vec T\times\vec N\right)=|\vec v|\,a_N\,\vec T\times\vec N$.
+      - kind: step
+        text: >-
+          $\vec T\perp\vec N$ ושניהם באורך 1, ולכן $|\vec T\times\vec N|=1\cdot1\cdot\sin90^\circ=1$ (שיעור 1.4). מכאן
+          $|\vec v\times\vec a|=|\vec v|\,a_N$, ועם $a_N=\kappa|\vec v|^2$: $\kappa=\frac{|\vec v\times\vec a|}{|\vec v|^3}$.
+      - kind: step
+        text: >-
+          (ב) **נכון.** $\frac{d}{dt}|\vec v|^2=2\,\vec v\cdot\vec a=0$ בכל $t$, ולכן $|\vec v|^2$ קבוע (פונקציה שנגזרתה אפס בקטע,
+          שיעור 5.5), וגם $|\vec v|$. במילים: $a_T=\frac{\vec v\cdot\vec a}{|\vec v|}=0$ בכל רגע.
+      - kind: computation
+        text: >-
+          (ג) **לא נכון.** בכדור $\vec v=(6,\ 8-10t)$ ו-$\vec a=(0,-10)$, $|\vec a|=10$ תמיד. ב-$t=0$: $\vec v=(6,8)$, $|\vec v|=10$,
+          $a_T=\frac{-80}{10}=-8$, ו-$a_N=\sqrt{100-64}=6$. ב-$t=0.8$: $\vec v=(6,0)$, $a_T=0$ ו-$a_N=10$.
+      - kind: check
+        text: >-
+          (ג) במכפלה וקטורית: $|\vec v\times\vec a|=|6\cdot(-10)-8\cdot0|=60$ ב-$t=0$, ו-$\frac{60}{10}=6=a_N$ ✓, מה שגם מאשר את (א).
+          אותה תאוצה $\vec a$ מתפרקת אחרת כשכיוון המהירות משתנה.
+      - kind: result
+        text: >-
+          (א) $|\vec v\times\vec a|=|\vec v|\,a_N$, ולכן $\kappa=\frac{|\vec v\times\vec a|}{|\vec v|^3}$; (ב) נכון; (ג) לא נכון ($a_N$ עולה מ-6 ל-10).
+
+challenge:
+  - id: W-9.4-c1
+    stars: 1
+    objectives: [OBJ-9.4-3]
+    prompt: >-
+      (א) חשבו את העקמומיות $\kappa(x)$ של הגרף $y=\ln x$, $x>0$.
+
+
+      (ב) באיזו נקודה של הגרף העקמומיות הכי גדולה? מה ערכה שם?
+
+
+      (ג) מה קורה לעקמומיות כש-$x\to0^+$ וכש-$x\to\infty$? הסבירו לפי צורת הגרף.
+    answer: >-
+      (א) $\kappa=\frac{x}{\left(1+x^2\right)^{3/2}}$. (ב) ב-$\left(\frac{1}{\sqrt2},\ -\frac{\ln2}{2}\right)$, $\kappa=\frac{2}{3\sqrt3}\approx0.385$.
+      (ג) $\kappa\to0$ בשני הקצוות.
+    solution:
+      - kind: idea
+        text: >-
+          נוסחת העקמומיות לגרף נותנת פונקציה של $x$, ואת המקסימום שלה מוצאים בנגזרת ובסימן שלה, כמו בשיעור 5.5.
+      - kind: computation
+        text: >-
+          (א) $f'=\frac1x$, $f''=-\frac{1}{x^2}$. לכן
+          $\kappa=\frac{1/x^2}{\left(1+\frac{1}{x^2}\right)^{3/2}}=\frac{1/x^2}{\left(x^2+1\right)^{3/2}/x^3}=\frac{x}{\left(1+x^2\right)^{3/2}}$.
+      - kind: computation
+        text: >-
+          (ב) בכלל המנה, עם $\left(\left(1+x^2\right)^{3/2}\right)'=\frac32\left(1+x^2\right)^{1/2}\cdot2x=3x\left(1+x^2\right)^{1/2}$:
+          $\kappa'(x)=\frac{\left(1+x^2\right)^{3/2}-x\cdot3x\left(1+x^2\right)^{1/2}}{\left(1+x^2\right)^{3}}$.
+      - kind: computation
+        text: >-
+          מוציאים מהמונה את הגורם המשותף $\left(1+x^2\right)^{1/2}$ ומצמצמים אותו עם המכנה:
+          $\kappa'(x)=\frac{\left(1+x^2\right)-3x^2}{\left(1+x^2\right)^{5/2}}=\frac{1-2x^2}{\left(1+x^2\right)^{5/2}}$.
+      - kind: step
+        text: >-
+          $\kappa'>0$ כש-$x<\frac{1}{\sqrt2}$ ו-$\kappa'<0$ אחר כך: $\kappa$ עולה ואחר כך יורדת, והמקסימום ב-$x=\frac{1}{\sqrt2}$, בנקודה
+          $\left(\frac{1}{\sqrt2},\ \ln\frac{1}{\sqrt2}\right)=\left(\frac{1}{\sqrt2},\ -\frac{\ln2}{2}\right)$.
+      - kind: computation
+        text: >-
+          $\kappa\left(\frac{1}{\sqrt2}\right)=\frac{1/\sqrt2}{(3/2)^{3/2}}=\frac{1}{\sqrt2}\cdot\frac{2\sqrt2}{3\sqrt3}=\frac{2}{3\sqrt3}$.
+      - kind: step
+        text: >-
+          (ג) כש-$x\to0^+$ המונה $x\to0$ והמכנה $\to1$; כש-$x\to\infty$, $\kappa\approx\frac{x}{x^3}\to0$. ליד 0 הגרף צונח כמעט
+          אנכית, וליד $\infty$ הוא כמעט אופקי: בשני המקרים כמעט ישר.
+      - kind: check
+        text: >-
+          $\kappa(1)=\frac{1}{2^{3/2}}\approx0.354$ ו-$\kappa\left(\frac12\right)=\frac{1/2}{(5/4)^{3/2}}\approx0.358$, שניהם קטנים מ-$0.385$ ✓.
+      - kind: result
+        text: >-
+          $\kappa=\frac{x}{\left(1+x^2\right)^{3/2}}$, מקסימלית ב-$\left(\frac{1}{\sqrt2},-\frac{\ln2}{2}\right)$ עם $\kappa=\frac{2}{3\sqrt3}$, ושואפת ל-0
+          בשני הקצוות.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 3 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.3 (Arc Length and Curvature), exercise 140; parts (a) and (c) added'
+      url: https://openstax.org/books/calculus-volume-3/pages/3-3-arc-length-and-curvature
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-9.4-c2
+    stars: 1
+    objectives: [OBJ-9.4-1, OBJ-9.4-2, OBJ-9.4-3]
+    prompt: >-
+      גולש בגלשן תלייה עולה בספירלה בזרם אוויר חם, לפי $\vec r(t)=\left(3\cos t,\ 3\sin t,\ t^2\right)$, $t\ge0$.
+
+
+      (א) חשבו את $\vec v$, את $\vec a$ ואת גודל המהירות.
+
+
+      (ב) מתי התאוצה ניצבת למהירות?
+
+
+      (ג) חשבו את $a_T$ ואת $a_N$ לכל $t$, ואת הגבולות שלהם כש-$t\to\infty$. הסבירו את הגבולות לפי צורת המסלול.
+
+
+      (ד) חשבו את העקמומיות ואת $\vec N$ ב-$t=0$.
+    answer: >-
+      (א) $|\vec v|=\sqrt{9+4t^2}$, $|\vec a|=\sqrt{13}$. (ב) רק ב-$t=0$. (ג) $a_T=\frac{4t}{\sqrt{9+4t^2}}\to2$,
+      $a_N=3\sqrt{\frac{13+4t^2}{9+4t^2}}\to3$. (ד) $\kappa=\frac{\sqrt{13}}{9}$, $\vec N=\frac{1}{\sqrt{13}}(-3,0,2)$.
+    solution:
+      - kind: idea
+        text: >-
+          המתכון: $\vec v$, $\vec a$, $a_T=\frac{\vec v\cdot\vec a}{|\vec v|}$, ופיתגורס. "ניצבת" פירושו $\vec v\cdot\vec a=0$, כלומר $a_T=0$.
+      - kind: computation
+        text: >-
+          (א) $\vec v=(-3\sin t,\ 3\cos t,\ 2t)$, $|\vec v|=\sqrt{9+4t^2}$; $\vec a=(-3\cos t,\ -3\sin t,\ 2)$, $|\vec a|=\sqrt{13}$.
+      - kind: computation
+        text: >-
+          (ב) $\vec v\cdot\vec a=9\sin t\cos t-9\sin t\cos t+4t=4t$, אפס רק ב-$t=0$: ברגע ההתחלה, כשגודל המהירות מינימלי.
+      - kind: computation
+        text: >-
+          (ג) $a_T=\frac{\vec v\cdot\vec a}{|\vec v|}=\frac{4t}{\sqrt{9+4t^2}}$. מפיתגורס, במכנה משותף, עם $13\left(9+4t^2\right)=117+52t^2$:
+          $a_N^2=13-\frac{16t^2}{9+4t^2}=\frac{117+52t^2-16t^2}{9+4t^2}=\frac{117+36t^2}{9+4t^2}=\frac{9\left(13+4t^2\right)}{9+4t^2}$.
+      - kind: step
+        text: >-
+          כש-$t\to\infty$: $a_T\to\frac{4t}{2t}=2$ ו-$a_N\to3$. המסלול נעשה כמעט אנכי, ולכן הרכיב האנכי של $\vec a$, 2, הופך
+          למשיקי, והרכיב האופקי, באורך 3 ואל ציר הספירלה, לנורמלי.
+      - kind: computation
+        text: >-
+          (ד) ב-$t=0$: $\vec v=(0,3,0)$, $\vec a=(-3,0,2)$, $a_T=0$, $a_N=\sqrt{13}$. לכן $\kappa=\frac{a_N}{|\vec v|^2}=\frac{\sqrt{13}}{9}$
+          ו-$\vec N=\frac{\vec a}{a_N}=\frac{1}{\sqrt{13}}(-3,0,2)$.
+      - kind: check
+        text: >-
+          $a_T^2+a_N^2=\frac{16t^2+117+36t^2}{9+4t^2}=\frac{13\left(9+4t^2\right)}{9+4t^2}=13=|\vec a|^2$ ✓. ובמכפלה וקטורית
+          ב-$t=0$: $(0,3,0)\times(-3,0,2)=(6,0,9)$, שאורכה $\sqrt{117}=3\sqrt{13}$, ו-$\frac{3\sqrt{13}}{3}=a_N$ ✓.
+      - kind: result
+        text: >-
+          $|\vec v|=\sqrt{9+4t^2}$; ניצבות רק ב-$t=0$; $a_T=\frac{4t}{\sqrt{9+4t^2}}\to2$, $a_N=3\sqrt{\frac{13+4t^2}{9+4t^2}}\to3$;
+          $\kappa(0)=\frac{\sqrt{13}}{9}$, $\vec N(0)=\frac{1}{\sqrt{13}}(-3,0,2)$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 3 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.4 (Motion in Space), exercises 166–168 (the hang glider); parts (c) and (d) added'
+      url: https://openstax.org/books/calculus-volume-3/pages/3-4-motion-in-space
+      verified: '2026-11-27'
+      adapted: true

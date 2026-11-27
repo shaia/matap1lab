@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 9.1 figure: <Spread figure={ParamLab} figureProps={{ mode, f, … }}>.
+ * mode: trace, world, space. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the top
+ * of ParamLab.tsx; the preset ids are those of the registries PC and SC in src/math/paramcurves.ts.
+ */
+import ParamLab, { type ParamLabProps } from './ParamLab';
+type Props = ParamLabProps;
+---
+
+<ParamLab client:visible {...Astro.props} />

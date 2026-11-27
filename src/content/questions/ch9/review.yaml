@@ -80,6 +80,12 @@ questions:
       $\left(\tfrac\pi2,1,0\right)$.
     wrongFeedback: >-
       כתבו את הישר המשיק כנקודה ועוד $s$ כפול המהירות, מצאו את $s$ שבו $z=0$ והציבו ברכיב $x$.
+    commonWrong:
+      - value: 0
+        feedback: >-
+          0 יוצא מהישר $s\,(-1,0,1)$, בלי הנקודה: הוא עובר בראשית ופוגש את $z=0$ ב-$s=0$. הישר המשיק עובר בנקודה
+          $\vec r\left(\tfrac\pi2\right)=\left(0,1,\tfrac\pi2\right)$ שעל הסליל: $\vec L(s)=\vec r\left(\tfrac\pi2\right)+s\,(-1,0,1)$.
+        misconception: MC-c9-tangent-missing-point
     hints: ['חזרו לשיעור 9.2 (הישר המשיק) ולשיעור 1.3 (חיתוך ישר ומישור).']
 
   - id: Q-9-review-05
@@ -102,27 +108,29 @@ questions:
         feedback: >-
           $1.6=4\cdot0.4$: השתמשתם במהירות האנכית ההתחלתית כאילו היא קבועה. ההעתק הוא $\int_0^{0.4}(4-10t)\,dt$, והכובד
           מוריד ממנו $5t^2$.
-        misconception: MC-c9-constant-speed-zero-accel
+        misconception: MC-c9-ignore-accel
     hints: ['חזרו לשיעור 9.2 (תאוצה) ולשיעור 8.1 (העתק כאינטגרל של מהירות).']
 
   - id: Q-9-review-06
     type: numeric
-    objectives: [OBJ-9.3-3, OBJ-7.6-1]
+    objectives: [OBJ-9.3-3, OBJ-7.5-2]
     level: exam
     prompt: >-
-      חשבו את אורך הגרף של $y=\ln(\cos x)$, $0\le x\le\frac\pi4$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+      חשבו את אורך הגרף של $y=\ln(\cos x)$, $0\le x\le\frac\pi4$. (את $\int\frac{dx}{\cos x}$ חישבנו בשיעור 7.5.
+      אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
     answer: 0.88137358701954
     tolerance: 0.001
     correctFeedback: >-
-      נכון, $\ln\left(1+\sqrt2\right)$. $y'=-\tan x$ ו-$\sqrt{1+\tan^2x}=\frac{1}{\cos x}$ (חיובי בקטע). מהטבלה
-      $\int\frac{dx}{\cos x}=\ln\left|\frac1{\cos x}+\tan x\right|+C$, ולכן $L=\ln\left(\sqrt2+1\right)-\ln1$.
+      נכון, $\ln\left(1+\sqrt2\right)$. $y'=-\tan x$ ו-$\sqrt{1+\tan^2x}=\frac{1}{\cos x}$ (חיובי בקטע). מדוגמה 6 של
+      שיעור 7.5, $\int\frac{dx}{\cos x}=\ln\left|\frac1{\cos x}+\tan x\right|+C$, ולכן $L=\ln\left(\sqrt2+1\right)-\ln1$.
     wrongFeedback: >-
-      $1+\tan^2x=\frac1{\cos^2x}$. את $\int\frac{dx}{\cos x}$ מוצאים בטבלה.
+      $1+\tan^2x=\frac1{\cos^2x}$. את $\int\frac{dx}{\cos x}$ חישבנו בשיעור 7.5 (בהצבה $t=\tan\frac x2$, או
+      $u=\sin x$).
     commonWrong:
       - value: 0.34657359028
         feedback: '$\int_0^{\pi/4}\tan x\,dx=\tfrac12\ln2$: זה $\int|f''|$, רק השינוי האנכי. בנוסחה $\sqrt{1+f''^2}$.'
         misconception: MC-c9-length-projection
-    hints: ['חזרו לשיעור 9.3 (אורך של גרף) ולשיעור 7.6 (טבלת אינטגרלים).']
+    hints: ['חזרו לשיעור 9.3 (אורך של גרף) ולשיעור 7.5 (אחת חלקי קוסינוס).']
 
   - id: Q-9-review-07
     type: twotier
@@ -191,7 +199,7 @@ questions:
       - text: 'חצי מעגל בלבד, כי $\theta$ עובר רק על $[0,\pi]$'
         feedback: >-
           הנקודה היא $(1+\cos2\theta,\sin2\theta)$, והזווית $2\theta$ עוברת על $[0,2\pi]$: מעגל שלם.
-        misconception: MC-c9-cartesian-whole-curve
+        misconception: MC-c9-range-is-fraction
     hints: ['חזרו לשיעור 9.1 (משוואה קרטזית) ולשיעור 2.3 (עקומים קוטביים).']
 
   - id: Q-9-review-10
@@ -226,7 +234,8 @@ questions:
       נכון, $\arccos\frac45\approx0.6435$ (כ-$36.9^\circ$). בנקודה $t=1$ בשניהם: $\vec r_1\,'=(1,2)$ ו-$\vec r_2\,'=(2,1)$,
       ו-$\cos\alpha=\frac{2+2}{\sqrt5\sqrt5}=\frac45$.
     wrongFeedback: >-
-      הזווית בין עקומים היא הזווית בין וקטורי המהירות בנקודה. השתמשו במכפלה סקלרית. (התשובה ברדיאנים.)
+      הזווית בין הישרים המשיקים היא הזווית (החדה) בין וקטורי המהירות בנקודה. השתמשו במכפלה סקלרית. (התשובה
+      ברדיאנים.)
     commonWrong:
       - value: 0.32175055440
         feedback: >-

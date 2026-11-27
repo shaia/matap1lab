@@ -1,0 +1,30 @@
+# Videos of lesson 9.2 (the velocity vector and the tangent line). Every id verified by oEmbed on 2026-11-27 (HTTP 200,
+# title and channel as below); durations from the watch page (lengthSeconds: 885 and 221), descriptions read there. No
+# Hebrew video on the topic was found (searches for Hebrew lectures on vector functions and parametric tangents).
+# The content of the first video (difference vector, quotient by h, limit, components, tangent) is from its transcript
+# summary on rosetta.to, read on 2026-11-27; the YouTube description says only "Visualizing the derivative".
+- id: v-9-2-khan-position-derivative
+  youtubeId: E9Q_Lc0g1xE
+  title: Derivative of a position vector valued function | Multivariable Calculus | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 15
+  why: >-
+    לפי הכותרת והתיאור ("Visualizing the derivative of a position vector valued function"): ההפרש בין שתי נקודות על
+    עקום הוא וקטור, החלוקה בהפרש הזמנים נותנת קצב שינוי ממוצע, והגבול הוא הנגזרת, שמחושבת רכיב-רכיב ומשיקה לעקום.
+    השוו לאיור 9.2א ולסעיף "הנגזרת של פונקציה וקטורית".
+  verified: '2026-11-27'
+- id: v-9-2-khan-second-derivative
+  youtubeId: '-vv63FS__bY'
+  title: Second derivatives (vector-valued functions) | Advanced derivatives | AP Calculus BC | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 4
+  why: >-
+    לפי הכותרת והתיאור: סרטון קצר שבו מחשבים את הנגזרת הראשונה ואת הנגזרת השנייה של פונקציה וקטורית במישור, רכיב
+    אחרי רכיב. השוו לסעיף "וקטור התאוצה": הנגזרת השנייה של המקום היא התאוצה.
+  verified: '2026-11-27'

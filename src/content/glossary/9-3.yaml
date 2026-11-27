@@ -4,9 +4,9 @@
   en: arc length
   symbol: 'L=\int_a^b|\vec r\,''(t)|\,dt'
   definition: >-
-    האורך של עקום שעוברים עליו פעם אחת: $L=\int_a^b|\vec r\,'(t)|\,dt$, הגבול של אורכי קווים שבורים שקודקודיהם על
-    העקום. הוא אינו תלוי בפרמטריזציה. לגרף $y=f(x)$: $\int_a^b\sqrt{1+f'^2}\,dx$; לעקום קוטבי $r=f(\theta)$:
-    $\int\sqrt{r^2+r'^2}\,d\theta$.
+    האורך של עקום: הגבול של אורכי המצולעים החסומים בו, כשהקטעים קטנים. משפט (בלי הוכחה): לפרמטריזציה עם נגזרת
+    רציפה שעוברת על העקום פעם אחת, $L=\int_a^b|\vec r\,'(t)|\,dt$, ולכן הוא אינו תלוי בפרמטריזציה. לגרף $y=f(x)$:
+    $\int_a^b\sqrt{1+f'(x)^2}\,dx$; לעקום קוטבי $r=f(\theta)$: $\int\sqrt{f(\theta)^2+f'(\theta)^2}\,d\theta$.
   reject: []
   lesson: '9.3'
 - id: arc-length-parametrisation
@@ -16,5 +16,42 @@
   definition: >-
     פרמטריזציה $\vec\rho(s)$ שבה הפרמטר $s$ הוא הדרך שנעברה מנקודת ההתחלה, ולכן $|\vec\rho\,'(s)|=1$. מקבלים אותה
     מ-$s(t)=\int_{t_0}^t|\vec r\,'|$: הופכים ל-$t(s)$ ומציבים.
+  reject: []
+  lesson: '9.3'
+- id: inscribed-polygon
+  term: מצולע חסום
+  en: inscribed polygon (polygonal line)
+  symbol: 'L_n=\sum_{i=1}^n|\vec r(t_i)-\vec r(t_{i-1})|'
+  definition: >-
+    קו שבור שקודקודיו נקודות על העקום, $\vec r(t_0),\vec r(t_1),\dots,\vec r(t_n)$, מחוברות לפי הסדר בקטעים ישרים
+    (מיתרים). הוא אינו חייב להיות סגור. האורך שלו $L_n$ אינו גדול מאורך העקום, ושואף אליו כשהקטעים קטנים.
+  reject: []
+  lesson: '9.3'
+- id: arc-length-function
+  term: פונקציית אורך הקשת
+  en: arc-length function
+  symbol: 's(t)=\int_{t_0}^t|\vec v(\tau)|\,d\tau'
+  definition: >-
+    הדרך שהנקודה עברה מזמן $t_0$ עד זמן $t$: $s(t)=\int_{t_0}^t|\vec v(\tau)|\,d\tau$. לפי המשפט היסודי
+    $\frac{ds}{dt}=|\vec v(t)|$: הקצב שבו הדרך גדלה הוא גודל המהירות, כמו מד המרחק של מכונית.
+  reject: []
+  lesson: '9.3'
+- id: spiral
+  term: ספירלה
+  en: spiral
+  symbol: 'r=a\theta'
+  definition: >-
+    עקום קוטבי שהמרחק שלו מהראשית משתנה במונוטוניות (גדל או קטן) כשהזווית גדלה, ולכן הוא מקיף את הראשית שוב ושוב
+    ומתרחק ממנה או מתקרב אליה. בספירלה של ארכימדס $r=a\theta$ המרחק גדל בקצב קבוע; בספירלה הלוגריתמית $r=e^{k\theta}$
+    הוא משתנה פי קבוע בכל סיבוב.
+  reject: []
+  lesson: '9.3'
+- id: astroid
+  term: אסטרואידה
+  en: astroid
+  symbol: '\vec r(t)=\left(\cos^3t,\ \sin^3t\right)'
+  definition: >-
+    העקום $\vec r(t)=\left(\cos^3t,\sin^3t\right)$, $0\le t\le2\pi$ (המשוואה הקרטזית $x^{2/3}+y^{2/3}=1$): כוכב עם ארבע
+    פינות מחודדות, בנקודות $(\pm1,0)$ ו-$(0,\pm1)$, שבהן המהירות מתאפסת.
   reject: []
   lesson: '9.3'

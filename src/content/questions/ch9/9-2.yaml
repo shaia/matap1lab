@@ -243,7 +243,7 @@ questions:
   - id: Q-9.2-differential
     type: numeric
     objectives: [OBJ-9.2-3]
-    level: mid
+    level: basic
     prompt: >-
       מהירותו של חלקיק ב-$t=3$ היא $\vec v=(2,-2,1)$ מטרים לשנייה. בעזרת הדיפרנציאל $d\vec r=\vec v\,dt$, העריכו את
       אורך ההעתק שלו, במטרים, בפרק הזמן $dt=0.01$ שניות.
@@ -285,7 +285,7 @@ questions:
   - id: Q-9.2-landing
     type: numeric
     objectives: [OBJ-9.2-1, OBJ-9.2-3]
-    level: exam
+    level: mid
     prompt: >-
       אבן נזרקת אופקית מצוק בגובה 20 מטר: $\vec r(t)=\left(15t,\ 20-5t^2\right)$ (מטרים, שניות). חשבו את התאוצה, מצאו
       מתי האבן פוגעת בקרקע, ומהו גודל המהירות שלה ברגע הפגיעה, במטרים לשנייה?
@@ -297,9 +297,59 @@ questions:
       מצאו את $t$ שבו $y=0$, גזרו את $\vec r$, והציבו. גודל המהירות הוא אורך הווקטור.
     commonWrong:
       - value: 15
-        feedback: 'זה רק הרכיב האופקי. ברגע הפגיעה לאבן יש גם מהירות אנכית, $-20$.'
+        feedback: 'זה רק הרכיב האופקי. ברגע הפגיעה לאבן יש גם מהירות אנכית, =-20$.'
         misconception: MC-c9-speed-sum-components
       - value: 35
         feedback: '$15+20$: חיברתם גדלים של רכיבים. האורך הוא $\sqrt{15^2+20^2}$.'
         misconception: MC-c9-speed-sum-components
     hints: ['$\vec v(t)=(15,\,-10t)$.']
+
+  - id: Q-9.2-constant-length
+    type: mc
+    objectives: [OBJ-9.2-1]
+    qualitative: true
+    level: mid
+    prompt: >-
+      נקודה נעה על ספרה סביב הראשית: $|\vec r(t)|=5$ בכל רגע. מה נכון בהכרח בכל רגע?
+    choices:
+      - text: 'המהירות ניצבת לווקטור המקום: $\vec r(t)\cdot\vec v(t)=0$'
+        correct: true
+        feedback: >-
+          נכון. $\vec r\cdot\vec r=25$ קבוע, ולכן לפי כלל המכפלה $0=(\vec r\cdot\vec r)'=2\,\vec r\cdot\vec r\,'$.
+      - text: 'המהירות היא וקטור האפס, כי המרחק מהראשית לא משתנה'
+        feedback: >-
+          המרחק מהראשית הוא $|\vec r|$, לא גודל המהירות. נקודה על מעגל סביב הראשית שומרת על המרחק ובכל זאת נעה.
+        misconception: MC-c9-speed-is-position-length
+      - text: 'המהירות מקבילה לווקטור המקום'
+        feedback: >-
+          להפך: מהירות בכיוון $\vec r$ הייתה מרחיקה את הנקודה מהראשית או מקרבת אותה. כאן המהירות ניצבת ל-$\vec r$.
+        misconception: MC-c9-velocity-parallel-position
+      - text: 'התאוצה ניצבת לווקטור המקום'
+        feedback: >-
+          זה נכון למהירות, לא לתאוצה. בתנועה מעגלית אחידה $\vec a=-\omega^2\vec r$, כלומר התאוצה דווקא **מקבילה** ל-$\vec r$.
+        misconception: MC-c9-accel-vs-velocity
+    hints: ['גזרו את $\vec r\cdot\vec r=25$ בכלל המכפלה.']
+
+  - id: Q-9.2-speeding-up
+    type: numeric
+    objectives: [OBJ-9.2-3]
+    level: exam
+    prompt: >-
+      ברגע מסוים המהירות של חלקיק היא $\vec v=(3,4)$ והתאוצה שלו $\vec a=(-2,1)$. באיזה קצב משתנה גודל המהירות באותו
+      רגע? (מספר שלילי פירושו שהחלקיק מאט.)
+    answer: -0.4
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $\frac{d|\vec v|}{dt}=\frac{\vec v\cdot\vec a}{|\vec v|}=\frac{-6+4}{5}=-0.4$: הזווית בין המהירות לתאוצה קהה, והחלקיק
+      מאט.
+    wrongFeedback: >-
+      גודל המהירות משתנה לפי $\frac{d|\vec v|}{dt}=\frac{\vec v\cdot\vec a}{|\vec v|}$. חשבו את המכפלה הסקלרית ואת $|\vec v|$.
+    commonWrong:
+      - value: 2.2360679775
+        feedback: >-
+          זה $|\vec a|=\sqrt5$. רק החלק של התאוצה שבכיוון המהירות משנה את גודל המהירות.
+        misconception: MC-c9-speed-rate-is-accel
+      - value: -2
+        feedback: 'זו המכפלה הסקלרית $\vec v\cdot\vec a$. צריך עוד לחלק ב-$|\vec v|=5$.'
+        misconception: MC-c9-speed-rate-is-accel
+    hints: ['$\vec v\cdot\vec a=3\cdot(-2)+4\cdot1$, $|\vec v|=5$.']
