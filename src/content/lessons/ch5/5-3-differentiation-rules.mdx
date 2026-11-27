@@ -92,13 +92,19 @@ import RulesLab from '~/sims/RulesLab.astro';
 **תזכורת משיעור 5.2.** את שני הכללים הראשונים כבר ראיתם בשיעור 5.2: לכל שתי פונקציות גזירות $u$, $v$ ולכל שני קבועים $a$ ו-$c$,
 
 $$
-(u+v)'=u'+v',\qquad (u-v)'=u'-v',\qquad (au)'=a\,u',\qquad c'=0 .
+\begin{gathered}
+(u+v)'=u'+v',\qquad (u-v)'=u'-v',\\
+(au)'=a\,u',\qquad c'=0 .
+\end{gathered}
 $$
 
 **למה זה עובד, בשורה אחת.** מנת ההפרשים של סכום היא סכום מנות ההפרשים:
 
 $$
-\frac{\big(u(x+h)+v(x+h)\big)-\big(u(x)+v(x)\big)}{h}=\frac{u(x+h)-u(x)}{h}+\frac{v(x+h)-v(x)}{h} ,
+\begin{aligned}
+&\frac{\big(u(x+h)+v(x+h)\big)-\big(u(x)+v(x)\big)}{h}\\
+&\quad=\frac{u(x+h)-u(x)}{h}+\frac{v(x+h)-v(x)}{h} ,
+\end{aligned}
 $$
 
 ולפי כללי החשבון של גבולות (שיעור 4.6), הגבול של סכום הוא סכום הגבולות. כך גם בכפל בקבוע: $a$ יוצא החוצה ממנת ההפרשים. ופונקציה קבועה לא משתנה: מנת ההפרשים שלה 0. **בציור:** כשמחברים שני גרפים, השיפועים מתחברים; כשמותחים גרף פי $a$ בכיוון האנכי, כל שיפוע נמתח פי $a$.
@@ -144,7 +150,11 @@ $$
 מהגבול המיוחד של שיעור 4.6, $\frac{\sin h}{h}\to1$. והמנה השנייה שואפת ל-0. נוסחת הזווית הכפולה $\cos2\theta=1-2\sin^2\theta$, עם $\theta=\frac h2$, נותנת $\cos h=1-2\sin^2\frac h2$, כלומר $\cos h-1=-2\sin^2\frac h2$. מחלקים ב-$h$, וה-2 נבלע במכנה, כי $\frac{2}{h}=\frac{1}{h/2}$:
 
 $$
-\frac{\cos h-1}{h}=-\frac{\sin^2(h/2)}{h/2}=-\sin\frac h2\cdot\frac{\sin(h/2)}{h/2}\ \xrightarrow[h\to0]{}\ -0\cdot1=0 .
+\begin{aligned}
+\frac{\cos h-1}{h}&=-\frac{\sin^2(h/2)}{h/2}\\
+&=-\sin\frac h2\cdot\frac{\sin(h/2)}{h/2}\\
+&\xrightarrow[h\to0]{}\ -0\cdot1=0 .
+\end{aligned}
 $$
 
 נשאר $\sin x\cdot0+\cos x\cdot1=\cos x$. בדיקה בטבלה, ב-$x=1$: מנת ההפרשים עם $h=0.1$ היא בערך $0.4974$, עם $h=0.01$ בערך $0.5361$, ועם $h=0.001$ בערך $0.5399$, ו-$\cos1\approx0.5403$.
@@ -152,7 +162,11 @@ $$
 **הקוסינוס** באותה דרך, מ-$\cos(x+h)=\cos x\cos h-\sin x\sin h$. המינוס של נוסחת הסכום נשאר עד הסוף:
 
 $$
-\frac{\cos(x+h)-\cos x}{h}=\cos x\cdot\frac{\cos h-1}{h}-\sin x\cdot\frac{\sin h}{h}\ \xrightarrow[h\to0]{}\ \cos x\cdot0-\sin x\cdot1 .
+\begin{aligned}
+&\frac{\cos(x+h)-\cos x}{h}\\
+&\quad=\cos x\cdot\frac{\cos h-1}{h}-\sin x\cdot\frac{\sin h}{h}\\
+&\quad\xrightarrow[h\to0]{}\ \cos x\cdot0-\sin x\cdot1 .
+\end{aligned}
 $$
 
 **בדיקה בציור, כדי לא להתבלבל בסימן.** ב-$x=0$ הסינוס עולה בשיפוע 1 (כי $\sin x\approx x$ ליד 0), ו-$\cos0=1$. הקוסינוס נמצא ב-0 בפסגה, ומיד אחריה יורד: כש-$x$ קטן וחיובי השיפוע שלו שלילי, ו-$\sin x$ חיובי שם. לכן בנגזרת של הקוסינוס יש **מינוס**, ובנגזרת של הסינוס אין.
@@ -172,7 +186,10 @@ $$
 מכאן הנגזרת בכל נקודה, כי $e^{x+h}=e^x\,e^h$:
 
 $$
-\frac{e^{x+h}-e^x}{h}=e^x\cdot\frac{e^h-1}{h}\ \xrightarrow[h\to0]{}\ e^x\cdot1,\qquad\Longrightarrow\qquad (e^x)'=e^x .
+\begin{gathered}
+\frac{e^{x+h}-e^x}{h}=e^x\cdot\frac{e^h-1}{h}\ \xrightarrow[h\to0]{}\ e^x\cdot1,\\
+\Longrightarrow\qquad (e^x)'=e^x .
+\end{gathered}
 $$
 
 $e^x$ היא הפונקציה שהשיפוע שלה בכל נקודה שווה לגובה שלה. לכן היא מופיעה בכל מקום שבו קצב הגידול של גודל פרופורציוני לגודל עצמו: ריבית, אוכלוסייה, דעיכה רדיואקטיבית.
@@ -241,7 +258,11 @@ $$
 **שלב 1: הנגזרת של $\frac1v$.** במקום שבו $v\ne0$, מביאים את מנת ההפרשים למכנה משותף:
 
 $$
-\frac{\frac{1}{v(x+h)}-\frac{1}{v(x)}}{h}=\frac{v(x)-v(x+h)}{h\,v(x+h)\,v(x)}=-\frac{v(x+h)-v(x)}{h}\cdot\frac{1}{v(x+h)\,v(x)} .
+\begin{aligned}
+&\frac{\frac{1}{v(x+h)}-\frac{1}{v(x)}}{h}\\
+&\quad=\frac{v(x)-v(x+h)}{h\,v(x+h)\,v(x)}\\
+&\quad=-\frac{v(x+h)-v(x)}{h}\cdot\frac{1}{v(x+h)\,v(x)} .
+\end{aligned}
 $$
 
 כש-$h\to0$ השבר הראשון שואף ל-$v'(x)$, ו-$v(x+h)\to v(x)$ כי $v$ רציפה. לכן
@@ -269,7 +290,10 @@ $$
 **המתכון, בטנגנס.** $\tan x=\frac{\sin x}{\cos x}$, ובכל נקודה שבה $\cos x\ne0$: $u=\sin x$, $u'=\cos x$, $v=\cos x$, $v'=-\sin x$. מציבים:
 
 $$
-(\tan x)'=\frac{\cos x\cdot\cos x-\sin x\cdot(-\sin x)}{\cos^2x}=\frac{\cos^2x+\sin^2x}{\cos^2x}=\frac{1}{\cos^2x} .
+\begin{aligned}
+(\tan x)'&=\frac{\cos x\cdot\cos x-\sin x\cdot(-\sin x)}{\cos^2x}\\
+&=\frac{\cos^2x+\sin^2x}{\cos^2x}=\frac{1}{\cos^2x} .
+\end{aligned}
 $$
 
 שני המינוסים (של כלל המנה ושל הנגזרת של הקוסינוס) נותנים יחד פלוס, והזהות $\sin^2x+\cos^2x=1$ מפשטת. אפשר לכתוב גם $(\tan x)'=1+\tan^2x$. בדיקה: הנגזרת חיובית בכל מקום, והטנגנס אכן עולה בכל קטע שבו הוא מוגדר; ב-$x=\frac{\pi}{4}$ השיפוע $\frac{1}{1/2}=2$.
@@ -353,7 +377,10 @@ $$
 **ארבעה מקרים שחוזרים כל הזמן.** כשהפנימית היא $g(x)$:
 
 $$
-\big(g^n\big)'=n\,g^{n-1}\cdot g',\qquad \big(e^{g}\big)'=e^{g}\cdot g',\qquad \big(\sin g\big)'=\cos g\cdot g',\qquad \big(\cos g\big)'=-\sin g\cdot g' .
+\begin{gathered}
+\big(g^n\big)'=n\,g^{n-1}\cdot g',\quad \big(e^{g}\big)'=e^{g}\cdot g',\\
+\big(\sin g\big)'=\cos g\cdot g',\quad \big(\cos g\big)'=-\sin g\cdot g' .
+\end{gathered}
 $$
 
 למשל $(\sin 3x)'=3\cos3x$: הגרף של $\sin3x$ הוא הגרף של $\sin x$ מכווץ אופקית פי 3 (שיעור 4.2), ולכן כל שיפוע שלו תלול פי 3.
@@ -751,7 +778,7 @@ $$
 
 <Formula tex="\Big(f\big(g(x)\big)\Big)'=f'\big(g(x)\big)\cdot g'(x),\qquad \frac{dy}{dx}=\frac{dy}{du}\cdot\frac{du}{dx}" label="כלל השרשרת" sheet />
 
-<Formula tex="(x^n)'=nx^{n-1},\quad (\sin x)'=\cos x,\quad (\cos x)'=-\sin x,\quad (e^x)'=e^x,\quad (\tan x)'=\frac{1}{\cos^2x}" label="נגזרות בסיסיות" sheet />
+<Formula tex="\begin{gathered}(x^n)'=nx^{n-1},\quad (\sin x)'=\cos x,\quad (\cos x)'=-\sin x,\\ (e^x)'=e^x,\quad (\tan x)'=\frac{1}{\cos^2x}\end{gathered}" label="נגזרות בסיסיות" sheet />
 
 <Revisit id="pred-5-3" />
 

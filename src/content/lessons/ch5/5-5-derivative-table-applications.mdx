@@ -127,7 +127,10 @@ $$
 **הפונקציות ההיפרבוליות.** מההגדרות של שיעור 4.5, $\cosh x=\frac{e^x+e^{-x}}{2}$ ו-$\sinh x=\frac{e^x-e^{-x}}{2}$. הנגזרת של $e^{-x}$ היא מינוס $e^{-x}$ (כלל השרשרת עם $u=-x$). לכן
 
 $$
-(\cosh x)'=\frac{e^x-e^{-x}}{2}=\sinh x,\qquad (\sinh x)'=\frac{e^x+e^{-x}}{2}=\cosh x .
+\begin{gathered}
+(\cosh x)'=\frac{e^x-e^{-x}}{2}=\sinh x,\\
+(\sinh x)'=\frac{e^x+e^{-x}}{2}=\cosh x .
+\end{gathered}
 $$
 
 **בלי מינוס.** כאן ההבדל מהטריגונומטריה: $(\cos x)'=-\sin x$, אבל $(\cosh x)'=\sinh x$, עם פלוס. בדיקה בציור: $\cosh$ יורדת כש-$x<0$ ועולה כש-$x>0$ (שיעור 4.5), ובהתאם $\sinh x$ שלילי משמאל ל-0 וחיובי מימינו. ב-0, $\sinh0=0$: הגרף של $\cosh$ שטוח בתחתית שלו.
@@ -135,7 +138,10 @@ $$
 **הטנגנס ההיפרבולי.** בכלל המנה, עם $u=\sinh x$ ו-$v=\cosh x$, ובעזרת הזהות $\cosh^2x-\sinh^2x=1$:
 
 $$
-(\tanh x)'=\frac{\cosh x\cdot\cosh x-\sinh x\cdot\sinh x}{\cosh^2x}=\frac{1}{\cosh^2x}=1-\tanh^2x .
+\begin{aligned}
+(\tanh x)'&=\frac{\cosh x\cdot\cosh x-\sinh x\cdot\sinh x}{\cosh^2x}\\
+&=\frac{1}{\cosh^2x}=1-\tanh^2x .
+\end{aligned}
 $$
 
 הנגזרת חיובית תמיד, ולכן $\tanh$ עולה. כש-$|x|$ גדל היא שואפת ל-0: הגרף מתיישר לאורך האסימפטוטות $y=\pm1$.
@@ -149,13 +155,21 @@ $$
 בדיקה בגזירה ישירה של הנוסחה $\operatorname{arsinh}x=\ln\left(x+\sqrt{x^2+1}\right)$ משיעור 4.5. הנגזרת של מה שבתוך הלוגריתם היא $1+\frac{x}{\sqrt{x^2+1}}=\frac{\sqrt{x^2+1}+x}{\sqrt{x^2+1}}$, ולכן
 
 $$
-\left(\ln\left(x+\sqrt{x^2+1}\right)\right)'=\frac{1}{x+\sqrt{x^2+1}}\cdot\frac{x+\sqrt{x^2+1}}{\sqrt{x^2+1}}=\frac{1}{\sqrt{x^2+1}} .
+\begin{aligned}
+&\left(\ln\left(x+\sqrt{x^2+1}\right)\right)'\\
+&\quad=\frac{1}{x+\sqrt{x^2+1}}\cdot\frac{x+\sqrt{x^2+1}}{\sqrt{x^2+1}}\\
+&\quad=\frac{1}{\sqrt{x^2+1}} .
+\end{aligned}
 $$
 
 **בפיזיקה: נפילה עם התנגדות אוויר.** גוף שנופל מנוחה, כשכוח ההתנגדות גדל כמו ריבוע המהירות, צובר מהירות $v(t)=v_T\tanh\frac{gt}{v_T}$, כאשר $v_T$ היא המהירות הסופית ו-$g$ תאוצת הכובד. התאוצה, בכלל השרשרת:
 
 $$
-v'(t)=v_T\cdot\frac{1}{\cosh^2\frac{gt}{v_T}}\cdot\frac{g}{v_T}=g\left(1-\tanh^2\frac{gt}{v_T}\right)=g\left(1-\frac{v^2}{v_T^2}\right).
+\begin{aligned}
+v'(t)&=v_T\cdot\frac{1}{\cosh^2\frac{gt}{v_T}}\cdot\frac{g}{v_T}\\
+&=g\left(1-\tanh^2\frac{gt}{v_T}\right)\\
+&=g\left(1-\frac{v^2}{v_T^2}\right).
+\end{aligned}
 $$
 
 ברגע הראשון $v=0$, והתאוצה היא $g$, כמו בנפילה חופשית. ככל שהמהירות מתקרבת ל-$v_T$, התאוצה דועכת ל-0.
@@ -847,9 +861,9 @@ $$
 
 <Formula tex="\left(a^x\right)'=a^x\ln a,\qquad \left(\log_ax\right)'=\frac{1}{x\ln a},\qquad \left(\ln|x|\right)'=\frac1x" label="בסיס כללי ולוגריתם (a חיובי ושונה מ-1)" sheet />
 
-<Formula tex="(\sinh x)'=\cosh x,\qquad (\cosh x)'=\sinh x,\qquad (\tanh x)'=\frac{1}{\cosh^2x}=1-\tanh^2x,\qquad \left(\operatorname{arsinh}x\right)'=\frac{1}{\sqrt{1+x^2}}" label="הפונקציות ההיפרבוליות (בלי מינוס)" sheet />
+<Formula tex="\begin{gathered}(\sinh x)'=\cosh x,\qquad (\cosh x)'=\sinh x,\\ (\tanh x)'=\frac{1}{\cosh^2x}=1-\tanh^2x,\qquad \left(\operatorname{arsinh}x\right)'=\frac{1}{\sqrt{1+x^2}}\end{gathered}" label="הפונקציות ההיפרבוליות (בלי מינוס)" sheet />
 
-<Formula tex="\left(x^r\right)'=rx^{r-1},\qquad \left(e^x\right)'=e^x,\qquad (\sin x)'=\cos x,\qquad (\cos x)'=-\sin x,\qquad (\tan x)'=\frac{1}{\cos^2x}" label="החזקה, האקספוננט והטריגונומטריות" sheet />
+<Formula tex="\begin{gathered}\left(x^r\right)'=rx^{r-1},\qquad \left(e^x\right)'=e^x,\qquad (\sin x)'=\cos x,\\ (\cos x)'=-\sin x,\qquad (\tan x)'=\frac{1}{\cos^2x}\end{gathered}" label="החזקה, האקספוננט והטריגונומטריות" sheet />
 
 <Formula tex="(\arcsin x)'=\frac{1}{\sqrt{1-x^2}},\qquad (\arccos x)'=-\frac{1}{\sqrt{1-x^2}},\qquad (\arctan x)'=\frac{1}{1+x^2}" label="הטריגונומטריות ההפוכות" sheet />
 

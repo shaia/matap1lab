@@ -93,7 +93,10 @@ $$
 באיור המתג "חתיכה שהיא גרף y(x)" דלוק, והחצי העליון מודגש. לחתיכה הזו יש משיק, ואת השיפוע שלו אפשר לחשב בכלל השרשרת (שיעור 5.3):
 
 $$
-y'=\frac{1}{2\sqrt{25-x^2}}\cdot(-2x)=-\frac{x}{\sqrt{25-x^2}},\qquad y'(3)=-\frac{3}{\sqrt{16}}=-\frac34 .
+\begin{gathered}
+y'=\frac{1}{2\sqrt{25-x^2}}\cdot(-2x)=-\frac{x}{\sqrt{25-x^2}},\\
+y'(3)=-\frac{3}{\sqrt{16}}=-\frac34 .
+\end{gathered}
 $$
 
 **אותו חישוב, בלי לפתור.** במקום לבודד את $y$, משאירים את המשוואה כמו שהיא, וזוכרים ש-$y$ הוא פונקציה של $x$. אז $x^2+y(x)^2=25$ לכל $x$ ליד 3: שני האגפים הם **אותה פונקציה של $x$** (אגף ימין קבוע). לכן גם הנגזרות שלהם שוות. גוזרים כל איבר לפי $x$:
@@ -402,7 +405,10 @@ $$
 **$\arctan$.** $y=\arctan x$ אומר $\tan y=x$ ו-$y\in\left(-\frac\pi2,\frac\pi2\right)$. הנגזרת של הטנגנס, בכלל המנה (שיעור 5.3):
 
 $$
-(\tan y)'=\left(\frac{\sin y}{\cos y}\right)'=\frac{\cos^2y+\sin^2y}{\cos^2y}=\frac{1}{\cos^2y}=1+\tan^2y .
+\begin{aligned}
+(\tan y)'&=\left(\frac{\sin y}{\cos y}\right)'=\frac{\cos^2y+\sin^2y}{\cos^2y}\\
+&=\frac{1}{\cos^2y}=1+\tan^2y .
+\end{aligned}
 $$
 
 הצורה האחרונה היא הנוחה כאן, כי $\tan y=x$. גוזרים את $\tan y=x$ באופן סתום: $(1+\tan^2y)\,y'=1$, כלומר $(1+x^2)\,y'=1$:
@@ -735,7 +741,7 @@ $$
 
 <Formula tex="\left(f^{-1}\right)'(b)=\frac{1}{f'(a)},\qquad f(a)=b,\ f'(a)\ne0" label="נגזרת של פונקציה הפוכה: f' מחושבת ב-a, המספר ש-f שולחת ל-b" sheet />
 
-<Formula tex="(\ln|x|)'=\frac1x,\qquad (\arcsin x)'=\frac{1}{\sqrt{1-x^2}},\qquad (\arccos x)'=-\frac{1}{\sqrt{1-x^2}},\qquad (\arctan x)'=\frac{1}{1+x^2}" label="הנגזרות של ln ושל הפונקציות הטריגונומטריות ההפוכות" sheet />
+<Formula tex="\begin{gathered}(\ln|x|)'=\frac1x,\qquad (\arcsin x)'=\frac{1}{\sqrt{1-x^2}},\\ (\arccos x)'=-\frac{1}{\sqrt{1-x^2}},\qquad (\arctan x)'=\frac{1}{1+x^2}\end{gathered}" label="הנגזרות של ln ושל הפונקציות הטריגונומטריות ההפוכות" sheet />
 
 <Formula tex="(x^r)'=rx^{r-1}\ (x>0),\qquad (a^x)'=a^x\ln a\ (a>0),\qquad \left(x^x\right)'=x^x(\ln x+1)" label="מעריך קבוע, בסיס קבוע, ושניהם משתנים" />
 

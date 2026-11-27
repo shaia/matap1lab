@@ -143,8 +143,10 @@ $$
 
 $$
 \begin{aligned}
-\frac{h(2+\Delta)-h(2)}{\Delta}&=\frac{40+20\Delta-5(4+4\Delta+\Delta^2)-20}{\Delta}\\
-&=\frac{40+20\Delta-20-20\Delta-5\Delta^2-20}{\Delta}=\frac{-5\Delta^2}{\Delta}=-5\Delta ,
+&\frac{h(2+\Delta)-h(2)}{\Delta}\\
+&\quad=\frac{40+20\Delta-5(4+4\Delta+\Delta^2)-20}{\Delta}\\
+&\quad=\frac{40+20\Delta-20-20\Delta-5\Delta^2-20}{\Delta}\\
+&\quad=\frac{-5\Delta^2}{\Delta}=-5\Delta ,
 \end{aligned}
 $$
 
@@ -164,9 +166,11 @@ $$
 
 $$
 \begin{aligned}
-h(t+\Delta)-h(t)&=20(t+\Delta)-5(t+\Delta)^2-20t+5t^2\\
-&=20t+20\Delta-5t^2-10t\Delta-5\Delta^2-20t+5t^2\\
-&=20\Delta-10t\Delta-5\Delta^2 ,
+&h(t+\Delta)-h(t)\\
+&\quad=20(t+\Delta)-5(t+\Delta)^2-20t+5t^2\\
+&\quad=20t+20\Delta-5t^2-10t\Delta\\
+&\qquad\quad-5\Delta^2-20t+5t^2\\
+&\quad=20\Delta-10t\Delta-5\Delta^2 ,
 \end{aligned}
 $$
 
@@ -275,7 +279,11 @@ $$
 **דוגמה:** $f(x)=x^2$ בכל נקודה $x$.
 
 $$
-\frac{(x+h)^2-x^2}{h}=\frac{x^2+2xh+h^2-x^2}{h}=\frac{2xh+h^2}{h}=2x+h\ \xrightarrow[h\to0]{}\ 2x .
+\begin{aligned}
+\frac{(x+h)^2-x^2}{h}&=\frac{x^2+2xh+h^2-x^2}{h}\\
+&=\frac{2xh+h^2}{h}\\
+&=2x+h\ \xrightarrow[h\to0]{}\ 2x .
+\end{aligned}
 $$
 
 לכן $(x^2)'=2x$. ב-$x=1$ זה 2, כמו בטבלה, וב-$x=3$ זה 6. בשיעור 5.2 נשתמש בשיפוע הזה כדי לכתוב את המשיק ב-$(3,9)$.
@@ -291,7 +299,10 @@ $$
 - **מכנה משותף.** כש-$f$ היא שבר, למשל $f(x)=\frac{1}{x+1}$, מביאים את המונה למכנה משותף, והמונה מתקצר:
 
 $$
-\frac{1}{x+1+h}-\frac{1}{x+1}=\frac{(x+1)-(x+1+h)}{(x+1)(x+1+h)}=\frac{-h}{(x+1)(x+1+h)} .
+\begin{aligned}
+\frac{1}{x+1+h}-\frac{1}{x+1}&=\frac{(x+1)-(x+1+h)}{(x+1)(x+1+h)}\\
+&=\frac{-h}{(x+1)(x+1+h)} .
+\end{aligned}
 $$
 
 אחרי החילוק ב-$h$ נשאר $\frac{-1}{(x+1)(x+1+h)}$, וכש-$h\to0$:
@@ -331,7 +342,10 @@ $$
 **הגדרה.** <Term id="one-sided-derivative">הנגזרות החד-צדדיות</Term> הן הגבולות של מנת ההפרשים רק מימין ורק משמאל:
 
 $$
-f'_+(x_0)=\lim_{h\to0^+}\frac{f(x_0+h)-f(x_0)}{h},\qquad f'_-(x_0)=\lim_{h\to0^-}\frac{f(x_0+h)-f(x_0)}{h}.
+\begin{gathered}
+f'_+(x_0)=\lim_{h\to0^+}\frac{f(x_0+h)-f(x_0)}{h},\\
+f'_-(x_0)=\lim_{h\to0^-}\frac{f(x_0+h)-f(x_0)}{h}.
+\end{gathered}
 $$
 
 כמו בכל גבול (שיעור 4.6), הגבול הדו-צדדי קיים בדיוק כששני הגבולות החד-צדדיים קיימים ושווים. לכן **$f$ גזירה ב-$x_0$ בדיוק כששתי הנגזרות החד-צדדיות קיימות, סופיות ושוות**. ב-$|x|$: $f'_+(0)=1$ ו-$f'_-(0)$ שווה למינוס 1. הן שונות, ולכן $|x|$ אינה גזירה ב-0. נקודה כזו, שבה $f$ רציפה והנגזרות החד-צדדיות קיימות ושונות, היא <Term id="corner-point">נקודת פינה</Term>.
