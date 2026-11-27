@@ -59,6 +59,9 @@ export function normalizeExpr(input: string): string {
     const word = s.slice(0, offset + 1).match(/[a-z]+$/i)?.[0];
     return word && new RegExp(`^(${FUNCTIONS})$`).test(word) ? m : `${before}*(`;
   });
+  // a name that is not a function, right before "(", is a product too: "n(n+1)(2n+1)" as printed in a formula, which
+  // mathjs would otherwise read as a call of a function n and evaluate to nothing
+  s = s.replace(/([a-z]+)\(/gi, (m, word: string) => (new RegExp(`^(${FUNCTIONS})$`).test(word) ? m : `${word}*(`));
   return s;
 }
 

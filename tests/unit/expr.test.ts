@@ -51,6 +51,13 @@ describe('sameFunction: equivalent forms are accepted', () => {
     expect(sameFunction('ln(x^2)', '2 log(x)', pos)).toBe(true);
     expect(sameFunction('ln|x|', 'log(x)', pos)).toBe(true);
   });
+  it('reads a variable right before "(" as a product, as formulas are printed: n(n+1)(2n+1)', () => {
+    expect(normalizeExpr('n(n+1)')).toBe('n*(n+1)');
+    expect(normalizeExpr('sin(x)')).toBe('sin(x)');
+    const n = spec({ variables: ['n'], domain: [1, 50] });
+    expect(sameFunction('27/n^3 * n(n+1)(2n+1)/6', '9*(n+1)*(2*n+1)/(2*n^2)', n)).toBe(true);
+    expect(sameFunction('x(x+1)', 'x^2+x', spec())).toBe(true);
+  });
   it('handles several variables', () => {
     const xy = spec({ variables: ['x', 'y'] });
     expect(sameFunction('y^2 + 2x y', 'y*(y + 2*x)', xy)).toBe(true);
