@@ -1,0 +1,29 @@
+# Videos of lesson 9.4 (tangential and normal acceleration; enrichment). Every id verified by oEmbed on 2026-11-27 (HTTP
+# 200, title and channel as below); durations from the watch page (lengthSeconds), descriptions read there. No Hebrew
+# video on this topic was found.
+- id: v-9-4-khan-curvature
+  youtubeId: ugtUGhBSeE0
+  title: Curvature intuition
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 4
+  why: >-
+    לפי הכותרת, התיאור והתמליל: מבוא לעקמומיות ולרדיוס העקמומיות ולאופן שבו חושבים עליהם גיאומטרית. נוהגים עם הגה
+    נעול ומקבלים מעגל; הרדיוס שלו הוא רדיוס העקמומיות, והעקמומיות היא ההפכי שלו. השוו לסעיפים "עקמומיות" ו"המעגל
+    הצמוד", ולמעגל הצמוד באיור 9.4א.
+  verified: '2026-11-27'
+- id: v-9-4-mit-tangent-normal
+  youtubeId: f93PZ9ZyvDk
+  title: 'Part II: Vector Calculus, Lec 2 | MIT Calculus Revisited: Multivariable Calculus'
+  channel: MIT OpenCourseWare
+  lang: en
+  captions: []
+  start: 0
+  minutes: 28
+  why: >-
+    לפי התיאור ודף הקורס ב-MIT OpenCourseWare: הרצאה של Herbert Gross, "Tangential and Normal Vectors". וקטור משיק
+    כפונקציה של אורך הקשת, הנורמל והקשר שלו לנגזרת של המשיק לפי אורך הקשת ולעקמומיות, ודוגמה של מהירות ותאוצה של
+    חלקיק על עקום. השוו לסעיפים "וקטור היחידה הנורמלי" ו"פירוק התאוצה".
+  verified: '2026-11-27'

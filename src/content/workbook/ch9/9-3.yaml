@@ -1,0 +1,472 @@
+# Workbook of lesson 9.3 — arc length.
+# Objectives (src/course.ts):
+#   OBJ-9.3-1  arc length as the integral of the speed
+#   OBJ-9.3-2  arc length does not depend on the parametrisation; the arc-length parametrisation
+#   OBJ-9.3-3  length of the graph of a function and of a curve given in polar coordinates
+# Order of knowledge: chapters 1–8, 9.1–9.3 (nothing from 9.4: no T, N, curvature).
+# Every number recomputed with sympy in screens/tools/lesson-9-3.py.
+lesson: '9.3'
+practice:
+  - id: W-9.3-01
+    level: mid
+    objectives: [OBJ-9.3-1]
+    prompt: >-
+      חשבו את האורך של הספירלה החרוטית $\vec r(t)=\left(e^t\cos t,\ e^t\sin t,\ e^t\right)$, $0\le t\le\ln2$.
+    answer: >-
+      $L=\sqrt3$.
+    solution:
+      - kind: idea
+        text: >-
+          גוזרים רכיב אחרי רכיב בכלל המכפלה, ומחברים ריבועים: האיברים המעורבים מתבטלים, ונשאר גורם $e^{2t}$ שיוצא מהשורש.
+      - kind: computation
+        text: >-
+          $x'=e^t(\cos t-\sin t)$, $y'=e^t(\sin t+\cos t)$, $z'=e^t$.
+      - kind: computation
+        text: >-
+          $(\cos t-\sin t)^2+(\sin t+\cos t)^2=2$, כי האיברים $\mp2\sin t\cos t$ מתבטלים. לכן
+          $x'^2+y'^2+z'^2=e^{2t}(2+1)=3e^{2t}$, ו-$|\vec r\,'|=\sqrt3\,e^t$.
+      - kind: computation
+        text: >-
+          $L=\int_0^{\ln2}\sqrt3\,e^t\,dt=\sqrt3\left(e^{\ln2}-e^0\right)=\sqrt3\,(2-1)=\sqrt3\approx1.732$.
+      - kind: check
+        text: >-
+          הקצוות $\vec r(0)=(1,0,1)$ ו-$\vec r(\ln2)\approx(1.538,1.278,2)$, והמרחק ביניהם בערך $1.710$, קצת פחות מ-$1.732$ ✓.
+      - kind: result
+        text: >-
+          $L=\sqrt3$.
+
+  - id: W-9.3-02
+    level: basic
+    objectives: [OBJ-9.3-3]
+    prompt: >-
+      חשבו את אורך הגרף של $y=x^{3/2}$, $0\le x\le\frac43$.
+    answer: >-
+      $L=\frac{56}{27}\approx2.074$.
+    solution:
+      - kind: idea
+        text: >-
+          גרף: $L=\int\sqrt{1+f'^2}\,dx$. אחרי הנגזרת, מתחת לשורש ביטוי לינארי, ואת השורש שלו מחשבים בהצבה לינארית.
+      - kind: computation
+        text: >-
+          $f'(x)=\frac32x^{1/2}$, ולכן $1+f'^2=1+\frac94x$.
+      - kind: computation
+        text: >-
+          הצבה $u=1+\frac94x$, $du=\frac94\,dx$, והגבולות $x=0\mapsto u=1$, $x=\frac43\mapsto u=1+3=4$:
+          $L=\frac49\int_1^4\sqrt u\,du=\frac49\cdot\frac23u^{3/2}\Big|_1^4=\frac{8}{27}(8-1)=\frac{56}{27}$.
+      - kind: check
+        text: >-
+          הקצוות $(0,0)$ ו-$\left(\frac43,\frac{8\sqrt3}{9}\right)\approx(1.333,1.540)$, והמרחק ביניהם בערך $2.037$, פחות
+          מ-$2.074$ ✓.
+      - kind: result
+        text: >-
+          $L=\frac{56}{27}$.
+
+  - id: W-9.3-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-9.3-1, OBJ-9.3-2]
+    prompt: >-
+      נכון או לא נכון? נמקו כל סעיף.
+
+
+      (א) האורך של $\vec r(t)$, $a\le t\le b$, הוא $|\vec r(b)-\vec r(a)|$.
+
+
+      (ב) אם $|\vec r\,'(t)|=3$ לכל $t$, אז האורך על $[a,b]$ הוא $3(b-a)$.
+
+
+      (ג) ל-$\vec r(t)=(\cos t,\sin t)$, $0\le t\le3\pi$, מתקיים $\int_0^{3\pi}|\vec r\,'|\,dt=3\pi$, אבל העקום עצמו, מעגל
+      היחידה, ארוך $2\pi$.
+    answer: >-
+      (א) לא נכון, חוץ מקטע ישר. (ב) נכון. (ג) נכון: האינטגרל הוא הדרך, והמעגל נעבר פעם וחצי.
+    solution:
+      - kind: idea
+        text: >-
+          המיתר הוא רק חסם מלמטה לאורך; אינטגרל של מהירות קבועה הוא מהירות כפול זמן; והאינטגרל של גודל המהירות סופר כל
+          מעבר על העקום.
+      - kind: step
+        text: >-
+          (א) $|\vec r(b)-\vec r(a)|$ הוא אורך המיתר, והקו הישר הוא הקצר ביותר. לכן $L\ge|\vec r(b)-\vec r(a)|$, ושוויון רק
+          כשהעקום קטע ישר. דוגמה נגדית: חצי מעגל היחידה, אורך $\pi$, מיתר 2.
+      - kind: step
+        text: >-
+          (ב) $L=\int_a^b3\,dt=3(b-a)$: מהירות קבועה כפול משך הזמן.
+      - kind: step
+        text: >-
+          (ג) $|\vec r\,'|=1$, ולכן האינטגרל $3\pi$. אבל ב-$[0,3\pi]$ הנקודה מקיפה את המעגל פעם אחת ועוד חצי: האינטגרל
+          הוא הדרך שעברה, $2\pi+\pi$. אורך העקום, הקבוצה, הוא $2\pi$.
+      - kind: check
+        text: >-
+          ב-(ג), על $[0,2\pi]$ בלבד האינטגרל $2\pi$, ההיקף ✓.
+      - kind: result
+        text: >-
+          (א) לא נכון; (ב) נכון; (ג) נכון.
+
+  - id: W-9.3-04
+    level: mid
+    objectives: [OBJ-9.3-1]
+    prompt: >-
+      נקודה על שפת גלגל ברדיוס 1, שמתגלגל על ציר $x$, נעה על הציקלואידה $\vec r(t)=(t-\sin t,\ 1-\cos t)$. חשבו את אורך
+      קשת אחת, $0\le t\le2\pi$.
+    answer: >-
+      $L=8$.
+    solution:
+      - kind: idea
+        text: >-
+          מתחת לשורש יוצא $2-2\cos t$. זהות הזווית החצויה, $1-\cos t=2\sin^2\frac t2$, הופכת אותו לריבוע, והשורש הוא ערך
+          מוחלט, שבקטע הזה הוא חיובי.
+      - kind: computation
+        text: >-
+          $\vec r\,'=(1-\cos t,\ \sin t)$, ו-$|\vec r\,'|^2=1-2\cos t+\cos^2t+\sin^2t=2-2\cos t$.
+      - kind: computation
+        text: >-
+          $2-2\cos t=4\sin^2\frac t2$, ולכן $|\vec r\,'|=2\left|\sin\frac t2\right|=2\sin\frac t2$, כי $0\le\frac t2\le\pi$.
+      - kind: computation
+        text: >-
+          $L=\int_0^{2\pi}2\sin\frac t2\,dt=-4\cos\frac t2\Big|_0^{2\pi}=-4(-1)+4=8$.
+      - kind: check
+        text: >-
+          הקצוות $(0,0)$ ו-$(2\pi,0)$, והמרחק ביניהם $2\pi\approx6.28<8$ ✓. ובאמצע, ב-$t=\pi$, הנקודה בגובה 2, ושני
+          המיתרים אליה, $2\sqrt{\pi^2+4}\approx7.45$, עדיין פחות מ-8 ✓.
+      - kind: result
+        text: >-
+          $L=8$: פי 8 מהרדיוס.
+
+  - id: W-9.3-05
+    level: mid
+    objectives: [OBJ-9.3-2]
+    prompt: >-
+      $\vec r(t)=\left(e^t\cos t,\ e^t\sin t\right)$, $t\ge0$.
+
+
+      (א) חשבו את $s(t)$, הדרך מ-$t=0$.
+
+
+      (ב) מצאו פרמטריזציה לפי אורך $\vec\rho(s)$, $s\ge0$.
+    answer: >-
+      (א) $s(t)=\sqrt2\left(e^t-1\right)$. (ב) עם $t=\ln\left(1+\frac{s}{\sqrt2}\right)$:
+      $\vec\rho(s)=\left(1+\frac{s}{\sqrt2}\right)\left(\cos\ln\left(1+\frac{s}{\sqrt2}\right),\ \sin\ln\left(1+\frac{s}{\sqrt2}\right)\right)$.
+    solution:
+      - kind: idea
+        text: >-
+          לפי המתכון: $s(t)$ מאינטגרל של גודל המהירות, הופכים ל-$t(s)$ בעזרת $\ln$, ומציבים. את $e^{t(s)}$ אפשר לכתוב בלי
+          מעריכים ולוגריתמים.
+      - kind: computation
+        text: >-
+          $\vec r\,'=e^t(\cos t-\sin t,\ \sin t+\cos t)$, ו-$|\vec r\,'|=e^t\sqrt{(\cos t-\sin t)^2+(\sin t+\cos t)^2}=\sqrt2\,e^t$.
+      - kind: computation
+        text: >-
+          (א) $s(t)=\int_0^t\sqrt2\,e^\tau\,d\tau=\sqrt2\left(e^t-1\right)$.
+      - kind: step
+        text: >-
+          (ב) הופכים: $e^t=1+\frac{s}{\sqrt2}$, כלומר $t=\ln\left(1+\frac{s}{\sqrt2}\right)$. מציבים ב-$\vec r$, ו-$e^{t}$ הוא
+          פשוט $1+\frac{s}{\sqrt2}$.
+      - kind: check
+        text: >-
+          לפי כלל השרשרת $|\vec\rho\,'(s)|=|\vec r\,'(t)|\cdot\frac{dt}{ds}=\sqrt2\,e^t\cdot\frac{1}{\sqrt2\,e^t}=1$ ✓.
+          וב-$s=0$: $\vec\rho(0)=(1,0)=\vec r(0)$ ✓.
+      - kind: result
+        text: >-
+          $s(t)=\sqrt2(e^t-1)$, ו-$\vec\rho(s)=\left(1+\frac{s}{\sqrt2}\right)\left(\cos\ln\left(1+\frac{s}{\sqrt2}\right),\ \sin\ln\left(1+\frac{s}{\sqrt2}\right)\right)$.
+
+  - id: W-9.3-06
+    level: mid
+    qualitative: true
+    objectives: [OBJ-9.3-2]
+    prompt: >-
+      $\vec r_1(t)=(3t,4t)$, $0\le t\le1$, ו-$\vec r_2(t)=(3\sin t,4\sin t)$, $0\le t\le\pi$. שתיהן נמצאות על הקטע מ-$(0,0)$
+      ל-$(3,4)$.
+
+
+      (א) חשבו $\int_0^1|\vec r_1\,'|\,dt$ ו-$\int_0^\pi|\vec r_2\,'|\,dt$.
+
+
+      (ב) למה התשובות שונות, אם אורך אינו תלוי בפרמטריזציה? על איזה קטע של $t$ הפרמטריזציה $\vec r_2$ נותנת את אורך
+      הקטע?
+    answer: >-
+      (א) 5 ו-10. (ב) $\vec r_2$ הולכת ל-$(3,4)$ וחוזרת; על $\left[0,\frac\pi2\right]$ היא נותנת 5.
+    solution:
+      - kind: idea
+        text: >-
+          אי-התלות בפרמטריזציה נכונה כשכל נקודה נעברת פעם אחת. בודקים איך $\sin t$ מתנהג בקטע, וזוכרים שגודל מהירות הוא ערך
+          מוחלט.
+      - kind: computation
+        text: >-
+          (א) $|\vec r_1\,'|=|(3,4)|=5$, ולכן $\int_0^15\,dt=5$.
+      - kind: computation
+        text: >-
+          $\vec r_2\,'=(3\cos t,4\cos t)$, ו-$|\vec r_2\,'|=5|\cos t|$. מפצלים ב-$\frac\pi2$, שם $\cos t$ מחליף סימן:
+          $\int_0^{\pi/2}5\cos t\,dt+\int_{\pi/2}^{\pi}(-5\cos t)\,dt=5+5=10$.
+      - kind: step
+        text: >-
+          (ב) $\sin t$ עולה מ-0 ל-1 ב-$\left[0,\frac\pi2\right]$ ויורד חזרה ל-0 ב-$\left[\frac\pi2,\pi\right]$: הנקודה הולכת
+          מ-$(0,0)$ ל-$(3,4)$ וחוזרת. האינטגרל סופר את הדרך, 5 הלוך ו-5 חזור. על $\left[0,\frac\pi2\right]$ כל נקודה נעברת
+          פעם אחת, והאינטגרל 5.
+      - kind: check
+        text: >-
+          בלי הערך המוחלט היה יוצא $\int_0^\pi5\cos t\,dt=0$: אורך 0 לנקודה שזזה, סימן בטוח לטעות ✓. והקטע אכן ארוך
+          $|(3,4)|=5$ ✓.
+      - kind: result
+        text: >-
+          5 ו-10; $\vec r_2$ עוברת על הקטע פעמיים, ועל $\left[0,\frac\pi2\right]$ היא נותנת 5.
+
+  - id: W-9.3-07
+    level: basic
+    objectives: [OBJ-9.3-3]
+    prompt: >-
+      הספירלה $r=e^{-\theta}$, $0\le\theta<\infty$, מקיפה את הראשית אינסוף פעמים ומתקרבת אליה. חשבו את אורכה (אינטגרל לא
+      אמיתי, שיעור 8.3).
+    answer: >-
+      $L=\sqrt2$.
+    solution:
+      - kind: idea
+        text: >-
+          נוסחת האורך הקוטבית, ואז אינטגרל לא אמיתי: מחשבים עד $\Theta$ ושולחים את $\Theta$ לאינסוף.
+      - kind: computation
+        text: >-
+          $f(\theta)=e^{-\theta}$, $f'(\theta)=-e^{-\theta}$, ולכן $f^2+f'^2=2e^{-2\theta}$, והשורש $\sqrt2\,e^{-\theta}$.
+      - kind: computation
+        text: >-
+          $\int_0^{\Theta}\sqrt2\,e^{-\theta}\,d\theta=\sqrt2\left(1-e^{-\Theta}\right)\xrightarrow[\Theta\to\infty]{}\sqrt2$.
+      - kind: check
+        text: >-
+          העקום מתחיל ב-$(1,0)$ ומתקרב לראשית, ולכן אורכו לפחות 1, ו-$\sqrt2\approx1.414\ge1$ ✓. הסיבוב הראשון לבדו,
+          $0\le\theta\le2\pi$, כבר $\sqrt2\left(1-e^{-2\pi}\right)\approx1.4116$: כל שאר הסיבובים יחד קצרים מ-$0.003$.
+      - kind: result
+        text: >-
+          $L=\sqrt2$: אינסוף סיבובים, אורך סופי.
+
+  - id: W-9.3-08
+    level: exam
+    qualitative: true
+    objectives: [OBJ-9.3-2, OBJ-9.3-3]
+    prompt: >-
+      (א) הסבירו בציור למה לגרף של $y=e^x$, $0\le x\le1$, ולגרף של $y=\ln x$, $1\le x\le e$, יש אותו אורך.
+
+
+      (ב) הוכיחו זאת: כתבו את שני האינטגרלים, והעבירו אחד לשני בהצבה.
+
+
+      (ג) חשבו את האורך. (רמז: ב-$\int_1^e\frac{\sqrt{1+x^2}}{x}\,dx$ הציבו $w=\sqrt{1+x^2}$.)
+    answer: >-
+      (א) כל גרף הוא שיקוף של השני ביחס ל-$y=x$. (ג) $L=\sqrt{1+e^2}-\sqrt2+\frac12\ln\frac{\sqrt{1+e^2}-1}{\sqrt{1+e^2}+1}+\ln\left(1+\sqrt2\right)\approx2.0035$.
+    solution:
+      - kind: idea
+        text: >-
+          $\ln$ הפוכה ל-$\exp$, ולכן הגרפים הם שיקוף זה של זה ביחס לישר $y=x$, ושיקוף שומר על אורכים. בחשבון: ההצבה
+          $x=e^u$ מעבירה את האינטגרל של $\ln$ לזה של $\exp$.
+      - kind: step
+        text: >-
+          (א) הנקודה $(x,e^x)$ על הגרף הראשון היא השיקוף של $(e^x,x)$ על הגרף השני. $x$ מ-0 עד 1 מתאים ל-$e^x$ מ-1 עד $e$:
+          אותה חתיכה, משוקפת. שיקוף אינו משנה מרחקים, ולכן גם לא אורכים של מצולעים חסומים.
+      - kind: computation
+        text: >-
+          (ב) $L_1=\int_0^1\sqrt{1+e^{2x}}\,dx$ ו-$L_2=\int_1^e\sqrt{1+\frac1{x^2}}\,dx$. ב-$L_2$ מציבים $x=e^u$, $dx=e^u\,du$,
+          והגבולות $1\mapsto0$, $e\mapsto1$: $\int_0^1\sqrt{1+e^{-2u}}\,e^u\,du=\int_0^1\sqrt{e^{2u}+1}\,du=L_1$, כי
+          $e^u=\sqrt{e^{2u}}$ נכנס לשורש.
+      - kind: step
+        text: >-
+          (ג) $\sqrt{1+\frac1{x^2}}=\frac{\sqrt{1+x^2}}{x}$ (כי $x>0$). עם $w=\sqrt{1+x^2}$: $w^2=1+x^2$, כלומר
+          $x^2=w^2-1$; בגזירה $2w\,dw=2x\,dx$, כלומר $dx=\frac{w\,dw}{x}$. לכן
+          $\frac{\sqrt{1+x^2}}{x}\,dx=\frac{w}{x}\cdot\frac{w\,dw}{x}=\frac{w^2}{x^2}\,dw=\frac{w^2}{w^2-1}\,dw$.
+      - kind: computation
+        text: >-
+          $\frac{w^2}{w^2-1}=1+\frac{1}{w^2-1}$. לאיבר השני השורה
+          $\int\frac{dx}{x^2-a^2}=\frac{1}{2a}\ln\left|\frac{x-a}{x+a}\right|+C$ בטבלה של שיעור 7.6, עם $a=1$. פונקציה קדומה:
+          $G(w)=w+\frac12\ln\frac{w-1}{w+1}$. הגבולות: $x=1\mapsto w=\sqrt2$, $x=e\mapsto w=\sqrt{1+e^2}$.
+      - kind: computation
+        text: >-
+          $G\left(\sqrt{1+e^2}\right)\approx2.8964+\frac12\ln\frac{1.8964}{3.8964}\approx2.5363$, ו-$G(\sqrt2)=\sqrt2+\frac12\ln\frac{\sqrt2-1}{\sqrt2+1}=\sqrt2-\ln\left(1+\sqrt2\right)\approx0.5328$
+          (כי $\frac{\sqrt2-1}{\sqrt2+1}=\left(\sqrt2-1\right)^2$). לכן $L\approx2.5363-0.5328=2.0035$.
+      - kind: check
+        text: >-
+          המיתר מ-$(0,1)$ ל-$(1,e)$ הוא $\sqrt{1+(e-1)^2}\approx1.988$, קצת פחות מ-$2.0035$ ✓. וחישוב נומרי של $L_1$ ושל
+          $L_2$, כל אחד בנפרד, נותן $2.00350$ ✓.
+      - kind: result
+        text: >-
+          $L=\sqrt{1+e^2}-\sqrt2+\ln\left(1+\sqrt2\right)+\frac12\ln\frac{\sqrt{1+e^2}-1}{\sqrt{1+e^2}+1}\approx2.0035$ לשני
+          הגרפים.
+
+  - id: W-9.3-09
+    level: exam
+    objectives: [OBJ-9.3-1]
+    prompt: >-
+      חשבו את האורך של העקום $\vec r(t)=\left(3\cos t-\cos3t,\ 3\sin t-\sin3t\right)$, $0\le t\le2\pi$. (רמז:
+      $\cos t\cos3t+\sin t\sin3t=\cos2t$.)
+    answer: >-
+      $L=24$.
+    solution:
+      - kind: idea
+        text: >-
+          מחברים את ריבועי הרכיבים של המהירות: הרמז מכווץ את המכפלות המעורבות ל-$\cos2t$, ואז $1-\cos2t=2\sin^2t$. השורש הוא
+          ערך מוחלט, ולכן משתמשים בסימטריה.
+      - kind: computation
+        text: >-
+          $x'=-3\sin t+3\sin3t$, $y'=3\cos t-3\cos3t$. לכן
+          $x'^2+y'^2=9\left[(\sin3t-\sin t)^2+(\cos t-\cos3t)^2\right]=9\left[2-2(\sin t\sin3t+\cos t\cos3t)\right]$.
+      - kind: computation
+        text: >-
+          לפי הרמז, הסוגריים הם $2-2\cos2t$. עם $1-\cos2t=2\sin^2t$:
+          $9(2-2\cos2t)=18(1-\cos2t)=18\cdot2\sin^2t=36\sin^2t$, ו-$|\vec r\,'|=\sqrt{36\sin^2t}=6|\sin t|$.
+      - kind: step
+        text: >-
+          לגרף של $|\sin t|$ יש אותו שטח מעל כל אחד מארבעת הרבעים של $[0,2\pi]$ (בכל רבע זו אותה קשת, או תמונת הראי
+          שלה), ולכן $L=4\int_0^{\pi/2}6\sin t\,dt$.
+      - kind: computation
+        text: >-
+          $\int_0^{\pi/2}6\sin t\,dt=-6\cos t\Big|_0^{\pi/2}=6$, ו-$L=4\cdot6=24$.
+      - kind: check
+        text: >-
+          בלי הערך המוחלט: $\int_0^{2\pi}6\sin t\,dt=0$, אורך 0, בלתי אפשרי ✓. והעקום עובר דרך $(2,0)$, $(0,4)$, $(-2,0)$
+          ו-$(0,-4)$; המצולע דרך ארבע הנקודות האלה ארוך $4\sqrt{20}\approx17.9<24$ ✓.
+      - kind: result
+        text: >-
+          $L=24$.
+
+  - id: W-9.3-10
+    level: exam
+    objectives: [OBJ-9.3-1, OBJ-9.3-2]
+    prompt: >-
+      $\vec r(t)=\left(\cosh t,\ \sinh t,\ t\right)$, $t\ge0$.
+
+
+      (א) חשבו את $s(t)$, הדרך מ-$t=0$, ואת האורך עד $t=\ln2$.
+
+
+      (ב) מצאו פרמטריזציה לפי אורך $\vec\rho(s)$ בלי פונקציות היפרבוליות ברכיבים הראשון והשני, ובדקו ש-$|\vec\rho\,'(s)|=1$.
+    answer: >-
+      (א) $s(t)=\sqrt2\sinh t$, והאורך עד $\ln2$ הוא $\frac{3\sqrt2}{4}$. (ב)
+      $\vec\rho(s)=\left(\sqrt{1+\frac{s^2}{2}},\ \frac{s}{\sqrt2},\ \operatorname{arsinh}\frac{s}{\sqrt2}\right)$.
+    solution:
+      - kind: idea
+        text: >-
+          הזהות $\cosh^2t-\sinh^2t=1$ מפשטת את גודל המהירות לריבוע שלם. אחר כך המתכון: הופכים את $s=\sqrt2\sinh t$
+          בעזרת $\operatorname{arsinh}$ (שיעור 4.5), ומציבים.
+      - kind: computation
+        text: >-
+          $\vec r\,'=(\sinh t,\cosh t,1)$, ו-$|\vec r\,'|^2=\sinh^2t+\cosh^2t+1=2\cosh^2t$ (כי $1+\sinh^2t=\cosh^2t$). לכן
+          $|\vec r\,'|=\sqrt2\cosh t$.
+      - kind: computation
+        text: >-
+          (א) $s(t)=\int_0^t\sqrt2\cosh\tau\,d\tau=\sqrt2\sinh t$. ב-$t=\ln2$: $\sinh(\ln2)=\frac{2-\frac12}{2}=\frac34$, ולכן
+          האורך $\frac{3\sqrt2}{4}\approx1.061$.
+      - kind: step
+        text: >-
+          (ב) $\sinh t=\frac{s}{\sqrt2}$, כלומר $t=\operatorname{arsinh}\frac{s}{\sqrt2}$. אז $\cosh t=\sqrt{1+\sinh^2t}=\sqrt{1+\frac{s^2}{2}}$
+          (שורש חיובי, כי $\cosh>0$). לכן $\vec\rho(s)=\left(\sqrt{1+\frac{s^2}{2}},\ \frac{s}{\sqrt2},\ \operatorname{arsinh}\frac{s}{\sqrt2}\right)$.
+      - kind: computation
+        text: >-
+          בדיקה: $\vec\rho\,'(s)=\left(\frac{s/2}{\sqrt{1+s^2/2}},\ \frac{1}{\sqrt2},\ \frac{1/\sqrt2}{\sqrt{1+s^2/2}}\right)$.
+          הריבועים של הרכיבים הראשון והשלישי: $\frac{s^2/4+1/2}{1+s^2/2}=\frac12$; ועם $\frac12$ של השני, הסכום 1.
+      - kind: check
+        text: >-
+          ב-$s=\frac{3\sqrt2}{4}$, האורך מ-(א), $\vec\rho=\left(\frac54,\frac34,\ln2\right)$, וזה בדיוק
+          $\vec r(\ln2)=\left(\cosh\ln2,\sinh\ln2,\ln2\right)$ ✓.
+      - kind: result
+        text: >-
+          $s(t)=\sqrt2\sinh t$; האורך עד $\ln2$ הוא $\frac{3\sqrt2}{4}$;
+          $\vec\rho(s)=\left(\sqrt{1+\frac{s^2}{2}},\ \frac{s}{\sqrt2},\ \operatorname{arsinh}\frac{s}{\sqrt2}\right)$.
+
+challenge:
+  - id: W-9.3-c1
+    stars: 1
+    objectives: [OBJ-9.3-3]
+    prompt: >-
+      חשבו את האורך המדויק של הגרף של $y=\ln(\sin x)$, $\frac\pi4\le x\le\frac{3\pi}{4}$. (רמז: זהויות טריגונומטריות;
+      ואת האינטגרל שתקבלו כתבו כ-$\int\frac{\sin x}{1-\cos^2x}\,dx$.)
+    answer: >-
+      $L=\ln\left(3+2\sqrt2\right)=2\ln\left(1+\sqrt2\right)\approx1.7627$.
+    solution:
+      - kind: idea
+        text: >-
+          נוסחת האורך של גרף. $1+\frac{\cos^2x}{\sin^2x}=\frac{1}{\sin^2x}$ הוא ריבוע, ונשאר $\int\frac{dx}{\sin x}$. כופלים ומחלקים ב-$\sin x$, מציבים
+          $u=\cos x$ עם גבולות חדשים, ומפרקים לשברים חלקיים.
+      - kind: computation
+        text: >-
+          $y'=\frac{\cos x}{\sin x}$, ולכן $1+y'^2=\frac{\sin^2x+\cos^2x}{\sin^2x}=\frac{1}{\sin^2x}$, והשורש $\frac{1}{\sin x}$,
+          כי $\sin x>0$ בקטע.
+      - kind: computation
+        text: >-
+          $L=\int_{\pi/4}^{3\pi/4}\frac{\sin x}{1-\cos^2x}\,dx$. הצבה $u=\cos x$, $du=-\sin x\,dx$, והגבולות
+          $\frac\pi4\mapsto\frac{\sqrt2}{2}$, $\frac{3\pi}{4}\mapsto-\frac{\sqrt2}{2}$. המינוס הופך את הגבולות:
+          $L=\int_{-\sqrt2/2}^{\sqrt2/2}\frac{du}{1-u^2}$.
+      - kind: computation
+        text: >-
+          $\frac{1}{1-u^2}=\frac12\left(\frac{1}{1-u}+\frac{1}{1+u}\right)$, ופונקציה קדומה: $\frac12\ln\frac{1+u}{1-u}$ (בקטע
+          $|u|<1$).
+      - kind: computation
+        text: >-
+          $\frac{1+\sqrt2/2}{1-\sqrt2/2}=\frac{2+\sqrt2}{2-\sqrt2}=\frac{(2+\sqrt2)^2}{2}=3+2\sqrt2$, ובגבול התחתון יוצא
+          ההפכי. לכן $L=\frac12\ln\left(3+2\sqrt2\right)-\frac12\ln\frac{1}{3+2\sqrt2}=\ln\left(3+2\sqrt2\right)$.
+      - kind: check
+        text: >-
+          $3+2\sqrt2=\left(1+\sqrt2\right)^2$, ולכן $L=2\ln\left(1+\sqrt2\right)\approx1.7627$. המיתר בין הקצוות, שבאותו
+          גובה $\ln\frac{\sqrt2}{2}$, הוא $\frac\pi2\approx1.571$, והמצולע דרך השיא $\left(\frac\pi2,0\right)$ ארוך
+          $\approx1.717$: שניהם קצרים מ-$1.7627$ ✓.
+      - kind: result
+        text: >-
+          $L=\ln\left(3+2\sqrt2\right)=2\ln\left(1+\sqrt2\right)\approx1.7627$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Section 2.4 (Arc Length of a Curve and Surface Area), exercise 212; the hint for the integral of 1/sin x added'
+      url: https://openstax.org/books/calculus-volume-2/pages/2-4-arc-length-of-a-curve-and-surface-area
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-9.3-c2
+    stars: 1
+    objectives: [OBJ-9.3-3]
+    prompt: >-
+      העקום הקוטבי $r=6\sin\theta+8\cos\theta$.
+
+
+      (א) כפלו את המשוואה ב-$r$, ועברו לקואורדינטות קרטזיות. הראו שזה מעגל, ומצאו את המרכז, את הרדיוס ואת ההיקף שלו.
+
+
+      (ב) בקורס הזה $r\ge0$. מצאו את קטע הזוויות $\alpha\le\theta\le\beta$, באורך $\pi$, שבו $r\ge0$, ואשרו את ההיקף בעזרת
+      נוסחת האורך הקוטבית.
+
+
+      (ג) סטודנט חישב $\int_\alpha^\beta r\,d\theta$. מה יצא לו, ולמה זה אינו האורך?
+    answer: >-
+      (א) $(x-4)^2+(y-3)^2=25$: מרכז $(4,3)$, רדיוס 5, היקף $10\pi$. (ב) $-\arctan\frac43\le\theta\le\pi-\arctan\frac43$;
+      $\int\sqrt{r^2+\left(\frac{dr}{d\theta}\right)^2}\,d\theta=\int10\,d\theta=10\pi$. (ג) 20.
+    solution:
+      - kind: idea
+        text: >-
+          $r\cos\theta=x$, $r\sin\theta=y$ ו-$r^2=x^2+y^2$ מעבירים את המשוואה לקרטזית, והשלמה לריבוע מזהה מעגל. בנוסחה
+          הקוטבית $r^2+\left(\frac{dr}{d\theta}\right)^2$ יוצא קבוע.
+      - kind: computation
+        text: >-
+          (א) $r^2=6r\sin\theta+8r\cos\theta$, כלומר $x^2+y^2=6y+8x$. השלמה לריבוע: $(x-4)^2+(y-3)^2=16+9=25$. מעגל שמרכזו
+          $(4,3)$ ורדיוסו 5 (והוא עובר דרך הראשית); ההיקף $2\pi\cdot5=10\pi$.
+      - kind: step
+        text: >-
+          (ב) $r=0$ כש-$\tan\theta=-\frac43$, כלומר $\theta=-\arctan\frac43\approx-0.927$ או $\theta=\pi-\arctan\frac43\approx2.214$.
+          ב-$\theta=0$ $r=8>0$, ולכן $r\ge0$ בקטע $-\arctan\frac43\le\theta\le\pi-\arctan\frac43$, שאורכו $\pi$. מחוץ לקטע
+          הזה (בסיבוב אחד) $r<0$, ואין לעקום נקודות.
+      - kind: computation
+        text: >-
+          $\frac{dr}{d\theta}=6\cos\theta-8\sin\theta$. בפתיחת הריבועים, $r^2=36\sin^2\theta+96\sin\theta\cos\theta+64\cos^2\theta$
+          ו-$\left(\frac{dr}{d\theta}\right)^2=36\cos^2\theta-96\sin\theta\cos\theta+64\sin^2\theta$; האיברים האמצעיים מתבטלים, והסכום
+          $36+64=100$. לכן
+          $L=\int_\alpha^\beta10\,d\theta=10\pi$, כמו ההיקף מ-(א).
+      - kind: computation
+        text: >-
+          (ג) $\int_\alpha^\beta(6\sin\theta+8\cos\theta)\,d\theta=\bigl(-6\cos\theta+8\sin\theta\bigr)\Big|_\alpha^\beta$. עם
+          $\sin\beta=\frac45$, $\cos\beta=-\frac35$ ו-$\sin\alpha=-\frac45$, $\cos\alpha=\frac35$: $10-(-10)=20$.
+      - kind: check
+        text: >-
+          20 קטן מ-$10\pi\approx31.4$: $\int r\,d\theta$ סופר רק את התנועה סביב הראשית ($r\,d\theta$) ומפספס את $dr$; הוא
+          היה נכון רק אם $r$ היה קבוע ✓. ו-$\theta=0$ נותן את הנקודה $(8,0)$, שאכן על המעגל: $(8-4)^2+(0-3)^2=25$ ✓.
+      - kind: result
+        text: >-
+          מעגל שמרכזו $(4,3)$ ורדיוסו 5; היקף $10\pi$ בשתי הדרכים; $\int r\,d\theta=20$ אינו האורך.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Section 7.4 (Area and Arc Length in Polar Coordinates), exercise 233; the interval moved from [0, π] to where r ≥ 0 (this course has no negative r), part (c) added'
+      url: https://openstax.org/books/calculus-volume-2/pages/7-4-area-and-arc-length-in-polar-coordinates
+      verified: '2026-11-27'
+      adapted: true

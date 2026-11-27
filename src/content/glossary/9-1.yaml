@@ -35,3 +35,21 @@
     ($\Delta t=2\pi$) הוא עולה $2\pi c$. הוא נמצא על הגליל $x^2+y^2=R^2$.
   reject: []
   lesson: '9.1'
+- id: self-intersection
+  term: נקודת חיתוך עצמי
+  en: self-intersection point (double point)
+  definition: >-
+    נקודה שעקום עובר בה פעמיים, בשני ערכים שונים של הפרמטר: $\vec r(t_1)=\vec r(t_2)$ עם $t_1\ne t_2$. למשל
+    $\left(t^2-1,\ t^3-t\right)$ עובר בראשית ב-$t=-1$ וב-$t=1$. קו העולם אינו חותך את עצמו אף פעם, כי בשני המעברים
+    ערך הזמן שונה.
+  reject: []
+  lesson: '9.1'
+- id: orientation
+  term: כיוון התנועה
+  en: orientation of a parametrisation
+  definition: >-
+    הכיוון שבו הנקודה $\vec r(t)$ עוברת על העקום כש-$t$ גדל. הוא שייך לפרמטריזציה ולא לעקום: $(\cos t,\sin t)$
+    מקיפה את מעגל היחידה נגד כיוון השעון, ו-$(\sin t,\cos t)$ עם כיוון השעון. בודקים אותו בהצבה של $t$ ההתחלתי ושל
+    ערך מעט מאוחר יותר.
+  reject: []
+  lesson: '9.1'

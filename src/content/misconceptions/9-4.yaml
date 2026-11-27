@@ -4,9 +4,9 @@
   belief: >-
     $\vec T=\vec v$, או $\vec v$ חלקי מספר שאינו אורכו.
   truth: >-
-    $\vec T=\frac{\vec v}{|\vec v|}$, ואורכו 1. בדיקה: $|\vec T|=1$. (וקטור מאונך ל-$\vec v$ הוא בכיוון הנורמל, לא
-    המשיק.)
-  remedy: { lesson: '9.4', label: 'וקטור היחידה המשיק' }
+    $\vec T=\frac{\vec v}{|\vec v|}$, ואורכו 1. בדיקה: $|\vec T|=1$. (וקטור מאונך ל-$\vec v$ אינו משיק; במישור הוא
+    בכיוון $\pm\vec N$.)
+  remedy: { lesson: '9.4', anchor: 'unit-tangent', label: 'וקטור היחידה המשיק' }
 
 - id: MC-c9-N-outward
   title: חושבים שוקטור הנורמל מצביע החוצה מהעיקול
@@ -14,16 +14,16 @@
     $\vec N$ מצביע לצד הקמור של העקום, החוצה מהמרכז, או שכיוונו תלוי בכיוון התנועה.
   truth: >-
     $\vec N=\frac{\vec T\,'}{|\vec T\,'|}$ מצביע לצד שאליו העקום מתעקל: במעגל, אל המרכז. הוא אינו תלוי בכיוון התנועה.
-  remedy: { lesson: '9.4', label: 'וקטור היחידה הנורמלי' }
+  remedy: { lesson: '9.4', anchor: 'unit-normal', label: 'וקטור היחידה הנורמלי' }
 
 - id: MC-c9-aN-is-a
   title: מזהים את רכיב התאוצה הנורמלי עם גודל התאוצה, או עם העקמומיות
   belief: >-
-    $a_N=|\vec a|$ תמיד, או $\kappa=a_N$, או $R=\frac{|\vec v|}{a_N}$.
+    $a_N=|\vec a|$ תמיד, או $\kappa=a_N$, או $\rho=\frac{|\vec v|}{a_N}$.
   truth: >-
     $|\vec a|^2=a_T^2+a_N^2$, ולכן $a_N=|\vec a|$ רק כש-$a_T=0$. והקשר לעקמומיות: $a_N=\kappa|\vec v|^2$, כלומר
-    $R=\frac1\kappa=\frac{|\vec v|^2}{a_N}$.
-  remedy: { lesson: '9.4', label: 'פירוק התאוצה ועקמומיות' }
+    $\rho=\frac1\kappa=\frac{|\vec v|^2}{a_N}$.
+  remedy: { lesson: '9.4', anchor: 'split', label: 'פירוק התאוצה ועקמומיות' }
 
 - id: MC-c9-aT-aN-swap
   title: מחליפים בין תפקידי התאוצה המשיקית והנורמלית
@@ -33,7 +33,7 @@
   truth: >-
     $a_T=\frac{d|\vec v|}{dt}=\frac{\vec v\cdot\vec a}{|\vec v|}$ משנה את **גודל** המהירות; $a_N=\kappa|\vec v|^2$
     משנה את **כיוונה**.
-  remedy: { lesson: '9.4', label: 'מה עושה כל רכיב של התאוצה' }
+  remedy: { lesson: '9.4', anchor: 'two-jobs', label: 'מה עושה כל רכיב של התאוצה' }
 
 - id: MC-c9-aT-sign
   title: מפרשים לא נכון את הסימן של רכיבי התאוצה
@@ -42,7 +42,7 @@
   truth: >-
     $a_T<0$ פירושו שגודל המהירות קטן (האטה), בכל כיוון תנועה. $a_N=|\vec v|\,|\vec T\,'|\ge0$ תמיד; הכיוון נמצא
     ב-$\vec N$.
-  remedy: { lesson: '9.4', label: 'הסימן של התאוצה המשיקית' }
+  remedy: { lesson: '9.4', anchor: 'signs', label: 'הסימן של התאוצה המשיקית' }
 
 - id: MC-c9-curvature-equals-radius
   title: מבלבלים בין עקמומיות לבין רדיוס העקמומיות
@@ -51,7 +51,7 @@
   truth: >-
     $\kappa=\frac1R$ ורדיוס המעגל הצמוד $\frac1\kappa$: עקום שמתעקל חזק הוא בעל עקמומיות גדולה ורדיוס קטן. בתנועה
     מעגלית $a_N=\frac{v^2}{R}$.
-  remedy: { lesson: '9.4', label: 'עקמומיות ומעגל צמוד' }
+  remedy: { lesson: '9.4', anchor: 'osculating', label: 'עקמומיות ומעגל צמוד' }
 
 - id: MC-c9-constant-curvature-circle
   title: חושבים שכל עקום במרחב עם עקמומיות קבועה הוא מעגל
@@ -60,7 +60,7 @@
   truth: >-
     במישור זה נכון; במרחב לא: לסליל $(3\cos t,3\sin t,4t)$ העקמומיות $\frac{3}{25}$ בכל נקודה. העקמומיות אינה מודדת
     יציאה מהמישור.
-  remedy: { lesson: '9.4', label: 'עקמומיות של סליל' }
+  remedy: { lesson: '9.4', anchor: 'helix-curvature', label: 'עקמומיות של סליל' }
 
 - id: MC-c9-helix-curvature-projection
   title: מחשבים את העקמומיות של סליל לפי המעגל שמתחתיו
@@ -69,4 +69,23 @@
   truth: >-
     לסליל $(R\cos t,R\sin t,ct)$: $\kappa=\frac{R}{R^2+c^2}<\frac1R$, קבועה. העלייה מותחת את העקום ומקטינה את
     העקמומיות.
-  remedy: { lesson: '9.4', label: 'עקמומיות של סליל' }
+  remedy: { lesson: '9.4', anchor: 'helix-curvature', label: 'עקמומיות של סליל' }
+
+# Added with the lesson (2026-11-27): the Predict's main distractor, and the slip of worked example 6.
+- id: MC-c9-circle-accel-centre
+  title: חושבים שבכל תנועה על מעגל התאוצה מצביעה אל המרכז
+  belief: >-
+    נקודה שנעה על מעגל, גם כשהיא מאיצה או מאטה, מקבלת תאוצה שמצביעה בדיוק אל המרכז.
+  truth: >-
+    אל המרכז מצביע רק הרכיב $a_N\vec N$, שאחראי לפנייה. כשגודל המהירות משתנה נוסף רכיב משיקי $a_T\vec T$, ו-$\vec a$
+    נוטה קדימה (מאיצה) או אחורה (מאטה). רק בתנועה מעגלית בגודל מהירות קבוע $\vec a$ מצביע בדיוק אל המרכז.
+  remedy: { lesson: '9.4', anchor: 'speeding-circle', label: 'תנועה מעגלית שמאיצה' }
+
+- id: MC-c9-curvature-per-time
+  title: מחשבים עקמומיות כקצב הסיבוב של T לפי הזמן
+  belief: >-
+    $\kappa=|\vec T\,'(t)|$, בלי לחלק בגודל המהירות.
+  truth: >-
+    עקמומיות היא קצב הסיבוב **לכל יחידת אורך**: $\kappa=\left|\frac{d\vec T}{ds}\right|=\frac{|\vec T\,'(t)|}{|\vec v|}$.
+    בלי החלוקה התשובה תלויה בקצב שבו עוברים על העקום, ומעגל שעוברים עליו פי 2 מהר "מתעקל" פי 2 חזק.
+  remedy: { lesson: '9.4', anchor: 'curvature', label: 'עקמומיות: לכל יחידת אורך' }

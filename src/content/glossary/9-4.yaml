@@ -47,9 +47,18 @@
 - id: osculating-circle
   term: מעגל צמוד
   en: osculating circle
-  symbol: 'R=\frac1\kappa'
+  symbol: '\rho=\frac1\kappa'
   definition: >-
     המעגל שמשיק לעקום בנקודה, באותה עקמומיות, ומרכזו בכיוון $\vec N$: המעגל שהכי מתאים לעקום שם. הרדיוס שלו,
-    $R=\frac1\kappa$, נקרא רדיוס העקמומיות.
+    $\rho=\frac1\kappa$, הוא רדיוס העקמומיות, והמרכז שלו הוא $\vec r+\rho\vec N$.
+  reject: []
+  lesson: '9.4'
+- id: radius-of-curvature
+  term: רדיוס עקמומיות
+  en: radius of curvature
+  symbol: '\rho=\frac1\kappa'
+  definition: >-
+    הרדיוס של המעגל הצמוד, $\rho=\frac1\kappa$: עקמומיות גדולה פירושה רדיוס קטן, פנייה חדה. בקטע ישר $\kappa=0$,
+    ואין מעגל צמוד (רדיוס "אינסופי"). בכל תנועה $a_N=\frac{|\vec v|^2}{\rho}$, כמו בתנועה מעגלית ברדיוס $\rho$.
   reject: []
   lesson: '9.4'

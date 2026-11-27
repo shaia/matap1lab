@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 9.3 figure: <Spread figure={ArcLab} figureProps={{ mode, f, … }}>.
+ * mode: polygon, speed, polar. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the top
+ * of ArcLab.tsx; the preset ids are those of the registries AL, RP and PL in src/math/arclength.ts.
+ */
+import ArcLab, { type ArcLabProps } from './ArcLab';
+type Props = ArcLabProps;
+---
+
+<ArcLab client:visible {...Astro.props} />

@@ -18,7 +18,8 @@ questions:
         feedback: 'נכון. מהמשוואה הראשונה $t=x-1$, ומציבים בשנייה. זו פרבולה שקודקודה ב-$(1,0)$.'
       - text: '$y=x^2+1$'
         feedback: >-
-          הצבתם $x$ במקום $t$ והוספתם 1. צריך לבטא את $t$ באמצעות $x$: $t=x-1$, ורק אז להציב.
+          הצבתם $x$ במקום $t$ והוספתם 1. צריך לבטא את $t$ באמצעות $x$: $t=x-1$, ורק אז להציב. בדקו ב-$t=0$: הנקודה
+          $(1,0)$, ו-$1^2+1=2\ne0$.
         misconception: MC-c9-substitute-x-for-t
       - text: '$y=x^2$'
         feedback: >-
@@ -54,7 +55,7 @@ questions:
   - id: Q-9.1-cartesian-expr
     type: expr
     objectives: [OBJ-9.1-1]
-    level: mid
+    level: basic
     prompt: >-
       העקום $x=e^t$, $y=e^{2t}+1$. בטאו את $y$ כפונקציה של $x$ (כש-$x>0$).
     answer: 'x^2+1'
@@ -98,8 +99,8 @@ questions:
           הזהות מראה שהעקום **בתוך** הישר, לא שהוא ממלא אותו. אלה שני כיוונים שונים.
         misconception: MC-c9-cartesian-whole-curve
       - text: 'העקום הוא מעגל, כי מופיעים בו סינוס וקוסינוס'
-        feedback: 'מופיעים ריבועים שלהם: $x+y=1$ היא משוואה לינארית, והעקום חלק מישר.'
-        misconception: MC-c9-semi-axes-squared
+        feedback: 'את הצורה קובעת המשוואה הקרטזית, לא הפונקציות שבנוסחה: $x+y=1$ היא משוואה לינארית, והעקום חלק מישר.'
+        misconception: MC-c9-trig-means-circle
 
   - id: Q-9.1-segment
     type: expr
@@ -202,7 +203,7 @@ questions:
   - id: Q-9.1-ellipse-param
     type: expr
     objectives: [OBJ-9.1-2]
-    level: mid
+    level: basic
     prompt: >-
       כתבו פרמטריזציה לאליפסה $\frac{(x-1)^2}{4}+\frac{y^2}{9}=1$ מהצורה $x(t)=\ldots$, $y(t)=3\sin t$, $0\le t\le2\pi$,
       נגד כיוון השעון, כך שב-$t=0$ הנקודה $(3,0)$.
@@ -263,8 +264,7 @@ questions:
       - text: 'נכון'
         correct: true
         feedback: >-
-          נכון. שתיהן עוברות בדיוק על הנקודות $(x,x^2)$, $0\le x\le2$. (בסיכומים הטווח של $\vec r_2$ נכתב
-          $0\le t\le4$; אז היא הייתה ממשיכה עד $(16,256)$.)
+          נכון. שתיהן עוברות בדיוק על הנקודות $(x,x^2)$, $0\le x\le2$: בשתיהן $y=x^2$, ו-$x$ עובר על כל הקטע $[0,2]$.
       - text: 'לא נכון'
         feedback: >-
           הנוסחאות שונות, אבל קבוצת הנקודות זהה. מה שונה הוא **קו העולם**: מתי ובאיזו מהירות הנקודה עוברת בכל מקום.
@@ -285,7 +285,7 @@ questions:
     type: multi
     objectives: [OBJ-9.1-3]
     qualitative: true
-    level: mid
+    level: basic
     prompt: >-
       $\vec r:[a,b]\to\mathbb{R}^2$ פונקציה וקטורית רציפה. אילו טענות נכונות? סמנו את כולן.
     choices:
@@ -307,7 +307,8 @@ questions:
     objectives: [OBJ-9.1-1]
     level: exam
     prompt: >-
-      העקום $x=t^2-1$, $y=t^3-t$, $t\in\mathbb{R}$. מהי המשוואה הקרטזית שלו? (רמז: $y=t\,x$.)
+      העקום $x=t^2-1$, $y=t^3-t$, $t\in\mathbb{R}$. מהי המשוואה הקרטזית שלו?
+    hints: ['$y=t\,(t^2-1)=t\,x$, ו-$t^2=x+1$.']
     choices:
       - text: '$y^2=x^2(x+1)$'
         correct: true
@@ -328,7 +329,7 @@ questions:
   - id: Q-9.1-projectile
     type: expr
     objectives: [OBJ-9.1-1]
-    level: exam
+    level: mid
     prompt: >-
       כדור נזרק מהראשית במהירות $20$ מטרים לשנייה בזווית $45^\circ$, ו-$g=10$: $x(t)=10\sqrt2\,t$,
       $y(t)=10\sqrt2\,t-5t^2$. בטאו את $y$ כפונקציה של $x$ (המסלול).
@@ -345,3 +346,58 @@ questions:
         feedback: 'הצבתם $x$ במקום $t$. צריך $t=\frac{x}{10\sqrt2}$.'
         misconception: MC-c9-substitute-x-for-t
     hints: ['$t=\dfrac{x}{10\sqrt2}$.']
+
+  - id: Q-9.1-find-crossing
+    type: mc
+    objectives: [OBJ-9.1-1]
+    level: exam
+    prompt: >-
+      העקום $\vec r(t)=\left(t^2-3,\ t^3-3t\right)$, $t\in\mathbb{R}$, חותך את עצמו. באיזו נקודה, ובאילו ערכים של $t$?
+    hints: ['מ-$x$ שווים: $t_2=-t_1$. הציבו ב-$y$ ודרשו $t_1\ne t_2$.']
+    choices:
+      - text: 'בנקודה $(0,0)$, ב-$t=-\sqrt3$ וב-$t=\sqrt3$'
+        correct: true
+        feedback: >-
+          נכון. $x$ שווים נותן $t_2=-t_1$ (הפלוס נפסל, כי $t_1\ne t_2$). אז $y(t_2)=-\left(t_1^3-3t_1\right)$, ו-$y$ שווים נותן
+          $t_1^3-3t_1=0$: $t_1=0$ נפסל, ונשאר $t_1=\pm\sqrt3$. ובשניהם $x=3-3=0$ ו-$y=\pm\left(3\sqrt3-3\sqrt3\right)=0$.
+      - text: 'בנקודה $(-3,0)$, ב-$t=0$'
+        feedback: >-
+          $t_1=t_2=0$ הוא פתרון של $\vec r(t_1)=\vec r(t_2)$, אבל זה רגע אחד, לא שני מעברים. חיתוך עצמי דורש
+          $t_1\ne t_2$.
+        misconception: MC-c9-self-cross-equal-t
+      - text: 'בנקודה $(1,\pm2)$, ב-$t=-2$ וב-$t=2$'
+        feedback: >-
+          ב-$t=\pm2$ אכן $x=1$ בשניהם, אבל $y(2)=2$ ו-$y(-2)=-2$: שתי נקודות שונות. צריך שוויון גם ב-$y$.
+        misconception: MC-c9-self-cross-equal-t
+      - text: 'העקום אינו חותך את עצמו: לכל $t$ יש נקודה אחרת'
+        feedback: >-
+          זה נכון לקו העולם, שבו $t$ הוא קואורדינטה. העקום עצמו שוכח את הזמן, ושני רגעים שונים יכולים לתת אותו מקום.
+        misconception: MC-c9-curve-equals-graph
+
+  - id: Q-9.1-on-surface
+    type: multi
+    objectives: [OBJ-9.1-1, OBJ-9.1-2]
+    qualitative: true
+    level: mid
+    prompt: >-
+      העקום במרחב $\vec r(t)=(\cos t,\ \sin t,\ \cos2t)$, $0\le t\le2\pi$. על אילו מהמשטחים הבאים הוא נמצא **כולו**? סמנו את
+      כולם.
+    hints: ['הציבו את כל הפרמטריזציה, ובדקו זהות לכל $t$. $\cos2t=\cos^2t-\sin^2t=2\cos^2t-1$.']
+    choices:
+      - text: 'הגליל $x^2+y^2=1$'
+        correct: true
+        feedback: 'נכון: $\cos^2t+\sin^2t=1$ לכל $t$.'
+      - text: 'המשטח $z=x^2-y^2$'
+        correct: true
+        feedback: 'נכון: $\cos^2t-\sin^2t=\cos2t$ לכל $t$.'
+      - text: 'המשטח $z=2x^2-1$'
+        correct: true
+        feedback: 'נכון: $2\cos^2t-1=\cos2t$ לכל $t$. (גליל מעל פרבולה, שיעור 2.5.)'
+      - text: 'הכדור $x^2+y^2+z^2=2$'
+        feedback: >-
+          ב-$t=0$ הנקודה $(1,0,1)$ אכן עליו, אבל באופן כללי $x^2+y^2+z^2=1+\cos^22t$, ולמשל ב-$t=\frac\pi4$ זה 1.
+        misconception: MC-c9-surface-check-one-point
+      - text: 'המישור $z=x$'
+        feedback: >-
+          ב-$t=0$ מתקיים $z=1=x$, אבל ב-$t=\frac\pi2$ הנקודה $(0,1,-1)$, ו-$-1\ne0$. נקודה אחת אינה מספיקה.
+        misconception: MC-c9-surface-check-one-point

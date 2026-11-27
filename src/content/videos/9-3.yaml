@@ -1,0 +1,27 @@
+# Videos of lesson 9.3 (arc length). Every id verified by oEmbed on 2026-11-27 (HTTP 200, title and channel as below);
+# durations from the watch page (lengthSeconds: 364 and 705), descriptions read there. No Hebrew video on arc length was
+# found (searched in Hebrew: אורך עקום, אורך קשת, with Khan Academy Hebrew and the Technion's channel).
+- id: v-9-3-khan-parametric
+  youtubeId: DXHM7LYGcbI
+  title: Parametric curve arc length | Applications of definite integrals | AP Calculus BC | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 6
+  why: >-
+    לפי הכותרת והתמליל: עקום שבו x ו-y הם פונקציות של פרמטר שלישי t, וקטעים קטנים שהאורך שלהם $\sqrt{dx^2+dy^2}$
+    מצטברים לאינטגרל של $\sqrt{x'(t)^2+y'(t)^2}$. השוו לסעיף "מקו שבור לאינטגרל" ולמצולע של איור 9.3א.
+  verified: '2026-11-27'
+- id: v-9-3-khan-polar
+  youtubeId: CEPuNmVKnZM
+  title: Justification for polar arc length formula
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 12
+  why: >-
+    לפי הכותרת ופרקי הסרטון: נוסחת האורך של עקום $r=f(\theta)$, נגזרת מהפרמטריזציה $x=r\cos\theta$,
+    $y=r\sin\theta$ בכלל המכפלה ומפיתגורס, בלי הוכחה פורמלית של הגבול. השוו לסעיף "אורך של עקום קוטבי".
+  verified: '2026-11-27'
