@@ -9,6 +9,8 @@
  */
 import AnyQuestion from '~/assessment/AnyQuestion';
 import { chapterQuestions, chaptersWithQuestions } from '~/assessment/bank';
+import { midtermPapers } from '~/assessment/midterm-bank';
+import { MIDTERM_LAST_CHAPTER } from '~/assessment/midterm';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { chapters, lessonSlug } from '~/course';
 import { url } from '~/lib/url';
@@ -27,6 +29,7 @@ const { byLesson, review, exam } = await chapterQuestions(n);
 const written = await writtenLessons();
 const workbooks = await lessonsWithWorkbook();
 const hasSummary = (await chaptersWithSummary()).has(n);
+const hasMidterm = (await midtermPapers()).length > 0;
 const lessonTitle = (id: string) => chapter?.lessons.find((l) => l.id === id)?.title ?? '';
 
 const LEVELS = [
@@ -59,6 +62,7 @@ let counter = 0;
       </div>
       <div class="p-links">
         <a class="btn primary" href={url(`test/ch${n}/`)}>למבחן הפרק</a>
+        {n === MIDTERM_LAST_CHAPTER && hasMidterm && <a class="btn" href={url('test/midterm/')}>מבחן אמצע: פרקים 1–8</a>}
         {hasSummary && <a class="btn" href={url(`summary/ch${n}/`)}>סיכום הפרק</a>}
         <a class="btn" href={url('')}>לתוכן העניינים</a>
       </div>

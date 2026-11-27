@@ -73,6 +73,8 @@
 .test-run,
 .test-report {
   display: grid;
+  /* one column that may shrink below its content: an implicit track grows to the widest formula (sideways scroll) */
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
 }
 .test-options {

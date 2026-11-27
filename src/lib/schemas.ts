@@ -199,6 +199,12 @@ export type AutoPart = Exclude<Part, OpenPart>;
 
 export const bankSchema = z.object({ chapter: z.number().int(), questions: z.array(question) });
 
+/**
+ * The midterm (מבחן אמצע, chapters 1–8): exam questions in the same format, id Q-mid-<paper>-<block>
+ * (src/assessment/midterm.ts). One YAML list per block, src/content/midterm/block-<k>.yaml.
+ */
+export const midtermQuestionSchema = exam.extend({ id: z.string().regex(/^Q-mid-[1-9]-[1-5]$/) });
+
 export const misconceptionSchema = z.object({
     id: z.string().regex(/^MC-[\w-]+$/),
     title: z.string(),

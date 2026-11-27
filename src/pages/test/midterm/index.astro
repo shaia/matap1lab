@@ -1,0 +1,45 @@
+---
+/**
+ * The midterm (מבחן אמצע): chapters 1–8, as in course 80114. Five exam questions per paper, the four best
+ * counted; see src/assessment/midterm.ts. Built only once a complete paper exists.
+ */
+import { midtermPapers } from '~/assessment/midterm-bank';
+import MidtermRunner from '~/assessment/MidtermRunner';
+import { MIDTERM_LAST_CHAPTER } from '~/assessment/midterm';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { chapters } from '~/course';
+import { lessonHref, misconceptionLinks, writtenLessons } from '~/lib/links';
+import { url } from '~/lib/url';
+import '~/styles/lesson.css';
+import '~/styles/platform.css';
+
+const papers = await midtermPapers();
+const written = await writtenLessons();
+const lessons = Object.fromEntries(
+  chapters
+    .filter((c) => c.n >= 1 && c.n <= MIDTERM_LAST_CHAPTER)
+    .flatMap((c) => c.lessons)
+    .map((l) => [l.id, { title: l.title, href: lessonHref(l.id, written) }]),
+);
+const misconceptions = await misconceptionLinks(written);
+---
+
+<BaseLayout title="מבחן אמצע" description="מבחן אמצע על פרקים 1–8: חמש שאלות מבחן, עונים על ארבע, עם בדיקה ודוח אחרי ההגשה">
+  <div class="platform">
+    <section class="sheet sheet-narrow">
+      <p class="kicker">פרקים <span class="ltr">1–{MIDTERM_LAST_CHAPTER}</span> · וקטורים, מרוכבים, פונקציות, נגזרות, טיילור ואינטגרלים</p>
+      <h1>מבחן אמצע</h1>
+      <p class="p-lede">
+        כמו בקורס: מבחן אחד בכתב על כל החומר עד האינטגרל המסוים. כדאי לגשת אליו אחרי שעברתם על הסיכומים ועל שאלות המבחן של כל
+        הפרקים, ולעשות אותו ברצף, עם שעון.
+      </p>
+      {
+        papers.length === 0 ? (
+          <p>מבחן האמצע עוד לא מוכן.</p>
+        ) : (
+          <MidtermRunner client:load papers={papers} lessons={lessons} misconceptions={misconceptions} meHref={url('me/')} homeHref={url('')} />
+        )
+      }
+    </section>
+  </div>
+</BaseLayout>

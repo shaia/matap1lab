@@ -19,11 +19,16 @@ interface Props {
   kind?: AttemptKind;
   /** called once, when the student finishes the self-check */
   onScored: (earned: number) => void;
+  /**
+   * After a written test (the midterm): what the student wrote during the test. The model solution opens at
+   * once, the text is shown read-only and there are no hints: the test is over.
+   */
+  written?: string;
 }
 
-export default function OpenPart({ q, part, lesson = null, kind = 'practice', onScored }: Props) {
-  const [text, setText] = useState('');
-  const [revealed, setRevealed] = useState(false);
+export default function OpenPart({ q, part, lesson = null, kind = 'practice', onScored, written }: Props) {
+  const [text, setText] = useState(written ?? '');
+  const [revealed, setRevealed] = useState(written !== undefined);
   const [ticked, setTicked] = useState<boolean[]>(() => part.rubric.map(() => false));
   const [done, setDone] = useState<{ earned: number; fraction: number } | null>(null);
   const [hints, setHints] = useState(0);
@@ -56,8 +61,13 @@ export default function OpenPart({ q, part, lesson = null, kind = 'practice', on
       </div>
       <div class="q-prompt" dangerouslySetInnerHTML={{ __html: part.prompt }} />
 
-      <label class="open-write">
-        <span class="open-write-label">כתבו את הפתרון שלכם: מה נתון, מה מבקשים, הצעדים והתוצאה.</span>
+      {written === undefined ? null : written.trim() === '' ? (
+        <p class="open-note">השוו את הפתרון שכתבתם על הדף לפתרון לדוגמה, וסמנו את מה שעשיתם נכון.</p>
+      ) : null}
+      <label class="open-write" hidden={written !== undefined && written.trim() === ''}>
+        <span class="open-write-label">
+          {written === undefined ? 'כתבו את הפתרון שלכם: מה נתון, מה מבקשים, הצעדים והתוצאה.' : 'מה שכתבתם במבחן:'}
+        </span>
         <textarea
           rows={5}
           value={text}
@@ -105,7 +115,7 @@ export default function OpenPart({ q, part, lesson = null, kind = 'practice', on
             <legend class="q-subprompt">בדקו את הפתרון שלכם מול הסעיפים. סמנו את מה שעשיתם נכון.</legend>
             {part.rubric.map((r, i) => (
               <label key={i} class={`q-choice ${ticked[i] ? 'on' : ''}`}>
-                <input type="checkbox" checked={ticked[i]} onChange={() => setTicked(ticked.map((t, k) => (k === i ? !t : t)))} />
+                <input type="checkbox" checked={ticked[i]} onChange={() => setTicked((cur) => cur.map((t, k) => (k === i ? !t : t)))} />
                 <span dangerouslySetInnerHTML={{ __html: r.text }} />
               </label>
             ))}

@@ -1,0 +1,470 @@
+# Midterm block 3 (chapters 4-5: functions, limits and continuity; derivatives): one exam question per paper, 25 points each.
+# Original, in the style of an 80114 exam (not taken from a real exam). The three questions centre on different
+# lessons: Q-mid-1-3 on 5.3 and 5.5 with 4.6 (the quickest path of a lifeguard: chain rule, a minimum on a closed
+# interval and on the whole line), Q-mid-2-3 on 5.4 and 5.2 with 4.2, 4.6, 5.5 and 5.1 (Kepler's equation: existence,
+# uniqueness and symmetries of an inverse, its derivative and linear approximation, a vertical tangent), Q-mid-3-3 on
+# 4.5, 4.3 and 4.6 with 4.1, 4.2, 5.3 and 5.2 (the Fermi-Dirac occupation: a limit that becomes a jump, tanh, a
+# tangent line). No f'' and no Taylor: extrema and monotonicity by the sign of the first derivative.
+# Every key, commonWrong and solution step recomputed with sympy (scratchpad script block3_check.py, run 2026-11-27).
+
+- id: Q-mid-1-3
+  type: exam
+  title: המציל והדרך המהירה ביותר
+  prompt: >-
+    קו החוף הוא ציר $x$ (מטרים): החול הוא $y>0$ והים $y<0$. מציל עומד בנקודה $A=(0,7)$ על החול, ושחיין במצוקה נמצא
+    בנקודה $B=(31,-24)$ בים. המציל רץ על החול במהירות 6 מ׳ לשנייה ושוחה במהירות 1.75 מ׳ לשנייה. הוא רץ בקו ישר
+    לנקודה $P=(x,0)$ על קו החוף, כש-$0\le x\le31$, ומשם שוחה בקו ישר אל $B$. הזמן הכולל (בשניות) הוא
+
+    $$T(x)=\frac{\sqrt{x^2+49}}{6}+\frac{4\sqrt{(31-x)^2+576}}{7},\qquad 0\le x\le31 .$$
+  parts:
+    - label: א
+      points: 6
+      type: expr
+      objectives: [OBJ-5.3-2]
+      prompt: 'חשבו את $T''(x)$.'
+      answer: 'x/(6*sqrt(x^2+49)) - 4*(31-x)/(7*sqrt((31-x)^2+576))'
+      answerTex: '$T''(x)=\dfrac{x}{6\sqrt{x^2+49}}-\dfrac{4(31-x)}{7\sqrt{(31-x)^2+576}}$'
+      variables: [x]
+      domain: [0, 31]
+      correctFeedback: >-
+        נכון. $\left(\sqrt u\right)'=\frac{u'}{2\sqrt u}$: באיבר הראשון $u'=2x$, ובשני $u'=2(31-x)\cdot(-1)$, ומכאן
+        המינוס.
+      wrongFeedback: >-
+        גזרו כל שורש בכלל השרשרת: $\left(\sqrt u\right)'=\frac{1}{2\sqrt u}\cdot u'$. באיבר השני הפנימית היא
+        $(31-x)^2+576$, והנגזרת שלה $2(31-x)\cdot(-1)$.
+      commonWrong:
+        - expr: 'x/(6*sqrt(x^2+49)) + 4*(31-x)/(7*sqrt((31-x)^2+576))'
+          feedback: >-
+            באיבר השני חסר הכופל $(-1)$, הנגזרת של $31-x$: הנגזרת של $(31-x)^2$ היא $2(31-x)\cdot(-1)$, לא $2(31-x)$.
+            בלי המינוס $T'>0$ בכל הקטע, והזמן נראה עולה כל הדרך.
+          misconception: MC-c5-chain-missing-inner
+        - expr: '1/(12*sqrt(x^2+49)) + 2/(7*sqrt((31-x)^2+576))'
+          feedback: >-
+            גזרתם רק את השורש, $\frac{1}{2\sqrt u}$, בלי לכפול בנגזרת של מה שבתוכו ($2x$ באיבר הראשון,
+            ו-$2(31-x)\cdot(-1)$ בשני).
+          misconception: MC-c5-chain-missing-inner
+
+    - label: ב
+      points: 10
+      type: open
+      objectives: [OBJ-5.5-3, OBJ-5.3-2]
+      prompt: >-
+        הראו ש-$T'(24)=0$, ושאין ל-$T$ נקודה קריטית אחרת בקטע $(0,31)$. הסיקו שהזמן הקצר ביותר מתקבל כשהמציל נכנס למים
+        ב-$x=24$, והשוו עם שתי האפשרויות שבקצוות: לרוץ ישר לקו המים ($x=0$), או לרוץ לנקודת החוף הקרובה ביותר לשחיין
+        ($x=31$).
+      solution:
+        - kind: given
+          text: >-
+            $T'(x)=\frac16\,g(x)-\frac47\,h(x)$ (סעיף א), כאשר $g(x)=\frac{x}{\sqrt{x^2+49}}$ ו-$h(x)=\frac{31-x}{\sqrt{(31-x)^2+576}}$.
+        - kind: goal
+          text: '$T''(24)=0$, אין נקודה קריטית אחרת ב-$(0,31)$, ו-$T(24)$ הוא הערך הקטן ביותר של $T$ בקטע $[0,31]$.'
+        - kind: idea
+          text: >-
+            לא פותרים את $T'(x)=0$ (זו משוואה קשה), אלא מראים ש-$T'$ **עולה** בקטע: אז היא מתאפסת לכל היותר פעם אחת. אחרי
+            שמוצאים את האפס, הסימן של $T'$ משני צדדיו קובע מינימום, ובקטע סגור משווים גם עם הקצוות.
+        - kind: computation
+          text: >-
+            $g(24)=\frac{24}{\sqrt{625}}=\frac{24}{25}$ ו-$h(24)=\frac{7}{\sqrt{49+576}}=\frac{7}{25}$, ולכן
+            $T'(24)=\frac{24}{150}-\frac{28}{175}=\frac{4}{25}-\frac{4}{25}=0$.
+        - kind: step
+          text: >-
+            ל-$x>0$ מחלקים מונה ומכנה ב-$x$, ונכנסים עם ה-$x$ אל תוך השורש בעזרת $x=\sqrt{x^2}$ (מותר כי $x>0$):
+
+            $$g(x)=\frac{1}{\frac1x\sqrt{x^2+49}}=\frac{1}{\sqrt{\frac{x^2+49}{x^2}}}=\frac{1}{\sqrt{1+49/x^2}} .$$
+
+            כש-$x$ גדל, $\frac{49}{x^2}$ קטן, המכנה קטן ו-$g$ גדלה; וגם $g(0)=0<g(x)$.
+            באותה דרך, ל-$x<31$ מחלקים ב-$31-x>0$: $h(x)=\frac{1}{\sqrt{1+576/(31-x)^2}}$. כש-$x$ גדל, $31-x$ קטן, $\frac{576}{(31-x)^2}$ גדל ו-$h$ קטנה; וגם
+            $h(31)=0$. לכן $T'=\frac16g-\frac47h$ עולה ממש ב-$[0,31]$.
+        - kind: step
+          text: >-
+            פונקציה עולה ממש מתאפסת לכל היותר פעם אחת, ולכן $x=24$ היא הנקודה הקריטית היחידה. יותר מזה: $T'<0$ ב-$[0,24)$
+            ו-$T'>0$ ב-$(24,31]$, כלומר $T$ יורדת ב-$[0,24]$ ועולה ב-$[24,31]$. לכן $T(24)<T(x)$ לכל $x\ne24$ בקטע, גם
+            בקצוות.
+        - kind: computation
+          text: >-
+            $T(24)=\frac{25}{6}+\frac{4\cdot25}{7}=\frac{775}{42}\approx18.45$ שניות. בקצוות:
+            $T(0)=\frac76+\frac{4\sqrt{1537}}{7}\approx23.57$ ו-$T(31)=\frac{\sqrt{1010}}{6}+\frac{96}{7}\approx19.01$.
+        - kind: check
+          text: >-
+            הסימנים בקצוות מתאימים:
+
+            $$\begin{aligned}T'(0)&=-\frac{4\cdot31}{7\sqrt{1537}}\approx-0.45<0,\\ T'(31)&=\frac{31}{6\sqrt{1010}}\approx0.16>0 .\end{aligned}$$
+
+            ובמשמעות: $g(x)$ ו-$h(x)$ הם הסינוסים של הזוויות $\theta_1,\theta_2$ של שני קטעי המסלול עם האנך לחוף, ו-$T'(24)=0$
+            אומר $\frac{\sin\theta_1}{6}=\frac{\sin\theta_2}{1.75}$: חוק סנל של שבירת אור, שגם הוא נובע מעקרון של זמן קצר ביותר.
+        - kind: result
+          text: >-
+            $x=24$ היא הנקודה הקריטית היחידה של $T$ ב-$(0,31)$, ו-$T$ יורדת לפניה ועולה אחריה: הזמן הקצר ביותר הוא
+            $\frac{775}{42}\approx18.45$ שניות, לעומת כ-$23.57$ ב-$x=0$ וכ-$19.01$ ב-$x=31$.
+      rubric:
+        - text: 'בדיקה מפורשת ש-$T''(24)=0$'
+          weight: 2
+        - text: 'נימוק לכך ש-$T''$ עולה ממש בקטע (כל אחד משני האיברים מונוטוני, או $T''''>0$ בקטע: גם זה מתקבל), ולכן אין נקודה קריטית אחרת'
+          weight: 3
+        - text: 'הסימן של $T''$ משני צידי 24 (או הערכים בקצוות): $T$ יורדת ואחר כך עולה, ולכן מינימום'
+          weight: 3
+        - text: 'הזמן $\frac{775}{42}\approx18.45$ והשוואה עם $T(0)\approx23.57$ ו-$T(31)\approx19.01$'
+          weight: 2
+
+    - label: ג
+      points: 4
+      type: numeric
+      objectives: [OBJ-5.5-3, OBJ-5.3-2]
+      prompt: >-
+        נניח שהמציל שוחה מהר כמו שהוא רץ: 6 מ׳ לשנייה גם במים (שאר הנתונים לא משתנים). באיזו נקודה $x$ על קו החוף
+        כדאי לו להיכנס למים עכשיו?
+      answer: 7
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון. עכשיו $T(x)=\frac16\left(\sqrt{x^2+49}+\sqrt{(31-x)^2+576}\right)$, ו-$T'(x)=0$ פירושו
+        $\frac{x}{\sqrt{x^2+49}}=\frac{31-x}{\sqrt{(31-x)^2+576}}$: שתי הזוויות עם האנך שוות, ולכן המשולשים הישרי-זווית
+        דומים ו-$\frac x7=\frac{31-x}{24}$, כלומר $x=7$. בלי חשבון: כשהמהירות אחת, הזמן הוא האורך חלקי 6, והדרך הקצרה ביותר
+        היא הקו הישר $AB$, שחוצה את קו החוף ב-$x=7$.
+      wrongFeedback: >-
+        כתבו את $T(x)$ החדש וגזרו, או חשבו על המשמעות: כשהמהירות על החול ובמים שווה, הזמן קצר ביותר כשהדרך קצרה ביותר.
+        היכן הקו הישר מ-$A$ ל-$B$ חוצה את ציר $x$?
+      commonWrong:
+        - value: 24
+          feedback: >-
+            זו נקודת הכניסה של המהירויות המקוריות. נקודת הכניסה הטובה ביותר תלויה ביחס בין המהירויות: עם מהירות אחת
+            $T'(24)=\frac{1}{6}\left(\frac{24}{25}-\frac{7}{25}\right)>0$, ולכן 24 אינה נקודה קריטית.
+        - value: 15.5
+          feedback: >-
+            אמצע הקטע $[0,31]$ אינו נקודה מיוחדת: $A$ ו-$B$ אינם באותו מרחק מקו החוף (7 מול 24). הקו הישר $AB$ חוצה את קו
+            החוף קרוב יותר ל-$A$, ב-$x=7$.
+
+    - label: ד
+      points: 5
+      type: mc
+      objectives: [OBJ-4.6-3, OBJ-5.5-3]
+      qualitative: true
+      prompt: >-
+        נניח שהמציל רשאי להיכנס למים בכל נקודה של קו החוף, כלומר $T(x)$ מוגדרת באותה נוסחה לכל $x$ ממשי. איזו טענה
+        נכונה?
+      choices:
+        - text: 'יש ל-$T$ ערך קטן ביותר על כל הישר, ב-$x=24$, כי $T''<0$ לכל $x<24$ ו-$T''>0$ לכל $x>24$'
+          correct: true
+          feedback: >-
+            נכון. כש-$x<0$ שני האיברים של $T'$ שליליים ($x<0$ ו-$31-x>0$), וכש-$x>31$ שניהם חיוביים; ב-$[0,31]$ זה סעיף ב.
+            לכן $T$ יורדת ב-$(-\infty,24]$ ועולה ב-$[24,\infty)$, ו-$T(24)$ הוא המינימום על כל הישר.
+        - text: 'יש ל-$T$ ערך קטן ביותר, כי $T$ רציפה על כל הישר, ומשפט קיום מקסימום ומינימום מבטיח אותו'
+          feedback: >-
+            המסקנה נכונה, הנימוק לא. המשפט דורש קטע **סגור וחסום** $[a,b]$, והישר כולו אינו כזה: $\arctan x$ רציפה על כל
+            הישר ואין לה ערך קטן ביותר. כאן המינימום נובע מהסימן של $T'$.
+          misconception: MC-c4-evt-open-interval
+        - text: 'אין ערובה שיש ל-$T$ ערך קטן ביותר, כי משפט קיום מקסימום ומינימום חל רק בקטע סגור'
+          feedback: >-
+            המשפט נותן תנאי **מספיק**: כשהוא אינו חל, עדיין ייתכן מינימום, ואותו מוכיחים בדרך אחרת. כאן $T$ יורדת עד 24 ועולה
+            אחריו, ולכן $T(24)$ קטן מכל ערך אחר.
+          misconception: MC-c4-evt-necessary
+        - text: 'יש ל-$T$ ערך קטן ביותר ב-$x=24$, כי $T''(24)=0$'
+          feedback: >-
+            נגזרת שמתאפסת אינה מבטיחה אפילו קיצון מקומי ($x^3$ ב-0), ובוודאי לא את הערך הקטן ביותר על כל הישר. צריך את הסימן
+            של $T'$ משני הצדדים, בכל הישר.
+          misconception: MC-c5-fprime-zero-extremum
+
+- id: Q-mid-2-3
+  type: exam
+  title: משוואת קפלר
+  prompt: >-
+    במסלול של כוכב לכת סביב השמש מודדים את הזמן בזווית $M$ ("האנומליה הממוצעת", שגדלה בקצב קבוע ב-$2\pi$ בכל הקפה),
+    ואת המקום על המסלול בזווית אחרת, $E$. הן קשורות ב**משוואת קפלר** $M=E-\varepsilon\sin E$, כאשר $\varepsilon$, מספר בין
+    0 ל-1, הוא האקסצנטריות של המסלול. בסעיפים א-ג $\varepsilon=\frac12$:
+
+    $$M=f(E)=E-\tfrac12\sin E .$$
+
+    את המשוואה אי אפשר לפתור לפי $E$ בנוסחה. נסמן ב-$E=g(M)$ את הפתרון (אחרי שנראה בסעיף א שהוא קיים ויחיד).
+  parts:
+    - label: א
+      points: 10
+      type: open
+      objectives: [OBJ-5.5-3, OBJ-4.6-3, OBJ-4.2-3]
+      prompt: >-
+        הוכיחו שלכל $M$ ממשי יש למשוואה $f(E)=M$ פתרון $E$ אחד בדיוק, ושהוא מקיים $|E-M|\le\frac12$. הראו גם ש-$g$
+        אי-זוגית ושלכל $M$ מתקיים $g(M+2\pi)=g(M)+2\pi$.
+      solution:
+        - kind: given
+          text: '$f(E)=E-\frac12\sin E$, רציפה וגזירה על כל הישר.'
+        - kind: goal
+          text: 'קיום ויחידות של פתרון לכל $M$, החסם $|E-M|\le\frac12$, והתכונות $g(-M)=-g(M)$ ו-$g(M+2\pi)=g(M)+2\pi$.'
+        - kind: idea
+          text: >-
+            יחידות באה ממונוטוניות (הסימן של $f'$), קיום ממשפט ערך הביניים בקטע שבו $f-M$ מחליפה סימן. את הסימטריות של $g$
+            מעבירים מ-$f$ בעזרת היחידות: אם מספר מקיים את המשוואה, הוא **הפתרון**.
+        - kind: step
+          text: >-
+            $f'(E)=1-\frac12\cos E\ge1-\frac12=\frac12>0$ לכל $E$, ולכן $f$ עולה ממש על כל הישר, ולמשוואה $f(E)=M$ יש לכל
+            היותר פתרון אחד.
+        - kind: computation
+          text: >-
+            כי $|\sin|\le1$:
+
+            $$\begin{aligned}f\!\left(M+\tfrac12\right)-M&=\tfrac12-\tfrac12\sin\!\left(M+\tfrac12\right)\ge0,\\ f\!\left(M-\tfrac12\right)-M&=-\tfrac12-\tfrac12\sin\!\left(M-\tfrac12\right)\le0.\end{aligned}$$
+        - kind: theorem
+          text: >-
+            משפט ערך הביניים: $f$ רציפה בקטע הסגור $\left[M-\frac12,M+\frac12\right]$, ו-$M$ נמצא בין הערכים שלה בקצוות, ולכן
+            יש בקטע $E$ עם $f(E)=M$.
+        - kind: step
+          text: >-
+            לכן יש פתרון אחד בדיוק, והוא בקטע: $|E-M|\le\frac12$. (אותו חסם יוצא גם ישר מהמשוואה: $E-M=\frac12\sin E$.)
+        - kind: step
+          text: >-
+            $f$ אי-זוגית: $f(-E)=-E+\frac12\sin E=-f(E)$. אם $E=g(M)$, אז $f(-E)=-M$, ולפי היחידות $g(-M)=-E=-g(M)$.
+        - kind: step
+          text: >-
+            $f(E+2\pi)=E+2\pi-\frac12\sin E=f(E)+2\pi$. לכן $f\big(g(M)+2\pi\big)=M+2\pi$, ולפי היחידות $g(M+2\pi)=g(M)+2\pi$.
+        - kind: result
+          text: >-
+            לכל $M$ יש פתרון יחיד $E=g(M)$, עם $|g(M)-M|\le\frac12$; $g$ אי-זוגית, ו-$g(M)-M$ מחזורית עם מחזור $2\pi$: אחרי
+            הקפה שלמה ($M$ גדל ב-$2\pi$) גם $E$ גדל ב-$2\pi$, והכוכב חוזר לאותו מקום.
+      rubric:
+        - text: '$f''(E)=1-\frac12\cos E\ge\frac12>0$, ולכן $f$ עולה ממש ויש לכל היותר פתרון אחד'
+          weight: 2
+        - text: 'קיום בעזרת משפט ערך הביניים: קטע מפורש שבקצותיו $f-M$ מחליפה סימן, עם רציפות'
+          weight: 3
+        - text: 'החסם $|E-M|\le\frac12$'
+          weight: 1
+        - text: 'אי-זוגיות של $g$ מאי-זוגיות של $f$ ומהיחידות'
+          weight: 2
+        - text: '$g(M+2\pi)=g(M)+2\pi$ מ-$f(E+2\pi)=f(E)+2\pi$ ומהיחידות'
+          weight: 2
+
+    - label: ב
+      points: 5
+      type: numeric
+      objectives: [OBJ-5.4-2]
+      prompt: >-
+        ברגע שבו $E=\frac\pi3$, כלומר $M=\frac\pi3-\frac{\sqrt3}4$, חשבו את $\frac{dE}{dM}=g'(M)$.
+      answer: 1.3333333333333333
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון. $g'(M)=\frac{1}{f'(E)}$ בנקודה $E=g(M)=\frac\pi3$: $f'\!\left(\frac\pi3\right)=1-\frac12\cdot\frac12=\frac34$, ולכן
+        $g'=\frac43$.
+      wrongFeedback: >-
+        הנגזרת של ההפוכה היא אחד חלקי הנגזרת של $f$, מחושבת בנקודה $E$ שמתאימה ל-$M$ (כאן $\frac\pi3$), לא ב-$M$ עצמו.
+      commonWrong:
+        - value: 0.75
+          feedback: >-
+            $\frac34=f'\!\left(\frac\pi3\right)$ היא הנגזרת של $f$. הנגזרת של ההפוכה היא ההופכי שלה, $\frac{1}{3/4}$.
+          misconception: MC-c5-inverse-is-reciprocal
+        - value: 1.69096510762481
+          feedback: >-
+            חישבתם $\frac{1}{f'(M)}$ עם $M=\frac\pi3-\frac{\sqrt3}4\approx0.614$. את $f'$ מציבים בנקודה $E=\frac\pi3$ שבה
+            $f(E)=M$, לא ב-$M$.
+          misconception: MC-c5-inverse-wrong-point
+
+    - label: ג
+      points: 5
+      type: numeric
+      objectives: [OBJ-5.2-1, OBJ-5.4-2]
+      prompt: >-
+        נתון ש-$g(\pi)=\pi$ (כי $f(\pi)=\pi-\frac12\sin\pi=\pi$). העריכו בעזרת הקירוב הלינארי של $g$ ליד $M=\pi$ את $E$
+        כש-$M=\pi+0.3$.
+      answer: 3.3415926535897933
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $E\approx\pi+0.2\approx3.3416$. $g(\pi)=\pi$, ו-$g'(\pi)=\frac{1}{f'(\pi)}=\frac{1}{1+\frac12}=\frac23$.
+        הקירוב: $g(\pi+0.3)\approx\pi+\frac23\cdot0.3$. (פתרון מספרי של המשוואה נותן $E\approx3.3420$: השגיאה כ-$0.0004$.)
+      wrongFeedback: >-
+        $g(\pi+0.3)\approx g(\pi)+g'(\pi)\cdot0.3$, עם $g'(\pi)=\frac{1}{f'(\pi)}$ ו-$\cos\pi=-1$.
+      commonWrong:
+        - value: 3.5915926535897933
+          feedback: >-
+            השתמשתם בשיפוע $f'(\pi)=\frac32$. השיפוע של ההפוכה הוא $\frac{1}{f'(\pi)}=\frac23$: ליד $\pi$ הזווית $E$ משתנה
+            **לאט** יותר מ-$M$.
+          misconception: MC-c5-inverse-is-reciprocal
+        - value: 0.2
+          feedback: >-
+            $0.2$ הוא רק השינוי $g'(\pi)\cdot0.3$. הקירוב הלינארי מתחיל מהערך בנקודת ההשקה: $g(\pi)+0.2$.
+          misconception: MC-c5-tangent-through-origin
+
+    - label: ד
+      points: 5
+      type: twotier
+      objectives: [OBJ-5.1-3, OBJ-5.4-2]
+      qualitative: true
+      prompt: >-
+        במקרה הגבולי $\varepsilon=1$ המשוואה היא $M=f_1(E)=E-\sin E$. הנגזרת $f_1'(E)=1-\cos E$ אינה שלילית ומתאפסת רק
+        בנקודות בודדות ($E=2\pi k$), ולכן $f_1$ עולה ממש ויש לה פונקציה הפוכה $g_1$. נכון או לא נכון: $g_1$ גזירה
+        בנקודה $M=0$.
+      choices:
+        - text: 'נכון'
+          feedback: >-
+            $(f^{-1})'=\frac{1}{f'}$ דורש $f'\ne0$ בנקודה המתאימה. כאן $g_1(0)=0$ ו-$f_1'(0)=0$: הנוסחה נותנת אחד חלקי אפס,
+            ול-$g_1$ יש ב-0 משיק אנכי.
+          misconception: MC-c5-inverse-always-differentiable
+        - text: 'לא נכון'
+          correct: true
+          feedback: >-
+            נכון. $f_1'(0)=0$: לגרף של $f_1$ משיק אופקי בראשית, ובשיקוף ביחס ל-$y=x$ הוא הופך למשיק אנכי של $g_1$. גם
+            בלי שום נוסחה: $g_1(0.001)\approx0.18$, ומנת ההפרשים שם כבר כ-180.
+      reasons:
+        - text: >-
+            מנת ההפרשים של $g_1$ ב-0 היא $\frac{g_1(h)}{h}=\frac{E}{f_1(E)}$ עם $E=g_1(h)$, וכש-$h\to0$ גם $E\to0$ ו-$\frac{f_1(E)}{E}\to f_1'(0)=0$
+            (מספרים חיוביים), ולכן המנה שואפת לאינסוף
+          correct: true
+          feedback: >-
+            בדיוק: הגבול של מנת ההפרשים אינו קיים כמספר. זה משיק אנכי, כמו של $\sqrt[3]{x}$ ב-0, ההפוכה של $x^3$.
+        - text: '$f_1$ גזירה ועולה ממש, ולכן גם ההפוכה שלה גזירה, עם $g_1''=\frac{1}{f_1''}$'
+          feedback: >-
+            ההפוכה של פונקציה גזירה ועולה ממש גזירה רק היכן ש-$f'\ne0$ בנקודה המתאימה. $x^3$ גזירה ועולה ממש, ו-$\sqrt[3]{x}$
+            אינה גזירה ב-0.
+          misconception: MC-c5-inverse-always-differentiable
+        - text: '$g_1$ גזירה ב-0 ו-$g_1''(0)=f_1''(0)=0$: לגרף של ההפוכה יש באותה נקודה אותו משיק אופקי'
+          feedback: >-
+            השיפוע של ההפוכה הוא ההופכי של השיפוע של $f_1$, לא אותו שיפוע: השיקוף ביחס ל-$y=x$ מחליף בין הצירים, ומשיק
+            אופקי של $f_1$ הופך למשיק **אנכי** של $g_1$. ובמספרים: $g_1(0.001)\approx0.18$, רחוק מאוד מ"שיפוע 0".
+          misconception: MC-c5-inverse-is-reciprocal
+
+- id: Q-mid-3-3
+  type: exam
+  title: התפלגות פרמי-דיראק
+  prompt: >-
+    במתכת בטמפרטורה מוחלטת $T$, ההסתברות שמצב של אלקטרון עם אנרגיה $E$ תפוס היא (התפלגות פרמי-דיראק)
+
+    $$n(x)=\frac{1}{e^{x/\tau}+1},$$
+
+    כאשר $x=E-\mu$ היא האנרגיה ביחס לאנרגיה קבועה $\mu$ ("הפוטנציאל הכימי"), ו-$\tau=kT>0$ היא הטמפרטורה ביחידות של
+    אנרגיה ($k$ הוא קבוע בולצמן). $x$ הוא המשתנה, ו-$\tau$ פרמטר.
+  parts:
+    - label: א
+      points: 5
+      type: mc
+      objectives: [OBJ-4.6-1, OBJ-4.6-2, OBJ-4.3-1]
+      qualitative: true
+      prompt: >-
+        מקררים את המתכת לכיוון האפס המוחלט. לכל $x$ קבוע נגדיר $n_0(x)=\lim_{\tau\to0^+}n(x)$. מהי $n_0$, ואיזו אי-רציפות
+        יש לה ב-$x=0$?
+      choices:
+        - text: '$n_0(x)=1$ כש-$x<0$, $n_0(0)=\frac12$, ו-$n_0(x)=0$ כש-$x>0$: אי-רציפות מסוג קפיצה'
+          correct: true
+          feedback: >-
+            נכון. כש-$x>0$, $\frac x\tau\to\infty$, ולכן $e^{x/\tau}\to\infty$ ו-$n\to0$. כש-$x<0$, $\frac x\tau\to-\infty$, ולכן
+            $e^{x/\tau}\to0$ ו-$n\to1$. וב-$x=0$, $n=\frac12$ לכל $\tau$. הגבולות החד-צדדיים של $n_0$ ב-0 הם 1 משמאל ו-0 מימין:
+            סופיים ושונים.
+        - text: 'אותה $n_0$, ואי-רציפות סליקה, כי שני הגבולות החד-צדדיים ב-0 סופיים'
+          feedback: >-
+            אי-רציפות סליקה דורשת גבול דו-צדדי, כלומר גבולות חד-צדדיים **שווים**. כאן 1 משמאל ו-0 מימין: קפיצה, ושום ערך
+            של $n_0(0)$ לא יסלק אותה.
+          misconception: MC-c4-removable-vs-jump
+        - text: '$n_0(x)=0$ לכל $x\ne0$ ו-$n_0(0)=\frac12$: אי-רציפות סליקה'
+          feedback: >-
+            כש-$x<0$, $e^{x/\tau}=\left(e^{x}\right)^{1/\tau}$ עם בסיס $e^x<1$ ומעריך שגדל בלי גבול: הוא שואף ל-0, לא לאינסוף.
+            לכן $n\to\frac{1}{0+1}=1$ שם: כל המצבים שמתחת ל-$\mu$ תפוסים.
+          misconception: MC-c4-exp-base-small
+
+    - label: ב
+      points: 5
+      type: expr
+      objectives: [OBJ-5.3-1, OBJ-5.3-2]
+      prompt: >-
+        כש-$\tau=2$, $n(x)=\frac{1}{e^{x/2}+1}$. חשבו את $n'(x)$.
+      answer: '-exp(x/2)/(2*(exp(x/2)+1)^2)'
+      answerTex: '$n''(x)=-\dfrac{\frac12e^{x/2}}{\left(e^{x/2}+1\right)^2}=-\dfrac{e^{x/2}}{2\left(e^{x/2}+1\right)^2}$'
+      variables: [x]
+      domain: [-2, 2]
+      correctFeedback: >-
+        נכון. $\left(\frac1u\right)'=-\frac{u'}{u^2}$ עם $u=e^{x/2}+1$, ו-$u'=\frac12e^{x/2}$ מכלל השרשרת. הנגזרת שלילית
+        תמיד: $n$ יורדת, כי מצב גבוה יותר תפוס בהסתברות קטנה יותר.
+      wrongFeedback: >-
+        כלל המנה (או השרשרת) עם $u=e^{x/2}+1$: $\left(\frac1u\right)'=-\frac{u'}{u^2}$. והנגזרת של $e^{x/2}$ היא
+        $\frac12e^{x/2}$.
+      commonWrong:
+        - expr: '-exp(x/2)/(exp(x/2)+1)^2'
+          feedback: >-
+            חסר הכופל $\frac12$, הנגזרת הפנימית של $\frac x2$: $\left(e^{x/2}\right)'=\frac12e^{x/2}$.
+          misconception: MC-c5-chain-missing-inner
+        - expr: 'exp(x/2)/(2*(exp(x/2)+1)^2)'
+          feedback: >-
+            הסימן הפוך. במונה של כלל המנה הסדר הוא נגזרת המונה כפול המכנה, **פחות** המונה כפול נגזרת המכנה. כאן המונה 1
+            ונגזרתו 0, ולכן $\left(\frac1u\right)'=\frac{0\cdot u-1\cdot u'}{u^2}=-\frac{u'}{u^2}$. בדיקה: $n$ יורדת מ-1 ל-0,
+            ולכן $n'<0$.
+          misconception: MC-c5-quotient-order
+
+    - label: ג
+      points: 10
+      type: open
+      objectives: [OBJ-4.5-1, OBJ-4.1-1, OBJ-4.2-1, OBJ-5.2-1]
+      prompt: >-
+        (1) הראו ש-$n(x)=\frac12\left(1-\tanh\frac{x}{2\tau}\right)$. (2) הסיקו מכך את התמונה של $n$, ואת הסימטריה
+        $n(-x)=1-n(x)$; תארו איך מתקבל הגרף של $n$ מהגרף של $\tanh$. (3) כתבו את משוואת המשיק לגרף של $n$ ב-$x=0$, ומצאו
+        היכן הוא פוגע בישרים $y=1$ ו-$y=0$. מה קורה למרחק בין שתי הנקודות האלה כש-$\tau\to0^+$, ואיך זה מתאים לסעיף א?
+      solution:
+        - kind: given
+          text: '$n(x)=\frac{1}{e^{x/\tau}+1}$ עם $\tau>0$, ו-$\tanh s=\frac{\sinh s}{\cosh s}=\frac{e^s-e^{-s}}{e^s+e^{-s}}$.'
+        - kind: goal
+          text: 'הזהות עם $\tanh$, התמונה והסימטריה, הטרנספורמציות, והמשיק ב-0 עם נקודות הפגישה שלו עם $y=1$ ו-$y=0$.'
+        - kind: idea
+          text: >-
+            כופלים מונה ומכנה של $\tanh s$ ב-$e^s$ ומקבלים ביטוי ב-$e^{2s}$; עם $2s=\frac x\tau$ מופיע בדיוק המעריך של $n$.
+            את כל השאר קוראים מתכונות ידועות של $\tanh$: עולה, אי-זוגית, והתמונה שלה $(-1,1)$.
+        - kind: computation
+          text: >-
+            $\tanh s=\frac{e^{2s}-1}{e^{2s}+1}$, ולכן $1-\tanh s=\frac{(e^{2s}+1)-(e^{2s}-1)}{e^{2s}+1}=\frac{2}{e^{2s}+1}$. עם
+            $s=\frac{x}{2\tau}$: $\frac12\left(1-\tanh\frac{x}{2\tau}\right)=\frac{1}{e^{x/\tau}+1}=n(x)$.
+        - kind: step
+          text: >-
+            כש-$x$ עובר על כל הישר, גם $s=\frac{x}{2\tau}$ עובר על כל הישר, ו-$\tanh s$ מקבלת כל ערך ב-$(-1,1)$ ורק אותם. לכן
+            $1-\tanh s$ מקבלת כל ערך ב-$(0,2)$, והתמונה של $n$ היא $(0,1)$: ההסתברות לעולם אינה בדיוק 0 או 1.
+        - kind: step
+          text: >-
+            $\tanh$ אי-זוגית, ולכן $n(-x)=\frac12\left(1+\tanh s\right)=1-n(x)$: הנקודות $(x,n(x))$ ו-$(-x,n(-x))$ סימטריות
+            ביחס לנקודה $\left(0,\frac12\right)$. הגרף מתקבל מזה של $\tanh$ במתיחה לרוחב פי $2\tau$, מתיחה לגובה פי $\frac12$,
+            שיקוף ביחס לציר $x$, והזזה למעלה ב-$\frac12$ (כי $n=\frac12-\frac12\tanh s$).
+        - kind: computation
+          text: >-
+            מכלל המנה ומכלל השרשרת:
+
+            $$\begin{aligned}n'(x)&=-\frac{\frac1\tau e^{x/\tau}}{\left(e^{x/\tau}+1\right)^2},\\ n'(0)&=-\frac{1/\tau}{(1+1)^2}=-\frac{1}{4\tau},\end{aligned}$$
+
+            ו-$n(0)=\frac12$. המשיק: $y=\frac12-\frac{x}{4\tau}$. הוא פוגע ב-$y=1$ כש-$x=-2\tau$ וב-$y=0$ כש-$x=2\tau$.
+        - kind: check
+          text: >-
+            $n(2\tau)=\frac{1}{e^2+1}\approx0.12$ ו-$n(-2\tau)\approx0.88$: רוב המעבר מ"כמעט תפוס" ל"כמעט ריק" קורה ברצועה ברוחב
+            של כ-$4\tau$ סביב $\mu$. ולפי הסימטריה $n(2\tau)+n(-2\tau)=1$, כמצופה.
+        - kind: result
+          text: >-
+            $n=\frac12\left(1-\tanh\frac{x}{2\tau}\right)$; התמונה $(0,1)$; $n(-x)=1-n(x)$. המשיק ב-0 הוא $y=\frac12-\frac{x}{4\tau}$,
+            ופוגע ב-$y=1$ וב-$y=0$ ב-$x=\mp2\tau$: מרחק $4\tau$. כש-$\tau\to0^+$ המרחק שואף ל-0 והמשיק נעשה אנכי: המדרגה
+            מתחדדת לקפיצה של $n_0$ מסעיף א.
+      rubric:
+        - text: 'הזהות עם $\tanh$: כתיבת $\tanh s$ בעזרת $e^{2s}$ והצבת $s=\frac{x}{2\tau}$'
+          weight: 3
+        - text: 'התמונה $(0,1)$ מהתמונה של $\tanh$, והסימטריה $n(-x)=1-n(x)$ מאי-הזוגיות שלה'
+          weight: 2
+        - text: 'תיאור הגרף מזה של $\tanh$: מתיחה לרוחב פי $2\tau$, מתיחה לגובה פי $\frac12$, שיקוף והזזה'
+          weight: 1
+        - text: 'משוואת המשיק $y=\frac12-\frac{x}{4\tau}$, עם $n''(0)=-\frac{1}{4\tau}$'
+          weight: 3
+        - text: 'נקודות הפגישה $x=\mp2\tau$, והקשר לסעיף א: המרחק $4\tau$ שואף ל-0'
+          weight: 1
+
+    - label: ד
+      points: 5
+      type: numeric
+      objectives: [OBJ-5.2-1, OBJ-5.2-2]
+      standalone: false
+      prompt: >-
+        בטמפרטורת החדר $\tau\approx0.025$ אלקטרון-וולט. העריכו בעזרת המשיק מסעיף ג את ההסתברות שמצב שנמצא $0.01$
+        אלקטרון-וולט מעל $\mu$ (כלומר $x=0.01$) תפוס. (כתבו את ערך הקירוב, לא את הערך המדויק.)
+      answer: 0.4
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון. $n(0.01)\approx\frac12-\frac{0.01}{4\cdot0.025}=\frac12-0.1=0.4$. הערך המדויק $\frac{1}{e^{0.4}+1}\approx0.4013$:
+        השגיאה כ-$0.001$, כי $x=0.01$ קטן לעומת $2\tau=0.05$.
+      wrongFeedback: >-
+        הציבו $x=0.01$ ו-$\tau=0.025$ במשיק $y=\frac12-\frac{x}{4\tau}$ של סעיף ג.
+      commonWrong:
+        - value: 0.4975
+          feedback: >-
+            זה שיפוע של מינוס $\frac14$: נגזרת של $\frac{1}{e^{x/\tau}+1}$ בלי הנגזרת הפנימית $\frac1\tau$ של $\frac x\tau$. השיפוע
+            ב-0 הוא $n'(0)=-\frac{1}{4\tau}=-10$.
+          misconception: MC-c5-chain-missing-inner
+        - value: 0.6
+          feedback: >-
+            הסימן של השיפוע הפוך: $n$ יורדת, ולכן מעל $\mu$ ההסתברות **קטנה** מ-$\frac12$.
+          misconception: MC-c5-quotient-order
+        - value: -0.1
+          feedback: >-
+            זה רק השינוי $n'(0)\cdot x$. הקירוב מתחיל מהערך בנקודת ההשקה, $n(0)=\frac12$. (והסתברות שלילית היא סימן אזהרה.)
+          misconception: MC-c5-tangent-through-origin

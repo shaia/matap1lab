@@ -1,0 +1,443 @@
+# Midterm block 2 (chapter 3: complex numbers): one exam question per paper, 25 points each.
+# Original, in the style of an 80114 exam (not taken from a real exam). The three questions centre on different
+# lessons: Q-mid-1-2 on 3.1-3.3 (arithmetic, modulus, division in polar form), Q-mid-2-2 on 3.4 with 3.5 and 3.2
+# (an equation in e^z), Q-mid-3-2 on 3.5 with 3.1 and 3.3 (roots of unity of order 7).
+# Every key, commonWrong and solution step recomputed with sympy (scratchpad script block2.py, run 2026-11-27).
+
+- id: Q-mid-1-2
+  type: exam
+  title: עכבה של שני ענפים במקביל
+  prompt: >-
+    במעגל חשמלי של זרם חילופין מתארים כל רכיב במספר מרוכב, ה**עכבה** שלו (הכול ביחידות אוהם, ומשמיטים אותן): לנגד
+    $R$ העכבה $Z_R=R$, לסליל $Z_L=iX_L$ ולקבל $Z_C=-iX_C$, כש-$X_L,X_C>0$. עכבות של רכיבים בטור מתחברות. כששני ענפים
+    מחוברים במקביל, העכבה $Z$ של הצירוף מקיימת
+
+    $$\frac1Z=\frac1{Z_1}+\frac1{Z_2}.$$
+
+    הפאזור של הזרם הוא $I=\frac VZ$, כש-$V$ הפאזור של המתח: גודל התנודה של הזרם הוא $|I|$, והזרם מפגר אחרי המתח
+    בזווית $\arg V-\arg I$.
+
+    בענף הראשון נגד $1$ בטור עם סליל $X_L=2$, ולכן $Z_1=1+2i$. בענף השני קבל עם $X_C=3$, ולכן $Z_2=-3i$.
+  parts:
+    - label: א
+      points: 5
+      type: numeric
+      objectives: [OBJ-3.1-1, OBJ-3.1-2]
+      prompt: 'חשבו את $Z$ בצורה $a+bi$. מהו $\operatorname{Im}Z$?'
+      answer: 1.5
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $Z=\frac92+\frac32i$. בכפל בצמוד: $\frac1{Z_1}=\frac{1-2i}{5}$ ו-$\frac1{Z_2}=\frac{1}{-3i}=\frac i3$,
+        ולכן $\frac1Z=\frac15-\frac{i}{15}=\frac{3-i}{15}$ ו-$Z=\frac{15(3+i)}{10}$. אותו דבר מ-$Z=\frac{Z_1Z_2}{Z_1+Z_2}=\frac{6-3i}{1-i}$.
+      wrongFeedback: >-
+        חלקו בעזרת הצמוד: $\frac1{a+bi}=\frac{a-bi}{a^2+b^2}$. חשבו את $\frac1{Z_1}+\frac1{Z_2}$, ואז הפכו שוב.
+      commonWrong:
+        - value: 3
+          feedback: >-
+            זה מ-$\frac{6-3i}{1-i}$ שחולק רכיב ברכיב, $\frac61+\frac{-3}{-1}i=6+3i$. מחלקים בכפל בצמוד של המכנה:
+            $\frac{(6-3i)(1+i)}{2}=\frac{9+3i}{2}$.
+          misconception: MC-c3-divide-componentwise
+        - value: 4.5
+          feedback: '$\frac92$ הוא החלק הממשי של $Z=\frac92+\frac32i$. החלק המדומה הוא המקדם של $i$, $\frac32$.'
+          misconception: MC-c3-re-im-swap
+        - value: 1.2692307692308
+          feedback: >-
+            $\frac{33}{26}$ יוצא מ-$\frac{1}{-3i}=-\frac i3$, כאילו $\frac1i=i$. אבל $i\cdot(-i)=-i^2=1$, ולכן $\frac1i=-i$
+            ו-$\frac{1}{-3i}=\frac i3$.
+          misconception: MC-c3-i-squared
+
+    - label: ב
+      points: 4
+      type: numeric
+      objectives: [OBJ-3.2-2, OBJ-3.3-2]
+      standalone: false
+      prompt: 'המתח הוא $V=10$. מהו גודל התנודה של הזרם, $|I|$? (אפשר לכתוב ערך מדויק, כמו 3√2.)'
+      answer: 2.1081851067789
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\frac{2\sqrt{10}}{3}\approx2.108$. בחילוק הערכים המוחלטים מתחלקים:
+        $|I|=\frac{10}{|Z|}$, ו-$|Z|=\sqrt{\frac{81}{4}+\frac94}=\frac{3\sqrt{10}}{2}$. בדיקה: $I=\frac{10}{Z}=2-\frac23i$,
+        ו-$\sqrt{4+\frac49}=\frac{2\sqrt{10}}{3}$.
+      wrongFeedback: '$\left|\frac VZ\right|=\frac{|V|}{|Z|}$, ו-$|a+bi|=\sqrt{a^2+b^2}$.'
+      commonWrong:
+        - value: 0.44444444444444
+          feedback: >-
+            $\frac{10}{22.5}$: חילקתם ב-$|Z|^2=\frac{45}{2}$. הערך המוחלט הוא השורש, $|Z|=\sqrt{\frac{45}{2}}=\frac{3\sqrt{10}}{2}$.
+          misconception: MC-c3-modulus-no-root
+        - value: 1.6666666666667
+          feedback: >-
+            $\frac{10}{6}$: חישבתם $|Z|$ כ-$\frac92+\frac32$. הערך המוחלט הוא אורך החץ, $\sqrt{a^2+b^2}$, לא סכום
+            הרכיבים.
+          misconception: MC-c3-modulus-components-sum
+
+    - label: ג
+      points: 4
+      type: numeric
+      objectives: [OBJ-3.3-2, OBJ-3.2-2]
+      standalone: false
+      prompt: 'בכמה רדיאנים מפגר הזרם אחרי המתח במעגל הזה, כלומר מהו $\arg V-\arg I$ בקטע $(-\pi,\pi]$?'
+      answer: 0.32175055439664
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\arctan\frac13\approx0.322$. בחילוק הארגומנטים מתחסרים: $\arg I=\arg V-\arg Z$, ולכן הפיגור הוא
+        $\arg Z$. $Z=\frac92+\frac32i$ ברביע הראשון, ולכן $\arg Z=\arctan\frac{3/2}{9/2}=\arctan\frac13$. בדיקה:
+        $I=2-\frac23i$, ו-$\arg I=\arctan\left(\frac{-2/3}{2}\right)=-\arctan\frac13$.
+      wrongFeedback: '$I=\frac VZ$: בצורה הקוטבית, מה קורה לארגומנטים בחילוק? ו-$\arg V=0$ כי $V=10$ ממשי חיובי.'
+      commonWrong:
+        - value: -0.32175055439664
+          feedback: >-
+            כתבתם $\arg I=\arg V+\arg Z$, כלומר חיברתם ארגומנטים בחילוק, ולכן הפיגור יצא עם סימן הפוך. בחילוק
+            מחסירים: $\arg I=\arg V-\arg Z$, והפיגור $\arg V-\arg I=\arg Z$ חיובי: הזרם מאחר.
+          misconception: MC-c3-multiply-args
+        - value: 1.2490457723983
+          feedback: >-
+            $\arctan3$ הוא $\arctan\frac ab$: החלפתם בין החלק הממשי לחלק המדומה. $\tan\theta=\frac{\operatorname{Im}Z}{\operatorname{Re}Z}=\frac13$.
+          misconception: MC-c3-cis-swap
+
+    - label: ד
+      points: 8
+      type: open
+      objectives: [OBJ-3.1-2, OBJ-3.3-2]
+      prompt: >-
+        מחליפים את הקבל בענף השני בקבל אחר, $Z_2=-iX$ עם $X>0$, ו-$Z_1=1+2i$ נשאר. מצאו את $X$ שעבורו הזרם והמתח באותה
+        פאזה, כלומר הפיגור $\arg V-\arg I$ הוא בדיוק 0 (כש-$V=10$), ומצאו אז את $Z$ ואת $|I|$.
+      hints:
+        - 'הפיגור $\arg V-\arg I$ הוא, לפי כלל החילוק בצורה הקוטבית, הארגומנט של מספר אחד. מתי הוא 0?'
+      solution:
+        - kind: given
+          text: '$Z_1=1+2i$, $Z_2=-iX$ עם $X>0$, $\frac1Z=\frac1{Z_1}+\frac1{Z_2}$, $I=\frac VZ$ ו-$V=10$.'
+        - kind: idea
+          text: >-
+            בחילוק הארגומנטים מתחסרים: $\arg I=\arg V-\arg Z$, ולכן הפיגור הוא $\arg Z$. אין פיגור בדיוק כש-$Z$ ממשי
+            חיובי, וזה קורה בדיוק כש-$\frac1Z$ ממשי חיובי (ל-$\frac1Z$ אותו ארגומנט עם סימן הפוך).
+        - kind: computation
+          text: >-
+            בכפל בצמוד: $\frac1{Z_1}=\frac{1-2i}{5}=\frac15-\frac25i$, ו-$\frac1{-iX}=\frac{i}{X}$ (כי $\frac1{-i}=i$).
+            לכן $\frac1Z=\frac15+\left(\frac1X-\frac25\right)i$.
+        - kind: step
+          text: >-
+            החלק הממשי $\frac15$ חיובי לכל $X$. החלק המדומה מתאפס כש-$\frac1X=\frac25$, כלומר $X=\frac52$.
+        - kind: computation
+          text: 'אז $\frac1Z=\frac15$, ולכן $Z=5$ ו-$I=\frac{10}{5}=2$, כלומר $|I|=2$.'
+        - kind: check
+          text: >-
+            מהנוסחה $Z=\frac{Z_1Z_2}{Z_1+Z_2}$: $Z_1Z_2=(1+2i)\left(-\frac52i\right)=5-\frac52i$ ו-$Z_1+Z_2=1-\frac12i$,
+            ו-$5\left(1-\frac12i\right)=5-\frac52i$, ולכן אכן $Z=5$.
+        - kind: result
+          text: '$X=\frac52$, ואז $Z=5$ (ממשי, אין פיגור) ו-$|I|=2$.'
+      rubric:
+        - text: 'הפיגור הוא $\arg Z$ (כלל החילוק), ולכן התנאי הוא $Z$ ממשי חיובי, או $\frac1Z$ ממשי חיובי'
+          weight: 2
+        - text: >-
+            ביטוי נכון ל-$\frac1Z$ או ל-$Z$ כתלות ב-$X$, בצורה $a+bi$ (דרך $\frac1{Z_1}+\frac1{Z_2}$, או דרך
+            $\frac{Z_1Z_2}{Z_1+Z_2}$ בכפל בצמוד של המכנה)
+          weight: 3
+        - text: 'השוואת החלק המדומה ל-0 ומציאת $X=\frac52$'
+          weight: 2
+        - text: '$Z=5$ ו-$|I|=2$'
+          weight: 1
+        - text: 'בדיקה: הצבת $X=\frac52$ בדרך השנייה, או בדיקה שהחלק הממשי חיובי'
+          weight: 1
+
+    - label: ה
+      points: 4
+      type: twotier
+      objectives: [OBJ-3.2-1, OBJ-3.2-2]
+      qualitative: true
+      prompt: >-
+        נכון או לא: לכל שתי עכבות $Z_1,Z_2$ שמחוברות במקביל מתקיים $|Z|\le|Z_1|$ וגם $|Z|\le|Z_2|$, כמו בשני נגדים
+        במקביל.
+      choices:
+        - text: 'לא נכון'
+          correct: true
+          feedback: >-
+            נכון. כבר בנתוני השאלה (סעיף א): $|Z|=\frac{3\sqrt{10}}{2}\approx4.74$, אבל $|Z_1|=\sqrt5\approx2.24$ ו-$|Z_2|=3$.
+            בנגדים $\frac1{R_1}$ ו-$\frac1{R_2}$ חיוביים ומתחברים; עכבות הפוכות הן חצים שיכולים לבטל זה את זה.
+        - text: 'נכון'
+          feedback: >-
+            זה נכון לנגדים, שבהם כל העכבות ממשיות חיוביות. בנתוני השאלה $|Z|=\frac{3\sqrt{10}}{2}\approx4.74$, יותר
+            מ-$|Z_1|=\sqrt5$ ומ-$|Z_2|=3$.
+          misconception: MC-c3-modulus-additive
+      reasons:
+        - text: 'החצים $\frac1{Z_1}$ ו-$\frac1{Z_2}$ יכולים להצביע לכיוונים כמעט מנוגדים, ואז סכומם קצר מכל אחד מהם'
+          correct: true
+          feedback: >-
+            בדיוק. בנתוני השאלה $\frac1{Z_1}=\frac{1-2i}{5}$ ו-$\frac1{Z_2}=\frac i3$: החלקים המדומים מבטלים זה את זה
+            בחלקם, ו-$\left|\frac1Z\right|=\left|\frac{3-i}{15}\right|=\frac{\sqrt{10}}{15}\approx0.21$ קטן גם
+            מ-$\left|\frac1{Z_1}\right|=\frac1{\sqrt5}\approx0.45$ וגם מ-$\left|\frac1{Z_2}\right|=\frac13$. אורך קטן של
+            $\frac1Z$ פירושו $|Z|$ גדול.
+        - text: 'כי $\left|\frac1{Z_1}+\frac1{Z_2}\right|=\left|\frac1{Z_1}\right|+\left|\frac1{Z_2}\right|$, ולכן $\left|\frac1Z\right|$ גדול מכל אחד מהם'
+          feedback: >-
+            הערך המוחלט של סכום אינו סכום הערכים המוחלטים. בנתוני השאלה $\frac1{\sqrt5}+\frac13\approx0.78$, אבל
+            $\left|\frac1{Z_1}+\frac1{Z_2}\right|=\frac{\sqrt{10}}{15}\approx0.21$.
+          misconception: MC-c3-modulus-additive
+        - text: 'כי הוספת חץ לחץ אחר אף פעם אינה מקצרת אותו'
+          feedback: >-
+            חץ מקצר חץ אחר כשהוא מצביע בערך נגדו: $1+(-1)=0$. אי-שוויון המשולש נותן רק $|z+w|\le|z|+|w|$, חסם מלמעלה.
+          misconception: MC-c3-modulus-additive
+
+- id: Q-mid-2-2
+  type: exam
+  title: משוואה ריבועית באקספוננט
+  prompt: >-
+    נתונה המשוואה
+
+    $$e^{2z}-2ie^{z}-4=0\qquad(*)$$
+
+    שבה $z$ מספר מרוכב.
+  parts:
+    - label: א
+      points: 5
+      type: numeric
+      objectives: [OBJ-3.5-3, OBJ-3.2-2]
+      prompt: >-
+        הציבו $w=e^z$ ופתרו את המשוואה הריבועית שמתקבלת ב-$w$. מהו הארגומנט הראשי של השורש $w$ שחלקו הממשי שלילי?
+      answer: 2.6179938779915
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\frac{5\pi}{6}$. $w^2-2iw-4=0$: $\Delta=(-2i)^2+16=12$, ולכן $w=\frac{2i\pm2\sqrt3}{2}=i\pm\sqrt3$. השורש
+        $w=-\sqrt3+i$ ברביע השני, $|w|=2$, $\cos\theta=-\frac{\sqrt3}{2}$ ו-$\sin\theta=\frac12$. בדיקה בווייטה: סכום השורשים
+        $2i$ ומכפלתם $(i+\sqrt3)(i-\sqrt3)=i^2-3=-4$.
+      wrongFeedback: >-
+        $\Delta=b^2-4ac$ עם $b=-2i$, ו-$(-2i)^2=4i^2$. אחרי שמצאתם את $w$, קבעו את הרביע לפי הסימנים, ואז את הזווית.
+      commonWrong:
+        - value: -0.5235987755983
+          feedback: >-
+            $\arctan\frac{1}{-\sqrt3}$ מצביע לרביע הרביעי, אבל $w=-\sqrt3+i$ ברביע השני: מוסיפים $\pi$ ומקבלים $\frac{5\pi}{6}$.
+          misconception: MC-c3-arg-arctan
+        - value: 2.7210583183058
+          feedback: >-
+            זה $\operatorname{Arg}(-\sqrt5+i)$, שמתקבל מ-$\Delta=4+16=20$, כלומר מ-$(-2i)^2=4$. אבל $i^2=-1$, ולכן $(-2i)^2=-4$
+            ו-$\Delta=12$.
+          misconception: MC-c3-i-squared
+
+    - label: ב
+      points: 10
+      type: open
+      objectives: [OBJ-3.4-2, OBJ-3.4-1]
+      standalone: false
+      prompt: >-
+        מצאו את כל הפתרונות $z$ של $(*)$, בצורה $x+iy$, ותארו את מיקומם במישור גאוס.
+      solution:
+        - kind: given
+          text: 'מסעיף א: $e^z=\sqrt3+i=2\operatorname{cis}\frac{\pi}{6}$ או $e^z=-\sqrt3+i=2\operatorname{cis}\frac{5\pi}{6}$.'
+        - kind: idea
+          text: >-
+            פותרים $e^z=w$ לכל אחד משני השורשים: $z$ הוא ערך של $\log w$. כיוון שהאקספוננט מחזורי עם מחזור $2\pi i$,
+            לכל $w$ יש אינסוף פתרונות, ולא אחד.
+        - kind: definition
+          text: >-
+            ל-$z=x+iy$: $e^z=e^x\operatorname{cis}y$. לכן $e^z=2\operatorname{cis}\alpha$ בדיוק כש-$e^x=2$, כלומר $x=\ln2$,
+            ו-$y=\alpha+2\pi k$ עם $k$ שלם (שני מספרים בצורה קוטבית שווים כשהערכים המוחלטים שווים והזוויות שוות עד כדי
+            $2\pi k$).
+        - kind: computation
+          text: >-
+            מ-$\alpha=\frac{\pi}{6}$: $z=\ln2+i\left(\frac{\pi}{6}+2\pi k\right)$. מ-$\alpha=\frac{5\pi}{6}$:
+            $z=\ln2+i\left(\frac{5\pi}{6}+2\pi k\right)$. כאן $k$ שלם כלשהו.
+        - kind: check
+          text: >-
+            ב-$z=\ln2+\frac{\pi}{6}i$: $e^{2z}=4\operatorname{cis}\frac{\pi}{3}=2+2\sqrt3i$ ו-$2ie^z=2i(\sqrt3+i)=-2+2\sqrt3i$,
+            ולכן $e^{2z}-2ie^z-4=(2+2\sqrt3i)-(-2+2\sqrt3i)-4=0$.
+        - kind: result
+          text: >-
+            $z=\ln2+i\left(\frac{\pi}{6}+2\pi k\right)$ או $z=\ln2+i\left(\frac{5\pi}{6}+2\pi k\right)$, $k$ שלם. כל
+            הפתרונות על הישר האנכי $\operatorname{Re}z=\ln2\approx0.69$, שניים בכל קטע של הישר באורך $2\pi$, והמרחקים
+            בין פתרונות סמוכים מתחלפים: $\frac{2\pi}{3}$, $\frac{4\pi}{3}$, $\frac{2\pi}{3}$, וכן הלאה.
+      rubric:
+        - text: 'מעבר מ-$e^z=w$ ל-$x=\ln|w|$ ו-$y=\arg w+2\pi k$'
+          weight: 3
+        - text: 'שתי המשפחות, עם $\ln2$ ועם $\frac{\pi}{6}$ ו-$\frac{5\pi}{6}$'
+          weight: 3
+        - text: 'אינסוף פתרונות: $k$ שלם כלשהו (המחזוריות של האקספוננט)'
+          weight: 2
+        - text: 'תיאור: ישר אנכי ב-$\operatorname{Re}z=\ln2$, עם בדיקה של פתרון אחד'
+          weight: 2
+
+    - label: ג
+      points: 4
+      type: numeric
+      objectives: [OBJ-3.4-1]
+      standalone: false
+      prompt: 'כמה פתרונות של $(*)$ נמצאים בתוך העיגול $|z|<7$?'
+      answer: 5
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, 5. $|z|^2=(\ln2)^2+y^2<49$ פירושו $|y|<\sqrt{49-(\ln2)^2}\approx6.97$. מהמשפחה של $\frac{\pi}{6}$:
+        $y\approx0.52,\ 6.81,\ -5.76$; מהמשפחה של $\frac{5\pi}{6}$: $y\approx2.62,\ -3.67$. הפתרונות הקרובים ביותר שכבר בחוץ:
+        $y=\frac{17\pi}{6}\approx8.90$ למעלה ו-$y=\frac{5\pi}{6}-4\pi=-\frac{19\pi}{6}\approx-9.95$ למטה (ו-$y=\frac{\pi}{6}-4\pi\approx-12.04$
+        רחוק עוד יותר).
+      wrongFeedback: >-
+        כתבו כמה פתרונות מכל משפחה, עם $k=0,\pm1,\pm2$, ובדקו לכל אחד אם $(\ln2)^2+y^2<49$.
+      commonWrong:
+        - value: 2
+          feedback: >-
+            ספרתם רק את הערך הראשי של כל לוגריתם, $\ln2+\frac{\pi}{6}i$ ו-$\ln2+\frac{5\pi}{6}i$. ללוגריתם יש אינסוף
+            ערכים, במרווחים של $2\pi i$, וחלק מהם נמצאים גם הם בעיגול.
+          misconception: MC-c3-log-single-valued
+
+    - label: ד
+      points: 6
+      type: twotier
+      objectives: [OBJ-3.4-1, OBJ-3.5-3]
+      qualitative: true
+      prompt: 'נכון או לא: אם $z_0$ פתרון של $(*)$, גם הצמוד $\bar z_0$ פתרון של $(*)$.'
+      choices:
+        - text: 'לא נכון'
+          correct: true
+          feedback: >-
+            נכון. $z_0=\ln2+\frac{\pi}{6}i$ פתרון, אבל $\bar z_0=\ln2-\frac{\pi}{6}i$ נותן $e^{\bar z_0}=\sqrt3-i$, ו-$w=\sqrt3-i$
+            נותן $w^2-2iw-4=-4-4\sqrt3i\ne0$.
+        - text: 'נכון'
+          feedback: >-
+            בדקו את $\bar z_0=\ln2-\frac{\pi}{6}i$: $e^{\bar z_0}=\sqrt3-i$, וזה אינו שורש: שם
+            $w^2-2iw-4=-4-4\sqrt3i$. פתרונות באים בזוגות צמודים רק כשהמקדמים ממשיים, וכאן המקדם של $w$ הוא $b=-2i$.
+          misconception: MC-c3-conjugate-root-any-coeffs
+      reasons:
+        - text: >-
+            $e^{\bar z_0}=\overline{e^{z_0}}$, והצמוד של שורש של $w^2-2iw-4=0$ הוא שורש של המשוואה הצמודה
+            $w^2+2iw-4=0$, לא של שלנו, כי המקדם $b=-2i$ אינו ממשי
+          correct: true
+          feedback: >-
+            בדיוק. כשמצמידים את המשוואה, מצמידים גם את המקדמים, ו-$\overline{-2i}=2i$. השורשים של $(*)$ ב-$w$ הם
+            $\pm\sqrt3+i$, ושניהם בחצי המישור העליון: אף אחד אינו הצמוד של השני.
+        - text: 'הפתרונות של משוואה פולינומית תמיד באים בזוגות צמודים'
+          feedback: >-
+            רק כשהמקדמים ממשיים. השורשים של $w^2-2iw-4$ הם $w=\pm\sqrt3+i$, ואף אחד מהם אינו הצמוד של השני.
+          misconception: MC-c3-conjugate-root-any-coeffs
+        - text: 'אם מצמידים את המשוואה מקבלים $\bar w^2-2i\bar w-4=0$, ולכן גם $\bar w$ שורש'
+          feedback: >-
+            $\overline{-2iw}=\overline{-2i}\,\bar w=2i\bar w$: גם המקדם מוצמד. המשוואה שמתקבלת היא
+            $\bar w^2+2i\bar w-4=0$, ולא המשוואה שלנו.
+          misconception: MC-c3-conjugate-root-any-coeffs
+
+- id: Q-mid-3-2
+  type: exam
+  title: שני סכומים של שורשי יחידה מסדר 7
+  prompt: >-
+    יהי $\omega=e^{2\pi i/7}$, ונגדיר
+
+    $$S=\omega+\omega^2+\omega^4,\qquad T=\omega^3+\omega^5+\omega^6 .$$
+  parts:
+    - label: א
+      points: 4
+      type: numeric
+      objectives: [OBJ-3.5-2]
+      prompt: 'חשבו את $S+T$.'
+      answer: -1
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון. $1,\omega,\dots,\omega^6$ הם שבעת שורשי היחידה מסדר 7, וסכומם 0. $S+T$ הוא הסכום בלי $\omega^0=1$, ולכן
+        $S+T=-1$.
+      wrongFeedback: 'אילו מספרים מופיעים ב-$S+T$, ומה סכום כל שורשי היחידה מסדר 7?'
+      commonWrong:
+        - value: 0
+          feedback: '0 הוא סכום **כל** שבעת השורשים, כולל $\omega^0=1$. ב-$S+T$ חסר האיבר 1, ולכן $S+T=-1$.'
+          misconception: MC-c3-roots-sum-n
+        - value: 6
+          feedback: >-
+            כל $\omega^k$ מקיים $(\omega^k)^7=1$, אבל אינו שווה 1 בעצמו (חוץ מ-$k=0$). שבעת השורשים הם קודקודי מצולע
+            משוכלל, וסכומם 0.
+          misconception: MC-c3-roots-sum-n
+
+    - label: ב
+      points: 5
+      type: twotier
+      objectives: [OBJ-3.5-2, OBJ-3.1-2]
+      qualitative: true
+      prompt: 'נכון או לא: $T=\bar S$.'
+      choices:
+        - text: 'נכון'
+          correct: true
+          feedback: 'נכון. $\bar\omega=\omega^6$, $\overline{\omega^2}=\omega^5$ ו-$\overline{\omega^4}=\omega^3$, ולכן $\bar S=\omega^6+\omega^5+\omega^3=T$.'
+        - text: 'לא נכון'
+          feedback: >-
+            $\omega$ על מעגל היחידה בזווית $\frac{2\pi}{7}$, והצמוד שלו הוא השיקוף דרך הציר הממשי:
+            $\bar\omega=e^{-2\pi i/7}=e^{12\pi i/7}=\omega^6$. כך כל איבר של $S$ הופך לאיבר של $T$.
+          misconception: MC-c3-conj-reflect-wrong-axis
+      reasons:
+        - text: '$|\omega|=1$, ולכן $\bar\omega=\frac1\omega=\omega^{-1}=\omega^6$; באותו אופן $\overline{\omega^k}=\omega^{7-k}$'
+          correct: true
+          feedback: >-
+            בדיוק. $\omega\bar\omega=|\omega|^2=1$, ו-$\omega^{-1}=\omega^{6}$ כי $\omega^7=1$. וצמוד של סכום הוא סכום
+            הצמודים.
+        - text: 'לכל $z\ne0$ מתקיים $\bar z=\frac1z$, ולכן $\overline{\omega^k}=\omega^{-k}$'
+          feedback: >-
+            $\bar z=\frac1z$ רק כש-$|z|=1$: ל-$z=2$, $\bar z=2$ אבל $\frac1z=\frac12$. כאן זה עובד כי $\omega$ על מעגל
+            היחידה, וזה חייב להיאמר.
+          misconception: MC-c3-conjugate-is-inverse
+        - text: '$\bar\omega=-\omega$, ולכן $\bar S=-S$, וזה אינו $T$'
+          feedback: >-
+            השיקוף דרך הראשית הוא $z\mapsto-z$. הצמוד הוא השיקוף דרך הציר הממשי: $\bar\omega=e^{-2\pi i/7}$.
+          misconception: MC-c3-conj-reflect-wrong-axis
+
+    - label: ג
+      points: 11
+      type: open
+      objectives: [OBJ-3.5-2, OBJ-3.1-3, OBJ-3.3-1]
+      standalone: false
+      prompt: >-
+        הראו ש-$ST=2$, הסיקו ש-$S$ ו-$T$ הם השורשים של משוואה ריבועית עם מקדמים ממשיים, ומצאו את $S$ ואת $T$ בדיוק.
+        נמקו איזה מהשורשים הוא $S$.
+      hints:
+        - 'פתחו את המכפלה (תשעה איברים) והקטינו כל חזקה בעזרת $\omega^7=1$.'
+        - 'כדי להכריע איזה שורש הוא $S$, כתבו את $\operatorname{Im}S$ כסכום של סינוסים.'
+      solution:
+        - kind: given
+          text: '$\omega=e^{2\pi i/7}$, ולכן $\omega^7=1$. מסעיף א: $S+T=-1$.'
+        - kind: idea
+          text: >-
+            שני מספרים שהסכום והמכפלה שלהם ידועים הם השורשים של משוואה ריבועית (וייטה): $S$ ו-$T$ הם השורשים של
+            $u^2-(S+T)u+ST=0$. את הסכום כבר יש, ולכן מספיק לחשב את $ST$.
+        - kind: computation
+          text: >-
+            פותחים את הסוגריים, כל איבר של $S$ כפול כל איבר של $T$:
+
+            $$\begin{aligned}ST&=(\omega+\omega^2+\omega^4)(\omega^3+\omega^5+\omega^6)\\&=\omega^4+\omega^6+\omega^7+\omega^5+\omega^7+\omega^8+\omega^7+\omega^9+\omega^{10}.\end{aligned}$$
+        - kind: step
+          text: >-
+            עם $\omega^7=1$: $\omega^8=\omega$, $\omega^9=\omega^2$, $\omega^{10}=\omega^3$. לכן
+            $ST=3+(\omega+\omega^2+\omega^3+\omega^4+\omega^5+\omega^6)=3+(-1)=2$.
+        - kind: computation
+          text: >-
+            $S$ ו-$T$ שורשי $u^2+u+2=0$: $\Delta=1-8=-7$, ולכן $u=\frac{-1\pm\sqrt7\,i}{2}$.
+        - kind: step
+          text: >-
+            $\operatorname{Im}S=\sin\frac{2\pi}{7}+\sin\frac{4\pi}{7}+\sin\frac{8\pi}{7}$, ו-$\sin\frac{8\pi}{7}=-\sin\frac{\pi}{7}$.
+            הסינוס עולה ב-$\left[0,\frac{\pi}{2}\right]$, ולכן $\sin\frac{2\pi}{7}>\sin\frac{\pi}{7}$; וגם $\sin\frac{4\pi}{7}>0$.
+            לכן $\operatorname{Im}S>0$.
+        - kind: check
+          text: >-
+            מסעיף ב $ST=S\bar S=|S|^2$, ואכן $\left|\frac{-1+\sqrt7\,i}{2}\right|^2=\frac{1+7}{4}=2$. וגם
+            $\operatorname{Re}S=-\frac12$ מתאים ל-$S+\bar S=2\operatorname{Re}S=-1$.
+        - kind: result
+          text: '$S=\frac{-1+\sqrt7\,i}{2}$ ו-$T=\frac{-1-\sqrt7\,i}{2}$, השורשים של $u^2+u+2=0$.'
+      rubric:
+        - text: 'פתיחת המכפלה והקטנת החזקות בעזרת $\omega^7=1$'
+          weight: 3
+        - text: '$ST=3+(-1)=2$, בעזרת סכום שורשי היחידה'
+          weight: 2
+        - text: 'המשוואה $u^2+u+2=0$ (וייטה) ופתרונה עם דיסקרימיננטה שלילית'
+          weight: 3
+        - text: 'נימוק נכון לסימן של $\operatorname{Im}S$, ולכן איזה שורש הוא $S$'
+          weight: 3
+
+    - label: ד
+      points: 5
+      type: numeric
+      objectives: [OBJ-3.3-1, OBJ-3.5-2]
+      standalone: false
+      prompt: >-
+        הסיקו את הערך המדויק של $\sin\frac{2\pi}{7}+\sin\frac{4\pi}{7}-\sin\frac{\pi}{7}$. (אפשר לכתוב ערך מדויק, כמו 3√2.)
+      answer: 1.3228756555323
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\frac{\sqrt7}{2}$. זה בדיוק $\operatorname{Im}S$: החלק המדומה של $\omega^k=\operatorname{cis}\frac{2\pi k}{7}$
+        הוא $\sin\frac{2\pi k}{7}$, ו-$\sin\frac{8\pi}{7}=-\sin\frac{\pi}{7}$.
+      wrongFeedback: >-
+        כתבו את $S$ בצורה $\sum\operatorname{cis}\frac{2\pi k}{7}$ וקחו חלק מדומה. אחר כך השוו לתוצאה של סעיף ג.
+      commonWrong:
+        - value: 2.6457513110646
+          feedback: >-
+            $\sqrt7$ הוא $\sqrt{|\Delta|}$, בלי החלוקה ב-$2a=2$. השורשים הם $\frac{-1\pm\sqrt7\,i}{2}$, ולכן
+            $\operatorname{Im}S=\frac{\sqrt7}{2}$.
+          misconception: MC-c3-quadratic-forget-2a
