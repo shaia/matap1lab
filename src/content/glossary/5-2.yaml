@@ -7,6 +7,14 @@
     הישר דרך $(a,f(a))$ שהשיפוע שלו $f'(a)$: $y=f(a)+f'(a)(x-a)$. זה הגבול של המיתרים דרך $(a,f(a))$ כשהנקודה השנייה
     מתקרבת אליה.
   lesson: '5.2'
+- id: tangency-point
+  term: נקודת השקה
+  en: point of tangency
+  symbol: '(a,f(a))'
+  definition: >-
+    הנקודה $(a,f(a))$ שבה הישר המשיק נוגע בגרף. המשיק עובר בה תמיד, ולכן כל משוואת משיק נבדקת בהצבה $x=a$, שצריכה
+    לתת $f(a)$.
+  lesson: '5.2'
 - id: linear-approximation
   term: קירוב לינארי
   en: linear approximation (linearization)

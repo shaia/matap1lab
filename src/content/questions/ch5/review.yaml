@@ -27,7 +27,7 @@ questions:
 
   - id: Q-5-review-02
     type: expr
-    objectives: [OBJ-5.3-2, OBJ-4.3-2]
+    objectives: [OBJ-5.3-2, OBJ-5.4-2]
     level: basic
     prompt: 'גזרו: $f(x)=\ln(x^2+1)$. כתבו את $f''(x)$.'
     answer: '2*x/(x^2 + 1)'
@@ -35,7 +35,7 @@ questions:
     variables: [x]
     domain: [-2, 2]
     correctFeedback: >-
-      נכון. $(\ln y)'=\frac1y$ בערך $y=x^2+1$, כפול $2x$. ($x^2+1>0$, ולכן $f$ מוגדרת בכל הישר.)
+      נכון. $(\ln u)'=\frac1u$ בערך $u=x^2+1$, כפול $2x$. ($x^2+1>0$, ולכן $f$ מוגדרת בכל הישר.)
     wrongFeedback: >-
       בחוץ $\ln$, בפנים $x^2+1$: נגזרת חיצונית בערך הפנימית, כפול נגזרת פנימית.
     commonWrong:
@@ -43,7 +43,7 @@ questions:
         feedback: >-
           חסרה הנגזרת הפנימית $2x$. בדיקה: $f$ זוגית, ולכן הנגזרת שלה צריכה להיות אי-זוגית; $\frac{1}{x^2+1}$ זוגית.
         misconception: MC-c5-chain-missing-inner
-    hints: ['חזרו לשיעור 5.3: כלל השרשרת, ולשיעור 4.3: הלוגריתם הטבעי ותחום ההגדרה שלו.']
+    hints: ['חזרו לשיעור 5.3: כלל השרשרת, ולשיעור 5.4: הנגזרת של הלוגריתם הטבעי.']
 
   - id: Q-5-review-03
     type: mc

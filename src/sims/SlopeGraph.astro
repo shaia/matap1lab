@@ -1,0 +1,10 @@
+---
+/**
+ * Chapter 5.1 / 5.5 figure: <Spread figure={SlopeGraph} figureProps={{ mode, … }}>.
+ * mode: motion, sign. The props, step keys, readout ids and task ids are documented at the top of SlopeGraph.tsx.
+ */
+import SlopeGraph, { type SlopeGraphProps } from './SlopeGraph';
+type Props = SlopeGraphProps;
+---
+
+<SlopeGraph client:visible {...Astro.props} />

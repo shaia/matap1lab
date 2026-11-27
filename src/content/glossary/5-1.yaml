@@ -1,4 +1,11 @@
 # Terms first defined in lesson 5.1 (velocity and the difference quotient).
+- id: secant-line
+  term: מיתר
+  en: secant line (chord)
+  definition: >-
+    הישר שעובר דרך שתי נקודות על גרף, $(x_0,f(x_0))$ ו-$(x_0+h,f(x_0+h))$. השיפוע שלו הוא מנת ההפרשים
+    $\frac{f(x_0+h)-f(x_0)}{h}$. כש-$h\to0$ המיתרים מתקרבים לישר המשיק.
+  lesson: '5.1'
 - id: average-velocity
   term: מהירות ממוצעת
   en: average velocity

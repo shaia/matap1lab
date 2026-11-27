@@ -1,0 +1,10 @@
+---
+/**
+ * Chapter 5.1–5.2 figure: <Spread figure={DerivLab} figureProps={{ mode, … }}>.
+ * mode: secant, zoom, linear. The props, step keys, readout ids and task ids are documented at the top of DerivLab.tsx.
+ */
+import DerivLab, { type DerivLabProps } from './DerivLab';
+type Props = DerivLabProps;
+---
+
+<DerivLab client:visible {...Astro.props} />

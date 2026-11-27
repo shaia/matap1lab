@@ -1,0 +1,474 @@
+# Workbook of lesson 5.4 — implicit differentiation and the derivative of an inverse function.
+# Objectives (src/course.ts):
+#   OBJ-5.4-1  differentiate a curve given by an equation implicitly and find the slope at a point on it
+#   OBJ-5.4-2  compute the derivative of an inverse function; differentiate arcsin, arccos, arctan
+#   OBJ-5.4-3  differentiate by logarithms functions such as a power whose base and exponent both vary
+# Order of knowledge: implicit differentiation is "differentiate with respect to x, y = y(x)"; no partial derivatives,
+# no second derivatives, no extrema (5.5), no related rates in time (5.5), no hyperbolic derivatives (5.5).
+# Every number recomputed with sympy (scratch script wb54.py of the 5.4 writer).
+lesson: '5.4'
+practice:
+  - id: W-5.4-01
+    level: basic
+    objectives: [OBJ-5.4-1]
+    prompt: >-
+      הנקודה $(1,2)$ נמצאת על העקום $x^3+y^3=9$. מצאו בגזירה סתומה את $y'$, את השיפוע בנקודה, ואת משוואת המשיק.
+    answer: >-
+      $y'=-\frac{x^2}{y^2}$; בנקודה $y'=-\frac14$; המשיק $y=2-\frac14(x-1)$, כלומר $y=-\frac14x+\frac94$.
+    solution:
+      - kind: idea
+        text: >-
+          גוזרים את שני האגפים לפי $x$, כש-$y$ פונקציה של $x$ ליד הנקודה. האיבר $y^3$ הוא הרכבה, ולכן כלל השרשרת נותן
+          $(y^3)'=3y^2\,y'$.
+      - kind: check
+        text: >-
+          הנקודה על העקום: $1+8=9$.
+      - kind: computation
+        text: >-
+          גוזרים: $3x^2+3y^2\,y'=0$. מבודדים: $y'=-\frac{3x^2}{3y^2}=-\frac{x^2}{y^2}$.
+      - kind: computation
+        text: >-
+          ב-$(1,2)$: $y'=-\frac{1}{4}$. המשיק עובר ב-$(1,2)$ בשיפוע הזה: $y=2-\frac14(x-1)=-\frac14x+\frac94$.
+      - kind: check
+        text: >-
+          כאן אפשר גם לפתור: $y=\sqrt[3]{9-x^3}$, ובכלל השרשרת $y'=\frac13(9-x^3)^{-2/3}\cdot(-3x^2)$. ב-$x=1$:
+          $\frac13\cdot8^{-2/3}\cdot(-3)=-\frac14$. אותה תשובה.
+      - kind: result
+        text: >-
+          $y'=-\frac{x^2}{y^2}$, השיפוע $y'=-\frac14$ והמשיק $y=-\frac14x+\frac94$.
+
+  - id: W-5.4-02
+    level: basic
+    objectives: [OBJ-5.4-2]
+    prompt: >-
+      גזרו:
+
+      (א) $\arctan\left(e^x\right)$
+
+      (ב) $\arcsin\sqrt x$, בקטע $0<x<1$
+
+      (ג) $x^2\arctan x$
+    answer: >-
+      (א) $\frac{e^x}{1+e^{2x}}$. (ב) $\frac{1}{2\sqrt x\sqrt{1-x}}$. (ג) $2x\arctan x+\frac{x^2}{1+x^2}$.
+    solution:
+      - kind: idea
+        text: >-
+          הנגזרות החדשות של השיעור, $(\arctan u)'=\frac{1}{1+u^2}$ ו-$(\arcsin u)'=\frac{1}{\sqrt{1-u^2}}$, משתלבות
+          בכללים של שיעור 5.3: הנגזרת החיצונית מחושבת בשכבה הפנימית, כפול הנגזרת הפנימית; ומכפלה בכלל המכפלה.
+      - kind: computation
+        text: >-
+          (א) השכבה הפנימית $u=e^x$, $u'=e^x$: $\frac{1}{1+(e^x)^2}\cdot e^x=\frac{e^x}{1+e^{2x}}$.
+      - kind: computation
+        text: >-
+          (ב) $u=\sqrt x$, $u'=\frac{1}{2\sqrt x}$, ו-$1-u^2=1-x$: $\frac{1}{\sqrt{1-x}}\cdot\frac{1}{2\sqrt x}$.
+      - kind: computation
+        text: >-
+          (ג) כלל המכפלה: $(x^2)'\arctan x+x^2(\arctan x)'=2x\arctan x+\frac{x^2}{1+x^2}$.
+      - kind: check
+        text: >-
+          (א) ב-$x=0$: $\frac{1}{2}$, ואכן שם $u=1$ והשיפוע של $\arctan$ ב-1 הוא $\frac12$, כפול $u'(0)=1$. (ב) כש-$x$
+          מתקרב ל-1 המכנה מתקרב ל-0: משיק אנכי, כמו של $\arcsin$ בקצה 1.
+      - kind: result
+        text: >-
+          (א) $\frac{e^x}{1+e^{2x}}$; (ב) $\frac{1}{2\sqrt{x(1-x)}}$; (ג) $2x\arctan x+\frac{x^2}{1+x^2}$.
+
+  - id: W-5.4-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-5.4-3]
+    prompt: >-
+      לכל פונקציה (ל-$x>0$) קבעו איזה כלל מתאים: כלל החזקה (מעריך קבוע), כלל האקספוננט (בסיס קבוע), אף אחד מהם
+      (גזירה לוגריתמית), או שהיא בכלל קבועה. אחר כך גזרו.
+
+      (א) $x^e$ (ב) $e^x$ (ג) $e^e$ (ד) $x^{x^2}$
+    answer: >-
+      (א) חזקה: $ex^{e-1}$. (ב) אקספוננט: $e^x$. (ג) קבוע: 0. (ד) גזירה לוגריתמית: $x^{x^2}(2x\ln x+x)$.
+    solution:
+      - kind: idea
+        text: >-
+          שואלים מה משתנה: הבסיס, המעריך, שניהם או אף אחד. כלל החזקה דורש מעריך קבוע, כלל האקספוננט בסיס קבוע. כששניהם
+          משתנים לוקחים $\ln$.
+      - kind: computation
+        text: >-
+          (א) הבסיס משתנה והמעריך הוא המספר $e$: כלל החזקה הממשי, $(x^e)'=ex^{e-1}$.
+      - kind: computation
+        text: >-
+          (ב) הבסיס $e$ קבוע והמעריך משתנה: $(e^x)'=e^x$.
+      - kind: computation
+        text: >-
+          (ג) $e^e\approx15.15$ הוא מספר, בלי $x$ בכלל: הנגזרת 0.
+      - kind: computation
+        text: >-
+          (ד) גם הבסיס וגם המעריך משתנים. $\ln y=x^2\ln x$; גוזרים בכלל המכפלה: $\frac{y'}{y}=2x\ln x+x^2\cdot\frac1x=2x\ln x+x$.
+          כופלים ב-$y$: $y'=x^{x^2}(2x\ln x+x)$.
+      - kind: check
+        text: >-
+          (ד) ב-$x=1$: $y=1$ ו-$y'=1\cdot(0+1)=1$. מנת ההפרשים עם $h=0.001$: $\frac{1.001^{1.002001}-1}{0.001}\approx1.002$.
+      - kind: result
+        text: >-
+          (א) $ex^{e-1}$; (ב) $e^x$; (ג) 0; (ד) $x^{x^2}(2x\ln x+x)$.
+
+  - id: W-5.4-04
+    level: mid
+    objectives: [OBJ-5.4-1]
+    prompt: >-
+      העקום $e^y+xy=e$ עובר בנקודה $(0,1)$. מצאו את $y'$ ואת שיפוע המשיק בנקודה הזו.
+    answer: >-
+      $y'=-\frac{y}{e^y+x}$; בנקודה $y'=-\frac1e\approx-0.368$.
+    solution:
+      - kind: idea
+        text: >-
+          גזירה סתומה, עם שני כללים: $e^y$ הוא הרכבה ($e^u$ עם $u=y(x)$), ו-$xy$ מכפלה של $x$ בפונקציה $y(x)$.
+      - kind: check
+        text: >-
+          הנקודה על העקום: $e^1+0\cdot1=e$.
+      - kind: computation
+        text: >-
+          גוזרים: $(e^y)'=e^y\,y'$, $(xy)'=y+xy'$, ו-$(e)'=0$ (מספר). לכן $e^y\,y'+y+xy'=0$.
+      - kind: computation
+        text: >-
+          מעבירים: $y'(e^y+x)=-y$, ולכן $y'=-\frac{y}{e^y+x}$.
+      - kind: computation
+        text: >-
+          ב-$(0,1)$: $y'=-\frac{1}{e+0}=-\frac1e$.
+      - kind: check
+        text: >-
+          על ציר $y$ ($x=0$) המשוואה היא $e^y=e$, ולכן $y=1$ בלבד: הנקודה היחידה של העקום על הציר. ונקודה קרובה בכיוון
+          המשיק: $x=0.01$, $y\approx1-\frac{0.01}{e}\approx0.99632$; $e^{0.99632}+0.01\cdot0.99632\approx2.71826$, קרוב מאוד ל-$e\approx2.71828$.
+      - kind: result
+        text: >-
+          $y'=-\frac{y}{e^y+x}$, ושיפוע המשיק ב-$(0,1)$ הוא $y'=-\frac1e$.
+
+  - id: W-5.4-05
+    level: mid
+    objectives: [OBJ-5.4-2]
+    prompt: >-
+      $f(x)=2x+\cos x$.
+
+      (א) הראו ש-$f'(x)>0$ לכל $x$. (מכאן, לפי שיעור 5.5, $f$ עולה ויש לה הפוכה; כאן קבלו זאת.)
+
+      (ב) חשבו את $\left(f^{-1}\right)'(1)$ ואת $\left(f^{-1}\right)'(\pi)$.
+    answer: >-
+      (א) $f'(x)=2-\sin x\ge1$. (ב) $\frac12$ ו-1.
+    solution:
+      - kind: idea
+        text: >-
+          את $f^{-1}$ אי אפשר לכתוב בנוסחה, אבל לא צריך: $\left(f^{-1}\right)'(b)=\frac{1}{f'(a)}$ כש-$f(a)=b$. מוצאים את
+          $a$ בניחוש של נקודה נוחה.
+      - kind: computation
+        text: >-
+          (א) $f'(x)=2-\sin x$. כי $\sin x\le1$, $f'(x)\ge2-1=1>0$. בפרט $f'$ אף פעם אינה 0.
+      - kind: computation
+        text: >-
+          (ב) $b=1$: $f(0)=0+\cos0=1$, ולכן $a=0$, $f'(0)=2$, ו-$\left(f^{-1}\right)'(1)=\frac12$.
+      - kind: computation
+        text: >-
+          $b=\pi$: $f\left(\frac\pi2\right)=\pi+\cos\frac\pi2=\pi$, ולכן $a=\frac\pi2$, $f'\left(\frac\pi2\right)=2-1=1$, ו-$\left(f^{-1}\right)'(\pi)=1$.
+      - kind: check
+        text: >-
+          המכפלה של שני השיפועים בכל זוג נקודות ראי היא 1: $2\cdot\frac12=1$ ו-$1\cdot1=1$. ומכיוון ש-$f'\ge1$, השיפוע
+          של ההפוכה לכל היותר 1, ושווה ל-1 בדיוק כש-$f'(a)=1$, כמו ב-$b=\pi$.
+      - kind: result
+        text: >-
+          $\left(f^{-1}\right)'(1)=\frac12$, $\left(f^{-1}\right)'(\pi)=1$.
+
+  - id: W-5.4-06
+    level: mid
+    qualitative: true
+    objectives: [OBJ-5.4-2]
+    prompt: >-
+      $f(x)=x^3+3x$ עולה בכל הישר, ויש לה פונקציה הפוכה. בלי למצוא נוסחה ל-$f^{-1}$:
+
+      (א) הסבירו למה $f^{-1}$ גזירה בכל נקודה, בניגוד להפוכה של $x^3$.
+
+      (ב) הראו ש-$\left(f^{-1}\right)'(b)\le\frac13$ לכל $b$. באיזה $b$ יש שוויון?
+
+      (ג) חשבו את $\left(f^{-1}\right)'(4)$.
+    answer: >-
+      (א) $f'(x)=3x^2+3\ge3$ אף פעם אינה 0. (ב) $\frac{1}{f'(a)}\le\frac13$, שוויון ב-$b=0$. (ג) $\frac16$.
+    solution:
+      - kind: idea
+        text: >-
+          כל השאלות עוברות דרך $\left(f^{-1}\right)'(b)=\frac{1}{f'(a)}$ עם $f(a)=b$. ההפוכה אינה גזירה רק בנקודות הראי
+          של המקומות שבהם $f'=0$.
+      - kind: computation
+        text: >-
+          (א) $f'(x)=3x^2+3$. כי $x^2\ge0$, $f'(x)\ge3>0$ לכל $x$. אין נקודה עם משיק אופקי, ולכן אין לגרף של ההפוכה משיק
+          אנכי, והנוסחה נותנת מספר בכל נקודה. ב-$x^3$, לעומת זאת, $f'(0)=0$, וההפוכה $\sqrt[3]x$ אינה גזירה ב-0.
+      - kind: computation
+        text: >-
+          (ב) לכל $b$ יש $a$ עם $f(a)=b$, ו-$\left(f^{-1}\right)'(b)=\frac{1}{3a^2+3}$. המכנה לפחות 3, ולכן השבר לכל היותר
+          $\frac13$. שוויון רק כש-$a=0$, כלומר $b=f(0)=0$.
+      - kind: computation
+        text: >-
+          (ג) $f(1)=1+3=4$, ולכן $a=1$, $f'(1)=6$, ו-$\left(f^{-1}\right)'(4)=\frac16$.
+      - kind: check
+        text: >-
+          בציור: הגרף של $f$ תלול בכל מקום (שיפוע לפחות 3), ולכן הראי שלו שטוח בכל מקום (שיפוע לכל היותר $\frac13$).
+      - kind: result
+        text: >-
+          $f^{-1}$ גזירה בכל מקום; $\left(f^{-1}\right)'\le\frac13$ עם שוויון ב-0; $\left(f^{-1}\right)'(4)=\frac16$.
+
+  - id: W-5.4-07
+    level: mid
+    objectives: [OBJ-5.4-3]
+    prompt: >-
+      $y=(\sin x)^x$ בקטע $0<x<\pi$. מצאו את $y'$, וחשבו את השיפוע ב-$x=\frac\pi2$ וב-$x=\frac\pi4$.
+    answer: >-
+      $y'=(\sin x)^x\left(\ln\sin x+\frac{x\cos x}{\sin x}\right)$. ב-$\frac\pi2$: 0. ב-$\frac\pi4$:
+      $\left(\frac{\sqrt2}{2}\right)^{\pi/4}\left(\frac\pi4-\frac{\ln2}{2}\right)\approx0.334$.
+    solution:
+      - kind: idea
+        text: >-
+          גם הבסיס $\sin x$ וגם המעריך $x$ משתנים: לוקחים $\ln$ (מותר, כי $\sin x>0$ בקטע), גוזרים, וכופלים בחזרה ב-$y$.
+      - kind: computation
+        text: >-
+          $\ln y=x\ln(\sin x)$. כלל המכפלה, ובאיבר השני כלל השרשרת:
+          $\frac{y'}{y}=\ln(\sin x)+x\cdot\frac{\cos x}{\sin x}$.
+      - kind: computation
+        text: >-
+          כופלים ב-$y$: $y'=(\sin x)^x\left(\ln\sin x+\frac{x\cos x}{\sin x}\right)$.
+      - kind: computation
+        text: >-
+          ב-$\frac\pi2$: $\sin=1$, $\ln1=0$ ו-$\cos=0$, ולכן $y'=1\cdot(0+0)=0$: משיק אופקי.
+      - kind: computation
+        text: >-
+          ב-$\frac\pi4$: $\sin\frac\pi4=\cos\frac\pi4=\frac{\sqrt2}{2}$, $\ln\frac{\sqrt2}{2}=-\frac{\ln2}{2}$, ו-$\frac{x\cos x}{\sin x}=\frac\pi4$.
+          לכן $y'=\left(\frac{\sqrt2}{2}\right)^{\pi/4}\left(\frac\pi4-\frac{\ln2}{2}\right)\approx0.7617\cdot0.4388\approx0.334$.
+      - kind: check
+        text: >-
+          מנת ההפרשים ב-$\frac\pi4$ עם $h=0.001$ בערך $0.3345$. מי ששוכח לכפול ב-$y$ מקבל $0.4388$.
+      - kind: result
+        text: >-
+          $y'=(\sin x)^x\left(\ln\sin x+\frac{x\cos x}{\sin x}\right)$; $y'\left(\frac\pi2\right)=0$, $y'\left(\frac\pi4\right)\approx0.334$.
+
+  - id: W-5.4-08
+    level: exam
+    qualitative: true
+    objectives: [OBJ-5.4-1]
+    prompt: >-
+      העקום $y^2=x^3$ נקרא פרבולה חצי-קובית.
+
+      (א) מצאו את $y'$ בגזירה סתומה, ואת משוואת המשיק בנקודה $(4,8)$.
+
+      (ב) המשיק מ-(א) פוגש את העקום בעוד נקודה. מצאו אותה.
+
+      (ג) מה נותנת הנוסחה של (א) בראשית? הסבירו מה קורה לעקום שם, בעזרת שני הענפים $y=\pm x^{3/2}$.
+    answer: >-
+      (א) $y'=\frac{3x^2}{2y}$; המשיק $y=3x-4$. (ב) $(1,-1)$. (ג) $\frac00$, שאינו אומר כלום: שני הענפים יוצאים מהראשית
+      בשיפוע 0, אחד למעלה ואחד למטה, ויוצרים חוד.
+    solution:
+      - kind: idea
+        text: >-
+          גזירה סתומה נותנת את השיפוע. נקודת חיתוך נוספת: מציבים את משוואת המשיק במשוואת העקום, ויודעים מראש ש-$x=4$
+          הוא שורש כפול (שם הישר משיק). בנקודה שבה גם המונה וגם המכנה מתאפסים חוזרים לפונקציות המפורשות.
+      - kind: computation
+        text: >-
+          (א) $64=4^3$: הנקודה על העקום. גוזרים: $2y\,y'=3x^2$, ולכן $y'=\frac{3x^2}{2y}$. ב-$(4,8)$: $y'=\frac{48}{16}=3$.
+          המשיק: $y=8+3(x-4)=3x-4$.
+      - kind: computation
+        text: >-
+          (ב) מציבים $y=3x-4$ ב-$y^2=x^3$: $(3x-4)^2=x^3$, כלומר $x^3-9x^2+24x-16=0$. כי הישר משיק ב-$x=4$, ה-$x$ של
+          נקודת ההשקה הוא שורש כפול, והפולינום מתחלק ב-$(x-4)^2=x^2-8x+16$. הגורם הנותר הוא מהצורה $(x-c)$, כי המקדם של
+          $x^3$ הוא 1. משווים את האיברים החופשיים: $16\cdot(-c)=-16$, ולכן $c=1$. בדיקה בפתיחת סוגריים:
+          $(x^2-8x+16)(x-1)=x^3-x^2-8x^2+8x+16x-16=x^3-9x^2+24x-16$. השורש החדש $x=1$, ו-$y=3\cdot1-4=-1$.
+      - kind: computation
+        text: >-
+          (ג) בראשית $\frac{3\cdot0}{2\cdot0}=\frac00$: גם המונה וגם המכנה מתאפסים, והנוסחה אינה קובעת שיפוע. העקום הוא
+          שני ענפים, $y=x^{3/2}$ ו-$y=-x^{3/2}$, ל-$x\ge0$. בכלל החזקה הממשי $\left(x^{3/2}\right)'=\frac32x^{1/2}$, ששואף
+          ל-0 כש-$x\to0^+$.
+      - kind: step
+        text: >-
+          לכן שני הענפים יוצאים מהראשית משיקים לציר $x$, אחד מעליו ואחד מתחתיו: העקום נראה שם כמו קצה חד של מקור, חוד.
+          אין שם חתיכה שהיא גרף של פונקציה אחת $y(x)$ משני צדי הראשית (משמאל לה אין נקודות בכלל, ומימין יש שתיים מעל כל $x$).
+      - kind: check
+        text: >-
+          $(-1)^2=1=1^3$: הנקודה מ-(ב) על העקום. והשיפוע שם $\frac{3}{-2}$, שונה מ-3: בנקודה השנייה הישר חותך ואינו משיק.
+      - kind: result
+        text: >-
+          המשיק ב-$(4,8)$ הוא $y=3x-4$, הוא פוגש את העקום שוב ב-$(1,-1)$, ובראשית יש חוד, שבו הנוסחה נותנת $\frac00$.
+
+  - id: W-5.4-09
+    level: exam
+    objectives: [OBJ-5.4-2]
+    prompt: >-
+      (א) הראו שהנגזרת של $g(x)=\arcsin\frac{x}{\sqrt{1+x^2}}$ שווה ל-$(\arctan x)'$, ובדקו ש-$g(1)=\arctan1$.
+
+      (ב) גזרו את $h(x)=x\arcsin x+\sqrt{1-x^2}$ כש-$|x|<1$, ופשטו.
+    answer: >-
+      (א) $g'(x)=\frac{1}{1+x^2}$; $g(1)=\arcsin\frac{1}{\sqrt2}=\frac\pi4=\arctan1$. (ב) $h'(x)=\arcsin x$.
+    solution:
+      - kind: idea
+        text: >-
+          כלל השרשרת עם $(\arcsin u)'=\frac{1}{\sqrt{1-u^2}}$. הצעד הקשה הוא לפשט את $\sqrt{1-u^2}$ כש-$u$ עצמה שבר עם שורש.
+      - kind: computation
+        text: >-
+          (א) $u=\frac{x}{\sqrt{1+x^2}}=x(1+x^2)^{-1/2}$. בכלל המכפלה:
+          $u'=(1+x^2)^{-1/2}+x\cdot\left(-\frac12\right)(1+x^2)^{-3/2}\cdot2x=(1+x^2)^{-1/2}-x^2(1+x^2)^{-3/2}$. מכנה
+          משותף: $(1+x^2)^{-1/2}=\frac{1+x^2}{(1+x^2)^{3/2}}$, כי $(1+x^2)^{3/2}=(1+x^2)\cdot(1+x^2)^{1/2}$. לכן
+          $u'=\frac{(1+x^2)-x^2}{(1+x^2)^{3/2}}=\frac{1}{(1+x^2)^{3/2}}$.
+      - kind: computation
+        text: >-
+          $1-u^2=1-\frac{x^2}{1+x^2}=\frac{1}{1+x^2}$, ולכן $\sqrt{1-u^2}=\frac{1}{\sqrt{1+x^2}}$ (שורש חיובי).
+      - kind: computation
+        text: >-
+          $g'(x)=\frac{1}{\sqrt{1-u^2}}\cdot u'=\sqrt{1+x^2}\cdot\frac{1}{(1+x^2)^{3/2}}=\frac{1}{1+x^2}=(\arctan x)'$.
+      - kind: computation
+        text: >-
+          $g(1)=\arcsin\frac{1}{\sqrt2}=\frac\pi4$, ו-$\arctan1=\frac\pi4$.
+      - kind: computation
+        text: >-
+          (ב) $(x\arcsin x)'=\arcsin x+\frac{x}{\sqrt{1-x^2}}$ (כלל המכפלה), ו-$\left(\sqrt{1-x^2}\right)'=\frac{-2x}{2\sqrt{1-x^2}}=-\frac{x}{\sqrt{1-x^2}}$.
+          הסכום: $h'(x)=\arcsin x$.
+      - kind: check
+        text: >-
+          (א) בציור: אם $\theta=\arctan x$, במשולש ישר זווית עם ניצבים 1 ו-$x$ היתר $\sqrt{1+x^2}$, ו-$\sin\theta=\frac{x}{\sqrt{1+x^2}}$
+          (גם ל-$x<0$, כי $\theta$ ברביע הרביעי ושם הסינוס שלילי). לכן $g=\arctan$, וזה מסביר למה הנגזרות שוות.
+          (ב) ב-$x=0$: $h'(0)=0=\arcsin0$.
+      - kind: result
+        text: >-
+          $g'(x)=\frac{1}{1+x^2}$ ו-$g(1)=\frac\pi4$; $h'(x)=\arcsin x$.
+
+  - id: W-5.4-10
+    level: exam
+    objectives: [OBJ-5.4-3]
+    prompt: >-
+      (א) $y=x^{1/x}$ ל-$x>0$. מצאו את $y'$ בגזירה לוגריתמית.
+
+      (ב) באיזו נקודה המשיק לגרף אופקי? מה הערך של $y$ שם?
+
+      (ג) לפי חוק סטפן-בולצמן, ההספק שגוף חם קורן הוא $P=\sigma AT^4$, כש-$\sigma$ ו-$A$ קבועים ו-$T$ הטמפרטורה בקלווין.
+      הראו בגזירה לוגריתמית ש-$\frac{P'}{P}=\frac4T$ (הנגזרת לפי $T$), והסיקו בעזרת הדיפרנציאל בכמה אחוזים בקירוב גדל
+      ההספק כשהטמפרטורה עולה ב-1%.
+    answer: >-
+      (א) $y'=x^{1/x}\cdot\frac{1-\ln x}{x^2}$. (ב) ב-$x=e$, $y=e^{1/e}\approx1.445$. (ג) בכ-4%.
+    solution:
+      - kind: idea
+        text: >-
+          גם הבסיס וגם המעריך משתנים: $\ln y=\frac{\ln x}{x}$. ב-(ג), $\ln$ הופך מכפלה של קבועים בחזקה לסכום, והקבועים
+          נעלמים בגזירה: $\frac{P'}{P}$ תלוי רק במעריך.
+      - kind: computation
+        text: >-
+          (א) $\ln y=\frac{\ln x}{x}$. בכלל המנה: $\frac{y'}{y}=\frac{\frac1x\cdot x-\ln x\cdot1}{x^2}=\frac{1-\ln x}{x^2}$.
+          כופלים ב-$y$: $y'=x^{1/x}\cdot\frac{1-\ln x}{x^2}$.
+      - kind: computation
+        text: >-
+          (ב) $x^{1/x}>0$ ו-$x^2>0$, ולכן $y'=0$ בדיוק כש-$1-\ln x=0$, כלומר $x=e$. שם $y=e^{1/e}\approx1.4447$.
+      - kind: computation
+        text: >-
+          (ג) $\ln P=\ln\sigma+\ln A+4\ln T$. גוזרים לפי $T$: $\frac{P'}{P}=\frac4T$.
+      - kind: step
+        text: >-
+          לפי הדיפרנציאל (שיעור 5.2), $dP=P'\,dT$, ולכן $\frac{dP}{P}=4\cdot\frac{dT}{T}$. עלייה של 1% בטמפרטורה,
+          $\frac{dT}{T}=0.01$, נותנת $\frac{dP}{P}\approx0.04$: בערך 4%.
+      - kind: check
+        text: >-
+          (א) ב-$x=1$: $y'=1\cdot\frac{1-0}{1}=1$; ב-$x=2$: $\sqrt2\cdot\frac{1-\ln2}{4}\approx0.108$. (ג) בדיוק:
+          $1.01^4\approx1.0406$, עלייה של $4.06\%$, קרוב ל-4%.
+      - kind: result
+        text: >-
+          $y'=x^{1/x}\frac{1-\ln x}{x^2}$; משיק אופקי ב-$\left(e,e^{1/e}\right)$; ההספק גדל בכ-4%.
+
+challenge:
+  - id: W-5.4-c1
+    stars: 1
+    objectives: [OBJ-5.4-1]
+    prompt: >-
+      העקום $y^3-27y=x^2-90$.
+
+      (א) מצאו את $y'$ בגזירה סתומה.
+
+      (ב) מצאו את כל הנקודות של העקום שבהן המשיק אנכי.
+
+      (ג) הראו שיש על העקום נקודה עם $x=0$ שבה המשיק אופקי, ושה-$y$ שלה בין מינוס 7 למינוס 6.
+    answer: >-
+      (א) $y'=\frac{2x}{3y^2-27}$. (ב) $(\pm6,3)$ ו-$(\pm12,-3)$. (ג) ב-$x=0$: $y^3-27y+90=0$, ו-$g(y)=y^3-27y+90$ מחליפה
+      סימן בין מינוס 7 למינוס 6 (בערך $y=-6.407$).
+    solution:
+      - kind: idea
+        text: >-
+          גוזרים לפי $x$ עם $y=y(x)$ ומבודדים את $y'$. משיק אנכי: המכנה מתאפס והמונה לא; משיק אופקי: המונה מתאפס
+          והמכנה לא. כל תנאי פותרים יחד עם משוואת העקום.
+      - kind: computation
+        text: >-
+          (א) $3y^2\,y'-27\,y'=2x$, ולכן $y'(3y^2-27)=2x$ ו-$y'=\frac{2x}{3y^2-27}$.
+      - kind: computation
+        text: >-
+          (ב) המכנה מתאפס כש-$y^2=9$, כלומר $y=\pm3$. ב-$y=3$: $27-81=-54=x^2-90$, ולכן $x^2=36$, $x=\pm6$. ב-$y=-3$:
+          $(-3)^3-27\cdot(-3)=54=x^2-90$, ולכן $x^2=144$, $x=\pm12$. בארבע הנקודות $x\ne0$, והמונה $2x$ אינו מתאפס.
+      - kind: computation
+        text: >-
+          (ג) המונה $2x$ מתאפס רק ב-$x=0$. שם המשוואה $y^3-27y+90=0$. נסמן $g(y)=y^3-27y+90$, רציפה (פולינום):
+          $g(-7)=-343+189+90=-64<0$, $g(-6)=-216+162+90=36>0$. לפי משפט ערך הביניים (שיעור 4.6) יש $y_0$ בין מינוס 7 למינוס 6
+          עם $g(y_0)=0$.
+      - kind: step
+        text: >-
+          בנקודה $(0,y_0)$ המכנה $3y_0^2-27>3\cdot36-27>0$, ולכן אינו מתאפס, ו-$y'=\frac{0}{3y_0^2-27}=0$: משיק אופקי.
+      - kind: check
+        text: >-
+          $(6,3)$: $27-81=-54$ ו-$36-90=-54$. $(12,-3)$: $54$ ו-$144-90=54$. בחישוב מספרי $y_0\approx-6.407$.
+      - kind: result
+        text: >-
+          המשיק אנכי ב-$(6,3)$, $(-6,3)$, $(12,-3)$, $(-12,-3)$, ואופקי בנקודה $(0,y_0)$ עם $y_0\approx-6.407$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 1 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.8 (Implicit Differentiation), exercise 318; parts (א) and (ג) added'
+      url: https://openstax.org/books/calculus-volume-1/pages/3-8-implicit-differentiation
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-5.4-c2
+    stars: 1
+    objectives: [OBJ-5.4-2]
+    prompt: >-
+      עמוד גובהו $7.5$ מ׳. כבל מתוח מנקודה על הקרקע אל ראש העמוד. נסמן ב-$x$ את אורך הכבל (במטרים, $x>7.5$), וב-$\theta$
+      את הזווית בין הכבל לקרקע.
+
+      (א) כתבו את $\theta$ כפונקציה של $x$.
+
+      (ב) מצאו את $\frac{d\theta}{dx}$, וחשבו אותו כש-$x=9$ מ׳.
+
+      (ג) למה הנגזרת שלילית? ומה קורה לה כש-$x$ מתקרב ל-$7.5$ מימין? הסבירו בעזרת הגרף של $\arcsin$.
+    answer: >-
+      (א) $\theta=\arcsin\frac{7.5}{x}$. (ב) $\frac{d\theta}{dx}=-\frac{7.5}{x\sqrt{x^2-56.25}}$; ב-$x=9$:
+      $\frac{d\theta}{dx}=-\frac{5\sqrt{11}}{99}\approx-0.1675$ רדיאן למטר. (ג) כבל ארוך יותר שוכב נמוך יותר; ליד $7.5$ הנגזרת יורדת בלי
+      גבול, כי הארגומנט $\frac{7.5}{x}$ של $\arcsin$ מתקרב ל-1, ושם ל-$\arcsin$ משיק אנכי.
+    solution:
+      - kind: idea
+        text: >-
+          במשולש ישר הזווית שהעמוד, הקרקע והכבל יוצרים, הכבל הוא היתר, והעמוד הניצב שמול $\theta$: $\sin\theta=\frac{7.5}{x}$.
+          הזווית חדה, ולכן היא $\arcsin$ של היחס. גוזרים בכלל השרשרת.
+      - kind: computation
+        text: >-
+          (א) $\theta=\arcsin\frac{7.5}{x}$, ובקטע $x>7.5$ היחס בין 0 ל-1.
+      - kind: computation
+        text: >-
+          (ב) $u=\frac{7.5}{x}$, $u'=-\frac{7.5}{x^2}$. $\sqrt{1-u^2}=\sqrt{\frac{x^2-56.25}{x^2}}=\frac{\sqrt{x^2-56.25}}{x}$ (כי $x>0$).
+          לכן $\frac{d\theta}{dx}=\frac{x}{\sqrt{x^2-56.25}}\cdot\left(-\frac{7.5}{x^2}\right)=-\frac{7.5}{x\sqrt{x^2-56.25}}$.
+      - kind: computation
+        text: >-
+          ב-$x=9$: $\sqrt{81-56.25}=\sqrt{24.75}=\frac{3\sqrt{11}}{2}$, ולכן $\frac{d\theta}{dx}=-\frac{7.5}{9\cdot\frac{3\sqrt{11}}{2}}=-\frac{5}{9\sqrt{11}}=-\frac{5\sqrt{11}}{99}\approx-0.1675$.
+      - kind: step
+        text: >-
+          אותו דבר בגזירה סתומה: מ-$\sin\theta=\frac{7.5}{x}$, $\cos\theta\cdot\theta'=-\frac{7.5}{x^2}$, ו-$\cos\theta=\frac{\sqrt{x^2-56.25}}{x}$
+          (הניצב הצמוד חלקי היתר).
+      - kind: computation
+        text: >-
+          (ג) כבל ארוך יותר לאותו גובה שוכב נמוך יותר, ולכן $\theta$ יורדת כש-$x$ גדל: נגזרת שלילית. כש-$x\to7.5^+$
+          היחס $u\to1$, הכבל כמעט אנכי, והמכנה $x\sqrt{x^2-56.25}\to0$: הנגזרת יורדת בלי גבול. זה המשיק האנכי של
+          $\arcsin$ בקצה 1.
+      - kind: check
+        text: >-
+          ב-$x=9$: $\theta=\arcsin\frac56\approx0.9851$ רדיאן (בערך $56.4^\circ$). מנת ההפרשים עם $h=0.001$ בערך מינוס
+          $0.16747$, קרובה לתוצאה.
+      - kind: result
+        text: >-
+          $\frac{d\theta}{dx}=-\frac{7.5}{x\sqrt{x^2-56.25}}$, וב-$x=9$ מ׳ בערך מינוס $0.1675$ רדיאן לכל מטר של כבל.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 1 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.7 (Derivatives of Inverse Functions), exercise 297; the numbers rescaled to metres (75 ft, 90 ft to 7.5 m, 9 m: the book''s answer, about −0.0168 rad per foot, becomes about −0.1675 rad per metre), parts (א) and (ג) added'
+      url: https://openstax.org/books/calculus-volume-1/pages/3-7-derivatives-of-inverse-functions
+      verified: '2026-11-27'
+      adapted: true

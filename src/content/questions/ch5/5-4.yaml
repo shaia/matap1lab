@@ -11,15 +11,50 @@ questions:
     objectives: [OBJ-5.4-1]
     level: basic
     prompt: >-
-      הנקודה $(3,4)$ נמצאת על המעגל $x^2+y^2=25$. גזרו את המשוואה באופן סתום ומצאו את שיפוע המשיק למעגל בנקודה הזו.
-    answer: -0.75
+      הנקודה $(1,2)$ נמצאת על האליפסה $x^2+2y^2=9$. גזרו את המשוואה באופן סתום ומצאו את שיפוע המשיק לאליפסה בנקודה
+      הזו.
+    answer: -0.25
     tolerance: 0.001
     correctFeedback: >-
-      נכון. $2x+2yy'=0$, ולכן $y'=-\frac xy=-\frac34$. בדיקה גיאומטרית: הרדיוס לנקודה שיפועו $\frac43$, והמשיק מאונך
-      לו: $\frac43\cdot\left(-\frac34\right)=-1$.
+      נכון. $2x+4yy'=0$, ולכן $y'=-\frac{x}{2y}$, וב-$(1,2)$: $y'=-\frac14$. בדיקה: החצי העליון הוא
+      $y=\sqrt{\frac{9-x^2}{2}}$, וב-$x=1$ השיפוע שלו $\frac{-x}{2\sqrt{(9-x^2)/2}}=\frac{-1}{2\cdot2}=-\frac14$.
     wrongFeedback: >-
-      גזרו כל איבר לפי $x$, כש-$y$ פונקציה של $x$: $(y^2)'=2yy'$. אחר כך בודדו את $y'$ והציבו את הנקודה.
+      גזרו כל איבר לפי $x$, כש-$y$ פונקציה של $x$: $(2y^2)'=4yy'$. אחר כך בודדו את $y'$ והציבו את הנקודה.
     hints: ['$(y^2)''=2y\,y''$, לפי כלל השרשרת.']
+
+  - id: Q-5.4-not-function
+    type: twotier
+    objectives: [OBJ-5.4-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      העקום $x^3+y^3=6xy$ אינו גרף של פונקציה: מעל $x=3$ יש לו שלוש נקודות. נכון או לא נכון: לכן אין לו משיק בנקודה
+      $(3,3)$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. משיק הוא תכונה מקומית: ליד $(3,3)$ חתיכה של העקום היא גרף של פונקציה $y(x)$, ולחתיכה הזו יש משיק. בגזירה
+          סתומה $y'=\frac{2y-x^2}{y^2-2x}$, וב-$(3,3)$ השיפוע מינוס 1.
+      - text: 'נכון'
+        feedback: >-
+          העובדה שהעקום כולו אינו פונקציה אינה משנה את מה שקורה ליד נקודה אחת. ליד $(3,3)$ העקום הוא גרף של פונקציה, ויש
+          לו משיק.
+        misconception: MC-c5-implicit-not-function
+    reasons:
+      - text: 'ליד $(3,3)$ חתיכה של העקום היא גרף של פונקציה $y(x)$, והשיפוע שלה הוא $y''$ מגזירה סתומה'
+        correct: true
+        feedback: >-
+          בדיוק. הנקודות האחרות מעל $x=3$ רחוקות מ-$(3,3)$ ואינן משפיעות על המשיק בה.
+      - text: 'נגזרת מוגדרת רק לפונקציה, ועקום שאינו פונקציה אין לו נגזרת בשום נקודה'
+        feedback: >-
+          כך גם למעגל לא היה משיק באף נקודה. אבל למעגל יש משיק בכל נקודה: ב-$(3,4)$ שיפועו $y'=-\frac34$. מה שקובע הוא העקום
+          **ליד** הנקודה.
+        misconception: MC-c5-implicit-not-function
+      - text: 'מעל $x=3$ יש שלוש נקודות, ולכן יש שלושה שיפועים שונים ב-$(3,3)$'
+        feedback: >-
+          לכל אחת משלוש הנקודות יש משיק משלה, אבל הן נקודות שונות. בנקודה $(3,3)$ עצמה עובר משיק אחד, בשיפוע מינוס 1.
+        misconception: MC-c5-implicit-not-function
 
   - id: Q-5.4-arctan
     type: expr
@@ -31,9 +66,9 @@ questions:
     variables: [x]
     domain: [-2, 2]
     correctFeedback: >-
-      נכון. $(\arctan y)'=\frac{1}{1+y^2}$ בערך $y=x^2$, כפול $2x$.
+      נכון. $(\arctan u)'=\frac{1}{1+u^2}$ בערך $u=x^2$, כפול $2x$.
     wrongFeedback: >-
-      $(\arctan y)'=\frac{1}{1+y^2}$. מה $y$ כאן, ומה נגזרתו?
+      $(\arctan u)'=\frac{1}{1+u^2}$. מה $u$ כאן, ומה נגזרתו?
     commonWrong:
       - expr: '1/(1 + x^4)'
         feedback: >-
@@ -41,7 +76,7 @@ questions:
         misconception: MC-c5-chain-missing-inner
       - expr: '2*x/(1 + x^2)'
         feedback: >-
-          הצבתם $x$ במקום $x^2$ בנגזרת החיצונית: $\frac{1}{1+y^2}$ מחושבת ב-$y=x^2$, ולכן במכנה $1+x^4$.
+          הצבתם $x$ במקום $x^2$ בנגזרת החיצונית: $\frac{1}{1+u^2}$ מחושבת ב-$u=x^2$, ולכן במכנה $1+x^4$.
         misconception: MC-c5-chain-outer-at-x
 
   - id: Q-5.4-arccos
@@ -54,9 +89,9 @@ questions:
     variables: [x]
     domain: [-0.4, 0.4]
     correctFeedback: >-
-      נכון. $(\arccos y)'=-\frac{1}{\sqrt{1-y^2}}$ בערך $y=2x$, כפול 2. הנגזרת שלילית: $\arccos$ יורדת.
+      נכון. $(\arccos u)'=-\frac{1}{\sqrt{1-u^2}}$ בערך $u=2x$, כפול 2. הנגזרת שלילית: $\arccos$ יורדת.
     wrongFeedback: >-
-      $(\arccos y)'=-\frac{1}{\sqrt{1-y^2}}$, עם מינוס, ואחריה הנגזרת הפנימית.
+      $(\arccos u)'=-\frac{1}{\sqrt{1-u^2}}$, עם מינוס, ואחריה הנגזרת הפנימית.
     commonWrong:
       - expr: '2/sqrt(1 - 4*x^2)'
         feedback: >-
@@ -72,22 +107,22 @@ questions:
     objectives: [OBJ-5.4-2]
     level: basic
     prompt: >-
-      $f(x)=x^3+x+1$ עולה בכל הישר, ולכן יש לה פונקציה הפוכה $f^{-1}$. שימו לב ש-$f(1)=3$. חשבו את $(f^{-1})'(3)$.
-    answer: 0.25
+      $f(x)=x^3+2x-1$ עולה בכל הישר, ולכן יש לה פונקציה הפוכה $f^{-1}$. שימו לב ש-$f(1)=2$. חשבו את $(f^{-1})'(2)$.
+    answer: 0.2
     tolerance: 0.001
     correctFeedback: >-
-      נכון. $(f^{-1})'(3)=\frac{1}{f'(1)}$, כי $f(1)=3$; $f'(x)=3x^2+1$ ו-$f'(1)=4$. הנקודה $(1,3)$ על הגרף של $f$
-      מתאימה לנקודה $(3,1)$ על הגרף של ההפוכה, והשיפועים הופכיים.
+      נכון. $(f^{-1})'(2)=\frac{1}{f'(1)}$, כי $f(1)=2$; $f'(x)=3x^2+2$ ו-$f'(1)=5$. הנקודה $(1,2)$ על הגרף של $f$
+      מתאימה לנקודה $(2,1)$ על הגרף של ההפוכה, והשיפועים הופכיים.
     wrongFeedback: >-
       הנגזרת של ההפוכה ב-$b$ היא $\frac{1}{f'(a)}$, כש-$a$ הוא המספר שמקיים $f(a)=b$.
     commonWrong:
-      - value: 0.0357142857142857
+      - value: 0.0714285714285714
         feedback: >-
-          $\frac{1}{28}=\frac{1}{f'(3)}$: חישבתם את $f'$ ב-3. אבל 3 הוא ערך של $f$; הנקודה המתאימה היא $a=1$.
+          $\frac{1}{14}=\frac{1}{f'(2)}$: חישבתם את $f'$ ב-2. אבל 2 הוא ערך של $f$; הנקודה המתאימה היא $a=1$.
         misconception: MC-c5-inverse-wrong-point
-      - value: 4
+      - value: 5
         feedback: >-
-          4 הוא $f'(1)$ עצמו. השיפוע של ההפוכה הוא **ההופכי**: השיקוף ביחס ל-$y=x$ מחליף בין $\Delta x$ ל-$\Delta y$.
+          5 הוא $f'(1)$ עצמו. השיפוע של ההפוכה הוא **ההופכי**: השיקוף ביחס ל-$y=x$ מחליף בין $\Delta x$ ל-$\Delta y$.
         misconception: MC-c5-inverse-is-reciprocal
 
   - id: Q-5.4-xx
@@ -122,18 +157,41 @@ questions:
     objectives: [OBJ-5.4-1]
     level: mid
     prompt: >-
-      הנקודה $(1,2)$ נמצאת על העקום $x^2+xy+y^2=7$. מצאו את שיפוע המשיק לעקום בנקודה הזו.
-    answer: -0.8
+      הנקודה $(1,2)$ נמצאת על העקום $x^2+3xy+y^2=11$. מצאו את שיפוע המשיק לעקום בנקודה הזו.
+    answer: -1.14285714285714
     tolerance: 0.001
     correctFeedback: >-
-      נכון. גזירה סתומה: $2x+(y+xy')+2yy'=0$, ולכן $y'=-\frac{2x+y}{x+2y}$, וב-$(1,2)$: $-\frac45$.
+      נכון. גזירה סתומה: $2x+3(y+xy')+2yy'=0$, ולכן $y'=-\frac{2x+3y}{3x+2y}$, וב-$(1,2)$: $y'=-\frac87\approx-1.143$.
     wrongFeedback: >-
-      האיבר $xy$ הוא מכפלה של $x$ בפונקציה $y(x)$: $(xy)'=y+xy'$. גזרו, בודדו $y'$ והציבו.
+      האיבר $3xy$ הוא מכפלה של $x$ בפונקציה $y(x)$: $(xy)'=y+xy'$. גזרו, בודדו $y'$ והציבו.
     commonWrong:
-      - value: -1
+      - value: -2
         feedback: >-
-          $-1$ מתקבל כשגוזרים $(xy)'=y$, כאילו $y$ קבוע: אז $2x+y+2yy'=0$ ו-$y'=-\frac{4}{4}$. גם $y$ שבמכפלה תלוי ב-$x$.
+          מינוס 2 מתקבל כשגוזרים $(3xy)'=3y$, כאילו $y$ קבוע: אז $2x+3y+2yy'=0$ ו-$y'=-\frac{8}{4}$. גם $y$ שבמכפלה
+          תלוי ב-$x$.
         misconception: MC-c5-implicit-forget-yprime
+
+  - id: Q-5.4-vertical-points
+    type: numeric
+    objectives: [OBJ-5.4-1]
+    level: mid
+    prompt: >-
+      העקום $2x^2-2xy+y^2=4$ הוא אליפסה נטויה. מצאו את הנקודות שבהן המשיק לעקום **אנכי**. מהו שיעור ה-$x$ הגדול
+      מביניהן?
+    answer: 2
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון. $4x-2(y+xy')+2yy'=0$, ולכן $y'=\frac{2x-y}{x-y}$. המכנה מתאפס כש-$y=x$; מציבים: $2x^2-2x^2+x^2=4$, ולכן
+      $x=\pm2$: הנקודות $(2,2)$ ו-$(-2,-2)$. שם המונה $2x-y=x\ne0$, ולכן המשיק אנכי.
+    wrongFeedback: >-
+      גזרו באופן סתום וכתבו את $y'$ כשבר. משיק אנכי הוא **מכנה** שמתאפס (והמונה לא). את התנאי הזה פותרים יחד עם משוואת
+      העקום.
+    commonWrong:
+      - value: 1.4142135623731
+        feedback: >-
+          $\sqrt2$ מתקבל מהמונה שמתאפס, $y=2x$: שם המשיק **אופקי**, בנקודות $\pm\left(\sqrt2,2\sqrt2\right)$. משיק אנכי
+          הוא מכנה שמתאפס.
+        misconception: MC-c5-implicit-zero-denominator
 
   - id: Q-5.4-implicit-why
     type: twotier
@@ -266,6 +324,30 @@ questions:
           2 הוא $f'(0)$. נגזרת ההפוכה היא ההופכי שלו.
         misconception: MC-c5-inverse-is-reciprocal
 
+  - id: Q-5.4-inverse-arctan
+    type: numeric
+    objectives: [OBJ-5.4-2]
+    level: exam
+    prompt: >-
+      $f(x)=x+\arctan x$ עולה בכל הישר, ולכן יש לה פונקציה הפוכה. חשבו את $\left(f^{-1}\right)'\left(1+\frac\pi4\right)$.
+    answer: 0.666666666666667
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $\frac23$. $f(1)=1+\arctan1=1+\frac\pi4$, ולכן $a=1$. $f'(x)=1+\frac{1}{1+x^2}$, ו-$f'(1)=\frac32$. לכן
+      $\left(f^{-1}\right)'\left(1+\frac\pi4\right)=\frac{1}{3/2}=\frac23$.
+    wrongFeedback: >-
+      מצאו קודם $a$ עם $f(a)=1+\frac\pi4$ (מה $\arctan1$?), גזרו את $f$ בעזרת $(\arctan x)'=\frac{1}{1+x^2}$, והפכו.
+    commonWrong:
+      - value: 0.80723436333522
+        feedback: >-
+          זה $\frac{1}{f'\left(1+\frac\pi4\right)}$: חישבתם את $f'$ בערך $b=1+\frac\pi4$. הנגזרת של $f$ מחושבת ב-$a=1$,
+          המספר שמקיים $f(a)=b$.
+        misconception: MC-c5-inverse-wrong-point
+      - value: 1.5
+        feedback: >-
+          $\frac32$ הוא $f'(1)$ עצמו. השיפוע של ההפוכה הוא ההופכי שלו.
+        misconception: MC-c5-inverse-is-reciprocal
+
   - id: Q-5.4-when-logdiff
     type: multi
     objectives: [OBJ-5.4-3]
@@ -320,25 +402,29 @@ questions:
     objectives: [OBJ-5.4-3]
     level: exam
     prompt: >-
-      מהו שיפוע המשיק לגרף של $y=x^x$ בנקודה $x=2$?
-    answer: 6.77258872223978
+      המשיק לגרף של $y=\left(x^2+1\right)^x$ בנקודה $x=1$ חותך את ציר $x$ בנקודה אחת. מהו שיעור ה-$x$ שלה?
+    answer: 0.409383890850359
     tolerance: 0.001
     correctFeedback: >-
-      נכון, $4(\ln2+1)\approx6.77$. $y'=x^x(\ln x+1)$, וב-2: $2^2(\ln2+1)$.
+      נכון, $1-\frac{1}{1+\ln2}\approx0.409$. גזירה לוגריתמית: $\ln y=x\ln(x^2+1)$, ולכן
+      $\frac{y'}{y}=\ln(x^2+1)+\frac{2x^2}{x^2+1}$. ב-$x=1$: $y=2$ ו-$y'=2(\ln2+1)$. המשיק $y=2+2(\ln2+1)(x-1)$, ו-$y=0$
+      כש-$x=1-\frac{1}{\ln2+1}$.
     wrongFeedback: >-
-      גזרו לוגריתמית: $\ln y=x\ln x$, $\frac{y'}{y}=\ln x+1$, והציבו $x=2$, $y=4$.
+      שני שלבים: קודם השיפוע, בגזירה לוגריתמית (גם הבסיס וגם המעריך משתנים), ואחר כך המשיק $y=y(1)+y'(1)(x-1)$ והצבה
+      של $y=0$.
     commonWrong:
-      - value: 4
+      - value: 0
         feedback: >-
-          $4=2\cdot2^{1}$, כלל החזקה $x\cdot x^{x-1}$. הוא מתעלם מכך שהמעריך משתנה.
+          0 מתקבל משיפוע 2, כלל החזקה $x\left(x^2+1\right)^{x-1}\cdot2x$ ב-$x=1$. הוא מתעלם מכך שהמעריך משתנה.
         misconception: MC-c5-power-rule-variable-exponent
-      - value: 2.77258872223978
+      - value: -0.442695040888963
         feedback: >-
-          $4\ln2$ הוא כלל האקספוננט $x^x\ln x$, שמתעלם מכך שהבסיס משתנה. חסר האיבר $x^x\cdot1=4$.
+          זה יוצא משיפוע $2\ln2$, כלל האקספוננט $\left(x^2+1\right)^x\ln(x^2+1)$, שמתעלם מכך שהבסיס משתנה. חסרה התרומה
+          של הבסיס, $\left(x^2+1\right)^x\cdot\frac{2x^2}{x^2+1}=2$.
         misconception: MC-c5-power-rule-variable-exponent
-      - value: 1.69314718055995
+      - value: -0.181232218299282
         feedback: >-
-          $\ln2+1$ הוא $\frac{y'}{y}$. כפלו ב-$y(2)=4$.
+          זה יוצא משיפוע $\ln2+1$, שהוא רק $\frac{y'}{y}$. כפלו ב-$y(1)=2$.
         misconception: MC-c5-logdiff-forget-y
 
   - id: Q-5.4-ellipse-tangent
@@ -346,8 +432,8 @@ questions:
     objectives: [OBJ-5.4-1]
     level: exam
     prompt: >-
-      הנקודה $(2,1)$ נמצאת על האליפסה $x^2+4y^2=8$. מצאו את משוואת המשיק לאליפסה בנקודה הזו, וכתבו את הנקודה שבה הוא
-      חותך את ציר $y$: מהו שיעור ה-$y$ שלה?
+      הנקודה $(2,1)$ נמצאת על האליפסה $x^2+4y^2=8$. מצאו את משוואת המשיק לאליפסה בנקודה הזו. המשיק חותך את ציר $y$
+      בנקודה אחת: מהו שיעור ה-$y$ שלה?
     answer: 2
     tolerance: 0.001
     correctFeedback: >-

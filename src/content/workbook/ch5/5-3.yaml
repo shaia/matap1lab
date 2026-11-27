@@ -1,0 +1,505 @@
+# Workbook of lesson 5.3 — the rules of differentiation and the chain rule.
+# Objectives (src/course.ts):
+#   OBJ-5.3-1  differentiate a sum, a product and a quotient
+#   OBJ-5.3-2  differentiate a composition by the chain rule, also in several layers
+#   OBJ-5.3-3  differentiate functions that combine all the rules, and check a result by substituting a point
+# Known derivatives here: x^n (n an integer), sqrt x (5.1), sin, cos, tan, e^x. No ln, a^x, arcsin, arctan or
+# hyperbolic functions (5.4–5.5), no second derivatives (6.1), no extrema tests (5.5).
+# Every number recomputed with sympy (scratchpad w53.py / l53.py of the writing session).
+lesson: '5.3'
+practice:
+  - id: W-5.3-01
+    level: basic
+    objectives: [OBJ-5.3-1]
+    prompt: >-
+      (א) גזרו את $f(x)=2x^5-\frac{3}{x}+6\sqrt x$, כש-$x>0$, וחשבו את $f'(1)$.
+
+
+      (ב) גזרו את $g(x)=(x^2-1)(x^3+2)$ בשתי דרכים: בכלל המכפלה, ואחרי פתיחת סוגריים. השוו.
+    answer: >-
+      (א) $f'(x)=10x^4+\frac{3}{x^2}+\frac{3}{\sqrt x}$, ו-$f'(1)=16$. (ב) בשתי הדרכים $g'(x)=5x^4-3x^2+4x$.
+    solution:
+      - kind: idea
+        text: >-
+          (א) סכום של איברים, כל אחד קבוע כפול חזקה: גוזרים איבר-איבר. $\frac3x=3x^{-1}$ היא חזקה שלילית, ו-$\sqrt x$
+          נגזר בנוסחה של שיעור 5.1. (ב) מכפלה: כלל המכפלה; או פולינום אחרי פתיחת סוגריים: כלל החזקה.
+      - kind: computation
+        text: >-
+          (א) $(2x^5)'=10x^4$. $\left(-3x^{-1}\right)'=-3\cdot(-1)x^{-2}=\frac{3}{x^2}$. $(6\sqrt x)'=6\cdot\frac{1}{2\sqrt x}=\frac{3}{\sqrt x}$.
+          לכן $f'(x)=10x^4+\frac{3}{x^2}+\frac{3}{\sqrt x}$, ו-$f'(1)=10+3+3=16$.
+      - kind: computation
+        text: >-
+          (ב) כלל המכפלה עם $u=x^2-1$, $u'=2x$, $v=x^3+2$, $v'=3x^2$: $g'(x)=2x(x^3+2)+(x^2-1)\cdot3x^2=2x^4+4x+3x^4-3x^2=5x^4-3x^2+4x$.
+      - kind: computation
+        text: >-
+          אחרי פתיחת סוגריים: $g(x)=x^5-x^3+2x^2-2$, ולכן $g'(x)=5x^4-3x^2+4x$. אותה תוצאה.
+      - kind: check
+        text: >-
+          (א) $f(1.001)\approx2.010020-2.997003+6.002999=5.016016$ ו-$f(1)=5$, ומנת ההפרשים בערך $16.016$. (ב) הסימן בכלל
+          המכפלה פלוס בין שני האיברים; עם $u'v'=6x^3$ היה יוצא משהו אחר לגמרי.
+      - kind: result
+        text: >-
+          $f'(x)=10x^4+\frac{3}{x^2}+\frac{3}{\sqrt x}$, $f'(1)=16$; $g'(x)=5x^4-3x^2+4x$.
+
+  - id: W-5.3-02
+    level: basic
+    qualitative: true
+    objectives: [OBJ-5.3-1]
+    prompt: >-
+      $f(x)=\frac{x^2-1}{x^2+1}$.
+
+
+      (א) גזרו בכלל המנה.
+
+
+      (ב) הראו ש-$f(x)=1-\frac{2}{x^2+1}$, וגזרו שוב בעזרת הנגזרת של $\frac1v$. איזו דרך קצרה יותר, ולמה?
+
+
+      (ג) מה הסימן של $f'(x)$ כש-$x>0$? הסבירו בלי הנוסחה למה זה הגיוני.
+    answer: >-
+      (א)–(ב) $f'(x)=\frac{4x}{(x^2+1)^2}$. (ב) קצרה יותר, כי המונה הופך לקבוע. (ג) חיובי: כש-$x>0$ גדל, $\frac{2}{x^2+1}$
+      קטן, ולכן $f$ עולה.
+    solution:
+      - kind: idea
+        text: >-
+          מנה גוזרים בכלל המנה; אבל כשהמונה והמכנה דומים, כדאי קודם להפריד את המנה לקבוע ועוד שבר שהמונה שלו קבוע.
+      - kind: computation
+        text: >-
+          (א) $u=x^2-1$, $u'=2x$, $v=x^2+1$, $v'=2x$. המונה של כלל המנה: $2x(x^2+1)-(x^2-1)\cdot2x=2x\big((x^2+1)-(x^2-1)\big)=4x$.
+          לכן $f'(x)=\frac{4x}{(x^2+1)^2}$.
+      - kind: computation
+        text: >-
+          (ב) $\frac{x^2-1}{x^2+1}=\frac{(x^2+1)-2}{x^2+1}=1-\frac{2}{x^2+1}$. לפי $\left(\frac1v\right)'=-\frac{v'}{v^2}$ עם
+          $v=x^2+1$: $\left(\frac{2}{x^2+1}\right)'=-\frac{2\cdot2x}{(x^2+1)^2}$, ולכן $f'(x)=0+\frac{4x}{(x^2+1)^2}$.
+      - kind: step
+        text: >-
+          הדרך של (ב) קצרה יותר: אחרי ההפרדה נשאר שבר עם מונה קבוע, ואין צורך לפתוח סוגריים במונה של כלל המנה.
+      - kind: step
+        text: >-
+          (ג) כש-$x>0$ המונה $4x$ חיובי והמכנה ריבוע חיובי, ולכן $f'(x)>0$. בלי נוסחה: כש-$x>0$ גדל, $x^2+1$ גדל,
+          $\frac{2}{x^2+1}$ קטן, ולכן $1-\frac{2}{x^2+1}$ גדל.
+      - kind: check
+        text: >-
+          ב-$x=1$: $f'(1)=\frac{4}{4}=1$, ומנת ההפרשים עם $h=0.001$ בערך $0.9995$. ב-$x=0$ הנגזרת 0: $f$ זוגית, והגרף
+          סימטרי סביב הציר האנכי.
+      - kind: result
+        text: >-
+          $f'(x)=\frac{4x}{(x^2+1)^2}$, חיובית כש-$x>0$.
+
+  - id: W-5.3-03
+    level: basic
+    objectives: [OBJ-5.3-2]
+    prompt: >-
+      גזרו בכלל השרשרת:
+
+
+      (א) $(3x-2)^7$
+
+
+      (ב) $e^{3x+1}$
+
+
+      (ג) $\sqrt{4-x^2}$, כש-$x\in(-2,2)$; חשבו את הנגזרת ב-$x=1$.
+    answer: >-
+      (א) $21(3x-2)^6$. (ב) $3e^{3x+1}$. (ג) $\left(\sqrt{4-x^2}\right)'=-\frac{x}{\sqrt{4-x^2}}$; ב-$x=1$ הנגזרת מינוס
+      $\frac{1}{\sqrt3}$, בערך מינוס $0.577$.
+    solution:
+      - kind: idea
+        text: >-
+          בכל אחת: החיצונית (חזקה, אקספוננט, שורש) נגזרת כשהפנימית נשארת בתוכה, ואחר כך כופלים בנגזרת הפנימית.
+      - kind: computation
+        text: >-
+          (א) החיצונית $w^7$, הפנימית $w=3x-2$, $w'=3$: $7(3x-2)^6\cdot3=21(3x-2)^6$.
+      - kind: computation
+        text: >-
+          (ב) החיצונית $e^w$, הפנימית $w=3x+1$, $w'=3$: $e^{3x+1}\cdot3$.
+      - kind: computation
+        text: >-
+          (ג) החיצונית $\sqrt w$, נגזרתה $\frac{1}{2\sqrt w}$; הפנימית $w=4-x^2$, $w'=-2x$. לכן
+          $\left(\sqrt{4-x^2}\right)'=\frac{-2x}{2\sqrt{4-x^2}}=-\frac{x}{\sqrt{4-x^2}}$. ב-$x=1$ הנגזרת מינוס $\frac{1}{\sqrt3}$.
+      - kind: check
+        text: >-
+          (ג) הגרף של $\sqrt{4-x^2}$ הוא חצי המעגל העליון שרדיוסו 2. ב-$x=1$ הנקודה $(1,\sqrt3)$, והרדיוס אליה בשיפוע
+          $\sqrt3$; המשיק למעגל ניצב לרדיוס, ולכן שיפועו מינוס $\frac{1}{\sqrt3}$ (מכפלת השיפועים של שני ישרים ניצבים היא מינוס 1). מנת ההפרשים עם
+          $h=0.001$ בערך מינוס $0.5777$.
+      - kind: result
+        text: >-
+          (א) $21(3x-2)^6$; (ב) $3e^{3x+1}$; (ג) $\left(\sqrt{4-x^2}\right)'=-\frac{x}{\sqrt{4-x^2}}$, וב-$x=1$ הנגזרת
+          מינוס $\frac{\sqrt3}{3}$.
+
+  - id: W-5.3-04
+    level: mid
+    objectives: [OBJ-5.3-1]
+    prompt: >-
+      (א) הראו בעזרת כלל המכפלה, פעמיים, שלשלוש פונקציות גזירות $(uvw)'=u'vw+uv'w+uvw'$.
+
+
+      (ב) גזרו בעזרתו את $f(x)=x\,e^x\sin x$, וחשבו את $f'(1)$ בקירוב.
+    answer: >-
+      (ב) $f'(x)=e^x\sin x+x\,e^x\sin x+x\,e^x\cos x$, ו-$f'(1)=e(2\sin1+\cos1)\approx6.043$.
+    solution:
+      - kind: idea
+        text: >-
+          מכפלה של שלושה היא מכפלה של שניים, $(uv)\cdot w$, שהגורם הראשון שלה בעצמו מכפלה. מפעילים את כלל המכפלה
+          פעם על $(uv)\cdot w$ ופעם על $uv$.
+      - kind: computation
+        text: >-
+          (א) $\big((uv)w\big)'=(uv)'\,w+(uv)\,w'=(u'v+uv')\,w+uvw'=u'vw+uv'w+uvw'$. כל גורם נגזר פעם אחת, כששני
+          האחרים נשארים.
+      - kind: computation
+        text: >-
+          (ב) $u=x$, $u'=1$; $v=e^x$, $v'=e^x$; $w=\sin x$, $w'=\cos x$. לכן
+          $f'(x)=1\cdot e^x\sin x+x\,e^x\sin x+x\,e^x\cos x=e^x\big((1+x)\sin x+x\cos x\big)$.
+      - kind: computation
+        text: >-
+          ב-$x=1$: $f'(1)=e\,(2\sin1+\cos1)\approx2.7183\cdot(1.6829+0.5403)\approx6.043$.
+      - kind: check
+        text: >-
+          מנת ההפרשים $\frac{f(1.001)-f(1)}{0.001}$ בערך $6.049$, קרובה. ובמקרה פרטי שאפשר לבדוק בראש: $u=v=w=x$ נותן
+          $3x^2$, וזו $(x^3)'$.
+      - kind: result
+        text: >-
+          $f'(x)=e^x\big((1+x)\sin x+x\cos x\big)$, $f'(1)\approx6.043$.
+
+  - id: W-5.3-05
+    level: mid
+    qualitative: true
+    objectives: [OBJ-5.3-2, OBJ-5.3-3]
+    prompt: >-
+      נכון או לא נכון? נמקו: טענה נכונה בנימוק, טענה שגויה בדוגמה נגדית.
+
+
+      (א) הנגזרת של פונקציה זוגית גזירה היא פונקציה אי-זוגית.
+
+
+      (ב) לכל פונקציה גזירה $f$: $\big(f(2x)\big)'=f'(2x)$.
+
+
+      (ג) אם גוזרים את $\sin^2x+\cos^2x$ לפי הכללים, בלי להשתמש בזהות, יוצא 0.
+    answer: >-
+      (א) נכון. (ב) לא נכון: $\big(f(2x)\big)'=2f'(2x)$; למשל $(\sin2x)'=2\cos2x$. (ג) נכון: $2\sin x\cos x-2\cos x\sin x=0$.
+    solution:
+      - kind: idea
+        text: >-
+          (א) גוזרים את שני האגפים של הזהות $f(-x)=f(x)$, בכלל השרשרת. (ב) $f(2x)$ היא הרכבה עם הפנימית $2x$. (ג) כלל
+          השרשרת על כל ריבוע, והתוצאה חייבת להיות 0, כי הפונקציה קבועה: בדיקה של הכללים.
+      - kind: computation
+        text: >-
+          (א) $f$ זוגית: $f(-x)=f(x)$ לכל $x$. זו זהות בין שתי פונקציות של $x$, ולפונקציות שוות בכל נקודה יש אותה
+          נגזרת, ולכן מותר לגזור את שני הצדדים. בצד שמאל, הפנימית $u=-x$ ונגזרתה מינוס 1:
+          $f'(-x)\cdot(-1)=f'(x)$, כלומר $f'(-x)=-f'(x)$: $f'$ אי-זוגית. למשל $(x^2)'=2x$ ו-$(\cos x)'=-\sin x$.
+      - kind: computation
+        text: >-
+          (ב) כלל השרשרת: $\big(f(2x)\big)'=f'(2x)\cdot2$. הטענה שוכחת את הכופל 2. דוגמה נגדית: $f=\sin$. ב-$x=0$,
+          $(\sin2x)'=2\cos0=2$, ואילו $f'(2x)=\cos0=1$. הגרף של $\sin2x$ מכווץ פי 2 אופקית, ולכן תלול פי 2.
+      - kind: computation
+        text: >-
+          (ג) $\left(\sin^2x\right)'=2\sin x\cdot\cos x$ ו-$\left(\cos^2x\right)'=2\cos x\cdot(-\sin x)$. הסכום
+          $2\sin x\cos x-2\sin x\cos x=0$.
+      - kind: check
+        text: >-
+          (ג) הנגזרת חייבת להיות 0, כי $\sin^2x+\cos^2x=1$ קבועה: ההתאמה מאשרת את הסימנים בנגזרות של סינוס וקוסינוס.
+          אילו כתבנו $(\cos x)'=\sin x$, היה יוצא $4\sin x\cos x$, שאינו 0.
+      - kind: result
+        text: >-
+          (א) נכון; (ב) לא נכון, $\big(f(2x)\big)'=2f'(2x)$; (ג) נכון.
+
+  - id: W-5.3-06
+    level: mid
+    objectives: [OBJ-5.3-2]
+    prompt: >-
+      על פונקציה גזירה $f$ ידוע: $f(1)=2$, $f'(1)=3$, $f(2)=1$, $f'(2)=-1$. חשבו את הנגזרת ב-$x=1$ של:
+
+
+      (א) $f\big(f(x)\big)$
+
+
+      (ב) $\big(f(x)\big)^2$
+
+
+      (ג) $f(x^2)$
+
+
+      (ד) $\sqrt{f(x)}$
+    answer: >-
+      (א) מינוס 3. (ב) $12$. (ג) $6$. (ד) $\frac{3}{2\sqrt2}=\frac{3\sqrt2}{4}\approx1.061$.
+    solution:
+      - kind: idea
+        text: >-
+          כל אחת היא הרכבה. כותבים את כלל השרשרת בנקודה, ומחשבים קודם את הערך של הפנימית ב-1, כי בו מחשבים את הנגזרת
+          החיצונית.
+      - kind: computation
+        text: >-
+          (א) הפנימית $f(x)$, וב-1 ערכה $f(1)=2$. לכן $f'\big(f(1)\big)\cdot f'(1)=f'(2)\cdot3=(-1)\cdot3=-3$.
+      - kind: computation
+        text: >-
+          (ב) החיצונית $w^2$, נגזרתה $2w$, בערך $w=f(1)=2$: $2\cdot2\cdot f'(1)=4\cdot3=12$.
+      - kind: computation
+        text: >-
+          (ג) הפנימית $x^2$, ערכה ב-1 הוא 1 ונגזרתה $2x$, כלומר 2: $f'(1)\cdot2=6$.
+      - kind: computation
+        text: >-
+          (ד) החיצונית $\sqrt w$, נגזרתה $\frac{1}{2\sqrt w}$, בערך $w=f(1)=2$: $\frac{1}{2\sqrt2}\cdot3=\frac{3}{2\sqrt2}\approx1.061$.
+      - kind: check
+        text: >-
+          (א) מי שכותב $f'(1)\cdot f'(1)=9$ חישב את הנגזרת החיצונית ב-1 ולא ב-$f(1)=2$. (ג) כאן $x^2$ ב-1 הוא שוב 1,
+          ולכן $f'(1)$ הוא באמת הערך הנכון: מקרה שבו הטעות של "להציב $x$" לא הייתה נחשפת.
+      - kind: result
+        text: >-
+          (א) מינוס 3; (ב) $12$; (ג) $6$; (ד) $\frac{3\sqrt2}{4}$.
+
+  - id: W-5.3-07
+    level: mid
+    qualitative: true
+    objectives: [OBJ-5.3-3]
+    prompt: >-
+      סטודנטית גזרה את $f(x)=\frac{x}{\sqrt{x^2+1}}$ כך:
+
+      $$f'(x)=\frac{1\cdot\sqrt{x^2+1}-x\cdot\frac{1}{2\sqrt{x^2+1}}}{x^2+1} .$$
+
+      היא בדקה ב-$x=0$: הנוסחה שלה נותנת 1, ומנת ההפרשים של $f$ ב-0 קרובה ל-1.
+
+
+      (א) מצאו את הטעות ותקנו. הראו שהתוצאה הנכונה היא $f'(x)=\frac{1}{(x^2+1)^{3/2}}$.
+
+
+      (ב) למה הבדיקה ב-0 לא תפסה את הטעות? באיזו נקודה כדאי לבדוק, ומה מקבלים שם?
+    answer: >-
+      (א) בנגזרת של $\sqrt{x^2+1}$ חסר הכופל הפנימי $2x$. (ב) ב-0 האיבר השגוי מוכפל ב-$x=0$; ב-$x=1$ הנוסחה שלה נותנת
+      $\approx0.530$, הנכונה $\approx0.354$, ומנת ההפרשים $\approx0.353$.
+    solution:
+      - kind: idea
+        text: >-
+          הכלל הראשון שהופעל, כלל המנה, נכון במבנה שלו. בודקים כל נגזרת שהוצבה בו: הנגזרת של המכנה $\sqrt{x^2+1}$ היא
+          הרכבה, וצריך בה את כלל השרשרת.
+      - kind: computation
+        text: >-
+          (א) $\left(\sqrt{x^2+1}\right)'=\frac{1}{2\sqrt{x^2+1}}\cdot2x=\frac{x}{\sqrt{x^2+1}}$. הסטודנטית כתבה רק
+          $\frac{1}{2\sqrt{x^2+1}}$, בלי הכופל $2x$.
+      - kind: computation
+        text: >-
+          המונה הנכון: $\sqrt{x^2+1}-x\cdot\frac{x}{\sqrt{x^2+1}}=\frac{(x^2+1)-x^2}{\sqrt{x^2+1}}=\frac{1}{\sqrt{x^2+1}}$.
+          מחלקים במכנה $x^2+1$: $f'(x)=\frac{1}{(x^2+1)\sqrt{x^2+1}}=\frac{1}{(x^2+1)^{3/2}}$.
+      - kind: step
+        text: >-
+          (ב) האיבר השגוי מוכפל ב-$x$, וב-$x=0$ הוא נעלם, בנוסחה שלה ובנכונה. ב-0 שתי הנוסחאות שוות (שתיהן 1), ולכן
+          הבדיקה שם לא יכולה להבחין ביניהן. נקודה אחת יכולה לגלות טעות, לא להוכיח שאין טעות, ונקודה שבה גורמים
+          מתאפסים היא בדיקה חלשה.
+      - kind: computation
+        text: >-
+          ב-$x=1$: הנוסחה שלה נותנת $\frac{\sqrt2-\frac{1}{2\sqrt2}}{2}\approx0.530$, הנכונה $\frac{1}{2^{3/2}}\approx0.354$,
+          ומנת ההפרשים $\frac{f(1.001)-f(1)}{0.001}\approx0.353$.
+      - kind: check
+        text: >-
+          סימן: $f'(x)>0$ לכל $x$, ואכן $f$ עולה: היא מתקרבת ל-1 כש-$x\to\infty$ ולמינוס 1 כש-$x\to-\infty$ (שיעור 4.6).
+      - kind: result
+        text: >-
+          $f'(x)=\frac{1}{(x^2+1)^{3/2}}$; הטעות התגלתה ב-$x=1$, לא ב-$x=0$.
+
+  - id: W-5.3-08
+    level: exam
+    objectives: [OBJ-5.3-2, OBJ-5.3-3]
+    prompt: >-
+      מסה על קפיץ נעה לפי $x(t)=A\cos(\omega t+\varphi)$, כש-$A,\omega>0$ קבועים.
+
+
+      (א) מצאו את המהירות $v(t)$.
+
+
+      (ב) הוכיחו שלכל $t$: $v^2+\omega^2x^2=A^2\omega^2$.
+
+
+      (ג) נניח $A=0.05$ מ׳ ו-$\omega=4$ רדיאנים לשנייה. מהי המהירות המרבית בערכה המוחלט, ומה גודל המהירות כשהמסה
+      במרחק $0.03$ מ׳ מנקודת שיווי המשקל?
+    answer: >-
+      (א) $v(t)=-A\omega\sin(\omega t+\varphi)$. (ב) $\sin^2+\cos^2=1$. (ג) $0.2$ מ׳ לשנייה; $0.16$ מ׳ לשנייה.
+    solution:
+      - kind: idea
+        text: >-
+          (א) הרכבה: החיצונית קוסינוס, הפנימית $\omega t+\varphi$ שנגזרתה $\omega$. (ב) מציבים ומשתמשים ב-$\sin^2+\cos^2=1$.
+          (ג) מ-(ב) אפשר לקבל את גודל המהירות ישר מהמקום, בלי לדעת את הזמן.
+      - kind: computation
+        text: >-
+          (א) $v(t)=A\cdot\big(-\sin(\omega t+\varphi)\big)\cdot\omega=-A\omega\sin(\omega t+\varphi)$.
+      - kind: computation
+        text: >-
+          (ב) $v^2+\omega^2x^2=A^2\omega^2\sin^2(\omega t+\varphi)+\omega^2A^2\cos^2(\omega t+\varphi)=A^2\omega^2\big(\sin^2+\cos^2\big)=A^2\omega^2$.
+      - kind: step
+        text: >-
+          (ג) $|v|=A\omega\,|\sin(\omega t+\varphi)|\le A\omega$, ושוויון כש-$\sin(\omega t+\varphi)=\pm1$, כלומר כש-$x=0$
+          (במעבר בנקודת שיווי המשקל). לכן המהירות המרבית $A\omega=0.05\cdot4=0.2$ מ׳ לשנייה.
+      - kind: computation
+        text: >-
+          מ-(ב): $v^2=\omega^2(A^2-x^2)=16\,(0.0025-0.0009)=16\cdot0.0016=0.0256$, ולכן $|v|=0.16$ מ׳ לשנייה.
+      - kind: check
+        text: >-
+          יחידות: $A\omega$ הוא מטרים כפול אחד חלקי שנייה, כלומר מ׳ לשנייה. ובקצה, $x=\pm A$, יוצא $v=0$: המסה עוצרת
+          ומשנה כיוון, כמו שצריך.
+      - kind: result
+        text: >-
+          $v(t)=-A\omega\sin(\omega t+\varphi)$; $|v|\le0.2$ מ׳ לשנייה; ב-$|x|=0.03$ מ׳, $|v|=0.16$ מ׳ לשנייה.
+
+  - id: W-5.3-09
+    level: exam
+    objectives: [OBJ-5.3-1, OBJ-5.3-2, OBJ-5.3-3]
+    prompt: >-
+      $f(x)=x\,e^{-x^2/2}$.
+
+
+      (א) גזרו את $f$ ופשטו.
+
+
+      (ב) מצאו את כל הנקודות על הגרף שבהן המשיק אופקי.
+
+
+      (ג) כתבו את משוואת המשיק ב-$x=0$, ובדקו את הנגזרת ב-$x=\frac12$ במנת הפרשים.
+    answer: >-
+      (א) $f'(x)=(1-x^2)e^{-x^2/2}$. (ב) $\left(1,e^{-1/2}\right)$ ו-$\left(-1,-e^{-1/2}\right)$. (ג) $y=x$; $f'\left(\frac12\right)\approx0.662$.
+    solution:
+      - kind: idea
+        text: >-
+          מכפלה של $x$ באקספוננט, והאקספוננט הוא הרכבה: כלל המכפלה, ובתוכו כלל השרשרת. משיק אופקי פירושו שיפוע 0.
+      - kind: computation
+        text: >-
+          (א) $u=x$, $u'=1$. $w=e^{-x^2/2}$: החיצונית $e^s$, הפנימית $s=-\frac{x^2}{2}$, $s'=-x$, ולכן $w'=-x\,e^{-x^2/2}$.
+          כלל המכפלה: $f'(x)=e^{-x^2/2}+x\cdot\left(-x\,e^{-x^2/2}\right)=(1-x^2)\,e^{-x^2/2}$.
+      - kind: computation
+        text: >-
+          (ב) $e^{-x^2/2}>0$ תמיד, ולכן $f'(x)=0$ בדיוק כש-$1-x^2=0$, כלומר $x=\pm1$. הנקודות: $f(1)=e^{-1/2}\approx0.607$
+          ו-$f(-1)=-e^{-1/2}$.
+      - kind: computation
+        text: >-
+          (ג) $f(0)=0$ ו-$f'(0)=1$, ולכן המשיק (שיעור 5.2) הוא $y=0+1\cdot(x-0)$, כלומר $y=x$. ב-$x=\frac12$:
+          $f'\left(\frac12\right)=\frac34e^{-1/8}\approx0.662$.
+      - kind: check
+        text: >-
+          מנת ההפרשים ב-$\frac12$ עם $h=0.001$ בערך $0.661$, קרובה. ו-$f$ אי-זוגית, ולכן $f'$ זוגית (באותו נימוק כמו בתרגיל 5): אכן
+          $(1-x^2)e^{-x^2/2}$ זוגית, והנקודות של (ב) סימטריות סביב הראשית.
+      - kind: result
+        text: >-
+          $f'(x)=(1-x^2)e^{-x^2/2}$; משיק אופקי ב-$\left(\pm1,\pm e^{-1/2}\right)$; המשיק ב-0 הוא $y=x$.
+
+  - id: W-5.3-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-5.3-1, OBJ-5.3-3]
+    prompt: >-
+      (א) תהי $g$ גזירה ו-$f(x)=(x-a)^2g(x)$. הוכיחו ש-$f(a)=0$ וגם $f'(a)=0$.
+
+
+      (ב) מצאו את $p$ ואת $q$ כך שלפולינום $x^3+px+q$ יהיה ב-$x=1$ שורש כפול, כלומר שהוא יתחלק ב-$(x-1)^2$. היעזרו
+      בכך שאז גם הערך וגם הנגזרת מתאפסים ב-1.
+
+
+      (ג) פרקו את הפולינום שמצאתם לגורמים, ובדקו.
+    answer: >-
+      (א) $f'(x)=2(x-a)g(x)+(x-a)^2g'(x)$, ושני האיברים מתאפסים ב-$a$. (ב) $p=-3$, $q=2$. (ג)
+      $x^3-3x+2=(x-1)^2(x+2)$.
+    solution:
+      - kind: idea
+        text: >-
+          (א) כלל המכפלה, עם $(x-a)^2$ שנגזר בכלל השרשרת (או בפתיחת סוגריים). (ב) לפי (א), שורש כפול נותן שני תנאים:
+          $P(1)=0$ ו-$P'(1)=0$. שתי משוואות לשני נעלמים.
+      - kind: computation
+        text: >-
+          (א) $f(a)=0\cdot g(a)=0$. $f'(x)=2(x-a)\cdot g(x)+(x-a)^2\cdot g'(x)$, ושני האיברים מכילים את הגורם $(x-a)$,
+          ולכן $f'(a)=0$.
+      - kind: computation
+        text: >-
+          (ב) $P(x)=x^3+px+q$, $P'(x)=3x^2+p$. התנאים: $P'(1)=3+p=0$, ולכן $p=-3$; $P(1)=1+p+q=1-3+q=0$, ולכן $q=2$.
+      - kind: step
+        text: >-
+          (ג) $x^3-3x+2$ מתחלק ב-$x-1$ (כי $P(1)=0$). חילוק פולינומים נותן $x^3-3x+2=(x-1)(x^2+x-2)$, ו-$x^2+x-2=(x-1)(x+2)$.
+      - kind: check
+        text: >-
+          פתיחת סוגריים: $(x-1)^2(x+2)=(x^2-2x+1)(x+2)=x^3-3x+2$. השורש 1 מופיע פעמיים, והשורש השלישי מינוס 2. בגרף: ב-1
+          הגרף משיק לציר $x$ ולא חוצה אותו.
+      - kind: result
+        text: >-
+          $p=-3$, $q=2$, ו-$x^3-3x+2=(x-1)^2(x+2)$.
+
+challenge:
+  - id: W-5.3-c1
+    stars: 1
+    objectives: [OBJ-5.3-2, OBJ-5.3-3]
+    prompt: >-
+      $y=\big(f(u)+3x\big)^2$, כש-$u=x^3-2x$ ו-$f$ פונקציה גזירה. ידוע ש-$f(4)=6$, ושכש-$x=2$ הנגזרת $\frac{dy}{dx}$
+      שווה 18. מצאו את $f'(4)$.
+    answer: >-
+      $f'(4)=-\frac{9}{40}=-0.225$.
+    solution:
+      - kind: idea
+        text: >-
+          $y$ היא הרכבה בשלוש שכבות: ריבוע, בתוכו $f(u)+3x$, ובתוך $f$ הפונקציה $u(x)$. גוזרים בכלל השרשרת עם
+          $f'(u)$ כנעלם, מציבים $x=2$, ופותרים משוואה לינארית.
+      - kind: computation
+        text: >-
+          $\frac{dy}{dx}=2\big(f(u)+3x\big)\cdot\left(f'(u)\cdot\frac{du}{dx}+3\right)$, עם $\frac{du}{dx}=3x^2-2$.
+      - kind: computation
+        text: >-
+          ב-$x=2$: $u=8-4=4$, $\frac{du}{dx}=12-2=10$, ו-$f(u)+3x=f(4)+6=12$. לכן
+          $\frac{dy}{dx}=2\cdot12\cdot\big(10f'(4)+3\big)=24\big(10f'(4)+3\big)$.
+      - kind: computation
+        text: >-
+          $24\big(10f'(4)+3\big)=18$, ולכן $10f'(4)+3=\frac34$, $10f'(4)=-\frac94$, ו-$f'(4)=-\frac{9}{40}$.
+      - kind: check
+        text: >-
+          הצבה חזרה: $10\cdot\left(-\frac{9}{40}\right)+3=-\frac94+3=\frac34$, ו-$24\cdot\frac34=18$. ולמה $f'$ ב-4 ולא ב-2:
+          הנגזרת של $f$ מחושבת בערך של מה שבתוכה, $u(2)=4$.
+      - kind: result
+        text: >-
+          $f'(4)=-\frac{9}{40}$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 1 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.6 (The Chain Rule), exercise 240'
+      url: https://openstax.org/books/calculus-volume-1/pages/3-6-the-chain-rule
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-5.3-c2
+    stars: 1
+    objectives: [OBJ-5.3-1]
+    prompt: >-
+      הפונקציה $\cot x=\frac{\cos x}{\sin x}$ (קוטנגנס) מוגדרת כש-$\sin x\ne0$.
+
+
+      (א) גזרו אותה בכלל המנה, והראו ש-$(\cot x)'=-\frac{1}{\sin^2x}$.
+
+
+      (ב) מצאו את כל הנקודות על הגרף של $\cot x$ בקטע $(0,2\pi)$ שבהן המשיק מקביל לישר $y=-2x$.
+    answer: >-
+      (ב) $x=\frac{\pi}{4},\frac{3\pi}{4},\frac{5\pi}{4},\frac{7\pi}{4}$; הנקודות $\left(\frac{\pi}{4},1\right)$,
+      $\left(\frac{3\pi}{4},-1\right)$, $\left(\frac{5\pi}{4},1\right)$, $\left(\frac{7\pi}{4},-1\right)$.
+    solution:
+      - kind: idea
+        text: >-
+          (א) כלל המנה והזהות $\sin^2x+\cos^2x=1$, כמו בטנגנס בשיעור. (ב) ישרים מקבילים הם ישרים עם אותו שיפוע:
+          מחפשים את הנקודות שבהן הנגזרת שווה מינוס 2.
+      - kind: computation
+        text: >-
+          (א) $u=\cos x$, $u'=-\sin x$; $v=\sin x$, $v'=\cos x$. המונה: $(-\sin x)\sin x-\cos x\cdot\cos x=-(\sin^2x+\cos^2x)=-1$.
+          לכן $(\cot x)'=-\frac{1}{\sin^2x}$.
+      - kind: computation
+        text: >-
+          (ב) השיפוע של הישר $y=-2x$ הוא מינוס 2, והמשוואה $(\cot x)'=-2$, כלומר $\frac{1}{\sin^2x}=2$, מתקיימת כש-$\sin^2x=\frac12$, כלומר $\sin x=\pm\frac{1}{\sqrt2}$. בקטע $(0,2\pi)$:
+          $x=\frac{\pi}{4},\frac{3\pi}{4},\frac{5\pi}{4},\frac{7\pi}{4}$.
+      - kind: computation
+        text: >-
+          הערכים: $\cot\frac{\pi}{4}=1$, $\cot\frac{3\pi}{4}=-1$, $\cot\frac{5\pi}{4}=1$, $\cot\frac{7\pi}{4}=-1$.
+      - kind: check
+        text: >-
+          הנגזרת שלילית בכל מקום, ואכן הקוטנגנס יורד בכל קטע שבו הוא מוגדר. בין שתי אסימפטוטות סמוכות, למשל בקטע
+          $(0,\pi)$, השיפוע שלו הכי מתון (מינוס 1) באמצע, ב-$\frac{\pi}{2}$, ותלול יותר ככל שמתקרבים לקצוות; לכן בכל
+          קטע כזה יש בדיוק שתי נקודות עם שיפוע מינוס 2, אחת מכל צד של האמצע.
+      - kind: result
+        text: >-
+          $(\cot x)'=-\frac{1}{\sin^2x}$; ארבע הנקודות $\left(\frac{\pi}{4},1\right)$, $\left(\frac{3\pi}{4},-1\right)$,
+          $\left(\frac{5\pi}{4},1\right)$, $\left(\frac{7\pi}{4},-1\right)$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 1 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.5 (Derivatives of Trigonometric Functions), exercise 199; part (א) added'
+      url: https://openstax.org/books/calculus-volume-1/pages/3-5-derivatives-of-trigonometric-functions
+      verified: '2026-11-27'
+      adapted: true

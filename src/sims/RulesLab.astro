@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 5.3–5.4 figure: <Spread figure={RulesLab} figureProps={{ mode, … }}>.
+ * mode: product, chain, inverse. The props, step keys, readout ids and task ids are documented at the top of
+ * RulesLab.tsx.
+ */
+import RulesLab, { type RulesLabProps } from './RulesLab';
+type Props = RulesLabProps;
+---
+
+<RulesLab client:visible {...Astro.props} />

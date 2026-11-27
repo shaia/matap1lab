@@ -1,10 +1,11 @@
-# Lesson 5.3 — the rules of differentiation and the chain rule (notes pp. 8–9).
+# Lesson 5.3 — the rules of differentiation and the chain rule (notes pp. 8–9; cited without page numbers).
+# Chain-rule letters as in the lesson: u = g(x) inner, y = f(u) outer (a third layer: w).
 # Objectives (src/course.ts):
 #   OBJ-5.3-1  differentiate a sum, a product and a quotient
 #   OBJ-5.3-2  differentiate a composition by the chain rule, also in several layers
 #   OBJ-5.3-3  differentiate functions that combine all the rules, and check a result by substituting a point
-# The derivatives of sin, cos, tan, e^x and ln x are known from high school (chapter 0); a^x, log_a, the hyperbolic
-# and the inverse trigonometric functions come in 5.4–5.5. Every key is recomputed in screens/tools/checks_ch5.py.
+# The lesson derives x^n, sin, cos, e^x and tan (sqrt x and 1/x come from 5.1); ln x, a^x, log_a, the hyperbolic and
+# the inverse trigonometric functions come in 5.4–5.5, so no question here uses them. Every key is recomputed in screens/tools/checks_ch5.py.
 # This lesson feeds the gateway test on differentiation: most questions ask for a derivative as a formula.
 chapter: 5
 questions:
@@ -24,7 +25,8 @@ questions:
     commonWrong:
       - expr: '2*x*cos(x)'
         feedback: >-
-          גזרתם כל גורם לחוד וכפלתם: $u'v'$. הנגזרת של מכפלה אינה מכפלת הנגזרות; בדיקה: $u=v=x$ היה נותן $(x^2)'=1$.
+          גזרתם כל גורם לחוד וכפלתם: $u'v'$. הנגזרת של מכפלה אינה מכפלת הנגזרות. בדיקה: עם $u=v=x$ המכפלה $u'v'$ נותנת
+          1, אבל $(x^2)'=2x$.
         misconception: MC-c5-product-of-derivatives
     hints: ['$(uv)''=u''v+uv''$']
 
@@ -36,7 +38,7 @@ questions:
     answer: '(1 - x^2)/(x^2 + 1)^2'
     answerTex: '$f''(x)=\dfrac{1\cdot(x^2+1)-x\cdot2x}{(x^2+1)^2}=\dfrac{1-x^2}{(x^2+1)^2}$'
     variables: [x]
-    domain: [-2, 2]
+    domain: [0.2, 2]
     correctFeedback: >-
       נכון. כלל המנה עם $u=x$, $v=x^2+1$: $\frac{u'v-uv'}{v^2}=\frac{(x^2+1)-2x^2}{(x^2+1)^2}$.
     wrongFeedback: >-
@@ -44,7 +46,7 @@ questions:
     commonWrong:
       - expr: '(3*x^2 + 1)/(x^2 + 1)^2'
         feedback: >-
-          כתבתם פלוס במונה: $\frac{u'v+uv'}{v^2}$. כך נכתב בטעות גם בסיכומים (עמ׳ 8). בכלל המנה יש **מינוס**.
+          כתבתם פלוס במונה: $\frac{u'v+uv'}{v^2}$. כך נכתב בטעות גם בסיכומי ההרצאות. בכלל המנה יש **מינוס**.
         misconception: MC-c5-quotient-plus
       - expr: '(x^2 - 1)/(x^2 + 1)^2'
         feedback: >-
@@ -60,21 +62,21 @@ questions:
     type: mc
     objectives: [OBJ-5.3-1]
     qualitative: true
-    level: basic
+    level: mid
     prompt: >-
-      בסיכומים (עמ׳ 8) כלל המנה כתוב כך: $\left(\frac uv\right)'=\frac{u'v+uv'}{v^2}$. איזו בדיקה פשוטה מראה שהנוסחה
+      בסיכומי ההרצאות כלל המנה כתוב כך: $\left(\frac uv\right)'=\frac{u'v+uv'}{v^2}$. איזו בדיקה פשוטה מראה שהנוסחה
       הזו שגויה?
     choices:
-      - text: 'להציב $u=1$, $v=x$: הנוסחה נותנת $\left(\frac1x\right)''=\frac{1}{x^2}$, אבל $\frac1x$ יורדת ונגזרתה $-\frac{1}{x^2}$'
+      - text: 'להציב $u=1$, $v=x$: הנוסחה נותנת $\left(\frac1x\right)''=\frac{1}{x^2}$, אבל $\frac1x$ יורדת ונגזרתה מינוס $\frac{1}{x^2}$'
         correct: true
         feedback: >-
           נכון. מקרה פשוט שהתשובה שלו ידועה מגלה את הטעות: עם מינוס במונה מתקבל $\frac{0\cdot x-1\cdot1}{x^2}=-\frac1{x^2}$.
           התאמה במקרה פרטי לא הייתה מוכיחה את הנוסחה, אבל אי-התאמה מפריכה אותה.
       - text: 'להציב $u=v$: שני הצדדים צריכים לתת 0, והנוסחה נותנת $\frac{2uu''}{u^2}$, ולכן הטעות היא במכנה'
         feedback: >-
-          ההצבה $u=v$ אכן מגלה טעות ($\frac uv=1$ ונגזרתו 0), אבל המכנה $v^2$ נכון: מה שצריך לתקן הוא הסימן במונה, ואז
-          מתקבל $\frac{u'u-uu'}{u^2}=0$.
-        misconception: MC-c5-quotient-order
+          ההצבה $u=v$ אכן מגלה טעות ($\frac uv=1$ ונגזרתו 0), אבל המכנה $v^2$ נכון: מה שצריך לתקן הוא הפלוס במונה,
+          ועם מינוס מתקבל $\frac{u'u-uu'}{u^2}=0$. מי שמשאיר את הפלוס ומחפש את הטעות במקום אחר עדיין מחזיק בכלל השגוי.
+        misconception: MC-c5-quotient-plus
       - text: 'אין צורך לבדוק: כלל המנה נובע מכלל המכפלה, ושם יש פלוס'
         feedback: >-
           כשכותבים $\frac uv=u\cdot v^{-1}$, כלל השרשרת נותן $(v^{-1})'=-v^{-2}v'$, ומשם בא המינוס. הפלוס של כלל המכפלה
@@ -91,41 +93,40 @@ questions:
     qualitative: true
     level: basic
     prompt: >-
-      $f(x)=u\big(v(x)\big)$, כש-$u$ ו-$v$ גזירות. מהי $f'(x)$?
+      $y=f\big(g(x)\big)$, כש-$f$ ו-$g$ גזירות. מהי $\frac{dy}{dx}$?
     choices:
-      - text: "$u'\\big(v(x)\\big)\\cdot v'(x)$"
+      - text: "$f'\\big(g(x)\\big)\\cdot g'(x)$"
         correct: true
         feedback: >-
-          נכון. גוזרים את השכבה החיצונית **בערך של הפנימית**, וכופלים בנגזרת הפנימית. בסימון לייבניץ, עם $y=v(x)$:
-          $\frac{df}{dx}=\frac{du}{dy}\cdot\frac{dy}{dx}$.
-      - text: "$u'(x)\\cdot v'(x)$"
+          נכון. גוזרים את השכבה החיצונית **בערך של הפנימית**, וכופלים בנגזרת הפנימית. בסימון לייבניץ, עם $u=g(x)$
+          ו-$y=f(u)$: $\frac{dy}{dx}=\frac{dy}{du}\cdot\frac{du}{dx}$.
+      - text: "$f'(x)\\cdot g'(x)$"
         feedback: >-
-          הנגזרת החיצונית מחושבת ב-$v(x)$, לא ב-$x$ (בסיכומים, עמ׳ 9, נכתב בשורה אחת $u'(x)$ במקום $u'(y)$). למשל
-          $\big(\sin(x^3)\big)'$ אינו $\cos x\cdot3x^2$.
+          הנגזרת החיצונית מחושבת ב-$g(x)$, לא ב-$x$. למשל $\big(\sin(x^3)\big)'$ אינו $\cos x\cdot3x^2$.
         misconception: MC-c5-chain-outer-at-x
-      - text: "$u'\\big(v'(x)\\big)$"
+      - text: "$f'\\big(g'(x)\\big)$"
         feedback: >-
-          הפנימית נשארת **כמו שהיא** בתוך $u'$, ונגזרתה באה ככופל. $\big(\sin(x^3)\big)'$ אינו $\cos(3x^2)$.
+          הפנימית נשארת **כמו שהיא** בתוך $f'$, ונגזרתה באה ככופל. $\big(\sin(x^3)\big)'$ אינו $\cos(3x^2)$.
         misconception: MC-c5-chain-inner-inside
-      - text: "$u'\\big(v(x)\\big)$"
+      - text: "$f'\\big(g(x)\\big)$"
         feedback: >-
-          חסרה הנגזרת הפנימית $v'(x)$. ל-$\sin(2x)$ זה היה נותן $\cos(2x)$, אבל הגרף של $\sin(2x)$ תלול פי 2.
+          חסרה הנגזרת הפנימית $g'(x)$. ל-$\sin(2x)$ זה היה נותן $\cos(2x)$, אבל הגרף של $\sin(2x)$ תלול פי 2.
         misconception: MC-c5-chain-missing-inner
 
   - id: Q-5.3-sin-x3
     type: expr
     objectives: [OBJ-5.3-2]
     level: basic
-    prompt: '(מהסיכומים, עמ׳ 9) גזרו: $f(x)=\sin(x^3)$. כתבו את $f''(x)$.'
+    prompt: '(מסיכומי ההרצאות) גזרו: $f(x)=\sin(x^3)$. כתבו את $f''(x)$.'
     answer: '3*x^2*cos(x^3)'
     answerTex: '$f''(x)=\cos(x^3)\cdot3x^2$'
     variables: [x]
     domain: [-1.5, 1.5]
     correctFeedback: >-
-      נכון. השכבה החיצונית $\sin y$ נגזרת ל-$\cos y$ בערך $y=x^3$, והפנימית $x^3$ ל-$3x^2$. (בסיכומים נכתב
-      $-\cos(x^3)\cdot3x^2$: הסימן שם שגוי.)
+      נכון. השכבה החיצונית $\sin u$ נגזרת ל-$\cos u$ בערך $u=x^3$, והפנימית $x^3$ ל-$3x^2$. (בסיכומים נכתב
+      $f'(x)=-\cos(x^3)\cdot3x^2$: הסימן שם שגוי.)
     wrongFeedback: >-
-      זיהו את השכבות: בחוץ $\sin y$, בפנים $y=x^3$. גזרו את החיצונית בערך של הפנימית, וכפלו בנגזרת הפנימית.
+      זיהו את השכבות: בחוץ $\sin u$, בפנים $u=x^3$. גזרו את החיצונית בערך של הפנימית, וכפלו בנגזרת הפנימית.
     commonWrong:
       - expr: 'cos(x^3)'
         feedback: >-
@@ -133,7 +134,7 @@ questions:
         misconception: MC-c5-chain-missing-inner
       - expr: '-3*x^2*cos(x^3)'
         feedback: >-
-          $(\sin y)'=+\cos y$; המינוס שייך לנגזרת של קוסינוס. זו בדיוק הטעות שבסיכומים, עמ׳ 9.
+          $(\sin u)'=+\cos u$; המינוס שייך לנגזרת של קוסינוס. זו בדיוק הטעות שבסיכומים.
         misconception: MC-c5-trig-derivative-sign
       - expr: 'cos(3*x^2)'
         feedback: >-
@@ -150,7 +151,7 @@ questions:
     variables: [x]
     domain: [-2, 2]
     correctFeedback: >-
-      נכון. $(\sqrt y)'=\frac{1}{2\sqrt y}$ בערך $y=1+x^2$, כפול $(1+x^2)'=2x$, והשתיים מצטמצמות.
+      נכון. $(\sqrt u)'=\frac{1}{2\sqrt u}$ בערך $u=1+x^2$, כפול $(1+x^2)'=2x$, והשתיים מצטמצמות.
     wrongFeedback: >-
       בחוץ שורש, בפנים $1+x^2$. אחרי $\frac{1}{2\sqrt{1+x^2}}$ חסר עוד כופל.
     commonWrong:
@@ -160,30 +161,31 @@ questions:
           הנגזרת חייבת להיות 0, לא $\frac12$.
         misconception: MC-c5-chain-missing-inner
 
-  - id: Q-5.3-tan-quotient
+  - id: Q-5.3-quotient-trig
     type: expr
     objectives: [OBJ-5.3-1]
     level: mid
     prompt: >-
-      גזרו את $\tan x=\frac{\sin x}{\cos x}$ בכלל המנה, בקטע $\left(-\frac\pi2,\frac\pi2\right)$, ופשטו. כתבו את התוצאה
-      (השתמשו ב-cos).
-    answer: '1/cos(x)^2'
-    answerTex: '$(\tan x)''=\dfrac{\cos x\cos x-\sin x(-\sin x)}{\cos^2x}=\dfrac{1}{\cos^2x}$'
+      גזרו את $f(x)=\dfrac{\sin x}{1+\cos x}$ בכלל המנה, בקטע $(-\pi,\pi)$, ופשטו עד שבמונה נשאר מספר. כתבו את $f'(x)$
+      בעזרת $\cos x$ בלבד.
+    answer: '1/(1 + cos(x))'
+    answerTex: '$f''(x)=\dfrac{\cos x\,(1+\cos x)-\sin x\cdot(-\sin x)}{(1+\cos x)^2}=\dfrac{1+\cos x}{(1+\cos x)^2}=\dfrac{1}{1+\cos x}$'
     variables: [x]
-    domain: [-1.2, 1.2]
+    domain: [-2, 2]
     correctFeedback: >-
-      נכון. המונה הוא $\cos^2x+\sin^2x=1$. זו הנוסחה מהטבלה, $(\tan x)'=\frac{1}{\cos^2x}=1+\tan^2x$.
+      נכון. המונה הוא $\cos x+\cos^2x+\sin^2x=\cos x+1$, והוא מצטמצם עם המכנה. בדיקה: ב-$x=0$ יוצא $\frac12$.
     wrongFeedback: >-
-      $u=\sin x$, $v=\cos x$, $u'=\cos x$, $v'=-\sin x$. הציבו ב-$\frac{u'v-uv'}{v^2}$ והשתמשו ב-$\sin^2x+\cos^2x=1$.
+      $u=\sin x$, $u'=\cos x$, $v=1+\cos x$, $v'=-\sin x$. הציבו ב-$\frac{u'v-uv'}{v^2}$, השתמשו ב-$\sin^2x+\cos^2x=1$,
+      וצמצמו.
     commonWrong:
-      - expr: 'cos(2*x)/cos(x)^2'
+      - expr: '(cos(x) + cos(2*x))/(1 + cos(x))^2'
         feedback: >-
-          המונה יצא $\cos^2x-\sin^2x=\cos2x$: כתבתם פלוס בכלל המנה (או שכחתם את המינוס של $(\cos x)'$). עם שני המינוסים
-          במקומם מתקבל $\cos^2x+\sin^2x=1$.
+          המונה יצא $\cos x+\cos^2x-\sin^2x$: כתבתם פלוס בכלל המנה (או שכחתם את המינוס של $(\cos x)'$). עם שני המינוסים
+          במקומם מתקבל $\cos x+\cos^2x+\sin^2x=1+\cos x$.
         misconception: MC-c5-quotient-plus
-      - expr: '-1/cos(x)^2'
+      - expr: '-1/(1 + cos(x))'
         feedback: >-
-          הסימן הפוך: הפכתם את הסדר במונה. $\tan x$ עולה בקטע, ולכן נגזרתו חיובית.
+          הסימן הפוך: הפכתם את הסדר במונה. ליד 0 הפונקציה מתנהגת כמו $\frac{x}{2}$ ועולה, ולכן הנגזרת שם חיובית.
         misconception: MC-c5-quotient-order
 
   - id: Q-5.3-chain-table
@@ -205,7 +207,7 @@ questions:
         misconception: MC-c5-chain-outer-at-x
       - value: -1
         feedback: >-
-          $-1=f'(3)$ בלבד: חסר הכופל $g'(1)=2$.
+          $f'(3)=-1$ בלבד: חסר הכופל $g'(1)=2$.
         misconception: MC-c5-chain-missing-inner
 
   - id: Q-5.3-gauss
@@ -218,13 +220,13 @@ questions:
     variables: [x]
     domain: [-2, 2]
     correctFeedback: >-
-      נכון. $(e^y)'=e^y$ בערך $y=-x^2$, כפול $(-x^2)'=-2x$. סימן הנגזרת מתאים לגרף: עולה כש-$x<0$, יורד כש-$x>0$.
+      נכון. $(e^u)'=e^u$ בערך $u=-x^2$, כפול $(-x^2)'=-2x$. סימן הנגזרת מתאים לגרף: עולה כש-$x<0$, יורד כש-$x>0$.
     wrongFeedback: >-
-      הנגזרת של $e^y$ היא $e^y$. מה השכבה הפנימית, ומה נגזרתה?
+      הנגזרת של $e^u$ היא $e^u$. מה השכבה הפנימית, ומה נגזרתה?
     commonWrong:
       - expr: 'exp(-x^2)'
         feedback: >-
-          חסרה הנגזרת הפנימית $-2x$. הנגזרת של $e^{g(x)}$ היא $g'(x)e^{g(x)}$; רק ל-$g(x)=x$ הכופל הוא 1.
+          חסרה הנגזרת הפנימית $(-x^2)'=-2x$. הנגזרת של $e^{g(x)}$ היא $g'(x)e^{g(x)}$; רק ל-$g(x)=x$ הכופל הוא 1.
         misconception: MC-c5-chain-missing-inner
       - expr: '-x^2*exp(-x^2 - 1)'
         feedback: >-
@@ -241,9 +243,9 @@ questions:
     variables: [x]
     domain: [-2, 2]
     correctFeedback: >-
-      נכון. שלוש שכבות: החזקה $y^3$, הקוסינוס, ו-$2x$. כל שכבה נגזרת בערך של מה שבתוכה, והנגזרות מוכפלות.
+      נכון. שלוש שכבות: החזקה $u^3$, הקוסינוס, ו-$2x$. כל שכבה נגזרת בערך של מה שבתוכה, והנגזרות מוכפלות.
     wrongFeedback: >-
-      פרקו: $f=y^3$, $y=\cos w$, $w=2x$. כפלו $3y^2\cdot(-\sin w)\cdot2$ והציבו בחזרה.
+      פרקו: $y=u^3$, $u=\cos w$, $w=2x$. כפלו $3u^2\cdot(-\sin w)\cdot2$ והציבו בחזרה.
     commonWrong:
       - expr: '-3*cos(2*x)^2*sin(2*x)'
         feedback: >-
@@ -255,7 +257,7 @@ questions:
         misconception: MC-c5-trig-derivative-sign
       - expr: '3*cos(2*x)^2'
         feedback: >-
-          גזרתם רק את השכבה החיצונית (החזקה). אחריה באות עוד שתי שכבות: $-\sin(2x)$ ו-2.
+          גזרתם רק את השכבה החיצונית (החזקה). אחריה באות עוד שתי שכבות: $\big(-\sin(2x)\big)$ ו-2.
         misconception: MC-c5-chain-missing-inner
 
   - id: Q-5.3-one-point
@@ -354,22 +356,26 @@ questions:
     objectives: [OBJ-5.3-3]
     level: exam
     prompt: >-
-      תהי $f(x)=x\sqrt{x^2+5}$. חשבו את $f'(2)$.
-    answer: 4.33333333333333
+      תהי $f(x)=x\sqrt{x^2+a}$, כש-$a>0$ קבוע. ידוע ש-$f'(2)=\frac{13}{3}$. מצאו את $a$.
+    answer: 5
     tolerance: 0.001
     correctFeedback: >-
-      נכון, $\frac{13}{3}$. $f'(x)=\sqrt{x^2+5}+x\cdot\frac{x}{\sqrt{x^2+5}}$, וב-$x=2$: $3+\frac43$.
+      נכון. $f'(x)=\sqrt{x^2+a}+\frac{x^2}{\sqrt{x^2+a}}=\frac{2x^2+a}{\sqrt{x^2+a}}$, וב-2: $\frac{8+a}{\sqrt{4+a}}=\frac{13}{3}$.
+      עם $s=4+a$ ובהעלאה בריבוע: $9(s+4)^2=169s$, כלומר $9s^2-97s+144=0$, ולכן $s=9$ או $s=\frac{16}{9}$. הפתרון
+      השני נותן $a=-\frac{20}{9}<0$, ולכן $a=5$. בדיקה: $\frac{13}{\sqrt9}=\frac{13}{3}$.
     wrongFeedback: >-
-      כלל המכפלה עם $u=x$ ו-$v=\sqrt{x^2+5}$, ו-$v'$ בכלל השרשרת. הציבו $x=2$ רק בסוף ($\sqrt{9}=3$).
+      גזרו בכלל המכפלה עם $u=x$ ו-$v=\sqrt{x^2+a}$, ו-$v'$ בכלל השרשרת; הציבו $x=2$, וקבלו משוואה ב-$a$. אל תשכחו את
+      התנאי $a>0$.
     commonWrong:
-      - value: 3.33333333333333
+      - value: 12.7179618739289
         feedback: >-
-          $\frac{10}{3}=3+2\cdot\frac{1}{2\cdot3}$: בנגזרת של השורש חסר הכופל $(x^2+5)'=2x$.
+          זה מה שיוצא מ-$\sqrt{4+a}+\frac{1}{\sqrt{4+a}}=\frac{13}{3}$: בנגזרת של השורש חסר הכופל $(x^2+a)'=2x$, כלומר
+          כתבתם $\frac{1}{2\sqrt{x^2+a}}$ בלבד.
         misconception: MC-c5-chain-missing-inner
-      - value: 0.666666666666667
+      - value: -2.22222222222222
         feedback: >-
-          $\frac23=1\cdot\frac{x}{\sqrt{x^2+5}}$ ב-2: כפלתם את הנגזרות של שני הגורמים במקום להשתמש בכלל המכפלה.
-        misconception: MC-c5-product-of-derivatives
+          $a=-\frac{20}{9}$ הוא הפתרון השני של המשוואה הריבועית, והוא אכן נותן $f'(2)=\frac{13}{3}$, אבל הוא שלילי. הנתון
+          $a>0$ פוסל אותו.
 
   - id: Q-5.3-nested-exp
     type: expr
@@ -383,7 +389,7 @@ questions:
     correctFeedback: >-
       נכון. שלוש שכבות: $\sin$, האקספוננט ו-$x^2$. כל אחת נגזרת בערך של מה שבתוכה: $\cos(e^{x^2})$, $e^{x^2}$, $2x$.
     wrongFeedback: >-
-      כתבו $f=\sin w$, $w=e^{y}$, $y=x^2$, וכפלו $\cos w\cdot e^y\cdot2x$.
+      כתבו $y=\sin u$, $u=e^{w}$, $w=x^2$, וכפלו $\cos u\cdot e^w\cdot2x$.
     commonWrong:
       - expr: 'exp(x^2)*cos(exp(x^2))'
         feedback: >-
