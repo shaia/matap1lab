@@ -3,13 +3,35 @@
   term: אמפליטודה
   en: amplitude
   definition: >-
-    ב-$A\sin(kx-c)+d$: המספר $|A|$, חצי המרחק בין הערך הגבוה לנמוך. הגרף מתנודד בין $d-|A|$ ל-$d+|A|$.
+    ב-$A\sin(\omega x+\varphi)+d$: המספר $|A|$, חצי המרחק בין הערך הגבוה לנמוך. הגרף מתנודד בין $d-|A|$ ל-$d+|A|$.
+  lesson: '4.4'
+- id: midline
+  term: קו האמצע
+  en: midline
+  definition: >-
+    ב-$A\sin(\omega x+\varphi)+d$: הישר האופקי $y=d$, שהגרף מתנודד סביבו, באמצע בין הערך הגבוה לנמוך.
+  lesson: '4.4'
+- id: angular-frequency
+  term: תדירות זוויתית
+  en: angular frequency
+  symbol: '\omega=\frac{2\pi}{T}'
+  definition: >-
+    ב-$\sin(\omega x+\varphi)$, עם $\omega>0$: המקדם של $x$, הקצב שבו גדלה הזווית שבתוך הסינוס. המחזור הוא
+    $T=\frac{2\pi}{\omega}$. כש-$x$ הוא זמן בשניות, $\omega$ נמדדת ברדיאנים לשנייה.
+  lesson: '4.4'
+- id: phase
+  term: מופע
+  en: phase
+  definition: >-
+    ב-$A\cos(\omega t+\varphi)$: הזווית $\omega t+\varphi$ שבתוך הקוסינוס, שאומרת באיזה שלב של המחזור נמצאת התנודה ברגע
+    $t$. הקבוע $\varphi$ הוא המופע ברגע $t=0$ (**המופע ההתחלתי**).
   lesson: '4.4'
 - id: phase-shift
   term: הזזת מופע
   en: phase shift
   definition: >-
-    ב-$\sin(kx-c)=\sin\!\left(k\left(x-\frac ck\right)\right)$: ההזזה האופקית $\frac ck$ של הגרף ביחס ל-$\sin(kx)$.
+    ב-$\sin(\omega x+\varphi)=\sin\!\left(\omega\left(x+\frac{\varphi}{\omega}\right)\right)$: ההזזה האופקית של הגרף ביחס
+    ל-$\sin(\omega x)$. היא $-\frac{\varphi}{\omega}$: ימינה כשהמספר הזה חיובי, שמאלה כשהוא שלילי.
   lesson: '4.4'
 - id: arcsin
   term: ארקסינוס
@@ -31,6 +53,13 @@
   en: arctangent
   symbol: '\arctan:\mathbb{R}\to\left(-\tfrac\pi2,\tfrac\pi2\right)'
   definition: >-
-    ההפוכה של הטנגנס המצומצם לקטע $\left(-\frac\pi2,\frac\pi2\right)$: מוגדרת לכל $y$ ממשי, עולה, ושואפת ל-$\pm\frac\pi2$
-    כש-$y\to\pm\infty$.
+    ההפוכה של הטנגנס המצומצם לקטע הפתוח $\left(-\frac\pi2,\frac\pi2\right)$: מוגדרת לכל $y$ ממשי ועולה. כש-$y$ גדל בלי
+    גבול היא מתקרבת ל-$\frac\pi2$, וכש-$y$ יורד בלי גבול היא מתקרבת למינוס $\frac\pi2$, בלי להגיע אליהם.
+  lesson: '4.4'
+- id: principal-value-inverse-trig
+  term: הערך הראשי
+  en: principal value (of an inverse trigonometric function)
+  definition: >-
+    מבין כל הזוויות שהסינוס (הקוסינוס, הטנגנס) שלהן שווה למספר נתון, הזווית היחידה שבתמונה של $\arcsin$ (של $\arccos$,
+    של $\arctan$). למשל ל-$\sin\theta=\frac12$ יש אינסוף פתרונות, והערך הראשי הוא $\frac\pi6$.
   lesson: '4.4'

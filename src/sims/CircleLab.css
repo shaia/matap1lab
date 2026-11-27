@@ -1,0 +1,56 @@
+/* CircleLab readout and toggles. Colours come from tokens.css only. */
+
+.cl-readout {
+  flex: 1 1 100%;
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+.cl-row {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+}
+.cl-lab {
+  color: var(--ink-2);
+}
+.cl-math {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+  color: var(--ink);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.cl-row.strong .cl-math {
+  font-weight: 600;
+}
+.cl-note {
+  color: var(--ink);
+  font-weight: 600;
+}
+.cl-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+  color: var(--ink);
+}
+.cl-list li {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+.cl-list li.principal {
+  font-weight: 700;
+}
+.cl-toggles {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

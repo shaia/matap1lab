@@ -1,0 +1,18 @@
+/* GraphLab readout. Colours come from tokens.css only. */
+
+.sim-readout .q bdi {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+}
+
+/* Hebrew sentences in the readout: the global .q is an LTR quantity; here a row is a Hebrew sentence with
+   LTR islands (<bdi dir="ltr">), so it runs right to left and may wrap. */
+.rtl-q {
+  display: contents;
+}
+.rtl-q .q {
+  direction: rtl;
+  white-space: normal;
+}

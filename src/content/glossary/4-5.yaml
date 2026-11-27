@@ -27,7 +27,24 @@
   en: inverse hyperbolic functions
   symbol: '\operatorname{arsinh}y=\ln\left(y+\sqrt{y^2+1}\right)'
   definition: >-
-    ההפוכות של $\sinh$ ושל $\cosh$ המצומצם ל-$x\ge0$, שמתקבלות מפתרון משוואה ריבועית ב-$e^x$:
-    $\operatorname{arsinh}y=\ln\left(y+\sqrt{y^2+1}\right)$ לכל $y$, ו-$\operatorname{arcosh}y=\ln\left(y+\sqrt{y^2-1}\right)$
-    ל-$y\ge1$.
+    ההפוכות של $\sinh$, של $\cosh$ המצומצם ל-$x\ge0$ ושל $\tanh$, שמתקבלות מפתרון משוואה ב-$e^x$ (ריבועית
+    ב-$\sinh$ וב-$\cosh$): $\operatorname{arsinh}y=\ln\left(y+\sqrt{y^2+1}\right)$ לכל $y$,
+    $\operatorname{arcosh}y=\ln\left(y+\sqrt{y^2-1}\right)$ ל-$y\ge1$, ו-$\operatorname{artanh}y=\frac12\ln\frac{1+y}{1-y}$
+    ל-$-1<y<1$. בספרים מופיעים גם הסימונים $\sinh^{-1}$ ו-$\operatorname{arcsinh}$.
+  lesson: '4.5'
+- id: catenary
+  term: עקומת שרשרת
+  en: catenary
+  symbol: 'y=a\cosh\frac xa'
+  definition: >-
+    הצורה של שרשרת או כבל אחיד שתלויים בין שתי נקודות תחת המשקל של עצמם: $y=a\cosh\frac xa$ (עד כדי הזזה), כש-$a>0$
+    תלוי ביחס בין המתיחות במקום הנמוך ביותר לבין המשקל של מטר כבל. ליד התחתית היא דומה לפרבולה, אבל אינה פרבולה.
+  lesson: '4.5'
+- id: vieta-formulas
+  term: נוסחאות ויאטה
+  en: Vieta's formulas
+  symbol: 'u_1+u_2=-\frac ba,\quad u_1u_2=\frac ca'
+  definition: >-
+    למשוואה ריבועית $au^2+bu+c=0$ עם שורשים $u_1,u_2$: הסכום $u_1+u_2=-\frac ba$ והמכפלה $u_1u_2=\frac ca$. מהתיכון;
+    שימושיות כדי לדעת את הסימנים של השורשים בלי לחשב אותם.
   lesson: '4.5'

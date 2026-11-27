@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 4 figure: <Spread figure={ExpLab} figureProps={{ mode, … }}>.
+ * mode: 'bases' (aˣ and log_a x), 'compound' ((1 + 1/n)ⁿ → e), 'race' (growth rates of nine functions, with a log axis
+ * and a quotient panel). The props, step keys and task ids are documented at the top of ExpLab.tsx.
+ */
+import ExpLab, { type ExpLabProps } from './ExpLab';
+type Props = ExpLabProps;
+---
+
+<ExpLab client:visible {...Astro.props} />

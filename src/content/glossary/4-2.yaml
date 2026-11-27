@@ -11,7 +11,7 @@
   en: odd function
   symbol: 'f(-x)=-f(x)'
   definition: >-
-    פונקציה שמקיימת $f(-x)=-f(x)$ לכל $x$ בתחום. הגרף שלה סימטרי ביחס לראשית (סיבוב בחצי סיבוב): $x^3$, $\sin x$,
+    פונקציה שמקיימת $f(-x)=-f(x)$ לכל $x$ בתחום. הגרף שלה סימטרי ביחס לראשית (חצי סיבוב סביבה לא משנה אותו): $x^3$, $\sin x$,
     $\frac1x$.
   lesson: '4.2'
 - id: periodic-function
@@ -25,8 +25,25 @@
 - id: graph-transformation
   term: הזזה ומתיחה של גרף
   en: graph transformation (shift, stretch, reflection)
-  symbol: 'c\,f\!\left(\frac{x-a}{b}\right)+d'
+  symbol: 'A\,f\!\left(\frac{x-a}{b}\right)+c'
   definition: >-
-    $f(x-a)$: הזזה ימינה ב-$a$; $f(x)+d$: הזזה למעלה ב-$d$; $f\!\left(\frac xb\right)$: מתיחה לרוחב פי $b$; $c\,f(x)$:
-    מתיחה לגובה פי $c$; $f(-x)$ ו-$-f(x)$: שיקוף ביחס לציר $y$ וביחס לציר $x$.
+    $f(x-a)$: הזזה ימינה ב-$a$; $f(x)+c$: הזזה למעלה ב-$c$; $f\!\left(\frac xb\right)$: מתיחה לרוחב פי $b$; $A\,f(x)$:
+    מתיחה לגובה פי $A$. הנקודה $(u,f(u))$ של הגרף עוברת אל $(a+bu,\,Af(u)+c)$ בגרף של
+    $A\,f\!\left(\frac{x-a}{b}\right)+c$.
+  lesson: '4.2'
+- id: graph-reflection
+  term: שיקוף של גרף
+  en: reflection of a graph
+  symbol: 'f(-x),\ -f(x)'
+  definition: >-
+    הגרף של $y=f(-x)$ הוא השיקוף של הגרף של $f$ ביחס לציר $y$ (הקלט מחליף סימן); הגרף של $y=-f(x)$ הוא השיקוף ביחס לציר
+    $x$ (הערך מחליף סימן). הגרף של $y=-f(-x)$ הוא שני השיקופים יחד: חצי סיבוב סביב הראשית.
+  lesson: '4.2'
+- id: graphical-solution
+  term: פתרון גרפי
+  en: graphical solution
+  definition: >-
+    פתרון של משוואה $f(x)=g(x)$ (או $f(x)=k$) לפי נקודות החיתוך של הגרפים $y=f(x)$ ו-$y=g(x)$ (או של הגרף עם הישר האופקי
+    $y=k$). שיעורי ה-$x$ של נקודות החיתוך הם הפתרונות. הציור מראה רק חלון, ולכן הספירה בו היא הערכה: את מה שקורה מחוץ לחלון
+    בודקים בחשבון.
   lesson: '4.2'

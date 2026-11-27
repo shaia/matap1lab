@@ -4,9 +4,9 @@
   belief: >-
     האמפליטודה של $-2\cos\frac x3$ היא $-2$.
   truth: >-
-    האמפליטודה היא חצי המרחק בין הערך הגבוה לנמוך, ולכן חיובית: $|A|$ ב-$A\cos(kx)$. המינוס רק משקף את הגרף ביחס לקו
-    האמצע.
-  remedy: { lesson: '4.4', label: 'אמפליטודה' }
+    האמפליטודה של $A\cos(\omega x+\varphi)+d$ היא $|A|$, חצי המרחק בין הערך הגבוה לנמוך, ולכן חיובית. המינוס רק משקף את
+    הגרף ביחס לקו האמצע.
+  remedy: { lesson: '4.4', anchor: 'amplitude', label: 'אמפליטודה' }
 
 - id: MC-c4-phase-shift-factor
   title: קוראים את הזזת המופע בלי לחלק במקדם של x
@@ -14,8 +14,9 @@
     הגרף של $\sin\!\left(2x-\frac\pi2\right)$ הוא $\sin2x$ מוזז ימינה ב-$\frac\pi2$.
   truth: >-
     מוציאים את המקדם: $\sin\!\left(2x-\frac\pi2\right)=\sin\!\left(2\left(x-\frac\pi4\right)\right)$, ולכן ההזזה היא
-    $\frac\pi4$. באופן כללי $\sin(kx-c)$ מוזזת ב-$\frac ck$.
-  remedy: { lesson: '4.4', label: 'הזזת מופע' }
+    $\frac\pi4$ ימינה. באופן כללי $\sin(\omega x+\varphi)=\sin\!\left(\omega\left(x+\frac{\varphi}{\omega}\right)\right)$, והזזת
+    המופע היא $-\frac{\varphi}{\omega}$.
+  remedy: { lesson: '4.4', anchor: 'phase-shift', label: 'הזזת מופע' }
 
 - id: MC-c4-tan-period-2pi
   title: חושבים שהמחזור של טנגנס הוא 2π
@@ -24,7 +25,7 @@
   truth: >-
     $\tan(x+\pi)=\frac{-\sin x}{-\cos x}=\tan x$: המחזור הוא $\pi$. בין שתי אסימפטוטות סמוכות, $x=-\frac\pi2$ ו-$x=\frac\pi2$,
     הטנגנס עובר על כל הממשיים.
-  remedy: { lesson: '4.4', label: 'הגרף של tan' }
+  remedy: { lesson: '4.4', anchor: 'tan-graph', label: 'הגרף של tan' }
 
 - id: MC-c4-tan-bounded
   title: חושבים שטנגנס חסום כמו סינוס וקוסינוס
@@ -33,16 +34,16 @@
   truth: >-
     $\tan x=\frac{\sin x}{\cos x}$, והמכנה מתאפס ב-$x=\frac\pi2+k\pi$: שם יש אסימפטוטות אנכיות, ובכל מחזור הטנגנס מקבל
     כל ערך ממשי. פונקציה לא חסומה אינה מתנודדת "באמפליטודה".
-  remedy: { lesson: '4.4', label: 'הגרף של tan' }
+  remedy: { lesson: '4.4', anchor: 'tan-graph', label: 'הגרף של tan' }
 
 - id: MC-c4-arcsin-arccos-range-swap
-  title: מחליפים בין הטווחים של arcsin ו-arccos
+  title: מחליפים בין התמונות של arcsin ו-arccos
   belief: >-
     $\arcsin$ מקבלת ערכים ב-$[0,\pi]$, או $\arccos$ ב-$\left[-\frac\pi2,\frac\pi2\right]$.
   truth: >-
     $\arcsin:[-1,1]\to\left[-\frac\pi2,\frac\pi2\right]$, כי שם הסינוס עולה ומכסה את $[-1,1]$. $\arccos:[-1,1]\to[0,\pi]$,
     כי שם הקוסינוס יורד ומכסה את $[-1,1]$.
-  remedy: { lesson: '4.4', label: 'התחומים והתמונות של arcsin ו-arccos' }
+  remedy: { lesson: '4.4', anchor: 'arccos', label: 'התחומים והתמונות של arcsin ו-arccos' }
 
 - id: MC-c4-inverse-range-ignored
   title: חושבים ש-arcsin של סינוס מחזיר תמיד את הזווית
@@ -51,7 +52,7 @@
   truth: >-
     $\arcsin$ מחזירה תמיד זווית ב-$\left[-\frac\pi2,\frac\pi2\right]$. לכן $\arcsin(\sin x)=x$ רק ל-$x$ בקטע הזה;
     $\arcsin\!\left(\sin\frac{3\pi}4\right)=\arcsin\frac{\sqrt2}2=\frac\pi4$. (לעומת זאת $\sin(\arcsin y)=y$ לכל $y\in[-1,1]$.)
-  remedy: { lesson: '4.4', label: 'arcsin(sin x): רק בקטע הראשי' }
+  remedy: { lesson: '4.4', anchor: 'arcsin-sin', label: 'arcsin(sin x): רק בקטע הראשי' }
 
 - id: MC-c4-arccos-range
   title: נותנים ל-arccos ערך שלילי
@@ -60,7 +61,7 @@
   truth: >-
     $\arccos$ מחזירה זווית ב-$[0,\pi]$, ולא מספר שלילי. $\cos\frac{2\pi}3=-\frac12$, ולכן $\arccos\!\left(-\frac12\right)=\frac{2\pi}3$.
     באופן כללי $\arccos(-y)=\pi-\arccos y$.
-  remedy: { lesson: '4.4', label: 'arccos של מספר שלילי' }
+  remedy: { lesson: '4.4', anchor: 'arccos-negative', label: 'arccos של מספר שלילי' }
 
 - id: MC-c4-cos-arcsin-sign
   title: נותנים ל-cos(arcsin x) סימן שלילי או כפול
@@ -69,7 +70,7 @@
   truth: >-
     $\theta=\arcsin x$ נמצאת ב-$\left[-\frac\pi2,\frac\pi2\right]$, ושם $\cos\theta\ge0$. לכן $\cos(\arcsin x)=\sqrt{1-x^2}$
     לכל $x\in[-1,1]$, בלי $\pm$.
-  remedy: { lesson: '4.4', label: 'פישוט cos(arcsin x)' }
+  remedy: { lesson: '4.4', anchor: 'cos-arcsin', label: 'פישוט cos(arcsin x)' }
 
 - id: MC-c4-triangle-legs-swap
   title: מציבים את הצלעות במשולש העזר במקום הלא נכון
@@ -78,7 +79,7 @@
   truth: >-
     $\cos\theta=x$ פירושו ניצב **ליד** הזווית $x$ ויתר 1; הניצב שמול הזווית $\sqrt{1-x^2}$. לכן
     $\tan(\arccos x)=\frac{\sqrt{1-x^2}}{x}$. בדיקה ב-$x=1$: $\arccos1=0$ ו-$\tan0=0$.
-  remedy: { lesson: '4.4', label: 'משולש עזר לפישוט הרכבות' }
+  remedy: { lesson: '4.4', anchor: 'triangle-method', label: 'משולש עזר לפישוט הרכבות' }
 
 - id: MC-c4-arctan-additive
   title: מחברים ארקטנגנסים כאילו הם לינאריים
@@ -87,7 +88,7 @@
   truth: >-
     $\arctan$ אינה לינארית. מנוסחת הטנגנס של סכום, $\tan(\alpha+\beta)=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}$.
     למשל $\arctan1+\arctan1=\frac\pi2$, ואילו $\arctan2\approx1.107$.
-  remedy: { lesson: '4.4', label: 'סכום של ארקטנגנסים' }
+  remedy: { lesson: '4.4', anchor: 'arctan-sum', label: 'סכום של ארקטנגנסים' }
 
 - id: MC-c4-inverse-needs-one-to-one
   title: חושבים שלכל פונקציה יש הפוכה בלי לצמצם את התחום
@@ -96,4 +97,24 @@
   truth: >-
     פונקציה הפוכה קיימת רק לפונקציה **חד-חד-ערכית**: לכל ערך מקור יחיד. $\sin x=\frac12$ בעוד אינסוף נקודות, ולכן
     מצמצמים לקטע $\left[-\frac\pi2,\frac\pi2\right]$, שבו הסינוס עולה ומקבל כל ערך ב-$[-1,1]$ פעם אחת.
-  remedy: { lesson: '4.4', label: 'למה מצמצמים את התחום' }
+  remedy: { lesson: '4.4', anchor: 'why-restrict', label: 'למה מצמצמים את התחום' }
+
+- id: MC-c4-arctan-range-closed
+  title: חושבים ש-arctan מגיע עד פאי חלקי 2
+  belief: >-
+    התמונה של $\arctan$ היא הקטע הסגור $\left[-\frac\pi2,\frac\pi2\right]$, כמו של $\arcsin$, ולכן $\arctan y=\frac\pi2$
+    למספר גדול מספיק.
+  truth: >-
+    $\tan\frac\pi2$ אינו מוגדר, ולכן $\frac\pi2$ אינה בתחום של הטנגנס המצומצם, ואינה בתמונה של $\arctan$. התמונה היא הקטע
+    הפתוח $\left(-\frac\pi2,\frac\pi2\right)$: $\arctan y$ מתקרב ל-$\frac\pi2$ כש-$y$ גדל, ולא מגיע אליו
+    ($\arctan1000\approx89.94^\circ$).
+  remedy: { lesson: '4.4', anchor: 'arctan', label: 'התמונה של arctan: קטע פתוח' }
+
+- id: MC-c4-arctan-range-arg
+  title: מבלבלים את התמונה של arctan עם הקטע של הארגומנט הראשי
+  belief: >-
+    התמונה של arctan היא כל הכיוונים, כמו הקטע של הארגומנט הראשי, מינוס פאי עד פאי.
+  truth: >-
+    התמונה של $\arctan$ היא $\left(-\frac\pi2,\frac\pi2\right)$: כיוונים שפונים ימינה בלבד. הארגומנט הראשי, ב-$(-\pi,\pi]$,
+    משתמש ב-$\arctan$ ומתקן ב-$\pi$ כשהחלק הממשי שלילי.
+  remedy: { lesson: '4.4', anchor: 'arctan', label: 'התמונה של arctan' }
