@@ -18,3 +18,39 @@
     $0\le f\le g$ ו-$\int g$ מתכנס, גם $\int f$ מתכנס.
   reject: []
   lesson: '8.3'
+- id: divergent-integral
+  term: אינטגרל מתבדר
+  en: divergent (improper) integral
+  definition: >-
+    אינטגרל לא אמיתי **מתבדר** כשהגבול שמגדיר אותו אינו קיים או אינו סופי. למשל $\int_1^\infty\frac{dx}{x}$ מתבדר,
+    כי $\int_1^R\frac{dx}{x}=\ln R\to\infty$, ו-$\int_0^\infty\cos x\,dx$ מתבדר, כי $\sin R$ אינו שואף לשום גבול.
+  reject: []
+  lesson: '8.3'
+- id: comparison-test
+  term: מבחן ההשוואה
+  en: comparison test (for improper integrals)
+  definition: >-
+    אם $0\le f(x)\le g(x)$ בכל הקטע, אז: כש-$\int g$ מתכנס, גם $\int f$ מתכנס (ו-$\int f\le\int g$); וכש-$\int f$
+    מתבדר, גם $\int g$ מתבדר. חסם מלמעלה מוכיח התכנסות, וחסם מלמטה מוכיח התבדרות. בקורס משתמשים בו בלי הוכחה.
+  reject: []
+  lesson: '8.3'
+- id: escape-velocity
+  term: מהירות מילוט
+  en: escape velocity
+  symbol: 'v_{\mathrm{esc}}=\sqrt{2GM/r_0}'
+  unit: m/s
+  definition: >-
+    המהירות הקטנה ביותר שבה גוף שנזרק מפני השטח של כוכב (מסה $M$, רדיוס $r_0$) מתרחק ממנו לתמיד, בלי מנוע. האנרגיה
+    הקינטית שלו צריכה להספיק לעבודה נגד כוח הכבידה מ-$r_0$ עד אינסוף, $\int_{r_0}^\infty\frac{GMm}{r^2}\,dr=\frac{GMm}{r_0}$,
+    אינטגרל לא אמיתי מתכנס. לכדור הארץ בערך 11.2 קילומטרים בשנייה.
+  reject: []
+  lesson: '8.3'
+- id: mean-lifetime
+  term: זמן חיים ממוצע
+  en: mean lifetime
+  symbol: '\tau=\frac{1}{\lambda}'
+  definition: >-
+    בדעיכה רדיואקטיבית $N(t)=N_0e^{-\lambda t}$, הזמן הממוצע שגרעין "חי" עד שהוא מתפרק:
+    $\tau=\int_0^\infty t\,\lambda e^{-\lambda t}\,dt=\frac1\lambda$. הוא גדול מזמן מחצית החיים פי $\frac{1}{\ln2}\approx1.443$.
+  reject: []
+  lesson: '8.3'

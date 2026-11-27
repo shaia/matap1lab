@@ -6,7 +6,7 @@
   truth: >-
     $\int_a^bf(g(x))g'(x)\,dx=\int_{g(a)}^{g(b)}f(u)\,du$: הגבולות החדשים הם ערכי $u$ בקצוות. דרך אחרת: לחזור
     ל-$x$ לפני ההצבה של $a$ ו-$b$. אסור לערבב.
-  remedy: { lesson: '8.2', label: 'הצבה באינטגרל מסוים: גבולות חדשים' }
+  remedy: { lesson: '8.2', anchor: 'new-limits', label: 'הצבה באינטגרל מסוים: גבולות חדשים' }
 
 - id: MC-c8-sub-forget-factor
   title: מחליפים את dx ב-du בלי הגורם של הנגזרת
@@ -14,7 +14,7 @@
     בהצבה $u=x^2$ אפשר לכתוב $x\,dx=du$, או להשאיר $dx$ ו-$x$ אחרי ההצבה.
   truth: >-
     $du=g'(x)\,dx$, ולכן $x\,dx=\frac12du$ כש-$u=x^2$. אחרי ההצבה כל האינטגרל, כולל $dx$, כתוב ב-$u$ בלבד.
-  remedy: { lesson: '8.2', label: 'הצבה: du ו-dx' }
+  remedy: { lesson: '8.2', anchor: 'du-factor', label: 'הצבה: du ו-dx' }
 
 - id: MC-c8-sub-drop-minus
   title: שוכחים את הסימן של du
@@ -23,16 +23,16 @@
   truth: >-
     $du=-\sin x\,dx$. המינוס הזה, יחד עם הגבולות שמתהפכים ($\cos0=1>\cos\frac{\pi}{3}$), קובע את סימן התוצאה. בדיקה
     מהירה: אינטגרנד חיובי על קטע עם $a<b$ נותן אינטגרל חיובי.
-  remedy: { lesson: '8.2', label: 'הצבה: סימן הנגזרת' }
+  remedy: { lesson: '8.2', anchor: 'decreasing', label: 'הצבה: סימן הנגזרת' }
 
 - id: MC-c8-odd-whole
   title: מאפסים אינטגרל בגלל אי-זוגיות של חלק מהאינטגרנד או בקטע לא סימטרי
   belief: >-
     אם באינטגרנד יש גורם אי-זוגי, או אם הפונקציה אי-זוגית, האינטגרל 0 בכל קטע.
   truth: >-
-    $\int_{-a}^{a}f\,dx=0$ כש-$f$ **כולה** אי-זוגית והקטע **סימטרי**. בסכום, כל מחובר נבדק בנפרד; מכפלה של שתי
+    $\int_{-a}^{a}f\,dx=0$ כש-$f$ **כולה** אי-זוגית והקטע **סימטרי**. בסכום, כל איבר נבדק בנפרד; מכפלה של שתי
     אי-זוגיות היא זוגית; ובקטע לא סימטרי נשאר החלק העודף.
-  remedy: { lesson: '8.2', label: 'סימטריה: פונקציה אי-זוגית בקטע סימטרי' }
+  remedy: { lesson: '8.2', anchor: 'odd-conditions', label: 'סימטריה: פונקציה אי-זוגית בקטע סימטרי' }
 
 - id: MC-c8-even-forget-double
   title: שוכחים להכפיל ב-2 באינטגרל של פונקציה זוגית
@@ -40,7 +40,7 @@
     $\int_{-a}^{a}f\,dx=\int_0^af\,dx$ כש-$f$ זוגית.
   truth: >-
     לפונקציה זוגית שני החצאים תורמים אותו דבר: $\int_{-a}^{a}f\,dx=2\int_0^af\,dx$.
-  remedy: { lesson: '8.2', label: 'סימטריה: פונקציה זוגית' }
+  remedy: { lesson: '8.2', anchor: 'even-double', label: 'סימטריה: פונקציה זוגית' }
 
 - id: MC-c8-zero-means-odd
   title: מסיקים אי-זוגיות מאינטגרל אפס
@@ -48,7 +48,7 @@
     אם $\int_{-a}^{a}f\,dx=0$, אז $f$ אי-זוגית.
   truth: >-
     רק הכיוון ההפוך נכון. $x^2-\frac13$ זוגית ו-$\int_{-1}^{1}\left(x^2-\tfrac13\right)dx=0$.
-  remedy: { lesson: '8.2', label: 'סימטריה: מה נובע ממה' }
+  remedy: { lesson: '8.2', anchor: 'converse', label: 'סימטריה: מה נובע ממה' }
 
 - id: MC-c8-ftc-differentiate-integrand
   title: גוזרים את האינטגרנד במקום להציב בו את הגבול
@@ -57,15 +57,16 @@
   truth: >-
     לפי המשפט היסודי $\frac{d}{dx}\int_a^xf(t)\,dt=f(x)$: השטח גדל בקצב הגובה בקצה. אין צורך בפונקציה קדומה, וזה
     עובד גם כשאין לה נוסחה, כמו ל-$\sin(t^2)$.
-  remedy: { lesson: '8.2', label: 'אינטגרל עם גבול עליון משתנה' }
+  remedy: { lesson: '8.2', anchor: 'upper', label: 'אינטגרל עם גבול עליון משתנה' }
 
 - id: MC-c8-ftc-subtract-f0
   title: מחסירים את ערך האינטגרנד בגבול התחתון הקבוע
   belief: >-
     $\frac{d}{dx}\int_a^xf(t)\,dt=f(x)-f(a)$, בדומה ל-$F(b)-F(a)$.
   truth: >-
-    הגבול התחתון קבוע, והתרומה שלו לאינטגרל, $-G(a)$, היא קבוע שהנגזרת שלו 0. לכן הנגזרת היא $f(x)$ בלבד.
-  remedy: { lesson: '8.2', label: 'אינטגרל עם גבול עליון משתנה' }
+    אם $F$ קדומה של $f$, אז $G(x)=\int_a^xf(t)\,dt=F(x)-F(a)$. הגבול התחתון קבוע, ולכן $F(a)$ הוא מספר, והנגזרת
+    שלו 0. לכן $G'(x)=f(x)$ בלבד.
+  remedy: { lesson: '8.2', anchor: 'lower-constant', label: 'גבול תחתון קבוע' }
 
 - id: MC-c8-ftc-forget-chain
   title: שוכחים את כלל השרשרת כשהגבול העליון הוא פונקציה
@@ -74,7 +75,7 @@
   truth: >-
     $\frac{d}{dx}\int_a^{g(x)}f(t)\,dt=f\bigl(g(x)\bigr)\,g'(x)$: מציבים את הגבול **כולו** באינטגרנד וכופלים בנגזרת
     הפנימית.
-  remedy: { lesson: '8.2', label: 'גבול עליון משתנה וכלל השרשרת' }
+  remedy: { lesson: '8.2', anchor: 'chain', label: 'גבול עליון משתנה וכלל השרשרת' }
 
 - id: MC-c8-ftc-lower-limit-sign
   title: מחברים במקום לחסר את התרומה של גבול תחתון משתנה
@@ -82,4 +83,4 @@
     כששני הגבולות משתנים, $\frac{d}{dx}\int_{h(x)}^{g(x)}f\,dt=f(g)g'+f(h)h'$.
   truth: >-
     $\int_{h(x)}^{g(x)}f\,dt=\int_c^{g(x)}f\,dt-\int_c^{h(x)}f\,dt$, ולכן הנגזרת היא $f(g(x))g'(x)-f(h(x))h'(x)$.
-  remedy: { lesson: '8.2', label: 'שני גבולות משתנים' }
+  remedy: { lesson: '8.2', anchor: 'two-limits', label: 'שני גבולות משתנים' }

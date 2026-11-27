@@ -1,0 +1,24 @@
+- id: v-8-5-khan-disc
+  youtubeId: btGaOTXxXs8
+  title: Disc method around x-axis | Applications of definite integrals | AP Calculus AB | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 9
+  why: >-
+    לפי הכותרת והתיאור: Sal Khan מחשב נפח של גוף סיבוב סביב ציר $x$ בשיטת הדיסקות. השוו לסעיף "שיטת הדיסקות": דיסקה
+    ברדיוס $f(x)$ ובעובי $dx$, בנפח $\pi f(x)^2\,dx$, וסכום של כל הדיסקות.
+  verified: '2026-11-27'
+- id: v-8-5-khan-shell
+  youtubeId: 6Ozz3J-LRrY
+  title: Shell method for rotating around vertical line | AP Calculus AB | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 6
+  why: >-
+    לפי הכותרת והתיאור: מבוא לשיטת הקליפות בסיבוב סביב ישר אנכי. השוו לסעיף "שיטת הקליפות הגליליות" ולפריסת
+    הקליפה באיור 8.5ב: קליפה שנפרסת ללוח דק, שנפחו היקף כפול גובה כפול עובי, $2\pi x\,f(x)\,dx$.
+  verified: '2026-11-27'

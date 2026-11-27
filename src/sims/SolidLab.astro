@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 8.5 figure: <Spread figure={SolidLab} figureProps={{ mode, f, … }}>.
+ * mode: between, disk, shell. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the
+ * top of SolidLab.tsx; the preset ids are those of the registries AREA and REV in src/math/solids.ts.
+ */
+import SolidLab, { type SolidLabProps } from './SolidLab';
+type Props = SolidLabProps;
+---
+
+<SolidLab client:visible {...Astro.props} />

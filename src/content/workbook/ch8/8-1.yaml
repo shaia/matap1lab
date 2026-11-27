@@ -1,0 +1,521 @@
+# Workbook of lesson 8.1 — Riemann sums and area.
+# Objectives (src/course.ts):
+#   OBJ-8.1-1  compute a Riemann sum for a given partition and read it as an approximation of the area
+#   OBJ-8.1-2  the definite integral as signed area, and as displacement when the integrand is a velocity
+#   OBJ-8.1-3  linearity, additivity over intervals, comparison
+# Order of knowledge: chapters 1–7 and 8.1 (no substitution with new limits, no improper integrals, no L'Hôpital).
+# Every number recomputed with sympy in screens/tools/lesson-8-1.py.
+lesson: '8.1'
+practice:
+  - id: W-8.1-01
+    level: basic
+    objectives: [OBJ-8.1-1]
+    prompt: >-
+      $f(x)=x^3$ בקטע $[0,2]$, בחלוקה לארבעה קטעים שווים.
+
+
+      (א) חשבו את $L_4$, $R_4$ ו-$M_4$.
+
+
+      (ב) בלי לחשב את האינטגרל, איזה מהסכומים $L_4$, $R_4$ בטוח קטן מ-$\int_0^2x^3\,dx$, ואיזה בטוח גדול ממנו? בדקו בעזרת
+      המשפט היסודי.
+    answer: >-
+      (א) $L_4=\frac94$, $R_4=\frac{25}{4}$, $M_4=\frac{31}{8}$. (ב) $f$ עולה, ולכן $L_4\le\int_0^2x^3\,dx\le R_4$; האינטגרל 4.
+    solution:
+      - kind: idea
+        text: >-
+          רוחב קטע, טבלת ערכים בנקודות החלוקה ובאמצעים, וכל סכום הוא $\Delta x$ כפול סכום הגבהים שלו. לפונקציה עולה
+          הסכום השמאלי כולו מתחת לגרף והימני כולו מעליו.
+      - kind: computation
+        text: >-
+          $\Delta x=\frac{2-0}{4}=\frac12$. בנקודות $0,\frac12,1,\frac32,2$ הערכים $0,\ 0.125,\ 1,\ 3.375,\ 8$.
+      - kind: computation
+        text: >-
+          $L_4=\frac12\left(0+0.125+1+3.375\right)=\frac12\cdot4.5=\frac94$, ו-$R_4=\frac12\left(0.125+1+3.375+8\right)=\frac12\cdot12.5=\frac{25}{4}$.
+      - kind: computation
+        text: >-
+          באמצעים $\frac14,\frac34,\frac54,\frac74$ הערכים $0.015625,\ 0.421875,\ 1.953125,\ 5.359375$, שסכומם $7.75$; לכן
+          $M_4=\frac12\cdot7.75=\frac{31}{8}=3.875$.
+      - kind: step
+        text: >-
+          (ב) $x^3$ עולה ב-$[0,2]$, ולכן בכל קטע הערך בקצה השמאלי הוא הקטן והערך בקצה הימני הגדול: $L_4\le\int\le R_4$.
+      - kind: check
+        text: >-
+          $\int_0^2x^3\,dx=\left.\frac{x^4}{4}\right|_0^2=4$, ובאמת $2.25\le4\le6.25$ ✓. גם $R_4-L_4=\bigl(f(2)-f(0)\bigr)\cdot\frac12=4$ ✓,
+          ו-$M_4$ קרוב ל-4 בהרבה משניהם.
+      - kind: result
+        text: >-
+          $L_4=\frac94$, $R_4=\frac{25}{4}$, $M_4=\frac{31}{8}$; $L_4\le\int_0^2x^3\,dx=4\le R_4$.
+
+  - id: W-8.1-02
+    level: basic
+    objectives: [OBJ-8.1-2]
+    prompt: >-
+      חשבו בעזרת שטחים של צורות מוכרות, בלי פונקציה קדומה.
+
+
+      (א) $\int_{-2}^{3}(x-1)\,dx$, וגם השטח הכלוא בין הישר $y=x-1$, ציר $x$ והישרים $x=-2$, $x=3$.
+
+
+      (ב) $\int_0^2\sqrt{4-x^2}\,dx$.
+
+
+      (ג) $\int_{-3}^{3}|x|\,dx$.
+    answer: >-
+      (א) האינטגרל $-\frac52$, השטח $\frac{13}{2}$. (ב) $\pi$. (ג) 9.
+    solution:
+      - kind: idea
+        text: >-
+          האינטגרל הוא שטח עם סימן: מעל הציר בחיוב ומתחתיו בשלילה. כשהגרף בנוי מקווים ישרים או מקשת של מעגל, השטחים
+          הם משולשים ורבעי עיגול.
+      - kind: computation
+        text: >-
+          (א) הישר חותך את הציר ב-$x=1$. מ-$-2$ עד 1 משולש מתחת לציר, עם בסיס 3 וגובה $|f(-2)|=3$: שטח $\frac92$. מ-1 עד 3
+          משולש מעל הציר, עם בסיס 2 וגובה 2: שטח 2. האינטגרל $2-\frac92=-\frac52$, והשטח $2+\frac92=\frac{13}{2}$.
+      - kind: step
+        text: >-
+          (ב) $y=\sqrt{4-x^2}$ פירושו $x^2+y^2=4$ עם $y\ge0$: חצי העליון של המעגל ברדיוס 2. בין $x=0$ ל-$x=2$ זה רבע
+          עיגול, שכולו מעל הציר.
+      - kind: computation
+        text: >-
+          השטח $\frac14\pi\cdot2^2=\pi$.
+      - kind: computation
+        text: >-
+          (ג) $|x|\ge0$, והגרף בצורת V: שני משולשים, כל אחד עם בסיס 3 וגובה 3, שטח $\frac92$. ביחד 9.
+      - kind: check
+        text: >-
+          (א) בפונקציה קדומה: $\left(\frac{x^2}{2}-x\right)\Big|_{-2}^{3}=\frac32-4=-\frac52$ ✓. (ב) הרבע עיגול בתוך הריבוע
+          $2\times2$ ומעל המשולש שקודקודיו $(0,0)$, $(2,0)$, $(0,2)$: $2<\pi<4$ ✓.
+      - kind: result
+        text: >-
+          (א) $\int_{-2}^{3}(x-1)\,dx=-\frac52$, והשטח $\frac{13}{2}$; (ב) $\pi$; (ג) 9.
+
+  - id: W-8.1-03
+    level: basic
+    objectives: [OBJ-8.1-3]
+    prompt: >-
+      $f$ ו-$g$ רציפות, ונתון: $\int_1^4f(x)\,dx=6$, $\int_1^4g(x)\,dx=-2$ ו-$\int_1^2f(x)\,dx=1$. חשבו:
+
+
+      (א) $\int_1^4\bigl(f(x)-3g(x)+2\bigr)\,dx$
+
+
+      (ב) $\int_2^4f(x)\,dx$
+
+
+      (ג) $\int_4^2 2f(x)\,dx$
+    answer: >-
+      (א) 18. (ב) 5. (ג) $-10$.
+    solution:
+      - kind: idea
+        text: >-
+          לינאריות מפרקת סכום ומוציאה קבועים; אדיטיביות מפצלת קטע; והחלפת הגבולות הופכת סימן.
+      - kind: computation
+        text: >-
+          (א) $\int_1^4f-3\int_1^4g+\int_1^42\,dx=6-3\cdot(-2)+2\cdot(4-1)=6+6+6=18$. האינטגרל של הקבוע 2 הוא שטח של מלבן
+          ברוחב 3, לא 2.
+      - kind: computation
+        text: >-
+          (ב) $\int_1^4f=\int_1^2f+\int_2^4f$, ולכן $\int_2^4f=6-1=5$.
+      - kind: computation
+        text: >-
+          (ג) $\int_4^22f\,dx=-2\int_2^4f\,dx=-2\cdot5=-10$.
+      - kind: check
+        text: >-
+          (ב) ו-(ג) יחד: $\int_1^2f+\int_2^4f=1+5=6$ ✓, ו-$\int_2^42f=10$, כך שבסדר ההפוך מינוס 10 ✓.
+      - kind: result
+        text: >-
+          (א) 18; (ב) 5; (ג) מינוס 10.
+
+  - id: W-8.1-04
+    level: mid
+    qualitative: true
+    objectives: [OBJ-8.1-1]
+    prompt: >-
+      $f(x)=e^{-x}$ בקטע $[0,2]$.
+
+
+      (א) בלי לחשב סכומים, קבעו איזה מבין $L_n$, $R_n$ גדול מ-$\int_0^2e^{-x}\,dx$ לכל $n$, ונמקו.
+
+
+      (ב) חשבו את $L_4$ ו-$R_4$ (בקירוב של ארבע ספרות), ובדקו את התשובה ל-(א) מול $\int_0^2e^{-x}\,dx=1-e^{-2}$.
+
+
+      (ג) כמה קטעים צריך כדי שההפרש $L_n-R_n$ יהיה קטן מ-$0.01$? מה זה מבטיח על הדיוק של כל אחד מהסכומים?
+    answer: >-
+      (א) $L_n$ גדול מהאינטגרל, כי $e^{-x}$ יורדת. (ב) $L_4\approx1.0988$, $R_4\approx0.6664$, האינטגרל $\approx0.8647$.
+      (ג) $n\ge173$; אז שני הסכומים רחוקים מהאינטגרל בפחות מ-$0.01$.
+    solution:
+      - kind: idea
+        text: >-
+          לפונקציה יורדת כל מלבן שמאלי בולט מעל הגרף, וכל מלבן ימני מתחתיו. האינטגרל כלוא בין שני הסכומים, וההפרש
+          ביניהם הוא $\bigl(f(a)-f(b)\bigr)\Delta x$.
+      - kind: step
+        text: >-
+          (א) $\left(e^{-x}\right)'=-e^{-x}<0$, ולכן $e^{-x}$ יורדת. בכל קטע הערך הגדול ביותר בקצה השמאלי: $R_n\le\int_0^2e^{-x}\,dx\le L_n$.
+      - kind: computation
+        text: >-
+          (ב) $\Delta x=\frac12$. $L_4=\frac12\left(1+e^{-0.5}+e^{-1}+e^{-1.5}\right)\approx\frac12\left(1+0.6065+0.3679+0.2231\right)\approx1.0988$.
+      - kind: computation
+        text: >-
+          $R_4=\frac12\left(e^{-0.5}+e^{-1}+e^{-1.5}+e^{-2}\right)\approx\frac12\left(0.6065+0.3679+0.2231+0.1353\right)\approx0.6664$.
+      - kind: check
+        text: >-
+          $1-e^{-2}\approx0.8647$, ובאמת $0.6664\le0.8647\le1.0988$ ✓. וההפרש $L_4-R_4=\frac12\left(1-e^{-2}\right)\approx0.4323$,
+          בדיוק $\bigl(f(0)-f(2)\bigr)\Delta x$ ✓.
+      - kind: computation
+        text: >-
+          (ג) $L_n-R_n=\left(1-e^{-2}\right)\cdot\frac2n$. הדרישה $\left(1-e^{-2}\right)\frac2n<0.01$ שקולה ל-$n>200\left(1-e^{-2}\right)\approx172.93$,
+          כלומר $n\ge173$.
+      - kind: step
+        text: >-
+          האינטגרל נמצא בין $R_n$ ל-$L_n$, ולכן המרחק שלו מכל אחד מהם קטן מהמרחק ביניהם, שקטן מ-$0.01$. זה חסם על השגיאה בלי
+          לדעת את האינטגרל.
+      - kind: result
+        text: >-
+          $R_n\le\int_0^2e^{-x}\,dx\le L_n$; $L_4\approx1.0988$, $R_4\approx0.6664$, האינטגרל $\approx0.8647$; עם $n\ge173$
+          שני הסכומים רחוקים ממנו בפחות מ-$0.01$.
+
+  - id: W-8.1-05
+    level: mid
+    objectives: [OBJ-8.1-2]
+    prompt: >-
+      גוף נע על ישר במהירות $v(t)=t^2-2t-3$ (מטר לשנייה, $t$ בשניות). חשבו את ההעתק ואת הדרך שלו בין $t=0$ ל-$t=4$.
+    answer: >-
+      העתק $-\frac{20}{3}$ מטר, דרך $\frac{34}{3}$ מטר.
+    solution:
+      - kind: idea
+        text: >-
+          ההעתק הוא $\int v\,dt$ עם הסימן. לדרך מפצלים בזמן שבו $v$ מחליפה סימן, ומחברים את הערכים המוחלטים של
+          החלקים.
+      - kind: step
+        text: >-
+          $v(t)=(t-3)(t+1)$. ב-$[0,4]$ השורש היחיד הוא $t=3$: $v<0$ ב-$[0,3)$ ו-$v>0$ ב-$(3,4]$. הגוף נע אחורה עד $t=3$
+          ואז מסתובב.
+      - kind: computation
+        text: >-
+          קדומה: $X(t)=\frac{t^3}{3}-t^2-3t$. $X(0)=0$, $X(3)=9-9-9=-9$, $X(4)=\frac{64}{3}-16-12=-\frac{20}{3}$.
+      - kind: computation
+        text: >-
+          ההעתק: $X(4)-X(0)=-\frac{20}{3}$. החלקים: $\int_0^3v\,dt=-9$ ו-$\int_3^4v\,dt=-\frac{20}{3}-(-9)=\frac73$.
+      - kind: computation
+        text: >-
+          הדרך: $|-9|+\frac73=\frac{34}{3}\approx11.33$ מטר.
+      - kind: check
+        text: >-
+          החלקים עם הסימן מחזירים את ההעתק: $-9+\frac73=-\frac{20}{3}$ ✓, והדרך גדולה מגודל ההעתק, $\frac{34}{3}>\frac{20}{3}$ ✓.
+      - kind: result
+        text: >-
+          העתק $-\frac{20}{3}$ מטר (הגוף מסיים $6\tfrac23$ מטר מאחורי ההתחלה), דרך $\frac{34}{3}$ מטר.
+
+  - id: W-8.1-06
+    level: mid
+    objectives: [OBJ-8.1-2, OBJ-8.1-3]
+    prompt: >-
+      $f(x)=x^3-4x$ בקטע $[-1,3]$. חשבו את $\int_{-1}^{3}f(x)\,dx$, ואת השטח הכלוא בין הגרף לציר $x$ בקטע הזה.
+    answer: >-
+      האינטגרל 4, השטח 12.
+    solution:
+      - kind: idea
+        text: >-
+          את האינטגרל מחשבים ישר בפונקציה קדומה. לשטח מפצלים בכל נקודה שבה $f$ מחליפה סימן בתוך הקטע (אדיטיביות),
+          ובכל חלק לוקחים ערך מוחלט.
+      - kind: step
+        text: >-
+          $f(x)=x(x-2)(x+2)$. בתוך $[-1,3]$ האפסים הם $x=0$ ו-$x=2$. סימנים: $f(-0.5)=1.875>0$, $f(1)=-3<0$, $f(2.5)=5.625>0$.
+      - kind: computation
+        text: >-
+          $F(x)=\frac{x^4}{4}-2x^2$: $F(-1)=-\frac74$, $F(0)=0$, $F(2)=-4$, $F(3)=\frac94$. האינטגרל $F(3)-F(-1)=\frac94+\frac74=4$.
+      - kind: computation
+        text: >-
+          החלקים: $\int_{-1}^0f=0-\left(-\frac74\right)=\frac74$; $\int_0^2f=-4-0=-4$; $\int_2^3f=\frac94-(-4)=\frac{25}{4}$.
+      - kind: computation
+        text: >-
+          השטח: $\frac74+4+\frac{25}{4}=12$.
+      - kind: check
+        text: >-
+          החלקים עם הסימן: $\frac74-4+\frac{25}{4}=4$ ✓, האינטגרל. וסימני החלקים מתאימים לסימני $f$ שמצאנו ✓.
+      - kind: result
+        text: >-
+          $\int_{-1}^{3}\left(x^3-4x\right)dx=4$, והשטח 12.
+
+  - id: W-8.1-07
+    level: mid
+    qualitative: true
+    objectives: [OBJ-8.1-3]
+    prompt: >-
+      בלי לחשב אף אינטגרל:
+
+
+      (א) סדרו מהקטן לגדול: $\int_0^1x^2\,dx$, $\int_0^1x\,dx$, $\int_0^1\sqrt x\,dx$.
+
+
+      (ב) הראו ש-$\frac12\le\int_1^2\frac{dx}{x}\le1$.
+
+
+      (ג) הראו ש-$1\le\int_0^1\sqrt{1+x^3}\,dx\le\sqrt2$.
+    answer: >-
+      (א) $\int_0^1x^2\le\int_0^1x\le\int_0^1\sqrt x$. (ב) ו-(ג): חסם תחתון וחסם עליון של הפונקציה, כפול אורך הקטע.
+    solution:
+      - kind: idea
+        text: >-
+          השוואה: אם $f\le g$ בכל הקטע, אז $\int f\le\int g$. ואם $m\le f\le M$ בקטע, האינטגרל בין $m(b-a)$ ל-$M(b-a)$.
+      - kind: step
+        text: >-
+          (א) ל-$0\le x\le1$: $x^2=x\cdot x\le x$, ו-$x=\sqrt x\cdot\sqrt x\le\sqrt x$. לכן $x^2\le x\le\sqrt x$ בכל הקטע, ומהשוואה
+          $\int_0^1x^2\le\int_0^1x\le\int_0^1\sqrt x$.
+      - kind: step
+        text: >-
+          (ב) $\frac1x$ יורדת, ולכן ב-$[1,2]$ היא בין $\frac12$ ל-1. אורך הקטע 1: $\frac12\cdot1\le\int_1^2\frac{dx}{x}\le1\cdot1$.
+      - kind: step
+        text: >-
+          (ג) ב-$[0,1]$, $0\le x^3\le1$, ולכן $1\le1+x^3\le2$ ו-$1\le\sqrt{1+x^3}\le\sqrt2$. אורך הקטע 1.
+      - kind: check
+        text: >-
+          (א) בערכים: $\frac13\le\frac12\le\frac23$ ✓. (ב) $\ln2\approx0.693$ ✓. (ג) חישוב נומרי נותן $\int_0^1\sqrt{1+x^3}\,dx\approx1.1114$,
+          בין 1 ל-$1.414$ ✓.
+      - kind: result
+        text: >-
+          (א) $\int_0^1x^2\,dx\le\int_0^1x\,dx\le\int_0^1\sqrt x\,dx$; (ב) ו-(ג) נובעים מהשוואה עם פונקציות קבועות.
+
+  - id: W-8.1-08
+    level: exam
+    objectives: [OBJ-8.1-1]
+    prompt: >-
+      חלקו את $[1,2]$ ל-$n$ קטעים שווים, ויהי $R_n$ הסכום הימני של $f(x)=x^2$.
+
+
+      (א) כתבו את $R_n$ כנוסחה ב-$n$. היעזרו ב-$\sum_{i=1}^{n}i=\frac{n(n+1)}{2}$ וב-$\sum_{i=1}^{n}i^2=\frac{n(n+1)(2n+1)}{6}$.
+
+
+      (ב) חשבו את $\lim_{n\to\infty}R_n$ והשוו ל-$\int_1^2x^2\,dx$.
+
+
+      (ג) בדקו את הנוסחה ב-$n=1$ וב-$n=2$ ישירות מההגדרה.
+    answer: >-
+      (א) $R_n=1+\frac{n+1}{n}+\frac{(n+1)(2n+1)}{6n^2}=\frac{(2n+1)(7n+1)}{6n^2}$. (ב) $\frac73$. (ג) $R_1=4$, $R_2=\frac{25}{8}$.
+    solution:
+      - kind: idea
+        text: >-
+          כותבים את נקודת הדגימה כ-$x_i=1+\frac in$, פותחים את הריבוע, ומפרקים את הסכום לשלושה סכומים שלכל אחד מהם יש
+          נוסחה.
+      - kind: computation
+        text: >-
+          $\Delta x=\frac1n$ ו-$x_i=1+\frac in$ ל-$i=1,\dots,n$. האיבר ה-$i$:
+          $\left(1+\frac in\right)^2\frac1n=\frac1n+\frac{2i}{n^2}+\frac{i^2}{n^3}$.
+      - kind: computation
+        text: >-
+          מסכמים כל חלק: $\sum\frac1n=1$; $\frac{2}{n^2}\sum i=\frac{2}{n^2}\cdot\frac{n(n+1)}{2}=\frac{n+1}{n}$;
+          $\frac{1}{n^3}\sum i^2=\frac{(n+1)(2n+1)}{6n^2}$.
+      - kind: computation
+        text: >-
+          לכן $R_n=1+\frac{n+1}{n}+\frac{(n+1)(2n+1)}{6n^2}$, ובמכנה משותף $R_n=\frac{(2n+1)(7n+1)}{6n^2}$.
+      - kind: computation
+        text: >-
+          (ב) $\frac{n+1}{n}\to1$ ו-$\frac{(n+1)(2n+1)}{6n^2}\to\frac26=\frac13$, ולכן $R_n\to1+1+\frac13=\frac73$. ובמשפט היסודי:
+          $\left.\frac{x^3}{3}\right|_1^2=\frac83-\frac13=\frac73$.
+      - kind: check
+        text: >-
+          (ג) $n=1$: מלבן אחד בגובה $f(2)=4$ וברוחב 1, $R_1=4$; והנוסחה: $\frac{3\cdot8}{6}=4$ ✓. $n=2$: $\frac12\left(f(1.5)+f(2)\right)=\frac12(2.25+4)=\frac{25}{8}$;
+          והנוסחה: $\frac{5\cdot15}{24}=\frac{25}{8}$ ✓. ו-$R_n>\frac73$, כמו שצריך לפונקציה עולה ✓.
+      - kind: result
+        text: >-
+          $R_n=\frac{(2n+1)(7n+1)}{6n^2}\xrightarrow[n\to\infty]{}\frac73=\int_1^2x^2\,dx$.
+
+  - id: W-8.1-09
+    level: exam
+    objectives: [OBJ-8.1-2, OBJ-8.1-3]
+    prompt: >-
+      במיכל יש 100 ליטר מים בזמן $t=0$. דרך צינור אחד זורמים מים בקצב $r(t)=20-4t$ ליטר לדקה, $0\le t\le10$ ($t$ בדקות):
+      כש-$r>0$ המים נכנסים, וכש-$r<0$ הם יוצאים.
+
+
+      (א) כמה מים יש במיכל ב-$t=10$?
+
+
+      (ב) מתי יש במיכל הכי הרבה מים, וכמה?
+
+
+      (ג) כמה מים במיכל ב-$t=8$? חשבו בעזרת אדיטיביות מהתוצאה של (ב).
+
+
+      (ד) כמה מים עברו בצינור בסך הכול, בשני הכיוונים, בין $t=0$ ל-$t=10$?
+    answer: >-
+      (א) 100 ליטר. (ב) ב-$t=5$, 150 ליטר. (ג) 132 ליטר. (ד) 100 ליטר.
+    solution:
+      - kind: idea
+        text: >-
+          הקצב הוא הנגזרת של כמות המים, ולכן השינוי בכמות הוא האינטגרל של הקצב, עם הסימן, כמו העתק. כמות המים
+          שעברה בצינור סופרת כניסה ויציאה בחיוב, כמו דרך: $\int|r|\,dt$.
+      - kind: computation
+        text: >-
+          (א) $\int_0^{10}(20-4t)\,dt=\left(20t-2t^2\right)\Big|_0^{10}=200-200=0$: הכמות חזרה ל-100 ליטר.
+      - kind: step
+        text: >-
+          (ב) $r>0$ עד $t=5$ והכמות עולה; אחר כך $r<0$ והיא יורדת. המקסימום ב-$t=5$: $100+\int_0^5(20-4t)\,dt=100+(100-50)=150$ ליטר.
+      - kind: computation
+        text: >-
+          (ג) $\int_0^8r\,dt=\int_0^5r\,dt+\int_5^8r\,dt$. $\int_5^8(20-4t)\,dt=(160-128)-(100-50)=-18$. לכן הכמות $150-18=132$ ליטר.
+      - kind: computation
+        text: >-
+          (ד) $\int_0^{10}|r|\,dt=\int_0^5r\,dt-\int_5^{10}r\,dt=50+50=100$ ליטר: 50 נכנסו ו-50 יצאו.
+      - kind: check
+        text: >-
+          (ג) ישירות: $100+\left(20\cdot8-2\cdot64\right)=100+32=132$ ✓. (ד) בגרף: הקצב הוא ישר, ושני המשולשים, מ-0 עד 5 ומ-5 עד 10,
+          עם בסיס 5 וגובה 20, בשטח 50 כל אחד ✓.
+      - kind: result
+        text: >-
+          (א) 100 ליטר; (ב) ב-$t=5$, 150 ליטר; (ג) 132 ליטר; (ד) 100 ליטר עברו בצינור.
+
+  - id: W-8.1-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-8.1-2, OBJ-8.1-3]
+    prompt: >-
+      $f$ ו-$g$ רציפות. לכל טענה קבעו אם היא נכונה, ונמקו: טענה נכונה בנימוק, טענה שגויה בדוגמה נגדית.
+
+
+      (א) אם $f(x)\le g(x)$ לכל $x\in[0,1]$, אז $\int_1^0f(x)\,dx\le\int_1^0g(x)\,dx$.
+
+
+      (ב) אם $a<b$ ו-$\int_a^bf(x)\,dx>0$, אז יש $x$ בקטע שבו $f(x)>0$.
+
+
+      (ג) $\int_0^2\bigl(f(x)+3\bigr)\,dx=\int_0^2f(x)\,dx+3$.
+
+
+      (ד) אם $0\le f(x)\le1$ לכל $x\in[0,1]$, אז $\int_0^1f(x)^2\,dx\le\int_0^1f(x)\,dx$.
+    answer: >-
+      (א) לא נכון. (ב) נכון. (ג) לא נכון. (ד) נכון.
+    solution:
+      - kind: idea
+        text: >-
+          לכל טענה שואלים איזו תכונה היא מפעילה, ואם התנאים שלה מתקיימים: ההשוואה דורשת גבולות בסדר עולה, והאינטגרל של
+          קבוע הוא קבוע כפול אורך הקטע.
+      - kind: step
+        text: >-
+          (א) לא נכון. ההשוואה נכונה כשהגבול התחתון קטן מהעליון; בסדר ההפוך הכיוון מתהפך, כי $\int_1^0=-\int_0^1$. דוגמה:
+          $f=0$, $g=1$: $\int_1^00\,dx=0$, אבל $\int_1^01\,dx=-1<0$.
+      - kind: step
+        text: >-
+          (ב) נכון. אילו $f(x)\le0$ בכל הקטע, ההשוואה עם הפונקציה 0 הייתה נותנת $\int_a^bf\le\int_a^b0=0$, בסתירה לנתון.
+      - kind: step
+        text: >-
+          (ג) לא נכון. בלינאריות $\int_0^2(f+3)\,dx=\int_0^2f\,dx+3\cdot2$. דוגמה: $f(x)=x$: באגף שמאל $2+6=8$, ובאגף ימין
+          $2+3=5$.
+      - kind: step
+        text: >-
+          (ד) נכון. כש-$0\le f\le1$, $f^2=f\cdot f\le f\cdot1=f$ בכל נקודה, ומהשוואה (עם $0<1$) $\int_0^1f^2\le\int_0^1f$.
+      - kind: check
+        text: >-
+          (ד) עם $f(x)=x$: $\int_0^1x^2\,dx=\frac13\le\frac12=\int_0^1x\,dx$ ✓. (ג) עם $f=0$: $6\ne3$ ✓.
+      - kind: result
+        text: >-
+          (א) לא נכון; (ב) נכון; (ג) לא נכון, האגף הימני צריך להיות $\int_0^2f\,dx+6$; (ד) נכון.
+
+challenge:
+  - id: W-8.1-c1
+    stars: 1
+    objectives: [OBJ-8.1-3]
+    prompt: >-
+      (א) הראו ש-$\sin t\ge\frac{2t}{\pi}$ לכל $t\in\left[0,\frac\pi2\right]$. (רמז: חקרו את
+      $h(t)=\sin t-\frac{2t}{\pi}$ בקטע.)
+
+
+      (ב) הסיקו, בלי לחשב את האינטגרל של סינוס, ש-$\int_0^{\pi/2}\sin t\,dt\ge\frac\pi4$.
+
+
+      (ג) מה הפירוש הגיאומטרי של (א) ושל (ב)? חשבו את האינטגרל והשוו.
+    answer: >-
+      (א) ל-$h$ אין מינימום בתוך הקטע, והיא אפס בשני הקצוות. (ב) $\int_0^{\pi/2}\frac{2t}{\pi}\,dt=\frac\pi4$. (ג) הקשת מעל המיתר;
+      $\int_0^{\pi/2}\sin t\,dt=1\ge\frac\pi4\approx0.785$.
+    solution:
+      - kind: idea
+        text: >-
+          כדי להשוות שני אינטגרלים משווים את הפונקציות בכל הקטע. את אי-השוויון בין הפונקציות מוכיחים בחקירה של ההפרש:
+          איפה הוא עולה, איפה יורד, ומה ערכו בקצוות.
+      - kind: computation
+        text: >-
+          (א) $h(0)=0$ ו-$h\left(\frac\pi2\right)=1-1=0$. $h'(t)=\cos t-\frac2\pi$. $\cos t$ יורדת ב-$\left[0,\frac\pi2\right]$ מ-1 ל-0,
+          ולכן $h'$ חיובית עד הנקודה $t_0$ שבה $\cos t_0=\frac2\pi$ (בערך $0.8807$), ושלילית אחריה.
+      - kind: step
+        text: >-
+          לכן $h$ עולה ב-$[0,t_0]$ ויורדת ב-$\left[t_0,\frac\pi2\right]$. בקטע הראשון $h(t)\ge h(0)=0$, ובשני
+          $h(t)\ge h\left(\frac\pi2\right)=0$. כלומר $h\ge0$ בכל הקטע: $\sin t\ge\frac{2t}{\pi}$.
+      - kind: computation
+        text: >-
+          (ב) מהשוואה: $\int_0^{\pi/2}\sin t\,dt\ge\int_0^{\pi/2}\frac{2t}{\pi}\,dt$. האגף הימני הוא שטח המשולש שקודקודיו
+          $(0,0)$, $\left(\frac\pi2,0\right)$, $\left(\frac\pi2,1\right)$: $\frac12\cdot\frac\pi2\cdot1=\frac\pi4$.
+      - kind: step
+        text: >-
+          (ג) $\frac{2t}{\pi}$ הוא הישר דרך $(0,0)$ ו-$\left(\frac\pi2,1\right)$: המיתר של הקשת. (א) אומר שהקשת מעל המיתר
+          שלה, ו-(ב) אומר שהשטח מתחת לקשת גדול משטח המשולש שמתחת למיתר.
+      - kind: check
+        text: >-
+          $\int_0^{\pi/2}\sin t\,dt=-\cos\frac\pi2+\cos0=1$, ובאמת $1\ge\frac\pi4\approx0.785$ ✓. גם בנקודה אחת: $\sin1\approx0.841\ge\frac2\pi\approx0.637$ ✓.
+      - kind: result
+        text: >-
+          $\sin t\ge\frac{2t}{\pi}$ ב-$\left[0,\frac\pi2\right]$, ולכן $\int_0^{\pi/2}\sin t\,dt\ge\frac\pi4$; הערך המדויק 1.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 1 (OpenStax)'
+      year: 2016
+      problem: 'Section 5.2 (The Definite Integral), exercise 108; the hint is proved as part (a), and part (c) added'
+      url: https://openstax.org/books/calculus-volume-1/pages/5-2-the-definite-integral
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-8.1-c2
+    stars: 1
+    objectives: [OBJ-8.1-1]
+    prompt: >-
+      $H_n=1+\frac12+\frac13+\dots+\frac1n$.
+
+
+      (א) הסתכלו על הסכום השמאלי של $\frac1x$ בקטע $[1,n+1]$, בקטעים ברוחב 1, והראו ש-$H_n>\ln(n+1)$.
+
+
+      (ב) בעזרת סכום ימני מתאים, הראו ש-$H_n<1+\ln n$ לכל $n\ge2$.
+
+
+      (ג) הסיקו ש-$H_n$ גדל בלי גבול כש-$n\to\infty$, ומצאו בין אילו שני מספרים נמצא $H_{1000}$.
+    answer: >-
+      (א) $H_n=L_n>\int_1^{n+1}\frac{dx}{x}=\ln(n+1)$. (ב) $H_n-1=R_{n-1}<\int_1^n\frac{dx}{x}=\ln n$. (ג) $\ln(n+1)\to\infty$;
+      $6.9088<H_{1000}<7.9078$.
+    solution:
+      - kind: idea
+        text: >-
+          $\frac1x$ יורדת, ולכן בקטע $[k,k+1]$ המלבן בגובה הקצה השמאלי, $\frac1k$, בולט מעל הגרף, והמלבן בגובה הקצה
+          הימני, $\frac{1}{k+1}$, מתחתיו. הסכום של המלבנים הוא בדיוק סכום של שברים מהצורה $\frac1k$.
+      - kind: computation
+        text: >-
+          (א) בחלוקה של $[1,n+1]$ ל-$n$ קטעים ברוחב 1, הקצוות השמאליים הם $1,2,\dots,n$, ולכן
+          $L_n=\left(1+\frac12+\dots+\frac1n\right)\cdot1=H_n$.
+      - kind: step
+        text: >-
+          בכל קטע $[k,k+1]$ הפונקציה $\frac1x$ קטנה מ-$\frac1k$ בכל נקודה חוץ מ-$x=k$, ולכן השטח מתחתיה קטן ממש מהמלבן.
+          מחברים: $H_n>\int_1^{n+1}\frac{dx}{x}=\ln(n+1)$.
+      - kind: computation
+        text: >-
+          (ב) בחלוקה של $[1,n]$ ל-$n-1$ קטעים ברוחב 1, הקצוות הימניים הם $2,3,\dots,n$, ולכן
+          $R_{n-1}=\frac12+\dots+\frac1n=H_n-1$.
+      - kind: step
+        text: >-
+          כאן כל מלבן מתחת לגרף, וגם כאן ממש: $H_n-1<\int_1^n\frac{dx}{x}=\ln n$, כלומר $H_n<1+\ln n$. (ב-$n=1$ אין קטעים,
+          ומתקיים שוויון: $H_1=1=1+\ln1$.)
+      - kind: step
+        text: >-
+          (ג) $\ln(n+1)$ גדל בלי גבול (שיעור 4.3), ו-$H_n$ גדול ממנו, ולכן גם $H_n$. ל-$n=1000$:
+          $\ln1001\approx6.9088<H_{1000}<1+\ln1000\approx7.9078$.
+      - kind: check
+        text: >-
+          $n=2$: $\ln3\approx1.0986<H_2=1.5<1+\ln2\approx1.6931$ ✓. ובחישוב ישיר $H_{1000}\approx7.4855$, בין שני החסמים ✓.
+      - kind: result
+        text: >-
+          $\ln(n+1)<H_n<1+\ln n$ לכל $n\ge2$; $H_n\to\infty$; $6.9088<H_{1000}<7.9078$.
+    source:
+      name: 'W. Briggs et al., Calculus: Early Transcendentals, 3rd edition (Pearson)'
+      year: 2019
+      problem: 'Problem 7.1.77 (Harmonic sum); the upper bound of part (b) added, the conclusion paraphrased'
+      url: https://www.pearson.com/channels/calculus/asset/bddf474b/harmonic-sum-in-chapter-10-we-will-encounter-the-harmonic-sum-1-12-13-1n-use-a-l
+      verified: '2026-11-27'
+      adapted: true

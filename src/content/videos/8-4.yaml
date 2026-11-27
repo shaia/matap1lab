@@ -1,0 +1,24 @@
+- id: v-8-4-mit-simpson-why
+  youtubeId: uc4xJsi99bk
+  title: Explanation of Simpson's rule | MIT 18.01SC Single Variable Calculus, Fall 2010
+  channel: MIT OpenCourseWare
+  lang: en
+  captions: []
+  start: 0
+  minutes: 15
+  why: >-
+    לפי הכותרת והתיאור: תרגול מוקלט של הקורס 18.01SC ב-MIT, בהנחיית כריסטין ברינר, שמסביר את כלל סימפסון. השוו לסעיף
+    "השטח מתחת לפרבולה אחת" ולמשקלים $1,4,1$.
+  verified: '2026-11-27'
+- id: v-8-4-mit-trap-simpson
+  youtubeId: l2SjUREZk0c
+  title: Using the Trapezoid and Simpson's rules | MIT 18.01SC Single Variable Calculus, Fall 2010
+  channel: MIT OpenCourseWare
+  lang: en
+  captions: []
+  start: 0
+  minutes: 8
+  why: >-
+    לפי הכותרת והתיאור: תרגול קצר של אותו קורס ובאותה הנחיה, שמפעיל את כלל הטרפז ואת כלל סימפסון. השוו למתכונים של
+    שני הכללים ולדוגמה 1.
+  verified: '2026-11-27'

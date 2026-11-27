@@ -1,0 +1,514 @@
+# Workbook of lesson 8.3 — improper integrals.
+# Objectives (src/course.ts):
+#   OBJ-8.3-1  compute an improper integral over an infinite interval and of an unbounded function
+#   OBJ-8.3-2  decide convergence by comparison with a power
+#   OBJ-8.3-3  the standard improper integrals of powers and of the exponential
+# Order of knowledge: chapters 1–7, 8.1–8.2 and this lesson; no L'Hôpital (limits from 4.3 growth rates, 4.6, or given).
+# Every number recomputed with sympy in screens/tools/lesson-8-3.py.
+lesson: '8.3'
+practice:
+  - id: W-8.3-01
+    level: basic
+    objectives: [OBJ-8.3-1, OBJ-8.3-3]
+    prompt: >-
+      חשבו, או קבעו שמתבדר.
+
+      (א) $\int_3^\infty\frac{dx}{(x-2)^2}$
+
+      (ב) $\int_1^\infty\frac{dx}{x^{1.01}}$
+    answer: >-
+      (א) 1. (ב) 100.
+    solution:
+      - kind: idea
+        text: >-
+          מחליפים את $\infty$ ב-$R$, מחשבים במשפט היסודי, ולוקחים גבול כש-$R\to\infty$. שני האינטגרנדים רציפים בכל
+          הקטע: ב-(א) המכנה מתאפס רק ב-$x=2$, שאינו בקטע.
+      - kind: computation
+        text: >-
+          (א) $\int(x-2)^{-2}\,dx=-\frac{1}{x-2}$, ולכן $\int_3^R\frac{dx}{(x-2)^2}=-\frac{1}{R-2}+\frac{1}{1}=1-\frac{1}{R-2}\to1$.
+      - kind: computation
+        text: >-
+          (ב) $p=1.01$: $\int_1^Rx^{-1.01}\,dx=\frac{R^{-0.01}-1}{-0.01}=100\left(1-R^{-0.01}\right)$. כש-$R\to\infty$,
+          $R^{-0.01}=\frac{1}{R^{0.01}}\to0$, והגבול 100.
+      - kind: step
+        text: >-
+          (ב) מראה כמה $p=1$ הוא גבול חד: מעט מעל 1 כבר מתכנס, אבל לאט מאוד. כדי ש-$R^{-0.01}$ יהיה חצי, צריך
+          $R=2^{100}\approx1.3\cdot10^{30}$.
+      - kind: check
+        text: >-
+          (א) בהצבה $u=x-2$ (גבולות חדשים: $u$ מ-1 עד $\infty$) מתקבל $\int_1^\infty\frac{du}{u^2}=\frac{1}{2-1}=1$ ✓. (ב) לפי
+          הכלל $\frac{1}{p-1}=\frac{1}{0.01}=100$ ✓.
+      - kind: result
+        text: >-
+          (א) $\int_3^\infty\frac{dx}{(x-2)^2}=1$; (ב) $\int_1^\infty\frac{dx}{x^{1.01}}=100$.
+
+  - id: W-8.3-02
+    level: basic
+    objectives: [OBJ-8.3-1]
+    prompt: >-
+      חשבו, או קבעו שמתבדר.
+
+      (א) $\int_1^{10}\frac{dx}{\sqrt{x-1}}$
+
+      (ב) $\int_0^1\frac{dx}{1-x}$
+    answer: >-
+      (א) 6. (ב) מתבדר.
+    solution:
+      - kind: idea
+        text: >-
+          בשניהם הקטע סופי והאינטגרנד אינו חסום בקצה: ב-(א) ליד $x=1$ (הקצה השמאלי), ב-(ב) ליד $x=1$ (הקצה הימני).
+          מתרחקים מהקצה הבעייתי ב-$\varepsilon$, מחשבים, ושולחים $\varepsilon\to0^+$.
+      - kind: computation
+        text: >-
+          (א) $\int(x-1)^{-1/2}\,dx=2\sqrt{x-1}$. לכן $\int_{1+\varepsilon}^{10}\frac{dx}{\sqrt{x-1}}=2\sqrt9-2\sqrt\varepsilon=6-2\sqrt\varepsilon\to6$.
+      - kind: step
+        text: >-
+          (ב) הבעיה בקצה הימני, ולכן מחשבים עד $1-\varepsilon$. קדומה: $\int\frac{dx}{1-x}=-\ln|1-x|$ (הצבה $u=1-x$,
+          $du=-dx$).
+      - kind: computation
+        text: >-
+          $\int_0^{1-\varepsilon}\frac{dx}{1-x}=-\ln\varepsilon+\ln1=-\ln\varepsilon$, שגדל בלי גבול כש-$\varepsilon\to0^+$:
+          מתבדר.
+      - kind: check
+        text: >-
+          לפי הכלל ליד נקודה בעייתית: (א) $\frac{1}{(x-1)^{1/2}}$, $p=\frac12<1$, מתכנס ✓; (ב) $\frac{1}{(1-x)^1}$, $p=1$,
+          מתבדר ✓.
+      - kind: result
+        text: >-
+          (א) $6$; (ב) מתבדר.
+
+  - id: W-8.3-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-8.3-3]
+    prompt: >-
+      בעזרת האינטגרלים הסטנדרטיים בלבד, קבעו לכל אחד אם הוא מתכנס, ואם כן, את ערכו.
+
+      (א) $\int_1^\infty x^{-4/3}\,dx$
+
+      (ב) $\int_0^1x^{-4/3}\,dx$
+
+      (ג) $\int_0^1x^{-1/3}\,dx$
+
+      (ד) $\int_1^\infty x^{-1/3}\,dx$
+
+      (ה) $\int_0^\infty e^{-x/10}\,dx$
+    answer: >-
+      (א) 3. (ב) מתבדר. (ג) $\frac32$. (ד) מתבדר. (ה) 10.
+    solution:
+      - kind: idea
+        text: >-
+          באינסוף $\int_1^\infty x^{-p}dx$ מתכנס בדיוק כש-$p>1$, לערך $\frac{1}{p-1}$; ליד 0, $\int_0^1x^{-p}dx$ בדיוק
+          כש-$p<1$, לערך $\frac{1}{1-p}$. ו-$\int_0^\infty e^{-ax}dx=\frac1a$.
+      - kind: computation
+        text: >-
+          (א) $p=\frac43>1$ באינסוף: $\frac{1}{4/3-1}=3$. (ב) אותה $p=\frac43$, אבל ליד 0 צריך $p<1$: מתבדר.
+      - kind: computation
+        text: >-
+          (ג) $p=\frac13<1$ ליד 0: $\frac{1}{1-1/3}=\frac32$. (ד) אותה $p=\frac13$ באינסוף, $p\le1$: מתבדר.
+      - kind: computation
+        text: >-
+          (ה) $a=\frac{1}{10}$, ולכן $\frac1a=10$. דעיכה איטית, שטח גדול.
+      - kind: step
+        text: >-
+          לכל חזקה, בדיוק אחד מ"ליד 0" ו"באינסוף" מתכנס (וב-$p=1$ אף אחד): (א)–(ב) ו-(ג)–(ד) מראים את שני הצדדים.
+      - kind: check
+        text: >-
+          (א) ישירות: $\int_1^Rx^{-4/3}dx=-3x^{-1/3}\Big|_1^R=3-3R^{-1/3}\to3$ ✓. (ג) $\int_\varepsilon^1x^{-1/3}dx=\frac32x^{2/3}\Big|_\varepsilon^1\to\frac32$ ✓.
+      - kind: result
+        text: >-
+          (א) 3; (ב) מתבדר; (ג) $\frac32$; (ד) מתבדר; (ה) 10.
+
+  - id: W-8.3-04
+    level: mid
+    objectives: [OBJ-8.3-1]
+    prompt: >-
+      חשבו את $\int_0^\infty\frac{dx}{(x+1)(x+3)}$.
+    answer: >-
+      $\frac12\ln3\approx0.549$
+    solution:
+      - kind: idea
+        text: >-
+          שברים חלקיים (שיעור 7.4), פונקציה קדומה, ואז גבול. את שני הלוגריתמים **מאחדים** ללוגריתם של מנה לפני שלוקחים
+          גבול: כל אחד לחוד שואף לאינסוף, ו"אינסוף פחות אינסוף" אינו חישוב.
+      - kind: computation
+        text: >-
+          $\frac{1}{(x+1)(x+3)}=\frac{A}{x+1}+\frac{B}{x+3}$. בכיסוי: $A=\frac{1}{-1+3}=\frac12$, $B=\frac{1}{-3+1}=-\frac12$.
+      - kind: computation
+        text: >-
+          קדומה: $\frac12\ln(x+1)-\frac12\ln(x+3)=\frac12\ln\frac{x+1}{x+3}$ (ב-$x\ge0$ הכול חיובי). לכן
+          $\int_0^R\frac{dx}{(x+1)(x+3)}=\frac12\ln\frac{R+1}{R+3}-\frac12\ln\frac13$.
+      - kind: step
+        text: >-
+          $\frac{R+1}{R+3}=\frac{1+1/R}{1+3/R}\to1$, ולכן $\ln\frac{R+1}{R+3}\to\ln1=0$ (הלוגריתם רציף). נשאר מינוס
+          $\frac12\ln\frac13$, כלומר $\frac12\ln3$.
+      - kind: check
+        text: >-
+          האינטגרנד בין $\frac{1}{(x+3)^2}$ ל-$\frac{1}{(x+1)^2}$, ו-$\int_0^\infty\frac{dx}{(x+3)^2}=\frac13$,
+          $\int_0^\infty\frac{dx}{(x+1)^2}=1$. ו-$\frac12\ln3\approx0.549$ ביניהם ✓.
+      - kind: result
+        text: >-
+          $\int_0^\infty\frac{dx}{(x+1)(x+3)}=\frac12\ln3\approx0.549$.
+
+  - id: W-8.3-05
+    level: mid
+    objectives: [OBJ-8.3-1]
+    prompt: >-
+      חשבו את $\int_0^\infty e^{-2x}\cos x\,dx$.
+    answer: >-
+      $\frac25$
+    solution:
+      - kind: idea
+        text: >-
+          אינטגרציה בחלקים פעמיים, שמחזירה את האינטגרל המקורי (שיעור 7.3), ואחר כך גבול. החסם $|\sin x|,|\cos x|\le1$
+          ו-$e^{-2R}\to0$ מאפסים את האיברים באינסוף (כלל הסנדוויץ׳ של 4.6).
+      - kind: computation
+        text: >-
+          נסמן $J=\int e^{-2x}\cos x\,dx$. בחלקים עם $u=e^{-2x}$, $dv=\cos x\,dx$: $J=e^{-2x}\sin x+2\int e^{-2x}\sin x\,dx$.
+      - kind: computation
+        text: >-
+          שוב בחלקים, $u=e^{-2x}$, $dv=\sin x\,dx$: $\int e^{-2x}\sin x\,dx=-e^{-2x}\cos x-2J$. לכן
+          $J=e^{-2x}\sin x-2e^{-2x}\cos x-4J$, כלומר $J=\frac{e^{-2x}(\sin x-2\cos x)}{5}+C$.
+      - kind: computation
+        text: >-
+          $\int_0^Re^{-2x}\cos x\,dx=\frac{e^{-2R}(\sin R-2\cos R)}{5}-\frac{1\cdot(0-2)}{5}$.
+      - kind: step
+        text: >-
+          $|\sin R-2\cos R|\le3$, ולכן האיבר הראשון כלוא בין $\pm\frac35e^{-2R}$, ששניהם שואפים ל-0. נשאר
+          $\frac25$.
+      - kind: check
+        text: >-
+          גזירה של הקדומה: $\left(\frac{e^{-2x}(\sin x-2\cos x)}{5}\right)'=\frac{e^{-2x}\left(-2\sin x+4\cos x+\cos x+2\sin x\right)}{5}=e^{-2x}\cos x$ ✓.
+          ובגודל: $|e^{-2x}\cos x|\le e^{-2x}$, ולכן $|J|\le\frac12$, ו-$\frac25$ בתחום ✓.
+      - kind: result
+        text: >-
+          $\int_0^\infty e^{-2x}\cos x\,dx=\frac25$.
+
+  - id: W-8.3-06
+    level: mid
+    qualitative: true
+    objectives: [OBJ-8.3-2]
+    prompt: >-
+      בלי לחשב, קבעו אם כל אינטגרל מתכנס. בכל אחד כתבו את החסם שבחרתם, ולמה הכיוון שלו מתאים.
+
+      (א) $\int_1^\infty\frac{1+\sin x}{x^2}\,dx$
+
+      (ב) $\int_1^\infty\frac{\sqrt x+1}{x}\,dx$
+
+      (ג) $\int_0^1\frac{dx}{\sqrt x+x^3}$
+    answer: >-
+      (א) מתכנס. (ב) מתבדר. (ג) מתכנס.
+    solution:
+      - kind: idea
+        text: >-
+          לכל אחד מנחשים קודם, לפי החזקה השולטת בקצה הבעייתי, ואז בוחרים כיוון: לחשד להתכנסות, חסם מלמעלה בפונקציה
+          מתכנסת; לחשד להתבדרות, חסם מלמטה בפונקציה מתבדרת. בכולם האינטגרנד אי-שלילי.
+      - kind: step
+        text: >-
+          (א) $0\le1+\sin x\le2$, ולכן $0\le\frac{1+\sin x}{x^2}\le\frac{2}{x^2}$. $\int_1^\infty\frac{2}{x^2}dx=2$ מתכנס, וחסם
+          **מלמעלה** במתכנס מוכיח התכנסות.
+      - kind: step
+        text: >-
+          (ב) באינסוף $\frac{\sqrt x+1}{x}$ כמו $\frac{\sqrt x}{x}=\frac{1}{\sqrt x}$, $p=\frac12$: נחשוד בהתבדרות.
+          $\frac{\sqrt x+1}{x}\ge\frac{\sqrt x}{x}=\frac{1}{\sqrt x}$, ו-$\int_1^\infty\frac{dx}{\sqrt x}$ מתבדר. חסם **מלמטה**
+          במתבדר: מתבדר.
+      - kind: step
+        text: >-
+          (ג) הבעיה ליד 0, ושם $x^3$ זניח לעומת $\sqrt x$: כמו $\frac{1}{\sqrt x}$, $p=\frac12<1$, נחשוד בהתכנסות.
+          $\sqrt x+x^3\ge\sqrt x$, ולכן $\frac{1}{\sqrt x+x^3}\le\frac{1}{\sqrt x}$, ו-$\int_0^1\frac{dx}{\sqrt x}=2$. חסם
+          מלמעלה במתכנס: מתכנס.
+      - kind: check
+        text: >-
+          מלכודת ב-(ב): החסם $\frac{\sqrt x+1}{x}\le\frac{2\sqrt x}{x}=\frac{2}{\sqrt x}$ נכון, אבל חסם מלמעלה במתבדר אינו
+          אומר דבר. ב-(א), $\frac{1+\sin x}{x^2}\ge0$ חשוב: בלי אי-שליליות המבחן לא חל.
+      - kind: result
+        text: >-
+          (א) מתכנס (ערכו לכל היותר 2); (ב) מתבדר; (ג) מתכנס (ערכו לכל היותר 2).
+
+  - id: W-8.3-07
+    level: mid
+    qualitative: true
+    objectives: [OBJ-8.3-1]
+    prompt: >-
+      (א) חשבו את $\int_{-\infty}^{\infty}\frac{dx}{x^2+2x+5}$.
+
+      (ב) הסבירו למה $\int_{-\infty}^{\infty}x^3e^{-x^4}\,dx=0$ נכון, ואילו $\int_{-\infty}^{\infty}x^3\,dx=0$ אינו נכון, אף ששני
+      האינטגרנדים אי-זוגיים.
+    answer: >-
+      (א) $\frac\pi2$. (ב) ב-$x^3e^{-x^4}$ כל חצי מתכנס ($\pm\frac14$), ולכן אפשר להשתמש בסימטריה; ב-$x^3$ כל חצי מתבדר,
+      ולכן האינטגרל מתבדר.
+    solution:
+      - kind: idea
+        text: >-
+          אינטגרל על כל הישר מפצלים לשני חצאים, וכל אחד צריך להתכנס בנפרד. ב-(א) השלמה לריבוע מביאה לשורת arctan.
+      - kind: computation
+        text: >-
+          (א) $x^2+2x+5=(x+1)^2+4$. מהטבלה (שיעור 7.4), $\int\frac{dx}{(x+1)^2+4}=\frac12\arctan\frac{x+1}{2}+C$.
+      - kind: computation
+        text: >-
+          מפצלים ב-$x=-1$: $\int_{-1}^R=\frac12\arctan\frac{R+1}{2}\to\frac12\cdot\frac\pi2=\frac\pi4$, ובאותו אופן
+          $\int_{-R}^{-1}=-\frac12\arctan\frac{-R+1}{2}\to\frac\pi4$. שני החצאים מתכנסים, והסכום $\frac\pi2$.
+      - kind: computation
+        text: >-
+          (ב) בהצבה $u=x^4$: $\int_0^Rx^3e^{-x^4}dx=\frac14\left(1-e^{-R^4}\right)\to\frac14$, ובאותו אופן
+          $\int_{-R}^0x^3e^{-x^4}dx\to-\frac14$. שני החצאים מתכנסים, והסכום 0.
+      - kind: step
+        text: >-
+          לעומת זאת $\int_0^Rx^3dx=\frac{R^4}{4}\to\infty$: החצי הימני מתבדר, ולכן $\int_{-\infty}^{\infty}x^3dx$ מתבדר.
+          העובדה ש-$\int_{-R}^Rx^3dx=0$ לכל $R$ אינה רלוונטית: ההגדרה דורשת ששני הקצוות ירוצו כל אחד לחוד.
+      - kind: check
+        text: >-
+          (א) גזירה: $\left(\frac12\arctan\frac{x+1}{2}\right)'=\frac12\cdot\frac{1/2}{1+\frac{(x+1)^2}{4}}=\frac{1}{(x+1)^2+4}$ ✓.
+          ובציור: $\frac{1}{(x+1)^2+4}=\frac14\cdot\frac{1}{1+\left(\frac{x+1}{2}\right)^2}$, כלומר הגרף של $\frac{1}{1+x^2}$
+          (ששטחו על כל הישר $\pi$) מוזז, מתוח פי 2 לרוחב ומכווץ פי 4 לגובה. השטח: $\pi\cdot\frac24=\frac\pi2$ ✓.
+      - kind: result
+        text: >-
+          (א) $\frac\pi2$. (ב) הסימטריה מאפסת רק אינטגרל ששני חצאיו מתכנסים: נכון ל-$x^3e^{-x^4}$, לא ל-$x^3$ (מתבדר).
+
+  - id: W-8.3-08
+    level: exam
+    objectives: [OBJ-8.3-2, OBJ-8.3-3]
+    prompt: >-
+      לאילו ערכים של $a>0$ מתכנס $\int_1^\infty\left(\sqrt{x^2+1}-x\right)^a\,dx$?
+    answer: >-
+      בדיוק כש-$a>1$.
+    solution:
+      - kind: given
+        text: >-
+          האינטגרנד חיובי ורציף ב-$[1,\infty)$ (כי $\sqrt{x^2+1}>x$); הבעיה היחידה באינסוף.
+      - kind: goal
+        text: >-
+          למצוא את כל $a>0$ שבהם האינטגרל מתכנס.
+      - kind: idea
+        text: >-
+          הפרש של שורשים, "אינסוף פחות אינסוף", כופלים בצמוד (שיעור 4.6), וזה מגלה כמו איזו חזקה הפונקציה מתנהגת.
+          אחר כך חוסמים משני הצדדים ומשווים לכלל של החזקות.
+      - kind: computation
+        text: >-
+          $\sqrt{x^2+1}-x=\frac{\left(\sqrt{x^2+1}-x\right)\left(\sqrt{x^2+1}+x\right)}{\sqrt{x^2+1}+x}=\frac{1}{\sqrt{x^2+1}+x}$.
+      - kind: step
+        text: >-
+          ל-$x\ge1$: $x\le\sqrt{x^2+1}\le\sqrt{2x^2}=\sqrt2x$, ולכן המכנה בין $2x$ ל-$(1+\sqrt2)x\le3x$. מכאן
+          $\frac{1}{3x}\le\sqrt{x^2+1}-x\le\frac{1}{2x}$.
+      - kind: step
+        text: >-
+          מעלים בחזקת $a>0$ (חזקה חיובית שומרת על סדר בין מספרים חיוביים): $\frac{1}{3^a}\cdot\frac{1}{x^a}\le\left(\sqrt{x^2+1}-x\right)^a\le\frac{1}{2^a}\cdot\frac{1}{x^a}$.
+      - kind: theorem
+        text: >-
+          $\int_1^\infty\frac{dx}{x^a}$ מתכנס בדיוק כש-$a>1$; כפל בקבוע חיובי אינו משנה זאת.
+      - kind: step
+        text: >-
+          אם $a>1$: החסם העליון מתכנס, ולפי מבחן ההשוואה גם האינטגרל. אם $0<a\le1$: החסם התחתון מתבדר, ולכן גם
+          האינטגרל.
+      - kind: check
+        text: >-
+          חישוב נומרי ל-$a=2$ (ראיה, לא הוכחה) נותן בערך $0.219$, בין $\frac19=0.111$ ל-$\frac14=0.25$ שנותנים החסמים
+          ✓. ול-$a=1$ האינטגרנד כמו $\frac{1}{2x}$, כמו $\frac1x$: מתבדר ✓.
+      - kind: result
+        text: >-
+          האינטגרל מתכנס בדיוק כש-$a>1$.
+
+  - id: W-8.3-09
+    level: exam
+    objectives: [OBJ-8.3-1]
+    prompt: >-
+      לירח מסה $M\approx7.35\cdot10^{22}$ ק״ג ורדיוס $R\approx1.737\cdot10^6$ מטר, ו-$G\approx6.674\cdot10^{-11}$ (ביחידות SI).
+
+      (א) חשבו את העבודה לכל קילוגרם שצריך להשקיע נגד כוח המשיכה של הירח כדי להרחיק גוף מפני השטח עד אינסוף.
+
+      (ב) מהי מהירות המילוט מהירח?
+
+      (ג) איזה חלק מהעבודה מ-(א) נדרש רק כדי להגיע למרחק $2R$ מהמרכז (גובה $R$ מעל פני השטח)?
+    answer: >-
+      (א) $\frac{GM}{R}\approx2.82\cdot10^6$ ג׳אול לקילוגרם. (ב) בערך $2.38$ קילומטרים בשנייה. (ג) חצי.
+    solution:
+      - kind: idea
+        text: >-
+          העבודה נגד כוח שמשתנה עם המרחק היא אינטגרל של הכוח, כאן עד אינסוף: אינטגרל לא אמיתי של $\frac{1}{r^2}$,
+          $p=2>1$, ולכן סופי. מהירות המילוט: אנרגיה קינטית שמספיקה בדיוק לעבודה הזו.
+      - kind: computation
+        text: >-
+          (א) לכל קילוגרם הכוח $\frac{GM}{r^2}$, ו-$\int_R^\rho\frac{GM}{r^2}dr=GM\left(\frac1R-\frac1\rho\right)\to\frac{GM}{R}$
+          כש-$\rho\to\infty$.
+      - kind: computation
+        text: >-
+          $\frac{GM}{R}=\frac{6.674\cdot10^{-11}\cdot7.35\cdot10^{22}}{1.737\cdot10^6}\approx2.82\cdot10^6$ ג׳אול לקילוגרם.
+      - kind: computation
+        text: >-
+          (ב) $\frac12v^2=\frac{GM}{R}$, ולכן $v=\sqrt{\frac{2GM}{R}}\approx\sqrt{5.65\cdot10^6}\approx2377$ מטר לשנייה, בערך
+          $2.38$ קילומטרים בשנייה.
+      - kind: computation
+        text: >-
+          (ג) עד $2R$: $GM\left(\frac1R-\frac{1}{2R}\right)=\frac{GM}{2R}$, חצי מהעבודה עד אינסוף.
+      - kind: step
+        text: >-
+          (ג) הוא התמונה של "הזנב מתכנס": חצי מכל העבודה נעשה בדרך הקצרה עד $2R$, ושאר הדרך, האינסופית, דורשת רק את
+          החצי השני. עד $10R$ כבר נעשו 90%.
+      - kind: check
+        text: >-
+          ממדים: $\frac{GM}{R}$ ביחידות של מטר בריבוע לשנייה בריבוע, כלומר ג׳אול לקילוגרם ✓. ובגודל: מהירות המילוט
+          תלויה ביחס $\frac{M}{R}$, לא במסה לבדה. לכדור הארץ $\frac{GM}{R_E}=gR_E\approx9.81\cdot6.371\cdot10^6\approx6.25\cdot10^7$,
+          בערך פי 22 מאשר לירח, ולכן מהירות המילוט ממנו, $11.2$ קילומטרים בשנייה, גדולה בערך פי $\sqrt{22}\approx4.7$ ✓.
+      - kind: result
+        text: >-
+          (א) $\frac{GM}{R}\approx2.82\cdot10^6$ ג׳אול לקילוגרם; (ב) $v_{\mathrm{esc}}\approx2.38$ קילומטרים בשנייה; (ג) חצי.
+
+  - id: W-8.3-10
+    level: exam
+    objectives: [OBJ-8.3-1, OBJ-8.3-2, OBJ-8.3-3]
+    prompt: >-
+      (א) הראו ש-$\int_0^\infty x^2e^{-x}\,dx$ מתכנס, בלי לחשב אותו.
+
+      (ב) חשבו אותו. (נתון: $x^ne^{-x}\to0$ כש-$x\to\infty$ לכל $n$, משיעור 4.3.)
+
+      (ג) הראו ש-$\int_0^\infty e^{-x^2}\,dx$ מתכנס, ומצאו לו חסם עליון, אף שאין ל-$e^{-x^2}$ פונקציה קדומה בנוסחה.
+    answer: >-
+      (א) ההשוואה $x^2e^{-x}\le\frac{1}{x^2}$ בזנב. (ב) 2. (ג) מתכנס, וערכו לכל היותר $1+e^{-1}\approx1.37$.
+    solution:
+      - kind: idea
+        text: >-
+          (א), (ג): מבחן ההשוואה; החסם צריך להתקיים רק בזנב, והחלק הסופי הוא אינטגרל רגיל. (ב): אינטגרציה בחלקים
+          פעמיים עד $R$, ואחר כך גבול.
+      - kind: step
+        text: >-
+          (א) האינטגרנד אי-שלילי ורציף. לפי 4.3, $x^4e^{-x}\to0$, ולכן קיים $X$ כך שמ-$X$ והלאה $x^4e^{-x}\le1$, כלומר
+          $x^2e^{-x}\le\frac{1}{x^2}$. $\int_X^\infty\frac{dx}{x^2}$ מתכנס, ו-$\int_0^Xx^2e^{-x}dx$ סופי. מתכנס.
+      - kind: computation
+        text: >-
+          (ב) בחלקים, $u=x^2$, $dv=e^{-x}dx$: $\int x^2e^{-x}dx=-x^2e^{-x}+2\int xe^{-x}dx$, ושוב:
+          $\int xe^{-x}dx=-xe^{-x}-e^{-x}$. לכן $\int x^2e^{-x}dx=-\left(x^2+2x+2\right)e^{-x}+C$.
+      - kind: computation
+        text: >-
+          $\int_0^Rx^2e^{-x}dx=-\left(R^2+2R+2\right)e^{-R}+2$. לפי הנתון, $R^2e^{-R}$, $Re^{-R}$ ו-$e^{-R}$ שואפים ל-0,
+          והגבול 2.
+      - kind: step
+        text: >-
+          (ג) מפצלים ב-1. $\int_0^1e^{-x^2}dx$ אינטגרל רגיל, ו-$e^{-x^2}\le1$ שם, ולכן הוא לכל היותר 1. ב-$[1,\infty)$,
+          $x^2\ge x$, ולכן $e^{-x^2}\le e^{-x}$, ו-$\int_1^\infty e^{-x}dx=e^{-1}$. לפי מבחן ההשוואה $\int_1^\infty e^{-x^2}dx$
+          מתכנס ואינו עולה על $e^{-1}$.
+      - kind: check
+        text: >-
+          (ב) גזירה: $\left(-\left(x^2+2x+2\right)e^{-x}\right)'=-(2x+2)e^{-x}+\left(x^2+2x+2\right)e^{-x}=x^2e^{-x}$ ✓.
+          (ג) בחישוב נומרי (ראיה, לא הוכחה) $\int_0^1e^{-x^2}dx\approx0.7468$ ו-$\int_1^\infty e^{-x^2}dx\approx0.1394$,
+          סך הכול בערך $0.886$, מתחת ל-$1.37$ ✓.
+      - kind: result
+        text: >-
+          (א) מתכנס; (ב) $\int_0^\infty x^2e^{-x}dx=2$; (ג) מתכנס, $\int_0^\infty e^{-x^2}dx\le1+e^{-1}\approx1.37$.
+
+challenge:
+  - id: W-8.3-c1
+    stars: 1
+    objectives: [OBJ-8.3-1, OBJ-8.3-3]
+    prompt: >-
+      **התמרת לפלס** של פונקציה $f$ רציפה ב-$[0,\infty)$ היא הפונקציה $F(s)=\int_0^\infty e^{-sx}f(x)\,dx$, המוגדרת לכל
+      $s$ שבו האינטגרל מתכנס. מצאו את $F(s)$ ואת התחום שלה עבור:
+
+      (א) $f(x)=e^{ax}$ ($a$ קבוע)
+
+      (ב) $f(x)=x$ (נתון: $xe^{-cx}\to0$ כש-$x\to\infty$ לכל $c>0$)
+
+      (ג) $f(x)=\cos2x$
+    answer: >-
+      (א) $\frac{1}{s-a}$, כש-$s>a$. (ב) $\frac{1}{s^2}$, כש-$s>0$. (ג) $\frac{s}{s^2+4}$, כש-$s>0$.
+    solution:
+      - kind: idea
+        text: >-
+          לכל $s$ זה אינטגרל לא אמיתי אחר: מחשבים עד $R$, לוקחים גבול, ובודקים לאילו $s$ הגבול קיים. הכול מסתכם
+          באקספוננט $e^{-cR}$, ששואף ל-0 כש-$c>0$ ולאינסוף כש-$c<0$.
+      - kind: computation
+        text: >-
+          (א) $e^{-sx}e^{ax}=e^{-(s-a)x}$. כש-$s\ne a$: $\int_0^Re^{-(s-a)x}dx=\frac{1-e^{-(s-a)R}}{s-a}$. כש-$s>a$ זה שואף
+          ל-$\frac{1}{s-a}$ (האינטגרל הסטנדרטי עם קצב $s-a$). כש-$s<a$, $e^{-(s-a)R}\to\infty$: מתבדר. וכש-$s=a$
+          האינטגרנד 1, ו-$\int_0^R1\,dx=R\to\infty$.
+      - kind: computation
+        text: >-
+          (ב) כש-$s>0$, בחלקים עם $u=x$, $dv=e^{-sx}dx$:
+          $\int_0^Rxe^{-sx}dx=-\frac{R}{s}e^{-sR}+\frac1s\int_0^Re^{-sx}dx=-\frac Rse^{-sR}+\frac{1-e^{-sR}}{s^2}\to\frac{1}{s^2}$.
+          כש-$s\le0$, $xe^{-sx}\ge x\ge1$ ל-$x\ge1$, ומבחן ההשוואה נותן התבדרות.
+      - kind: computation
+        text: >-
+          (ג) בחלקים פעמיים (כמו בשיעור 7.3) מתקבלת הקדומה $\frac{e^{-sx}\left(2\sin2x-s\cos2x\right)}{s^2+4}$. לכן
+          $\int_0^Re^{-sx}\cos2x\,dx=\frac{e^{-sR}\left(2\sin2R-s\cos2R\right)}{s^2+4}+\frac{s}{s^2+4}$.
+      - kind: step
+        text: >-
+          כש-$s>0$: $|2\sin2R-s\cos2R|\le2+|s|$, והאיבר הראשון כלוא בין $\pm\frac{(2+|s|)e^{-sR}}{s^2+4}$, ששואפים ל-0
+          (סנדוויץ׳). הגבול $\frac{s}{s^2+4}$.
+      - kind: step
+        text: >-
+          כש-$s=0$: $\int_0^R\cos2x\,dx=\frac{\sin2R}{2}$, שמתנודד ואינו מתקרב לשום מספר: מתבדר. כש-$s<0$: באותה נוסחה,
+          ב-$R=k\pi$ (עם $k$ שלם) האיבר הראשון הוא $\frac{-s\,e^{-sk\pi}}{s^2+4}$, שגדל בלי גבול, וב-$R=k\pi+\frac\pi2$ הוא
+          שלילי וגדל בגודלו: אין גבול, מתבדר.
+      - kind: check
+        text: >-
+          (א) עם $a=0$, $f=1$, מתקבל $\frac1s$, כמו $\int_0^\infty e^{-sx}dx$ ✓. (ג) גזירה של הקדומה:
+          $\left(e^{-sx}\left(2\sin2x-s\cos2x\right)\right)'=e^{-sx}\left(-2s\sin2x+s^2\cos2x+4\cos2x+2s\sin2x\right)=\left(s^2+4\right)e^{-sx}\cos2x$ ✓.
+          ובגודל: $\left|\frac{s}{s^2+4}\right|\le\frac1s$, כי $|e^{-sx}\cos2x|\le e^{-sx}$ ✓.
+      - kind: result
+        text: >-
+          (א) $\frac{1}{s-a}$ ל-$s>a$; (ב) $\frac{1}{s^2}$ ל-$s>0$; (ג) $\frac{s}{s^2+4}$ ל-$s>0$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.7 (Improper Integrals), exercises 401–404 (the Laplace transform); three of the four functions, with the domain argued'
+      url: https://openstax.org/books/calculus-volume-2/pages/3-7-improper-integrals
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-8.3-c2
+    stars: 2
+    objectives: [OBJ-8.3-1]
+    prompt: >-
+      חשבו את $\int_0^\infty\frac{\arctan(\pi x)-\arctan x}{x}\,dx$.
+
+      רמז: חשבו את האינטגרל מ-$\varepsilon$ עד $R$ כהפרש של שני אינטגרלים, ובראשון הציבו $u=\pi x$.
+    answer: >-
+      $\frac\pi2\ln\pi\approx1.798$
+    solution:
+      - kind: given
+        text: >-
+          האינטגרנד חיובי ב-$(0,\infty)$, כי $\arctan$ עולה ו-$\pi x>x$. ליד 0 הוא חסום: $\arctan t\le t$ ל-$t\ge0$, ולכן הוא
+          לכל היותר $\pi$. באינסוף הוא כמו $\frac{\pi/2-\pi/2}{x}$, וצריך זהירות.
+      - kind: goal
+        text: >-
+          לחשב את $\lim\int_\varepsilon^R$ כש-$\varepsilon\to0^+$ ו-$R\to\infty$, כל אחד לחוד.
+      - kind: idea
+        text: >-
+          לאף אחד משני האיברים אין פונקציה קדומה בנוסחה. אבל ההצבה $u=\pi x$ משאירה את $\frac{dx}{x}$ כמו שהוא
+          ($\frac{du}{u}$) ורק מזיזה את הגבולות. ההפרש בין שני האינטגרלים מצטמצם לשני קטעים קצרים, אחד ליד 0 ואחד ליד
+          אינסוף, ואת כל אחד מהם כולאים בסנדוויץ׳.
+      - kind: step
+        text: >-
+          ב-$[\varepsilon,R]$ שני האיברים רציפים, ולכן $\int_\varepsilon^R\frac{\arctan(\pi x)-\arctan x}{x}dx=\int_\varepsilon^R\frac{\arctan(\pi x)}{x}dx-\int_\varepsilon^R\frac{\arctan x}{x}dx$.
+          בראשון, $u=\pi x$ ו-$\frac{dx}{x}=\frac{du}{u}$, עם הגבולות $\pi\varepsilon$ ו-$\pi R$:
+          $\int_{\pi\varepsilon}^{\pi R}\frac{\arctan u}{u}du$.
+      - kind: step
+        text: >-
+          נסמן $h(u)=\frac{\arctan u}{u}$. כש-$\varepsilon<\pi\varepsilon<R<\pi R$, לפי האדיטיביות (שיעור 8.1):
+          $\int_{\pi\varepsilon}^{\pi R}h-\int_\varepsilon^Rh=\int_R^{\pi R}h-\int_\varepsilon^{\pi\varepsilon}h$.
+      - kind: computation
+        text: >-
+          הקטע ליד אינסוף: ב-$[R,\pi R]$, $\arctan R\le\arctan u<\frac\pi2$, ו-$\int_R^{\pi R}\frac{du}{u}=\ln\pi$. לכן
+          $\arctan R\cdot\ln\pi\le\int_R^{\pi R}h\le\frac\pi2\ln\pi$. כש-$R\to\infty$, $\arctan R\to\frac\pi2$, ולפי
+          הסנדוויץ׳ $\int_R^{\pi R}h\to\frac\pi2\ln\pi$.
+      - kind: computation
+        text: >-
+          הקטע ליד 0: $0\le\arctan u\le u$ ל-$u\ge0$ (הפונקציה $u-\arctan u$ מתאפסת ב-0 והנגזרת שלה
+          $1-\frac{1}{1+u^2}\ge0$). לכן $0\le h\le1$, ו-$0\le\int_\varepsilon^{\pi\varepsilon}h\le(\pi-1)\varepsilon\to0$.
+      - kind: step
+        text: >-
+          האינטגרל מ-$\varepsilon$ עד $R$ הוא פונקציה של $R$ פחות פונקציה של $\varepsilon$, ולכן שני הגבולות נלקחים כל אחד
+          לחוד, בדיוק כמו שההגדרה דורשת. הגבול $\frac\pi2\ln\pi-0$.
+      - kind: check
+        text: >-
+          חישוב נומרי (ראיה, לא הוכחה) של האינטגרל נותן בערך $1.79814$, ו-$\frac\pi2\ln\pi\approx1.5708\cdot1.1447\approx1.79814$
+          ✓. ואותו טיעון עם $b$ במקום $\pi$ נותן $\frac\pi2\ln b$, שמתאפס ב-$b=1$, כשהאינטגרנד אפס ✓.
+      - kind: result
+        text: >-
+          $\int_0^\infty\frac{\arctan(\pi x)-\arctan x}{x}\,dx=\frac\pi2\ln\pi\approx1.798$.
+    source:
+      name: 'The 43rd William Lowell Putnam Mathematical Competition (Kalva archive, solution page)'
+      year: 1982
+      problem: 'Problem A3'
+      url: https://prase.cz/kalva/putnam/psoln/psol823.html
+      verified: '2026-11-27'
+      adapted: true

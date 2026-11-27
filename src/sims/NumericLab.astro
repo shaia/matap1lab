@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 8.4 figure: <Spread figure={NumericLab} figureProps={{ mode, f, n, rule, both, … }}>.
+ * mode: rules, error. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the top of
+ * NumericLab.tsx; the preset ids are those of the registry NQ (error mode: ERROR_IDS) in src/math/quadrature.ts.
+ */
+import NumericLab, { type NumericLabProps } from './NumericLab';
+type Props = NumericLabProps;
+---
+
+<NumericLab client:visible {...Astro.props} />

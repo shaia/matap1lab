@@ -1,0 +1,25 @@
+- id: v-8-2-khan-definite-sub
+  youtubeId: paNqHnR3-aM
+  title: '_-substitution: definite integrals | AP Calculus AB | Khan Academy'
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 5
+  why: >-
+    לפי הכותרת והתקציר: תרגול של הצבה באינטגרל מסוים, על הדוגמה $\int_1^22x\left(x^2+1\right)^3dx$. התקציר מתאר את שתי
+    הדרכים של סעיף "המתכון": להחליף את הגבולות לערכים של $u$, או לחשב קדומה, לחזור ל-$x$ ולהציב את הגבולות המקוריים.
+    השוו את שתי הדרכים, וראו שהן נותנות אותו מספר.
+  verified: '2026-11-27'
+- id: v-8-2-khan-ftc-chain
+  youtubeId: dptES2sb1oc
+  title: 'Finding derivative with fundamental theorem of calculus: chain rule | AP®︎ Calculus | Khan Academy'
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 3
+  why: >-
+    לפי הכותרת והתקציר: נגזרת של $F(x)=\int_1^{\sin x}(2t-1)\,dt$, כשהגבול העליון הוא $\sin x$, בעזרת המשפט היסודי וכלל
+    השרשרת. השוו לסעיף "הגבול הוא פונקציה: כלל השרשרת": מציבים את הגבול כולו באינטגרנד וכופלים בנגזרת הפנימית.
+  verified: '2026-11-27'

@@ -4,18 +4,73 @@
   en: partition (of an interval)
   symbol: 'a=x_0<x_1<\dots<x_n=b'
   definition: >-
-    חלוקה של הקטע $[a,b]$ היא בחירה של נקודות $a=x_0<x_1<\dots<x_n=b$, שמפרקות אותו ל-$n$ קטעים. בחלוקה לקטעים
-    שווים, רוחב כל קטע הוא $\Delta x=\frac{b-a}{n}$ ו-$x_i=a+i\,\Delta x$.
+    חלוקה של הקטע $[a,b]$ היא בחירה של נקודות $a=x_0<x_1<\dots<x_n=b$, שמפרקות אותו ל-$n$ קטעים קטנים, קטעי החלוקה. בחלוקה
+    לקטעים שווים, רוחב כל קטע חלוקה הוא $\Delta x=\frac{b-a}{n}$ ו-$x_i=a+i\,\Delta x$.
   reject: []
   lesson: '8.1'
 - id: riemann-sum
   term: סכום רימן
   en: Riemann sum
-  symbol: '\sum_{i=1}^{n}f(c_i)\,\Delta x_i'
+  symbol: '\sum_{i=1}^{n}f(x_i^*)\,\Delta x'
   definition: >-
-    לחלוקה של $[a,b]$ ולנקודה $c_i$ בכל קטע: $\sum_i f(c_i)\,\Delta x_i$, סכום השטחים (עם סימן) של מלבנים בגובה
-    $f(c_i)$ וברוחב הקטע. בסכום **השמאלי** $c_i$ הוא הקצה השמאלי של הקטע, ב**ימני** הקצה הימני, ובסכום
+    לחלוקה של $[a,b]$ ולנקודת דגימה $x_i^*$ בכל קטע: $\sum_{i=1}^{n}f(x_i^*)\,\Delta x$, סכום השטחים (עם סימן) של מלבנים
+    בגובה $f(x_i^*)$ וברוחב הקטע. בסכום **השמאלי** $x_i^*$ הוא הקצה השמאלי של הקטע, ב**ימני** הקצה הימני, ובסכום
     **האמצעים** אמצע הקטע. הסכום הוא קירוב לאינטגרל המסוים.
   reject: [סכום רימאן]
   lesson: '8.1'
 # definite-integral and signed-area are first used in lesson 7.1: their entries are in 7-1.yaml.
+- id: left-sum
+  term: סכום שמאלי
+  en: left (endpoint) Riemann sum
+  symbol: 'L_n=\sum_{i=1}^{n}f(x_{i-1})\,\Delta x'
+  definition: >-
+    סכום רימן שבו נקודת הדגימה בכל קטע היא הקצה **השמאלי** שלו: $L_n=\sum_{i=1}^{n}f(x_{i-1})\,\Delta x$. הנקודה $x_0=a$
+    נכנסת, והנקודה $x_n=b$ לא.
+  reject: []
+  lesson: '8.1'
+- id: right-sum
+  term: סכום ימני
+  en: right (endpoint) Riemann sum
+  symbol: 'R_n=\sum_{i=1}^{n}f(x_i)\,\Delta x'
+  definition: >-
+    סכום רימן שבו נקודת הדגימה בכל קטע היא הקצה **הימני** שלו: $R_n=\sum_{i=1}^{n}f(x_i)\,\Delta x$. הנקודה $x_n=b$ נכנסת,
+    והנקודה $x_0=a$ לא.
+  reject: []
+  lesson: '8.1'
+- id: midpoint-sum
+  term: סכום האמצעים
+  en: midpoint Riemann sum
+  symbol: 'M_n=\sum_{i=1}^{n}f\left(\tfrac{x_{i-1}+x_i}{2}\right)\Delta x'
+  definition: >-
+    סכום רימן שבו נקודת הדגימה בכל קטע היא **אמצע** הקטע, $\frac{x_{i-1}+x_i}{2}$. בדרך כלל הוא קרוב לאינטגרל יותר
+    מהסכום השמאלי ומהימני עם אותו מספר קטעים.
+  reject: []
+  lesson: '8.1'
+- id: additivity
+  term: אדיטיביות בקטעים
+  en: additivity over intervals
+  symbol: '\int_a^cf\,dx+\int_c^bf\,dx=\int_a^bf\,dx'
+  definition: >-
+    השטח עם הסימן מ-$a$ עד $b$ הוא השטח עם הסימן מ-$a$ עד $c$, ועוד השטח עם הסימן מ-$c$ עד $b$:
+    $\int_a^cf\,dx+\int_c^bf\,dx=\int_a^bf\,dx$. בזכות ההגדרה $\int_c^bf\,dx=-\int_b^cf\,dx$ השוויון נכון לכל סדר של
+    $a$, $b$ ו-$c$, גם כש-$c$ מחוץ לקטע.
+  reject: []
+  lesson: '8.1'
+- id: displacement-1d
+  term: העתק
+  en: displacement (along a line)
+  symbol: 'x(t_2)-x(t_1)=\int_{t_1}^{t_2}v(t)\,dt'
+  definition: >-
+    לגוף שנע על ישר: המקום הסופי פחות המקום ההתחלתי, $x(t_2)-x(t_1)$. הוא האינטגרל של המהירות, $\int_{t_1}^{t_2}v\,dt$,
+    שטח עם סימן: תנועה אחורה ($v<0$) מקטינה אותו. העתק יכול להיות שלילי או 0 גם כשהגוף זז.
+  reject: []
+  lesson: '8.1'
+- id: path-distance
+  term: דרך
+  en: distance travelled
+  symbol: '\int_{t_1}^{t_2}|v(t)|\,dt'
+  definition: >-
+    כמה הגוף נע בסך הכול, קדימה ואחורה יחד: $\int_{t_1}^{t_2}|v(t)|\,dt$. היא תמיד לפחות הגודל של ההעתק, ושווה לו רק
+    כשהמהירות אינה מחליפה סימן.
+  reject: []
+  lesson: '8.1'

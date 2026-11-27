@@ -246,7 +246,7 @@ questions:
         answer: 0.74718042890951
         tolerance: 0.0002
         correctFeedback: >-
-          נכון. $\tfrac16\left(1+4e^{-1/4}+e^{-1}\right)\approx0.7472$: טעות של כ-$4\cdot10^{-4}$ בלבד, לעומת כ-$0.015$
+          נכון. $\tfrac16\left(1+4e^{-1/4}+e^{-1}\right)\approx0.7472$: שגיאה של כ-$4\cdot10^{-4}$ בלבד, לעומת כ-$0.015$
           בטרפז עם אותן שלוש נקודות.
         wrongFeedback: '$S_2=\frac h3\left(f_0+4f_1+f_2\right)$ עם $h=\frac12$.'
         commonWrong:
@@ -259,7 +259,7 @@ questions:
         type: open
         objectives: [OBJ-8.4-3]
         prompt: >-
-          בעזרת החסם $|E_T|\le\frac{(b-a)^3M_2}{12n^2}$, מצאו $n$ שמבטיח שכלל הטרפז יחשב את $F(1)$ בטעות של לכל
+          בעזרת החסם $|E_T|\le\frac{(b-a)^3M_2}{12n^2}$, מצאו $n$ שמבטיח שכלל הטרפז יחשב את $F(1)$ בשגיאה של לכל
           היותר $10^{-3}$. נמקו את הבחירה של $M_2$.
         solution:
           - kind: given
@@ -280,7 +280,7 @@ questions:
           - kind: check
             text: '$n=13$: $\frac{2}{12\cdot169}\approx9.86\cdot10^{-4}\le10^{-3}$; $n=12$: $\approx1.16\cdot10^{-3}$, לא מספיק.'
           - kind: result
-            text: '$n=13$ קטעים מבטיחים טעות של לכל היותר $10^{-3}$ (כל $n\ge13$ מתאים).'
+            text: '$n=13$ קטעים מבטיחים שגיאה של לכל היותר $10^{-3}$ (כל $n\ge13$ מתאים).'
         rubric:
           - text: 'חישוב נכון של $f''''(t)=(4t^2-2)e^{-t^2}$'
             weight: 3
