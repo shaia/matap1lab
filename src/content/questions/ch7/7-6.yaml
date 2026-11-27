@@ -65,6 +65,9 @@ questions:
       - expr: 'asin(x/2)'
         feedback: 'המשתנה בטבלה הוא $u=x-1$, לא $x$.'
         misconception: MC-c7-complete-square-shift
+      - expr: 'asin((x-1)/2)/2'
+        feedback: 'בשורה של $\arcsin$ אין $\frac1a$ מקדימה: היא בשורה של $\arctan$. בדקו בגזירה: הנגזרת של מה שכתבתם קטנה פי 2 מהנדרש.'
+        misconception: MC-c7-inverse-trig-scale
     hints: ['$3+2x-x^2=4-(x-1)^2$.']
 
   - id: Q-7.6-table-log
@@ -72,14 +75,16 @@ questions:
     objectives: [OBJ-7.6-1]
     level: mid
     prompt: >-
-      בטבלה: $\int\frac{du}{\sqrt{u^2+a^2}}=\ln\left(u+\sqrt{u^2+a^2}\right)+C$. חשבו $\int\frac{dx}{\sqrt{x^2+2x+5}}$.
+      בטבלה: $\int\frac{du}{\sqrt{u^2+k}}=\ln\left|u+\sqrt{u^2+k}\right|+C$ ($k\ne0$; כש-$k>0$ אין צורך בערך המוחלט). חשבו
+      $\int\frac{dx}{\sqrt{x^2+2x+5}}$.
     answer: 'log(x+1+sqrt(x^2+2*x+5))'
     answerTex: '$\ln\left(x+1+\sqrt{x^2+2x+5}\right)+C$'
     variables: [x]
     domain: [-2, 2]
     upToConstant: true
     correctFeedback: >-
-      נכון. $x^2+2x+5=(x+1)^2+4$, ועם $u=x+1$: $\ln\left(x+1+\sqrt{(x+1)^2+4}\right)$, ו-$(x+1)^2+4$ הוא שוב $x^2+2x+5$.
+      נכון. $x^2+2x+5=(x+1)^2+4$, ועם $u=x+1$ ו-$k=4$: $\ln\left(x+1+\sqrt{(x+1)^2+4}\right)$, ו-$(x+1)^2+4$ הוא שוב
+      $x^2+2x+5$.
     wrongFeedback: 'השלימו לריבוע והציבו $u=x+1$ בשני המקומות של הנוסחה.'
     commonWrong:
       - expr: 'log(x+sqrt(x^2+2*x+5))'
@@ -102,7 +107,6 @@ questions:
         misconception: MC-c7-parts-wrong-choice
       - text: 'שברים חלקיים'
         feedback: 'זו שיטה לפונקציות רציונליות. כאן יש הרכבה, $e^{x^2}$, עם הנגזרת הפנימית לידה.'
-        misconception: MC-c7-parts-wrong-choice
     hints: ['האם הנגזרת של הביטוי הפנימי מופיעה כגורם?']
 
   - id: Q-7.6-method-xlnx
@@ -116,10 +120,14 @@ questions:
         correct: true
         feedback: 'נכון. $\frac{x^2}{2}\ln x-\int\frac{x^2}{2}\cdot\frac1x\,dx=\frac{x^2}{2}\ln x-\frac{x^2}{4}+C$.'
       - text: 'בחלקים: גוזרים את $x$ ומבצעים אינטגרציה ל-$\ln x$'
-        feedback: 'אז צריך קודם $\int\ln x\,dx$, וגם אחר כך נשאר אינטגרל מסובך יותר. גוזרים את הלוגריתם.'
+        feedback: >-
+          זה עובד, אבל בדרך ארוכה: צריך קודם $\int\ln x\,dx=x\ln x-x$, ואחר כך האינטגרל המקורי חוזר באגף ימין, ופותרים
+          בשבילו כמו באינטגרל שחוזר על עצמו. גזירה של הלוגריתם מגיעה לתשובה בצעד אחד.
         misconception: MC-c7-parts-wrong-choice
       - text: 'הצבה $u=\ln x$'
-        feedback: '$du=\frac{dx}{x}$, אבל באינטגרל יש $x$ במונה ולא במכנה: נשאר $\int ue^{2u}\,du$, שוב בחלקים.'
+        feedback: >-
+          $du=\frac{dx}{x}$, אבל באינטגרל יש $x$ במונה ולא במכנה. עם $x=e^u$ ו-$dx=e^u\,du$, האינטגרל נעשה
+          $\int e^u\cdot u\cdot e^u\,du=\int ue^{2u}\,du$: שוב אינטגרציה בחלקים, רק במשתנה אחר.
         misconception: MC-c7-subst-no-du
     hints: ['איזה גורם נעשה פשוט בגזירה?']
 
@@ -145,7 +153,7 @@ questions:
     type: twotier
     objectives: [OBJ-7.6-3]
     qualitative: true
-    level: basic
+    level: mid
     prompt: 'נכון או לא: $\int xe^{2x}\,dx=\left(\frac x2-\frac14\right)e^{2x}+C$.'
     choices:
       - text: נכון
@@ -163,7 +171,7 @@ questions:
         feedback: 'צורה נכונה אינה מבטיחה מקדמים נכונים: $\left(\frac x2+\frac14\right)e^{2x}$ באותה צורה ושגוי. בודקים בגזירה.'
         misconception: MC-c7-unique-antiderivative-form
       - text: 'אי אפשר לדעת בלי לחשב את האינטגרל בעצמנו'
-        feedback: 'אפשר: מספיק לגזור את התשובה המוצעת. גזירה תמיד קלה יותר מאינטגרציה.'
+        feedback: 'אפשר: מספיק לגזור את התשובה המוצעת. גזירה תמיד אפשרית, בכללים של פרק 5, גם כשאינטגרציה קשה.'
         misconception: MC-c7-unique-antiderivative-form
     hints: ['גזרו את אגף ימין.']
 
@@ -171,7 +179,7 @@ questions:
     type: mc
     objectives: [OBJ-7.6-3]
     qualitative: true
-    level: mid
+    level: basic
     prompt: 'סטודנטית כתבה $\int\frac{dx}{2x+3}=\ln|2x+3|+C$. מה מגלה בדיקה בגזירה?'
     choices:
       - text: 'הנגזרת יוצאת $\frac{2}{2x+3}$, פי 2 מהנדרש; הנכון $\frac12\ln|2x+3|+C$'
@@ -264,7 +272,7 @@ questions:
       - expr: 'exp(x) + log(exp(x)+1)'
         feedback: '$\frac{u}{u+1}=1-\frac{1}{u+1}$: השארית בחילוק שלילית.'
         misconception: MC-c7-division-remainder-sign
-    hints: ['$u=e^x$.']
+    hints: ['$u=e^x$, ו-$e^{2x}=e^x\cdot e^x$: גורם אחד הוא $u$, והשני, עם $dx$, הוא $du$.']
 
   - id: Q-7.6-sqrtx-lnx
     type: expr
@@ -287,3 +295,62 @@ questions:
         feedback: '$\frac23\int x^{1/2}\,dx=\frac23\cdot\frac23x^{3/2}=\frac49x^{3/2}$: את $\frac23$ מקבלים פעמיים.'
         misconception: MC-c7-power-rule-multiply
     hints: ['$u=\ln x$, $v''=x^{1/2}$, $v=\frac23x^{3/2}$.']
+
+  - id: Q-7.6-no-formula
+    type: twotier
+    objectives: [OBJ-7.6-3, OBJ-7.6-2]
+    qualitative: true
+    level: mid
+    prompt: 'נכון או לא: $\int e^{-x^2}\,dx=-\frac{e^{-x^2}}{2x}+C$.'
+    choices:
+      - text: נכון
+        feedback: >-
+          גזרו את אגף ימין בכלל המנה: $\left(-\frac{e^{-x^2}}{2x}\right)'=e^{-x^2}+\frac{e^{-x^2}}{2x^2}$. יש איבר מיותר, ולכן
+          זו אינה קדומה של $e^{-x^2}$.
+        misconception: MC-c7-divide-by-inner-derivative
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. מחלקים בנגזרת הפנימית רק כשהיא קבוע. ל-$e^{-x^2}$ יש פונקציה קדומה, $\int_0^xe^{-t^2}\,dt$, אבל אין לה נוסחה
+          מהטבלה.
+    reasons:
+      - text: 'הנגזרת של אגף ימין היא $e^{-x^2}+\frac{e^{-x^2}}{2x^2}$, ולא $e^{-x^2}$'
+        correct: true
+        feedback: 'בדיוק. הבדיקה בגזירה מכריעה, בלי לדעת מה התשובה הנכונה.'
+      - text: 'ל-$e^{-x^2}$ אין פונקציה קדומה בכלל'
+        feedback: >-
+          יש: לפי המשפט היסודי, פונקציית השטח $A(x)=\int_0^xe^{-t^2}\,dt$ היא קדומה שלה. אין לה רק נוסחה אלמנטרית.
+        misconception: MC-c7-no-formula-no-antiderivative
+      - text: 'מחלקים בנגזרת הפנימית $-2x$, כמו ב-$\int e^{3x}\,dx=\frac{e^{3x}}{3}+C$'
+        feedback: >-
+          ב-$e^{3x}$ הנגזרת הפנימית היא המספר 3, וגזירה מחזירה אותו בדיוק. $-2x$ תלוי ב-$x$, וכשגוזרים את המנה נוצר איבר
+          נוסף.
+        misconception: MC-c7-divide-by-inner-derivative
+    hints: ['גזרו את $-\frac{e^{-x^2}}{2x}$ בכלל המנה, או כתבו אותה כ-$-\frac12x^{-1}e^{-x^2}$ וגזרו בכלל המכפלה.']
+
+  - id: Q-7.6-split-numerator
+    type: expr
+    objectives: [OBJ-7.6-1, OBJ-7.6-2]
+    level: exam
+    prompt: 'חשבו $\int\frac{3x-1}{x^2-2x+5}\,dx$.'
+    answer: '3/2*log(x^2-2*x+5) + atan((x-1)/2)'
+    answerTex: '$\frac32\ln\left(x^2-2x+5\right)+\arctan\frac{x-1}{2}+C$'
+    variables: [x]
+    domain: [-2, 3]
+    upToConstant: true
+    correctFeedback: >-
+      נכון. נגזרת המכנה $2x-2$, ו-$3x-1=\frac32(2x-2)+2$. החלק הראשון נותן $\frac32\ln\left(x^2-2x+5\right)$ (המכנה חיובי
+      תמיד), והשני, עם $x^2-2x+5=(x-1)^2+4$, נותן $2\cdot\frac12\arctan\frac{x-1}{2}$.
+    wrongFeedback: >-
+      כתבו את המונה כמספר כפול נגזרת המכנה, ועוד קבוע: $3x-1=\frac32(2x-2)+2$. את השארית מחשבים בהשלמה לריבוע.
+    commonWrong:
+      - expr: '3/2*log(x^2-2*x+5)'
+        feedback: 'חסרה השארית: $3x-1$ אינו $\frac32(2x-2)$, יש עוד $+2$, וממנה בא $\arctan$.'
+        misconception: MC-c7-numerator-not-derivative
+      - expr: '3/2*log(x^2-2*x+5) + 2*atan((x-1)/2)'
+        feedback: 'בשורה של $\arctan$ יש $\frac1a$ מקדימה: עם $a=2$, $2\cdot\frac12\arctan\frac{x-1}{2}=\arctan\frac{x-1}{2}$.'
+        misconception: MC-c7-inverse-trig-scale
+      - expr: '3*log(x^2-2*x+5) + atan((x-1)/2)'
+        feedback: 'נגזרת המכנה היא $2x-2$, ולכן המקדם הוא $\frac32$, לא 3. בדקו בגזירה.'
+        misconception: MC-c7-subst-forget-factor
+    hints: ['$3x-1=\frac32(2x-2)+2$, ו-$x^2-2x+5=(x-1)^2+4$.']

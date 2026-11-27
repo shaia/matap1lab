@@ -1,0 +1,47 @@
+/* MethodLab readout and controls. Colours come from tokens.css only. */
+
+.sim-readout .q bdi {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+}
+
+/* a slider wrapped for its data-control hook takes the full row, like a bare slider */
+.ml-ctl {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+.ml-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+}
+.ml-lab {
+  color: var(--ink-2);
+}
+.ml-select select {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  max-width: 100%;
+}
+.ml-select select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Hebrew sentences in the readout: the global .q is an LTR quantity; here a row is a Hebrew sentence with
+   LTR islands (<bdi dir="ltr">), so it runs right to left and may wrap. */
+.rtl-q {
+  display: contents;
+}
+.rtl-q .q {
+  direction: rtl;
+  white-space: normal;
+}

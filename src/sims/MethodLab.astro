@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 7.2 / 7.3 figure: <Spread figure={MethodLab} figureProps={{ mode, f, … }}>.
+ * mode: subst, parts. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the top of
+ * MethodLab.tsx; the preset ids are those of the registries SUB and PARTS in src/math/intmethods.ts.
+ */
+import MethodLab, { type MethodLabProps } from './MethodLab';
+type Props = MethodLabProps;
+---
+
+<MethodLab client:visible {...Astro.props} />

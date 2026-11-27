@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 7.1 and 7.6 figure: <Spread figure={AntiLab} figureProps={{ mode, f, … }}>.
+ * mode: family, area, check. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the top
+ * of AntiLab.tsx; the preset ids are those of the registries AD and CHK in src/math/antideriv.ts.
+ */
+import AntiLab, { type AntiLabProps } from './AntiLab';
+type Props = AntiLabProps;
+---
+
+<AntiLab client:visible {...Astro.props} />

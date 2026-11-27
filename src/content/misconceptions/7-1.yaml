@@ -5,7 +5,7 @@
     $\int2x\,dx=2$, או $\int2^x\,dx=2^x\ln2$: הפעולה על $f$ היא גזירה.
   truth: >-
     פונקציה קדומה $F$ מקיימת $F'=f$: מחפשים פונקציה **שנגזרתה** $f$. בודקים תמיד בגזירה של התשובה, לא של השאלה.
-  remedy: { lesson: '7.1', label: 'פונקציה קדומה: הפעולה ההפוכה לגזירה' }
+  remedy: { lesson: '7.1', anchor: antiderivative, label: 'פונקציה קדומה: הפעולה ההפוכה לגזירה' }
 
 - id: MC-c7-power-rule-multiply
   title: בכלל החזקה כופלים במעריך במקום לחלק בו
@@ -14,7 +14,7 @@
   truth: >-
     $\int x^a\,dx=\frac{x^{a+1}}{a+1}+C$ ל-$a\ne-1$: מעלים את המעריך באחד ו**מחלקים** במעריך החדש. בדיקה:
     $\left(\frac23x^{3/2}\right)'=x^{1/2}$.
-  remedy: { lesson: '7.1', label: 'כלל החזקה באינטגרציה' }
+  remedy: { lesson: '7.1', anchor: power-rule, label: 'כלל החזקה באינטגרציה' }
 
 - id: MC-c7-power-negative-exponent
   title: טועים בסימן כשמבצעים אינטגרציה לחזקה שלילית
@@ -22,7 +22,7 @@
     $\int x^{-3}\,dx=\frac{x^{-2}}{2}$, או $\int\frac{dx}{(x+1)^2}=\frac{1}{x+1}$.
   truth: >-
     המעריך החדש שלילי, וגם המכנה: $\int x^{-3}\,dx=\frac{x^{-2}}{-2}=-\frac{1}{2x^2}$, ו-$\int\frac{dx}{(x+1)^2}=-\frac{1}{x+1}$.
-  remedy: { lesson: '7.1', label: 'חזקות שליליות בטבלת האינטגרלים' }
+  remedy: { lesson: '7.1', anchor: power-rule, label: 'חזקות שליליות בטבלת האינטגרלים' }
 
 - id: MC-c7-trig-integral-sign
   title: טועים בסימן באינטגרל של סינוס או קוסינוס
@@ -31,16 +31,16 @@
   truth: >-
     $\int\sin x\,dx=-\cos x+C$ ו-$\int\cos x\,dx=\sin x+C$, כי $(\cos x)'=-\sin x$ ו-$(\sin x)'=\cos x$. בבדיקה בגזירה
     הסימן מתגלה מיד.
-  remedy: { lesson: '7.1', label: 'טבלת האינטגרלים: סינוס וקוסינוס' }
+  remedy: { lesson: '7.1', anchor: trig-rows, label: 'טבלת האינטגרלים: סינוס וקוסינוס' }
 
 - id: MC-c7-quotient-integrate-separately
   title: מבצעים אינטגרציה למונה ולמכנה בנפרד
   belief: >-
     $\int\frac{f}{g}\,dx=\frac{\int f\,dx}{\int g\,dx}$.
   truth: >-
-    אין כלל כזה. קודם מפשטים את המנה (חילוק, פירוק למחוברים), למשל $\frac{x^2+1}{x}=x+\frac1x$, ורק אז מבצעים אינטגרציה
-    לכל מחובר.
-  remedy: { lesson: '7.1', label: 'ליניאריות: מה מותר ומה לא' }
+    אין כלל כזה. קודם מפשטים את המנה (חילוק, פירוק לאיברים), למשל $\frac{x^2+1}{x}=x+\frac1x$, ורק אז מבצעים אינטגרציה
+    לכל איבר.
+  remedy: { lesson: '7.1', anchor: linearity, label: 'לינאריות: מה מותר ומה לא' }
 
 - id: MC-c7-power-rule-on-exponential
   title: מפעילים את כלל החזקה על פונקציה מעריכית
@@ -48,7 +48,7 @@
     $\int2^x\,dx=\frac{2^{x+1}}{x+1}$, כמו $\int x^2\,dx=\frac{x^3}{3}$.
   truth: >-
     כלל החזקה הוא לבסיס משתנה ומעריך קבוע. כשהמשתנה במעריך: $\int a^x\,dx=\frac{a^x}{\ln a}+C$, כי $\left(a^x\right)'=a^x\ln a$.
-  remedy: { lesson: '7.1', label: 'אינטגרל של פונקציה מעריכית' }
+  remedy: { lesson: '7.1', anchor: exp-rows, label: 'אינטגרל של פונקציה מעריכית' }
 
 - id: MC-c7-ftc-order
   title: מחסרים בסדר הפוך במשפט היסודי
@@ -56,7 +56,7 @@
     $\int_a^bf\,dx=F(a)-F(b)$, או שאינטגרל מסוים תמיד חיובי.
   truth: >-
     $\int_a^bf\,dx=F(b)-F(a)$: הגבול העליון פחות התחתון. זה שטח עם סימן: חלקים מתחת לציר נספרים בשלילה.
-  remedy: { lesson: '7.1', label: 'המשפט היסודי' }
+  remedy: { lesson: '7.1', anchor: ftc-recipe, label: 'המשפט היסודי' }
 
 - id: MC-c7-drop-constant
   title: שוכחים או מבטלים את קבוע האינטגרציה
@@ -65,7 +65,7 @@
   truth: >-
     הקדומות של $f$ בקטע הן $F+C$ לכל קבוע $C$. תנאי כמו $x(0)=5$ קובע את $C$; בלעדיו התשובה היא משפחה. באינטגרל מסוים
     הקבוע מתבטל.
-  remedy: { lesson: '7.1', label: 'למה פונקציה קדומה נקבעת עד כדי קבוע' }
+  remedy: { lesson: '7.1', anchor: plus-c, label: 'למה פונקציה קדומה נקבעת עד כדי קבוע' }
 
 - id: MC-c7-product-integral
   title: חושבים שאינטגרל של מכפלה הוא מכפלת האינטגרלים
@@ -74,7 +74,7 @@
   truth: >-
     האינטגרל לינארי אבל אינו כפלי: $\int x\cdot x\,dx=\frac{x^3}{3}\ne\frac{x^4}{4}$. למכפלה משתמשים בהצבה (שיעור 7.2) או
     באינטגרציה בחלקים (שיעור 7.3).
-  remedy: { lesson: '7.1', label: 'ליניאריות: מה מותר ומה לא' }
+  remedy: { lesson: '7.1', anchor: linearity, label: 'לינאריות: מה מותר ומה לא' }
 
 - id: MC-c7-constant-same-everywhere
   title: חושבים שקבוע האינטגרציה אחד גם בתחום שבנוי מכמה קטעים
@@ -83,12 +83,13 @@
   truth: >-
     "שתי קדומות נבדלות בקבוע" נכון בקטע. בתחום שבנוי מכמה קטעים הקבוע יכול להיות שונה בכל קטע: $\ln|x|+1$ ל-$x>0$
     ו-$\ln|x|+3$ ל-$x<0$ היא קדומה של $\frac1x$.
-  remedy: { lesson: '7.1', label: 'קדומה בתחום שאינו קטע' }
+  remedy: { lesson: '7.1', anchor: two-pieces, label: 'קדומה בתחום שאינו קטע' }
 
 - id: MC-c7-ftc-lower-zero
   title: מניחים שהקדומה מתאפסת בגבול התחתון
   belief: >-
     $\int_a^bf\,dx=F(b)$, בלי לחסר את $F(a)$, כאילו כל קדומה מתאפסת ב-$a$ (או ב-0).
   truth: >-
-    תמיד מחסרים: $\int_a^bf\,dx=F(b)-F(a)$. למשל $\int_0^1x^3e^x\,dx=F(1)-F(0)=-2e-(-6)$, ו-$F(0)=-6\ne0$.
-  remedy: { lesson: '7.1', label: 'המשפט היסודי: שני הגבולות' }
+    תמיד מחסרים: $\int_a^bf\,dx=F(b)-F(a)$. למשל ב-$\int_0^1\left(e^x+\frac{1}{1+x^2}\right)dx$ הקדומה היא $F(x)=e^x+\arctan x$, ו-$F(0)=1\ne0$: התשובה
+    $e+\frac\pi4-1$, ולא $e+\frac\pi4$.
+  remedy: { lesson: '7.1', anchor: ftc-recipe, label: 'המשפט היסודי: שני הגבולות' }

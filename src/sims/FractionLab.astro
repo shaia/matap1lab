@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 7.4 figure: <Spread figure={FractionLab} figureProps={{ mode, f, … }}>.
+ * mode: pieces, fit. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the top of
+ * FractionLab.tsx; the preset ids are those of the registry PF in src/math/partialfrac.ts.
+ */
+import FractionLab, { type FractionLabProps } from './FractionLab';
+type Props = FractionLabProps;
+---
+
+<FractionLab client:visible {...Astro.props} />

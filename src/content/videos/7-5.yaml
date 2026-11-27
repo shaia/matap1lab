@@ -1,0 +1,24 @@
+- id: v-7-5-trig-sub
+  youtubeId: RQY6tkbL87k
+  title: הצבה טריגונומטרית
+  channel: Physics Department Bar Ilan
+  lang: he
+  captions: []
+  start: 0
+  minutes: 11
+  why: >-
+    לפי הכותרת והתיאור: סרטון מהפרק "שיטות לפתרון אינטגרלים" בקורס מתמטיקה לפיזיקאים 1 של המחלקה לפיזיקה בבר-אילן
+    (עמנואל מאייר), על הצבה טריגונומטרית. השוו למתכון של השיעור ולמשולש: איזו צלע היא השורש, ואיך חוזרים מ-$\theta$ ל-$x$.
+  verified: '2026-11-27'
+- id: v-7-5-universal
+  youtubeId: rVkTnPCJvJQ
+  title: הצבה אוניברסלית והשלמה לריבוע
+  channel: Physics Department Bar Ilan
+  lang: he
+  captions: []
+  start: 0
+  minutes: 10
+  why: >-
+    לפי הכותרת והתיאור: מאותו פרק של אותו קורס בבר-אילן, ההצבה האוניברסלית (בשיעור: הצבת טנגנס חצי הזווית) והשלמה
+    לריבוע. השוו לשלוש הנוסחאות של השיעור, ובמיוחד לגורם 2 שב-$dx=\frac{2\,dt}{1+t^2}$.
+  verified: '2026-11-27'

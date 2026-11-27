@@ -1,0 +1,449 @@
+# Workbook of lesson 7.6 — tables and strategy.
+# Objectives (src/course.ts):
+#   OBJ-7.6-1  use a table of integrals after completing the square or a substitution that brings it to a table form
+#   OBJ-7.6-2  choose the right method for a given integral
+#   OBJ-7.6-3  check an answer by differentiation
+# Definite integrals are computed from an antiderivative in x and the fundamental theorem (no change of limits: 8.2).
+# Every number recomputed with sympy in screens/tools/lesson-7-6.py.
+lesson: '7.6'
+practice:
+  - id: W-7.6-01
+    level: basic
+    objectives: [OBJ-7.6-1]
+    prompt: >-
+      חשבו $\int\frac{dx}{x^2-8x+20}$, ובדקו בגזירה.
+    answer: >-
+      $\frac12\arctan\frac{x-4}{2}+C$
+    solution:
+      - kind: idea
+        text: >-
+          המכנה אינו מתפרק ($64-80<0$). משלימים לריבוע ומשתמשים בשורה $\int\frac{du}{u^2+a^2}=\frac1a\arctan\frac ua+C$.
+      - kind: computation
+        text: >-
+          חצי מהמקדם של $x$ הוא מינוס 4: $x^2-8x+20=(x-4)^2-16+20=(x-4)^2+4$.
+      - kind: step
+        text: >-
+          מציבים $u=x-4$, $du=dx$, ו-$a=2$: $\int\frac{du}{u^2+4}=\frac12\arctan\frac u2=\frac12\arctan\frac{x-4}{2}+C$.
+      - kind: check
+        text: >-
+          בכלל השרשרת: $\frac12\cdot\frac{1}{1+\frac{(x-4)^2}{4}}\cdot\frac12=\frac{1}{4+(x-4)^2}=\frac{1}{x^2-8x+20}$. ✓
+      - kind: result
+        text: >-
+          $\int\frac{dx}{x^2-8x+20}=\frac12\arctan\frac{x-4}{2}+C$.
+
+  - id: W-7.6-02
+    level: basic
+    qualitative: true
+    objectives: [OBJ-7.6-3]
+    prompt: >-
+      בלי לחשב את האינטגרלים, קבעו בגזירה אם כל שוויון נכון. אם לא, תקנו.
+
+      (א) $\int\ln x\,dx=x\ln x-x+C$
+
+      (ב) $\int x\cos x\,dx=x\sin x-\cos x+C$
+
+      (ג) $\int\frac{dx}{1+4x^2}=\arctan(2x)+C$
+    answer: >-
+      (א) נכון. (ב) לא נכון: $x\sin x+\cos x+C$. (ג) לא נכון: $\frac12\arctan(2x)+C$.
+    solution:
+      - kind: idea
+        text: >-
+          תשובה נכונה אם הנגזרת שלה היא האינטגרנד. גוזרים את אגף ימין, ומשווים.
+      - kind: computation
+        text: >-
+          (א) בכלל המכפלה: $(x\ln x)'=\ln x+x\cdot\frac1x=\ln x+1$, ופחות $(x)'=1$: נשאר $\ln x$. נכון.
+      - kind: computation
+        text: >-
+          (ב) $(x\sin x)'=\sin x+x\cos x$, ו-$(-\cos x)'=\sin x$. ביחד $2\sin x+x\cos x$, לא $x\cos x$: שגוי. האיבר המיותר
+          $2\sin x$ אומר שהסימן של $\cos x$ הפוך: $(x\sin x+\cos x)'=\sin x+x\cos x-\sin x=x\cos x$.
+      - kind: computation
+        text: >-
+          (ג) בכלל השרשרת: $(\arctan2x)'=\frac{2}{1+4x^2}$, פי 2 מהנדרש: שכחו לחלק בנגזרת הפנימית 2. הנכון
+          $\frac12\arctan(2x)+C$.
+      - kind: check
+        text: >-
+          (ג) גם מהטבלה: $1+4x^2=4\left(x^2+\frac14\right)$, ולכן $\frac14\int\frac{dx}{x^2+(1/2)^2}=\frac14\cdot2\arctan(2x)$,
+          שוב $\frac12\arctan(2x)$.
+      - kind: result
+        text: >-
+          (א) נכון. (ב) שגוי בסימן: $x\sin x+\cos x+C$. (ג) שגוי בקבוע: $\frac12\arctan(2x)+C$.
+
+  - id: W-7.6-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-7.6-2]
+    prompt: >-
+      לכל אינטגרל, כתבו מה הסימן שמכוון לשיטה ואיזו שיטה מתאימה, וחשבו.
+
+      (א) $\int xe^{3x}\,dx$
+
+      (ב) $\int\cos x\,e^{\sin x}\,dx$
+
+      (ג) $\int\sqrt{1-x^2}\,dx$
+    answer: >-
+      (א) בחלקים: $\left(\frac x3-\frac19\right)e^{3x}+C$. (ב) הצבה $u=\sin x$: $e^{\sin x}+C$. (ג) שורה בטבלה עם $a=1$:
+      $\frac x2\sqrt{1-x^2}+\frac12\arcsin x+C$.
+    solution:
+      - kind: idea
+        text: >-
+          עוברים על רשימת הבדיקה: פישוט, הצבה, ואז לפי סוג האינטגרנד.
+      - kind: step
+        text: >-
+          (א) מכפלה של פולינום ב-$e^{3x}$: בחלקים, גוזרים את $x$ ומחשבים את האינטגרל של $e^{3x}$ (שהוא $\frac{e^{3x}}{3}$):
+          $\frac{xe^{3x}}{3}-\int\frac{e^{3x}}{3}\,dx=\frac{xe^{3x}}{3}-\frac{e^{3x}}{9}+C$.
+      - kind: step
+        text: >-
+          (ב) ביטוי פנימי, $\sin x$, שהנגזרת שלו, $\cos x$, היא גורם: $u=\sin x$, $du=\cos x\,dx$, ו-$\int e^u\,du=e^{\sin x}+C$.
+      - kind: step
+        text: >-
+          (ג) שורש של $a^2-x^2$ עם $a=1$: השורה $\int\sqrt{a^2-x^2}\,dx=\frac x2\sqrt{a^2-x^2}+\frac{a^2}{2}\arcsin\frac xa+C$ (או
+          הצבה $x=\sin\theta$). התשובה $\frac x2\sqrt{1-x^2}+\frac12\arcsin x+C$.
+      - kind: check
+        text: >-
+          (א) $\left(\left(\frac x3-\frac19\right)e^{3x}\right)'=\frac13e^{3x}+3\left(\frac x3-\frac19\right)e^{3x}=xe^{3x}$. ✓ (ב)
+          $\left(e^{\sin x}\right)'=\cos x\,e^{\sin x}$. ✓ (ג) $\left(\frac x2\sqrt{1-x^2}\right)'=\frac12\sqrt{1-x^2}-\frac{x^2}{2\sqrt{1-x^2}}$
+          ו-$\left(\frac12\arcsin x\right)'=\frac{1}{2\sqrt{1-x^2}}$; על מכנה משותף המונה $(1-x^2)-x^2+1=2(1-x^2)$, והסכום
+          $\sqrt{1-x^2}$. ✓
+      - kind: result
+        text: >-
+          (א) בחלקים, $\left(\frac x3-\frac19\right)e^{3x}+C$. (ב) הצבה, $e^{\sin x}+C$. (ג) טבלה,
+          $\frac x2\sqrt{1-x^2}+\frac12\arcsin x+C$.
+
+  - id: W-7.6-04
+    level: mid
+    objectives: [OBJ-7.6-1]
+    prompt: >-
+      חשבו $\int\frac{dx}{\sqrt{6x-x^2}}$ בקטע $0<x<6$, ובדקו בגזירה.
+    answer: >-
+      $\arcsin\frac{x-3}{3}+C$
+    solution:
+      - kind: idea
+        text: >-
+          המקדם של $x^2$ שלילי: מוציאים מינוס, משלימים לריבוע, ומקבלים $a^2-u^2$, השורה של $\arcsin$.
+      - kind: computation
+        text: >-
+          $6x-x^2=-(x^2-6x)=-\left((x-3)^2-9\right)=9-(x-3)^2$.
+      - kind: step
+        text: >-
+          $u=x-3$, $du=dx$, $a=3$: $\int\frac{du}{\sqrt{9-u^2}}=\arcsin\frac u3+C=\arcsin\frac{x-3}{3}+C$. התחום: $|x-3|<3$,
+          כלומר $0<x<6$, בדיוק איפה ש-$6x-x^2>0$.
+      - kind: check
+        text: >-
+          $\left(\arcsin\frac{x-3}{3}\right)'=\frac{1/3}{\sqrt{1-\frac{(x-3)^2}{9}}}=\frac{1}{\sqrt{9-(x-3)^2}}=\frac{1}{\sqrt{6x-x^2}}$. ✓
+      - kind: result
+        text: >-
+          $\int\frac{dx}{\sqrt{6x-x^2}}=\arcsin\frac{x-3}{3}+C$, כש-$0<x<6$.
+
+  - id: W-7.6-05
+    level: mid
+    objectives: [OBJ-7.6-1, OBJ-7.6-2]
+    prompt: >-
+      חשבו $\int\frac{\cos x}{\sin^2x+6\sin x+10}\,dx$.
+    answer: >-
+      $\arctan(\sin x+3)+C$
+    solution:
+      - kind: idea
+        text: >-
+          שתי שיטות ברצף. קודם הצבה: $\sin x$ מופיע בכל מקום, והנגזרת שלו, $\cos x$, היא המונה. אחריה מקבלים מנה עם ביטוי
+          ריבועי אי-פריק, ומשלימים לריבוע כדי להגיע לשורה של $\arctan$.
+      - kind: step
+        text: >-
+          $u=\sin x$, $du=\cos x\,dx$: $\int\frac{du}{u^2+6u+10}$.
+      - kind: computation
+        text: >-
+          $u^2+6u+10=(u+3)^2+1$. עם $w=u+3$, $dw=du$: $\int\frac{dw}{w^2+1}=\arctan w=\arctan(u+3)$.
+      - kind: step
+        text: >-
+          חזרה ל-$x$: $\arctan(\sin x+3)+C$.
+      - kind: check
+        text: >-
+          בכלל השרשרת: $\left(\arctan(\sin x+3)\right)'=\frac{\cos x}{1+(\sin x+3)^2}=\frac{\cos x}{\sin^2x+6\sin x+10}$. ✓
+      - kind: result
+        text: >-
+          $\arctan(\sin x+3)+C$.
+
+  - id: W-7.6-06
+    level: mid
+    qualitative: true
+    objectives: [OBJ-7.6-3]
+    prompt: >-
+      שני סטודנטים חישבו $\int\frac{\ln(2x)}{x}\,dx$, כש-$x>0$. הראשון קיבל $\frac12\left(\ln2x\right)^2+C$. השני כתב
+      קודם $\ln(2x)=\ln2+\ln x$, וקיבל $\frac12\left(\ln x\right)^2+\ln2\cdot\ln x+C$.
+
+      (א) מי צודק? הכריעו בגזירה.
+
+      (ב) אם שניהם צודקים, מצאו את הקבוע שמפריד בין התשובות.
+    answer: >-
+      (א) שניהם. (ב) $\frac12\left(\ln2\right)^2\approx0.240$.
+    solution:
+      - kind: idea
+        text: >-
+          כל תשובה נבדקת לבד, בגזירה. שתי תשובות נכונות נבדלות בקבוע, ומוצאים אותו בחיסור.
+      - kind: computation
+        text: >-
+          (א) הראשון, בכלל השרשרת: $\left(\frac12\left(\ln2x\right)^2\right)'=\ln(2x)\cdot\frac{2}{2x}=\frac{\ln(2x)}{x}$. ✓ השני:
+          $\left(\frac12\left(\ln x\right)^2+\ln2\cdot\ln x\right)'=\frac{\ln x}{x}+\frac{\ln2}{x}=\frac{\ln2+\ln x}{x}=\frac{\ln(2x)}{x}$. ✓
+      - kind: computation
+        text: >-
+          (ב) $\frac12\left(\ln2x\right)^2=\frac12(\ln2+\ln x)^2=\frac12\left(\ln2\right)^2+\ln2\cdot\ln x+\frac12\left(\ln x\right)^2$.
+          מחסרים את התשובה השנייה ונשאר $\frac12\left(\ln2\right)^2$.
+      - kind: check
+        text: >-
+          בנקודה $x=1$: התשובה הראשונה $\frac12\left(\ln2\right)^2\approx0.240$, השנייה $0$. ההפרש $0.240$, כמו שמצאנו.
+      - kind: result
+        text: >-
+          שניהם צודקים; התשובות נבדלות בקבוע $\frac12\left(\ln2\right)^2\approx0.240$, שנבלע ב-$C$.
+
+  - id: W-7.6-07
+    level: mid
+    objectives: [OBJ-7.6-2]
+    prompt: >-
+      חשבו $\int x^3e^{x^2}\,dx$, ובדקו בגזירה.
+    answer: >-
+      $\frac12\left(x^2-1\right)e^{x^2}+C$
+    solution:
+      - kind: idea
+        text: >-
+          בחלקים עם $v'=e^{x^2}$ אי אפשר: אין קדומה אלמנטרית ל-$e^{x^2}$. אבל $x^3e^{x^2}=x^2\cdot xe^{x^2}$, ול-$xe^{x^2}$ יש
+          קדומה, $\frac12e^{x^2}$. אפשר לכן בחלקים עם $v'=xe^{x^2}$, או, כמו כאן, להציב קודם $u=x^2$ ($x\,dx$ הוא חצי $du$):
+          נשאר $ue^u$, ושם בחלקים עובדים.
+      - kind: step
+        text: >-
+          $u=x^2$, $du=2x\,dx$: $\int x^2e^{x^2}\cdot x\,dx=\frac12\int ue^u\,du$.
+      - kind: computation
+        text: >-
+          בחלקים, גוזרים את $u$ ומחשבים את האינטגרל של $e^u$: $\int ue^u\,du=ue^u-\int e^u\,du=(u-1)e^u$.
+      - kind: step
+        text: >-
+          חזרה ל-$x$: $\frac12\left(x^2-1\right)e^{x^2}+C$.
+      - kind: check
+        text: >-
+          בכלל המכפלה: $\left(\frac12(x^2-1)e^{x^2}\right)'=\frac12\cdot2x\,e^{x^2}+\frac12(x^2-1)\cdot2xe^{x^2}$, וזה
+          $xe^{x^2}+(x^3-x)e^{x^2}=x^3e^{x^2}$. ✓
+      - kind: result
+        text: >-
+          $\int x^3e^{x^2}\,dx=\frac12\left(x^2-1\right)e^{x^2}+C$.
+
+  - id: W-7.6-08
+    level: exam
+    objectives: [OBJ-7.6-1, OBJ-7.6-3]
+    prompt: >-
+      (א) חשבו $\int\sqrt{4x-x^2}\,dx$ בקטע $0<x<4$, בהשלמה לריבוע ובשורה של $\sqrt{a^2-u^2}$ בטבלה.
+
+      (ב) חשבו בעזרת (א) את $\int_0^4\sqrt{4x-x^2}\,dx$, והסבירו למה התוצאה מתאימה לשטח של חצי עיגול.
+    answer: >-
+      (א) $\frac{x-2}{2}\sqrt{4x-x^2}+2\arcsin\frac{x-2}{2}+C$. (ב) $2\pi$, השטח של חצי עיגול ברדיוס 2.
+    solution:
+      - kind: idea
+        text: >-
+          $4x-x^2$ הוא $a^2-u^2$ אחרי השלמה לריבוע, והשורה $\int\sqrt{a^2-u^2}\,du=\frac u2\sqrt{a^2-u^2}+\frac{a^2}{2}\arcsin\frac ua$
+          נותנת את הקדומה. הגרף של $y=\sqrt{4x-x^2}$ הוא חצי מעגל, ולכן יש בדיקה גאומטרית.
+      - kind: computation
+        text: >-
+          $4x-x^2=-(x^2-4x)=-\left((x-2)^2-4\right)=4-(x-2)^2$: $u=x-2$, $du=dx$, $a=2$.
+      - kind: step
+        text: >-
+          (א) $\int\sqrt{4-u^2}\,du=\frac u2\sqrt{4-u^2}+2\arcsin\frac u2$, ובחזרה ל-$x$, עם $\sqrt{4-u^2}=\sqrt{4x-x^2}$:
+          $F(x)=\frac{x-2}{2}\sqrt{4x-x^2}+2\arcsin\frac{x-2}{2}+C$.
+      - kind: check
+        text: >-
+          גוזרים. $\left(\frac{x-2}{2}\sqrt{4x-x^2}\right)'=\frac12\sqrt{4x-x^2}+\frac{x-2}{2}\cdot\frac{4-2x}{2\sqrt{4x-x^2}}$. באיבר השני
+          $4-2x=-2(x-2)$, ולכן הוא $-\frac{(x-2)^2}{2\sqrt{4x-x^2}}$; והראשון, על אותו מכנה, $\frac{4x-x^2}{2\sqrt{4x-x^2}}$. ביחד
+          $\frac{(4x-x^2)-(x-2)^2}{2\sqrt{4x-x^2}}$,
+          ו-$\left(2\arcsin\frac{x-2}{2}\right)'=\frac{1}{\sqrt{1-\frac{(x-2)^2}{4}}}=\frac{2}{\sqrt{4x-x^2}}=\frac{4}{2\sqrt{4x-x^2}}$.
+          בסכום המונה $4x-x^2-(x-2)^2+4=2(4x-x^2)$, כי $(x-2)^2=4-(4x-x^2)$; ולכן הסכום $\sqrt{4x-x^2}$. ✓
+      - kind: computation
+        text: >-
+          (ב) מהמשפט היסודי: $F(4)=0+2\arcsin1=\pi$ ו-$F(0)=0+2\arcsin(-1)=-\pi$, ולכן $\int_0^4\sqrt{4x-x^2}\,dx=2\pi$.
+      - kind: step
+        text: >-
+          $y=\sqrt{4x-x^2}$ פירושו $y\ge0$ ו-$y^2=4-(x-2)^2$, כלומר $(x-2)^2+y^2=4$: חצי המעגל העליון, מרכזו $(2,0)$ ורדיוסו 2.
+          השטח מתחתיו הוא חצי עיגול, $\frac{\pi\cdot2^2}{2}=2\pi$.
+      - kind: result
+        text: >-
+          (א) $\frac{x-2}{2}\sqrt{4x-x^2}+2\arcsin\frac{x-2}{2}+C$. (ב) $2\pi$: השטח של חצי עיגול ברדיוס 2.
+
+  - id: W-7.6-09
+    level: exam
+    objectives: [OBJ-7.6-2, OBJ-7.6-3]
+    prompt: >-
+      (א) חשבו $\int\frac{dx}{1+\sqrt x}$, כש-$x>0$.
+
+      (ב) בדקו את התשובה בגזירה.
+
+      (ג) חשבו $\int_0^4\frac{dx}{1+\sqrt x}$.
+    answer: >-
+      (א) $2\sqrt x-2\ln\left(1+\sqrt x\right)+C$. (ג) $4-2\ln3\approx1.803$.
+    solution:
+      - kind: idea
+        text: >-
+          השורש מפריע לכל שורה בטבלה. מציבים $u=\sqrt x$, כלומר $x=u^2$ ו-$dx=2u\,du$: האינטגרל נעשה מנה של פולינומים
+          ב-$u$, וממנה, אחרי חילוק, לוגריתם.
+      - kind: step
+        text: >-
+          $\int\frac{2u\,du}{1+u}$. מעלת המונה שווה למעלת המכנה, ולכן מחלקים: $\frac{2u}{1+u}=\frac{2(1+u)-2}{1+u}=2-\frac{2}{1+u}$.
+      - kind: computation
+        text: >-
+          $\int\left(2-\frac{2}{1+u}\right)du=2u-2\ln(1+u)$ ($1+u>0$). חזרה ל-$x$: $2\sqrt x-2\ln\left(1+\sqrt x\right)+C$.
+      - kind: check
+        text: >-
+          (ב) $\left(2\sqrt x\right)'=\frac{1}{\sqrt x}$ ו-$\left(2\ln(1+\sqrt x)\right)'=\frac{2}{1+\sqrt x}\cdot\frac{1}{2\sqrt x}=\frac{1}{\sqrt x(1+\sqrt x)}$.
+          ההפרש: $\frac{(1+\sqrt x)-1}{\sqrt x(1+\sqrt x)}=\frac{1}{1+\sqrt x}$. ✓
+      - kind: computation
+        text: >-
+          (ג) הקדומה רציפה גם ב-$x=0$, ולכן מהמשפט היסודי: $F(4)=4-2\ln3$ ו-$F(0)=0-2\ln1=0$. האינטגרל $4-2\ln3\approx1.803$.
+      - kind: check
+        text: >-
+          בערך: בקטע $[0,4]$ האינטגרנד יורד מ-1 ל-$\frac13$, ולכן האינטגרל בין $4\cdot\frac13\approx1.33$ ל-4. ✓
+      - kind: result
+        text: >-
+          (א) $2\sqrt x-2\ln\left(1+\sqrt x\right)+C$. (ג) $4-2\ln3\approx1.803$.
+
+  - id: W-7.6-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-7.6-2, OBJ-7.6-3]
+    prompt: >-
+      (א) לשלוש מהפונקציות הבאות יש פונקציה קדומה אלמנטרית: מצאו אותן, ובדקו בגזירה. על השלוש האחרות נאמר בשיעור שאין
+      להן קדומה אלמנטרית: אילו הן?
+
+      $xe^{-x^2}$, $e^{-x^2}$, $\frac{\ln x}{x}$, $\frac{\sin x}{x}$, $x\sin(x^2)$, $\frac{e^x}{x}$.
+
+      (ב) סטודנט כתב $\int e^{-x^2}\,dx=\frac{e^{-x^2}}{-2x}+C$. הראו בגזירה שזה שגוי, והסבירו מה ההבדל בינו לבין
+      $\int xe^{-x^2}\,dx$.
+
+      (ג) חשבו את ארבעת האיברים הראשונים של הטור של $\int_0^xe^{-t^2}\,dt$, וקרבו בעזרתם את $\int_0^{1/2}e^{-t^2}\,dt$.
+    answer: >-
+      (א) $-\frac12e^{-x^2}$, $\frac12\left(\ln x\right)^2$, $-\frac12\cos(x^2)$; בלי קדומה אלמנטרית: $e^{-x^2}$, $\frac{\sin x}{x}$, $\frac{e^x}{x}$.
+      (ג) $x-\frac{x^3}{3}+\frac{x^5}{10}-\frac{x^7}{42}$, ובחצי $\approx0.46127$.
+    solution:
+      - kind: idea
+        text: >-
+          קדומה אלמנטרית מוצאים כשיש ביטוי פנימי שהנגזרת שלו היא גורם. כשאין גורם כזה, ואין שיטה אחרת, הסיבה עשויה להיות
+          שאין נוסחה בכלל: הקדומה קיימת (פונקציית השטח), ומחשבים אותה בטור.
+      - kind: computation
+        text: >-
+          (א) $\int xe^{-x^2}\,dx$: $u=-x^2$, $du=-2x\,dx$, ולכן $-\frac12\int e^u\,du=-\frac12e^{-x^2}+C$. $\int\frac{\ln x}{x}\,dx$:
+          $u=\ln x$, $du=\frac{dx}{x}$, ולכן $\frac12\left(\ln x\right)^2+C$. $\int x\sin(x^2)\,dx$: $u=x^2$, ולכן $-\frac12\cos(x^2)+C$.
+      - kind: check
+        text: >-
+          $\left(-\frac12e^{-x^2}\right)'=xe^{-x^2}$; $\left(\frac12\left(\ln x\right)^2\right)'=\frac{\ln x}{x}$; $\left(-\frac12\cos x^2\right)'=x\sin x^2$. ✓
+          לשלוש האחרות, $e^{-x^2}$, $\frac{\sin x}{x}$ ו-$\frac{e^x}{x}$, אין גורם שהוא נגזרת פנימית, וממשפט של ליוביל (בלי הוכחה)
+          נובע שאין להן קדומה אלמנטרית.
+      - kind: computation
+        text: >-
+          (ב) $\frac{e^{-x^2}}{-2x}=-\frac12x^{-1}e^{-x^2}$, ובכלל המכפלה הנגזרת היא
+          $\frac12x^{-2}e^{-x^2}+e^{-x^2}=e^{-x^2}+\frac{e^{-x^2}}{2x^2}$: יש איבר מיותר. ב-$\int xe^{-x^2}\,dx$ הגורם $x$
+          "מכיל" את הנגזרת הפנימית, וההצבה מעלימה אותו; ב-$\int e^{-x^2}\,dx$ אין גורם כזה, והחלוקה ב-$-2x$ אינה חוקית,
+          כי $-2x$ אינו קבוע.
+      - kind: computation
+        text: >-
+          (ג) $e^{-t^2}=1-t^2+\frac{t^4}{2}-\frac{t^6}{6}+\dots$, ובאינטגרציה איבר אחרי איבר:
+          $\int_0^xe^{-t^2}\,dt=x-\frac{x^3}{3}+\frac{x^5}{10}-\frac{x^7}{42}+\dots$ ב-$x=\frac12$:
+          $\frac12-\frac{1}{24}+\frac{1}{320}-\frac{1}{5376}=\frac{4133}{8960}\approx0.461272$.
+      - kind: check
+        text: >-
+          זה טור מסוג לייבניץ, ולכן השגיאה קטנה מהאיבר הראשון שהושמט, $\frac{(1/2)^9}{216}\approx9\cdot10^{-6}$. הערך המדויק
+          $0.461281\ldots$, וההפרש $8.7\cdot10^{-6}$, קטן מהחסם $9.04\cdot10^{-6}$, כמו שהמשפט מבטיח.
+      - kind: result
+        text: >-
+          (א) $-\frac12e^{-x^2}$, $\frac12\left(\ln x\right)^2$, $-\frac12\cos(x^2)$ (ועוד $C$); $e^{-x^2}$, $\frac{\sin x}{x}$, $\frac{e^x}{x}$
+          בלי קדומה אלמנטרית. (ב) הנגזרת $e^{-x^2}+\frac{e^{-x^2}}{2x^2}$. (ג) $\approx0.46127$.
+
+challenge:
+  - id: W-7.6-c1
+    stars: 1
+    objectives: [OBJ-7.6-2, OBJ-7.6-3]
+    prompt: >-
+      חשבו $\int\frac{\arctan\left(x^3\right)}{x^4}\,dx$, כש-$x>0$, ובדקו את התשובה בגזירה. (רמז לשיטה: איזה גורם נעשה פשוט
+      יותר בגזירה? ומה עושים עם המנה שנשארת?)
+    answer: >-
+      $-\frac{\arctan\left(x^3\right)}{3x^3}+\ln x-\frac16\ln\left(1+x^6\right)+C$
+    solution:
+      - kind: idea
+        text: >-
+          שלוש שיטות ברצף. בחלקים: גוזרים את $\arctan(x^3)$, שנגזרתו מנה פשוטה, ומחשבים את האינטגרל של $x^{-4}$. נשארת מנה של
+          פולינומים; הצבה $w=x^6$ הופכת אותה למנה פשוטה, ושברים חלקיים מסיימים.
+      - kind: computation
+        text: >-
+          גוזרים $\arctan(x^3)$: הנגזרת $\frac{3x^2}{1+x^6}$. אינטגרציה ל-$x^{-4}$: $-\frac{1}{3x^3}$. לכן
+          $\int\frac{\arctan(x^3)}{x^4}\,dx=-\frac{\arctan(x^3)}{3x^3}+\int\frac{1}{3x^3}\cdot\frac{3x^2}{1+x^6}\,dx=-\frac{\arctan(x^3)}{3x^3}+\int\frac{dx}{x\left(1+x^6\right)}$.
+      - kind: step
+        text: >-
+          באינטגרל שנשאר כופלים מונה ומכנה ב-$x^5$, כדי ליצור את הנגזרת של $x^6$: $\int\frac{x^5\,dx}{x^6\left(1+x^6\right)}$. עם
+          $w=x^6$, $dw=6x^5\,dx$: $\frac16\int\frac{dw}{w(1+w)}$.
+      - kind: computation
+        text: >-
+          $\frac{1}{w(1+w)}=\frac1w-\frac{1}{1+w}$ (בכיסוי), ולכן $\frac16\left(\ln w-\ln(1+w)\right)=\ln x-\frac16\ln\left(1+x^6\right)$,
+          כי $\frac16\ln x^6=\ln x$ כש-$x>0$.
+      - kind: check
+        text: >-
+          גוזרים. $\left(-\frac{\arctan(x^3)}{3x^3}\right)'=\frac{\arctan(x^3)}{x^4}-\frac{1}{3x^3}\cdot\frac{3x^2}{1+x^6}=\frac{\arctan(x^3)}{x^4}-\frac{1}{x(1+x^6)}$,
+          ו-$\left(\ln x-\frac16\ln(1+x^6)\right)'=\frac1x-\frac{x^5}{1+x^6}=\frac{1+x^6-x^6}{x(1+x^6)}=\frac{1}{x(1+x^6)}$. בסכום נשאר
+          $\frac{\arctan(x^3)}{x^4}$. ✓ (זו גם התשובה שבספר.)
+      - kind: result
+        text: >-
+          $\int\frac{\arctan\left(x^3\right)}{x^4}\,dx=-\frac{\arctan\left(x^3\right)}{3x^3}+\ln x-\frac16\ln\left(1+x^6\right)+C$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.5 (Other Strategies for Integration), exercise 283'
+      url: https://openstax.org/books/calculus-volume-2/pages/3-5-other-strategies-for-integration
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-7.6-c2
+    stars: 1
+    objectives: [OBJ-7.6-1, OBJ-7.6-2, OBJ-7.6-3]
+    prompt: >-
+      חשבו $\int\frac{dx}{x^4+4}$. (רמז: $x^4+4=\left(x^2+2\right)^2-4x^2$, הפרש ריבועים.) אחר כך חשבו
+      $\int_{-1}^{1}\frac{dx}{x^4+4}$, ובדקו שהתוצאה סבירה.
+    answer: >-
+      $\frac{1}{16}\ln\frac{x^2+2x+2}{x^2-2x+2}+\frac18\left(\arctan(x+1)+\arctan(x-1)\right)+C$; האינטגרל המסוים
+      $\frac18\ln5+\frac14\arctan2\approx0.478$.
+    solution:
+      - kind: idea
+        text: >-
+          מנה של פולינומים, אבל המכנה לא נראה מתפרק: אין לו שורשים ממשיים. הוא מתפרק בכל זאת לשני גורמים ריבועיים
+          אי-פריקים, ואחרי שברים חלקיים כל גורם מטופל כמו בשיעור: פיצול המונה לנגזרת המכנה ועוד קבוע, והשלמה לריבוע עד
+          השורה של $\arctan$.
+      - kind: computation
+        text: >-
+          $x^4+4=\left(x^2+2\right)^2-(2x)^2=\left(x^2+2x+2\right)\left(x^2-2x+2\right)$. לשני הגורמים דיסקרימיננטה $4-8<0$:
+          אי-פריקים, וחיוביים תמיד.
+      - kind: step
+        text: >-
+          $\frac{1}{x^4+4}=\frac{Ax+B}{x^2+2x+2}+\frac{Cx+D}{x^2-2x+2}$. הפונקציה זוגית, והחלפת $x$ ב-$-x$ מחליפה את שני
+          הגורמים זה בזה, ולכן $C=-A$ ו-$D=B$. כופלים במכנה: המונה הוא $(Ax+B)(x^2-2x+2)+(-Ax+B)(x^2+2x+2)$, ואחרי פתיחת סוגריים הוא $(2B-4A)x^2+4B$: האיברים
+          עם $x^3$ ועם $x$ מתבטלים. משווים ל-1: $4B=1$ ו-$2B-4A=0$, כלומר $B=\frac14$, $A=\frac18$.
+      - kind: computation
+        text: >-
+          החלק הראשון: $\frac{\frac x8+\frac14}{x^2+2x+2}=\frac{1}{16}\cdot\frac{2x+2}{x^2+2x+2}+\frac18\cdot\frac{1}{(x+1)^2+1}$,
+          ואינטגרל שלו $\frac{1}{16}\ln\left(x^2+2x+2\right)+\frac18\arctan(x+1)$. החלק השני, באותה דרך:
+          $\frac{-\frac x8+\frac14}{x^2-2x+2}=-\frac{1}{16}\cdot\frac{2x-2}{x^2-2x+2}+\frac18\cdot\frac{1}{(x-1)^2+1}$, ואינטגרל שלו
+          $-\frac{1}{16}\ln\left(x^2-2x+2\right)+\frac18\arctan(x-1)$.
+      - kind: step
+        text: >-
+          ביחד: $F(x)=\frac{1}{16}\ln\frac{x^2+2x+2}{x^2-2x+2}+\frac18\left(\arctan(x+1)+\arctan(x-1)\right)+C$.
+      - kind: check
+        text: >-
+          גוזרים: $F'(x)=\frac{1}{16}\left(\frac{2x+2}{x^2+2x+2}-\frac{2x-2}{x^2-2x+2}\right)+\frac18\left(\frac{1}{x^2+2x+2}+\frac{1}{x^2-2x+2}\right)$.
+          על מכנה משותף $x^4+4$, המונה של הסוגריים הראשונים הוא $(2x+2)(x^2-2x+2)-(2x-2)(x^2+2x+2)=-4x^2+8$, ושל השניים
+          $2x^2+4$. לכן $F'(x)=\frac{(-4x^2+8)+2(2x^2+4)}{16\left(x^4+4\right)}=\frac{16}{16\left(x^4+4\right)}=\frac{1}{x^4+4}$. ✓
+      - kind: computation
+        text: >-
+          מהמשפט היסודי, עם $\arctan0=0$ ו-$\arctan(-2)=-\arctan2$: $F(1)=\frac{1}{16}\ln5+\frac18\arctan2$ ו-$F(-1)=\frac{1}{16}\ln\frac15-\frac18\arctan2$.
+          ההפרש $\frac18\ln5+\frac14\arctan2\approx0.2012+0.2768=0.478$.
+      - kind: check
+        text: >-
+          בקטע $[-1,1]$ האינטגרנד בין $\frac15$ (בקצוות) ל-$\frac14$ (ב-0), והאורך 2, ולכן האינטגרל בין $0.4$ ל-$0.5$. ✓
+      - kind: result
+        text: >-
+          $\int\frac{dx}{x^4+4}=\frac{1}{16}\ln\frac{x^2+2x+2}{x^2-2x+2}+\frac18\left(\arctan(x+1)+\arctan(x-1)\right)+C$, ו-$\int_{-1}^{1}\frac{dx}{x^4+4}=\frac18\ln5+\frac14\arctan2\approx0.478$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Chapter 3 Review Exercises, exercise 421'
+      url: https://openstax.org/books/calculus-volume-2/pages/3-review-exercises
+      verified: '2026-11-27'
+      adapted: true

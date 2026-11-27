@@ -1,0 +1,495 @@
+# Workbook of lesson 7.4 — partial fractions.
+# Objectives (src/course.ts):
+#   OBJ-7.4-1  decompose a rational function into partial fractions, with repeated and quadratic factors
+#   OBJ-7.4-2  integrate a rational function after polynomial division and decomposition
+#   OBJ-7.4-3  integrals that give a logarithm and arctan
+# Coefficients are A, B, D, E (C is the constant of integration). Changing the limits under a substitution is lesson
+# 8.2: definite integrals here go through an antiderivative in x.
+# Every number recomputed with sympy in screens/tools/lesson-7-4.py.
+lesson: '7.4'
+practice:
+  - id: W-7.4-01
+    level: basic
+    objectives: [OBJ-7.4-1, OBJ-7.4-2]
+    prompt: >-
+      פרקו את $\frac{5}{(x-2)(x+3)}$ לשברים חלקיים בשיטת הכיסוי, וחשבו $\int\frac{5\,dx}{(x-2)(x+3)}$.
+    answer: >-
+      $\frac{1}{x-2}-\frac{1}{x+3}$, והאינטגרל $\ln|x-2|-\ln|x+3|+C=\ln\left|\frac{x-2}{x+3}\right|+C$.
+    solution:
+      - kind: idea
+        text: >-
+          שני גורמים לינאריים שונים: לכל אחד שבר עם מונה קבוע. את כל מקדם נותן הכיסוי: מכסים את הגורם ומציבים את השורש
+          שלו בכל מה שנשאר.
+      - kind: computation
+        text: >-
+          $\frac{5}{(x-2)(x+3)}=\frac{A}{x-2}+\frac{B}{x+3}$. כיסוי של $x-2$ והצבת 2: $A=\frac{5}{2+3}=1$. כיסוי של $x+3$
+          והצבת מינוס 3: $B=\frac{5}{-3-2}$, כלומר $B=-1$.
+      - kind: computation
+        text: >-
+          כל שבר נותן לוגריתם: $\int\frac{dx}{x-2}-\int\frac{dx}{x+3}=\ln|x-2|-\ln|x+3|+C$.
+      - kind: check
+        text: >-
+          חיבור שברים: $\frac{1}{x-2}-\frac{1}{x+3}=\frac{(x+3)-(x-2)}{(x-2)(x+3)}=\frac{5}{(x-2)(x+3)}$. ✓
+      - kind: result
+        text: >-
+          $\frac{5}{(x-2)(x+3)}=\frac{1}{x-2}-\frac{1}{x+3}$, ו-$\int\frac{5\,dx}{(x-2)(x+3)}=\ln\left|\frac{x-2}{x+3}\right|+C$.
+
+  - id: W-7.4-02
+    level: basic
+    objectives: [OBJ-7.4-3]
+    prompt: >-
+      חשבו:
+
+      (א) $\int\frac{dx}{4x^2+1}$
+
+      (ב) $\int\frac{x\,dx}{x^2+16}$
+
+      (ג) לשני המכנים אין שורשים ממשיים. הסבירו במשפט אחד למה אחד האינטגרלים נותן $\arctan$ והשני לוגריתם.
+    answer: >-
+      (א) $\frac12\arctan(2x)+C$. (ב) $\frac12\ln\left(x^2+16\right)+C$. (ג) ב-(ב) המונה הוא חצי הנגזרת של המכנה, וב-(א)
+      המונה קבוע.
+    solution:
+      - kind: idea
+        text: >-
+          מונה קבוע מעל סכום ריבועים: מביאים לשורה $\int\frac{du}{u^2+1}=\arctan u$ של הטבלה. מונה שהוא כפולה של הנגזרת של
+          המכנה: $\int\frac{u'}{u}=\ln|u|$.
+      - kind: computation
+        text: >-
+          (א) $4x^2+1=(2x)^2+1$. הצבה $u=2x$, $du=2\,dx$, כלומר $dx=\frac{du}{2}$:
+          $\int\frac{dx}{4x^2+1}=\frac12\int\frac{du}{u^2+1}=\frac12\arctan(2x)+C$.
+      - kind: computation
+        text: >-
+          (ב) $u=x^2+16$, $du=2x\,dx$, כלומר $x\,dx=\frac{du}{2}$: $\int\frac{x\,dx}{x^2+16}=\frac12\ln\left(x^2+16\right)+C$.
+          (המכנה חיובי, ולכן אין צורך בערך מוחלט.)
+      - kind: step
+        text: >-
+          (ג) הצורה של המונה קובעת: כשהמונה הוא כפולה של הנגזרת של המכנה מקבלים לוגריתם, וכשהוא קבוע מעל סכום ריבועים,
+          $\arctan$. מונה כללי, $Bx+D$, נותן את שניהם.
+      - kind: check
+        text: >-
+          גזירה: $\left(\frac12\arctan(2x)\right)'=\frac12\cdot\frac{2}{1+4x^2}=\frac{1}{4x^2+1}$ ✓, ו-$\left(\frac12\ln\left(x^2+16\right)\right)'=\frac12\cdot\frac{2x}{x^2+16}$ ✓.
+      - kind: result
+        text: >-
+          (א) $\frac12\arctan(2x)+C$; (ב) $\frac12\ln\left(x^2+16\right)+C$.
+
+  - id: W-7.4-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-7.4-1]
+    prompt: >-
+      לכל פונקציה כתבו את צורת הפירוק לשברים חלקיים, בלי לחשב מקדמים. אם צריך קודם לחלק, בצעו את החילוק.
+
+      (א) $\frac{x^2}{(x+1)(x-2)(x-3)}$
+
+      (ב) $\frac{x+4}{x^3+4x}$
+
+      (ג) $\frac{x^3}{x^2+3x+2}$
+
+      (ד) $\frac{2x-1}{(x-1)^3\left(x^2+x+1\right)}$
+    answer: >-
+      (א) $\frac{A}{x+1}+\frac{B}{x-2}+\frac{D}{x-3}$. (ב) $\frac Ax+\frac{Bx+D}{x^2+4}$. (ג) $x-3+\frac{A}{x+1}+\frac{B}{x+2}$.
+      (ד) $\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{D}{(x-1)^3}+\frac{Ex+F}{x^2+x+1}$.
+    solution:
+      - kind: idea
+        text: >-
+          קודם משווים מעלות, אחר כך מפרקים את המכנה, ורק אז כותבים: שבר לכל גורם לינארי, שבר לכל חזקה של גורם חוזר, מונה
+          לינארי מעל גורם ריבועי אי-פריק. מספר הנעלמים שווה למעלת המכנה.
+      - kind: step
+        text: >-
+          (א) אמיתי (2 מול 3), שלושה גורמים לינאריים שונים: $\frac{A}{x+1}+\frac{B}{x-2}+\frac{D}{x-3}$.
+      - kind: step
+        text: >-
+          (ב) אמיתי (1 מול 3). $x^3+4x=x\left(x^2+4\right)$, ולגורם $x^2+4$ אין שורשים ממשיים (דיסקרימיננטה מינוס 16):
+          $\frac Ax+\frac{Bx+D}{x^2+4}$.
+      - kind: computation
+        text: >-
+          (ג) לא אמיתי (3 מול 2): מחלקים, בחילוק ארוך. $\frac{x^3}{x^2}=x$; מחסירים $x\left(x^2+3x+2\right)=x^3+3x^2+2x$, ונשאר מינוס $\left(3x^2+2x\right)$. האיבר המוביל שלו חלקי $x^2$ נותן מינוס 3; מחסירים מינוס $3\left(x^2+3x+2\right)$, ונשאר $7x+6$, ממעלה 1. כלומר $(x-3)\left(x^2+3x+2\right)=x^3-7x-6$, ולכן $x^3=(x-3)\left(x^2+3x+2\right)+7x+6$, ו-$\frac{x^3}{x^2+3x+2}=x-3+\frac{7x+6}{(x+1)(x+2)}$
+          (השורשים של $x^2+3x+2$ הם מינוס 1 ומינוס 2). הצורה: $x-3+\frac{A}{x+1}+\frac{B}{x+2}$.
+      - kind: step
+        text: >-
+          (ד) אמיתי (1 מול 5). $(x-1)^3$ נותן שלושה שברים, ו-$x^2+x+1$ (דיסקרימיננטה $1-4<0$) מונה לינארי:
+          $\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{D}{(x-1)^3}+\frac{Ex+F}{x^2+x+1}$.
+      - kind: check
+        text: >-
+          ספירה: 3, 3, 2 (בשבר שנשאר אחרי החילוק) ו-5 נעלמים, בדיוק מעלות המכנים. ב-(ג) בכפל חזרה:
+          $x^3-7x-6+7x+6=x^3$ ✓.
+      - kind: result
+        text: >-
+          (א) $\frac{A}{x+1}+\frac{B}{x-2}+\frac{D}{x-3}$; (ב) $\frac Ax+\frac{Bx+D}{x^2+4}$; (ג) $x-3+\frac{A}{x+1}+\frac{B}{x+2}$;
+          (ד) $\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{D}{(x-1)^3}+\frac{Ex+F}{x^2+x+1}$.
+
+  - id: W-7.4-04
+    level: mid
+    objectives: [OBJ-7.4-2]
+    prompt: >-
+      חשבו $\int\frac{x^2+x+1}{x^2-1}\,dx$.
+    answer: >-
+      $x+\frac32\ln|x-1|-\frac12\ln|x+1|+C$.
+    solution:
+      - kind: idea
+        text: >-
+          המעלות שוות (2 ו-2): השבר אינו אמיתי, ולכן קודם מחלקים. אחר כך מפרקים את השבר שנשאר, עם המכנה $(x-1)(x+1)$.
+      - kind: computation
+        text: >-
+          $x^2+x+1=\left(x^2-1\right)+(x+2)$, ולכן $\frac{x^2+x+1}{x^2-1}=1+\frac{x+2}{(x-1)(x+1)}$.
+      - kind: computation
+        text: >-
+          כיסוי: ב-$x=1$, $A=\frac{1+2}{1+1}=\frac32$; ב-$x=-1$, $B=\frac{-1+2}{-1-1}$, כלומר $B=-\frac12$. לכן
+          $\frac{x+2}{x^2-1}=\frac{3/2}{x-1}-\frac{1/2}{x+1}$.
+      - kind: computation
+        text: >-
+          $\int\left(1+\frac{3/2}{x-1}-\frac{1/2}{x+1}\right)dx=x+\frac32\ln|x-1|-\frac12\ln|x+1|+C$.
+      - kind: check
+        text: >-
+          ב-$x=0$: הפונקציה שווה $\frac{1}{-1}$, כלומר מינוס 1, והפירוק $1+\frac{3/2}{-1}-\frac{1/2}{1}=1-1.5-0.5$, גם מינוס 1. ✓
+      - kind: result
+        text: >-
+          $\int\frac{x^2+x+1}{x^2-1}\,dx=x+\frac32\ln|x-1|-\frac12\ln|x+1|+C$.
+
+  - id: W-7.4-05
+    level: mid
+    objectives: [OBJ-7.4-1, OBJ-7.4-2]
+    prompt: >-
+      חשבו $\int\frac{2x}{(x-1)^2(x+1)}\,dx$.
+    answer: >-
+      $\frac12\ln|x-1|-\frac{1}{x-1}-\frac12\ln|x+1|+C$.
+    solution:
+      - kind: idea
+        text: >-
+          גורם חוזר $(x-1)^2$ ושני שברים בשבילו, ועוד שבר ל-$x+1$. הכיסוי נותן את המקדם של $x+1$ ואת המקדם של $(x-1)^2$;
+          את השלישי מוצאים מהמקדם של $x^2$.
+      - kind: computation
+        text: >-
+          $\frac{2x}{(x-1)^2(x+1)}=\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{D}{x+1}$. כיסוי של $(x-1)^2$ והצבת 1:
+          $B=\frac{2}{1+1}=1$. כיסוי של $x+1$ והצבת מינוס 1, כולל הריבוע שנשאר: $D=\frac{-2}{(-1-1)^2}=\frac{-2}{4}$, כלומר
+          $D=-\frac12$.
+      - kind: computation
+        text: >-
+          כופלים במכנה: $2x=A(x-1)(x+1)+B(x+1)+D(x-1)^2$. באגף שמאל אין $x^2$, ולכן $0=A+D$, כלומר $A=\frac12$.
+      - kind: computation
+        text: >-
+          $\int\frac{dx}{(x-1)^2}=\frac{(x-1)^{-1}}{-1}$, ולכן
+          $\int\frac{2x\,dx}{(x-1)^2(x+1)}=\frac12\ln|x-1|-\frac{1}{x-1}-\frac12\ln|x+1|+C$.
+      - kind: check
+        text: >-
+          ב-$x=0$: הפונקציה שווה 0, והפירוק $\frac{1/2}{-1}+\frac{1}{1}-\frac{1/2}{1}=-0.5+1-0.5=0$. ✓
+      - kind: result
+        text: >-
+          $\int\frac{2x\,dx}{(x-1)^2(x+1)}=\frac12\ln|x-1|-\frac{1}{x-1}-\frac12\ln|x+1|+C$.
+
+  - id: W-7.4-06
+    level: mid
+    objectives: [OBJ-7.4-3]
+    prompt: >-
+      חשבו $\int\frac{3x+1}{x^2+2x+10}\,dx$.
+    answer: >-
+      $\frac32\ln\left(x^2+2x+10\right)-\frac23\arctan\frac{x+1}{3}+C$.
+    solution:
+      - kind: idea
+        text: >-
+          הדיסקרימיננטה $4-40<0$: גורם ריבועי אי-פריק. מפצלים את המונה לכפולה של הנגזרת של המכנה, $2x+2$, ועוד קבוע;
+          הכפולה נותנת לוגריתם, והקבוע, אחרי השלמה לריבוע, $\arctan$.
+      - kind: computation
+        text: >-
+          $3x+1=\frac32(2x+2)-2$ (בדיקה: $3x+3-2=3x+1$ ✓).
+      - kind: computation
+        text: >-
+          $\frac32\int\frac{(2x+2)\,dx}{x^2+2x+10}=\frac32\ln\left(x^2+2x+10\right)$.
+      - kind: computation
+        text: >-
+          $x^2+2x+10=\left(x^2+2x+1\right)+9=(x+1)^2+9$, ועם $u=x+1$ ו-$a=3$: $\int\frac{-2\,dx}{(x+1)^2+9}=-2\cdot\frac13\arctan\frac{x+1}{3}$, כלומר מינוס $\frac23\arctan\frac{x+1}{3}$.
+      - kind: check
+        text: >-
+          גזירה ב-$x=-1$: מהלוגריתם $\frac32\cdot\frac{0}{9}=0$, ומה-$\arctan$ מינוס $\frac23\cdot\frac13=-\frac29$; והפונקציה
+          ב-$x=-1$: $\frac{-3+1}{1-2+10}=-\frac29$. ✓
+      - kind: result
+        text: >-
+          $\int\frac{3x+1}{x^2+2x+10}\,dx=\frac32\ln\left(x^2+2x+10\right)-\frac23\arctan\frac{x+1}{3}+C$.
+
+  - id: W-7.4-07
+    level: mid
+    qualitative: true
+    objectives: [OBJ-7.4-1]
+    prompt: >-
+      סטודנטית כתבה $\frac{1}{x^2(x+1)}=\frac{A}{x^2}+\frac{B}{x+1}$, ומצאה בכיסוי $A=1$ ו-$B=1$.
+
+      (א) הראו בהצבה של ערך אחד של $x$ שהפירוק שלה שגוי.
+
+      (ב) מה הטעות? כתבו את הפירוק הנכון וחשבו $\int\frac{dx}{x^2(x+1)}$.
+    answer: >-
+      (א) ב-$x=1$: $\frac12$ מול $\frac32$. (ב) חסר השבר $\frac{A_1}{x}$; $\frac{1}{x^2(x+1)}=-\frac1x+\frac{1}{x^2}+\frac{1}{x+1}$,
+      והאינטגרל $\ln\left|\frac{x+1}{x}\right|-\frac1x+C$.
+    solution:
+      - kind: idea
+        text: >-
+          פירוק נכון הוא שוויון לכל $x$, ולכן ערך אחד מספיק כדי להפריך. הגורם $x^2$ הוא הגורם $x$ בחזקה 2, וצריך לו שבר
+          לכל חזקה.
+      - kind: computation
+        text: >-
+          (א) ב-$x=1$: $\frac{1}{1\cdot2}=\frac12$, ואילו $\frac{1}{1}+\frac{1}{2}=\frac32$. השוויון לא מתקיים.
+      - kind: step
+        text: >-
+          (ב) לגורם $x^2$ צריך שני שברים, $\frac{A_1}{x}+\frac{A_2}{x^2}$: המכנה ממעלה 3 ולכן שלושה נעלמים. עם שני נעלמים
+          בלבד אין פתרון: מ-$1=A(x+1)+Bx^2$ המקדם של $x^2$ נותן $B=0$, האיבר החופשי $A=1$, והמקדם של $x$ דורש $A=0$.
+      - kind: computation
+        text: >-
+          $\frac{1}{x^2(x+1)}=\frac{A_1}{x}+\frac{A_2}{x^2}+\frac{B}{x+1}$. כיסוי: $A_2=\frac{1}{0+1}=1$ ו-$B=\frac{1}{(-1)^2}=1$.
+          כופלים במכנה: $1=A_1x(x+1)+A_2(x+1)+Bx^2$, והמקדם של $x^2$: $0=A_1+B$, כלומר $A_1=-1$.
+      - kind: computation
+        text: >-
+          $\int\left(-\frac1x+\frac{1}{x^2}+\frac{1}{x+1}\right)dx=-\ln|x|-\frac1x+\ln|x+1|+C$.
+      - kind: check
+        text: >-
+          ב-$x=1$: $1+\frac12-1=\frac12$, כמו הפונקציה. ✓
+      - kind: result
+        text: >-
+          הטעות: חסר השבר $\frac{A_1}{x}$ של הגורם החוזר. $\frac{1}{x^2(x+1)}=-\frac1x+\frac{1}{x^2}+\frac{1}{x+1}$, ו-$\int\frac{dx}{x^2(x+1)}=\ln\left|\frac{x+1}{x}\right|-\frac1x+C$.
+
+  - id: W-7.4-08
+    level: exam
+    objectives: [OBJ-7.4-1, OBJ-7.4-3]
+    prompt: >-
+      חשבו $\int\frac{dx}{x^3-1}$.
+    answer: >-
+      $\frac13\ln|x-1|-\frac16\ln\left(x^2+x+1\right)-\frac{1}{\sqrt3}\arctan\frac{2x+1}{\sqrt3}+C$.
+    solution:
+      - kind: idea
+        text: >-
+          $x=1$ שורש של $x^3-1$, ולכן $x-1$ גורם. הגורם השני ריבועי ואי-פריק. כיסוי נותן את המקדם של $x-1$, השוואת
+          מקדמים את המונה הלינארי, ואז פיצול המונה והשלמה לריבוע.
+      - kind: computation
+        text: >-
+          $x^3-1=(x-1)\left(x^2+x+1\right)$ (בדיקה בפתיחת סוגריים), והדיסקרימיננטה של $x^2+x+1$ היא $1-4<0$.
+          הצורה: $\frac{A}{x-1}+\frac{Bx+D}{x^2+x+1}$. כיסוי ב-1: $A=\frac{1}{1+1+1}=\frac13$.
+      - kind: computation
+        text: >-
+          $1=\frac13\left(x^2+x+1\right)+(Bx+D)(x-1)$. המקדם של $x^2$: $0=\frac13+B$, כלומר $B=-\frac13$. האיבר החופשי:
+          $1=\frac13-D$, כלומר $D=-\frac23$. לכן $\frac{1}{x^3-1}=\frac{1/3}{x-1}-\frac13\cdot\frac{x+2}{x^2+x+1}$.
+      - kind: computation
+        text: >-
+          פיצול: $x+2=\frac12(2x+1)+\frac32$. החלק הראשון נותן $\frac12\ln\left(x^2+x+1\right)$. בחלק השני משלימים לריבוע:
+          $x^2+x+1=\left(x+\frac12\right)^2+\frac34$, ועם $a=\frac{\sqrt3}{2}$:
+          $\frac32\int\frac{dx}{\left(x+\frac12\right)^2+\frac34}=\frac32\cdot\frac{2}{\sqrt3}\arctan\frac{x+\frac12}{\sqrt3/2}$, ו-$\frac{x+\frac12}{\sqrt3/2}=\frac{2x+1}{\sqrt3}$ (כופלים מונה ומכנה ב-2). לכן החלק הזה $\sqrt3\arctan\frac{2x+1}{\sqrt3}$.
+      - kind: computation
+        text: >-
+          מכפילים במינוס $\frac13$ ומחברים: $\int\frac{dx}{x^3-1}=\frac13\ln|x-1|-\frac16\ln\left(x^2+x+1\right)-\frac{1}{\sqrt3}\arctan\frac{2x+1}{\sqrt3}+C$.
+      - kind: check
+        text: >-
+          גזירה ב-$x=0$: $\frac13\cdot\frac{1}{-1}-\frac16\cdot\frac{1}{1}-\frac{1}{\sqrt3}\cdot\frac{2/\sqrt3}{1+\frac13}=-\frac13-\frac16-\frac12=-1$,
+          והפונקציה ב-0 שווה $\frac{1}{-1}$. ✓
+      - kind: result
+        text: >-
+          $\int\frac{dx}{x^3-1}=\frac13\ln|x-1|-\frac16\ln\left(x^2+x+1\right)-\frac{1}{\sqrt3}\arctan\frac{2x+1}{\sqrt3}+C$.
+
+  - id: W-7.4-09
+    level: exam
+    objectives: [OBJ-7.4-1, OBJ-7.4-2]
+    prompt: >-
+      במודל פשוט של אוכלוסייה עם תקרה (ובאותה צורה גם בתגובה כימית שמזרזת את עצמה), החלק $P$ מהתקרה, $0<P<1$, גדל בקצב
+      $\frac{dP}{dt}=P(1-P)$, ביחידות זמן נוחות. כמו בטיפת הגשם של השיעור, עלייה קטנה $dP$ "עולה" זמן
+      $dt=\frac{dP}{P(1-P)}$.
+
+      (א) חשבו את הזמן שלוקח לעבור מ-$P=0.1$ ל-$P=0.9$.
+
+      (ב) חשבו את הזמן מ-$P=0.01$ ל-$P=0.5$.
+
+      (ג) מה קורה לזמן מ-$P=\varepsilon$ ל-$P=0.5$ כש-$\varepsilon\to0^+$? הסבירו במשפט.
+    answer: >-
+      (א) $\ln81=4\ln3\approx4.394$. (ב) $\ln99\approx4.595$. (ג) $\ln\frac{1-\varepsilon}{\varepsilon}$ גדל בלי גבול: מ-0
+      אי אפשר להתחיל לגדול.
+    solution:
+      - kind: idea
+        text: >-
+          הזמן הוא $\int\frac{dP}{P(1-P)}$ בין שני הערכים. מפרקים לשברים חלקיים, מוצאים פונקציה קדומה, ומציבים גבולות
+          (המשפט היסודי, שיעור 7.1).
+      - kind: computation
+        text: >-
+          כיסוי: $\frac{1}{P(1-P)}=\frac{A}{P}+\frac{B}{1-P}$, עם $A=\frac{1}{1-0}=1$ ו-$B=\frac{1}{1}=1$ (מכסים את $1-P$ ומציבים
+          $P=1$). בדיקה: $\frac1P+\frac{1}{1-P}=\frac{(1-P)+P}{P(1-P)}$ ✓.
+      - kind: computation
+        text: >-
+          $\int\frac{dP}{1-P}=-\ln(1-P)$ (הצבה $w=1-P$), ולכן כש-$0<P<1$ הפונקציה הקדומה היא
+          $\ln P-\ln(1-P)=\ln\frac{P}{1-P}$.
+      - kind: computation
+        text: >-
+          (א) $\ln\frac{0.9}{0.1}-\ln\frac{0.1}{0.9}=\ln9+\ln9=\ln81=4\ln3\approx4.394$.
+      - kind: computation
+        text: >-
+          (ב) $\ln\frac{0.5}{0.5}-\ln\frac{0.01}{0.99}=0+\ln99\approx4.595$.
+      - kind: step
+        text: >-
+          (ג) הזמן הוא $0-\ln\frac{\varepsilon}{1-\varepsilon}=\ln\frac{1-\varepsilon}{\varepsilon}$, וכש-$\varepsilon\to0^+$ הוא
+          גדל בלי גבול. אוכלוסייה שמתחילה מ-$P=0$ לא גדלה בכלל ($\frac{dP}{dt}=0$), ומכל התחלה קטנה מאוד לוקח זמן ארוך
+          מאוד, כמו הלוגריתם של $\frac1\varepsilon$, להגיע לחצי.
+      - kind: check
+        text: >-
+          (ב) לוקח יותר מ-(א), אף שהקטע של $P$ קצר יותר: כש-$P$ קטן גם הקצב $P(1-P)$ קטן. מ-0.01 ל-0.1 בלבד עוברים
+          $\ln\frac{0.1/0.9}{0.01/0.99}=\ln11\approx2.40$, יותר מחצי מהזמן של (ב). ו-(א) סימטרי: מ-0.1 ל-0.5 ומ-0.5 ל-0.9
+          לוקחים כל אחד $\ln9$.
+      - kind: result
+        text: >-
+          (א) $4\ln3\approx4.394$; (ב) $\ln99\approx4.595$; (ג) הזמן $\ln\frac{1-\varepsilon}{\varepsilon}\to\infty$.
+
+  - id: W-7.4-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-7.4-1, OBJ-7.4-2, OBJ-7.4-3]
+    prompt: >-
+      קבעו לכל טענה אם היא נכונה, ונמקו: טענה נכונה בנימוק, טענה שגויה בדוגמה נגדית. בכל הטענות $P$ ו-$Q$ פולינומים.
+
+      (א) אם ל-$Q$ אין שורשים ממשיים, הפונקציה הקדומה של $\frac PQ$ (שבר אמיתי) היא $\arctan$ בלבד, בלי לוגריתמים.
+
+      (ב) אם $Q=(x-a_1)(x-a_2)\cdots(x-a_n)$ עם $a_i$ שונים זה מזה ו-$\frac PQ$ אמיתי, הפונקציה הקדומה היא סכום של
+      $A_i\ln|x-a_i|$ ועוד קבוע.
+
+      (ג) $\int\frac{dx}{x^2+bx+c}$ (עם $b,c$ ממשיים) מכיל $\arctan$ אם ורק אם $b^2<4c$.
+
+      (ד) בפירוק של שבר אמיתי לשברים חלקיים יכול להופיע גם איבר פולינומי.
+    answer: >-
+      (א) לא נכון. (ב) נכון. (ג) נכון. (ד) לא נכון.
+    solution:
+      - kind: idea
+        text: >-
+          כל טענה בודקת חלק אחד של המתכון: מה נותן מונה לינארי מעל גורם ריבועי, מה נותנים גורמים לינאריים שונים, מתי
+          מכנה ריבועי מתפרק, ולמה מחלקים רק שבר שאינו אמיתי.
+      - kind: step
+        text: >-
+          (א) לא נכון. $\int\frac{2x+3}{x^2+1}\,dx=\ln\left(x^2+1\right)+3\arctan x+C$: מעל גורם ריבועי המונה לינארי, והחלק
+          $Bx$ שלו נותן לוגריתם.
+      - kind: step
+        text: >-
+          (ב) נכון. הפירוק הוא $\sum\frac{A_i}{x-a_i}$ (כל מקדם בכיסוי: $A_i$ הוא $\frac{P}{Q}$ בלי הגורם $x-a_i$, ב-$x=a_i$),
+          וכל שבר נותן $A_i\ln|x-a_i|$.
+      - kind: step
+        text: >-
+          (ג) נכון. אם $b^2<4c$, ההשלמה לריבוע נותנת $\left(x+\frac b2\right)^2+a^2$ עם $a^2=c-\frac{b^2}{4}>0$, ומתקבל
+          $\frac1a\arctan\frac{x+b/2}{a}$. אם $b^2>4c$, למכנה שני שורשים ממשיים: שברים חלקיים ולוגריתמים. ואם $b^2=4c$, המכנה
+          ריבוע שלם $\left(x+\frac b2\right)^2$, והאינטגרל חזקה: מינוס $\frac{1}{x+b/2}$. למשל $x^2+2x+1=(x+1)^2$.
+      - kind: step
+        text: >-
+          (ד) לא נכון. כש-$x\to\infty$ שבר אמיתי שואף ל-0, וכל שבר חלקי, $\frac{A}{(x-a)^k}$ או $\frac{Bx+D}{\left(x^2+px+q\right)^k}$ (גם בחזקה של גורם ריבועי, שלא נפגוש בקורס), גם
+          שואף ל-0, אבל פולינום שאינו אפס לא שואף ל-0. לכן בפירוק של שבר אמיתי החלק הפולינומי הוא 0.
+      - kind: check
+        text: >-
+          (א) בגזירה: $\frac{2x}{x^2+1}+\frac{3}{x^2+1}=\frac{2x+3}{x^2+1}$ ✓. (ג) $\left(-\frac{1}{x+1}\right)'=\frac{1}{(x+1)^2}$ ✓.
+      - kind: result
+        text: >-
+          (ב) ו-(ג) נכונות; (א) ו-(ד) לא נכונות.
+
+challenge:
+  - id: W-7.4-c1
+    stars: 1
+    objectives: [OBJ-7.4-1, OBJ-7.4-2, OBJ-7.4-3]
+    prompt: >-
+      (א) מצאו שורש שלם של $x^3-2x-4$ (נסו את המחלקים של 4), ופרקו את המכנה לגורמים.
+
+      (ב) חשבו $\int\frac{3x+4}{x^3-2x-4}\,dx$.
+
+      (ג) למכנה יש גורם ריבועי אי-פריק, ובכל זאת בתשובה אין $\arctan$. הסבירו למה.
+    answer: >-
+      (א) $x=2$, ו-$x^3-2x-4=(x-2)\left(x^2+2x+2\right)$. (ב) $\ln|x-2|-\frac12\ln\left(x^2+2x+2\right)+C$. (ג) המונה של
+      השבר הריבועי, מינוס $(x+1)$, הוא בדיוק כפולה של הנגזרת $2x+2$, ולא נשאר קבוע.
+    solution:
+      - kind: idea
+        text: >-
+          לפולינום עם מקדמים שלמים ומקדם מוביל 1, שורש שלם מחלק את האיבר החופשי: מנסים $\pm1,\pm2,\pm4$. אחרי שמוצאים שורש
+          $a$, מחלקים ב-$x-a$, ובודקים את הדיסקרימיננטה של מה שנשאר.
+      - kind: computation
+        text: >-
+          (א) ב-1: $1-2-4\ne0$; במינוס 1: $2-1-4\ne0$; ב-2: $8-4-4=0$: $x=2$ שורש, ולכן $x-2$ גורם. את הגורם השני מוצאים בהשוואת מקדמים:
+          $(x-2)\left(x^2+bx+c\right)=x^3+(b-2)x^2+(c-2b)x-2c$. המקדם של $x^2$ בפולינום הוא 0, ולכן $b=2$; האיבר החופשי
+          מינוס 4, ולכן $2c=4$, כלומר $c=2$; והמקדם של $x$ לבדיקה: $c-2b=2-4$, מינוס 2, כמו בפולינום ✓. (חילוק ארוך ב-$x-2$, כמו
+          בשיעור, נותן אותו דבר.)
+          הדיסקרימיננטה של $x^2+2x+2$ היא $4-8<0$: גורם ריבועי אי-פריק.
+      - kind: computation
+        text: >-
+          (ב) הצורה $\frac{A}{x-2}+\frac{Bx+D}{x^2+2x+2}$. כיסוי ב-2: $A=\frac{3\cdot2+4}{4+4+2}=1$. כופלים במכנה:
+          $3x+4=\left(x^2+2x+2\right)+(Bx+D)(x-2)$. המקדם של $x^2$: $0=1+B$, כלומר $B=-1$. האיבר החופשי: $4=2-2D$, כלומר
+          $D=-1$.
+      - kind: computation
+        text: >-
+          לכן $\frac{3x+4}{x^3-2x-4}=\frac{1}{x-2}-\frac{x+1}{x^2+2x+2}$, ו-$x+1=\frac12(2x+2)$ הוא חצי הנגזרת של המכנה:
+          $\int\frac{3x+4}{x^3-2x-4}\,dx=\ln|x-2|-\frac12\ln\left(x^2+2x+2\right)+C$.
+      - kind: step
+        text: >-
+          (ג) $\arctan$ בא רק מהקבוע שנשאר אחרי שמוציאים מהמונה את הכפולה של הנגזרת של המכנה. כאן $Bx+D=-(x+1)=-\frac12(2x+2)$,
+          והקבוע שנשאר הוא 0. זה מקרה, לא כלל: עם מונה אחר, למשל $3x+5$, היה נשאר קבוע ומופיע $\arctan$.
+      - kind: check
+        text: >-
+          גזירה: $\frac{1}{x-2}-\frac12\cdot\frac{2x+2}{x^2+2x+2}=\frac{1}{x-2}-\frac{x+1}{x^2+2x+2}$, הפירוק. ובערך: ב-$x=0$ הפונקציה
+          שווה $\frac{4}{-4}$, והפירוק $\frac{1}{-2}-\frac12$, שניהם מינוס 1. ✓
+      - kind: result
+        text: >-
+          $x^3-2x-4=(x-2)\left(x^2+2x+2\right)$, ו-$\int\frac{3x+4}{x^3-2x-4}\,dx=\ln|x-2|-\frac12\ln\left(x^2+2x+2\right)+C$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Section 3.4 (Partial Fractions), exercise 213 (with its hint: the rational root theorem); part (c) added'
+      url: https://openstax.org/books/calculus-volume-2/pages/3-4-partial-fractions
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-7.4-c2
+    stars: 2
+    objectives: [OBJ-7.4-2, OBJ-7.4-3]
+    prompt: >-
+      (א) הוכיחו ש-$\int_0^1\frac{x^4(1-x)^4}{1+x^2}\,dx=\frac{22}{7}-\pi$.
+
+      (ב) הסיקו ש-$\pi<\frac{22}{7}$, והראו גם ש-$\frac{1}{1260}<\frac{22}{7}-\pi<\frac{1}{630}$.
+    answer: >-
+      (א) חילוק: $x^4(1-x)^4=\left(1+x^2\right)\left(x^6-4x^5+5x^4-4x^2+4\right)-4$; האינטגרל של החלק הפולינומי בין 0 ל-1 הוא
+      $\frac{22}{7}$, ו-$4\int_0^1\frac{dx}{1+x^2}=\pi$. (ב) המכנה בין 1 ל-2, ו-$\int_0^1x^4(1-x)^4\,dx=\frac{1}{630}$.
+    solution:
+      - kind: idea
+        text: >-
+          השבר אינו אמיתי (8 מול 2), ולכן מחלקים: פולינום ועוד שארית מעל $1+x^2$. לפולינום יש פונקציה קדומה פשוטה, והשארית
+          הקבועה נותנת $\arctan$, ו-$\arctan1=\frac\pi4$. את (ב) מקבלים מהשוואה: באינטגרנד חיובי, ותחום של המכנה.
+      - kind: computation
+        text: >-
+          פתיחת סוגריים: $(1-x)^4=1-4x+6x^2-4x^3+x^4$, ולכן $x^4(1-x)^4=x^8-4x^7+6x^6-4x^5+x^4$.
+      - kind: computation
+        text: >-
+          חילוק ארוך ב-$x^2+1$. $\frac{x^8}{x^2}=x^6$; מחסירים $x^6\left(x^2+1\right)=x^8+x^6$, ונשאר $x^4-4x^5+5x^6-4x^7$.
+      - kind: computation
+        text: >-
+          האיבר המוביל חלקי $x^2$: מינוס $4x^5$; מחסירים מינוס $4x^5\left(x^2+1\right)$, כלומר מוסיפים $4x^7+4x^5$, ונשאר $5x^6+x^4$.
+      - kind: computation
+        text: >-
+          $\frac{5x^6}{x^2}=5x^4$; מחסירים $5x^6+5x^4$, ונשאר מינוס $4x^4$.
+      - kind: computation
+        text: >-
+          מינוס $4x^4$ חלקי $x^2$: מינוס $4x^2$; מוסיפים $4x^4+4x^2$, ונשאר $4x^2$.
+      - kind: computation
+        text: >-
+          $\frac{4x^2}{x^2}=4$; מחסירים $4x^2+4$, ונשאר מינוס 4, ממעלה קטנה מ-2. החלק הפולינומי הוא סכום התוצאות, $x^6-4x^5+5x^4-4x^2+4$, והשארית מינוס 4.
+      - kind: check
+        text: >-
+          כפל חזרה: $\left(1+x^2\right)\left(x^6-4x^5+5x^4-4x^2+4\right)=x^8-4x^7+6x^6-4x^5+x^4+4$, ופחות 4 נותן את המונה. ✓
+      - kind: computation
+        text: >-
+          $\int_0^1\left(x^6-4x^5+5x^4-4x^2+4\right)dx=\frac17-\frac46+1-\frac43+4=\frac17+3=\frac{22}{7}$.
+      - kind: computation
+        text: >-
+          $\int_0^1\frac{4\,dx}{1+x^2}=4\left(\arctan1-\arctan0\right)=4\cdot\frac\pi4=\pi$. לכן האינטגרל הוא $\frac{22}{7}-\pi$.
+      - kind: step
+        text: >-
+          (ב) בקטע $(0,1)$ האינטגרנד חיובי (מונה חיובי ומכנה חיובי), ולכן האינטגרל חיובי: $\frac{22}{7}-\pi>0$.
+      - kind: step
+        text: >-
+          בקטע $[0,1]$ מתקיים $1\le1+x^2\le2$, ולכן $\frac{x^4(1-x)^4}{2}\le\frac{x^4(1-x)^4}{1+x^2}\le x^4(1-x)^4$, עם שוויון רק
+          בקצוות. מחשבים, לפי פתיחת הסוגריים: $\int_0^1x^4(1-x)^4\,dx=\int_0^1\left(x^8-4x^7+6x^6-4x^5+x^4\right)dx$. זה שווה
+          $\frac19-\frac12+\frac67-\frac23+\frac15$, כלומר $\frac{1}{630}$.
+          לכן $\frac{1}{1260}<\frac{22}{7}-\pi<\frac{1}{630}$.
+      - kind: check
+        text: >-
+          $\frac{22}{7}-\pi\approx0.0012645$, בין $\frac{1}{1260}\approx0.00079$ ל-$\frac{1}{630}\approx0.00159$. ✓
+      - kind: result
+        text: >-
+          $\int_0^1\frac{x^4(1-x)^4}{1+x^2}\,dx=\frac{22}{7}-\pi$, ולכן $\frac{1}{1260}<\frac{22}{7}-\pi<\frac{1}{630}$, ובפרט $\pi<\frac{22}{7}$.
+    source:
+      name: 'William Lowell Putnam Mathematical Competition (29th), solutions archived by John Scholes (Kalva)'
+      year: 1968
+      problem: 'A1'
+      url: https://prase.cz/kalva/putnam/psoln/psol681.html
+      verified: '2026-11-27'
+      adapted: true

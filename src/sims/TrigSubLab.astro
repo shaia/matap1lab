@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 7.5 figure: <Spread figure={TrigSubLab} figureProps={{ mode, f, … }}>.
+ * mode: power, triangle, halfangle. The props, step keys, task ids and the data-* hooks for e2e specs are documented at
+ * the top of TrigSubLab.tsx; the presets are those of POW and the kinds of triSub in src/math/trigint.ts.
+ */
+import TrigSubLab, { type TrigSubLabProps } from './TrigSubLab';
+type Props = TrigSubLabProps;
+---
+
+<TrigSubLab client:visible {...Astro.props} />

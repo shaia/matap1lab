@@ -5,7 +5,7 @@
     ב-$\frac{3x-1}{(x-1)(x-2)}$ המקדם של $\frac{1}{x-1}$ הוא $\frac{3-1}{2-1}=2$.
   truth: >-
     מכסים את $x-1$ ומציבים $x=1$ בכל מה שנשאר, כפי שהוא: $A=\frac{3\cdot1-1}{1-2}=-2$. הגורם $x-2$ ב-$x=1$ שלילי.
-  remedy: { lesson: '7.4', label: 'מציאת המקדמים בהצבה' }
+  remedy: { lesson: '7.4', anchor: 'coverup', label: 'מציאת המקדמים בהצבה' }
 
 - id: MC-c7-coverup-drop-square
   title: בשיטת הכיסוי שוכחים את החזקה של הגורם שנשאר
@@ -13,7 +13,7 @@
     ב-$\frac{x+5}{(x-1)^2(x+2)}$ המקדם של $\frac{1}{x+2}$ הוא $\frac{-2+5}{-2-1}=-1$.
   truth: >-
     מציבים $x=-2$ בכל מה שנשאר אחרי הכיסוי, כולל הריבוע: $\frac{-2+5}{(-2-1)^2}=\frac13$.
-  remedy: { lesson: '7.4', label: 'מציאת המקדמים בהצבה' }
+  remedy: { lesson: '7.4', anchor: 'repeated', label: 'כיסוי כשבמכנה נשאר ריבוע' }
 
 - id: MC-c7-repeated-factor-once
   title: נותנים לגורם חוזר שבר אחד בלבד
@@ -22,15 +22,15 @@
   truth: >-
     לגורם $(x-a)^k$ כותבים שבר לכל חזקה: $\frac{A_1}{x-a}+\frac{A_2}{(x-a)^2}+\dots+\frac{A_k}{(x-a)^k}$. מספר הנעלמים
     שווה למעלת המכנה.
-  remedy: { lesson: '7.4', label: 'גורמים חוזרים' }
+  remedy: { lesson: '7.4', anchor: 'repeated', label: 'גורמים חוזרים' }
 
 - id: MC-c7-quadratic-numerator-const
   title: שמים מונה קבוע מעל גורם ריבועי
   belief: >-
-    מעל $x^2+1$ בפירוק כותבים $\frac{C}{x^2+1}$.
+    מעל $x^2+1$ בפירוק כותבים $\frac{D}{x^2+1}$.
   truth: >-
-    מעל גורם ריבועי בלי שורשים ממשיים המונה לינארי, $\frac{Cx+D}{x^2+1}$. החלק $Cx$ נותן לוגריתם, והחלק $D$ נותן $\arctan$.
-  remedy: { lesson: '7.4', label: 'גורמים ריבועיים' }
+    מעל גורם ריבועי בלי שורשים ממשיים המונה לינארי, $\frac{Dx+E}{x^2+1}$. החלק $Dx$ נותן לוגריתם, והחלק $E$ נותן $\arctan$.
+  remedy: { lesson: '7.4', anchor: 'quadratic', label: 'גורמים ריבועיים' }
 
 - id: MC-c7-quadratic-factor-wrong
   title: מפרקים לגורמים ביטוי ריבועי שאין לו שורשים, או לא מפרקים אחד שיש לו
@@ -39,7 +39,7 @@
   truth: >-
     בודקים את הדיסקרימיננטה: ל-$x^2+1$ אין שורשים ממשיים והוא נשאר גורם ריבועי; $x^2-4=(x-2)(x+2)$ ו-$x^2-1=(x-1)(x+1)$
     מתפרקים.
-  remedy: { lesson: '7.4', label: 'פירוק המכנה לגורמים' }
+  remedy: { lesson: '7.4', anchor: 'factoring', label: 'פירוק המכנה לגורמים' }
 
 - id: MC-c7-repeated-as-log
   title: מבצעים אינטגרציה לשבר עם גורם בריבוע כאילו הוא נותן לוגריתם
@@ -47,7 +47,7 @@
     $\int\frac{dx}{(x+1)^2}=\ln|x+1|$, או $\ln(x+1)^2$.
   truth: >-
     $\int\frac{dx}{(x+1)^2}=\int(x+1)^{-2}dx=-\frac{1}{x+1}+C$: לוגריתם נותנת רק החזקה $-1$.
-  remedy: { lesson: '7.4', label: 'אינטגרציה של כל סוג שבר' }
+  remedy: { lesson: '7.4', anchor: 'integrate-pieces', label: 'אינטגרציה של כל סוג שבר' }
 
 - id: MC-c7-skip-division
   title: מפרקים לשברים חלקיים בלי לחלק קודם כשהשבר אינו אמיתי
@@ -55,7 +55,7 @@
     אפשר לפרק את $\frac{x^3+1}{x^2-4}$ ישר ל-$\frac{A}{x-2}+\frac{B}{x+2}$, או להוציא את המונה מהאינטגרל.
   truth: >-
     פירוק קיים רק לשבר אמיתי (מעלת המונה קטנה ממעלת המכנה). אחרת מחלקים קודם: $\frac{x^3+1}{x^2-4}=x+\frac{4x+1}{x^2-4}$.
-  remedy: { lesson: '7.4', label: 'חילוק פולינומים לפני אינטגרציה' }
+  remedy: { lesson: '7.4', anchor: 'division', label: 'חילוק פולינומים לפני אינטגרציה' }
 
 - id: MC-c7-inverse-trig-scale
   title: טועים בקבוע ב-arctan או ב-arcsin עם פרמטר
@@ -64,7 +64,7 @@
   truth: >-
     $\int\frac{dx}{x^2+a^2}=\frac1a\arctan\frac xa+C$, אבל $\int\frac{dx}{\sqrt{a^2-x^2}}=\arcsin\frac xa+C$ בלי $\frac1a$. בכל
     מקרה בודקים בגזירה (כלל השרשרת נותן את הגורם $\frac1a$).
-  remedy: { lesson: '7.4', label: 'אינטגרלים שנותנים arctan' }
+  remedy: { lesson: '7.4', anchor: 'arctan', label: 'אינטגרלים שנותנים arctan' }
 
 - id: MC-c7-complete-square-shift
   title: אחרי השלמה לריבוע שוכחים את ההזזה של המשתנה
@@ -72,7 +72,7 @@
     $\int\frac{dx}{(x+1)^2+4}=\frac12\arctan\frac x2$, או שמציבים בטבלה את $x$ במקום את $x+1$.
   truth: >-
     אחרי $x^2+2x+5=(x+1)^2+4$ המשתנה של הטבלה הוא $u=x+1$ (ו-$du=dx$): $\frac12\arctan\frac{x+1}{2}+C$.
-  remedy: { lesson: '7.4', label: 'השלמה לריבוע במכנה' }
+  remedy: { lesson: '7.4', anchor: 'complete-square', label: 'השלמה לריבוע במכנה' }
 
 - id: MC-c7-numerator-not-derivative
   title: מתייחסים למונה כאילו כולו הנגזרת של המכנה
@@ -81,4 +81,4 @@
   truth: >-
     מפצלים את המונה: החלק שהוא כפולה של הנגזרת של המכנה נותן לוגריתם, והשארית הקבועה נותנת $\arctan$ (אחרי השלמה
     לריבוע): $\frac{2x+3}{x^2+1}=\frac{2x}{x^2+1}+\frac{3}{x^2+1}$.
-  remedy: { lesson: '7.4', label: 'פיצול המונה: לוגריתם ועוד arctan' }
+  remedy: { lesson: '7.4', anchor: 'split-numerator', label: 'פיצול המונה: לוגריתם ועוד arctan' }

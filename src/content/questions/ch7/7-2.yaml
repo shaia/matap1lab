@@ -33,7 +33,7 @@ questions:
     type: expr
     objectives: [OBJ-7.2-2]
     level: basic
-    prompt: 'חשבו $\int x^2\cos\left(x^3\right)dx$ (עמ׳ 11 במחברת).'
+    prompt: '(מסיכומי ההרצאות שהקורס נבנה לפיהם) חשבו $\int x^2\cos\left(x^3\right)dx$.'
     answer: 'sin(x^3)/3'
     answerTex: '$\frac{\sin\left(x^3\right)}{3}+C$'
     variables: [x]
@@ -41,11 +41,11 @@ questions:
     upToConstant: true
     correctFeedback: >-
       נכון. $u=x^3$, $du=3x^2\,dx$: $\int x^2\cos\left(x^3\right)dx=\frac13\int\cos u\,du=\frac13\sin u+C=\frac{\sin(x^3)}{3}+C$.
-      (בשורת הביניים במחברת כתוב $-\frac{\sin y}{3}$, בטעות; התשובה הסופית שם נכונה.)
+      (בשורת הביניים בסיכומי ההרצאות כתוב $-\frac{\sin y}{3}$, בטעות; התשובה הסופית שם נכונה.)
     wrongFeedback: 'הציבו $u=x^3$, החליפו $x^2\,dx=\frac{du}{3}$, בצעו אינטגרציה וחזרו ל-$x$.'
     commonWrong:
       - expr: '-sin(x^3)/3'
-        feedback: '$\int\cos u\,du=+\sin u$. (זו בדיוק הטעות בשורת הביניים במחברת.)'
+        feedback: '$\int\cos u\,du=+\sin u$. (זו בדיוק הטעות בשורת הביניים בסיכומי ההרצאות.)'
         misconception: MC-c7-trig-integral-sign
       - expr: 'sin(x^3)'
         feedback: 'שכחתם את $\frac13$: $du=3x^2\,dx$, ולכן $x^2\,dx=\frac{du}{3}$.'
@@ -75,7 +75,7 @@ questions:
     type: expr
     objectives: [OBJ-7.2-3]
     level: basic
-    prompt: 'חשבו $\int\frac{x}{1+x^2}\,dx$ (עמ׳ 14 במחברת).'
+    prompt: '(מסיכומי ההרצאות שהקורס נבנה לפיהם) חשבו $\int\frac{x}{1+x^2}\,dx$.'
     answer: 'log(1+x^2)/2'
     answerTex: '$\frac12\ln\left(1+x^2\right)+C$'
     variables: [x]
@@ -93,16 +93,49 @@ questions:
         misconception: MC-c7-atan-vs-log
     hints: ['$u=1+x^2$.']
 
+  - id: Q-7.2-divide-inner
+    type: twotier
+    objectives: [OBJ-7.2-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      נכון או לא: כמו ש-$\int e^{3x}dx=\frac{e^{3x}}{3}+C$, כך גם $\int e^{x^2}dx=\frac{e^{x^2}}{2x}+C$ (מחלקים בנגזרת של
+      המעריך).
+    choices:
+      - text: לא נכון
+        correct: true
+        feedback: >-
+          נכון. גזרו בכלל המנה: $\left(\frac{e^{x^2}}{2x}\right)'=\frac{e^{x^2}\left(x^2-\frac12\right)}{x^2}$, וזה אינו
+          $e^{x^2}$.
+      - text: נכון
+        feedback: >-
+          גזרו את התשובה: $\left(\frac{e^{x^2}}{2x}\right)'=\frac{e^{x^2}\left(x^2-\frac12\right)}{x^2}\ne e^{x^2}$. חלוקה
+          בנגזרת הפנימית עובדת רק כשהיא קבועה.
+        misconception: MC-c7-divide-by-inner-derivative
+    reasons:
+      - text: 'חלוקה בנגזרת הפנימית עובדת רק כשהיא קבועה, כלומר כשהביטוי הפנימי לינארי, $ax+b$'
+        correct: true
+        feedback: >-
+          בדיוק. ב-$e^{3x}$ הנגזרת הפנימית היא המספר 3, וכלל השרשרת מחזיר אותו. ב-$e^{x^2}$ היא $2x$, ואת $x$ שבמכנה כלל
+          המנה גוזר גם הוא. ול-$\int e^{x^2}dx$ אין בכלל קדומה בנוסחה מהטבלה.
+      - text: 'כי חסר הגורם $x$ בתשובה: צריך $\frac{x\,e^{x^2}}{2}$'
+        feedback: '$\left(\frac{x\,e^{x^2}}{2}\right)''=\frac{e^{x^2}}{2}+x^2e^{x^2}$, גם זה לא $e^{x^2}$. כאן אין גורם $x$ שיהפוך ל-$du$.'
+        misconception: MC-c7-subst-no-du
+      - text: 'כי צריך לחלק ב-$x^2$, לא ב-$2x$'
+        feedback: 'חלוקה בכל ביטוי עם $x$ נכשלת מאותה סיבה: הגזירה של המכנה מוסיפה איבר. בדקו בגזירה.'
+        misconception: MC-c7-divide-by-inner-derivative
+    hints: ['גזרו את $\frac{e^{x^2}}{2x}$ בכלל המנה.']
+
   - id: Q-7.2-not-fprime
     type: twotier
     objectives: [OBJ-7.2-3]
     qualitative: true
-    level: mid
+    level: basic
     prompt: 'נכון או לא: $\int\frac{dx}{1+x^2}=\ln\left(1+x^2\right)+C$.'
     choices:
       - text: לא נכון
         correct: true
-        feedback: 'נכון. גזרו: $\left(\ln(1+x^2)\right)''=\frac{2x}{1+x^2}$. הקדומה הנכונה היא $\arctan x+C$ (עמ׳ 13 במחברת).'
+        feedback: 'נכון. גזרו: $\left(\ln(1+x^2)\right)''=\frac{2x}{1+x^2}$. הקדומה הנכונה היא $\arctan x+C$, מהטבלה של שיעור 7.1.'
       - text: נכון
         feedback: >-
           הכלל $\int\frac{u'}{u}=\ln|u|$ דורש שהמונה יהיה הנגזרת של המכנה. כאן המונה 1, לא $2x$.
@@ -130,7 +163,7 @@ questions:
     domain: [-1.2, 1.2]
     upToConstant: true
     correctFeedback: >-
-      נכון. $\tan x=\frac{\sin x}{\cos x}$, ו-$(\cos x)'=-\sin x$: עם $u=\cos x$ מתקבל $-\int\frac{du}{u}=-\ln|\cos x|+C$.
+      נכון. $\tan x=\frac{\sin x}{\cos x}$, ו-$(\cos x)'=-\sin x$: עם $u=\cos x$ מתקבל $-\int\frac{du}{u}=-\ln|\cos x|+C$. בתחום $|x|<\frac{\pi}{2}$, $\cos x>0$, ולכן הערך המוחלט אינו משנה כאן דבר: גם $-\ln(\cos x)$ נכון.
     wrongFeedback: 'כתבו $\tan x=\frac{\sin x}{\cos x}$ והציבו $u=\cos x$. שימו לב לסימן של $du$.'
     commonWrong:
       - expr: 'log(abs(cos(x)))'
@@ -171,7 +204,7 @@ questions:
       - text: 'הוא החליף $dx$ ב-$du$ בלי $du=2x\,dx$, והשאיר $x$ באינטגרל לפי $u$'
         correct: true
         feedback: >-
-          נכון. $du=2x\,dx$, ולכן $x\,dx=\frac{du}{2}$ והגורם $x$ **נבלע** ב-$du$: $\frac12\int\sqrt u\,du=\frac13\left(x^2+1\right)^{3/2}+C$.
+          נכון. $du=2x\,dx$, ולכן $x\,dx=\frac{du}{2}$ והגורם $x$ **נבלע** ב-$du$: האינטגרל הוא $\frac12\int\sqrt u\,du$.
           אחרי הצבה לא נשאר אף $x$ באינטגרל.
       - text: 'ההצבה לא מתאימה: צריך $u=\sqrt{x^2+1}$'
         feedback: 'גם זו הצבה אפשרית, אבל $u=x^2+1$ מתאימה מצוין: הנגזרת $2x$ מופיעה כגורם. הבעיה בביצוע.'
@@ -228,7 +261,7 @@ questions:
     objectives: [OBJ-7.2-1]
     qualitative: true
     level: mid
-    prompt: 'אילו מהאינטגרלים הבאים נפתרים ישירות בהצבה $u=x^2+1$? סמנו את כולם.'
+    prompt: 'אילו מהאינטגרלים הבאים נפתרים בהצבה $u=x^2+1$ (אחריה נשאר אינטגרל ב-$u$ בלבד)? סמנו את כולם.'
     choices:
       - text: '$\int\frac{x}{x^2+1}\,dx$'
         correct: true
@@ -283,9 +316,9 @@ questions:
     domain: [0.2, 4]
     upToConstant: true
     correctFeedback: >-
-      נכון. $x=u^2$, $dx=2u\,du$: $\int\frac{2u}{1+u}\,du=\int\left(2-\frac{2}{1+u}\right)du=2u-2\ln(1+u)+C$, וחוזרים
+      נכון. $x=u^2$, $dx=2u\,du$. במונה $2u=2(1+u)-2$, ולכן $\frac{2u}{1+u}=2-\frac{2}{1+u}$, ו-$\int\frac{2u}{1+u}\,du=2u-2\ln(1+u)+C$. חוזרים
       ל-$u=\sqrt x$.
-    wrongFeedback: 'כתבו $dx=2u\,du$, חלקו $\frac{2u}{1+u}=2-\frac{2}{1+u}$, וחזרו ל-$x$.'
+    wrongFeedback: 'כתבו $dx=2u\,du$, ואז $2u=2(1+u)-2$, כלומר $\frac{2u}{1+u}=2-\frac{2}{1+u}$. בצעו אינטגרציה וחזרו ל-$x$.'
     commonWrong:
       - expr: 'log(1+sqrt(x))'
         feedback: 'החלפתם $dx$ ב-$du$. כש-$x=u^2$, $dx=2u\,du$, והגורם $2u$ משנה את האינטגרל לגמרי.'
