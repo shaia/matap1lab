@@ -1,4 +1,30 @@
 # Terms first defined in lesson 6.4 (the domain of convergence and Leibniz-type series).
+- id: partial-sum
+  term: סכום חלקי
+  en: partial sum
+  symbol: 'S_n'
+  definition: >-
+    הסכום של $n$ האיברים הראשונים של טור אינסופי. בטור $\sum_{k=1}^{\infty}b_k$ הסכום החלקי הוא
+    $S_n=b_1+b_2+\dots+b_n$. בטור טיילור, הסכומים החלקיים הם פולינומי טיילור.
+  reject: []
+  lesson: '6.4'
+- id: convergent-series
+  term: טור מתכנס
+  en: convergent series
+  definition: >-
+    טור אינסופי **מתכנס** כשהסכומים החלקיים שלו $S_n$ שואפים למספר $S$ כש-$n\to\infty$; אז $S$ נקרא **סכום הטור**. טור
+    שאינו מתכנס **מתבדר**. תנאי הכרחי: האיברים שואפים ל-0. הוא אינו מספיק: הטור ההרמוני מתבדר.
+  reject: []
+  lesson: '6.4'
+- id: harmonic-series
+  term: הטור ההרמוני
+  en: harmonic series
+  symbol: '\sum_{k=1}^{\infty}\frac1k'
+  definition: >-
+    הטור $1+\frac12+\frac13+\frac14+\dots$. איבריו שואפים ל-0, ובכל זאת הוא מתבדר: הסכומים החלקיים גדלים בלי גבול, כי
+    $\frac13+\frac14>\frac12$, $\frac15+\dots+\frac18>\frac12$, וכן הלאה.
+  reject: []
+  lesson: '6.4'
 - id: radius-of-convergence
   term: רדיוס התכנסות
   en: radius of convergence
@@ -13,22 +39,31 @@
   en: interval of convergence
   definition: >-
     קבוצת ה-$x$ שבהם טור החזקות מתכנס: קטע סביב $x_0$ ברדיוס $R$, כשבכל אחד משני הקצוות בודקים בנפרד. למשל הטור של
-    $\ln(1+x)$ מתכנס בדיוק כש-$-1<x\le1$.
+    $\ln(1+x)$ מתכנס בדיוק בתחום $(-1,1]$.
   reject: []
   lesson: '6.4'
 - id: alternating-series
   term: טור מתחלף
   en: alternating series
-  symbol: '\sum(-1)^ka_k,\ a_k>0'
+  symbol: '\sum_{k=1}^{\infty}(-1)^{k+1}b_k,\ b_k>0'
   definition: >-
-    טור שהסימנים של איבריו מתחלפים: $a_0-a_1+a_2-\dots$ עם $a_k>0$.
+    טור שהסימנים של איבריו מתחלפים: $b_1-b_2+b_3-b_4+\dots$ עם $b_k>0$.
   reject: []
   lesson: '6.4'
 - id: leibniz-series
   term: טור לייבניץ
   en: Leibniz (alternating) series
   definition: >-
-    טור מתחלף $\sum(-1)^ka_k$ שבו $a_k$ יורדים ושואפים ל-0. טור כזה מתכנס, והשגיאה של הסכום החלקי קטנה מהאיבר הראשון
-    שהושמט ובסימן שלו: $|S-S_n|\le a_{n+1}$.
+    טור מתחלף $\sum_{k=1}^{\infty}(-1)^{k+1}b_k$ שבו $b_k$ יורדים ושואפים ל-0. טור כזה מתכנס (משפט לייבניץ), הסכום $S$
+    נמצא בין שני סכומים חלקיים עוקבים $S_n$ ו-$S_{n+1}$, ולכן $|S-S_n|\le b_{n+1}$: השגיאה קטנה מהאיבר הראשון שהושמט,
+    ובסימן שלו.
   reject: [טור ליבניץ]
+  lesson: '6.4'
+- id: perturbation-parameter
+  term: פרמטר הפרעה
+  en: perturbation parameter
+  definition: >-
+    משתנה קטן בלי יחידות שמודד כמה מצב פיזיקלי רחוק ממצב פשוט שיודעים לפתור, למשל $\frac{h}{R_E}$ לגובה $h$ מעל כדור הארץ.
+    מפתחים בטור בחזקות שלו; הפיתוח תקף רק כשהפרמטר בתוך רדיוס ההתכנסות.
+  reject: []
   lesson: '6.4'

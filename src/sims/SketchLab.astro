@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 6.5 figure: <Spread figure={SketchLab} figureProps={{ mode, f, … }}>.
+ * mode: sketch, local. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the top of
+ * SketchLab.tsx; the preset ids are those of the registries SK and LOCAL in src/math/sketch.ts.
+ */
+import SketchLab, { type SketchLabProps } from './SketchLab';
+type Props = SketchLabProps;
+---
+
+<SketchLab client:visible {...Astro.props} />

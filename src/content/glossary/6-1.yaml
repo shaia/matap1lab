@@ -18,6 +18,25 @@
     נגזרות ראשונות כמו ל-$f$ בנקודה $x_0$. סביב $x_0=0$ קוראים לו לפעמים פולינום מקלורן.
   reject: [פולינום טיילר, פולינום טיילורי]
   lesson: '6.1'
+- id: factorial
+  term: עצרת
+  en: factorial
+  symbol: 'n!'
+  definition: >-
+    לטבעי $n$, $n!=1\cdot2\cdot3\cdots n$, המכפלה של כל הטבעיים עד $n$ (מהתיכון). מגדירים $0!=1$, כך ש-$n!=n\cdot(n-1)!$
+    לכל $n\ge1$. למשל $3!=6$, $4!=24$, $5!=120$. העצרת גדלה מהר מאוד: $10!=3628800$.
+  reject: [פקטוריאל]
+  lesson: '6.1'
+- id: summation-sign
+  term: סימן הסכום
+  en: summation sign (sigma notation)
+  symbol: '\sum_{k=0}^{n}a_k'
+  definition: >-
+    קיצור לסכום של כמה מחוברים שנבנים לפי אותו כלל:
+    $\sum_{k=0}^{n}a_k=a_0+a_1+\dots+a_n$. האות $\Sigma$ (סיגמה) היא S יוונית, של המילה סכום. $k$ הוא אינדקס הסכימה: הוא
+    עובר על כל השלמים מהערך שמתחת לסימן ועד הערך שמעליו. למשל $\sum_{k=1}^{4}k^2=1+4+9+16=30$.
+  reject: []
+  lesson: '6.1'
 - id: osculating-parabola
   term: פרבולה צמודה
   en: osculating parabola

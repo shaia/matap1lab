@@ -1,0 +1,440 @@
+# Workbook of lesson 6.3 — the expansions of the elementary functions.
+# Objectives (src/course.ts):
+#   OBJ-6.3-1  the Taylor series of exp, sin, cos, ln(1+x), the geometric series, arctan and (1+x)^a
+#   OBJ-6.3-2  new expansions from known ones: substitution, multiplication, differentiation, integration
+#   OBJ-6.3-3  limits by expansion; the leading term and the next one
+# No L'Hôpital, no convergence tests (radii are 6.4's topic: here only "valid for |x| < 1").
+# Every number recomputed with sympy in screens/tools/workbook-6-3.py.
+lesson: '6.3'
+practice:
+  - id: W-6.3-01
+    level: basic
+    objectives: [OBJ-6.3-1]
+    prompt: >-
+      בעזרת הטורים מהטבלה:
+
+      (א) קרבו את $e^{0.2}$ בארבעת האיברים הראשונים של הטור.
+
+      (ב) קרבו את $\sin0.1$ בשני האיברים הראשונים שאינם אפס.
+
+      השוו לערכים במחשבון, והשוו את ההפרש לאיבר הבא בטור.
+    answer: >-
+      (א) $1.2213333$ (במחשבון $1.2214028$). (ב) $0.0998333$ (במחשבון $0.0998334$).
+    solution:
+      - kind: idea
+        text: >-
+          מציבים את המספר בטור, איבר אחר איבר. האיבר הראשון שלא נלקח נותן את סדר הגודל של השגיאה.
+      - kind: computation
+        text: >-
+          (א) $e^x=1+x+\frac{x^2}{2}+\frac{x^3}{6}+\cdots$ עם $x=0.2$: $1+0.2+\frac{0.04}{2}+\frac{0.008}{6}=1+0.2+0.02+0.0013333=1.2213333$.
+      - kind: computation
+        text: >-
+          (ב) $\sin x=x-\frac{x^3}{6}+\cdots$ עם $x=0.1$: $0.1-\frac{0.001}{6}=0.1-0.0001667=0.0998333$.
+      - kind: check
+        text: >-
+          (א) במחשבון $e^{0.2}=1.2214028$; ההפרש $6.9\cdot10^{-5}$, והאיבר הבא $\frac{0.2^4}{24}\approx6.7\cdot10^{-5}$. (ב) במחשבון
+          $\sin0.1=0.09983342$; ההפרש $8.3\cdot10^{-8}$, בדיוק בגודל האיבר הבא $\frac{0.1^5}{120}\approx8.3\cdot10^{-8}$.
+      - kind: result
+        text: >-
+          $e^{0.2}\approx1.22133$, $\sin0.1\approx0.0998333$.
+
+  - id: W-6.3-02
+    level: basic
+    qualitative: true
+    objectives: [OBJ-6.3-1]
+    prompt: >-
+      לפניכם ארבעה טורים, וארבע פונקציות: $e^x$, $\sin x$, $\ln(1+x)$, $\arctan x$. התאימו לכל טור את הפונקציה שלו,
+      ונמקו בלי לחשב נגזרות: בעזרת הערך ב-0, הזוגיות והמכנים.
+
+      (א) $x-\frac{x^3}{3}+\frac{x^5}{5}-\cdots$
+
+      (ב) $1+x+\frac{x^2}{2}+\frac{x^3}{6}+\cdots$
+
+      (ג) $x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots$
+
+      (ד) $x-\frac{x^3}{6}+\frac{x^5}{120}-\cdots$
+    answer: >-
+      (א) $\arctan x$; (ב) $e^x$; (ג) $\ln(1+x)$; (ד) $\sin x$.
+    solution:
+      - kind: idea
+        text: >-
+          שלוש תכונות מבדילות: הערך ב-0 (האיבר החופשי), הזוגיות (אילו חזקות מופיעות) והמכנים (עצרות, או החזקה עצמה).
+      - kind: step
+        text: >-
+          רק (ב) מתחיל ב-1, ורק $e^x$ שווה 1 ב-0 (שאר הפונקציות שוות שם 0). לכן (ב) הוא $e^x$; וגם המכנים $2=2!$, $6=3!$ הם עצרות.
+      - kind: step
+        text: >-
+          (ג) מכיל חזקה זוגית, $x^2$, ולכן אינו טור של פונקציה אי-זוגית. $\sin$ ו-$\arctan$ אי-זוגיות, ולכן (ג) הוא $\ln(1+x)$.
+          גם המכנים $2,3$ הם החזקות עצמן, כמו בטור שבא מאינטגרציה.
+      - kind: step
+        text: >-
+          נשארו (א) ו-(ד), שניהם אי-זוגיים ומתחילים ב-$x$. ב-(ד) המכנים $6=3!$ ו-$120=5!$, עצרות: הסינוס. ב-(א) המכנים $3$ ו-$5$,
+          החזקות עצמן: הארקטנגנס.
+      - kind: check
+        text: >-
+          ב-$x=0.1$: (א) נותן $0.0996687$ ו-$\arctan0.1=0.0996687$; (ד) נותן $0.0998334$ ו-$\sin0.1=0.0998334$.
+      - kind: result
+        text: >-
+          (א) $\arctan x$, (ב) $e^x$, (ג) $\ln(1+x)$, (ד) $\sin x$.
+
+  - id: W-6.3-03
+    level: basic
+    objectives: [OBJ-6.3-2]
+    prompt: >-
+      כתבו את ארבעת האיברים הראשונים שאינם אפס בטור סביב 0 של כל פונקציה, ואמרו לאילו $x$ הפיתוח נכון.
+
+      (א) $\frac{1}{1-x^3}$
+
+      (ב) $e^{3x}$
+    answer: >-
+      (א) $1+x^3+x^6+x^9+\cdots$, כש-$|x|<1$. (ב) $1+3x+\frac92x^2+\frac92x^3+\cdots$, לכל $x$.
+    solution:
+      - kind: idea
+        text: >-
+          הצבה: מזהים את הטור הידוע ($\frac{1}{1-u}$ או $e^u$) ואת מה שעומד במקום $u$, ומציבים בכל איבר.
+      - kind: computation
+        text: >-
+          (א) $u=x^3$ בטור ההנדסי: $u^k=x^{3k}$, ולכן $1+x^3+x^6+x^9+\cdots$. התנאי $|u|<1$ הוא $|x|^3<1$, כלומר $|x|<1$.
+      - kind: computation
+        text: >-
+          (ב) $u=3x$ בטור של $e^u$: $\frac{(3x)^2}{2!}=\frac{9x^2}{2}$ ו-$\frac{(3x)^3}{3!}=\frac{27x^3}{6}=\frac{9x^3}{2}$. הטור של $e^u$
+          נכון לכל $u$, ולכן לכל $x$.
+      - kind: check
+        text: >-
+          (ב) הנגזרת של $e^{3x}$ היא $3e^{3x}$, ו-$f'(0)=3$: המקדם של $x$. והנגזרת השנייה $9e^{3x}$ נותנת $\frac{f''(0)}{2!}=\frac92$, כמו שיצא.
+      - kind: result
+        text: >-
+          (א) $1+x^3+x^6+x^9+\cdots$ ($|x|<1$); (ב) $1+3x+\frac92x^2+\frac92x^3+\cdots$ (כל $x$).
+
+  - id: W-6.3-04
+    level: mid
+    objectives: [OBJ-6.3-2]
+    prompt: >-
+      כתבו את הטור של $\frac{\ln(1+x)}{1-x}$ סביב 0 עד $x^3$, כולל, ככפל של שני טורים.
+    answer: >-
+      $x+\frac{x^2}{2}+\frac{5}{6}x^3+\cdots$
+    solution:
+      - kind: idea
+        text: >-
+          חילוק ב-$1-x$ הוא כפל בטור ההנדסי $1+x+x^2+\cdots$. במכפלה אוספים לכל חזקה את כל הזוגות שסכום החזקות שלהם שווה לה.
+      - kind: step
+        text: >-
+          $\frac{\ln(1+x)}{1-x}=\left(x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots\right)\left(1+x+x^2+\cdots\right)$. בטור של הלוגריתם אין איבר
+          חופשי, ולכן כדי להגיע עד $x^3$ מספיק מהטור ההנדסי עד $x^2$.
+      - kind: computation
+        text: >-
+          $x^1$: $x\cdot1$, מקדם 1. $x^2$: $x\cdot x$ ו-$\left(-\frac{x^2}{2}\right)\cdot1$, מקדם $1-\frac12=\frac12$. $x^3$: $x\cdot x^2$,
+          $\left(-\frac{x^2}{2}\right)\cdot x$ ו-$\frac{x^3}{3}\cdot1$, מקדם $1-\frac12+\frac13=\frac56$.
+      - kind: check
+        text: >-
+          המקדם של $x^n$ במכפלה בטור ההנדסי הוא סכום המקדמים של הטור הראשון עד $x^n$: $1$, $1-\frac12$, $1-\frac12+\frac13$. ובמספרים:
+          ב-$x=0.1$, $\frac{\ln1.1}{0.9}\approx0.1059002$, והטור נותן $0.1+0.005+0.000833=0.1058333$; ההפרש $6.7\cdot10^{-5}$, בגודל האיבר
+          הבא ($\left(1-\frac12+\frac13-\frac14\right)x^4\approx5.8\cdot10^{-5}$).
+      - kind: result
+        text: >-
+          $\frac{\ln(1+x)}{1-x}=x+\frac{x^2}{2}+\frac56x^3+\cdots$ (כש-$|x|<1$).
+
+  - id: W-6.3-05
+    level: mid
+    objectives: [OBJ-6.3-2]
+    prompt: >-
+      (א) גזרו את הטור ההנדסי איבר-איבר, וכפלו ב-$x$, כדי לכתוב את $\frac{x}{(1-x)^2}$ כטור חזקות, כש-$|x|<1$.
+
+      (ב) חשבו בעזרתו את הסכום $\frac13+\frac{2}{9}+\frac{3}{27}+\frac{4}{81}+\cdots=\sum_{k=1}^{\infty}\frac{k}{3^k}$.
+    answer: >-
+      (א) $\frac{x}{(1-x)^2}=x+2x^2+3x^3+\cdots=\sum_{k\ge1}kx^k$. (ב) $\frac34$.
+    solution:
+      - kind: idea
+        text: >-
+          גזירה איבר-איבר של טור ידוע נותנת את הטור של הנגזרת; כפל ב-$x$ מזיז כל חזקה באחת. אחר כך מזהים את הסכום המבוקש כערך של
+          הטור בנקודה מסוימת.
+      - kind: computation
+        text: >-
+          (א) $\frac{1}{1-x}=1+x+x^2+x^3+\cdots$. גוזרים: $\frac{1}{(1-x)^2}=1+2x+3x^2+4x^3+\cdots$. כופלים ב-$x$:
+          $\frac{x}{(1-x)^2}=x+2x^2+3x^3+4x^4+\cdots$
+      - kind: step
+        text: >-
+          (ב) $\frac{k}{3^k}=k\left(\frac13\right)^k$: זה הטור של (א) ב-$x=\frac13$, בתוך התחום $|x|<1$.
+      - kind: computation
+        text: >-
+          $\frac{1/3}{(1-1/3)^2}=\frac{1/3}{4/9}=\frac{9}{12}=\frac34$.
+      - kind: check
+        text: >-
+          חמשת האיברים הראשונים: $\frac13+\frac29+\frac19+\frac{4}{81}+\frac{5}{243}\approx0.7366$, ומתקרבים ל-$0.75$ מלמטה (כל
+          האיברים חיוביים).
+      - kind: result
+        text: >-
+          $\sum_{k=1}^\infty\frac{k}{3^k}=\frac34$.
+
+  - id: W-6.3-06
+    level: mid
+    objectives: [OBJ-6.3-2]
+    prompt: >-
+      לפונקציה $F(x)=\int_0^xe^{-t^2}\,dt$ (השטח מתחת לפעמון של גאוס, שמופיע בסטטיסטיקה ובפיזיקה של חום) אין נוסחה
+      בפונקציות של התיכון.
+
+      (א) כתבו את ארבעת האיברים הראשונים שאינם אפס בטור שלה סביב 0.
+
+      (ב) קרבו בעזרתם את $F(0.5)$.
+    answer: >-
+      (א) $x-\frac{x^3}{3}+\frac{x^5}{10}-\frac{x^7}{42}+\cdots$ (ב) $F(0.5)\approx0.461272$.
+    solution:
+      - kind: idea
+        text: >-
+          את $e^{-t^2}$ מפתחים בהצבה $u=-t^2$ בטור של $e^u$, ואז מבצעים אינטגרציה איבר-איבר מ-0 עד $x$, עם $\int_0^xt^m\,dt=\frac{x^{m+1}}{m+1}$.
+          כאן $F(0)=0$, ולכן אין קבוע.
+      - kind: computation
+        text: >-
+          $e^{-t^2}=1-t^2+\frac{t^4}{2!}-\frac{t^6}{3!}+\cdots=1-t^2+\frac{t^4}{2}-\frac{t^6}{6}+\cdots$
+      - kind: computation
+        text: >-
+          (א) איבר-איבר: $\int_0^x1\,dt=x$, $\int_0^xt^2\,dt=\frac{x^3}{3}$, $\int_0^x\frac{t^4}{2}\,dt=\frac{x^5}{10}$,
+          $\int_0^x\frac{t^6}{6}\,dt=\frac{x^7}{42}$. לכן $F(x)=x-\frac{x^3}{3}+\frac{x^5}{10}-\frac{x^7}{42}+\cdots$
+      - kind: computation
+        text: >-
+          (ב) $0.5-\frac{0.125}{3}+\frac{0.03125}{10}-\frac{0.0078125}{42}=0.5-0.0416667+0.003125-0.000186=0.461272$.
+      - kind: check
+        text: >-
+          הערך המדויק (מחושב) $F(0.5)=0.4612810$. ההפרש $8.7\cdot10^{-6}$, בגודל האיבר הבא, $\frac{x^9}{9\cdot4!}=\frac{0.5^9}{216}\approx9.0\cdot10^{-6}$.
+          ובדיקה בגזירה: הנגזרת של $x-\frac{x^3}{3}+\frac{x^5}{10}$ היא $1-x^2+\frac{x^4}{2}$, תחילת הטור של $e^{-x^2}$.
+      - kind: result
+        text: >-
+          $F(x)=x-\frac{x^3}{3}+\frac{x^5}{10}-\frac{x^7}{42}+\cdots$, ו-$F(0.5)\approx0.46127$.
+
+  - id: W-6.3-07
+    level: mid
+    objectives: [OBJ-6.3-3]
+    prompt: >-
+      חשבו בעזרת טורי טיילור:
+
+      (א) $\lim_{x\to0}\frac{\ln(1+x)-\sin x}{x^2}$
+
+      (ב) $\lim_{x\to0}\frac{\arctan x-\sin x}{x^3}$
+    answer: >-
+      (א) מינוס $\frac12$. (ב) מינוס $\frac16$.
+    solution:
+      - kind: idea
+        text: >-
+          מפתחים את המונה עד החזקה של המכנה, כולל. האיברים הראשונים של שתי הפונקציות זהים ומתבטלים, והגבול הוא המקדם של
+          החזקה של המכנה.
+      - kind: computation
+        text: >-
+          (א) $\ln(1+x)=x-\frac{x^2}{2}+\cdots$ ו-$\sin x=x+0\cdot x^2+\cdots$ (לסינוס אין $x^2$). ההפרש מתחיל במינוס $\frac{x^2}{2}$, והמנה
+          שואפת למינוס $\frac12$.
+      - kind: computation
+        text: >-
+          (ב) $\arctan x=x-\frac{x^3}{3}+\cdots$ ו-$\sin x=x-\frac{x^3}{6}+\cdots$. ההפרש $\left(-\frac13+\frac16\right)x^3+\cdots=-\frac16x^3+\cdots$,
+          והמנה שואפת למינוס $\frac16$.
+      - kind: check
+        text: >-
+          ב-$x=0.01$, במחשבון: (א) מינוס $0.4950$, (ב) מינוס $0.16665$. ובדיקת סימן ב-(ב): המכנים של $\arctan$ (3) קטנים מאלה של $\sin$ ($3!=6$),
+          ולכן $\arctan x$ "מאבד" יותר מ-$x$, ו-$\arctan x<\sin x$ ליד 0 מימין.
+      - kind: result
+        text: >-
+          (א) מינוס $\frac12$; (ב) מינוס $\frac16$.
+
+  - id: W-6.3-08
+    level: exam
+    qualitative: true
+    objectives: [OBJ-6.3-3, OBJ-6.3-1]
+    prompt: >-
+      $f(x)=\cos x-\sqrt{1-x^2}$ ל-$|x|<1$.
+
+      (א) מצאו את האיבר המוביל ואת האיבר הבא בטור של $f$ סביב 0.
+
+      (ב) נכון או לא: ליד 0, ל-$x\ne0$, הגרף של $\cos x$ נמצא מעל חצי המעגל $y=\sqrt{1-x^2}$. נמקו מתוך (א).
+
+      (ג) ב-$x=0.3$, השוו את $f(x)$ לאיבר המוביל ולקירוב בשני איברים.
+    answer: >-
+      (א) $f(x)=\frac{x^4}{6}+\frac{11}{180}x^6+\cdots$ (ב) נכון: האיבר המוביל חיובי וזוגי. (ג) $f(0.3)\approx0.0013973$, האיבר
+      המוביל $0.00135$, שני איברים $0.0013946$.
+    solution:
+      - kind: idea
+        text: >-
+          מפתחים את שתי הפונקציות עד $x^6$: הקוסינוס מהטבלה, והשורש מהטור הבינומי עם $\alpha=\frac12$ ו-$u=-x^2$. שני האיברים
+          הראשונים, $1-\frac{x^2}{2}$, שווים בשתיהן, ולכן צריך ללכת רחוק.
+      - kind: computation
+        text: >-
+          $\sqrt{1+u}=1+\frac u2-\frac{u^2}{8}+\frac{u^3}{16}-\cdots$ עם $u=-x^2$: $u^2=x^4$ ו-$u^3=-x^6$, ולכן
+          $\sqrt{1-x^2}=1-\frac{x^2}{2}-\frac{x^4}{8}-\frac{x^6}{16}-\cdots$
+      - kind: computation
+        text: >-
+          $\cos x=1-\frac{x^2}{2}+\frac{x^4}{24}-\frac{x^6}{720}+\cdots$. מחסרים: $x^4$: $\frac1{24}+\frac18=\frac{4}{24}=\frac16$.
+          $x^6$: $\frac{1}{16}-\frac{1}{720}=\frac{-1+45}{720}=\frac{44}{720}=\frac{11}{180}$.
+      - kind: step
+        text: >-
+          (ב) האיבר המוביל $\frac{x^4}{6}$ חיובי לכל $x\ne0$, וליד 0 הוא שולט ב-$f$. לכן $f(x)>0$ ליד 0: הקוסינוס מעל חצי המעגל. שימו
+          לב ששני הגרפים חולקים ב-0 ערך, שיפוע וגם נגזרת שנייה (האיבר מינוס $\frac{x^2}{2}$ בשניהם): ההבדל מופיע רק בחזקה הרביעית.
+      - kind: computation
+        text: >-
+          (ג) $\frac{0.3^4}{6}=\frac{0.0081}{6}=0.00135$, ועם $\frac{11}{180}\cdot0.3^6=0.0000446$: $0.0013946$.
+      - kind: check
+        text: >-
+          במחשבון $\cos0.3-\sqrt{0.91}=0.9553365-0.9539392=0.0013973$. האיבר המוביל טועה ב-3.4%, ושני איברים בפחות מ-0.2%.
+      - kind: result
+        text: >-
+          $f(x)=\frac{x^4}{6}+\frac{11}{180}x^6+\cdots$; ליד 0 (פרט ל-0) $\cos x>\sqrt{1-x^2}$.
+
+  - id: W-6.3-09
+    level: exam
+    qualitative: true
+    objectives: [OBJ-6.3-2, OBJ-6.3-1]
+    prompt: >-
+      $f(x)=\ln(1+x^3)$. בלי לגזור:
+
+      (א) חשבו את $f^{(6)}(0)$ ואת $f^{(9)}(0)$.
+
+      (ב) נכון או לא: $f^{(10)}(0)=0$. נמקו.
+    answer: >-
+      (א) $f^{(6)}(0)=-360$, $f^{(9)}(0)=120960$. (ב) נכון: בטור יש רק חזקות שמתחלקות ב-3.
+    solution:
+      - kind: idea
+        text: >-
+          כותבים את הטור בהצבה $u=x^3$ בטור של $\ln(1+u)$, ומשתמשים ב-$f^{(k)}(0)=k!\,a_k$: הנגזרת היא המקדם **כפול** העצרת.
+      - kind: computation
+        text: >-
+          $\ln(1+u)=u-\frac{u^2}{2}+\frac{u^3}{3}-\cdots$ עם $u=x^3$: $\ln(1+x^3)=x^3-\frac{x^6}{2}+\frac{x^9}{3}-\frac{x^{12}}{4}+\cdots$
+      - kind: computation
+        text: >-
+          (א) $a_6$ שווה מינוס $\frac12$, ולכן $f^{(6)}(0)=6!\cdot\left(-\frac12\right)=-360$. $a_9=\frac13$, ולכן
+          $f^{(9)}(0)=\frac{9!}{3}=\frac{362880}{3}=120960$.
+      - kind: step
+        text: >-
+          (ב) בטור מופיעות רק החזקות $x^3,x^6,x^9,\dots$, ולכן $a_{10}=0$ ו-$f^{(10)}(0)=10!\cdot0=0$. נכון.
+      - kind: check
+        text: >-
+          $f$ אינה זוגית ואינה אי-זוגית, ובכל זאת חלק מהנגזרות מתאפסות: הסיבה היא ההצבה $x^3$, לא הזוגיות. ובדיקה בגזירה ישירה
+          לסדר הנמוך: $f'(x)=\frac{3x^2}{1+x^3}$, ו-$f'''(0)=3!\cdot a_3=6$ מתאים ל-$a_3=1$.
+      - kind: result
+        text: >-
+          $f^{(6)}(0)=-360$, $f^{(9)}(0)=120960$, $f^{(10)}(0)=0$.
+
+  - id: W-6.3-10
+    level: exam
+    objectives: [OBJ-6.3-1, OBJ-6.3-3]
+    prompt: >-
+      תאוצת הכובד בגובה $h$ מעל פני כדור הארץ היא $g(h)=\frac{g_0R^2}{(R+h)^2}$, כש-$R\approx6371$ ק״מ רדיוס כדור הארץ ו-$g_0$
+      התאוצה על פני הקרקע.
+
+      (א) כתבו $g(h)=g_0\left(1+s\right)^{-2}$ עם $s=\frac hR$, ומצאו את שלושת האיברים הראשונים של הטור ב-$s$.
+
+      (ב) בגובה $h=10$ ק״מ (גובה טיסה), בכמה אחוזים קטנה התאוצה, לפי הקירוב הלינארי? מה גודל התיקון מהאיבר הבא?
+
+      (ג) הערכה: באיזה גובה בערך הקירוב הלינארי $g_0\left(1-\frac{2h}{R}\right)$ טועה ב-1% של $g_0$? השתמשו באיבר הבא כהערכה
+      לשגיאה.
+    answer: >-
+      (א) $g_0\left(1-2s+3s^2-\cdots\right)$. (ב) בערך $0.31\%$; התיקון $3s^2\approx7.4\cdot10^{-6}$, כלומר $0.0007\%$. (ג) $3s^2=0.01$
+      נותן $s\approx0.058$, כלומר $h\approx370$ ק״מ.
+    solution:
+      - kind: idea
+        text: >-
+          מוציאים $R^2$ מהמכנה כדי לקבל "1 ועוד משהו קטן" בחזקה, ומפתחים בטור הבינומי עם $\alpha=-2$. האיבר הלינארי הוא הקירוב,
+          והאיבר הבא מעריך את השגיאה שלו.
+      - kind: step
+        text: >-
+          $(R+h)^2=R^2(1+s)^2$, ולכן $g=g_0(1+s)^{-2}$.
+      - kind: computation
+        text: >-
+          (א) $\alpha=-2$: $\alpha s=-2s$, $\frac{\alpha(\alpha-1)}{2}s^2=\frac{(-2)(-3)}{2}s^2=3s^2$. לכן $g=g_0\left(1-2s+3s^2-\cdots\right)$.
+      - kind: computation
+        text: >-
+          (ב) $s=\frac{10}{6371}\approx0.0015696$. $2s\approx0.0031392$: ירידה של בערך $0.31\%$. התיקון $3s^2\approx7.39\cdot10^{-6}$,
+          זניח לעומתה.
+      - kind: computation
+        text: >-
+          (ג) השגיאה של הקירוב הלינארי היא בערך $3s^2$ (ביחידות של $g_0$). $3s^2=0.01$ כש-$s=\sqrt{\frac{1}{300}}\approx0.0577$, כלומר
+          $h\approx0.0577\cdot6371\approx368$ ק״מ.
+      - kind: check
+        text: >-
+          (ב) במדויק $(1+s)^{-2}\approx0.9968682$, הקירוב הלינארי $0.9968608$, ועם $3s^2$: $0.9968682$. (ג) במדויק השגיאה מגיעה ל-1% ב-$s\approx0.060$,
+          כלומר בערך 382 ק״מ: ההערכה מהאיבר הבא טובה עד כמה אחוזים, כי האיבר שאחריו, מינוס $4s^3$, מקטין מעט את השגיאה. בערך
+          בגובה של תחנת החלל, הקירוב הלינארי כבר אינו מספיק לחישוב מדויק.
+      - kind: result
+        text: >-
+          $g\approx g_0\left(1-\frac{2h}{R}+\frac{3h^2}{R^2}\right)$; ב-10 ק״מ ירידה של $0.31\%$; הקירוב הלינארי טועה ב-1% בגובה של כ-370 ק״מ.
+
+challenge:
+  - id: W-6.3-c1
+    stars: 1
+    objectives: [OBJ-6.3-3, OBJ-6.3-2]
+    prompt: >-
+      חשבו בעזרת טורים את $\lim_{x\to\infty}\left(1+\frac{1}{2x}\right)^{x}$.
+    answer: >-
+      $\sqrt e=e^{1/2}\approx1.6487$.
+    solution:
+      - kind: idea
+        text: >-
+          חזקה שגם הבסיס וגם המעריך שלה משתנים מפשטים בלוגריתם: $y=\left(1+\frac{1}{2x}\right)^x$ אז $\ln y=x\ln\left(1+\frac{1}{2x}\right)$.
+          כש-$x\to\infty$, $u=\frac{1}{2x}$ קטן, ובו מפתחים את $\ln(1+u)$.
+      - kind: computation
+        text: >-
+          $\ln(1+u)=u-\frac{u^2}{2}+\frac{u^3}{3}-\cdots$ עם $u=\frac{1}{2x}$:
+          $\ln y=x\left(\frac{1}{2x}-\frac{1}{8x^2}+\frac{1}{24x^3}-\cdots\right)=\frac12-\frac{1}{8x}+\frac{1}{24x^2}-\cdots$
+      - kind: step
+        text: >-
+          כש-$x\to\infty$ כל האיברים פרט ל-$\frac12$ שואפים ל-0, ולכן $\ln y\to\frac12$. האקספוננט רציף (שיעור 4.6), ולכן
+          $y=e^{\ln y}\to e^{1/2}$.
+      - kind: check
+        text: >-
+          ב-$x=1000$, במחשבון: $1.0005^{1000}\approx1.648515$, ו-$\sqrt e\approx1.648721$; היחס $e^{-1/(8x)}\approx0.999875$ מתאים
+          לאיבר מינוס $\frac{1}{8x}$. ובדיקה נוספת: עם $\frac1x$ במקום $\frac{1}{2x}$ אותו חישוב נותן את הגבול $e$ של שיעור 4.3.
+      - kind: result
+        text: >-
+          $\lim_{x\to\infty}\left(1+\frac{1}{2x}\right)^x=\sqrt e$.
+    source:
+      name: 'J. Feldman, A. Rechnitzer, E. Yeager, CLP-2 Integral Calculus (UBC)'
+      year: 2016
+      problem: 'Section 3.6.8 (Taylor series), exercise 35'
+      url: https://personal.math.ubc.ca/~CLP/CLP2/clp_2_ic/chap_seq_ser-8.html
+      verified: '2026-11-27'
+      adapted: false
+
+  - id: W-6.3-c2
+    stars: 1
+    objectives: [OBJ-6.3-1, OBJ-6.3-2]
+    prompt: >-
+      טור החזקות $\sum_{n=0}^{\infty}a_nx^n$ שווה לפונקציה $f(x)$, שמקיימת $f(0)=1$, $f'(0)=0$ ו-$f''(x)=-f(x)$ (המשוואה של
+      קפיץ, או של מטוטלת בזוויות קטנות).
+
+      (א) גזרו את הטור פעמיים איבר-איבר, והשוו מקדמים כדי למצוא קשר בין $a_{n+2}$ לבין $a_n$.
+
+      (ב) מצאו נוסחה ל-$a_n$, וזהו את $f$.
+    answer: >-
+      (א) $a_{n+2}=-\frac{a_n}{(n+2)(n+1)}$. (ב) $a_{2k}=\frac{(-1)^k}{(2k)!}$ ו-$a_{2k+1}=0$, כלומר $f(x)=\cos x$.
+    solution:
+      - kind: idea
+        text: >-
+          המשוואה $f''=-f$ היא שוויון בין שני טורי חזקות. טור חזקות יחיד, ולכן המקדמים של כל חזקה בשני האגפים שווים. זה נותן כלל
+          שמחשב כל מקדם משניים לפניו, ושני התנאים ב-0 נותנים את שני המקדמים הראשונים.
+      - kind: computation
+        text: >-
+          (א) קודם בכתיב מפורש: $f(x)=a_0+a_1x+a_2x^2+a_3x^3+a_4x^4+\cdots$, ולכן $f'(x)=a_1+2a_2x+3a_3x^2+4a_4x^3+\cdots$ ו-$f''(x)=2a_2+6a_3x+12a_4x^2+\cdots$.
+          משווים ל-$(-1)\cdot f(x)=-a_0-a_1x-a_2x^2-\cdots$ חזקה אחרי חזקה: האיבר החופשי נותן $2\cdot1\cdot a_2=-a_0$, המקדם של $x$ נותן
+          $3\cdot2\cdot a_3=-a_1$, והמקדם של $x^2$ נותן $4\cdot3\cdot a_4=-a_2$. בכל שורה המקדם של $x^n$ ב-$f''$ בא מהאיבר
+          $a_{n+2}x^{n+2}$ של $f$, שאיבד שתי חזקות בשתי הגזירות.
+      - kind: computation
+        text: >-
+          באופן כללי: $f(x)=\sum a_nx^n$, ולכן $f''(x)=\sum_{n\ge2}n(n-1)a_nx^{n-2}$. באיבר עם $x^n$ באגף שמאל (אינדקס $n+2$ במקום $n$) המקדם
+          הוא $(n+2)(n+1)a_{n+2}$, ובאגף ימין מינוס $a_n$. לכן $(n+2)(n+1)a_{n+2}=-a_n$.
+      - kind: computation
+        text: >-
+          (ב) $a_0=f(0)=1$ ו-$a_1=f'(0)=0$. מהכלל: $a_2=-\frac{a_0}{2\cdot1}=-\frac12$, $a_4=-\frac{a_2}{4\cdot3}=\frac{1}{24}$,
+          $a_6=-\frac{a_4}{6\cdot5}=-\frac{1}{720}$; ו-$a_3=-\frac{a_1}{6}=0$, ולכן כל האי-זוגיים 0.
+      - kind: step
+        text: >-
+          בכל צעד זוגי מכפילים במינוס 1 ומחלקים בשני המספרים הבאים, ולכן $a_{2k}=\frac{(-1)^k}{(2k)!}$. זה בדיוק הטור של $\cos x$
+          מהטבלה, ולכן (ביחידות של טור החזקות) $f(x)=\cos x$.
+      - kind: check
+        text: >-
+          $\cos0=1$, $(\cos)'(0)=-\sin0=0$, ו-$(\cos x)''=-\cos x$: שלושת התנאים מתקיימים. ובמספרים: אחד-עשר המקדמים הראשונים ב-$x=0.5$
+          נותנים $0.8775826$, ו-$\cos0.5=0.8775826$. עם התנאים $f(0)=0$, $f'(0)=1$ אותו חישוב נותן את הטור של $\sin x$.
+      - kind: result
+        text: >-
+          $a_{2k}=\frac{(-1)^k}{(2k)!}$, $a_{2k+1}=0$, ו-$f(x)=\cos x$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Section 6.4 (Working with Taylor Series), exercise 239; the plotting part omitted'
+      url: https://openstax.org/books/calculus-volume-2/pages/6-4-working-with-taylor-series
+      verified: '2026-11-27'
+      adapted: true
