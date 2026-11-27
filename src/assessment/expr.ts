@@ -46,6 +46,8 @@ export function normalizeExpr(input: string): string {
     .replace(/\barc(sin|cos|tan)\b/g, 'a$1')
     .replace(/\btg\b/g, 'tan')
     .replace(/\bln\b/g, 'log');
+  // superscript digits, as a phone keyboard or a copied formula writes them: "u²" → u^(2), "x⁻¹" → x^(-1)
+  s = s.replace(/[⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+/g, (m) => `^(${[...m].map((c) => '-0123456789'['⁻⁰¹²³⁴⁵⁶⁷⁸⁹'.indexOf(c)]).join('')})`);
   // √x, √2, √(…) → sqrt(…)
   s = s.replace(/√\s*\(/g, 'sqrt(').replace(/√\s*([a-z]|\d+(?:\.\d+)?)/gi, 'sqrt($1)');
   // |…| → abs(…), innermost pairs first; "ln|x|" keeps its function: log(abs(x)). An odd bar is left for the parser.

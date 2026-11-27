@@ -6,6 +6,8 @@ import Formula from '~/components/Formula.astro';
 import LessonLink from '~/components/LessonLink.astro';
 import Note from '~/components/Note.astro';
 import { chapters } from '~/course';
+import { midtermPapers } from '~/assessment/midterm-bank';
+import { MIDTERM_LAST_CHAPTER } from '~/assessment/midterm';
 import { url } from '~/lib/url';
 import '~/styles/lesson.css';
 import '~/styles/platform.css';
@@ -18,6 +20,7 @@ const { entry } = Astro.props;
 const n = entry.data.chapter;
 const chapter = chapters.find((c) => c.n === n);
 const { Content } = await render(entry);
+const hasMidterm = (await midtermPapers()).length > 0;
 ---
 
 <BaseLayout title={`סיכום פרק ${n} · ${chapter?.title ?? ''}`} description={entry.data.title}>
@@ -28,6 +31,7 @@ const { Content } = await render(entry);
       <div class="p-links">
         <a class="btn primary" href={url(`practice/ch${n}/`)}>דף התרגול של הפרק</a>
         <a class="btn" href={url(`test/ch${n}/`)}>מבחן הפרק</a>
+        {n === MIDTERM_LAST_CHAPTER && hasMidterm && <a class="btn" href={url('test/midterm/')}>מבחן אמצע: פרקים 1–8</a>}
         <a class="btn" href={url('formulas/')}>דף הנוסחאות</a>
         <a class="btn" href={url('')}>לתוכן העניינים</a>
       </div>

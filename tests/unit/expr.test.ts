@@ -51,6 +51,15 @@ describe('sameFunction: equivalent forms are accepted', () => {
     expect(sameFunction('ln(x^2)', '2 log(x)', pos)).toBe(true);
     expect(sameFunction('ln|x|', 'log(x)', pos)).toBe(true);
   });
+  it('reads superscript digits as powers, as a phone keyboard types them: u², x⁻¹, t¹⁰', () => {
+    expect(normalizeExpr('u²')).toBe('u^(2)');
+    expect(normalizeExpr('x⁻¹')).toBe('x^(-1)');
+    const u = spec({ variables: ['u'], domain: [-3, 3] });
+    expect(sameFunction('2-√(1+u²)', '2 - sqrt(1 + u^2)', u)).toBe(true);
+    expect(sameFunction('x⁻¹ + t¹⁰', 'x^(-1) + t^10', spec({ variables: ['x', 't'], domain: [0.5, 2] }))).toBe(true);
+    expect(sameFunction('2x³', '2*x^3', spec())).toBe(true);
+  });
+
   it('reads a variable right before "(" as a product, as formulas are printed: n(n+1)(2n+1)', () => {
     expect(normalizeExpr('n(n+1)')).toBe('n*(n+1)');
     expect(normalizeExpr('sin(x)')).toBe('sin(x)');

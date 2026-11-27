@@ -6,6 +6,7 @@ import {
   bankSchema,
   glossarySchema,
   lessonSchema,
+  midtermQuestionSchema,
   misconceptionSchema,
   summarySchema,
   videoSchema,
@@ -42,6 +43,7 @@ const misconceptions = defineCollection({ loader: yamlDir('src/content/misconcep
 const glossary = defineCollection({ loader: yamlDir('src/content/glossary'), schema: glossarySchema });
 const videos = defineCollection({ loader: yamlDir('src/content/videos'), schema: videoSchema });
 const workbook = defineCollection({ loader: glob({ base: './src/content/workbook', pattern: '**/*.yaml' }), schema: workbookSchema });
+const midterm = defineCollection({ loader: yamlDir('src/content/midterm'), schema: midtermQuestionSchema });
 const summaries = defineCollection({ loader: glob({ base: './src/content/summaries', pattern: '*.mdx' }), schema: summarySchema });
 
-export const collections = { lessons, questions, misconceptions, glossary, videos, workbook, summaries };
+export const collections = { lessons, questions, misconceptions, glossary, videos, workbook, summaries, midterm };

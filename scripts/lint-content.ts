@@ -25,7 +25,8 @@ import { parse } from 'yaml';
 import { allObjectives, chapters, lessonOrder } from '../src/course.ts';
 import { tex } from '../src/lib/tex.ts';
 import { compileExpr, sameFunction } from '../src/assessment/expr.ts';
-import { bankSchema, glossarySchema, misconceptionSchema, videoSchema, workbookSchema } from '../src/lib/schemas.ts';
+import { bankSchema, glossarySchema, midtermQuestionSchema, misconceptionSchema, videoSchema, workbookSchema } from '../src/lib/schemas.ts';
+import { MIDTERM_BLOCKS, MIDTERM_LAST_CHAPTER, midtermPlace, papersOf } from '../src/assessment/midterm.ts';
 
 const ROOT = join(import.meta.dirname, '..');
 const CONTENT = join(ROOT, 'src/content');
@@ -159,7 +160,13 @@ const banks = walk(join(CONTENT, 'questions'))
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => ({ file: rel(f), data: yamlFile<{ chapter: number; questions: Question[] }>(f) }));
 for (const b of banks) schemaCheck(b.file, bankSchema, b.data);
-const questions = banks.flatMap((b) => (b.data?.questions ?? []).map((q) => ({ q, file: b.file })));
+/** The midterm (chapters 1–8): exam questions, one YAML list per block (src/content/midterm/block-<k>.yaml). */
+const midtermDir = join(CONTENT, 'midterm');
+const midterm = (statSync(midtermDir, { throwIfNoEntry: false }) ? readdirSync(midtermDir) : [])
+  .filter((f) => f.endsWith('.yaml'))
+  .flatMap((f) => (yamlFile<Question[]>(join(midtermDir, f)) ?? []).map((q) => ({ q, file: `src/content/midterm/${f}` })));
+for (const { q, file } of midterm) schemaCheck(`${file} ${q.id}`, midtermQuestionSchema, q);
+const questions = [...banks.flatMap((b) => (b.data?.questions ?? []).map((q) => ({ q, file: b.file }))), ...midterm];
 
 /** A per-lesson YAML folder (`misconceptions/1-5.yaml`, …): every entry, tagged with its file. */
 const yamlDir = <T>(name: string): (T & { file: string })[] =>
@@ -290,6 +297,24 @@ for (const { file, data } of banks) {
     }
   }
 }
+for (const { q, file } of midterm) {
+  const w = `${file} ${q.id}`;
+  const place = midtermPlace(q.id);
+  if (q.type !== 'exam') fail(w, 'a midterm question is an exam question (type: exam)');
+  if (place && !file.endsWith(`/block-${place.block}.yaml`)) fail(w, `this question belongs in src/content/midterm/block-${place.block}.yaml`);
+  for (const [where, text] of texStrings(q, q.id)) {
+    try {
+      tex(text, where);
+    } catch (e) {
+      fail(w, (e as Error).message);
+    }
+  }
+}
+// a paper is one question from every block
+for (const { paper, blocks } of papersOf(midterm.map(({ q }) => q.id))) {
+  const missing = MIDTERM_BLOCKS.filter((b) => !blocks.includes(b.k)).map((b) => b.k);
+  if (missing.length) fail('src/content/midterm', `paper ${paper} has no question from block(s) ${missing.join(', ')}`, true);
+}
 for (const { q, file } of questions) {
   if (seenQ.has(q.id)) fail(`${file} ${q.id}`, 'duplicate question id');
   seenQ.add(q.id);
@@ -310,9 +335,13 @@ for (const { q: bq, file } of questions.filter(({ q }) => q.type === 'exam')) {
 for (const { q, file, part, parent } of units) {
   const w = `${file} ${q.id}`;
   const lessonOfId = q.id.match(/^Q-(\d+\.\d+)-/)?.[1];
-  const chapterOfId = Number(q.id.match(/^Q-(\d+)/)?.[1]);
+  const place = midtermPlace(q.id.split('/')[0]);
+  const block = place ? MIDTERM_BLOCKS.find((b) => b.k === place.block) : undefined;
+  const chapterOfId = place ? MIDTERM_LAST_CHAPTER : Number(q.id.match(/^Q-(\d+)/)?.[1]);
   for (const o of q.objectives ?? []) {
     if (!objectiveIds.has(o)) fail(w, `objective ${o} is not in the course map (src/course.ts)`);
+    // a midterm question tests its own block's chapters
+    if (place && !block?.chapters.includes(chapterOfObjective(o))) fail(w, `objective ${o} is outside block ${place.block} (chapters ${block?.chapters.join(', ') ?? '?'})`);
     if (lessonOfId && !o.startsWith(`OBJ-${lessonOfId}-`)) fail(w, `objective ${o} belongs to another lesson than the id prefix ${lessonOfId}`);
     // a review or exam question may mix lessons, and reach back to earlier chapters, never forward
     if (!lessonOfId && chapterOfObjective(o) > chapterOfId) fail(w, `objective ${o} is from a later chapter than ${chapterOfId}`);

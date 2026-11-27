@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import { chaptersWithQuestions } from '~/assessment/bank';
+import { midtermPapers } from '~/assessment/midterm-bank';
+import { MIDTERM_LAST_CHAPTER } from '~/assessment/midterm';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import CoverArt from '~/ui/CoverArt.astro';
 import { chapters, lessonSlug } from '~/course';
@@ -13,6 +15,7 @@ const written = new Set(
 );
 const withPractice = new Set(await chaptersWithQuestions());
 const withSummary = await chaptersWithSummary();
+const hasMidterm = (await midtermPapers()).length > 0;
 const firstLesson = chapters.flatMap((c) => c.lessons).find((l) => written.has(l.id));
 const firstPractice = chapters.find((c) => withPractice.has(c.n))?.n;
 ---
@@ -89,6 +92,7 @@ const firstPractice = chapters.find((c) => withPractice.has(c.n))?.n;
                 <p class="chapter-tools">
                   <a class="btn" href={url(`practice/ch${c.n}/`)}>דף תרגול</a>
                   <a class="btn" href={url(`test/ch${c.n}/`)}>מבחן פרק</a>
+                  {c.n === MIDTERM_LAST_CHAPTER && hasMidterm && <a class="btn" href={url('test/midterm/')}>מבחן אמצע: פרקים 1–8</a>}
                   {withSummary.has(c.n) && <a class="btn" href={url(`summary/ch${c.n}/`)}>סיכום הפרק</a>}
                 </p>
               )}

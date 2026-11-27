@@ -1,0 +1,501 @@
+# Midterm block 4 (chapter 6: Taylor polynomials and series, the remainder, f'' and sketching): one exam question per
+# paper, 25 points each. Original, in the style of an 80114 exam (not taken from a real exam). The three questions centre
+# on different lessons: Q-mid-1-4 on 6.1 with 6.2 (the n-th derivative of a damped oscillation, Lagrange's remainder,
+# the order needed), Q-mid-2-4 on 6.4 with 6.3 (Planck's law: a composed series, the radius 2π from the complex zeros
+# of e^z-1, a geometric series in e^-x for large x), Q-mid-3-4 on 6.5 with 6.3 (a full investigation of x-2arctan x
+# with oblique asymptotes, the number of solutions of f(x)=k, and its shape near 0 from the arctan series).
+# Every key, commonWrong and solution step recomputed with sympy (scratchpad scripts block4.py, block4b.py, block4c.py,
+# block4d.py, run 2026-11-27).
+
+- id: Q-mid-1-4
+  type: exam
+  title: תנודה מרוסנת בזמנים קצרים
+  prompt: >-
+    מסה קשורה לקפיץ ונעה בתוך נוזל צמיג, שמרסן את התנודה. ביחידות מתאימות, ההעתק שלה מנקודת שיווי המשקל בזמן $t\ge0$
+    הוא
+
+    $$x(t)=e^{-t}\cos t .$$
+
+    תוכנת סימולציה מחשבת את $x(t)$ בזמנים קצרים, $0\le t\le\frac12$, בעזרת פולינום טיילור $T_n(t)$ סביב $t=0$, ורוצים
+    לדעת איזה סדר $n$ מספיק. $R_n(t)=x(t)-T_n(t)$ היא השארית.
+  parts:
+    - label: א
+      points: 6
+      type: expr
+      objectives: [OBJ-6.1-1, OBJ-6.1-2]
+      prompt: 'כתבו את פולינום טיילור מסדר 4 של $x(t)$ סביב $t=0$ (במשתנה $t$).'
+      answer: '1 - t + t^3/3 - t^4/6'
+      answerTex: '$T_4(t)=1-t+\frac{t^3}{3}-\frac{t^4}{6}$'
+      variables: [t]
+      domain: [-1, 1]
+      correctFeedback: >-
+        נכון. הנגזרות ב-0 הן $x(0)=1$, $x'(0)=-1$, $x''(0)=0$, $x'''(0)=2$, $x^{(4)}(0)=-4$, ואחרי החלוקה ב-$k!$ המקדמים
+        הם $1,-1,0,\frac13,-\frac16$. אותה תשובה מכפל הטורים של $e^{-t}$ ושל $\cos t$: המקדם של $t^2$ הוא
+        $\frac12-\frac12=0$, ושל $t^3$ הוא $\frac12-\frac16=\frac13$.
+      wrongFeedback: >-
+        גזרו את $x(t)$ ארבע פעמים, הציבו $t=0$ וחלקו כל נגזרת ב-$k!$. או: כפלו את הטורים של $e^{-t}$ ושל $\cos t$, ואספו
+        לכל חזקה את כל זוגות האיברים שנותנים אותה.
+      commonWrong:
+        - expr: '1 - t + 2*t^3 - 4*t^4'
+          feedback: >-
+            אלה הנגזרות ב-0 עצמן. המקדם של $t^k$ הוא $\frac{x^{(k)}(0)}{k!}$: $\frac{2}{3!}=\frac13$ ו-$\frac{-4}{4!}$ הוא
+            מינוס $\frac16$.
+          misconception: MC-c6-forget-factorial
+        - expr: '1 - t^2/4 + t^4/576'
+          feedback: >-
+            כפלתם רק את המקדמים של אותה חזקה בשני הטורים. במכפלה $t^2$ בא מכל זוג חזקות שסכומן 2:
+            $1\cdot\left(-\frac{t^2}{2}\right)+\frac{t^2}{2}\cdot1=0$, ו-$t$ בא מ-$(-t)\cdot1$.
+          misconception: MC-c6-product-termwise
+        - expr: '1 + t - t^3/3 - t^4/6'
+          feedback: >-
+            זה הפולינום של $e^{t}\cos t$. כל גזירה של $e^{-t}$ מוסיפה גורם מינוס, ולכן $x'(0)=-1$ ולא 1.
+          misconception: MC-c6-nth-deriv-sign
+
+    - label: ב
+      points: 10
+      type: open
+      objectives: [OBJ-6.1-1, OBJ-6.2-1, OBJ-6.2-2]
+      prompt: >-
+        (1) הראו שלכל קבוע $\varphi$
+
+        $$\frac{d}{dt}\left[e^{-t}\cos(t+\varphi)\right]=\sqrt2\,e^{-t}\cos\left(t+\varphi+\tfrac{3\pi}{4}\right),$$
+
+        והסיקו ש-$x^{(n)}(t)=2^{n/2}e^{-t}\cos\left(t+\frac{3n\pi}{4}\right)$ לכל $n\ge0$.
+
+        (2) כתבו את $R_n(t)$ בצורת לגרנז׳, והוכיחו שלכל $0\le t\le\frac12$
+
+        $$|R_n(t)|\le\frac{2^{-(n+1)/2}}{(n+1)!}.$$
+      solution:
+        - kind: given
+          text: '$x(t)=e^{-t}\cos t$, $T_n$ פולינום טיילור מסדר $n$ סביב 0, והקטע $0\le t\le\frac12$.'
+        - kind: goal
+          text: 'נוסחה לנגזרת מסדר $n$, ובעזרתה חסם על השארית שאינו תלוי ב-$t$ בקטע.'
+        - kind: idea
+          text: >-
+            גזירה של $e^{-t}\cos(t+\varphi)$ מחזירה פונקציה מאותה צורה: היא כופלת ב-$\sqrt2$ ומזיזה את המופע ב-$\frac{3\pi}{4}$.
+            אחרי $n$ גזירות: גורם $(\sqrt2)^n=2^{n/2}$ והזזה $\frac{3n\pi}{4}$. בשארית מופיעה הנגזרת מסדר $n+1$ בנקודה לא
+            ידועה $c$, ולכן חוסמים אותה בכל הקטע.
+        - kind: computation
+          text: >-
+            לפי כלל המכפלה, עם $\theta=t+\varphi$:
+
+            $$\frac{d}{dt}\left[e^{-t}\cos\theta\right]=-e^{-t}\left(\cos\theta+\sin\theta\right).$$
+
+            את האגף הימני פותחים בנוסחת הסכום, עם $\cos\frac{3\pi}{4}=-\frac{\sqrt2}{2}$ ו-$\sin\frac{3\pi}{4}=\frac{\sqrt2}{2}$:
+
+            $$\sqrt2\cos\left(\theta+\tfrac{3\pi}{4}\right)=\sqrt2\left(\cos\theta\cos\tfrac{3\pi}{4}-\sin\theta\sin\tfrac{3\pi}{4}\right)$$
+
+            ו-$\sqrt2\cdot\frac{\sqrt2}{2}=1$, ולכן זה שווה ל-$(-\cos\theta-\sin\theta)$. כפל
+            ב-$e^{-t}$ נותן בדיוק את הנגזרת שחישבנו.
+        - kind: step
+          text: >-
+            אינדוקציה: ב-$n=0$ הנוסחה היא $x(t)$ עצמה. אם $x^{(n)}(t)=2^{n/2}e^{-t}\cos\left(t+\frac{3n\pi}{4}\right)$, אז
+            (1) עם $\varphi=\frac{3n\pi}{4}$ נותן $x^{(n+1)}(t)=2^{(n+1)/2}e^{-t}\cos\left(t+\frac{3(n+1)\pi}{4}\right)$.
+        - kind: check
+          text: >-
+            ב-$t=0$: $x'(0)=\sqrt2\cos\frac{3\pi}{4}=-1$, $x''(0)=2\cos\frac{3\pi}{2}=0$, $x'''(0)=2\sqrt2\cos\frac{9\pi}{4}=2$,
+            $x^{(4)}(0)=4\cos3\pi=-4$: אותם ערכים כמו בסעיף א.
+        - kind: computation
+          text: >-
+            נוסחת טיילור עם השארית בצורת לגרנז׳: $R_n(t)=\frac{x^{(n+1)}(c)}{(n+1)!}t^{n+1}$, עם $c$ כלשהו בין 0 ל-$t$.
+            לפי הנוסחה,
+
+            $$|R_n(t)|=\frac{2^{(n+1)/2}e^{-c}\left|\cos\left(c+\frac{3(n+1)\pi}{4}\right)\right|}{(n+1)!}\,t^{n+1}.$$
+        - kind: step
+          text: >-
+            $|\cos|\le1$. $e^{-c}$ יורדת, ו-$c\ge0$, ולכן $e^{-c}\le e^0=1$: המקסימום בקצה $c=0$, לא בקצה $c=\frac12$. ו-$t^{n+1}\le\left(\frac12\right)^{n+1}=2^{-(n+1)}$.
+            לכן
+
+            $$|R_n(t)|\le\frac{2^{(n+1)/2}\cdot2^{-(n+1)}}{(n+1)!}=\frac{2^{-(n+1)/2}}{(n+1)!}.$$
+        - kind: result
+          text: >-
+            $x^{(n)}(t)=2^{n/2}e^{-t}\cos\left(t+\frac{3n\pi}{4}\right)$ לכל $n\ge0$, ובקטע $0\le t\le\frac12$ מתקיים
+            $|R_n(t)|\le\frac{2^{-(n+1)/2}}{(n+1)!}$.
+      rubric:
+        - text: 'גזירה נכונה של $e^{-t}\cos(t+\varphi)$ וכתיבתה בצורה $\sqrt2\,e^{-t}\cos\left(t+\varphi+\frac{3\pi}{4}\right)$'
+          weight: 3
+        - text: 'מעבר מגזירה אחת לנוסחה לכל $n$ באינדוקציה, עם $\varphi=\frac{3n\pi}{4}$'
+          weight: 2
+        - text: 'השארית בצורת לגרנז׳ עם הנגזרת מסדר $n+1$ בנקודה $c$ בין 0 ל-$t$'
+          weight: 2
+        - text: 'חסם נכון: $|\cos|\le1$, $e^{-c}\le1$ (המקסימום ב-$c=0$) ו-$t\le\frac12$'
+          weight: 3
+
+    - label: ג
+      points: 5
+      type: numeric
+      objectives: [OBJ-6.2-3]
+      standalone: false
+      prompt: >-
+        מהו הסדר $n$ הקטן ביותר שעבורו אפשר להבטיח, בעזרת סעיפים א ו-ב, ש-$|R_n(t)|<10^{-4}$ לכל $0\le t\le\frac12$?
+      answer: 5
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון. ב-$n=5$ החסם של סעיף ב הוא $\frac{2^{-3}}{720}\approx1.74\cdot10^{-4}$, גדול מדי. אבל המקדם של $t^6$ הוא
+        $\frac{x^{(6)}(0)}{6!}=\frac{8\cos\frac{9\pi}{2}}{720}=0$, ולכן $T_5=T_6$ ו-$R_5=R_6$, ומותר לחסום ב-$R_6$:
+        $\frac{2^{-7/2}}{5040}\approx1.75\cdot10^{-5}<10^{-4}$. ב-$n=4$ אין קיצור כזה (המקדם של $t^5$ הוא
+        $\frac{1}{30}\ne0$), והחסם $\frac{2^{-5/2}}{120}\approx1.47\cdot10^{-3}$ גדול מדי.
+      wrongFeedback: >-
+        חשבו את החסם $\frac{2^{-(n+1)/2}}{(n+1)!}$ ל-$n=4,5,6$, ובדקו גם אילו מקדמים של פולינום טיילור הם 0: כשהמקדם
+        הבא 0, $T_n=T_{n+1}$.
+      commonWrong:
+        - value: 6
+          feedback: >-
+            החסם של סעיף ב עם האינדקס $n=6$ אכן קטן מ-$10^{-4}$, אבל המקדם של $t^6$ הוא 0, ולכן $T_5=T_6$: לאותו פולינום
+            יש גם השם $T_5$, ו-$R_5=R_6$ כבר קטנה מ-$10^{-4}$.
+          misconception: MC-c6-remainder-order
+        - value: 7
+          feedback: >-
+            השתמשתם בחסם מסדר $n$, $\frac{2^{-n/2}}{n!}$. השארית של $T_n$ כוללת את הנגזרת מסדר $n+1$ ואת $(n+1)!$; עם
+            החסם הנכון כבר $n=6$ מספיק, ובגלל $T_5=T_6$ גם $n=5$.
+          misconception: MC-c6-remainder-order
+
+    - label: ד
+      points: 4
+      type: twotier
+      objectives: [OBJ-6.2-1, OBJ-6.1-1]
+      qualitative: true
+      prompt: >-
+        נכון או לא: $T_5\left(\frac12\right)>x\left(\frac12\right)$, כלומר הקירוב של $T_5$ ב-$t=\frac12$ גדול מהערך
+        האמיתי.
+      choices:
+        - text: נכון
+          correct: true
+          feedback: >-
+            נכון. $T_5\left(\frac12\right)\approx0.532292$ ו-$x\left(\frac12\right)\approx0.532281$: ההפרש בערך
+            $1.1\cdot10^{-5}$, והסימן שלו נקבע מהשארית.
+        - text: לא נכון
+          feedback: >-
+            $R_5\left(\frac12\right)$ שלילית, ולכן $x\left(\frac12\right)<T_5\left(\frac12\right)$. היא אינה 0, אף
+            ש-$x^{(6)}(0)=0$: בשארית הנגזרת נלקחת בנקודה $c$, לא בנקודת הפיתוח.
+          misconception: MC-c6-remainder-at-center
+      reasons:
+        - text: >-
+            $R_5\left(\frac12\right)=\frac{x^{(6)}(c)}{720}\left(\frac12\right)^6$ עם $0<c<\frac12$, ובקטע הזה
+            $x^{(6)}(c)=-8e^{-c}\sin c<0$
+          correct: true
+          feedback: >-
+            בדיוק. מסעיף ב, $x^{(6)}(c)=2^3e^{-c}\cos\left(c+\frac{18\pi}{4}\right)$. כיוון ש-$\frac{18\pi}{4}=4\pi+\frac\pi2$
+            והקוסינוס מחזורי ב-$2\pi$, $\cos\left(c+\frac{18\pi}{4}\right)=\cos\left(c+\frac\pi2\right)$, וזה
+            $\cos c\cos\frac\pi2-\sin c\sin\frac\pi2=-\sin c$. ב-$0<c<\frac12$ מתקיים $\sin c>0$, ולכן $x^{(6)}(c)<0$ בכל
+            הקטע, ולא צריך לדעת את $c$.
+        - text: '$x^{(6)}(0)=0$, ולכן $R_5=0$ ו-$T_5\left(\frac12\right)=x\left(\frac12\right)$'
+          feedback: >-
+            מ-$x^{(6)}(0)=0$ נובע רק שהמקדם של $t^6$ הוא 0, כלומר $T_6=T_5$. השארית בצורת לגרנז׳ משתמשת ב-$x^{(6)}(c)$
+            בנקודה לא ידועה $c$, ושם הנגזרת אינה 0.
+          misconception: MC-c6-remainder-at-center
+        - text: 'אי אפשר להכריע, כי הנקודה $c$ בשארית אינה ידועה'
+          feedback: >-
+            לא צריך לדעת את $c$: מספיק שהסימן של $x^{(6)}(c)=-8e^{-c}\sin c$ קבוע לכל $c$ בקטע $\left(0,\frac12\right)$.
+          misconception: MC-c6-remainder-sign-unknown
+
+- id: Q-mid-2-4
+  type: exam
+  title: חוק פלאנק בתדירויות נמוכות וגבוהות
+  prompt: >-
+    לפי חוק פלאנק, צפיפות האנרגיה של קרינת גוף שחור בתדירות נתונה פרופורציונית ל-$\frac{x^3}{e^x-1}$, כש-$x>0$ הוא
+    אנרגיית הפוטון חלקי האנרגיה התרמית: מספר בלי יחידות שגדל עם התדירות. נסמן
+
+    $$g(x)=\frac{x}{e^x-1}\quad(x\ne0),\qquad g(0)=1,$$
+
+    כך שהצפיפות פרופורציונית ל-$x^2g(x)$. ($g(0)=1$ הוא הגבול של $g$ ב-0, ולכן $g$ רציפה.) בתדירויות נמוכות
+    $g\approx1$, וזה החוק הקלסי של ריילי וג׳ינס: הצפיפות פרופורציונית ל-$x^2$.
+  parts:
+    - label: א
+      points: 7
+      type: expr
+      objectives: [OBJ-6.4-3, OBJ-6.3-2]
+      prompt: >-
+        כתבו את $\frac{e^x-1}{x}$ כטור חזקות, ומצאו בעזרתו (בלי לגזור את $g$) את פולינום טיילור מסדר 3 של $g$ סביב 0.
+      answer: '1 - x/2 + x^2/12'
+      answerTex: '$T_3(x)=1-\frac x2+\frac{x^2}{12}$ (המקדם של $x^3$ יוצא 0)'
+      variables: [x]
+      domain: [-1, 1]
+      correctFeedback: >-
+        נכון. $\frac{e^x-1}{x}=1+u$ עם $u=\frac x2+\frac{x^2}{6}+\frac{x^3}{24}+\cdots$, ו-$g=\frac{1}{1+u}=1-u+u^2-u^3+\cdots$.
+        עד $x^3$: מ-$u^2$ באים $\frac{x^2}{4}$ ו-$2\cdot\frac x2\cdot\frac{x^2}{6}=\frac{x^3}{6}$, ומ-$u^3$ בא $\frac{x^3}{8}$.
+        המקדם של $x^2$: $\frac14-\frac16=\frac1{12}$; המקדם של $x^3$: $\frac16-\frac1{24}-\frac18=0$.
+      wrongFeedback: >-
+        הציבו $u=\frac x2+\frac{x^2}{6}+\frac{x^3}{24}$ בטור ההנדסי $\frac{1}{1+u}=1-u+u^2-u^3+\cdots$, ואספו מכל אחד
+        מ-$u$, $u^2$ ו-$u^3$ את כל האיברים עד $x^3$.
+      commonWrong:
+        - expr: '1 - x/2 + x^2/12 + x^3/8'
+          feedback: >-
+            השמטתם את $u^3$. גם הוא תורם ל-$x^3$, מינוס $\left(\frac x2\right)^3$, והמקדם של $x^3$ יוצא 0.
+          misconception: MC-c6-compose-truncate
+        - expr: '1 - x/2 - x^2/6 - x^3/24'
+          feedback: >-
+            זה $1-u$ בלבד. $u^2$ ו-$u^3$ מתחילים ב-$x^2$ וב-$x^3$, ולכן הם משנים את המקדמים המבוקשים.
+          misconception: MC-c6-compose-truncate
+        - expr: '1 - x/2 + x^2/4 - x^3/8'
+          feedback: >-
+            לקחתם מ-$u$ רק את האיבר הראשון, $\frac x2$. גם $\frac{x^2}{6}$ ו-$\frac{x^3}{24}$ תורמים עד $x^3$.
+          misconception: MC-c6-compose-truncate
+        - expr: '1 - x/2 + x^2/12 - x^3/12'
+          feedback: >-
+            ב-$u^2$ המכפלה $\frac x2\cdot\frac{x^2}{6}$ מופיעה פעמיים (פעם בכל סדר של הגורמים), ולכן היא תורמת
+            $\frac{x^3}{6}$ ולא $\frac{x^3}{12}$.
+          misconception: MC-c6-product-termwise
+
+    - label: ב
+      points: 4
+      type: numeric
+      objectives: [OBJ-6.4-1]
+      prompt: 'מהו רדיוס ההתכנסות של טור טיילור של $g$ סביב 0? (אפשר לכתוב ביטוי עם $\pi$)'
+      answer: 6.28318530718
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $2\pi$. $g$ נשברת רק איפה ש-$e^z=1$ ו-$z\ne0$, כלומר ב-$z=2\pi ki$ עם $k\ne0$, והקרובות ביותר ל-0 הן
+        $\pm2\pi i$.
+      wrongFeedback: >-
+        חפשו את הנקודות, גם המרוכבות, שבהן המכנה $e^z-1$ מתאפס (שיעור 3.4), חוץ מ-0, שבה $g$ מוגדרת. "אינסוף" אינו
+        נכון: $g$ חלקה על כל הישר, אבל זה אינו מספיק.
+      commonWrong:
+        - value: 2
+          feedback: >-
+            זה התנאי $|u|<1$ עם $u\approx\frac x2$ בלבד. $u$ הוא טור שלם, והרדיוס של $g=\frac1{1+u}$ נקבע לפי המקום שבו
+            $1+u=0$, כלומר $e^z=1$.
+          misconception: MC-c6-radius-substitution
+        - value: 1
+          feedback: >-
+            זה הרדיוס של הטור ההנדסי במשתנה $u$, לא במשתנה $x$. בודקים איפה $g$ עצמה נשברת.
+          misconception: MC-c6-radius-substitution
+
+    - label: ג
+      points: 9
+      type: open
+      objectives: [OBJ-6.4-1, OBJ-6.3-2]
+      standalone: false
+      prompt: >-
+        (1) נמקו את התשובה לסעיף ב.
+
+        (2) $g(7)$ מוגדר, ו-$g$ חלקה ליד 7. הסבירו למה אי אפשר לחשב את $g(7)$ מהטור של $g$ סביב 0.
+
+        (3) בתדירויות גבוהות ($x$ גדול) כתבו את $g(x)$, לכל $x>0$, כטור הנדסי במשתנה $q=e^{-x}$. הסבירו למה הוא
+        מתכנס, ומצאו את האיבר המוביל שלו כש-$x$ גדול. זה חוק וין: הצפיפות פרופורציונית בקירוב ל-$x^3e^{-x}$. בדקו את
+        הקירוב ב-$x=7$.
+      solution:
+        - kind: given
+          text: >-
+            $g(x)=\frac{x}{e^x-1}$, $g(0)=1$, ו-$\frac{e^x-1}{x}=1+\frac x2+\frac{x^2}{6}+\cdots$ (סעיף א).
+        - kind: goal
+          text: 'רדיוס ההתכנסות של הטור סביב 0, ופיתוח אחר שמתאים ל-$x$ גדול.'
+        - kind: idea
+          text: >-
+            רדיוס ההתכנסות הוא המרחק מ-0 לנקודה הקרובה ביותר שבה $g$ נשברת, ממשית או מרוכבת. ב-$x$ גדול $e^{-x}$ קטן,
+            ולכן מפתחים בחזקות שלו במקום בחזקות של $x$.
+        - kind: step
+          text: >-
+            (1) $g=\frac1h$ עם $h(x)=\frac{e^x-1}{x}=\sum_{k\ge0}\frac{x^k}{(k+1)!}$, טור שמתכנס לכל $x$, גם מרוכב. ב-0
+            עצמה $h(0)=1\ne0$, ולכן שם $g$ אינה נשברת. $g$ נשברת רק איפה ש-$h(z)=0$, כלומר $e^z=1$ ו-$z\ne0$. משיעור
+            3.4: $e^z=1$ בדיוק כש-$z=2\pi ki$ עם $k$ שלם. בלי $k=0$, הקרובות ביותר ל-0 הן $\pm2\pi i$, במרחק $2\pi$, ולכן
+            $R=2\pi\approx6.28$.
+        - kind: step
+          text: >-
+            (2) $7>2\pi$: הנקודה 7 מחוץ לתחום ההתכנסות, והטור מתבדר שם, אף ש-$g$ חלקה על כל הישר הממשי. מה שעוצר את
+            הטור הן הנקודות המרוכבות $\pm2\pi i$.
+        - kind: computation
+          text: >-
+            (3) נכפול את המונה ואת המכנה ב-$e^{-x}$, ונסמן $q=e^{-x}$:
+
+            $$g(x)=\frac{xe^{-x}}{1-e^{-x}}=x\left(q+q^2+q^3+\cdots\right).$$
+
+            הטור ההנדסי מתכנס כש-$|q|<1$, ו-$0<e^{-x}<1$ לכל $x>0$, ולכן הפיתוח נכון לכל $x>0$. היחס בין איברים עוקבים
+            הוא $e^{-x}$, קטן מאוד כש-$x$ גדול, ולכן האיבר המוביל הוא $xe^{-x}$, והצפיפות $x^2g(x)\approx x^3e^{-x}$.
+        - kind: check
+          text: >-
+            $g(7)=\frac{7}{e^7-1}\approx0.0063890$ ו-$7e^{-7}\approx0.0063832$: הפרש יחסי של כ-$0.0009\approx e^{-7}$, כמו
+            היחס לאיבר הבא. לעומת זאת, פולינום טיילור של $g$ סביב 0 מסדר 19 נותן ב-7 בערך 7.7, ומסדר 39 בערך 67: הטור
+            סביב 0 אינו מתקרב ל-$g(7)$.
+        - kind: result
+          text: >-
+            הרדיוס $2\pi$, בגלל $\pm2\pi i$, ולכן ב-$x=7>2\pi$ הטור סביב 0 מתבדר. לכל $x>0$ מתקיים
+            $g(x)=\sum_{k\ge1}xe^{-kx}$, והאיבר המוביל $xe^{-x}$ נותן את חוק וין, $x^3e^{-x}$.
+      rubric:
+        - text: 'הנקודות שבהן $g$ נשברת: $e^z=1$, $z=2\pi ki$ עם $k\ne0$, ונימוק למה 0 אינה נקודה כזו'
+          weight: 3
+        - text: 'רדיוס $2\pi$ כמרחק לנקודה הקרובה ביותר, והסבר למה הטור סביב 0 אינו נותן את $g(7)$'
+          weight: 2
+        - text: 'כתיבת $g$ כטור הנדסי ב-$e^{-x}$, ונימוק ההתכנסות לכל $x>0$'
+          weight: 2
+        - text: 'האיבר המוביל $xe^{-x}$, חוק וין, ובדיקה מספרית ב-$x=7$'
+          weight: 2
+
+    - label: ד
+      points: 5
+      type: twotier
+      objectives: [OBJ-6.3-2]
+      qualitative: true
+      prompt: >-
+        נכון או לא: בטור טיילור של $g$ סביב 0 המקדמים של $x^3$, $x^5$, $x^7$ וכל שאר החזקות האי-זוגיות מ-3 והלאה הם 0.
+      choices:
+        - text: נכון
+          correct: true
+          feedback: >-
+            נכון. $g(x)+\frac x2=1+\frac{x^2}{12}-\frac{x^4}{720}+\cdots$, רק חזקות זוגיות.
+        - text: לא נכון
+          feedback: >-
+            דווקא נכון. $g$ אינה זוגית ואינה אי-זוגית, אבל כמו כל פונקציה היא סכום של חלק זוגי וחלק אי-זוגי, והחלק
+            האי-זוגי שלה הוא בדיוק $\frac{g(x)-g(-x)}{2}=-\frac x2$. לכן החזקה האי-זוגית היחידה בטור של $g$ היא $x$ עצמה,
+            עם המקדם מינוס חצי, וכל השאר שייכות לחלק הזוגי $g(x)+\frac x2$.
+          misconception: MC-c4-even-odd-exclusive
+      reasons:
+        - text: >-
+            $g(-x)=\frac{-x}{e^{-x}-1}=\frac{xe^x}{e^x-1}=g(x)+x$, ולכן $g(x)+\frac x2$ זוגית, ובטור שלה רק חזקות זוגיות
+          correct: true
+          feedback: >-
+            בדיוק. $g$ ו-$g(x)+\frac x2$ נבדלות רק באיבר של $x$, ולכן ל-$g$ אין אף חזקה אי-זוגית מלבד $x$.
+        - text: '$g$ זוגית, כי היא מנה של שתי פונקציות אי-זוגיות, $x$ ו-$e^x-1$'
+          feedback: >-
+            $e^x-1$ אינה אי-זוגית: $e^{-x}-1\ne-(e^x-1)$. ו-$g$ אינה זוגית: $g(1)\approx0.58$ אבל $g(-1)\approx1.58$.
+          misconception: MC-c4-parity-by-exponents
+        - text: 'במחשבון $g(-1)\approx1.582$ ו-$g(1)\approx0.582$, כלומר $g(-1)=g(1)+1$, ולכן $g(x)+\frac x2$ זוגית'
+          feedback: >-
+            ההצבה ב-$x=1$ מתאימה, אבל נקודה אחת אינה מוכיחה זהות לכל $x$: היא יכולה רק לגלות טעות. ההוכחה היא החישוב
+            $g(-x)=g(x)+x$ ל-$x$ כללי.
+          misconception: MC-c5-one-point-proves
+
+- id: Q-mid-3-4
+  type: exam
+  title: חקירה עם שתי אסימפטוטות משופעות
+  prompt: >-
+    נתונה $f(x)=x-2\arctan x$, מוגדרת לכל $x$ ממשי.
+  parts:
+    - label: א
+      points: 4
+      type: numeric
+      objectives: [OBJ-6.5-1]
+      prompt: 'מהו הערך של $f$ בנקודת המקסימום המקומי שלה? (אפשר לכתוב ביטוי עם $\pi$)'
+      answer: 0.570796326795
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\frac\pi2-1$. $f'(x)=1-\frac{2}{1+x^2}=\frac{x^2-1}{x^2+1}$ חיובית כש-$x<-1$ ושלילית ב-$(-1,1)$, ולכן
+        ב-$x=-1$ מקסימום מקומי: $f(-1)=-1+2\cdot\frac\pi4$.
+      wrongFeedback: >-
+        מצאו את הנקודות שבהן $f'=0$, ובדקו את הסימן של $f'$ משני הצדדים של כל אחת.
+      commonWrong:
+        - value: -0.570796326795
+          feedback: >-
+            זה $f(1)=1-\frac\pi2$, הערך במינימום המקומי: ב-$x=1$ הנגזרת עוברת משלילית לחיובית.
+          misconception: MC-c5-sign-change-direction
+
+    - label: ב
+      points: 5
+      type: mc
+      objectives: [OBJ-6.5-1, OBJ-6.5-2]
+      prompt: >-
+        $k$ מספר קבוע. כמה פתרונות יש למשוואה $f(x)=k$, לפי הערך של $k$?
+      choices:
+        - text: >-
+            שלושה כש-$|k|<\frac\pi2-1$, שניים כש-$|k|=\frac\pi2-1$, ואחד כש-$|k|>\frac\pi2-1$
+          correct: true
+          feedback: >-
+            נכון. $f$ עולה ב-$(-\infty,-1]$ ממינוס אינסוף עד $\frac\pi2-1$, יורדת ב-$[-1,1]$ עד $1-\frac\pi2$, ועולה
+            ב-$[1,\infty)$ אל אינסוף, וכל ערך מתקבל לכל היותר פעם אחת בכל קטע. כש-$|k|<\frac\pi2-1$ יש פתרון בכל אחד
+            משלושת הקטעים. כש-$k=\frac\pi2-1$ הישר $y=k$ נוגע בגרף ב-$x=-1$ וחותך את הענף הימני (ב-$x\approx3.09$): שני
+            פתרונות, ובאי-זוגיות כך גם ב-$k=1-\frac\pi2$. כש-$|k|>\frac\pi2-1$ נשאר רק אחד הענפים החיצוניים.
+        - text: >-
+            שלושה כש-$|k|<\frac\pi2-1$, ואחד כש-$|k|\ge\frac\pi2-1$
+          feedback: >-
+            ב-$k=\frac\pi2-1$ הישר נוגע במקסימום ב-$x=-1$, וגם חותך את הענף הימני, שעולה מ-$1-\frac\pi2$ אל אינסוף:
+            פתרון שני, רחוק מהקיצון, ב-$x\approx3.09$. בגבול יש שני פתרונות.
+          misconception: MC-c4-graph-count-miss-far
+        - text: >-
+            שלושה כש-$|k|<1$, ואחד כש-$|k|\ge1$
+          feedback: >-
+            1 ומינוס 1 הם שיעורי ה-$x$ של נקודות הקיצון. $k$ הוא גובה, ולכן משווים אותו לערכי הקיצון, $f(\pm1)$, שהם
+            $\pm\left(\frac\pi2-1\right)\approx\pm0.571$. למשל ל-$f(x)=0.8$ יש פתרון אחד בלבד.
+          misconception: MC-c4-domain-image-swap
+        - text: 'שלושה לכל $k$, כמו מספר האפסים של $f$'
+          feedback: >-
+            הפתרונות של $f(x)=k$ הם האפסים של $f(x)-k$: הגרף מוזז ב-$k$ כלפי מטה, וההזזה משנה את מספר החיתוכים עם
+            הציר. למשל ל-$f(x)=2$ יש פתרון אחד בלבד, על הענף הימני.
+          misconception: MC-c4-vertical-shift-ignored
+
+    - label: ג
+      points: 11
+      type: open
+      objectives: [OBJ-6.5-1, OBJ-6.5-2]
+      prompt: >-
+        חקרו את $f$: זוגיות, אסימפטוטות (ומאיזה צד של כל אסימפטוטה נמצא הגרף), תחומי עלייה וירידה, קיצון, קמירות
+        ונקודות פיתול. הראו שיש ל-$f$ בדיוק שלושה אפסים, ומצאו קטע באורך 1 שמכיל את האפס החיובי. שרטטו את הגרף, ובדקו
+        את השרטוט מול ערכים מחושבים.
+      solution:
+        - kind: given
+          text: '$f(x)=x-2\arctan x$, רציפה וגזירה לכל $x$.'
+        - kind: goal
+          text: 'חקירה מלאה, מספר האפסים ומקומם, ושרטוט.'
+        - kind: idea
+          text: >-
+            $f$ אי-זוגית, ולכן מספיק לחקור את $x\ge0$ ולשקף דרך הראשית. כש-$x$ גדול $\arctan x$ כמעט קבוע, ולכן $f$
+            מתנהגת כמו $x$ פחות קבוע: מחפשים אסימפטוטות משופעות.
+        - kind: step
+          text: >-
+            זוגיות: $\arctan(-x)=-\arctan x$, ולכן $f(-x)=-f(x)$. אין אסימפטוטות אנכיות, כי $f$ רציפה בכל מקום. ההפרש
+            $f(x)-(x-\pi)=\pi-2\arctan x$ חיובי לכל $x$ (כי $\arctan x<\frac\pi2$) ושואף ל-0 כש-$x\to\infty$: האסימפטוטה
+            $y=x-\pi$, והגרף מעליה. בשיקוף דרך הראשית: $y=x+\pi$ כש-$x\to-\infty$, והגרף מתחתיה.
+        - kind: computation
+          text: >-
+            $f'(x)=\frac{x^2-1}{x^2+1}$: חיובית כש-$|x|>1$ ושלילית כש-$|x|<1$. לכן $f$ עולה ב-$(-\infty,-1]$ וב-$[1,\infty)$
+            ויורדת ב-$[-1,1]$. מקסימום מקומי $\left(-1,\frac\pi2-1\right)\approx(-1,0.571)$, ומינימום מקומי
+            $\left(1,1-\frac\pi2\right)\approx(1,-0.571)$.
+        - kind: computation
+          text: >-
+            $f''(x)=\frac{4x}{(1+x^2)^2}$: שלילית כש-$x<0$ (קעורה) וחיובית כש-$x>0$ (קמורה). נקודת פיתול אחת, $(0,0)$,
+            והשיפוע בה $f'(0)=-1$.
+        - kind: step
+          text: >-
+            אפסים: $f(0)=0$. בקטע $(0,1]$ הפונקציה יורדת מ-0, ולכן שלילית. בקטע $[1,\infty)$ היא עולה מ-$1-\frac\pi2<0$
+            אל אינסוף, ולכן מתאפסת שם פעם אחת בדיוק. $f(2)=2-2\arctan2\approx-0.214<0$ ו-$f(3)=3-2\arctan3\approx0.502>0$,
+            ולפי משפט ערך הביניים האפס $a$ בקטע $(2,3)$. מאי-זוגיות, האפס השלישי הוא מינוס $a$, ואין אחרים.
+        - kind: step
+          text: >-
+            שרטוט: משמאל הגרף מתחת לישר $y=x+\pi$ וצמוד אליו, עולה עד המקסימום ב-$x=-1$, יורד דרך הראשית בשיפוע מינוס 1
+            ומחליף שם קעירות בקמירות, מגיע למינימום ב-$x=1$, ועולה מעל הישר $y=x-\pi$ ומתקרב אליו.
+        - kind: check
+          text: >-
+            $f(0.5)\approx-0.427$, בין 0 לבין המינימום; $f(4)\approx1.348$, מעל $4-\pi\approx0.858$; $f(10)\approx7.058$,
+            מעל $10-\pi\approx6.858$, וההפרש קטן מ-0.49 ל-0.20 כשמתרחקים, כמו בתיאור.
+        - kind: result
+          text: >-
+            $f$ אי-זוגית; אסימפטוטות $y=x-\pi$ (ימינה, הגרף מעליה) ו-$y=x+\pi$ (שמאלה, הגרף מתחתיה); מקסימום מקומי
+            $\left(-1,\frac\pi2-1\right)$, מינימום מקומי $\left(1,1-\frac\pi2\right)$; קעורה כש-$x<0$, קמורה כש-$x>0$,
+            פיתול ב-$(0,0)$; שלושה אפסים, 0 ו-$\pm a$ עם $2<a<3$ ($a\approx2.33$).
+      rubric:
+        - text: 'אי-זוגיות, ושתי האסימפטוטות המשופעות עם נימוק ועם הצד שבו נמצא הגרף'
+          weight: 3
+        - text: >-
+            $f'$ נכונה, תחומי עלייה וירידה, וסוג שתי נקודות הקיצון (הערכים עצמם נבדקו בסעיף א)
+          weight: 2
+        - text: >-
+            $f''$ נכונה, תחומי קמירות וקעירות, ונקודת הפיתול
+          weight: 2
+        - text: 'בדיוק שלושה אפסים: מונוטוניות ליחידות, משפט ערך הביניים לקיום, וקטע באורך 1 לאפס החיובי'
+          weight: 2
+        - text: 'שרטוט עקבי עם החקירה, ובדיקה מול ערכים מחושבים'
+          weight: 2
+
+    - label: ד
+      points: 5
+      type: mc
+      objectives: [OBJ-6.5-3, OBJ-6.3-1]
+      prompt: 'לפי הטור של $\arctan x$, איך נראה הגרף של $f$ ליד $x=0$?'
+      choices:
+        - text: 'כמו $y=-x+\frac23x^3$: המשיק $y=-x$, והגרף מעליו כש-$x>0$ ומתחתיו כש-$x<0$'
+          correct: true
+          feedback: >-
+            נכון. $\arctan x=x-\frac{x^3}{3}+\cdots$, ולכן $f(x)=-x+\frac23x^3-\cdots$. האיבר שאחרי המשיק ממעלה אי-זוגית,
+            3, ולכן הגרף חוצה את המשיק: נקודת פיתול, כמו בסעיף ג.
+        - text: 'כמו $y=-x+\frac13x^3$'
+          feedback: >-
+            בטור של $\arctan$ המכנה הוא 3, לא $3!$: $2\cdot\frac{x^3}{3}=\frac23x^3$.
+          misconception: MC-c6-arctan-factorials
+        - text: 'כמו $y=-x-\frac23x^3$: הגרף מתחת למשיק כש-$x>0$'
+          feedback: >-
+            הסימן התהפך: מחסרים $2\arctan x$, והמכפלה $(-2)\cdot\left(-\frac{x^3}{3}\right)$ חיובית. גם בסעיף ג
+            $f''>0$ כש-$x>0$: הגרף קמור שם, ולכן מעל המשיק.
+          misconception: MC-c6-alternating-sign-lost
+        - text: 'כמו הישר $y=-x$: ליד 0 הגרף ישר'
+          feedback: >-
+            הישר הוא רק המשיק. האיבר הבא, $\frac23x^3$, קובע מאיזה צד של המשיק נמצא הגרף.
+          misconception: MC-c6-truncate-too-early

@@ -1,0 +1,422 @@
+# Midterm block 5 (chapters 7–8): antiderivatives and integration techniques; the definite integral,
+# substitution with limits, improper integrals, numerical integration, areas and volumes.
+# Original questions in the style of an 80114 exam (not taken from a real exam).
+# Every key, commonWrong and solution step recomputed with sympy (scratchpad scripts block5.py, block5_fix.py).
+# Paper 1: 7.3, 7.5, 8.2, 8.5. Paper 2: 7.1, 7.2, 7.3, 8.1. Paper 3: 7.4, 7.6, 8.3, 8.4.
+
+- id: Q-mid-1-5
+  type: exam
+  title: גבעה של סינוס בריבוע, ושני גופי סיבוב
+  prompt: >-
+    התחום $D$ כלוא בין הגרף של $y=\sin^2x$ לבין ציר $x$, בקטע $0\le x\le\pi$. הגרף נראה כמו גבעה אחת, סימטרית
+    סביב הישר $x=\frac\pi2$. מסובבים את $D$ פעם סביב ציר $x$ ופעם סביב ציר $y$.
+  parts:
+    - label: א
+      points: 6
+      type: numeric
+      objectives: [OBJ-8.5-2, OBJ-7.5-1]
+      prompt: 'חשבו את הנפח של הגוף שנוצר כש-$D$ מסתובב סביב ציר $x$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)'
+      answer: 3.7011016504085
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\frac{3\pi^2}{8}$. דיסקות ברדיוס $\sin^2x$: $V=\pi\int_0^\pi\sin^4x\,dx$. הורדת חזקה פעמיים:
+        $\sin^4x=\left(\frac{1-\cos2x}{2}\right)^2=\frac{1-2\cos2x+\cos^22x}{4}$, ועם
+        $\cos^22x=\frac{1+\cos4x}{2}$ זה $\frac38-\frac{\cos2x}{2}+\frac{\cos4x}{8}$. שני הקוסינוסים תורמים 0 על
+        $[0,\pi]$, ולכן $V=\pi\cdot\frac{3\pi}{8}$.
+      wrongFeedback: >-
+        שטח הדיסקה הוא $\pi R^2$ עם $R=\sin^2x$, כלומר $V=\pi\int_0^\pi\sin^4x\,dx$. הורידו חזקה פעמיים:
+        $\sin^2x=\frac{1-\cos2x}{2}$, ואחר כך $\cos^22x=\frac{1+\cos4x}{2}$.
+      commonWrong:
+        - value: 4.9348022005447
+          feedback: >-
+            זה $\frac{\pi^2}{2}$, ויש שתי דרכים להגיע אליו. (1) $\pi\int_0^\pi\sin^2x\,dx$: הרדיוס הוא $\sin^2x$, ושטח
+            הדיסקה $\pi\left(\sin^2x\right)^2$. (2) בהורדת החזקה השנייה כתבתם $\cos^22x=1+\cos4x$ בלי החלוקה ב-2,
+            ואז $\int_0^\pi\cos^22x\,dx$ יצא $\pi$ במקום $\frac\pi2$.
+          misconception: MC-c8-disc-no-square
+        - value: 14.804406601634
+          feedback: >-
+            זה $\frac{3\pi^2}{2}$, פי 4 מהתשובה: כתבתם $\sin^2x=1-\cos2x$ בלי החלוקה ב-2, ואחרי ההעלאה בריבוע
+            הגורם החסר הוא $\frac14$.
+          misconception: MC-c7-double-angle-half
+
+    - label: ב
+      points: 9
+      type: open
+      objectives: [OBJ-8.2-1]
+      prompt: >-
+        תהי $f$ רציפה ב-$[0,\pi]$, ונניח ש-$f(\pi-x)=f(x)$ לכל $x$ בקטע (הגרף סימטרי סביב $x=\frac\pi2$). הראו
+        בהצבה ש-
+
+        $$\int_0^\pi x\,f(x)\,dx=\frac\pi2\int_0^\pi f(x)\,dx .$$
+      solution:
+        - kind: given
+          text: '$f$ רציפה ב-$[0,\pi]$ ו-$f(\pi-x)=f(x)$.'
+        - kind: goal
+          text: 'להראות ש-$I=\int_0^\pi x\,f(x)\,dx$ שווה ל-$\frac\pi2\int_0^\pi f(x)\,dx$.'
+        - kind: idea
+          text: >-
+            ההצבה $u=\pi-x$ משקפת את הקטע סביב $\frac\pi2$. היא לא משנה את $f$, אבל מחליפה את הגורם $x$ ב-$\pi-u$.
+            כך מתקבלת משוואה שבה $I$ מופיע בשני האגפים.
+        - kind: step
+          text: >-
+            $u=\pi-x$, $du=-dx$. הגבולות: $x=0\mapsto u=\pi$ ו-$x=\pi\mapsto u=0$.
+        - kind: computation
+          text: >-
+            $I=\int_\pi^0(\pi-u)\,f(\pi-u)\,(-du)=\int_0^\pi(\pi-u)\,f(u)\,du=\pi\int_0^\pi f(u)\,du-\int_0^\pi u\,f(u)\,du$.
+        - kind: step
+          text: >-
+            האינטגרל האחרון הוא $I$ עצמו (שם המשתנה לא משנה). לכן $I=\pi\int_0^\pi f-I$, כלומר
+            $2I=\pi\int_0^\pi f(x)\,dx$, ומחלקים ב-2.
+        - kind: check
+          text: >-
+            עם $f=1$: $\int_0^\pi x\,dx=\frac{\pi^2}{2}$, ו-$\frac\pi2\int_0^\pi1\,dx=\frac{\pi^2}{2}$. בפיזיקה זה אומר שמרכז
+            המסה של לוח סימטרי נמצא על ציר הסימטריה $x=\frac\pi2$.
+        - kind: result
+          text: '$\int_0^\pi x\,f(x)\,dx=\frac\pi2\int_0^\pi f(x)\,dx$ לכל $f$ רציפה עם $f(\pi-x)=f(x)$.'
+      rubric:
+        - text: 'הצבה $u=\pi-x$ עם $du=-dx$ והחלפת הגבולות (והפיכתם בעזרת המינוס)'
+          weight: 3
+        - text: 'שימוש בתנאי $f(\pi-u)=f(u)$ ופירוק ל-$\pi\int f-\int u\,f$'
+          weight: 3
+        - text: 'זיהוי $I$ באגף ימין ופתרון המשוואה $2I=\pi\int f$'
+          weight: 3
+
+    - label: ג
+      points: 5
+      type: numeric
+      objectives: [OBJ-8.5-3, OBJ-7.5-1]
+      standalone: false
+      prompt: >-
+        חשבו בשיטת הקליפות את הנפח של הגוף שנוצר כש-$D$ מסתובב סביב ציר $y$. היעזרו בסעיף ב. (אפשר לכתוב ערך
+        מדויק, כמו 3√2, 5π/4 או ln 3.)
+      answer: 15.50313834015
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\frac{\pi^3}{2}$. $V=2\pi\int_0^\pi x\sin^2x\,dx$, ו-$\sin^2(\pi-x)=\sin^2x$, ולכן לפי סעיף ב
+        $V=2\pi\cdot\frac\pi2\int_0^\pi\sin^2x\,dx=\pi^2\cdot\frac\pi2$. (ישירות, באינטגרציה בחלקים, מתקבל אותו ערך.)
+      wrongFeedback: >-
+        קליפה ברדיוס $x$ ובגובה $\sin^2x$: $V=2\pi\int_0^\pi x\sin^2x\,dx$. בדקו שהפונקציה $\sin^2x$ מקיימת את התנאי של
+        סעיף ב, וחשבו $\int_0^\pi\sin^2x\,dx$ בהורדת חזקה.
+      commonWrong:
+        - value: 9.8696044010894
+          feedback: 'זה $2\pi\int_0^\pi\sin^2x\,dx=\pi^2$: חסר הרדיוס $x$ של הקליפה.'
+          misconception: MC-c8-shell-radius
+        - value: 31.00627668030
+          feedback: >-
+            זה $\pi^3$, פי 2 מהתשובה, ויש שתי דרכים להגיע אליו. (1) לקחתם $\int_0^\pi\sin^2x\,dx=\pi$; עם
+            $\sin^2x=\frac{1-\cos2x}{2}$ האינטגרל הוא $\frac\pi2$. (2) בסעיף ב עצרתם ב-$2I=\pi\int_0^\pi f$ ולקחתם
+            $I=\pi\int_0^\pi f$, בלי לחלק ב-2.
+          misconception: MC-c7-double-angle-half
+
+    - label: ד
+      points: 5
+      type: twotier
+      objectives: [OBJ-8.2-2, OBJ-7.3-1]
+      qualitative: true
+      standalone: false
+      prompt: >-
+        נכון או לא: לפי סעיף ב, $\int_0^\pi x\cos x\,dx=\frac\pi2\int_0^\pi\cos x\,dx=0$.
+      choices:
+        - text: לא נכון
+          correct: true
+          feedback: 'נכון. באינטגרציה בחלקים $\int_0^\pi x\cos x\,dx=\left[x\sin x+\cos x\right]_0^\pi=(-1)-1=-2$, לא 0.'
+        - text: נכון
+          feedback: >-
+            סעיף ב דורש $f(\pi-x)=f(x)$, ול-$\cos x$ זה לא מתקיים. חשבו ישירות: $\left[x\sin x+\cos x\right]_0^\pi$.
+          misconception: MC-c8-odd-whole
+      reasons:
+        - text: '$\cos(\pi-x)=-\cos x$, ולכן התנאי של סעיף ב לא מתקיים; ובחישוב ישיר האינטגרל הוא $-2$'
+          correct: true
+          feedback: 'בדיוק: לפני שמשתמשים בסימטריה בודקים את התנאי שלה.'
+        - text: '$x\cos x$ פונקציה אי-זוגית, ולכן האינטגרל שלה 0'
+          feedback: >-
+            $x\cos x$ אכן אי-זוגית, אבל אינטגרל של פונקציה אי-זוגית מתאפס רק בקטע סימטרי סביב 0, כמו $[-\pi,\pi]$.
+            הקטע $[0,\pi]$ אינו כזה.
+          misconception: MC-c8-odd-whole
+        - text: 'הנוסחה של סעיף ב נכונה לכל פונקציה רציפה'
+          feedback: >-
+            ההוכחה השתמשה ב-$f(\pi-u)=f(u)$. בלי התנאי הזה היא נשברת, ו-$\cos x$ היא דוגמה נגדית.
+          misconception: MC-c8-odd-whole
+
+- id: Q-mid-2-5
+  type: exam
+  title: מהירות עם שורש בתוך סינוס
+  prompt: >-
+    חלקיק נע על ציר $x$ במהירות $v(t)=\sin\sqrt t$ (מטר לשנייה, $t\ge0$ בשניות), ובזמן $t=0$ הוא בראשית:
+    $x(0)=0$. מתבוננים בתנועה בקטע הזמן $0\le t\le9\pi^2$.
+  parts:
+    - label: א
+      points: 6
+      type: expr
+      objectives: [OBJ-7.2-2, OBJ-7.3-1]
+      prompt: 'מצאו את המקום $x(t)$ (כולל הקבוע שנקבע מהתנאי $x(0)=0$). כתבו את התשובה במשתנה $t$.'
+      answer: '2*sin(sqrt(t)) - 2*sqrt(t)*cos(sqrt(t))'
+      answerTex: '$x(t)=2\sin\sqrt t-2\sqrt t\cos\sqrt t$'
+      variables: [t]
+      domain: [0.5, 90]
+      correctFeedback: >-
+        נכון. $u=\sqrt t$, $t=u^2$, $dt=2u\,du$: $\int\sin\sqrt t\,dt=2\int u\sin u\,du$. בחלקים (גוזרים את $u$):
+        $2\left(-u\cos u+\sin u\right)+C$. ב-$t=0$ הביטוי מתאפס, ולכן $C=0$.
+      wrongFeedback: >-
+        הציבו $u=\sqrt t$ (אז $dt=2u\,du$), ואת $\int u\sin u\,du$ חשבו באינטגרציה בחלקים. בסוף קבעו את הקבוע לפי
+        $x(0)=0$.
+      commonWrong:
+        - expr: 'sin(sqrt(t)) - sqrt(t)*cos(sqrt(t))'
+          feedback: 'חסר הגורם 2: מ-$t=u^2$ נובע $dt=2u\,du$, ולכן האינטגרל הוא $2\int u\sin u\,du$.'
+          misconception: MC-c7-subst-forget-factor
+        - expr: '2*sqrt(t)*cos(sqrt(t)) - 2*sin(sqrt(t))'
+          feedback: >-
+            זה מינוס התשובה: לקחתם $\int\sin u\,du=\cos u$. הנכון $-\cos u$, ולכן
+            $\int u\sin u\,du=-u\cos u+\sin u$.
+          misconception: MC-c7-trig-integral-sign
+        - expr: '1 - cos(sqrt(t))'
+          feedback: >-
+            זה מתקבל מ-$\int\sin u\,du$, כלומר מהחלפת $dt$ ב-$du$ כמו שהוא. אבל $dt=2u\,du$, ונשאר הגורם $2u$.
+          misconception: MC-c7-subst-mixed-variables
+
+    - label: ב
+      points: 4
+      type: numeric
+      objectives: [OBJ-8.1-2, OBJ-7.1-2]
+      standalone: false
+      prompt: >-
+        חשבו את ההעתק של החלקיק בקטע הזמן, $\int_0^{9\pi^2}v(t)\,dt$. (אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4 או ln 3.)
+      answer: 18.849555921539
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $6\pi$. ב-$t=9\pi^2$, $\sqrt t=3\pi$: $x(9\pi^2)=2\sin3\pi-6\pi\cos3\pi=6\pi$. בסוף הקטע החלקיק נמצא
+        $6\pi$ מטרים מימין לראשית.
+      wrongFeedback: 'לפי המשפט היסודי ההעתק הוא $x(9\pi^2)-x(0)$. הציבו $\sqrt t=3\pi$ בתשובה של סעיף א.'
+      commonWrong:
+        - value: 56.548667764616
+          feedback: 'זה $18\pi$, הדרך הכוללת (סעיף ג). ההעתק מקזז את התנועה ימינה מול התנועה שמאלה.'
+          misconception: MC-c8-displacement-vs-distance
+        - value: -18.849555921539
+          feedback: >-
+            זה $-6\pi$, מינוס התשובה. או שחישבתם $x(0)-x(9\pi^2)$ (ההעתק הוא המקום בסוף פחות המקום בהתחלה), או
+            שבסעיף א לקחתם $\int\sin u\,du=\cos u$ וקיבלתם את $x(t)$ עם סימן הפוך.
+          misconception: MC-c7-ftc-order
+        - value: 9.4247779607694
+          feedback: 'זה $3\pi$, חצי מהתשובה: חסר הגורם 2 של $dt=2u\,du$.'
+          misconception: MC-c7-subst-forget-factor
+        - value: 2
+          feedback: >-
+            זה $1-\cos3\pi=2$, מהקדומה $1-\cos\sqrt t$: החלפתם $dt$ ב-$du$ כמו שהוא. אבל $dt=2u\,du$.
+          misconception: MC-c7-subst-mixed-variables
+
+    - label: ג
+      points: 10
+      type: open
+      objectives: [OBJ-8.1-2, OBJ-7.1-2]
+      standalone: false
+      prompt: >-
+        חשבו את הדרך הכוללת שהחלקיק עובר בקטע הזמן $0\le t\le9\pi^2$. פרטו מתי הוא נע ימינה ומתי שמאלה, ומהן
+        הנקודה השמאלית ביותר והנקודה הימנית ביותר שהוא מגיע אליהן.
+      solution:
+        - kind: given
+          text: '$v(t)=\sin\sqrt t$, $x(t)=2\sin\sqrt t-2\sqrt t\cos\sqrt t$ (סעיף א), $0\le t\le9\pi^2$.'
+        - kind: goal
+          text: 'הדרך הכוללת $\int_0^{9\pi^2}\left|v(t)\right|dt$, וכיווני התנועה.'
+        - kind: idea
+          text: >-
+            הדרך היא האינטגרל של **גודל** המהירות. מפצלים את הקטע בנקודות שבהן $v$ מחליפה סימן, ובכל חלק מחשבים את
+            ההעתק בערך מוחלט.
+        - kind: step
+          text: >-
+            כש-$0\le t\le9\pi^2$, $\sqrt t$ עובר על $[0,3\pi]$. $\sin\sqrt t\ge0$ כש-$0\le\sqrt t\le\pi$ וכש-$2\pi\le\sqrt t\le3\pi$,
+            כלומר $0\le t\le\pi^2$ ו-$4\pi^2\le t\le9\pi^2$ (תנועה ימינה); $\sin\sqrt t\le0$ כש-$\pi^2\le t\le4\pi^2$ (תנועה
+            שמאלה).
+        - kind: computation
+          text: >-
+            $x(\pi^2)=2\sin\pi-2\pi\cos\pi=2\pi$, $x(4\pi^2)=2\sin2\pi-4\pi\cos2\pi=-4\pi$, $x(9\pi^2)=2\sin3\pi-6\pi\cos3\pi=6\pi$.
+        - kind: computation
+          text: >-
+            ההעתקים בשלושת החלקים: $2\pi-0=2\pi$, $-4\pi-2\pi=-6\pi$, $6\pi-(-4\pi)=10\pi$. לכן
+            $\int_0^{9\pi^2}|v|\,dt=2\pi+6\pi+10\pi=18\pi\approx56.5$.
+        - kind: check
+          text: >-
+            סכום ההעתקים עם הסימנים, $2\pi-6\pi+10\pi=6\pi$, מתאים לסעיף ב, והדרך $18\pi$ גדולה ממנו, כמו שצריך.
+        - kind: result
+          text: >-
+            ימינה כש-$0<t<\pi^2$ וכש-$4\pi^2<t<9\pi^2$, שמאלה כש-$\pi^2<t<4\pi^2$. הנקודה השמאלית ביותר $x=-4\pi$
+            (בזמן $t=4\pi^2$), הימנית ביותר $x=6\pi$ (בסוף, $t=9\pi^2$; היא מימין ל-$x(\pi^2)=2\pi$). הדרך הכוללת
+            $18\pi$ מטרים.
+      rubric:
+        - text: 'ניתוח הסימן של $v$: מחליפה סימן ב-$t=\pi^2$ וב-$t=4\pi^2$'
+          weight: 3
+        - text: 'חישוב המקומות $x(\pi^2)=2\pi$, $x(4\pi^2)=-4\pi$, $x(9\pi^2)=6\pi$ והנקודות הקיצוניות'
+          weight: 3
+        - text: 'סכום הערכים המוחלטים: $2\pi+6\pi+10\pi=18\pi$'
+          weight: 3
+        - text: 'בדיקה מול ההעתק של סעיף ב'
+          weight: 1
+
+    - label: ד
+      points: 5
+      type: twotier
+      objectives: [OBJ-8.1-2, OBJ-7.1-1]
+      qualitative: true
+      standalone: false
+      prompt: 'נכון או לא: בקטע הזמן $0<t\le9\pi^2$ החלקיק עובר בראשית ($x(t)=0$) בדיוק פעמיים.'
+      choices:
+        - text: נכון
+          correct: true
+          feedback: >-
+            נכון. $x$ עולה מ-0 ל-$2\pi$, יורדת ל-$-4\pi$ ועולה ל-$6\pi$. בקטע העולה הראשון היא חיובית; בכל אחד משני
+            הקטעים האחרים היא מונוטונית ומחליפה סימן, ולכן מתאפסת בו פעם אחת בדיוק.
+        - text: לא נכון
+          feedback: >-
+            המקום $x(t)$ אינו המהירות. הוא עולה עד $2\pi$, יורד עד $-4\pi$ ועולה עד $6\pi$: עובר ב-0 פעם בירידה ופעם
+            בעלייה.
+          misconception: MC-c7-antideriv-is-derivative
+      reasons:
+        - text: >-
+            $x$ מונוטונית בכל אחד מהקטעים $[\pi^2,4\pi^2]$ ו-$[4\pi^2,9\pi^2]$, ובכל אחד מהם מחליפה סימן ($2\pi\to-4\pi$,
+            $-4\pi\to6\pi$); ב-$(0,\pi^2]$ היא חיובית
+          correct: true
+          feedback: >-
+            בדיוק: משפט ערך הביניים נותן נקודת אפס בכל קטע, והמונוטוניות אומרת שהיא יחידה בו. (הרגעים מקיימים
+            $\tan\sqrt t=\sqrt t$: $t\approx20.2$ ו-$t\approx59.7$.)
+        - text: 'ב-$t=\pi^2$ וב-$t=4\pi^2$ המהירות מתאפסת, ולכן ברגעים האלה החלקיק בראשית'
+          feedback: >-
+            כש-$v=0$ החלקיק **עוצר** ומסתובב, לא חוזר לראשית: ברגעים האלה הוא ב-$x=2\pi$ וב-$x=-4\pi$.
+          misconception: MC-c7-antideriv-is-derivative
+        - text: 'כש-$\pi^2<t<4\pi^2$ המהירות שלילית, ולכן המקום שלילי בכל הזמן הזה'
+          feedback: >-
+            מהירות שלילית אומרת שהמקום **יורד**, לא שהוא שלילי. הוא מתחיל לרדת מ-$2\pi$, ולכן חיובי עוד זמן מה.
+          misconception: MC-c7-antideriv-is-derivative
+
+- id: Q-mid-3-5
+  type: exam
+  title: שבר עם מכנה ממעלה שלישית
+  prompt: >-
+    נתבונן בפונקציה $f(x)=\frac{2}{x^3-x^2+2}$ בתחום $x\ge0$ (המכנה חיובי שם). בשאלה נחשב את $\int_0^1f(x)\,dx$
+    במדויק ובקירוב, ואת $\int_0^\infty f(x)\,dx$.
+  parts:
+    - label: א
+      points: 4
+      type: mc
+      objectives: [OBJ-7.4-1]
+      prompt: '$x^3-x^2+2=(x+1)\left(x^2-2x+2\right)$. מהי צורת הפירוק לשברים חלקיים של $f(x)$?'
+      choices:
+        - text: '$\frac{A}{x+1}+\frac{Bx+D}{x^2-2x+2}$'
+          correct: true
+          feedback: >-
+            נכון. ל-$x^2-2x+2$ אין שורשים ממשיים (הדיסקרימיננטה $4-8=-4<0$), ולכן מעליו מונה לינארי.
+        - text: '$\frac{A}{x+1}+\frac{B}{x^2-2x+2}$'
+          feedback: >-
+            מעל גורם ריבועי בלי שורשים המונה לינארי, $Bx+D$. עם מונה קבוע אין מספיק מקדמים, והמשוואות לא נפתרות.
+          misconception: MC-c7-quadratic-numerator-const
+        - text: '$\frac{A}{x+1}+\frac{B}{x-r_1}+\frac{D}{x-r_2}$, כש-$r_1,r_2$ השורשים של $x^2-2x+2$'
+          feedback: >-
+            ל-$x^2-2x+2$ אין שורשים ממשיים: הדיסקרימיננטה $-4$. הגורם הריבועי נשאר שלם.
+          misconception: MC-c7-quadratic-factor-wrong
+
+    - label: ב
+      points: 10
+      type: open
+      objectives: [OBJ-7.4-1, OBJ-7.4-3, OBJ-7.6-1]
+      prompt: 'חשבו את $\int_0^1\frac{2\,dx}{x^3-x^2+2}$ במדויק.'
+      solution:
+        - kind: given
+          text: '$f(x)=\frac{2}{x^3-x^2+2}$, שבר אמיתי.'
+        - kind: goal
+          text: 'ערך מדויק של $\int_0^1f(x)\,dx$.'
+        - kind: idea
+          text: >-
+            מפרקים את המכנה לגורמים ואז לשברים חלקיים. השבר עם $x+1$ נותן לוגריתם. בשבר עם הגורם הריבועי מפרידים
+            מהמונה כפולה של נגזרת המכנה (לוגריתם), ואת מה שנשאר מביאים בהשלמה לריבוע ל-$\arctan$.
+        - kind: step
+          text: >-
+            $x=-1$ מאפס את המכנה: $-1-1+2=0$. חילוק ב-$x+1$: $x^3-x^2+2=(x+1)\left(x^2-2x+2\right)$, ול-$x^2-2x+2$
+            הדיסקרימיננטה $-4<0$.
+        - kind: computation
+          text: >-
+            $2=A\left(x^2-2x+2\right)+(Bx+D)(x+1)$. ב-$x=-1$: $2=5A$, $A=\frac25$. מקדם $x^2$: $A+B=0$, $B=-\frac25$.
+            המקדם החופשי: $2A+D=2$, $D=\frac65$. לכן $f(x)=\frac{2}{5(x+1)}+\frac{-2x+6}{5\left(x^2-2x+2\right)}$.
+        - kind: step
+          text: >-
+            $(x^2-2x+2)'=2x-2$, ו-$\frac{-2x+6}{5}=-\frac15(2x-2)+\frac45$. השלמה לריבוע: $x^2-2x+2=(x-1)^2+1$, ולכן
+            $\int\frac{dx}{(x-1)^2+1}=\arctan(x-1)+C$.
+        - kind: computation
+          text: >-
+            פונקציה קדומה: $F(x)=\frac25\ln(x+1)-\frac15\ln\left(x^2-2x+2\right)+\frac45\arctan(x-1)$ (בלי ערך מוחלט:
+            שני הביטויים חיוביים).
+        - kind: computation
+          text: >-
+            $F(1)=\frac25\ln2-\frac15\ln1+\frac45\arctan0=\frac25\ln2$, ו-$F(0)=0-\frac15\ln2+\frac45\left(-\frac\pi4\right)=-\frac{\ln2}{5}-\frac\pi5$.
+            לכן $\int_0^1f\,dx=\frac{3\ln2}{5}+\frac\pi5$.
+        - kind: check
+          text: >-
+            $\frac{3\ln2}{5}+\frac\pi5\approx0.4159+0.6283=1.0442$. ב-$[0,1]$ הפונקציה בין $1$ ל-$f\left(\tfrac23\right)=\frac{27}{25}$
+            (המינימום של המכנה), ולכן האינטגרל בין 1 ל-1.08 בקטע באורך 1. וגזירה של $F$ מחזירה את $f$.
+        - kind: result
+          text: '$\int_0^1\frac{2\,dx}{x^3-x^2+2}=\dfrac{3\ln2}{5}+\dfrac{\pi}{5}\approx1.0442$.'
+      rubric:
+        - text: 'פירוק המכנה לגורמים (השורש $x=-1$) ומקדמים נכונים: $A=\frac25$, $B=-\frac25$, $D=\frac65$'
+          weight: 3
+        - text: 'פיצול המונה לכפולה של $2x-2$ ועוד קבוע, והלוגריתם של $x^2-2x+2$'
+          weight: 2
+        - text: 'השלמה לריבוע ו-$\arctan(x-1)$ עם המקדם $\frac45$'
+          weight: 3
+        - text: 'הצבת הגבולות, כולל $\ln2$ ו-$\arctan(-1)=-\frac\pi4$ בגבול התחתון, ותוצאה סופית'
+          weight: 2
+
+    - label: ג
+      points: 5
+      type: numeric
+      objectives: [OBJ-8.3-1, OBJ-7.4-3]
+      standalone: false
+      prompt: >-
+        חשבו את $\int_0^\infty f(x)\,dx$. (היעזרו בפונקציה הקדומה של סעיף ב. אפשר לכתוב ערך מדויק, כמו 3√2, 5π/4
+        או ln 3.)
+      answer: 2.0235850282659
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\frac{\ln2}{5}+\frac{3\pi}{5}$. שני הלוגריתמים יחד הם $\frac15\ln\frac{(x+1)^2}{x^2-2x+2}$, והמנה שואפת ל-1
+        כש-$x\to\infty$, ולכן הם שואפים ל-0; ו-$\frac45\arctan(x-1)\to\frac{2\pi}{5}$. מחסרים
+        $F(0)=-\frac{\ln2}{5}-\frac\pi5$.
+      wrongFeedback: >-
+        חשבו $\lim_{R\to\infty}F(R)-F(0)$. אל תפרידו את הלוגריתמים: כל אחד לחוד שואף לאינסוף, אבל יחד הם
+        $\frac15\ln\frac{(R+1)^2}{R^2-2R+2}$, ששואף ל-0. ו-$F(0)$ אינו 0.
+      commonWrong:
+        - value: 1.2566370614359
+          feedback: >-
+            זה $\frac{2\pi}{5}$, הגבול של $F$ באינסוף בלבד: לקחתם $F(0)=0$. אבל $F(0)=-\frac{\ln2}{5}-\frac\pi5$.
+          misconception: MC-c7-ftc-lower-zero
+        - value: 1.8849555921539
+          feedback: >-
+            זה $\frac{3\pi}{5}$: חיסרתם רק את ה-$\arctan$ בגבול התחתון. גם הלוגריתם תורם שם:
+            $-\frac15\ln\left(0-0+2\right)=-\frac{\ln2}{5}$, לא 0.
+          misconception: MC-c7-ftc-lower-zero
+        - value: 1.3952664975479
+          feedback: >-
+            זה $\frac{\ln2}{5}+\frac{2\pi}{5}$, עם $\arctan x$ במקום $\arctan(x-1)$. אחרי ההשלמה לריבוע המשתנה של
+            הטבלה הוא $u=x-1$, ולכן בגבול התחתון $\arctan(-1)=-\frac\pi4$.
+          misconception: MC-c7-complete-square-shift
+
+    - label: ד
+      points: 6
+      type: numeric
+      objectives: [OBJ-8.4-1]
+      prompt: >-
+        קרבו את $\int_0^1f(x)\,dx$ בכלל הטרפז עם $n=2$. (אפשר לכתוב שבר, או תשובה עשרונית עם 4 ספרות אחרי
+        הנקודה.)
+      answer: 1.0333333333333
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\frac{31}{30}\approx1.0333$. $h=\frac12$, $f(0)=1$, $f\left(\tfrac12\right)=\frac{16}{15}$, $f(1)=1$:
+        $T_2=\frac14\left(1+2\cdot\frac{16}{15}+1\right)$. לעומת הערך המדויק של סעיף ב, $1.0442$, השגיאה כ-$0.011$;
+        סימפסון עם אותן שלוש נקודות נותן $\frac{47}{45}\approx1.0444$, בשגיאה של כ-$0.0002$ בלבד.
+      wrongFeedback: >-
+        $T_2=\frac h2\left(f_0+2f_1+f_2\right)$ עם $h=\frac12$ ו-$f\left(\tfrac12\right)=\frac{2}{\frac18-\frac14+2}=\frac{16}{15}$.
+      commonWrong:
+        - value: 1.5333333333333
+          feedback: 'זה $h\left(f_0+f_1+f_2\right)=\frac{23}{15}$: בטרפז הקצוות במשקל חצי, והאמצע במשקל מלא.'
+          misconception: MC-c8-trap-weights
+        - value: 0.76666666666667
+          feedback: 'זה $\frac h2\left(f_0+f_1+f_2\right)=\frac{23}{30}$: הנקודה הפנימית נספרת פעמיים, בשני הטרפזים שהיא שייכת להם.'
+          misconception: MC-c8-trap-weights
+        - value: 2.0666666666667
+          feedback: 'זה $h\left(f_0+2f_1+f_2\right)=\frac{31}{15}$: הגורם בטרפז הוא $\frac h2$, לא $h$.'
+          misconception: MC-c8-trap-weights

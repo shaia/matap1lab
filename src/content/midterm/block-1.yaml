@@ -1,0 +1,430 @@
+# Midterm block 1 (chapters 1–2): vectors, lines and planes, products; coordinates, conics, quadrics.
+# Original questions in the style of an 80114 exam (not taken from a real exam). One question per paper:
+# Q-mid-1-1 (paper א) reflection of a laser beam in a mirror (1.1, 1.2, 1.3, 1.5);
+# Q-mid-2-1 (paper ב) a comet on a hyperbolic orbit given in polar coordinates (2.2, 2.3);
+# Q-mid-3-1 (paper ג) the spot of a lamp's light cone on a slanted ceiling (1.3, 1.4, 2.1, 2.2, 2.4, 2.5).
+# Every number recomputed with sympy (the block-1 script of the midterm session).
+
+- id: Q-mid-1-1
+  type: exam
+  title: קרן לייזר ומראה
+  prompt: >-
+    במעבדה (היחידות הן מטרים) לייזר מונח על הרצפה, המישור $z=0$, בנקודה $S=(4,-5,0)$. הקרן יוצאת ממנו בכיוון
+    $\vec v=(-1,4,1)$ ופוגעת במראה שטוחה שנמצאת במישור $\Pi:\ x+2y+2z=12$. נסמן ב-$H$ את נקודת הפגיעה, וב-$\vec n=(1,2,2)$
+    את וקטור הנורמל של המראה.
+  parts:
+    - label: א
+      points: 5
+      type: numeric
+      objectives: [OBJ-1.3-3, OBJ-1.3-1]
+      prompt: >-
+        מצאו את נקודת הפגיעה $H$. מהי קואורדינטת ה-$y$ שלה?
+      answer: 3
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון. הקרן היא $S+t\vec v=(4-t,\ -5+4t,\ t)$, $t\ge0$. הצבה במישור: $(4-t)+2(-5+4t)+2t=12$, כלומר $9t-6=12$
+        ו-$t=2$. לכן $H=(2,3,2)$. בדיקה: $2+6+4=12$.
+      wrongFeedback: >-
+        כתבו את הקרן בהצגה פרמטרית $S+t\vec v$, הציבו את שלוש הקואורדינטות שלה במשוואת המישור ופתרו עבור $t$. אחר כך
+        הציבו את $t$ בחזרה בישר.
+      commonWrong:
+        - value: 2
+          feedback: >-
+            2 הוא ערך הפרמטר $t$ בפגיעה, וגם קואורדינטת ה-$x$ וקואורדינטת ה-$z$ של $H$. אבל התבקשה קואורדינטת ה-$y$: מהצבה
+            בחזרה, $H=S+2\vec v=(2,3,2)$, והיא 3.
+          misconception: MC-c1-t-is-point
+        - value: -7.666666666666667
+          feedback: >-
+            זה מה שיוצא מהמשוואה $(4-t)+2(-5+4t)+2t=-12$: הסימן של האיבר החופשי התהפך. אז $t=-\frac23$ ו-$y=-\frac{23}{3}$,
+            וגם $t$ שלילי מסגיר את הטעות: הקרן אינה הולכת אחורה.
+          misconception: MC-c1-plane-d-sign
+
+    - label: ב
+      points: 5
+      type: numeric
+      objectives: [OBJ-1.2-2]
+      prompt: >-
+        זווית הפגיעה היא הזווית בין הקרן לבין הנורמל של המראה (הישר המאונך למראה בנקודת הפגיעה). מהי זווית הפגיעה, ברדיאנים?
+      answer: 0.785398163397448
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\frac{\pi}{4}$. $\vec v\cdot\vec n=-1+8+2=9$, $|\vec v|=\sqrt{18}=3\sqrt2$, $|\vec n|=3$, ולכן
+        $\cos\alpha=\frac{9}{3\sqrt2\cdot3}=\frac{1}{\sqrt2}$.
+      wrongFeedback: >-
+        $\cos\alpha=\frac{|\vec v\cdot\vec n|}{|\vec v|\,|\vec n|}$: חלקו את המכפלה הסקלרית במכפלת האורכים, ואז קחו
+        $\arccos$.
+      commonWrong:
+        - value: 0.707106781186548
+          feedback: >-
+            $\frac{1}{\sqrt2}$ הוא $\cos\alpha$, לא הזווית. הזווית היא $\arccos\frac{1}{\sqrt2}=\frac{\pi}{4}$.
+          misconception: MC-c1-cos-is-angle
+        - value: 45
+          feedback: >-
+            $45^\circ$ היא אותה זווית, אבל התבקשה תשובה ברדיאנים: $\frac{\pi}{4}\approx0.785$.
+          misconception: MC-c0-radians-as-degrees
+
+    - label: ג
+      points: 10
+      type: open
+      objectives: [OBJ-1.2-3, OBJ-1.5-3, OBJ-1.3-3]
+      standalone: false
+      prompt: >-
+        בהחזרה ממראה, הרכיב של כיוון הקרן שמאונך למראה (בכיוון $\vec n$) מחליף סימן, והרכיב שמקביל למראה נשאר כפי
+        שהיה. מצאו את כיוון הקרן המוחזרת $\vec w$, הראו בעזרת מכפלה משולשת ש-$\vec v$, $\vec n$ ו-$\vec w$
+        נמצאים במישור אחד, ומצאו את הנקודה $P$ שבה הקרן המוחזרת פוגעת ברצפה $z=0$.
+      solution:
+        - kind: given
+          text: >-
+            $\vec v=(-1,4,1)$, $\vec n=(1,2,2)$, $\vec v\cdot\vec n=9$, $|\vec n|^2=9$; נקודת הפגיעה $H=(2,3,2)$ מסעיף א.
+        - kind: goal
+          text: 'הכיוון $\vec w$ של הקרן המוחזרת, הבדיקה שהוא במישור של $\vec v$ ו-$\vec n$, והנקודה $P$ על הרצפה.'
+        - kind: idea
+          text: >-
+            מפרקים את $\vec v$ לרכיב בכיוון הנורמל, שהוא ההיטל של $\vec v$ על $\vec n$, ולרכיב שמאונך לנורמל, כלומר מקביל
+            למראה. ההחזרה הופכת את הרכיב הראשון ומשאירה את השני: $\vec w=\vec v-2\,\frac{\vec v\cdot\vec n}{|\vec n|^2}\,\vec n$.
+            (דרך אחרת: הקרן המוחזרת יוצאת מ-$H$ כאילו באה מהנקודה $S'$ הסימטרית ל-$S$ ביחס למראה. $S$ במרחק
+            $\frac{|4-10-12|}{3}=6$ מהמראה, ולכן $S'=S+2\cdot\frac{6}{3}\vec n=(8,3,8)$, ו-$\vec w$ בכיוון
+            $\vec{S'H}=(-6,0,-6)$.)
+        - kind: computation
+          text: >-
+            ההיטל: $\vec v_n=\frac{\vec v\cdot\vec n}{|\vec n|^2}\vec n=\frac99(1,2,2)=(1,2,2)$. הרכיב המקביל למראה:
+            $\vec v-\vec v_n=(-2,2,-1)$, ואכן $(-2,2,-1)\cdot\vec n=-2+4-2=0$.
+        - kind: computation
+          text: >-
+            $\vec w=(-2,2,-1)-(1,2,2)=(-3,0,-3)$.
+        - kind: check
+          text: >-
+            $|\vec w|=\sqrt{18}=|\vec v|$, ו-$\vec w\cdot\vec n=-3-6=-9$: אותה זווית עם הנורמל (בצד השני), כמו בחוק
+            ההחזרה. הקרן המוחזרת חוזרת לצד של הלייזר.
+        - kind: computation
+          text: >-
+            המכפלה המשולשת היא הדטרמיננטה ששורותיה $\vec v$, $\vec n$, $\vec w$:
+            $$\begin{aligned}\begin{vmatrix}-1&4&1\\1&2&2\\-3&0&-3\end{vmatrix}&=(-1)\cdot(-6-0)-4\cdot(-3+6)+1\cdot(0+6)\\&=6-12+6=0 .\end{aligned}$$
+            לכן שלושת הווקטורים במישור אחד. (וזה צפוי: $\vec w=\vec v-2\vec n$ הוא צירוף של $\vec v$ ושל $\vec n$.)
+        - kind: computation
+          text: >-
+            הקרן המוחזרת: $H+s\vec w=(2-3s,\ 3,\ 2-3s)$, $s\ge0$. ברצפה $2-3s=0$, כלומר $s=\frac23$, ו-$P=(0,3,0)$.
+        - kind: check
+          text: >-
+            $P$ ברצפה, ו-$0+6+0=6<12$: היא באותו צד של המראה כמו $S$ (שם $4-10+0=-6<12$), כמו שקרן מוחזרת צריכה להיות.
+        - kind: result
+          text: 'כיוון הקרן המוחזרת $\vec w=(-3,0,-3)$, היא במישור של $\vec v$ ו-$\vec n$, והיא פוגעת ברצפה ב-$P=(0,3,0)$.'
+      rubric:
+        - text: >-
+            דרך נכונה לכיוון המוחזר: פירוק $\vec v$ לרכיב בכיוון הנורמל (היטל עם חילוק ב-$|\vec n|^2$) ולרכיב מקביל
+            למראה, או הנקודה $S'$ הסימטרית ל-$S$ ביחס למראה והישר $S'H$
+          weight: 3
+        - text: 'כיוון מוחזר נכון $\vec w=(-3,0,-3)$, או כל כפולה חיובית שלו'
+          weight: 2
+        - text: 'בדיקה: $|\vec w|=|\vec v|$ (כשלוקחים את אותו אורך), או אותה זווית עם הנורמל'
+          weight: 1
+        - text: 'מכפלה משולשת (דטרמיננטה) שמתאפסת, והמסקנה שהשלושה במישור אחד'
+          weight: 2
+        - text: 'הישר המוחזר דרך $H$ וחיתוכו עם $z=0$: $P=(0,3,0)$'
+          weight: 2
+
+    - label: ד
+      points: 5
+      type: numeric
+      objectives: [OBJ-1.1-3, OBJ-1.1-1]
+      standalone: false
+      prompt: >-
+        מה האורך הכולל של מסלול האור, מ-$S$ אל המראה ומשם אל הנקודה $P$ שעל הרצפה?
+      answer: 11.3137084989848
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $8\sqrt2$. $\vec{SH}=(-2,8,2)$ ואורכו $\sqrt{72}=6\sqrt2$; $\vec{HP}=(-2,0,-2)$ ואורכו $\sqrt8=2\sqrt2$. בדיקה
+        יפה: הנקודה הסימטרית ל-$S$ ביחס למראה היא $S'=S+4\vec n=(8,3,8)$ ($S$ במרחק 6 מהמראה, ו-$|\vec n|=3$). הקרן
+        המוחזרת נראית כאילו יצאה מ-$S'$: $H$ ו-$P$ על הישר דרך $S'$, ו-$|\vec{S'H}|=|\vec{SH}|$. לכן האורך הכולל הוא
+        $|\vec{S'P}|=|(-8,0,-8)|=8\sqrt2$.
+      wrongFeedback: >-
+        המסלול הוא שני קטעים: חשבו את האורך של $\vec{SH}$ ואת האורך של $\vec{HP}$ (שורש של סכום הריבועים) וחברו.
+      commonWrong:
+        - value: 8.94427190999916
+          feedback: >-
+            זה $|\vec{SP}|=\sqrt{80}=4\sqrt5$, אורך הקטע הישר מ-$S$ ל-$P$. האור לא הולך ישר: $\vec{SP}=\vec{SH}+\vec{HP}$,
+            אבל אורך של סכום אינו סכום האורכים.
+          misconception: MC-c1-length-additive
+        - value: 16
+          feedback: >-
+            $12+4$ הם סכומי הרכיבים (בערך מוחלט) של $\vec{SH}$ ושל $\vec{HP}$. אורך של וקטור הוא שורש של סכום הריבועים.
+          misconception: MC-c1-length-sum
+        - value: 80
+          feedback: >-
+            $72+8$ הם ריבועי האורכים. צריך להוציא שורש מכל אחד: $6\sqrt2+2\sqrt2$.
+          misconception: MC-c1-length-no-root
+
+- id: Q-mid-2-1
+  type: exam
+  title: שביט על מסלול היפרבולי
+  prompt: >-
+    שביט חולף ליד השמש, שנמצאת בראשית. בקואורדינטות קוטביות סביב השמש המסלול שלו הוא
+    $$r=\frac{3}{1+2\cos\theta},$$
+    בכל הכיוונים $\theta$ שבהם אגף ימין חיובי (יחידות שרירותיות).
+  parts:
+    - label: א
+      points: 5
+      type: numeric
+      objectives: [OBJ-2.3-2]
+      prompt: >-
+        מה המרחק הקטן ביותר בין השביט לשמש?
+      answer: 1
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון. $r$ קטן ביותר כשהמכנה $1+2\cos\theta$ גדול ביותר, כלומר ב-$\theta=0$: $r=\frac33=1$, בנקודה $(1,0)$.
+      wrongFeedback: >-
+        המונה קבוע, ולכן $r$ קטן ביותר כשהמכנה $1+2\cos\theta$ הגדול ביותר. מתי זה קורה?
+      commonWrong:
+        - value: 3
+          feedback: >-
+            3 בא מ-$\theta=\pi$: שם $r=\frac{3}{1-2}=-3$. אבל ב-$\theta=\pi$ המכנה שלילי, ולשביט אין נקודה בכיוון הזה. הנקודה
+            הקרובה נמצאת דווקא ב-$\theta=0$.
+          misconception: MC-c2-polar-extreme-r
+
+    - label: ב
+      points: 5
+      type: numeric
+      objectives: [OBJ-2.3-2, OBJ-2.3-1]
+      prompt: >-
+        הכיוונים שבהם יש לשביט נקודה הם $|\theta|<\alpha$ (עם $\theta$ בקטע $(-\pi,\pi]$). מהו $\alpha$, ברדיאנים?
+      answer: 2.0943951023932
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\alpha=\frac{2\pi}{3}$. צריך $1+2\cos\theta>0$, כלומר $\cos\theta>-\frac12$, וזה מתקיים בדיוק כש-$|\theta|<\frac{2\pi}{3}$.
+        כש-$\theta$ מתקרב ל-$\pm\frac{2\pi}{3}$ המכנה מתקרב ל-0 ו-$r$ גדל בלי גבול: מהכיוונים האלה השביט בא ואליהם הוא הולך.
+      wrongFeedback: >-
+        פתרו $1+2\cos\theta>0$. איפה $\cos\theta=-\frac12$ בקטע $[0,\pi]$?
+      commonWrong:
+        - value: 1.0471975511966
+          feedback: >-
+            $\frac{\pi}{3}$ פותר $\cos\theta=\frac12$, לא $\cos\theta=-\frac12$. הקוסינוס שלילי ברביע השני:
+            $\cos\frac{2\pi}{3}=-\frac12$.
+          misconception: MC-c0-quadrant-sign
+        - value: 120
+          feedback: >-
+            $120^\circ$ היא הזווית הנכונה, אבל התבקשה תשובה ברדיאנים: $\frac{2\pi}{3}\approx2.094$.
+          misconception: MC-c0-radians-as-degrees
+
+    - label: ג
+      points: 10
+      type: open
+      objectives: [OBJ-2.3-2, OBJ-2.3-1, OBJ-2.2-2, OBJ-2.2-3]
+      prompt: >-
+        מצאו משוואה קרטזית של המסלול וזהו את העקום: מרכז, קודקודים ואסימפטוטות. האם המסלול של השביט הוא כל העקום
+        שמצאתם? נמקו.
+      solution:
+        - kind: given
+          text: '$r=\frac{3}{1+2\cos\theta}$ עם $1+2\cos\theta>0$, ו-$x=r\cos\theta$, $r=\sqrt{x^2+y^2}$.'
+        - kind: goal
+          text: 'משוואה ב-$x$ וב-$y$, זיהוי העקום, והחלק שלו שהשביט עובר בו.'
+        - kind: idea
+          text: >-
+            כופלים במכנה ומחליפים $r\cos\theta$ ב-$x$. נשאר $r$ בודד: מבודדים אותו ומעלים בריבוע. העלאה בריבוע יכולה
+            להוסיף נקודות, ולכן בסוף בודקים את הסימן.
+        - kind: computation
+          text: >-
+            $r+2r\cos\theta=3$, כלומר $r+2x=3$ ו-$r=3-2x$. בריבוע: $x^2+y^2=9-12x+4x^2$, כלומר $3x^2-12x-y^2+9=0$.
+        - kind: computation
+          text: >-
+            השלמה לריבוע: $3(x^2-4x)-y^2=-9$, $3(x-2)^2-12-y^2=-9$, ולכן
+            $$(x-2)^2-\frac{y^2}{3}=1 .$$
+        - kind: step
+          text: >-
+            זו היפרבולה (הפרש ריבועים, אגף ימין 1) שמרכזה $(2,0)$, עם $a=1$ ו-$b=\sqrt3$. הקודקודים $(1,0)$ ו-$(3,0)$,
+            והאסימפטוטות $y=\pm\sqrt3\,(x-2)$.
+        - kind: step
+          text: >-
+            הסימן: במשוואה המקורית $r=3-2x$ ו-$r>0$, ולכן $x<\frac32$. בענף השמאלי $x\le1$, וכל נקודה שלו מקיימת זאת. בענף
+            הימני $x\ge3$, ושם $3-2x<0$: הענף הזה נוסף בהעלאה בריבוע. למשל הקודקוד $(3,0)$ מקיים $r=3$ אבל $3-2x=-3$.
+        - kind: check
+          text: >-
+            $\theta=0$ נותן $r=1$, הקודקוד $(1,0)$; $\theta=\frac{\pi}{2}$ נותן $r=3$, הנקודה $(0,3)$, ואכן $4-3=1$. הקצוות
+            של הענף השמאלי הולכים לאורך האסימפטוטות בכיוונים $(-1,\pm\sqrt3)$, שהזוויות שלהם $\pm\frac{2\pi}{3}$, כמו בסעיף ב.
+        - kind: result
+          text: >-
+            העקום הוא ההיפרבולה $(x-2)^2-\frac{y^2}{3}=1$: מרכז $(2,0)$, קודקודים $(1,0)$ ו-$(3,0)$, אסימפטוטות
+            $y=\pm\sqrt3\,(x-2)$. השביט עובר רק בענף השמאלי ($x\le1$), זה שמקיף את השמש.
+      rubric:
+        - text: 'מעבר נכון ל-$r=3-2x$ והעלאה בריבוע עם $r^2=x^2+y^2$'
+          weight: 3
+        - text: 'השלמה לריבוע וזיהוי היפרבולה עם המרכז, הקודקודים והאסימפטוטות'
+          weight: 4
+        - text: 'בדיקת הסימן $3-2x>0$ והמסקנה שרק הענף השמאלי הוא המסלול'
+          weight: 3
+
+    - label: ד
+      points: 5
+      type: expr
+      objectives: [OBJ-2.2-3]
+      standalone: false
+      prompt: >-
+        כתבו פרמטריזציה של המסלול של השביט בצורה $x=x(u)$, $y=\sqrt3\,u$, $u\in\mathbb{R}$. מהו $x(u)$? כתבו רק את הביטוי במשתנה $u$, בלי לכתוב
+        לפניו $x$ וסימן שוויון.
+      answer: '2 - sqrt(1 + u^2)'
+      answerTex: '$x(u)=2-\sqrt{1+u^2},\quad y(u)=\sqrt3\,u$'
+      variables: [u]
+      domain: [-2, 2]
+      correctFeedback: >-
+        נכון. $(x-2)^2=1+\frac{3u^2}{3}=1+u^2$, ו-$x-2=-\sqrt{1+u^2}$ בוחר את הענף השמאלי, שבו $x\le1$. ב-$u=0$ מתקבל
+        הקודקוד $(1,0)$.
+      wrongFeedback: >-
+        הציבו $y=\sqrt3\,u$ במשוואה $(x-2)^2-\frac{y^2}{3}=1$ ובחרו את הסימן של השורש לפי הענף שהשביט נמצא בו.
+      commonWrong:
+        - expr: '2 + sqrt(1 + u^2)'
+          feedback: >-
+            זה הענף הימני, $x\ge3$: הענף שנוסף בהעלאה בריבוע ושם $r=3-2x$ שלילי. הסימן שלפני השורש בוחר את הענף, וכאן
+            צריך מינוס.
+          misconception: MC-c2-sqrt-half-curve
+        - expr: '-2 - sqrt(1 + u^2)'
+          feedback: >-
+            המרכז הוא $(2,0)$: $(x-2)^2$ מתאפס ב-$x=2$, ולכן מוסיפים 2, לא מחסירים. בדיקה: ב-$u=0$ צריך לקבל את
+            הקודקוד $(1,0)$.
+          misconception: MC-c2-shift-sign
+
+- id: Q-mid-3-1
+  type: exam
+  title: כתם האור של מנורה על תקרה משופעת
+  prompt: >-
+    מנורה בראשית מאירה כלפי מעלה, והאלומה שלה היא כל הכיוונים שהזווית שלהם עם ציר $z$ החיובי היא לכל היותר
+    $\frac{\pi}{4}$. התקרה היא מישור משופע. טכנאית סימנה שלוש נקודות על השפה של כתם האור שעל התקרה, ונתנה אותן
+    בקואורדינטות כדוריות $(r,\theta,\varphi)$ (כמו בקורס: $\theta$ הזווית מציר $z$ החיובי, $\varphi$ האזימוט במישור
+    $xy$):
+    $$A=\left(2\sqrt2,\tfrac{\pi}{4},0\right),\quad B=\left(6\sqrt2,\tfrac{\pi}{4},\pi\right),\quad C=\left(3\sqrt2,\tfrac{\pi}{4},\tfrac{\pi}{2}\right).$$
+  parts:
+    - label: א
+      points: 4
+      type: mc
+      qualitative: true
+      objectives: [OBJ-2.4-2]
+      prompt: >-
+        השפה של האלומה היא המשטח $\theta=\frac{\pi}{4}$ (בכדוריות). מה המשוואה הקרטזית שלו?
+      choices:
+        - text: '$z=\sqrt{x^2+y^2}$, החצי העליון של חרוט'
+          correct: true
+          feedback: >-
+            נכון. $\theta=\frac{\pi}{4}$ פירושו $z=r\cos\frac{\pi}{4}$ ו-$\sqrt{x^2+y^2}=r\sin\frac{\pi}{4}$, ולכן הגובה שווה
+            למרחק מציר $z$, ו-$z\ge0$.
+        - text: '$z^2=x^2+y^2$'
+          feedback: >-
+            זה החרוט הכפול, שני החצאים. החצי התחתון, $z=-\sqrt{x^2+y^2}$, הוא $\theta=\frac{3\pi}{4}$. כשמוציאים שורש בוחרים
+            סימן, וכאן $z\ge0$.
+          misconception: MC-c2-sqrt-half-curve
+        - text: '$z=x^2+y^2$'
+          feedback: >-
+            זה פרבולואיד. על הפרבולואיד הזווית $\theta$ של נקודה משתנה ממקום למקום, כי הגובה הוא ריבוע המרחק מציר $z$.
+            על $\theta=\frac{\pi}{4}$ הגובה שווה למרחק מהציר עצמו.
+          misconception: MC-c2-cone-vs-paraboloid
+        - text: 'חצי המישור $y=x$, $x\ge0$'
+          feedback: >-
+            זה $\varphi=\frac{\pi}{4}$: אזימוט קבוע נותן חצי מישור. $\theta$ קבוע הוא חרוט סביב ציר $z$.
+          misconception: MC-c2-angle-const-plane
+
+    - label: ב
+      points: 6
+      type: expr
+      objectives: [OBJ-2.4-1, OBJ-1.4-3, OBJ-1.3-2]
+      prompt: >-
+        מצאו את המשוואה של מישור התקרה, שעובר דרך $A$, $B$ ו-$C$, וכתבו אותה בצורה $z=f(x,y)$. כתבו רק את הביטוי
+        במשתנים $x$ ו-$y$, בלי לכתוב לפניו $z$ וסימן שוויון.
+      answer: '3 - x/2'
+      answerTex: '$x+2z=6$, כלומר $z=3-\frac{x}{2}$'
+      variables: [x, y]
+      correctFeedback: >-
+        נכון. $A=(2,0,2)$, $B=(-6,0,6)$, $C=(0,3,3)$ (למשל $B$: $6\sqrt2\sin\frac{\pi}{4}=6$, $\cos\pi=-1$). $\vec{AB}=(-8,0,4)$,
+        $\vec{AC}=(-2,3,1)$, ו-$\vec{AB}\times\vec{AC}=(-12,0,-24)$, כלומר נורמל $(1,0,2)$ ו-$d=2+0+4=6$. בדיקה: $B$ נותנת
+        $(-6)+12=6$, ו-$C$ נותנת $0+6=6$.
+      wrongFeedback: >-
+        עברו לקרטזיות: $x=r\sin\theta\cos\varphi$, $y=r\sin\theta\sin\varphi$, $z=r\cos\theta$. הנורמל הוא
+        $\vec{AB}\times\vec{AC}$, ואז $\vec n\cdot(x,y,z)=\vec n\cdot A$.
+      commonWrong:
+        - expr: '-3 - x/2'
+          feedback: >-
+            זה $x+2z=-6$: הסימן של $d$ התהפך. הציבו את $A=(2,0,2)$: $2+4=6$.
+          misconception: MC-c1-plane-d-sign
+        - expr: '3 - sqrt(2)*x/4'
+          feedback: >-
+            כאן השתמשתם ב-$r$ הכדורי כאילו הוא המרחק מציר $z$: $x=r\cos\varphi$, $y=r\sin\varphi$. המרחק מהציר הוא
+            $r\sin\theta$, ולכן $A=(2,0,2)$, לא $(2\sqrt2,0,2)$. בדיקה: הנקודות צריכות להיות על החרוט, $x^2+y^2=z^2$.
+          misconception: MC-c2-cyl-r-vs-sph-r
+
+    - label: ג
+      points: 10
+      type: open
+      objectives: [OBJ-2.5-3, OBJ-2.1-2, OBJ-2.1-3, OBJ-2.2-2]
+      standalone: false
+      prompt: >-
+        השפה של כתם האור היא עקום החיתוך של החרוט $z=\sqrt{x^2+y^2}$ עם מישור התקרה. מצאו את ההיטל שלה על מישור $xy$,
+        הראו שהשפה עצמה היא אליפסה, ומצאו את המרכז שלה ואת חצאי הצירים שלה.
+      solution:
+        - kind: given
+          text: 'החרוט $z^2=x^2+y^2$ עם $z\ge0$, והתקרה $z=3-\frac{x}{2}$ מסעיף ב.'
+        - kind: goal
+          text: 'משוואת ההיטל, זיהוי העקום שבמישור התקרה, המרכז וחצאי הצירים שלו.'
+        - kind: idea
+          text: >-
+            מציבים את ה-$z$ של המישור במשוואת החרוט. המשוואה ב-$x$ וב-$y$ שמתקבלת היא ההיטל של עקום החיתוך על מישור $xy$,
+            לא העקום עצמו. במישור $z=px+k$ העקום הוא ההיטל כשהוא מתוח פי $\sqrt{1+p^2}$ בכיוון $x$, ובכיוון $y$ הוא אינו
+            משתנה.
+        - kind: computation
+          text: >-
+            $\left(3-\frac{x}{2}\right)^2=x^2+y^2$, כלומר $9-3x+\frac{x^2}{4}=x^2+y^2$. כפל ב-4 וסידור:
+            $3x^2+12x+4y^2=36$.
+        - kind: computation
+          text: >-
+            השלמה לריבוע: $3(x+2)^2-12+4y^2=36$, כלומר $3(x+2)^2+4y^2=48$, ובחלוקה ב-48:
+            $$\frac{(x+2)^2}{16}+\frac{y^2}{12}=1 .$$
+            ההיטל הוא אליפסה שמרכזה $(-2,0)$, עם חצי ציר 4 בכיוון $x$ וחצי ציר $2\sqrt3$ בכיוון $y$.
+        - kind: step
+          text: >-
+            השיפוע של התקרה הוא $p=-\frac12$, ולכן העקום עצמו מתוח בכיוון $x$ פי $\sqrt{1+\frac14}=\frac{\sqrt5}{2}$: חצאי
+            הצירים שלו $4\cdot\frac{\sqrt5}{2}=2\sqrt5$ ו-$2\sqrt3$. זו אליפסה במישור התקרה. המרכז שלה מעל $(-2,0)$, בגובה
+            $3+1=4$: הנקודה $(-2,0,4)$.
+        - kind: check
+          text: >-
+            הקצוות של ההיטל בכיוון $x$ הם $x=2$ ו-$x=-6$, ומעליהם בדיוק $A=(2,0,2)$ ו-$B=(-6,0,6)$. לכן $AB$ הוא הציר הארוך:
+            $|\vec{AB}|=\sqrt{64+16}=4\sqrt5$, פעמיים $2\sqrt5$. הקצה של הציר הקצר $(-2,2\sqrt3,4)$ על החרוט ($4+12=16$) ועל
+            התקרה ($-2+8=6$). גם $C$: $\frac{4}{16}+\frac{9}{12}=1$. ועל כל העקום $z=3-\frac{x}{2}\ge2>0$, כך שהוא כולו על
+            החצי העליון של החרוט.
+        - kind: result
+          text: >-
+            ההיטל: $\frac{(x+2)^2}{16}+\frac{y^2}{12}=1$. שפת כתם האור היא אליפסה שמרכזה $(-2,0,4)$, עם חצי ציר $2\sqrt5$
+            (לאורך $AB$) וחצי ציר $2\sqrt3$ (בכיוון $y$).
+      rubric:
+        - text: 'הצבת המישור בחרוט והשלמה לריבוע עד משוואת ההיטל $\frac{(x+2)^2}{16}+\frac{y^2}{12}=1$'
+          weight: 4
+        - text: 'הבחנה בין ההיטל לבין העקום שבמישור, ומתיחה פי $\frac{\sqrt5}{2}$ בכיוון $x$ (או חישוב ישיר של $|\vec{AB}|$)'
+          weight: 3
+        - text: 'מרכז $(-2,0,4)$ וחצאי צירים $2\sqrt5$ ו-$2\sqrt3$'
+          weight: 2
+        - text: 'בדיקה: $A$ ו-$B$ קצות הציר הארוך, או נקודה שנמצאת גם על החרוט וגם על התקרה'
+          weight: 1
+
+    - label: ד
+      points: 5
+      type: numeric
+      objectives: [OBJ-2.4-1, OBJ-1.3-3, OBJ-2.5-3]
+      prompt: >-
+        מחליפים את התקרה במישור התלול יותר $2x+z=6$, כלומר $z=6-2x$, שהשיפוע שלו $|p|=2$. חלק מהקרניים שבשפת האלומה
+        ($\theta=\frac{\pi}{4}$) לא יפגשו את התקרה הזאת לעולם. קרן בשפת האלומה עם האזימוט $\varphi$, כש-$\varphi$ בקטע
+        $(-\pi,\pi]$, פוגשת את התקרה בדיוק כש-$|\varphi|<\beta$. מהו $\beta$, ברדיאנים?
+      answer: 2.0943951023932
+      tolerance: 0.001
+      correctFeedback: >-
+        נכון, $\beta=\frac{2\pi}{3}$. הקרן היא $s\left(\frac{\cos\varphi}{\sqrt2},\frac{\sin\varphi}{\sqrt2},\frac{1}{\sqrt2}\right)$,
+        $s>0$. הצבה בתקרה: $\frac{s}{\sqrt2}\,(2\cos\varphi+1)=6$, ויש פתרון עם $s>0$ בדיוק כש-$2\cos\varphi+1>0$, כלומר
+        $\cos\varphi>-\frac12$. למשל ב-$\varphi=0$ הקרן פוגשת את התקרה ב-$A=(2,0,2)$, וב-$\varphi=\frac{\pi}{2}$ בנקודה
+        $(0,6,6)$. הקרניים עם $|\varphi|\ge\frac{2\pi}{3}$ עולות לאט יותר מהתקרה ואינן מגיעות אליה, ולכן שפת הכתם אינה
+        סגורה: זה ענף של היפרבולה, כי $|p|=2$ גדול מהשיפוע 1 של הישרים של החרוט.
+      wrongFeedback: >-
+        כתבו בקרטזיות את הקרן שבשפת האלומה עם האזימוט $\varphi$ (עם $\theta=\frac{\pi}{4}$, ופרמטר $s>0$), הציבו אותה
+        במשוואת התקרה ובדקו מתי יש פתרון עם $s>0$.
+      commonWrong:
+        - value: 1.0471975511966
+          feedback: >-
+            $\frac{\pi}{3}$ פותר $\cos\varphi=\frac12$, לא $\cos\varphi=-\frac12$. הקוסינוס שלילי ברביע השני:
+            $\cos\frac{2\pi}{3}=-\frac12$.
+          misconception: MC-c0-quadrant-sign
+        - value: 120
+          feedback: >-
+            $120^\circ$ היא הזווית הנכונה, אבל התבקשה תשובה ברדיאנים: $\frac{2\pi}{3}\approx2.094$.
+          misconception: MC-c0-radians-as-degrees
