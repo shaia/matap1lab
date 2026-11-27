@@ -26,7 +26,7 @@ questions:
         misconception: MC-c6-sin-cos-swap
       - text: '$1+\frac{x^2}{2!}+\frac{x^4}{4!}+\dots$'
         feedback: >-
-          בלי הסימנים המתחלפים זה הטור של $\cosh x$. הנגזרת השנייה של $\cos$ היא $-\cos$, ולכן $\cos''(0)=-1$.
+          בלי הסימנים המתחלפים זה הטור של $\cosh x$. הנגזרת השנייה של $\cos$ היא מינוס $\cos$, ולכן $\cos''(0)=-1$.
         misconception: MC-c6-alternating-sign-lost
     hints: ['$\cos0=1$, ו-$\cos$ פונקציה זוגית.']
 
@@ -89,10 +89,11 @@ questions:
       נכון. $e^u=1+u+\frac{u^2}{2!}+\frac{u^3}{3!}+\dots$ עם $u=-x^2$: $u^2=x^4$ ו-$u^3=-x^6$.
     wrongFeedback: 'מציבים $u=-x^2$ באיברים $1,u,\frac{u^2}{2},\frac{u^3}{6}$, שנותנים את החזקות $0,2,4,6$.'
     commonWrong:
-      - expr: '1 - x^2 + x^4/24 - x^6/720'
+      - expr: '1 - x^2/2 + x^4/24 - x^6/720'
         feedback: >-
-          לקחתם את המקדם של $x^4$ בטור של $e^x$, כאילו מתאימים חזקה לחזקה. ההצבה פועלת על **האיברים**: $x^4$ בא מ-$\frac{u^2}{2!}$,
-          ולכן מקדמו $\frac12$.
+          לקחתם לכל חזקה של $x$ את המקדם שלה בטור של $e^x$ ($\frac{1}{2!}$ ל-$x^2$, $\frac{1}{4!}$ ל-$x^4$, $\frac{1}{6!}$ ל-$x^6$),
+          כאילו מתאימים חזקה לחזקה. ההצבה פועלת על **האיברים**: $x^2$ בא מ-$u$ (מקדם 1), $x^4$ מ-$\frac{u^2}{2!}$ (מקדם $\frac12$),
+          ו-$x^6$ מ-$\frac{u^3}{3!}$ (מקדם $\frac16$).
         misconception: MC-c6-subst-match-powers
     hints: ['איזה איבר של $e^u$ נותן את $x^4$ כש-$u=-x^2$?']
 
@@ -155,7 +156,7 @@ questions:
     objectives: [OBJ-6.3-1, OBJ-6.3-2]
     level: mid
     prompt: >-
-      $\arctan x=\int_0^x\frac{dt}{1+t^2}$. בעזרת הטור ההנדסי עם $-t^2$, מהו טור טיילור של $\arctan x$ סביב 0?
+      $\arctan x=\int_0^x\frac{dt}{1+t^2}$. בעזרת הטור ההנדסי עם מינוס $t^2$, מהו טור טיילור של $\arctan x$ סביב 0?
     choices:
       - text: '$x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\dots$'
         correct: true
@@ -250,13 +251,13 @@ questions:
       - text: 'לאפס, כי $\sin x\approx x$'
         feedback: >-
           $\sin x\approx x$ הוא קירוב מסדר ראשון, והוא אומר רק שההפרש קטן מ-$x$. כדי לדעת **כמה** קטן מפתחים הלאה: ההפרש
-          מתנהג כמו $-\frac{x^3}{6}$, לא כמו 0.
+          מתנהג כמו מינוס $\frac{x^3}{6}$, לא כמו 0.
         misconception: MC-c6-truncate-too-early
       - text: '$\frac{x^3}{6}$'
-        feedback: 'הסימן: $\sin x=x-\frac{x^3}{6}+\dots$, ולכן $\sin x-x$ מתחיל ב-$-\frac{x^3}{6}$; ל-$x>0$ קטן $\sin x<x$.'
+        feedback: 'הסימן: $\sin x=x-\frac{x^3}{6}+\dots$, ולכן $\sin x-x$ מתחיל במינוס $\frac{x^3}{6}$; ל-$x>0$ קטן $\sin x<x$.'
         misconception: MC-c6-alternating-sign-lost
       - text: '$-\frac{x^2}{2}$'
-        feedback: '$\sin$ אי-זוגית, ולכן בטור שלה אין חזקות זוגיות. $-\frac{x^2}{2}$ הוא האיבר המוביל של $\cos x-1$.'
+        feedback: '$\sin$ אי-זוגית, ולכן בטור שלה אין חזקות זוגיות. מינוס $\frac{x^2}{2}$ הוא האיבר המוביל של $\cos x-1$.'
         misconception: MC-c6-sin-cos-swap
     hints: ['כתבו שני איברים של $\sin x$.']
 
@@ -273,7 +274,7 @@ questions:
     wrongFeedback: 'פתחו את שתי הפונקציות עד $x^4$ (כולל), החסירו ובדקו שהאיברים עד $x^2$ מתבטלים.'
     commonWrong:
       - value: 0.541666666667
-        feedback: 'זה $\frac{13}{24}$: המקדם של $x^4$ ב-$\cos x$ הוא $+\frac{1}{24}$, ובחיסור הוא נותן $-\frac{1}{24}$.'
+        feedback: 'זה $\frac{13}{24}$: המקדם של $x^4$ ב-$\cos x$ הוא $+\frac{1}{24}$, ובחיסור הוא נותן מינוס $\frac{1}{24}$.'
         misconception: MC-c6-alternating-sign-lost
       - value: 0.5
         feedback: 'עצרתם את $\cos x$ ב-$x^2$. במכנה $x^4$, ולכן צריך את כל האיברים עד $x^4$ בשתי הפונקציות.'
@@ -296,7 +297,7 @@ questions:
     wrongFeedback: 'פתחו את שתי הפונקציות עד $x^3$ והחסירו.'
     commonWrong:
       - expr: 'x^2/2 + x^3/6'
-        feedback: 'השמטתם את $-\frac{x^3}{6}$ של הסינוס. החיסור שלו מוסיף עוד $\frac{x^3}{6}$.'
+        feedback: 'השמטתם את האיבר מינוס $\frac{x^3}{6}$ של הסינוס. החיסור שלו מוסיף עוד $\frac{x^3}{6}$.'
         misconception: MC-c6-truncate-too-early
       - expr: 'x^2/2'
         feedback: 'זה רק האיבר המוביל. השאלה מבקשת גם את האיבר שאחריו, ממעלה 3.'

@@ -1,0 +1,476 @@
+# Workbook of lesson 6.4 — the domain of convergence and Leibniz-type series.
+# Objectives (src/course.ts):
+#   OBJ-6.4-1  the radius of convergence of the standard expansions and of expansions derived from them
+#   OBJ-6.4-2  estimate the sum of a Leibniz series, bounding the error by the first omitted term
+#   OBJ-6.4-3  compose series and find the first coefficients of the expansion of a composition
+# No convergence tests: radii come from the standard series by substitution, or from the picture (the nearest point
+# where the function breaks, also a complex one). Every number recomputed with sympy in screens/tools/lesson-6-4.py.
+lesson: '6.4'
+practice:
+  - id: W-6.4-01
+    level: basic
+    objectives: [OBJ-6.4-1]
+    prompt: >-
+      מצאו את רדיוס ההתכנסות של טור טיילור סביב 0 של כל פונקציה.
+
+      (א) $\frac{1}{1+9x^2}$
+
+      (ב) $\ln(1+2x)$
+
+      (ג) $\frac{1}{\sqrt{1-\frac x4}}$
+    answer: >-
+      (א) $R=\frac13$. (ב) $R=\frac12$. (ג) $R=4$.
+    solution:
+      - kind: idea
+        text: >-
+          כל פונקציה היא פונקציה סטנדרטית של משתנה $u$. רושמים את התנאי $|u|<1$ של הטור הסטנדרטי ופותרים אותו עבור $x$.
+      - kind: computation
+        text: >-
+          (א) $\frac{1}{1+9x^2}=\frac{1}{1-u}$ עם $u=-9x^2$. התנאי $|9x^2|<1$ הוא $x^2<\frac19$, כלומר $|x|<\frac13$.
+      - kind: computation
+        text: >-
+          (ב) $\ln(1+u)$ עם $u=2x$. התנאי $|2x|<1$ הוא $|x|<\frac12$.
+      - kind: computation
+        text: >-
+          (ג) $\frac{1}{\sqrt{1-\frac x4}}=(1+u)^{-1/2}$ עם $u=-\frac x4$, טור בינומי עם המעריך $\alpha=-\frac12$ (לא טבעי), שמתכנס
+          כש-$|u|<1$. התנאי $\left|\frac x4\right|<1$ הוא $|x|<4$.
+      - kind: check
+        text: >-
+          לפי התמונה: (ב) נשברת ב-$x=-\frac12$, שם $1+2x=0$; (ג) נשברת ב-$x=4$, שם המכנה מתאפס; (א) נשברת במרוכבים, כש-$9z^2=-1$,
+          כלומר $z=\pm\frac i3$, במרחק $\frac13$ מ-0. בכל המקרים המרחק לנקודה הקרובה ביותר שווה לרדיוס.
+      - kind: result
+        text: >-
+          (א) $\frac13$; (ב) $\frac12$; (ג) $4$. מקדם גדול של $x$ בתוך $u$ מקטין את הרדיוס, מקדם קטן מגדיל אותו.
+
+  - id: W-6.4-02
+    level: basic
+    objectives: [OBJ-6.4-2]
+    prompt: >-
+      (א) כתבו את $e^{-1/2}$ כטור, בעזרת הטור של $e^x$, והסבירו למה זה טור לייבניץ.
+
+      (ב) קרבו את $e^{-1/2}$ בסכום ארבעת האיברים הראשונים, חסמו את השגיאה, ותנו קטע שבוודאות מכיל את $e^{-1/2}$.
+    answer: >-
+      $1-\frac12+\frac18-\frac1{48}=\frac{29}{48}\approx0.60417$, השגיאה לכל היותר $\frac{1}{384}\approx0.0026$, ו-$0.60417<e^{-1/2}<0.60677$.
+    solution:
+      - kind: idea
+        text: >-
+          מציבים $x=-\frac12$ בטור של $e^x$ (שמתכנס לכל $x$). מתקבל טור מתחלף שאיבריו יורדים לאפס, ולכן השגיאה קטנה מהאיבר
+          הראשון שהושמט ובסימן שלו.
+      - kind: computation
+        text: >-
+          (א) $e^{-1/2}=1-\frac12+\frac{1}{2!\cdot4}-\frac{1}{3!\cdot8}+\frac{1}{4!\cdot16}-\dots=1-\frac12+\frac18-\frac1{48}+\frac1{384}-\dots$
+      - kind: step
+        text: >-
+          הסימנים מתחלפים. האיבר ה-$k$ (מתחילים מ-$k=0$) בערכו המוחלט הוא $\frac{(1/2)^k}{k!}$, וכשעוברים לבא אחריו כופלים
+          ב-$\frac{1/2}{k+1}<1$: האיברים יורדים, ושואפים ל-0. זה טור לייבניץ.
+      - kind: computation
+        text: >-
+          (ב) $S_4=1-\frac12+\frac18-\frac1{48}=\frac{48-24+6-1}{48}=\frac{29}{48}\approx0.604167$. האיבר הראשון שהושמט הוא
+          $+\frac{1}{384}\approx0.002604$.
+      - kind: step
+        text: >-
+          הוא חיובי, ולכן הסכום מעל $S_4$: $\frac{29}{48}<e^{-1/2}<\frac{29}{48}+\frac1{384}=\frac{233}{384}\approx0.606771$.
+      - kind: check
+        text: >-
+          במחשבון $e^{-1/2}\approx0.606531$: בתוך הקטע, והשגיאה האמיתית בערך $0.00236$, קטנה מהחסם $0.0026$.
+      - kind: result
+        text: >-
+          $e^{-1/2}\approx0.6042$, בשגיאה של לכל היותר $\frac1{384}$; ו-$0.60417<e^{-1/2}<0.60677$.
+
+  - id: W-6.4-03
+    level: basic
+    qualitative: true
+    objectives: [OBJ-6.4-2]
+    prompt: >-
+      לכל טור קבעו אם הוא טור לייבניץ, ונמקו. לטור שהוא טור לייבניץ, תנו שני סכומים חלקיים עוקבים שהסכום ביניהם.
+
+      (א) $1-\frac{1}{\sqrt2}+\frac{1}{\sqrt3}-\frac{1}{\sqrt4}+\dots$
+
+      (ב) $2-\frac32+\frac43-\frac54+\dots$
+
+      (ג) $\frac12-\frac14+\frac18-\frac1{16}+\dots$
+    answer: >-
+      (א) כן. (ב) לא: האיברים שואפים ל-1, והטור מתבדר. (ג) כן, וסכומו $\frac13$, בין $S_2=\frac14$ ל-$S_3=\frac38$.
+    solution:
+      - kind: idea
+        text: >-
+          בודקים שלושה דברים: סימנים מתחלפים, איברים (בערך מוחלט) יורדים, ואיברים ששואפים ל-0. אם אחד חסר, זה אינו טור
+          לייבניץ; אם האיברים אינם שואפים ל-0, הטור אפילו מתבדר.
+      - kind: computation
+        text: >-
+          (א) $b_k=\frac{1}{\sqrt k}$: יורדים (השורש גדל) ושואפים ל-0. טור לייבניץ. למשל $S_1=1$ ו-$S_2=1-\frac{1}{\sqrt2}\approx0.293$,
+          והסכום ביניהם.
+      - kind: computation
+        text: >-
+          (ב) $b_k=\frac{k+1}{k}=1+\frac1k$: יורדים, אבל שואפים ל-1, לא ל-0. זה אינו טור לייבניץ, ולפי התנאי ההכרחי הטור מתבדר:
+          הסכומים החלקיים $2,\ 0.5,\ 1.83,\ 0.58,\dots$ קופצים בערך ב-1 כל פעם.
+      - kind: computation
+        text: >-
+          (ג) $b_k=\frac{1}{2^k}$: יורדים ושואפים ל-0. טור לייבניץ. זה גם טור הנדסי עם איבר ראשון $\frac12$ ומנה מינוס $\frac12$, ולכן
+          סכומו $\frac{1/2}{1+1/2}=\frac13$.
+      - kind: check
+        text: >-
+          ב-(ג): $S_2=\frac12-\frac14=\frac14$ ו-$S_3=\frac14+\frac18=\frac38$, ו-$\frac14<\frac13<\frac38$, כמו שמשפט לייבניץ מבטיח.
+      - kind: result
+        text: >-
+          (א) ו-(ג) טורי לייבניץ; (ב) אינו, ומתבדר.
+
+  - id: W-6.4-04
+    level: mid
+    qualitative: true
+    objectives: [OBJ-6.4-1]
+    prompt: >-
+      מצאו את תחום ההתכנסות, כולל הקצוות, של טור טיילור סביב 0 של כל פונקציה.
+
+      (א) $x+\frac{x^2}{2}+\frac{x^3}{3}+\dots$, הטור של מינוס $\ln(1-x)$
+
+      (ב) $\arctan\frac x2$
+
+      (ג) $\frac{2}{4+x^2}$, שהיא הנגזרת של $\arctan\frac x2$. מה זה מלמד על גזירה איבר-איבר?
+    answer: >-
+      (א) $[-1,1)$. (ב) $[-2,2]$. (ג) $(-2,2)$: אותו רדיוס כמו ב-(ב), אבל הקצוות שונים.
+    solution:
+      - kind: idea
+        text: >-
+          את הרדיוס מקבלים מהטור הסטנדרטי בהצבה. את הקצוות בודקים כל אחד לחוד: מציבים ומקבלים טור מספרי.
+      - kind: computation
+        text: >-
+          (א) זה הטור של $\ln(1+u)$ עם $u=-x$, כפול מינוס 1, ולכן $R=1$. ב-$x=1$: $1+\frac12+\frac13+\dots$, הטור ההרמוני,
+          מתבדר. ב-$x=-1$: מינוס $\left(1-\frac12+\frac13-\dots\right)$, טור לייבניץ כפול מינוס 1, מתכנס. התחום $[-1,1)$.
+      - kind: computation
+        text: >-
+          (ב) $\arctan u$ עם $u=\frac x2$ מתכנס כש-$|u|\le1$, כלומר $|x|\le2$. בקצה $x=2$ מקבלים
+          $1-\frac13+\frac15-\dots$, טור לייבניץ; ב-$x=-2$ מינוס אותו טור. התחום $[-2,2]$.
+      - kind: computation
+        text: >-
+          (ג) $\frac{2}{4+x^2}=\frac12\cdot\frac{1}{1+\frac{x^2}{4}}=\frac12\left(1-\frac{x^2}{4}+\frac{x^4}{16}-\dots\right)$, טור הנדסי
+          עם $u=-\frac{x^2}{4}$. התנאי $\frac{x^2}{4}<1$ נותן $R=2$. ב-$x=\pm2$: $\frac12(1-1+1-\dots)$, האיברים אינם שואפים ל-0,
+          מתבדר. התחום $(-2,2)$.
+      - kind: step
+        text: >-
+          גזירה איבר-איבר של הטור של (ב) נותנת את הטור של (ג), עם אותו רדיוס 2, כמו שלמדנו. אבל בקצוות הטור של (ב) מתכנס
+          ושל (ג) מתבדר: גזירה שומרת על הרדיוס, לא על הקצוות.
+      - kind: check
+        text: >-
+          לפי התמונה: (ג) נשברת כש-$4+z^2=0$, ב-$z=\pm2i$, במרחק 2 מ-0, וכך גם $\arctan\frac x2$. ו-$\ln(1-x)$ נשברת ב-$x=1$,
+          הקצה שבו הטור מתבדר.
+      - kind: result
+        text: >-
+          (א) $[-1,1)$; (ב) $[-2,2]$; (ג) $(-2,2)$.
+
+  - id: W-6.4-05
+    level: mid
+    objectives: [OBJ-6.4-3]
+    prompt: >-
+      מצאו את פולינום טיילור מסדר 4 סביב 0 של $\sqrt{\cos x}$, בהרכבה של הטור הבינומי עם הטור של הקוסינוס.
+    answer: >-
+      $1-\frac{x^2}{4}-\frac{x^4}{96}$.
+    solution:
+      - kind: idea
+        text: >-
+          כותבים $\cos x=1+u$, כך ש-$u=\cos x-1$ בלי איבר חופשי, ומציבים ב-$(1+u)^{1/2}$. $u$ מתחיל ב-$x^2$, ולכן עד $x^4$ צריך
+          רק את $u$ ואת $u^2$.
+      - kind: computation
+        text: >-
+          $u=\cos x-1=-\frac{x^2}{2}+\frac{x^4}{24}-\dots$, ו-$u^2=\frac{x^4}{4}+\dots$ (שאר האיברים מתחילים ב-$x^6$).
+      - kind: computation
+        text: >-
+          $(1+u)^{1/2}=1+\frac12u+\frac{\frac12\left(-\frac12\right)}{2!}u^2+\dots=1+\frac u2-\frac{u^2}{8}+\dots$
+      - kind: computation
+        text: >-
+          מציבים: $1+\frac12\left(-\frac{x^2}{2}+\frac{x^4}{24}\right)-\frac18\cdot\frac{x^4}{4}=1-\frac{x^2}{4}+\frac{x^4}{48}-\frac{x^4}{32}$.
+      - kind: step
+        text: >-
+          אוספים את $x^4$: $\frac{1}{48}-\frac{1}{32}=\frac{2-3}{96}=-\frac{1}{96}$.
+      - kind: check
+        text: >-
+          בריבוע: $\left(1-\frac{x^2}{4}-\frac{x^4}{96}\right)^2=1-\frac{x^2}{2}+\frac{x^4}{16}-\frac{x^4}{48}+\dots=1-\frac{x^2}{2}+\frac{x^4}{24}+\dots$,
+          הטור של $\cos x$. ובמספרים: $\sqrt{\cos0.5}\approx0.936794$, והפולינום ב-$0.5$ נותן בערך $0.936849$.
+      - kind: result
+        text: >-
+          $\sqrt{\cos x}\approx1-\frac{x^2}{4}-\frac{x^4}{96}$.
+
+  - id: W-6.4-06
+    level: mid
+    objectives: [OBJ-6.4-3, OBJ-6.4-1]
+    prompt: >-
+      (א) מצאו את פולינום טיילור מסדר 3 סביב 0 של $\ln(1+x+x^2)$, בהצבה $u=x+x^2$ בטור של $\ln(1+u)$.
+
+      (ב) בדקו את התשובה בדרך אחרת: $1+x+x^2=\frac{1-x^3}{1-x}$.
+
+      (ג) הפונקציה מוגדרת וחלקה על כל הישר. מהו רדיוס ההתכנסות של הטור שלה? היעזרו בשורשים המרוכבים של $1+z+z^2$.
+    answer: >-
+      (א) $x+\frac{x^2}{2}-\frac{2x^3}{3}$. (ג) $R=1$: השורשים $\frac{-1\pm i\sqrt3}{2}$ במרחק 1 מ-0.
+    solution:
+      - kind: idea
+        text: >-
+          $u=x+x^2$ מתחיל ב-$x$, ולכן עד $x^3$ צריך את $u$, $u^2$ ו-$u^3$, ומכל אחד את החזקות עד $x^3$. לבדיקה, לוגריתם של
+          מנה הוא הפרש לוגריתמים, וכל אחד מהם טור ידוע. לרדיוס: הנקודה הקרובה ביותר שבה הפונקציה נשברת.
+      - kind: computation
+        text: >-
+          (א) $u=x+x^2$, $u^2=x^2+2x^3+\dots$, $u^3=x^3+\dots$ ב-$\ln(1+u)=u-\frac{u^2}{2}+\frac{u^3}{3}-\dots$:
+          $x+x^2-\frac{x^2}{2}-x^3+\frac{x^3}{3}=x+\frac{x^2}{2}-\frac{2x^3}{3}$.
+      - kind: computation
+        text: >-
+          (ב) $\ln(1+x+x^2)=\ln(1-x^3)-\ln(1-x)$. $\ln(1-x^3)=-x^3+\dots$, ומינוס $\ln(1-x)$ הוא $x+\frac{x^2}{2}+\frac{x^3}{3}+\dots$ ביחד:
+          $x+\frac{x^2}{2}+\frac{x^3}{3}-x^3=x+\frac{x^2}{2}-\frac{2x^3}{3}$, כמו ב-(א).
+      - kind: computation
+        text: >-
+          (ג) $1+z+z^2=0$ כש-$z=\frac{-1\pm\sqrt{1-4}}{2}=\frac{-1\pm i\sqrt3}{2}$. הערך המוחלט:
+          $\sqrt{\frac14+\frac34}=1$. בשתי הנקודות האלה הלוגריתם נשבר (לוגריתם של 0), ואין נקודה קרובה יותר.
+      - kind: check
+        text: >-
+          ב-$x=0.1$: $\ln1.11\approx0.104360$, והפולינום נותן $0.1+0.005-0.000667=0.104333$. וגם הבדיקה של (ב) מסכימה עם
+          הרדיוס: $\ln(1-x)$ דורש $|x|<1$.
+      - kind: result
+        text: >-
+          $\ln(1+x+x^2)\approx x+\frac{x^2}{2}-\frac{2x^3}{3}$, ורדיוס ההתכנסות 1.
+
+  - id: W-6.4-07
+    level: mid
+    objectives: [OBJ-6.4-2]
+    prompt: >-
+      ידוע (בלי הוכחה כאן) ש-$1-\frac14+\frac19-\frac1{16}+\dots=\frac{\pi^2}{12}$.
+
+      (א) כמה איברים צריך לסכם כדי שהשגיאה תהיה בוודאות קטנה מ-$10^{-3}$ לפי חסם לייבניץ?
+
+      (ב) האם הסכום החלקי הזה גדול מ-$\frac{\pi^2}{12}$ או קטן ממנו?
+    answer: >-
+      (א) 31 איברים. (ב) גדול: האיבר הראשון שהושמט, מינוס $\frac{1}{32^2}$, שלילי.
+    solution:
+      - kind: idea
+        text: >-
+          זה טור לייבניץ עם $b_k=\frac{1}{k^2}$, יורדים ושואפים ל-0. מחפשים את ה-$n$ הקטן ביותר שבו האיבר הראשון שהושמט,
+          $b_{n+1}$, קטן מ-$10^{-3}$; את הצד קובע הסימן שלו.
+      - kind: computation
+        text: >-
+          (א) צריך $\frac{1}{(n+1)^2}<\frac{1}{1000}$, כלומר $(n+1)^2>1000$. $31^2=961<1000$ ו-$32^2=1024>1000$, ולכן $n+1\ge32$, $n\ge31$.
+      - kind: step
+        text: >-
+          31 ולא 30: אחרי 30 איברים האיבר הראשון שהושמט הוא $\frac{1}{961}\approx0.00104$, עוד גדול מ-$10^{-3}$.
+      - kind: step
+        text: >-
+          (ב) האיבר ה-31, $+\frac{1}{961}$, חיובי, והאיבר הראשון שהושמט, מינוס $\frac{1}{1024}$, שלילי. השגיאה $S-S_{31}$ בסימן שלו, ולכן
+          $S_{31}>\frac{\pi^2}{12}$.
+      - kind: check
+        text: >-
+          בחישוב: $S_{31}\approx0.822971$ ו-$\frac{\pi^2}{12}\approx0.822467$. ההפרש בערך $5.0\cdot10^{-4}$, חיובי וקטן מ-$\frac{1}{1024}\approx9.8\cdot10^{-4}$.
+      - kind: result
+        text: >-
+          31 איברים, והסכום החלקי מעל $\frac{\pi^2}{12}$.
+
+  - id: W-6.4-08
+    level: exam
+    objectives: [OBJ-6.4-1, OBJ-6.4-2]
+    prompt: >-
+      נתון $I=\int_0^{1/2}\frac{\ln(1+x)}{x}\,dx$ (ב-$x=0$ האינטגרנד מוגדר כגבול שלו, 1).
+
+      (א) כתבו את טור טיילור סביב 0 של $\frac{\ln(1+x)}{x}$. מהו רדיוס ההתכנסות שלו?
+
+      (ב) בצעו אינטגרציה איבר-איבר וכתבו את $I$ כטור מספרי.
+
+      (ג) כמה איברים צריך כדי שהשגיאה תהיה בוודאות קטנה מ-$10^{-3}$? תנו קטע שמכיל את $I$.
+    answer: >-
+      (א) $1-\frac x2+\frac{x^2}{3}-\dots$, $R=1$. (ב) $I=\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k^2\,2^k}$. (ג) חמישה איברים:
+      $0.44829<I<0.44874$.
+    solution:
+      - kind: idea
+        text: >-
+          מחלקים את הטור של $\ln(1+x)$ ב-$x$: זה רק מזיז חזקות, ולא משנה את הרדיוס. מבצעים אינטגרציה של כל חזקה. $\frac12$ בתוך
+          הרדיוס, והטור המספרי מתחלף ואיבריו יורדים: טור לייבניץ.
+      - kind: computation
+        text: >-
+          (א) $\frac{\ln(1+x)}{x}=\frac1x\left(x-\frac{x^2}{2}+\frac{x^3}{3}-\dots\right)=1-\frac x2+\frac{x^2}{3}-\frac{x^3}{4}+\dots$, עם
+          אותו רדיוס $R=1$. ב-$x=0$ הטור נותן 1, הגבול של האינטגרנד.
+      - kind: computation
+        text: >-
+          (ב) האיבר $\frac{(-1)^{k+1}x^{k-1}}{k}$ נותן $\int_0^{1/2}x^{k-1}dx=\frac{(1/2)^k}{k}$, ולכן
+          $I=\frac12-\frac1{16}+\frac1{72}-\frac1{256}+\frac1{800}-\frac1{2304}+\dots$, עם $b_k=\frac{1}{k^2\,2^k}$.
+      - kind: step
+        text: >-
+          (ג) הסימנים מתחלפים, ו-$b_k$ יורדים (גם $k^2$ וגם $2^k$ גדלים) ושואפים ל-0: טור לייבניץ. $b_5=\frac1{800}=0.00125>10^{-3}$
+          ו-$b_6=\frac1{2304}\approx0.000434<10^{-3}$. לכן מסכמים חמישה איברים.
+      - kind: computation
+        text: >-
+          $S_5=\frac12-\frac1{16}+\frac1{72}-\frac1{256}+\frac1{800}=\frac{25847}{57600}\approx0.448733$. האיבר הראשון שהושמט,
+          מינוס $\frac1{2304}$, שלילי, ולכן $S_5-\frac1{2304}<I<S_5$, כלומר $0.448298<I<0.448733$.
+      - kind: check
+        text: >-
+          חישוב נומרי של האינטגרל נותן $I\approx0.448414$, בתוך הקטע. ארבעה איברים לא היו מספיקים: אחריהם החסם $b_5=0.00125$.
+      - kind: result
+        text: >-
+          חמישה איברים; $0.44829<I<0.44874$.
+
+  - id: W-6.4-09
+    level: exam
+    qualitative: true
+    objectives: [OBJ-6.4-1]
+    prompt: >-
+      מטען $q$ יושב ב-$x=d$ ומטען $(-q)$ ב-$x=-d$. הפוטנציאל בנקודה $x=r$ על הציר, כש-$r>d$, הוא
+      $V(r)=\frac{kq}{r-d}-\frac{kq}{r+d}$.
+
+      (א) כתבו $V=\frac{kq}{r}\left(\frac{1}{1-u}-\frac{1}{1+u}\right)$ עם $u=\frac dr$, ופתחו בטור בחזקות של $u$.
+
+      (ב) לאילו $r$ הפיתוח תקף? איזו נקודה פיזיקלית קובעת את הגבול?
+
+      (ג) האיבר המוביל נותן את פוטנציאל הדיפול. מהי השגיאה היחסית שלו ב-$r=10d$?
+
+      (ד) סטודנט מציב בטור את $r=\frac d2$, נקודה בין שני המטענים. מה לא בסדר?
+    answer: >-
+      (א) $V=\frac{2kq}{r}\left(u+u^3+u^5+\dots\right)$. (ב) $r>d$. (ג) בדיוק $u^2=1\%$. (ד) שם $u=2>1$: הטור מתבדר.
+    solution:
+      - kind: idea
+        text: >-
+          שני טורים הנדסיים במשתנה $u=\frac dr$. הם מתכנסים כש-$|u|<1$, והגבול $r=d$ הוא המקום שבו הפוטנציאל נשבר: המטען עצמו.
+      - kind: computation
+        text: >-
+          (א) $\frac{kq}{r-d}=\frac{kq}{r}\cdot\frac{1}{1-\frac dr}$ ו-$\frac{kq}{r+d}=\frac{kq}{r}\cdot\frac{1}{1+\frac dr}$. בטורים:
+          $\frac{1}{1-u}-\frac{1}{1+u}=(1+u+u^2+u^3+\dots)-(1-u+u^2-u^3+\dots)=2u+2u^3+2u^5+\dots$
+      - kind: step
+        text: >-
+          (ב) שני הטורים מתכנסים כש-$|u|<1$, כלומר $r>d$. ב-$r=d$ יושב המטען $q$, והפוטנציאל אינסופי: הטור אינו רואה מעבר
+          לנקודה הזו.
+      - kind: computation
+        text: >-
+          (ג) האיבר המוביל $V_1=\frac{2kq}{r}u=\frac{2kqd}{r^2}$. הטור $u+u^3+u^5+\dots$ הוא טור הנדסי: האיבר הראשון $u$, וכל
+          איבר הוא הקודם כפול $u^2$. לכן סכומו $\frac{u}{1-u^2}$ (וזה גם $\frac12\left(\frac{1}{1-u}-\frac{1}{1+u}\right)$ במכנה
+          משותף), והסכום המדויק $V=\frac{2kq}{r}\cdot\frac{u}{1-u^2}$. מכאן $\frac{V_1}{V}=1-u^2$, ולכן
+          $\frac{V-V_1}{V}=1-(1-u^2)=u^2$. ב-$r=10d$, $u=0.1$ והשגיאה היחסית $0.01$.
+      - kind: step
+        text: >-
+          (ד) ב-$r=\frac d2$, $u=2$: האיברים $2u^{2k+1}$ גדלים, והטור מתבדר. הפוטנציאל בנקודה הזו סופי, אבל הפיתוח בחזקות
+          של $\frac dr$ אינו מייצג אותו: הוא נועד לנקודות רחוקות מהמטענים, $r>d$. ליד המטענים או ביניהם מפתחים במשתנה אחר.
+      - kind: check
+        text: >-
+          במספרים, ב-$u=0.1$: $\frac{1}{0.9}-\frac{1}{1.1}\approx0.20202$, ו-$2u=0.2$: היחס $1.0101$, כלומר הקירוב קטן בכ-1%.
+      - kind: result
+        text: >-
+          $V=\frac{2kq}{r}(u+u^3+\dots)$, תקף כש-$r>d$; פוטנציאל הדיפול $\frac{2kqd}{r^2}$ שוגה ב-1% ב-$r=10d$; ב-$r<d$ הטור מתבדר.
+
+  - id: W-6.4-10
+    level: exam
+    objectives: [OBJ-6.4-3]
+    prompt: >-
+      (א) מצאו את פולינום טיילור מסדר 4 סביב 0 של $e^{\cos x}$. רמז: לטור של $\cos x$ יש איבר חופשי.
+
+      (ב) חשבו את $\lim_{x\to0}\frac{e^{\cos x}-e+\frac{e}{2}x^2}{x^4}$.
+    answer: >-
+      (א) $e\left(1-\frac{x^2}{2}+\frac{x^4}{6}\right)$. (ב) $\frac e6$.
+    solution:
+      - kind: idea
+        text: >-
+          אם מציבים $u=\cos x$ ישר בטור של $e^u$, כל חזקה $u^k$ תורמת לאיבר החופשי: אינסוף תרומות. לכן מוציאים קודם את הקבוע,
+          $e^{\cos x}=e\cdot e^{\cos x-1}$, ו-$u=\cos x-1$ מתחיל ב-$x^2$.
+      - kind: computation
+        text: >-
+          (א) $u=-\frac{x^2}{2}+\frac{x^4}{24}-\dots$, ו-$u^2=\frac{x^4}{4}+\dots$; $u^3$ מתחיל ב-$x^6$. לכן
+          $e^u=1+u+\frac{u^2}{2}+\dots=1-\frac{x^2}{2}+\frac{x^4}{24}+\frac{x^4}{8}+\dots$
+      - kind: step
+        text: >-
+          אוספים: $\frac1{24}+\frac18=\frac{1+3}{24}=\frac16$. לכן $e^{\cos x}=e\left(1-\frac{x^2}{2}+\frac{x^4}{6}\right)+\dots$
+      - kind: computation
+        text: >-
+          (ב) המונה הוא $e^{\cos x}-e\left(1-\frac{x^2}{2}\right)=\frac{e}{6}x^4+\dots$ (שאר החזקות מ-$x^6$ ומעלה), והמנה שואפת
+          ל-$\frac e6$.
+      - kind: check
+        text: >-
+          מקדם $x^2$ לפי כלל השרשרת: $f(x)=e^{\cos x}$, $f'=-\sin x\,e^{\cos x}$, $f''(0)=-e$, ולכן המקדם $\frac{f''(0)}{2}=-\frac e2$,
+          כמו שיצא. ובמספרים: $\frac{e^{\cos0.2}}{e}\approx0.980264$, והסוגריים ב-$0.2$ נותנים $0.980267$.
+      - kind: result
+        text: >-
+          $e^{\cos x}\approx e\left(1-\frac{x^2}{2}+\frac{x^4}{6}\right)$, והגבול $\frac e6\approx0.453$.
+
+challenge:
+  - id: W-6.4-c1
+    stars: 1
+    objectives: [OBJ-6.4-2, OBJ-6.4-1]
+    prompt: >-
+      טור מהיר ל-$\pi$.
+
+      (א) הציבו $x=\frac{1}{\sqrt3}$ בטור של $\arctan x$, והראו ש-$\frac{\pi}{\sqrt{12}}=\sum_{k=0}^{\infty}\frac{(-1)^k}{3^k(2k+1)}$.
+      למה מותר להציב?
+
+      (ב) מצאו את המספר הקטן ביותר של איברים שמבטיח, לפי חסם לייבניץ, שגיאה קטנה מ-$10^{-4}$ בסכום $\frac{\pi}{\sqrt{12}}$, וחשבו
+      את הקירוב של $\pi$ שמתקבל.
+
+      (ג) השוו לטור $1-\frac13+\frac15-\dots=\frac\pi4$: למה הטור של (א) מהיר כל כך?
+    answer: >-
+      (ב) שבעה איברים; $\frac{\pi}{\sqrt{12}}\approx0.906923$, ומכאן $\pi\approx3.14167$, בשגיאה של פחות מ-$1.1\cdot10^{-4}$.
+    solution:
+      - kind: idea
+        text: >-
+          $\arctan\frac{1}{\sqrt3}=\frac\pi6$, ו-$\frac{1}{\sqrt3}$ בתוך תחום ההתכנסות. כל איבר קטן מקודמו פי 3 לפחות, ולכן החסם
+          של לייבניץ קטן מהר.
+      - kind: computation
+        text: >-
+          (א) $|x|=\frac1{\sqrt3}<1$, ולכן הטור מתכנס ל-$\arctan\frac1{\sqrt3}=\frac\pi6$. האיבר ה-$k$:
+          $\frac{(-1)^k}{2k+1}\left(\frac{1}{\sqrt3}\right)^{2k+1}=\frac{1}{\sqrt3}\cdot\frac{(-1)^k}{3^k(2k+1)}$. לכן
+          $\frac\pi6=\frac{1}{\sqrt3}\sum\frac{(-1)^k}{3^k(2k+1)}$, והסכום הוא $\frac{\sqrt3\,\pi}{6}=\frac{\pi}{\sqrt{12}}$.
+      - kind: step
+        text: >-
+          (ב) בכתיבה של לייבניץ, $b_k=\frac{1}{3^{k-1}(2k-1)}$ ($k\ge1$): יורדים ושואפים ל-0. אחרי $n$ איברים האיבר הראשון
+          שהושמט הוא $b_{n+1}$. $b_7=\frac{1}{729\cdot13}=\frac1{9477}\approx1.06\cdot10^{-4}>10^{-4}$, ו-$b_8=\frac{1}{2187\cdot15}=\frac1{32805}\approx3.05\cdot10^{-5}<10^{-4}$.
+          לכן שבעה איברים.
+      - kind: computation
+        text: >-
+          $S_7=1-\frac19+\frac1{45}-\frac1{189}+\frac1{729}-\frac1{2673}+\frac1{9477}\approx0.906923$. האיבר שהושמט שלילי, ולכן
+          $0.906892<\frac{\pi}{\sqrt{12}}<0.906924$ (מעגלים כלפי חוץ). כפל ב-$\sqrt{12}\approx3.4641$ נותן $3.14156<\pi<3.14168$.
+      - kind: step
+        text: >-
+          (ג) בטור של $\frac\pi4$ ($x=1$, על קצה תחום ההתכנסות) האיברים $\frac{1}{2k+1}$ קטנים לאט מאוד. כאן $x^2=\frac13$, ולכן
+          כל איבר קטן פי 3 לפחות מקודמו: ככל ש-$|x|$ רחוק מהרדיוס, הטור מהיר יותר.
+      - kind: check
+        text: >-
+          $\frac{\pi}{\sqrt{12}}\approx0.9068997$, בתוך הקטע; ו-$\pi\approx3.1415927$ בתוך $(3.14156,\ 3.14168)$.
+      - kind: result
+        text: >-
+          שבעה איברים מספיקים, ו-$\pi\approx3.1417$; בטור של $\frac\pi4$ אותו דיוק דורש אלפי איברים.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 2 (OpenStax)'
+      year: 2016
+      problem: 'Section 5.5 (Alternating Series), exercise 307; parts (א) and (ג) added'
+      url: https://openstax.org/books/calculus-volume-2/pages/5-5-alternating-series
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-6.4-c2
+    stars: 1
+    objectives: [OBJ-6.4-3, OBJ-6.4-1]
+    prompt: >-
+      (א) מצאו את שלושת האיברים הראשונים שאינם 0 בטור טיילור סביב 0 של $\frac{1}{\cos^2x}$. רמז: $\cos^2x=\frac{1+\cos2x}{2}$.
+
+      (ב) בדקו: $\frac{1}{\cos^2x}$ היא הנגזרת של $\tan x$, ו-$\tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+\dots$
+
+      (ג) מהו רדיוס ההתכנסות של הטור? נמקו לפי הנקודה הקרובה ביותר שבה הפונקציה נשברת.
+    answer: >-
+      (א) $1+x^2+\frac{2x^4}{3}$. (ג) $R=\frac\pi2$.
+    solution:
+      - kind: idea
+        text: >-
+          כותבים $\cos^2x=1-v$ עם $v$ בלי איבר חופשי, ומציבים בטור ההנדסי $\frac{1}{1-v}=1+v+v^2+\dots$. $v$ מתחיל ב-$x^2$, ולכן עד
+          $x^4$ צריך את $v$ ואת $v^2$.
+      - kind: computation
+        text: >-
+          (א) $\cos2x=1-\frac{(2x)^2}{2}+\frac{(2x)^4}{24}-\dots=1-2x^2+\frac{2x^4}{3}-\dots$, ולכן
+          $\cos^2x=\frac{1+\cos2x}{2}=1-x^2+\frac{x^4}{3}-\dots$, ו-$v=x^2-\frac{x^4}{3}+\dots$
+      - kind: computation
+        text: >-
+          $v^2=x^4+\dots$, ולכן $\frac{1}{\cos^2x}=1+\left(x^2-\frac{x^4}{3}\right)+x^4+\dots=1+x^2+\frac{2x^4}{3}+\dots$
+      - kind: check
+        text: >-
+          (ב) גזירה איבר-איבר של $x+\frac{x^3}{3}+\frac{2x^5}{15}$ נותנת $1+x^2+\frac{2x^4}{3}$, אותה תשובה. וגם: הריבוע של
+          $\frac{1}{\cos x}\approx1+\frac{x^2}{2}+\frac{5x^4}{24}$ (דוגמה 4 בשיעור) הוא $1+x^2+\frac{x^4}{4}+\frac{5x^4}{12}=1+x^2+\frac{2x^4}{3}$.
+      - kind: step
+        text: >-
+          (ג) $\frac{1}{\cos^2x}$ נשברת כש-$\cos x=0$; הנקודות הקרובות ל-0 הן $\pm\frac\pi2$. (לקוסינוס אין אפסים מרוכבים מחוץ לישר
+          הממשי: את זה נקבל בלי הוכחה.) לכן $R=\frac\pi2$, כמו של $\tan x$, שאותו רדיוס עובר אליה בגזירה.
+      - kind: result
+        text: >-
+          $\frac{1}{\cos^2x}=1+x^2+\frac{2x^4}{3}+\dots$, כש-$|x|<\frac\pi2$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus (OpenStax), LibreTexts edition'
+      year: 2016
+      problem: 'Section 10.4 (Working with Taylor Series) exercises, Exercise 50 (f(x) = sec²x); parts (ב) and (ג) added'
+      url: https://math.libretexts.org/Bookshelves/Calculus/Book%3A_Calculus_(OpenStax)/10%3A_Power_Series/10.4%3A_Working_with_Taylor_Series/10.4E%3A_Exercises_for_Section_10.4
+      verified: '2026-11-27'
+      adapted: true

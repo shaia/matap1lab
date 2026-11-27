@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 6 figure: <Spread figure={TaylorLab} figureProps={{ mode, … }}>.
+ * mode: build, remainder, lead, radius, leibniz. The props, step keys, task ids and data-* hooks are documented at the
+ * top of TaylorLab.tsx.
+ */
+import TaylorLab, { type TaylorLabProps } from './TaylorLab';
+type Props = TaylorLabProps;
+---
+
+<TaylorLab client:visible {...Astro.props} />

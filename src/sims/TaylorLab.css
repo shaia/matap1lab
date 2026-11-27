@@ -1,0 +1,84 @@
+/* TaylorLab readout and controls. Colours come from tokens.css only. */
+
+/* data-* hook wrappers around shell controls: invisible to layout */
+.tl-hook {
+  display: contents;
+}
+
+.sim-readout .q bdi {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+}
+
+/* T_n can be long (order 20): it scrolls inside its own line, it never wraps */
+.sim-readout .tl-poly bdi {
+  white-space: nowrap;
+}
+
+.tl-tablewrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.tl-table {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  direction: ltr;
+}
+
+.tl-table td {
+  padding: 0.1rem 0.7rem;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--rule);
+}
+
+.tl-table tr.now td {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.tl-table tr.f td {
+  color: var(--curve);
+  font-weight: 600;
+}
+
+/* swatches: the function (filled circle), the approximation (accent square), the limit / exact value, the error */
+.tl-sw {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-inline: 0.2rem;
+  vertical-align: baseline;
+}
+
+.tl-sw-f {
+  border-radius: 50%;
+  background: var(--curve);
+}
+
+.tl-sw-t {
+  background: var(--accent);
+}
+
+.tl-sw-lim {
+  border-radius: 50%;
+  background: var(--limit);
+}
+
+.tl-sw-err {
+  background: var(--eps);
+}
+
+/* Hebrew sentences in the readout: the global .q is an LTR quantity; here a row is a Hebrew sentence with
+   LTR islands (<bdi dir="ltr">), so it runs right to left and may wrap. */
+.rtl-q {
+  display: contents;
+}
+.rtl-q .q {
+  direction: rtl;
+  white-space: normal;
+}

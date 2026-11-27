@@ -1,0 +1,24 @@
+- id: v-6-3-khan-exp
+  youtubeId: JYQqml4-4q4
+  title: Maclaurin series of e_ | Series | AP Calculus BC | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 7
+  why: >-
+    לפי הכותרת ותיאור הסרטון: מקרב את $e^x$ בטור טיילור סביב 0 (בסרטון: Maclaurin series, "פולינום טיילור עם אינסוף איברים"), ומראה
+    שהטור שווה לפונקציה עצמה. לפי התיאור, הסרטון הבא בסדרה הוא נוסחת אוילר.
+  verified: '2026-11-27'
+- id: v-6-3-khan-euler
+  youtubeId: mgNtPOgFje0
+  title: "Euler's formula & Euler's identity | Series | AP Calculus BC | Khan Academy"
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 12
+  why: >-
+    לפי הכותרת ותיאור הסרטון: נוסחת אוילר $e^{ix}=\cos x+i\sin x$ והזהות $e^{i\pi}+1=0$, ואיך הן מתקבלות מטורי טיילור סביב 0
+    של $\cos x$, $\sin x$ ו-$e^x$.
+  verified: '2026-11-27'
