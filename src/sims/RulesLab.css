@@ -1,0 +1,50 @@
+/* RulesLab readout. Colours come from tokens.css only. */
+
+.sim-readout .q bdi {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+}
+
+/* a Hebrew prefix letter ("ו-", "מ-", "כש-") stays on the line of the formula it is attached to */
+.rul-nb {
+  white-space: nowrap;
+}
+
+/* hatch swatches: the two strips and the corner of the product picture, colour AND hatch direction */
+.rul-sw {
+  display: inline-block;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-inline: 0.15rem;
+  vertical-align: -0.1rem;
+  border: 1.5px solid currentColor;
+}
+
+.rul-sw-v {
+  color: var(--eps);
+  background: repeating-linear-gradient(-45deg, var(--eps) 0 1.5px, var(--eps-band) 1.5px 5px);
+}
+
+.rul-sw-u {
+  color: var(--curve-2);
+  background: repeating-linear-gradient(45deg, var(--curve-2) 0 1.5px, transparent 1.5px 5px);
+}
+
+.rul-sw-c {
+  color: var(--delta);
+  background:
+    repeating-linear-gradient(45deg, var(--delta) 0 1.5px, transparent 1.5px 5px),
+    repeating-linear-gradient(-45deg, var(--delta) 0 1.5px, var(--delta-band) 1.5px 5px);
+}
+
+/* Hebrew sentences in the readout: the global .q is an LTR quantity; here a row is a Hebrew sentence with
+   LTR islands (<bdi dir="ltr">), so it runs right to left and may wrap. */
+.rtl-q {
+  display: contents;
+}
+.rtl-q .q {
+  direction: rtl;
+  white-space: normal;
+}

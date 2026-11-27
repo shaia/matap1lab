@@ -1,0 +1,77 @@
+/* DerivLab readout. Colours come from tokens.css only. */
+
+.sim-readout .q bdi {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+}
+
+.dl-tablewrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.dl-table {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  direction: ltr;
+}
+
+.dl-table th,
+.dl-table td {
+  padding: 0.1rem 0.7rem;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--rule);
+}
+
+.dl-table tr.now td {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* colour swatches of the readout, with a shape each (the canvas uses shapes as well as colours):
+   the curve a disc, the tangent a solid bar, the secant a dashed bar, the error a bracket */
+.dl-sw {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.7rem;
+  margin-inline: 0.2rem;
+  vertical-align: baseline;
+}
+
+.dl-sw-curve {
+  width: 0.7rem;
+  border-radius: 50%;
+  background: var(--curve);
+}
+
+.dl-sw-limit {
+  height: 0.2rem;
+  margin-block-end: 0.2rem;
+  background: var(--limit);
+}
+
+.dl-sw-eps {
+  height: 0;
+  margin-block-end: 0.25rem;
+  border-top: 0.2rem dashed var(--eps);
+}
+
+.dl-sw-delta {
+  width: 0.35rem;
+  border: 0.15rem solid var(--delta);
+  border-inline-start: 0;
+}
+
+/* Hebrew sentences in the readout: the global .q is an LTR quantity; here a row is a Hebrew sentence with
+   LTR islands (<bdi dir="ltr">), so it runs right to left and may wrap. */
+.rtl-q {
+  display: contents;
+}
+.rtl-q .q {
+  direction: rtl;
+  white-space: normal;
+}

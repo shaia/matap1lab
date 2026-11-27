@@ -1,0 +1,25 @@
+- id: v-5-4-3b1b-implicit
+  youtubeId: qb40J4N1fa4
+  title: Implicit differentiation, what's going on here? | Chapter 6, Essence of calculus
+  channel: 3Blue1Brown
+  lang: en
+  captions: []
+  start: 0
+  minutes: 15
+  why: >-
+    לפי עמוד השיעור הנלווה באתר של 3Blue1Brown: מתחיל במעגל שרדיוסו 5 ובשיפוע המשיק בנקודה (3, 4), עובר לסולם שמחליק
+    על קיר (קצבים קשורים, שיעור 5.5), ומסיים בנגזרת של ln x מהמשוואה e בחזקת y שווה x, כמו בשיעור. באמצע הוא מסתכל על
+    אגף שמאל כעל פונקציה של שני משתנים: הצצה לפרק 10, שאפשר לדלג עליה.
+  verified: '2026-11-27'
+- id: v-5-4-khan-inverse
+  youtubeId: XOs9vVmzE70
+  title: Derivatives of inverse functions | Advanced derivatives | AP Calculus AB | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 6
+  why: >-
+    לפי הכותרת: הנגזרות של פונקציות הפוכות, מתוך יחידת הנגזרות המתקדמות של Khan Academy. בזמן הצפייה בדקו בכל דוגמה
+    באיזו נקודה מחושבת הנגזרת של f: בנקודת הראי, ולא בערך שבו מחשבים את נגזרת ההפוכה.
+  verified: '2026-11-27'

@@ -1,4 +1,12 @@
 # Terms first defined in lesson 5.3 (the rules of differentiation and the chain rule).
+- id: power-rule
+  term: כלל החזקה
+  en: power rule
+  symbol: "(x^n)'=nx^{n-1}"
+  definition: >-
+    $(x^n)'=nx^{n-1}$: מורידים את המעריך לפנים ומקטינים אותו ב-1. בשיעור 5.3 הוא מוכח לכל $n$ שלם, ובשיעור 5.4 לכל
+    מעריך ממשי. הוא חל רק כשהבסיס משתנה והמעריך **קבוע**: $e^x$ אינה חזקה של $x$.
+  lesson: '5.3'
 - id: product-rule
   term: כלל המכפלה
   en: product rule
@@ -18,6 +26,21 @@
   en: chain rule
   symbol: "(f\\circ g)'(x)=f'(g(x))\\,g'(x)"
   definition: >-
-    הנגזרת של הרכבה: $\big(f(g(x))\big)'=f'(g(x))\cdot g'(x)$, ובסימון לייבניץ $\frac{dz}{dx}=\frac{dz}{dy}\frac{dy}{dx}$
-    כש-$z=f(y)$, $y=g(x)$. בכמה שכבות כופלים את הנגזרות של כל השכבות, כל אחת בערך של מה שבתוכה.
+    הנגזרת של הרכבה: $\big(f(g(x))\big)'=f'(g(x))\cdot g'(x)$, ובסימון לייבניץ $\frac{dy}{dx}=\frac{dy}{du}\frac{du}{dx}$
+    כש-$y=f(u)$, $u=g(x)$. בכמה שכבות כופלים את הנגזרות של כל השכבות, כל אחת בערך של מה שבתוכה.
+  lesson: '5.3'
+- id: inner-outer-function
+  term: פונקציה פנימית ופונקציה חיצונית
+  en: inner and outer function
+  definition: >-
+    בהרכבה $f(g(x))$, הפונקציה $g$ שפועלת ראשונה על $x$ היא הפנימית, ו-$f$ שפועלת על התוצאה היא החיצונית. ב-$\sin(x^3)$
+    הפנימית היא $x^3$ והחיצונית סינוס. בכמה שכבות קוראים מבחוץ פנימה.
+  lesson: '5.3'
+- id: stretch-factor
+  term: יחס מתיחה
+  en: stretch factor (local magnification)
+  symbol: '\frac{\Delta u}{\Delta x}'
+  definition: >-
+    כשפונקציה $u=g(x)$ מעבירה קטע קטן $[x,x+\Delta x]$ לקטע של ערכים באורך $|\Delta u|$, היחס $\frac{\Delta u}{\Delta x}$
+    אומר פי כמה הקטע נמתח (והסימן אומר אם הוא גם התהפך). כש-$\Delta x\to0$ יחס המתיחה שואף לנגזרת $g'(x)$.
   lesson: '5.3'

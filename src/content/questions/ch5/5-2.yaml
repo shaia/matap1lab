@@ -11,7 +11,7 @@ questions:
     objectives: [OBJ-5.2-1]
     level: basic
     prompt: >-
-      (מהסיכומים, עמ׳ 7) כתבו את משוואת הישר המשיק לגרף של $f(x)=x^2$ בנקודה $x=3$, בצורה $y=\ldots$ (כתבו רק את אגף ימין,
+      (מסיכומי ההרצאות) כתבו את משוואת הישר המשיק לגרף של $f(x)=x^2$ בנקודה $x=3$, בצורה $y=\ldots$ (כתבו רק את אגף ימין,
       במשתנה x).
     answer: '6*x - 9'
     answerTex: '$y=9+6(x-3)=6x-9$'
@@ -55,14 +55,14 @@ questions:
       - value: 2.05
         feedback: >-
           לקחתם שיפוע $\frac12$: זה המקדם בכלל החזקה, אבל $f'(4)=\frac{1}{2\sqrt4}=\frac14$. הציבו את הנקודה בנגזרת.
-        misconception: MC-c5-tangent-slope-not-number
+        misconception: MC-c5-power-rule-half-done
 
   - id: Q-5.2-notes-75
     type: numeric
     objectives: [OBJ-5.2-3]
     level: basic
     prompt: >-
-      (מהסיכומים, עמ׳ 8) $y=f(x)=x^3$. חשבו את $\left.\frac{dy}{dx}\right|_{x=5}$.
+      (מסיכומי ההרצאות) $y=f(x)=x^3$. חשבו את $\left.\frac{dy}{dx}\right|_{x=5}$.
     answer: 75
     tolerance: 0.001
     correctFeedback: >-
@@ -150,11 +150,11 @@ questions:
         feedback: >-
           זה $\frac43\pi(0.1)^3$: הצבתם את השגיאה **במקום** $r$ בנוסחת הנפח. הדיפרנציאל הוא $V'(r)\,dr$, הנגזרת בנקודה
           כפול השגיאה.
-        misconception: MC-c5-differential-is-exact
+        misconception: MC-c5-error-for-variable
       - value: 41.8879020478639
         feedback: >-
           זה $\frac43\pi r^2\,dr$: שכחתם את המקדם 3 שכלל החזקה מוריד, $(r^3)'=3r^2$.
-        misconception: MC-c5-relative-error-exponent
+        misconception: MC-c5-power-rule-half-done
 
   - id: Q-5.2-relative-error
     type: numeric
@@ -205,10 +205,11 @@ questions:
         feedback: >-
           ל-$x^2$ ההפרש הוא $(dx)^2$, שאינו 0 לאף $dx\ne0$. הוא רק קטן הרבה יותר מ-$dx$.
         misconception: MC-c5-differential-is-exact
-      - text: 'כי $f''(1)=1$, ולכן $dy=0.1$'
+      - text: 'כי ב-$dy$ צריך לקחת את השיפוע בנקודה החדשה: $dy=f''(1.1)\cdot0.1=0.22$'
         feedback: >-
-          $f'(x)=2x$, ולכן $f'(1)=2$ ו-$dy=0.2$. החישוב בשאלה נכון.
-        misconception: MC-c5-value-vs-derivative
+          הדיפרנציאל נלקח לאורך המשיק בנקודת ההתחלה $x=1$: $dy=f'(1)\,dx=0.2$. השיפוע בנקודה אחרת שייך למשיק אחר, ו-$0.22$
+          אינו שווה ל-$\Delta y=0.21$ בכל מקרה. החישוב בשאלה נכון.
+        misconception: MC-c5-tangent-slope-not-number
 
   - id: Q-5.2-leibniz-meaning
     type: mc
@@ -257,7 +258,7 @@ questions:
   - id: Q-5.2-pendulum
     type: numeric
     objectives: [OBJ-5.2-2]
-    level: exam
+    level: mid
     prompt: >-
       זמן המחזור של מטוטלת הוא $T=2\pi\sqrt{L/g}$. מאריכים את החוט $L$ ב-$1\%$. בכמה אחוזים, בקירוב, משתנה $T$? (כתבו
       מספר באחוזים.)
@@ -282,16 +283,21 @@ questions:
     objectives: [OBJ-5.2-1]
     level: exam
     prompt: >-
-      הישר המשיק לגרף של $f(x)=x^3-3x$ בנקודה $x=2$ חותך את הגרף בנקודה נוספת. מהו שיעור ה-$x$ שלה?
-    answer: -4
+      הישר המשיק לגרף של $f(x)=x^3-3x$ בנקודה $x=3$ חותך את הגרף בנקודה נוספת. מהו שיעור ה-$x$ שלה?
+    answer: -6
     tolerance: 0.001
     correctFeedback: >-
-      נכון. $f(2)=2$ ו-$f'(2)=3\cdot4-3=9$, והמשיק $y=9x-16$. החיתוך: $x^3-3x=9x-16$, כלומר $x^3-12x+16=0$, וזה
-      $(x-2)^2(x+4)=0$. השורש הכפול $x=2$ הוא נקודת ההשקה, והנקודה הנוספת $x=-4$.
+      נכון. $f(3)=18$ ו-$f'(3)=3\cdot9-3=24$, והמשיק $y=18+24(x-3)=24x-54$. החיתוך: $x^3-3x=24x-54$, כלומר
+      $x^3-27x+54=0$, וזה $(x-3)^2(x+6)=0$. השורש הכפול $x=3$ הוא נקודת ההשקה, והנקודה הנוספת $x=-6$.
     wrongFeedback: >-
-      מצאו את המשיק, השוו אותו ל-$f$, ופרקו לגורמים: $x=2$ חייב להיות שורש **כפול**.
+      מצאו את המשיק, השוו אותו ל-$f$, ופרקו לגורמים: $x=3$ חייב להיות שורש **כפול**, והגורם הנותר $(x+c)$ נמצא
+      בהשוואת המקדמים החופשיים.
     commonWrong:
-      - value: 2
+      - value: 3
         feedback: >-
-          2 היא נקודת ההשקה עצמה. השאלה מבקשת את הנקודה הנוספת: חלקו את הפולינום ב-$(x-2)^2$.
-    hints: ['למה $x=2$ הוא שורש כפול של $f(x)$ פחות המשיק?']
+          3 היא נקודת ההשקה עצמה. השאלה מבקשת את הנקודה הנוספת: כתבו $x^3-27x+54=(x-3)^2(x+c)$ ומצאו את $c$.
+      - value: 6
+        feedback: >-
+          טעות סימן בגורם הנותר: מהשוואת המקדמים החופשיים $9c=54$, ולכן $c=6$ והגורם הוא $(x+6)$, שמתאפס ב-$x=-6$.
+          בדיקה: $f(6)=198$, ואילו המשיק נותן $24\cdot6-54=90$.
+    hints: ['למה $x=3$ הוא שורש כפול של $f(x)$ פחות המשיק?']

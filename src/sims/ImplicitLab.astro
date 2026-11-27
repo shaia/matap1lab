@@ -1,0 +1,15 @@
+---
+/**
+ * Chapter 5 figure: <Spread figure={ImplicitLab} figureProps={{ mode, … }}>.
+ * mode: implicit (lesson 5.4), related (lesson 5.5). The props, step keys, readout ids and task ids are documented at
+ * the top of ImplicitLab.tsx. The KaTeX of every preset's y′ is rendered here, at build time, in strict mode (a broken
+ * formula fails the build) and handed to the island.
+ */
+import ImplicitLab, { type ImplicitLabProps } from './ImplicitLab';
+import { IMPLICIT, IMPLICIT_IDS } from '~/math/implicit';
+import { tex } from '~/lib/tex';
+type Props = Omit<ImplicitLabProps, 'formulaHtml'>;
+const formulaHtml = Object.fromEntries(IMPLICIT_IDS.map((id) => [id, tex(`$${IMPLICIT[id].slopeTex}$`, `ImplicitLab ${id}`)]));
+---
+
+<ImplicitLab client:visible {...Astro.props} formulaHtml={formulaHtml} />

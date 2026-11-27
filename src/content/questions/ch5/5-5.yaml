@@ -3,7 +3,7 @@
 #   OBJ-5.5-1  differentiate every elementary function in the table, including the hyperbolic ones
 #   OBJ-5.5-2  compute related rates in physical and geometric problems
 #   OBJ-5.5-3  use the derivative to find intervals of increase and decrease and extreme points
-# Every key is recomputed in screens/tools/checks_ch5.py.
+# Every key is recomputed in screens/tools/checks_ch5.py; the keys revised in the 5.5 review in screens/tools/lesson-5-5.py.
 chapter: 5
 questions:
   - id: Q-5.5-cosh
@@ -16,13 +16,13 @@ questions:
     variables: [x]
     domain: [-1.5, 1.5]
     correctFeedback: >-
-      נכון. $(\cosh y)'=\sinh y$, בלי מינוס, כפול הנגזרת הפנימית 3.
+      נכון. הנגזרת של $\cosh$ היא $\sinh$, בלי מינוס, כפול הנגזרת של השכבה הפנימית, $(3x)'=3$.
     wrongFeedback: >-
-      מההגדרה $\cosh y=\frac{e^y+e^{-y}}{2}$: גזרו לפי $y$, ואחר כך כלל השרשרת עם $y=3x$.
+      מהטבלה, $(\cosh x)'=\sinh x$, בלי מינוס. כאן יש שכבה פנימית, $3x$, ולפי כלל השרשרת כופלים בנגזרת שלה.
     commonWrong:
       - expr: '-3*sinh(3*x)'
         feedback: >-
-          המינוס שייך ל-$(\cos x)'$. ל-$\cosh$: $\left(\frac{e^y+e^{-y}}{2}\right)'=\frac{e^y-e^{-y}}{2}=\sinh y$.
+          המינוס שייך ל-$(\cos x)'$. ל-$\cosh$: $\left(\frac{e^x+e^{-x}}{2}\right)'=\frac{e^x-e^{-x}}{2}=\sinh x$.
         misconception: MC-c5-cosh-sign
       - expr: 'sinh(3*x)'
         feedback: >-
@@ -39,7 +39,7 @@ questions:
     variables: [x]
     domain: [-2, 2]
     correctFeedback: >-
-      נכון (כך גם בסיכומים, עמ׳ 13). $2^x=e^{x\ln2}$, ובכלל השרשרת $(2^x)'=e^{x\ln2}\cdot\ln2$.
+      נכון (כך גם בסיכומי ההרצאות שהקורס נבנה לפיהם). $2^x=e^{x\ln2}$, ובכלל השרשרת $(2^x)'=e^{x\ln2}\cdot\ln2$.
     wrongFeedback: >-
       כתבו $2^x=e^{x\ln 2}$ וגזרו בכלל השרשרת.
     commonWrong:
@@ -92,6 +92,11 @@ questions:
         feedback: >-
           הנפח אינו גדל באותו קצב כמו הרדיוס: הקשר ביניהם $\frac{dV}{dt}=4\pi r^2\frac{dr}{dt}$, ויש לו יחידות אחרות.
         misconception: MC-c5-related-same-rate
+      - value: 314.159265358979
+        feedback: >-
+          $100\pi=4\pi r^2$ ב-$r=5$ הוא $\frac{dV}{dr}$: קצב השינוי של הנפח לכל ס״מ של רדיוס. לפי כלל השרשרת חסר הכופל
+          $\frac{dr}{dt}=2$: $\frac{dV}{dt}=\frac{dV}{dr}\cdot\frac{dr}{dt}$.
+        misconception: MC-c5-chain-missing-inner
 
   - id: Q-5.5-decreasing
     type: mc
@@ -138,7 +143,7 @@ questions:
       - text: 'הסימן של $f''$ אינו מתחלף ב-0: $f''\ge0$ משני הצדדים'
         correct: true
         feedback: 'בדיוק. קיצון דורש החלפת סימן של הנגזרת (או בדיקה אחרת).'
-      - text: 'בכל נקודה שבה $f''=0$ יש קיצון, אז זו נקודת מינימום'
+      - text: 'בכל נקודה שבה $f''=0$ יש קיצון, ולכן גם כאן'
         feedback: >-
           לא כל נקודה שבה $f'=0$ היא קיצון. ליד 0 יש ל-$x^3$ גם ערכים קטנים מ-$f(0)=0$ וגם גדולים ממנו.
         misconception: MC-c5-fprime-zero-extremum
@@ -183,27 +188,27 @@ questions:
     objectives: [OBJ-5.5-1]
     level: mid
     prompt: >-
-      גזרו את $\tanh x=\frac{\sinh x}{\cosh x}$ בכלל המנה ופשטו בעזרת הזהות $\cosh^2x-\sinh^2x=1$. כתבו את התוצאה
-      (השתמשו ב-cosh).
-    answer: '1/cosh(x)^2'
-    answerTex: '$(\tanh x)''=\dfrac{\cosh^2x-\sinh^2x}{\cosh^2x}=\dfrac{1}{\cosh^2x}$'
+      גזרו: $f(x)=\ln(\tanh x)$, כש-$x>0$. כתבו את $f'(x)$ בעזרת sinh ו-cosh.
+    answer: '1/(sinh(x)*cosh(x))'
+    answerTex: '$f''(x)=\dfrac{1}{\tanh x}\cdot\dfrac{1}{\cosh^2x}=\dfrac{\cosh x}{\sinh x}\cdot\dfrac{1}{\cosh^2x}=\dfrac{1}{\sinh x\cosh x}$'
     variables: [x]
-    domain: [-2, 2]
+    domain: [0.3, 2]
     correctFeedback: >-
-      נכון. המונה $\cosh x\cdot\cosh x-\sinh x\cdot\sinh x=1$. הנגזרת חיובית: $\tanh$ עולה מ-$-1$ ל-1.
+      נכון. שתי שכבות: $(\ln w)'=\frac1w$ עם $w=\tanh x$, כפול $(\tanh x)'=\frac{1}{\cosh^2x}$. בצורה אחרת:
+      $\frac{2}{\sinh2x}$.
     wrongFeedback: >-
-      $u=\sinh x$, $v=\cosh x$, $u'=\cosh x$, $v'=\sinh x$ (בלי מינוס). הציבו ב-$\frac{u'v-uv'}{v^2}$.
+      החיצונית $\ln w$, הפנימית $w=\tanh x$. גזרו כל אחת מהטבלה וכפלו; אחר כך כתבו $\tanh x=\frac{\sinh x}{\cosh x}$
+      ופשטו.
     commonWrong:
-      - expr: '(cosh(x)^2 + sinh(x)^2)/cosh(x)^2'
+      - expr: '1/tanh(x)'
         feedback: >-
-          המונה יצא $\cosh^2x+\sinh^2x$: לקחתם $(\cosh x)'=-\sinh x$ (או כתבתם פלוס בכלל המנה). הנגזרת של $\cosh$ היא
-          $+\sinh$, והמונה $\cosh^2x-\sinh^2x=1$.
-        misconception: MC-c5-cosh-sign
+          גזרתם רק את הלוגריתם. לפי כלל השרשרת כופלים גם בנגזרת של הפנימית, $(\tanh x)'=\frac{1}{\cosh^2x}$.
+        misconception: MC-c5-chain-missing-inner
 
   - id: Q-5.5-ladder
     type: numeric
     objectives: [OBJ-5.5-2]
-    level: mid
+    level: basic
     prompt: >-
       סולם באורך 5 מ׳ נשען על קיר אנכי. הקצה התחתון מחליק מהקיר על הרצפה במהירות 1 מ׳ לשנייה. מהי המהירות (במ׳
       לשנייה, עם סימן) של הקצה העליון ברגע שבו הקצה התחתון במרחק 3 מ׳ מהקיר? (מהירות שלילית: הקצה יורד.)
@@ -223,6 +228,11 @@ questions:
         feedback: >-
           הצבתם $x=3$, $y=4$ לפני הגזירה: מספרים קבועים, ונגזרתם 0. גוזרים את הקשר הכללי ומציבים אחר כך.
         misconception: MC-c5-related-substitute-early
+      - value: 0.75
+        feedback: >-
+          הגודל נכון, הסימן לא. הגובה $y$ של הקצה העליון קטן, ולכן הקצב שלו שלילי: $y'=-\frac{x}{y}x'=-\frac34$. המינוס בא
+          מהעברת אגף ב-$2xx'+2yy'=0$.
+        misconception: MC-c5-related-sign
 
   - id: Q-5.5-related-steps
     type: rank
@@ -232,17 +242,17 @@ questions:
       סדרו את שלבי הפתרון של בעיית קצבים קשורים (למשל מים שנשפכים לתוך מיכל חרוטי).
     help: 'גררו את השלבים לסדר הנכון, מהראשון לאחרון.'
     items:
+      - id: draw
+        label: 'מציירים את המצב ברגע כללי, לא ברגע המבוקש'
       - id: vars
-        label: 'מסמנים את הגדלים שמשתנים בזמן ואת הקצבים הנתונים והמבוקשים'
+        label: 'מסמנים באותיות את הגדלים שמשתנים, ורושמים את הנתונים ואת המבוקש כנגזרות לפי $t$'
       - id: relation
         label: 'כותבים משוואה שקושרת את הגדלים ונכונה בכל רגע (גיאומטריה, משולשים דומים)'
       - id: diff
-        label: 'גוזרים את המשוואה לפי הזמן $t$, בכלל השרשרת'
+        label: 'גוזרים את שני האגפים לפי הזמן $t$, בכלל השרשרת'
       - id: plug
-        label: 'מציבים את ערכי הרגע המבוקש ואת הקצבים הנתונים'
-      - id: solve
-        label: 'פותרים לקצב המבוקש ובודקים סימן ויחידות'
-    order: [vars, relation, diff, plug, solve]
+        label: 'מציבים בסוף את ערכי הרגע ואת הקצבים הנתונים, פותרים לקצב המבוקש ובודקים סימן ויחידות'
+    order: [draw, vars, relation, diff, plug]
     correctFeedback: >-
       נכון. הצעד הקריטי הוא הסדר "גוזרים ואז מציבים": ערכי הרגע הם מספרים, ונגזרתם 0.
     wrongFeedback: >-
@@ -284,21 +294,18 @@ questions:
     objectives: [OBJ-5.5-3]
     level: mid
     prompt: >-
-      מהו הערך הגדול ביותר של $f(x)=x^3-3x$ בקטע הסגור $[0,3]$?
-    answer: 18
+      מהו הערך הגדול ביותר של $f(x)=x^3-12x$ בקטע הסגור $[-3,5]$?
+    answer: 65
     tolerance: 0.001
     correctFeedback: >-
-      נכון. המועמדים: $f'=0$ בקטע רק ב-$x=1$ ($f(1)=-2$, מינימום), והקצוות $f(0)=0$ ו-$f(3)=27-9=18$.
+      נכון. $f'(x)=3(x-2)(x+2)$, והנקודות הקריטיות $\pm2$ שתיהן בתוך הקטע: $f(-2)=16$, $f(2)=-16$. בקצוות $f(-3)=9$
+      ו-$f(5)=125-60=65$. הגדול ביותר 65, בקצה $x=5$.
     wrongFeedback: >-
-      בקטע סגור בודקים את הנקודות הפנימיות שבהן $f'=0$ **ואת קצות הקטע**, ומשווים את הערכים.
+      בקטע סגור המועמדים הם הנקודות הקריטיות שבתוך הקטע **וקצות הקטע**. חשבו את $f$ בכולם והשוו.
     commonWrong:
-      - value: -2
+      - value: 16
         feedback: >-
-          $f(1)=-2$ הוא הערך בנקודה היחידה שבה $f'=0$, וזו בכלל נקודת מינימום. המקסימום כאן בקצה $x=3$.
-        misconception: MC-c5-endpoints-forgotten
-      - value: 2
-        feedback: >-
-          $f(-1)=2$, אבל $-1$ אינו בקטע $[0,3]$. וגם כך: בקצה $x=3$ הערך 18 גדול יותר.
+          $f(-2)=16$ הוא מקסימום **מקומי**, בנקודה שבה $f'=0$. אבל בקצה $x=5$ הערך 65 גדול ממנו: קצות הקטע הם מועמדים.
         misconception: MC-c5-endpoints-forgotten
 
   - id: Q-5.5-fprime-formula
@@ -307,21 +314,22 @@ questions:
     qualitative: true
     level: mid
     prompt: >-
-      על פונקציה גזירה $f$ ידוע רק ש-$f'(x)=(x-1)^2(x+2)$. מה נכון?
+      על פונקציה גזירה $f$ ידוע רק ש-$f'(x)=(x+1)^2(x-3)$. מה נכון?
     choices:
-      - text: 'ב-$x=-2$ יש ל-$f$ מינימום מקומי, וב-$x=1$ אין קיצון'
+      - text: 'ב-$x=3$ יש ל-$f$ מינימום מקומי, וב-$x=-1$ אין קיצון'
         correct: true
         feedback: >-
-          נכון. $f'$ מחליפה סימן ב-$-2$ ממינוס לפלוס (ירידה ואחריה עלייה), וב-1 היא 0 אבל חיובית משני הצדדים.
-      - text: 'ב-$x=-2$ יש מקסימום מקומי, וב-$x=1$ מינימום מקומי'
+          נכון. ב-3 הגורם $x-3$ מחליף סימן ממינוס לפלוס (ירידה ואחריה עלייה). ב-$x=-1$ הנגזרת 0, אבל $(x+1)^2\ge0$,
+          ולכן $f'<0$ משני הצדדים: $f$ ממשיכה לרדת.
+      - text: 'ב-$x=3$ יש מקסימום מקומי, וב-$x=-1$ מינימום מקומי'
         feedback: >-
-          משמאל ל-$-2$, $f'<0$ ($f$ יורדת), ומימין $f'>0$: זה מינימום. ב-1 הנגזרת אינה מחליפה סימן.
+          משמאל ל-3, $f'<0$ ($f$ יורדת), ומימין $f'>0$ (עולה): זה מינימום. ב-$x=-1$ הנגזרת אינה מחליפה סימן.
         misconception: MC-c5-sign-change-direction
-      - text: 'יש ל-$f$ קיצון גם ב-$x=-2$ וגם ב-$x=1$, כי שם $f''=0$'
+      - text: 'יש ל-$f$ קיצון גם ב-$x=3$ וגם ב-$x=-1$, כי שם $f''=0$'
         feedback: >-
-          $f'=0$ לא מספיק. ב-$x=1$ הגורם $(x-1)^2$ אינו שלילי, ולכן $f'$ אינה מחליפה סימן שם.
+          $f'=0$ לא מספיק. ב-$x=-1$ הגורם $(x+1)^2$ אינו שלילי, ולכן $f'$ אינה מחליפה סימן שם.
         misconception: MC-c5-fprime-zero-extremum
-      - text: '$f(1)=0$ ו-$f(-2)=0$'
+      - text: '$f(3)=0$ ו-$f(-1)=0$'
         feedback: >-
           האפסים של $f'$ אינם אפסים של $f$. מ-$f'$ אפשר לדעת איפה $f$ עולה ויורדת, לא את ערכיה.
         misconception: MC-c5-fprime-graph-is-f
@@ -356,6 +364,39 @@ questions:
           $f'\ne0$ נותן מונוטוניות, כלומר **לכל היותר** פתרון אחד. קיום דורש עוד נימוק: החלפת סימן וערך הביניים.
         misconception: MC-c4-monotone-gives-root
 
+  - id: Q-5.5-recip-increasing
+    type: twotier
+    objectives: [OBJ-5.5-3]
+    qualitative: true
+    level: mid
+    prompt: >-
+      לפונקציה $f(x)=-\frac{1}{x^3}$ (מוגדרת כש-$x\ne0$) הנגזרת היא $f'(x)=\frac{3}{x^4}$, חיובית בכל נקודה של התחום.
+      נכון או לא נכון: $f$ עולה בכל תחום ההגדרה שלה, כלומר לכל $x_1<x_2$ שונים מ-0 מתקיים $f(x_1)<f(x_2)$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $f(-1)=1$ ו-$f(1)=-1$: הנקודה הימנית נותנת ערך קטן יותר. $f$ עולה ב-$(-\infty,0)$ ועולה ב-$(0,\infty)$,
+          כל קטע לחוד.
+      - text: 'נכון'
+        feedback: >-
+          המשפט "$f'>0$ גורר עלייה" עובד בקטע אחד. התחום כאן הוא שני קטעים, ובין $-1$ ל-1 הפונקציה אינה מוגדרת ב-0.
+          בדקו: $f(-1)=1$ ו-$f(1)=-1$.
+        misconception: MC-c5-monotone-on-union
+    reasons:
+      - text: 'התחום אינו קטע אחד, ומשפט הערך הממוצע אינו חל בקטע שמכיל את 0'
+        correct: true
+        feedback: 'בדיוק. בכל אחד משני הקטעים $f$ עולה, אבל לא מעבר ל-0.'
+      - text: 'נגזרת חיובית בכל נקודה גוררת תמיד עלייה בכל התחום'
+        feedback: >-
+          רק בקטע. $-\frac1x$ ו-$-\frac{1}{x^3}$ הן דוגמאות נגדיות: הנגזרת חיובית, ובכל זאת $f(-1)>f(1)$.
+        misconception: MC-c5-monotone-on-union
+      - text: 'בכל נקודה של התחום המשיק עולה, ולכן כל הגרף עולה משמאל לימין'
+        feedback: >-
+          משיק עולה בכל נקודה מבטיח עלייה רק בתוך קטע אחד. בין $-1$ ל-1 הגרף נקטע ב-0, ושם הוא עובר מערכים חיוביים
+          גדולים מאוד לערכים שליליים גדולים מאוד.
+        misconception: MC-c5-monotone-on-union
+
   - id: Q-5.5-arcsin-combo
     type: expr
     objectives: [OBJ-5.5-1]
@@ -368,7 +409,7 @@ questions:
     domain: [-0.9, 0.9]
     correctFeedback: >-
       נכון. כלל המכפלה נותן $\arcsin x+\frac{x}{\sqrt{1-x^2}}$, והשורש נגזר ל-$\frac{-2x}{2\sqrt{1-x^2}}$: שני האיברים
-      מתבטלים. (כלומר $f$ היא פונקציה קדומה של $\arcsin x$; זה יחזור בפרק 7.)
+      מתבטלים.
     wrongFeedback: >-
       גזרו את $x\arcsin x$ בכלל המכפלה ואת $\sqrt{1-x^2}$ בכלל השרשרת. צפו לביטול.
     commonWrong:
@@ -380,6 +421,10 @@ questions:
         feedback: >-
           גזרתם את $x\arcsin x$ כמכפלת הנגזרות, $1\cdot\frac{1}{\sqrt{1-x^2}}$. כלל המכפלה הוא סכום של שני איברים.
         misconception: MC-c5-product-of-derivatives
+      - expr: 'asin(x) + 2*x/sqrt(1 - x^2)'
+        feedback: >-
+          המינוס אבד: $(1-x^2)'=-2x$, ולכן $\left(\sqrt{1-x^2}\right)'=\frac{-2x}{2\sqrt{1-x^2}}=-\frac{x}{\sqrt{1-x^2}}$, והוא
+          מבטל את $\frac{x}{\sqrt{1-x^2}}$ מכלל המכפלה במקום להכפיל אותו.
 
   - id: Q-5.5-log-cosh
     type: expr
@@ -409,25 +454,33 @@ questions:
           גזרתם רק את הלוגריתם. אחריו באה הנגזרת של $\cosh(2x)$, שהיא $2\sinh(2x)$.
         misconception: MC-c5-chain-missing-inner
 
-  - id: Q-5.5-cone
+  - id: Q-5.5-radar
     type: numeric
     objectives: [OBJ-5.5-2]
     level: exam
     prompt: >-
-      מים נשפכים בקצב של $2$ מ״ק לדקה לתוך מיכל בצורת חרוט הפוך (הקודקוד למטה), שהרדיוס שלו בגובה $h$ הוא $r=\frac h2$.
-      באיזה קצב (במטר לדקה) עולה פני המים ברגע שבו עומק המים $4$ מ׳?
-    answer: 0.159154943091895
+      מטוס טס בגובה קבוע של 6 ק״מ, במהירות 600 קמ״ש, בקו ישר שעובר בדיוק מעל צופה שעומד על הקרקע, ומתקרב אליו. באיזה
+      קצב (ברדיאנים לשעה) גדלה זווית ההגבהה $\theta$, הזווית בין הקרקע לבין קו הראייה מהצופה אל המטוס, ברגע שבו המרחק
+      האופקי בין הצופה למטוס הוא 8 ק״מ?
+    answer: 36
     tolerance: 0.001
     correctFeedback: >-
-      נכון, $\frac{1}{2\pi}\approx0.159$ מ׳ לדקה. $V=\frac13\pi\left(\frac h2\right)^2h=\frac{\pi h^3}{12}$, ולכן
-      $\frac{dV}{dt}=\frac{\pi h^2}{4}\frac{dh}{dt}$, ו-$2=4\pi\frac{dh}{dt}$.
+      נכון: 36 רדיאנים לשעה, כלומר $0.01$ רדיאן לשנייה. אם $x$ המרחק האופקי, אז בכל רגע $\tan\theta=\frac6x$, כלומר
+      $\theta=\arctan\frac6x$. גזירה לפי $t$:
+      $\frac{d\theta}{dt}=\frac{1}{1+\frac{36}{x^2}}\cdot\left(-\frac{6}{x^2}\right)\frac{dx}{dt}=-\frac{6}{x^2+36}\cdot\frac{dx}{dt}$.
+      עם $x=8$ ו-$\frac{dx}{dt}=-600$ (המרחק קטן) יוצא $\frac{6\cdot600}{100}=36$.
     wrongFeedback: >-
-      בטאו את הנפח בעזרת $h$ בלבד (הציבו $r=\frac h2$, קשר שנכון בכל רגע), גזרו לפי $t$ והציבו $h=4$.
+      סמנו ב-$x$ את המרחק האופקי. כתבו קשר בין $\theta$ ל-$x$ שנכון בכל רגע ($\tan\theta=\frac6x$), גזרו לפי $t$, ורק אז
+      הציבו $x=8$ ואת $\frac{dx}{dt}$, עם הסימן הנכון.
     commonWrong:
-      - value: 0.477464829275686
+      - value: -36
         feedback: >-
-          $\frac{3}{2\pi}$ מתקבל כשמחליפים את $r$ במספר 2 (ערכו ברגע הזה) לפני הגזירה: $V=\frac{4\pi}{3}h$. אבל הרדיוס
-          של פני המים גדל יחד עם $h$.
+          הסימן: המטוס מתקרב, ולכן המרחק האופקי $x$ קטן, ו-$\frac{dx}{dt}=-600$, לא 600. בדיקה בציור: מטוס שמתקרב נראה
+          גבוה יותר בשמיים, והזווית גדלה.
+        misconception: MC-c5-related-sign
+      - value: 0
+        feedback: >-
+          הצבתם $x=8$ לפני הגזירה: $\arctan\frac68$ הוא מספר, ונגזרתו 0. גוזרים את הקשר הכללי ומציבים בסוף.
         misconception: MC-c5-related-substitute-early
 
   - id: Q-5.5-distance
@@ -443,28 +496,33 @@ questions:
       נכון. $v=3t^2-12t+9=3(t-1)(t-3)$: הגוף מחליף כיוון ב-$t=1$ וב-$t=3$. $x(0)=0$, $x(1)=4$, $x(3)=0$, $x(4)=4$, ולכן
       הדרך $4+4+4=12$.
     wrongFeedback: >-
-      מצאו מתי $v=0$: שם הגוף מסתובב. חשבו את המרחק בכל קטע שבו הוא נע בכיוון אחד, וחברו.
+      מצאו את כל הרגעים שבהם $v=0$ ו-$v$ מחליפה סימן: שם הגוף משנה כיוון. חשבו את המרחק בכל קטע שבו הוא נע בכיוון
+      אחד, וחברו.
     commonWrong:
       - value: 4
         feedback: >-
-          $4=x(4)-x(0)$ הוא ההעתק. הגוף הלך קדימה, חזר לראשית והלך שוב קדימה: הדרך גדולה מההעתק.
+          4 יוצא בשתי דרכים, ושתיהן מפספסות שינוי כיוון. $x(4)-x(0)=4$ הוא ההעתק, בלי לפצל בכלל. וגם פיצול באחד בלבד
+          משני רגעי שינוי הכיוון נותן 4: ב-$t=1$ בלבד, $|4-0|+|4-4|=4$; ב-$t=3$ בלבד, $|0-0|+|4-0|=4$. הגוף משנה כיוון
+          פעמיים, ב-$t=1$ וב-$t=3$: מפצלים בשתיהן.
         misconception: MC-c5-displacement-vs-distance
 
-  - id: Q-5.5-box
+  - id: Q-5.5-rectangle
     type: numeric
     objectives: [OBJ-5.5-3]
     level: exam
     prompt: >-
-      מגיליון פח ריבועי בגודל $12\times12$ ס״מ חותכים בכל פינה ריבוע בצלע $x$ ומקפלים קופסה פתוחה. מהו הנפח הגדול
-      ביותר (בסמ״ק) שאפשר לקבל?
-    answer: 128
+      מלבן בנוי כך שהבסיס שלו על ציר $x$, סימטרי סביב ציר $y$, ושני הקודקודים העליונים שלו על הפרבולה $y=12-x^2$. מהו
+      השטח הגדול ביותר שיכול להיות למלבן כזה?
+    answer: 32
     tolerance: 0.001
     correctFeedback: >-
-      נכון. $V(x)=x(12-2x)^2$ ב-$[0,6]$; $V'(x)=(12-2x)(12-6x)$ מתאפסת ב-2 וב-6. $V(0)=V(6)=0$ ו-$V(2)=2\cdot64=128$.
+      נכון. אם הקודקוד הימני העליון ב-$(x,12-x^2)$, אז הרוחב $2x$ והגובה $12-x^2$, והשטח $A(x)=2x(12-x^2)=24x-2x^3$
+      בקטע $[0,\sqrt{12}]$. $A'(x)=24-6x^2=0$ ב-$x=2$, ו-$A(2)=4\cdot8=32$; בקצוות $A=0$.
     wrongFeedback: >-
-      כתבו את $V(x)$, מצאו את $x$ שבהן $V'=0$ בתחום $0\le x\le6$, והשוו עם הקצוות.
+      בטאו את השטח בעזרת משתנה אחד: הקודקוד העליון הימני $(x,12-x^2)$. שימו לב שהרוחב הוא $2x$. קבעו את התחום, גזרו,
+      והשוו עם הקצוות.
     commonWrong:
-      - value: 0
+      - value: 16
         feedback: >-
-          0 הוא $V(6)$: גם ב-$x=6$ הנגזרת מתאפסת, אבל שם הנפח מינימלי (אין קופסה). לא כל אפס של $V'$ הוא מקסימום.
-        misconception: MC-c5-fprime-zero-extremum
+          16 הוא השטח של חצי מלבן: לקחתם רוחב $x$ במקום $2x$, כלומר $A=x(12-x^2)$. המקסימום באותה נקודה, $x=2$, אבל
+          השטח כפול: 32.

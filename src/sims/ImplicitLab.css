@@ -1,0 +1,34 @@
+/* ImplicitLab readout. Colours come from tokens.css only. */
+
+.sim-readout .q bdi {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+}
+
+/* the KaTeX of y′ (rendered at build time): an LTR island that never wraps; on a phone it scrolls in its own box */
+.imp-tex {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+  direction: ltr;
+}
+
+/* Hebrew sentences in the readout: the global .q is an LTR quantity; here a row is a Hebrew sentence with
+   LTR islands (<bdi dir="ltr">), so it runs right to left and may wrap. */
+.rtl-q {
+  display: contents;
+}
+.rtl-q .q {
+  direction: rtl;
+  white-space: normal;
+}
+
+@media (max-width: 640px) {
+  .imp-formula {
+    flex-basis: 100%;
+  }
+}
