@@ -1,0 +1,26 @@
+# Videos of lesson 8.1 (Riemann sums and area). Every id verified by oEmbed on 2026-11-27 (HTTP 200, title and channel
+# as below); durations from the watch page (lengthSeconds), descriptions read there.
+- id: v-8-1-technion-rectangles
+  youtubeId: oe9xX3IoAjI
+  title: האינטגרל המסוים - קירוב שטח על ידי מלבנים
+  channel: הטכניון מלמדים - TECHNION TEACHES
+  lang: he
+  captions: []
+  start: 0
+  minutes: 9
+  why: >-
+    לפי הכותרת והתיאור: סרטון מפרק האינטגרלים של קורס ההכנה במתמטיקה של הטכניון (המרצה ד״ר אביב צנזור), על קירוב
+    השטח שמתחת לגרף בעזרת מלבנים. השוו לסעיף "סכום רימן" ולמשימה שבה מגדילים את מספר הקטעים באיור 8.1א.
+  verified: '2026-11-27'
+- id: v-8-1-khan-he-limit
+  youtubeId: avQ_yJQjJNo
+  title: אינטגרל מסוים בתור הגבול של סכומי רימן
+  channel: KhanAcademyHebrew
+  lang: he
+  captions: []
+  start: 0
+  minutes: 4.5
+  why: >-
+    לפי הכותרת והתיאור: הגרסה העברית של הסרטון של Khan Academy "Definite integral as the limit of a Riemann sum",
+    על הכתיבה של האינטגרל המסוים כגבול של סכומי רימן כשמספר המלבנים גדל. השוו לסעיף "מסכום לאינטגרל: גבול".
+  verified: '2026-11-27'

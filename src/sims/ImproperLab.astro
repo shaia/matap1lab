@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 8.3 figure: <Spread figure={ImproperLab} figureProps={{ mode, f, … }}>.
+ * mode: tail, spike, compare. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the
+ * top of ImproperLab.tsx; the preset ids are those of the registries TAIL, SPIKE and CMP in src/math/improper.ts.
+ */
+import ImproperLab, { type ImproperLabProps } from './ImproperLab';
+type Props = ImproperLabProps;
+---
+
+<ImproperLab client:visible {...Astro.props} />

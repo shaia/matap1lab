@@ -1,0 +1,423 @@
+# Workbook of lesson 8.2 — substitution in a definite integral, symmetry, an integral with a variable upper limit.
+# Objectives (src/course.ts):
+#   OBJ-8.2-1  substitute in a definite integral and change the limits accordingly
+#   OBJ-8.2-2  use the symmetry of an even or odd function on a symmetric interval
+#   OBJ-8.2-3  differentiate an integral whose upper limit varies
+# Every number recomputed with sympy in screens/tools/lesson-8-2.py.
+lesson: '8.2'
+practice:
+  - id: W-8.2-01
+    level: basic
+    objectives: [OBJ-8.2-1]
+    prompt: >-
+      חשבו בהצבה, עם גבולות חדשים.
+
+      (א) $\int_0^1x^2\left(1+x^3\right)^3dx$ (ב) $\int_0^{\ln2}\frac{e^x}{1+e^x}\,dx$
+    answer: >-
+      (א) $\frac54$ (ב) $\ln\frac32\approx0.405$
+    solution:
+      - kind: idea
+        text: >-
+          בשניהם הביטוי הפנימי הוא מה שנמצא בתוך החזקה או במכנה, והנגזרת שלו מופיעה כגורם. מציבים, מתרגמים את
+          הגבולות, ומחשבים ב-$u$ בלי לחזור ל-$x$.
+      - kind: computation
+        text: >-
+          (א) $u=1+x^3$, $du=3x^2\,dx$, ולכן $x^2\,dx=\frac{du}{3}$. הגבולות: $x=0\mapsto u=1$, $x=1\mapsto u=2$. האינטגרל
+          הוא $\frac13\int_1^2u^3\,du=\frac13\cdot\frac{u^4}{4}\Big|_1^2=\frac{16-1}{12}=\frac54$.
+      - kind: computation
+        text: >-
+          (ב) $u=1+e^x$, $du=e^x\,dx$. הגבולות: $x=0\mapsto u=1+1=2$, $x=\ln2\mapsto u=1+2=3$. האינטגרל הוא
+          $\int_2^3\frac{du}{u}=\ln3-\ln2=\ln\frac32$.
+      - kind: check
+        text: >-
+          (א) גודל: האינטגרנד עולה מ-0 עד $1\cdot2^3=8$ על קטע באורך 1, ו-$\frac54$ בין 0 ל-8. ✓ (ב) האינטגרנד בין
+          $\frac12$ ל-$\frac23$ על קטע באורך $\ln2\approx0.693$, ולכן השטח בין $0.35$ ל-$0.46$; $\ln1.5\approx0.405$. ✓
+      - kind: result
+        text: >-
+          (א) $\frac54$; (ב) $\ln\frac32$.
+
+  - id: W-8.2-02
+    level: basic
+    objectives: [OBJ-8.2-2]
+    prompt: >-
+      חשבו בעזרת סימטריה.
+
+      (א) $\int_{-1}^{1}\left(x^7-3x^5+x^2\right)dx$ (ב) $\int_{-\pi}^{\pi}\left(\sin3x+\cos x+1\right)dx$
+    answer: >-
+      (א) $\frac23$ (ב) $2\pi$
+    solution:
+      - kind: idea
+        text: >-
+          הקטעים סימטריים. מפרקים לאיברים: כל איבר אי-זוגי תורם 0, וכל איבר זוגי תורם פעמיים את האינטגרל שלו מ-0.
+      - kind: computation
+        text: >-
+          (א) $x^7$ ו-$3x^5$ אי-זוגיות (חזקות אי-זוגיות), ותרומתן 0. $x^2$ זוגית:
+          $\int_{-1}^{1}x^2\,dx=2\int_0^1x^2\,dx=2\cdot\frac13=\frac23$.
+      - kind: computation
+        text: >-
+          (ב) $\sin3x$ אי-זוגית ($\sin(-3x)=-\sin3x$), ותרומתה 0. $\cos x$ זוגית, אבל זה לא אומר שהיא תורמת משהו:
+          $2\int_0^{\pi}\cos x\,dx=2\sin x\big|_0^{\pi}=0$. והקבוע 1 תורם את אורך הקטע, $2\pi$.
+      - kind: check
+        text: >-
+          (ב) גם ישירות: קדומה של $\sin3x+\cos x+1$ היא $-\frac{\cos3x}{3}+\sin x+x$. האיבר $-\frac{\cos3x}{3}$ זוגי
+          ומתבטל בהפרש, $\sin(\pm\pi)=0$, ונשאר $\pi-(-\pi)=2\pi$. ✓
+      - kind: result
+        text: >-
+          (א) $\frac23$; (ב) $2\pi$. זוגית אינה מבטיחה אינטגרל שונה מ-0: $\int_{-\pi}^{\pi}\cos x\,dx=0$.
+
+  - id: W-8.2-03
+    level: basic
+    objectives: [OBJ-8.2-3]
+    prompt: >-
+      (א) $G(x)=\int_3^xt^3e^{-t}\,dt$. מצאו את $G(3)$, את $G'(x)$ ואת $G'(3)$.
+
+      (ב) מצאו את $\frac{d}{dx}\int_0^{2x}\cos\left(t^2\right)dt$.
+    answer: >-
+      (א) $G(3)=0$, $G'(x)=x^3e^{-x}$, $G'(3)=27e^{-3}\approx1.344$. (ב) $2\cos\left(4x^2\right)$.
+    solution:
+      - kind: theorem
+        text: >-
+          המשפט היסודי: $\frac{d}{dx}\int_a^xf(t)\,dt=f(x)$, ועם גבול $g(x)$: $\frac{d}{dx}\int_a^{g(x)}f(t)\,dt=f(g(x))\,g'(x)$.
+      - kind: computation
+        text: >-
+          (א) $G(3)=\int_3^3=0$: קטע ברוחב 0. $G'(x)=x^3e^{-x}$: מציבים את הגבול באינטגרנד, בלי למצוא קדומה. לכן
+          $G'(3)=27e^{-3}\approx1.344$.
+      - kind: computation
+        text: >-
+          (ב) הגבול העליון $g(x)=2x$, $g'(x)=2$. מציבים $t=2x$ באינטגרנד: $\cos\left((2x)^2\right)=\cos\left(4x^2\right)$,
+          וכופלים ב-2.
+      - kind: check
+        text: >-
+          (ב) הטעות הנפוצה היא $\cos\left(x^2\right)$ או $2\cos\left(x^2\right)$: הצבה של $x$ במקום של הגבול כולו. ב-$x=0$
+          התשובה $2\cos0=2$: ליד 0 האינטגרנד בערך 1, והגבול $2x$ זז פי 2 מהר, ולכן השטח גדל בקצב 2. ✓
+      - kind: result
+        text: >-
+          (א) $G(3)=0$, $G'(x)=x^3e^{-x}$, $G'(3)=27e^{-3}$; (ב) $2\cos\left(4x^2\right)$.
+
+  - id: W-8.2-04
+    level: mid
+    qualitative: true
+    objectives: [OBJ-8.2-1]
+    prompt: >-
+      $\int_0^{\pi/2}\sin x\sqrt{\cos x}\,dx$.
+
+      (א) חשבו בהצבה $u=\cos x$, פעם כששומרים על סדר הגבולות החדשים, ופעם כשהופכים אותו.
+
+      (ב) סטודנטית קיבלה $-\frac23$. מה כנראה שכחה, ואיך אפשר לדעת שהתשובה שגויה בלי לחשב מחדש?
+    answer: >-
+      (א) $\frac23$ בשתי הדרכים. (ב) את המינוס של $du=-\sin x\,dx$; אינטגרנד חיובי על $\left[0,\frac{\pi}{2}\right]$ לא
+      נותן מספר שלילי.
+    solution:
+      - kind: idea
+        text: >-
+          $u=\cos x$ יורדת ב-$\left[0,\frac{\pi}{2}\right]$, ולכן הגבול העליון החדש קטן מהתחתון. המינוס של $du$ והסדר
+          ההפוך של הגבולות מבטלים זה את זה.
+      - kind: computation
+        text: >-
+          $du=-\sin x\,dx$, כלומר $\sin x\,dx=-du$. הגבולות: $x=0\mapsto u=1$, $x=\frac{\pi}{2}\mapsto u=0$. האינטגרל הוא
+          $\int_1^0\sqrt u\,(-du)$.
+      - kind: computation
+        text: >-
+          (א) שומרים על הסדר: $-\frac23u^{3/2}\Big|_1^0=-\left(0-\frac23\right)=\frac23$. הופכים את הסדר ומשנים סימן:
+          $\int_1^0\sqrt u\,(-du)=\int_0^1\sqrt u\,du=\frac23u^{3/2}\Big|_0^1=\frac23$.
+      - kind: step
+        text: >-
+          (ב) $-\frac23$ הוא $\int_1^0\sqrt u\,du$: הגבולות נכונים, אבל $du$ נכתב בלי המינוס. אינטגרנד חיובי
+          ($\sin x>0$ ו-$\sqrt{\cos x}>0$ בתוך הקטע) על קטע בכיוון הרגיל נותן מספר חיובי, ולכן מספר שלילי הוא סימן לטעות.
+      - kind: check
+        text: >-
+          קדומה ב-$x$: $-\frac23\cos^{3/2}x$ (גזרו: $-\frac23\cdot\frac32\cos^{1/2}x\cdot(-\sin x)=\sin x\sqrt{\cos x}$ ✓).
+          ההפרש: $-\frac23\cdot0-\left(-\frac23\cdot1\right)=\frac23$. ✓
+      - kind: result
+        text: >-
+          (א) $\frac23$; (ב) שכחה את המינוס של $du$; מספר שלילי לאינטגרל של פונקציה חיובית מסגיר את הטעות.
+
+  - id: W-8.2-05
+    level: mid
+    objectives: [OBJ-8.2-1]
+    prompt: >-
+      חשבו את $\int_1^5\frac{x}{\sqrt{2x-1}}\,dx$ בהצבה $u=2x-1$.
+    answer: >-
+      $\frac{16}{3}$
+    solution:
+      - kind: idea
+        text: >-
+          אחרי ההצבה נשאר $x$ במונה. מבטאים אותו בעזרת $u$, מתוך $u=2x-1$, ומתרגמים את הגבולות. מתקבל סכום של חזקות של
+          $u$.
+      - kind: computation
+        text: >-
+          $u=2x-1$, ולכן $x=\frac{u+1}{2}$ ו-$dx=\frac{du}{2}$. הגבולות: $x=1\mapsto u=1$, $x=5\mapsto u=9$.
+      - kind: computation
+        text: >-
+          $\int_1^5\frac{x}{\sqrt{2x-1}}\,dx=\int_1^9\frac{u+1}{2\sqrt u}\cdot\frac{du}{2}=\frac14\int_1^9\left(u^{1/2}+u^{-1/2}\right)du$.
+      - kind: computation
+        text: >-
+          $\frac14\left(\frac23u^{3/2}+2u^{1/2}\right)\Big|_1^9$: ב-$u=9$, $\frac23\cdot27+2\cdot3=24$; ב-$u=1$,
+          $\frac23+2=\frac83$. לכן התוצאה $\frac14\left(24-\frac83\right)=\frac14\cdot\frac{64}{3}=\frac{16}{3}$.
+      - kind: check
+        text: >-
+          גודל: ב-$[1,5]$ האינטגרנד בין $\frac{1}{\sqrt1}=1$ ל-$\frac{5}{\sqrt9}=\frac53$, על קטע באורך 4, ולכן השטח בין 4
+          ל-$6.67$; $\frac{16}{3}\approx5.33$. ✓
+      - kind: result
+        text: >-
+          $\int_1^5\frac{x}{\sqrt{2x-1}}\,dx=\frac{16}{3}$.
+
+  - id: W-8.2-06
+    level: mid
+    qualitative: true
+    objectives: [OBJ-8.2-2]
+    prompt: >-
+      בלי למצוא פונקציה קדומה: אילו מהאינטגרלים שווים 0? לאלה שלא, קבעו את הסימן, ובסעיף (ד) גם את הערך.
+
+      (א) $\int_{-2}^{2}x\,|x|\,dx$ (ב) $\int_{-1}^{1}x\cos\left(x^3\right)dx$ (ג) $\int_{-\pi}^{\pi}x\sin x\,dx$
+      (ד) $\int_{-1}^{3}x^3\,dx$
+    answer: >-
+      (א) 0 (ב) 0 (ג) חיובי (ד) חיובי, 20.
+    solution:
+      - kind: idea
+        text: >-
+          בכל אחד בודקים שני דברים: האם הקטע סימטרי, ומה הזוגיות של האינטגרנד. אי-זוגית בקטע סימטרי נותנת 0; זוגית לא
+          מתאפסת בגלל הסימטריה.
+      - kind: step
+        text: >-
+          (א) $(-x)\,|-x|=-x\,|x|$: אי-זוגית (אי-זוגית כפול זוגית), והקטע סימטרי. האינטגרל 0.
+      - kind: step
+        text: >-
+          (ב) $\cos\left(x^3\right)$ זוגית, כי $(-x)^3=-x^3$ ו-$\cos$ זוגית. כפול $x$ האי-זוגי: אי-זוגית. האינטגרל 0.
+      - kind: step
+        text: >-
+          (ג) $x\sin x$ היא מכפלה של שתי אי-זוגיות, ולכן זוגית: אין סיבה שתתאפס. ויותר מזה, ב-$(-\pi,\pi)$ ל-$x$ ול-$\sin x$
+          אותו סימן, ולכן $x\sin x\ge0$, והאינטגרל חיובי.
+      - kind: computation
+        text: >-
+          (ד) $x^3$ אי-זוגית, אבל הקטע $[-1,3]$ אינו סימטרי. מפצלים: $\int_{-1}^{1}x^3\,dx=0$, ונשאר
+          $\int_1^3x^3\,dx=\frac{x^4}{4}\Big|_1^3=\frac{81-1}{4}=20$.
+      - kind: check
+        text: >-
+          (ג) הערך, עם אינטגרציה בחלקים של שיעור 7.3, הוא $2\pi$: חיובי. ✓ (ד) ישירות: $\frac{81}{4}-\frac14=20$. ✓
+      - kind: result
+        text: >-
+          (א) 0; (ב) 0; (ג) חיובי (זוגית ואי-שלילית); (ד) 20.
+
+  - id: W-8.2-07
+    level: mid
+    objectives: [OBJ-8.2-3]
+    prompt: >-
+      $G(x)=\int_x^{x^2}\ln t\,dt$ ל-$x>0$.
+
+      (א) מצאו את $G'(x)$ בלי לחשב את האינטגרל.
+
+      (ב) בדקו: חשבו את $G(x)$ בעזרת הקדומה $t\ln t-t$ של $\ln t$, וגזרו.
+    answer: >-
+      $G'(x)=(4x-1)\ln x$
+    solution:
+      - kind: idea
+        text: >-
+          שני הגבולות משתנים: מפצלים בנקודה קבועה, 1, והחלק של הגבול התחתון נכנס עם מינוס. לגבול $x^2$ יש נגזרת פנימית
+          $2x$.
+      - kind: computation
+        text: >-
+          (א) $G(x)=\int_1^{x^2}\ln t\,dt-\int_1^x\ln t\,dt$, ולכן
+          $G'(x)=\ln\left(x^2\right)\cdot2x-\ln x\cdot1=4x\ln x-\ln x=(4x-1)\ln x$.
+      - kind: computation
+        text: >-
+          (ב) $G(x)=\left(t\ln t-t\right)\Big|_x^{x^2}=\left(2x^2\ln x-x^2\right)-\left(x\ln x-x\right)$.
+      - kind: check
+        text: >-
+          גזירה: $\left(2x^2\ln x\right)'=4x\ln x+2x$, $\left(x^2\right)'=2x$, $(x\ln x)'=\ln x+1$, $x'=1$. יחד:
+          $4x\ln x+2x-2x-\ln x-1+1=(4x-1)\ln x$. ✓ וגם $G(1)=\int_1^1\ln t\,dt=0$, ואכן הנוסחה של (ב) ב-$x=1$
+          נותנת $(0-1)-(0-1)=0$. ✓
+      - kind: result
+        text: >-
+          $G'(x)=(4x-1)\ln x$.
+
+  - id: W-8.2-08
+    level: exam
+    objectives: [OBJ-8.2-3]
+    prompt: >-
+      $G(x)=\int_0^x\frac{t^2-3t+2}{1+t^2}\,dt$.
+
+      (א) מצאו את התחומים שבהם $G$ עולה ושבהם היא יורדת, ואת נקודות הקיצון המקומי שלה.
+
+      (ב) כתבו את משוואת הישר המשיק לגרף של $G$ ב-$x=0$.
+    answer: >-
+      (א) עולה ב-$(-\infty,1]$ וב-$[2,\infty)$, יורדת ב-$[1,2]$; מקסימום מקומי ב-$x=1$, מינימום מקומי ב-$x=2$. (ב) $y=2x$.
+    solution:
+      - kind: idea
+        text: >-
+          את $G$ לא צריך לחשב: לפי המשפט היסודי $G'(x)$ הוא האינטגרנד, והעלייה והירידה נקבעות מהסימן שלו (שיעור 5.5).
+      - kind: computation
+        text: >-
+          $G'(x)=\frac{x^2-3x+2}{1+x^2}=\frac{(x-1)(x-2)}{1+x^2}$. המכנה חיובי תמיד, ולכן הסימן של $G'$ הוא הסימן של
+          $(x-1)(x-2)$.
+      - kind: step
+        text: >-
+          (א) $(x-1)(x-2)>0$ כש-$x<1$ או $x>2$, ו-$<0$ כש-$1<x<2$ (בדיקה בנקודות: $G'(0)=2$, $G'(1.5)=-\frac{1}{13}$,
+          $G'(3)=\frac15$). לכן $G$ עולה, יורדת ועולה שוב: ב-$x=1$ מעבר מעלייה לירידה, מקסימום מקומי; ב-$x=2$ מירידה
+          לעלייה, מינימום מקומי.
+      - kind: computation
+        text: >-
+          (ב) $G(0)=\int_0^0=0$ ו-$G'(0)=\frac{2}{1}=2$. המשיק: $y=G(0)+G'(0)(x-0)=2x$.
+      - kind: check
+        text: >-
+          כאן יש גם נוסחה, $G(x)=x-\frac32\ln\left(1+x^2\right)+\arctan x$ (חילוק ופירוק, שיעורים 7.2 ו-7.4), ואיתה
+          $G(1)\approx0.746>G(2)\approx0.693$: אכן ירידה בין המקסימום למינימום. ✓
+      - kind: result
+        text: >-
+          עולה ב-$(-\infty,1]$ וב-$[2,\infty)$, יורדת ב-$[1,2]$; מקסימום מקומי ב-1, מינימום מקומי ב-2; המשיק ב-0: $y=2x$.
+
+  - id: W-8.2-09
+    level: exam
+    qualitative: true
+    objectives: [OBJ-8.2-1]
+    prompt: >-
+      (א) הראו בהצבה $u=\frac{\pi}{2}-x$ ש-$\int_0^{\pi/2}\sin^2x\,dx=\int_0^{\pi/2}\cos^2x\,dx$.
+
+      (ב) הסיקו, בלי זהויות של זווית כפולה, שכל אחד מהם שווה $\frac{\pi}{4}$.
+
+      (ג) האם $\int_0^{\pi/2}\sin^8x\,dx=\int_0^{\pi/2}\cos^8x\,dx$? נמקו בלי לחשב.
+    answer: >-
+      (א) ההצבה הופכת את האחד לשני. (ב) הסכום $\int_0^{\pi/2}1\,dx=\frac{\pi}{2}$, וכל אחד חצי. (ג) כן, באותה הצבה.
+    solution:
+      - kind: idea
+        text: >-
+          ההצבה $u=\frac{\pi}{2}-x$ משקפת את הקטע $\left[0,\frac{\pi}{2}\right]$ סביב האמצע שלו ומחליפה סינוס בקוסינוס:
+          $\sin\left(\frac{\pi}{2}-u\right)=\cos u$.
+      - kind: computation
+        text: >-
+          (א) $u=\frac{\pi}{2}-x$, $du=-dx$, $x=\frac{\pi}{2}-u$. הגבולות: $x=0\mapsto u=\frac{\pi}{2}$,
+          $x=\frac{\pi}{2}\mapsto u=0$. זו הצבה יורדת:
+          $\int_0^{\pi/2}\sin^2x\,dx=\int_{\pi/2}^{0}\cos^2u\,(-du)=\int_0^{\pi/2}\cos^2u\,du$.
+      - kind: step
+        text: >-
+          (ב) נסמן את שני האינטגרלים השווים ב-$I$. לפי לינאריות ו-$\sin^2x+\cos^2x=1$:
+          $2I=\int_0^{\pi/2}\left(\sin^2x+\cos^2x\right)dx=\int_0^{\pi/2}1\,dx=\frac{\pi}{2}$, ולכן $I=\frac{\pi}{4}$.
+      - kind: step
+        text: >-
+          (ג) כן. באותה הצבה $\sin^8x$ הופכת ל-$\cos^8u$, והגבולות מתהפכים בדיוק כמו ב-(א). החזקה לא משנה את הטיעון.
+          (אבל כאן הסכום $\sin^8x+\cos^8x$ אינו 1, ולכן הטריק של (ב) לא נותן את הערך.)
+      - kind: check
+        text: >-
+          (ב) עם הורדת חזקה של שיעור 7.5: $\int_0^{\pi/2}\frac{1-\cos2x}{2}\,dx=\frac{\pi}{4}-\frac{\sin2x}{4}\Big|_0^{\pi/2}=\frac{\pi}{4}$.
+          ✓
+      - kind: result
+        text: >-
+          $\int_0^{\pi/2}\sin^2x\,dx=\int_0^{\pi/2}\cos^2x\,dx=\frac{\pi}{4}$, וגם החזקות השמיניות שוות זו לזו.
+
+  - id: W-8.2-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-8.2-2, OBJ-8.2-3]
+    prompt: >-
+      $f$ רציפה בכל $\mathbb{R}$, ו-$G(x)=\int_{-x}^{x}f(t)\,dt$.
+
+      (א) הראו ש-$G'(x)=f(x)+f(-x)$.
+
+      (ב) הוכיחו: אם $G(x)=0$ **לכל** $x$, אז $f$ אי-זוגית.
+
+      (ג) הפונקציה $f(x)=x^2-\frac13$ מקיימת $G(1)=0$, והיא זוגית ולא אי-זוגית. האם זה סותר את (ב)? חשבו את
+      $G\left(\frac12\right)$.
+    answer: >-
+      (א) לפי הכלל של שני גבולות משתנים. (ב) $G'\equiv0$ נותן $f(-x)=-f(x)$. (ג) אין סתירה: $G\left(\frac12\right)=-\frac14\ne0$.
+    solution:
+      - kind: idea
+        text: >-
+          אינטגרל אחד שמתאפס אינו מספיק כדי להסיק אי-זוגיות, אבל משפחה שלמה של אינטגרלים, על כל קטע סימטרי, כן: הנגזרת
+          לפי $x$ מבודדת את הערכים בקצוות.
+      - kind: computation
+        text: >-
+          (א) גבול עליון $g(x)=x$, $g'=1$; גבול תחתון $h(x)=-x$, $h'=-1$. לפי הכלל:
+          $G'(x)=f(x)\cdot1-f(-x)\cdot(-1)=f(x)+f(-x)$.
+      - kind: step
+        text: >-
+          (ב) אם $G\equiv0$, גם $G'\equiv0$, כלומר $f(x)+f(-x)=0$ לכל $x$. זו בדיוק ההגדרה: $f(-x)=-f(x)$.
+      - kind: computation
+        text: >-
+          (ג) $\int_{-1}^{1}\left(x^2-\tfrac13\right)dx=\frac23-\frac23=0$, אבל
+          $G\left(\tfrac12\right)=2\int_0^{1/2}\left(x^2-\tfrac13\right)dx=2\left(\tfrac{1}{24}-\tfrac16\right)=-\frac14$.
+          כלומר $G$ אינה 0 לכל $x$, והתנאי של (ב) לא מתקיים: אין סתירה.
+      - kind: check
+        text: >-
+          (א) על $f$ זוגית: $G(x)=2\int_0^xf(t)\,dt$, ולכן $G'=2f(x)$, ואכן $f(x)+f(-x)=2f(x)$. ✓ ועל אי-זוגית: $G\equiv0$
+          ו-$f(x)+f(-x)=0$. ✓
+      - kind: result
+        text: >-
+          $G'(x)=f(x)+f(-x)$; אם $G\equiv0$ אז $f$ אי-זוגית; אינטגרל 0 על קטע סימטרי **אחד** אינו מספיק.
+
+challenge:
+  - id: W-8.2-c1
+    stars: 1
+    objectives: [OBJ-8.2-1, OBJ-8.2-2]
+    prompt: >-
+      הראו בעזרת החלפת משתנה, בלי לחשב קדומה, ש-$\int_0^2(1-t)\cos(\pi t)\,dt=0$.
+    answer: >-
+      בהצבה $u=1-t$ האינטגרל הופך ל-$\int_{-1}^{1}(-u\cos\pi u)\,du$, אינטגרל של פונקציה אי-זוגית בקטע סימטרי.
+    solution:
+      - kind: idea
+        text: >-
+          הקטע $[0,2]$ סימטרי סביב $t=1$. הצבה שמזיזה את 1 לראשית הופכת אותו ל-$[-1,1]$, ואז מחפשים סימטריה של האינטגרנד
+          החדש.
+      - kind: computation
+        text: >-
+          $u=1-t$, $du=-dt$, $t=1-u$. הגבולות: $t=0\mapsto u=1$, $t=2\mapsto u=-1$. האינטגרנד:
+          $(1-t)\cos(\pi t)=u\cos(\pi-\pi u)=-u\cos(\pi u)$, כי $\cos(\pi-\theta)=-\cos\theta$.
+      - kind: computation
+        text: >-
+          $\int_0^2(1-t)\cos(\pi t)\,dt=\int_1^{-1}\left(-u\cos\pi u\right)(-du)=\int_1^{-1}u\cos(\pi u)\,du=-\int_{-1}^{1}u\cos(\pi u)\,du$.
+      - kind: step
+        text: >-
+          $u\cos(\pi u)$ היא אי-זוגית כפול זוגית, כלומר אי-זוגית, והקטע $[-1,1]$ סימטרי. לכן האינטגרל 0.
+      - kind: check
+        text: >-
+          בפיצול: $\int_0^1(1-t)\cos(\pi t)\,dt=\frac{2}{\pi^2}$ (אינטגרציה בחלקים, שיעור 7.3), והחלק $[1,2]$ נותן
+          $-\frac{2}{\pi^2}$, בדיוק השיקוף. ✓ ובציור: ב-$[0,1]$ שני הגורמים חיוביים ליד 0, ב-$[1,2]$ הגורם $1-t$ שלילי.
+      - kind: result
+        text: >-
+          $\int_0^2(1-t)\cos(\pi t)\,dt=0$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 1 (OpenStax)'
+      year: 2016
+      problem: 'Section 5.5 (Substitution), exercise 311'
+      url: 'https://openstax.org/books/calculus-volume-1/pages/5-5-substitution#fs-id1170571371143'
+      verified: '2026-11-27'
+      adapted: false
+
+  - id: W-8.2-c2
+    stars: 2
+    objectives: [OBJ-8.2-1]
+    prompt: >-
+      חשבו את $\int_0^{\pi/2}\frac{dx}{1+(\tan x)^{\sqrt2}}$. (ב-$x=\frac{\pi}{2}$ האינטגרנד מוגדר לפי הגבול שלו, 0.)
+    answer: >-
+      $\frac{\pi}{4}$
+    solution:
+      - kind: idea
+        text: >-
+          לאינטגרנד אין קדומה שאפשר למצוא, אבל הצבה שמשקפת את הקטע, $u=\frac{\pi}{2}-x$, הופכת את $\tan x$ ל-$\frac{1}{\tan u}$,
+          והאינטגרנד החדש משלים את הישן ל-1.
+      - kind: computation
+        text: >-
+          נסמן $f(x)=\frac{1}{1+(\tan x)^{\sqrt2}}$ ו-$I=\int_0^{\pi/2}f(x)\,dx$. בהצבה $u=\frac{\pi}{2}-x$, $du=-dx$, והגבולות
+          מתהפכים: $I=\int_{\pi/2}^{0}f\left(\tfrac{\pi}{2}-u\right)(-du)=\int_0^{\pi/2}f\left(\tfrac{\pi}{2}-u\right)du$.
+      - kind: computation
+        text: >-
+          $\tan\left(\frac{\pi}{2}-u\right)=\frac{\cos u}{\sin u}=\frac{1}{\tan u}$ ל-$0<u<\frac{\pi}{2}$. נסמן $T=(\tan u)^{\sqrt2}$:
+          $f\left(\tfrac{\pi}{2}-u\right)=\frac{1}{1+\frac1T}=\frac{T}{1+T}=1-\frac{1}{1+T}=1-f(u)$.
+      - kind: step
+        text: >-
+          לכן $I=\int_0^{\pi/2}\left(1-f(u)\right)du=\frac{\pi}{2}-I$, כלומר $2I=\frac{\pi}{2}$ ו-$I=\frac{\pi}{4}$. המעריך
+          $\sqrt2$ לא שיחק תפקיד: אותו טיעון עובד לכל מעריך.
+      - kind: check
+        text: >-
+          חישוב נומרי (sympy, 15 ספרות) של האינטגרל נותן $0.785398163397448$, ו-$\frac{\pi}{4}=0.785398163397448$. ✓ ובציור:
+          הגרף של $f$ סימטרי ביחס לנקודה $\left(\frac{\pi}{4},\frac12\right)$, ולכן השטח הוא חצי מהמלבן
+          $\frac{\pi}{2}\times1$.
+      - kind: result
+        text: >-
+          $\int_0^{\pi/2}\frac{dx}{1+(\tan x)^{\sqrt2}}=\frac{\pi}{4}$.
+    source:
+      name: 'The 41st William Lowell Putnam Mathematical Competition (Kalva archive)'
+      year: 1980
+      problem: 'Problem A3'
+      url: https://prase.cz/kalva/putnam/psoln/psol803.html
+      verified: '2026-11-27'
+      adapted: false

@@ -1,0 +1,24 @@
+- id: v-8-3-khan-intro
+  youtubeId: qv7DM5Ph0vU
+  title: Introduction to improper integrals | AP Calculus BC | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 4
+  why: >-
+    לפי התיאור: אינטגרל לא אמיתי הוא אינטגרל מסוים שאחד הגבולות שלו באינסוף, או שהאינטגרנד שלו מתפוצץ בקטע, ומחשבים
+    אותו בעזרת גבול. השוו לסעיף "שטח עד R, ואז גבול" ולחלון התחתון של איור 8.3א.
+  verified: '2026-11-27'
+- id: v-8-3-khan-divergent
+  youtubeId: 9VqL6POWIoc
+  title: Divergent improper integral | AP Calculus BC | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: []
+  start: 0
+  minutes: 3
+  why: >-
+    לפי הכותרת והתיאור: אינטגרל לא אמיתי שערכו אינסופי, כלומר מתבדר. השוו לסעיף על החזקות, ולמה שהשטח מתחת ל-$\frac1x$
+    עושה באיור 8.3א.
+  verified: '2026-11-27'

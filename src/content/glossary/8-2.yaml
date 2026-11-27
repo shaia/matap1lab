@@ -2,9 +2,29 @@
 - id: integral-variable-upper-limit
   term: אינטגרל עם גבול עליון משתנה
   en: integral with a variable upper limit (accumulation function)
-  symbol: 'F(x)=\int_a^x f(t)\,dt'
+  symbol: 'G(x)=\int_a^x f(t)\,dt'
   definition: >-
-    הפונקציה $F(x)=\int_a^xf(t)\,dt$: השטח עם הסימן מ-$a$ עד $x$. המשתנה $t$ הוא משתנה האינטגרציה, ו-$x$ הוא
-    הגבול. לפי המשפט היסודי, כש-$f$ רציפה, $F'(x)=f(x)$, ובגבול $g(x)$: $\frac{d}{dx}\int_a^{g(x)}f(t)\,dt=f(g(x))\,g'(x)$.
+    הפונקציה $G(x)=\int_a^xf(t)\,dt$: השטח עם הסימן מ-$a$ עד $x$ (בשיעור 7.1 נקראה $A$, פונקציית השטח). המשתנה $t$
+    הוא משתנה האינטגרציה, ו-$x$ הוא הגבול. לפי המשפט היסודי, כש-$f$ רציפה, $G'(x)=f(x)$, ובגבול $g(x)$: $\frac{d}{dx}\int_a^{g(x)}f(t)\,dt=f(g(x))\,g'(x)$.
+  reject: []
+  lesson: '8.2'
+
+- id: limits-of-integration
+  term: גבולות האינטגרציה
+  en: limits of integration
+  symbol: '\int_a^b'
+  definition: >-
+    המספרים $a$ ו-$b$ באינטגרל המסוים $\int_a^bf(x)\,dx$: $a$ הגבול התחתון ו-$b$ הגבול העליון. הם ערכים של משתנה
+    האינטגרציה: אחרי הצבה $u=g(x)$ גם הגבולות עוברים, ל-$g(a)$ ול-$g(b)$.
+  reject: []
+  lesson: '8.2'
+
+- id: even-odd-parts
+  term: החלק הזוגי והחלק האי-זוגי
+  en: even part and odd part of a function
+  symbol: 'f=f_{\mathrm{e}}+f_{\mathrm{o}}'
+  definition: >-
+    לפונקציה $f$ שמוגדרת בקטע סימטרי סביב 0, החלק הזוגי הוא $\frac{f(x)+f(-x)}{2}$ והחלק האי-זוגי הוא
+    $\frac{f(x)-f(-x)}{2}$. הראשון זוגי, השני אי-זוגי, וסכומם $f$. למשל ל-$e^x$ החלקים הם $\cosh x$ ו-$\sinh x$.
   reject: []
   lesson: '8.2'

@@ -6,7 +6,7 @@
   truth: >-
     המשפט היסודי דורש $f$ רציפה בכל $[a,b]$. נקודה פנימית שבה $f$ אינה חסומה הופכת את האינטגרל ללא אמיתי: מפצלים
     בה ובודקים כל חלק כגבול. $\int_{-1}^1\frac{dx}{x^2}$ מתבדר, ולא $-2$.
-  remedy: { lesson: '8.3', label: 'אינטגרל של פונקציה לא חסומה' }
+  remedy: { lesson: '8.3', anchor: 'hidden', label: 'אינטגרל של פונקציה לא חסומה' }
 
 - id: MC-c8-improper-symmetric-cancel
   title: מאפסים אינטגרל לא אמיתי בגלל סימטריה
@@ -15,7 +15,7 @@
   truth: >-
     $\int_{-\infty}^{\infty}f\,dx$ קיים רק כש-$\int_{-\infty}^0f$ ו-$\int_0^\infty f$ מתכנסים **כל אחד בנפרד**. אם
     אחד מהם מתבדר, הסימטריה לא מצילה: $\infty-\infty$ אינו מספר.
-  remedy: { lesson: '8.3', label: 'אינטגרל על כל הישר: שני חלקים' }
+  remedy: { lesson: '8.3', anchor: 'whole-line', label: 'אינטגרל על כל הישר: שני חלקים' }
 
 - id: MC-c8-integrand-to-zero-converges
   title: חושבים שאינטגרנד ששואף לאפס נותן אינטגרל מתכנס
@@ -24,7 +24,7 @@
   truth: >-
     $f$ צריכה לשאוף ל-0 **מהר מספיק**. $\int_1^\infty\frac{dx}{x}=\lim\ln R=\infty$ אף ש-$\frac1x\to0$; חזקה
     $x^{-p}$ נותנת אינטגרל מתכנס באינסוף רק כש-$p>1$.
-  remedy: { lesson: '8.3', label: 'מתי אינטגרל על קטע אינסופי מתכנס' }
+  remedy: { lesson: '8.3', anchor: 'not-enough', label: 'מתי אינטגרל על קטע אינסופי מתכנס' }
 
 - id: MC-c8-p-test-direction
   title: מבלבלים בין התנאי באינסוף לבין התנאי ליד אפס
@@ -33,7 +33,7 @@
   truth: >-
     באינסוף: $\int_1^\infty x^{-p}dx$ מתכנס כש-$p>1$. ליד 0: $\int_0^1x^{-p}dx$ מתכנס כש-$p<1$. ב-$p=1$ שניהם
     מתבדרים. באינסוף צריך דעיכה מהירה, וליד 0 צריך שהפונקציה "תתפוצץ" לאט.
-  remedy: { lesson: '8.3', label: 'אינטגרלים סטנדרטיים של חזקות' }
+  remedy: { lesson: '8.3', anchor: 'p-table', label: 'אינטגרלים סטנדרטיים של חזקות' }
 
 - id: MC-c8-exp-rate-inverted
   title: חושבים שהשטח מתחת לאקספוננט הדועך שווה לקצב הדעיכה
@@ -41,7 +41,7 @@
     $\int_0^\infty e^{-ax}dx=a$.
   truth: >-
     $\int_0^\infty e^{-ax}dx=\frac1a$ ל-$a>0$: דעיכה איטית (a קטן) משאירה שטח גדול.
-  remedy: { lesson: '8.3', label: 'האינטגרל הסטנדרטי של האקספוננט' }
+  remedy: { lesson: '8.3', anchor: 'exp-standard', label: 'האינטגרל הסטנדרטי של האקספוננט' }
 
 - id: MC-c8-comparison-wrong-direction
   title: משתמשים במבחן ההשוואה בכיוון הלא נכון
@@ -50,4 +50,4 @@
   truth: >-
     ל-$0\le f\le g$: אם $\int g$ **מתכנס**, גם $\int f$ מתכנס; אם $\int f$ **מתבדר**, גם $\int g$ מתבדר. חסם עליון
     מתבדר או חסם תחתון מתכנס אינם אומרים דבר.
-  remedy: { lesson: '8.3', label: 'מבחן ההשוואה' }
+  remedy: { lesson: '8.3', anchor: 'comparison-direction', label: 'מבחן ההשוואה' }

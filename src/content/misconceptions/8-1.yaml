@@ -7,16 +7,16 @@
     בחלוקה $a=x_0<x_1<\dots<x_n=b$ הסכום השמאלי הוא $\sum_{i=0}^{n-1}f(x_i)\,\Delta x$ (הקצה השמאלי של כל קטע),
     הימני $\sum_{i=1}^{n}f(x_i)\,\Delta x$, וסכום האמצעים דוגם באמצע כל קטע. לחלוקה סופית הם נותנים מספרים שונים;
     רק הגבול כש-$\Delta x\to0$ משותף.
-  remedy: { lesson: '8.1', label: 'סכומי רימן: איפה דוגמים בכל קטע' }
+  remedy: { lesson: '8.1', anchor: sample-points, label: 'סכומי רימן: איפה דוגמים בכל קטע' }
 
 - id: MC-c8-riemann-forget-width
   title: סוכמים את ערכי הפונקציה בלי לכפול ברוחב הקטע
   belief: >-
     סכום רימן הוא $\sum f(x_i)$.
   truth: >-
-    כל מחובר הוא שטח של מלבן, גובה כפול רוחב: $\sum f(x_i)\,\Delta x$. בלי $\Delta x$ הסכום גדל עם מספר הקטעים
+    כל איבר הוא שטח של מלבן, גובה כפול רוחב: $\sum f(x_i)\,\Delta x$. בלי $\Delta x$ הסכום גדל עם מספר הקטעים
     ואינו מתקרב לשטח.
-  remedy: { lesson: '8.1', label: 'סכום רימן: גובה כפול רוחב' }
+  remedy: { lesson: '8.1', anchor: riemann-sum, label: 'סכום רימן: גובה כפול רוחב' }
 
 - id: MC-c8-sum-is-integral
   title: חושבים שסכום רימן שווה לאינטגרל
@@ -25,7 +25,7 @@
   truth: >-
     סכום רימן הוא **קירוב** לשטח. האינטגרל המסוים הוא הגבול של הסכומים כשרוחב הקטעים שואף ל-0. לחלוקה סופית יש
     בדרך כלל הפרש, למשל $L_4=\tfrac74$ ואילו $\int_0^2x^2\,dx=\tfrac83$.
-  remedy: { lesson: '8.1', label: 'מסכום רימן לאינטגרל: גבול' }
+  remedy: { lesson: '8.1', anchor: limit-of-sums, label: 'מסכום רימן לאינטגרל: גבול' }
 
 - id: MC-c8-left-always-under
   title: חושבים שהסכום השמאלי תמיד קטן מהאינטגרל
@@ -34,7 +34,7 @@
   truth: >-
     לפונקציה **עולה** $L_n\le\int_a^bf\le R_n$; לפונקציה **יורדת** ההפך. כשהפונקציה עולה ויורדת בקטע, אין כלל
     כללי.
-  remedy: { lesson: '8.1', label: 'מתי הסכום השמאלי מעריך בחסר' }
+  remedy: { lesson: '8.1', anchor: monotone, label: 'מתי הסכום השמאלי מעריך בחסר' }
 
 - id: MC-c8-signed-vs-geometric
   title: מבלבלים בין אינטגרל לבין שטח גיאומטרי
@@ -43,7 +43,7 @@
   truth: >-
     האינטגרל הוא שטח **עם סימן**: חלקים מתחת לציר נספרים במינוס. השטח הגיאומטרי הוא $\int_a^b|f(x)|\,dx$: מפצלים
     את הקטע בנקודות שבהן $f$ מחליפה סימן.
-  remedy: { lesson: '8.1', label: 'שטח עם סימן' }
+  remedy: { lesson: '8.1', anchor: signed-area, label: 'שטח עם סימן' }
 
 - id: MC-c8-displacement-vs-distance
   title: מבלבלים בין העתק לבין דרך
@@ -52,7 +52,7 @@
   truth: >-
     $\int_{t_1}^{t_2}v\,dt$ הוא ה**העתק**, המיקום הסופי פחות ההתחלתי, ותנועה אחורה מקטינה אותו. הדרך היא
     $\int_{t_1}^{t_2}|v|\,dt$.
-  remedy: { lesson: '8.1', label: 'אינטגרל של מהירות: העתק ודרך' }
+  remedy: { lesson: '8.1', anchor: displacement, label: 'אינטגרל של מהירות: העתק ודרך' }
 
 - id: MC-c8-zero-integral-zero-function
   title: חושבים שאינטגרל אפס גורר פונקציה אפס
@@ -60,15 +60,15 @@
     אם $\int_a^bf\,dx=0$, אז $f\equiv0$ בקטע.
   truth: >-
     שטחים עם סימנים שונים מתקזזים: $\int_0^{2\pi}\sin x\,dx=0$. רק $\int_a^b|f|\,dx=0$ (ל-$f$ רציפה) גורר $f\equiv0$.
-  remedy: { lesson: '8.1', label: 'שטח עם סימן' }
+  remedy: { lesson: '8.1', anchor: cancel, label: 'שטחים מתקזזים' }
 
 - id: MC-c8-constant-integral-length
   title: חושבים שהאינטגרל של קבוע הוא הקבוע עצמו
   belief: >-
-    $\int_a^b c\,dx=c$, או שמחובר קבוע בתוך האינטגרל אינו תורם.
+    $\int_a^b c\,dx=c$, או שאיבר קבוע בתוך האינטגרל אינו תורם.
   truth: >-
     $\int_a^b c\,dx=c(b-a)$: שטח של מלבן בגובה $c$ וברוחב $b-a$.
-  remedy: { lesson: '8.1', label: 'תכונות האינטגרל: ליניאריות' }
+  remedy: { lesson: '8.1', anchor: linearity-8, label: 'תכונות האינטגרל: לינאריות' }
 
 - id: MC-c8-reverse-limits
   title: מתעלמים מסדר הגבולות
@@ -76,7 +76,7 @@
     $\int_b^af\,dx$ ו-$\int_a^bf\,dx$ הם אותו מספר, או שבחישוב $F(b)-F(a)$ אפשר להחליף את הסדר.
   truth: >-
     $\int_b^af\,dx=-\int_a^bf\,dx$, ו-$\int_a^bf\,dx=F(b)-F(a)$ (הגבול העליון ראשון). החלפת הסדר הופכת סימן.
-  remedy: { lesson: '8.1', label: 'תכונות האינטגרל: סדר הגבולות' }
+  remedy: { lesson: '8.1', anchor: limits-order, label: 'תכונות האינטגרל: סדר הגבולות' }
 
 - id: MC-c8-comparison-abs
   title: משתמשים בהשוואה בין אינטגרלים בלי לבדוק את כל הקטע, או עם ערך מוחלט
@@ -85,7 +85,7 @@
   truth: >-
     אם $f(x)\le g(x)$ **לכל** $x\in[a,b]$, אז $\int_a^bf\le\int_a^bg$, וזה כל מה שנובע. ערך מוחלט אינו שומר על סדר
     (למשל $-2\le1$). מה שנכון תמיד: $\left|\int_a^bf\right|\le\int_a^b|f|$.
-  remedy: { lesson: '8.1', label: 'תכונות האינטגרל: השוואה' }
+  remedy: { lesson: '8.1', anchor: comparison, label: 'תכונות האינטגרל: השוואה' }
 
 - id: MC-c8-definite-plus-c
   title: כותבים פלוס קבוע או פונקציה כתשובה לאינטגרל מסוים
@@ -93,4 +93,4 @@
     $\int_0^1 2x\,dx=x^2+C$, כמו באינטגרל לא מסוים.
   truth: >-
     אינטגרל מסוים הוא **מספר**: $\int_0^12x\,dx=\left[x^2\right]_0^1=1$. הקבוע $C$ מתבטל בהפרש $F(b)-F(a)$.
-  remedy: { lesson: '8.1', label: 'אינטגרל מסוים הוא מספר' }
+  remedy: { lesson: '8.1', anchor: a-number, label: 'אינטגרל מסוים הוא מספר' }

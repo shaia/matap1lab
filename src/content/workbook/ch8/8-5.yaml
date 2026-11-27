@@ -1,0 +1,411 @@
+# Workbook of lesson 8.5 — areas between graphs and volumes of solids of revolution.
+# Objectives (src/course.ts):
+#   OBJ-8.5-1  area between two graphs, including finding the intersection points
+#   OBJ-8.5-2  volume of a solid of revolution by discs (and washers)
+#   OBJ-8.5-3  volume of a solid of revolution by cylindrical shells
+# Order of knowledge: chapters 1–7 and lessons 8.1–8.4 (substitution with new limits, improper integrals); no multiple
+# integrals, no Pappus. Every number recomputed with sympy in screens/tools/lesson-8-5.py.
+lesson: '8.5'
+practice:
+  - id: W-8.5-01
+    level: basic
+    objectives: [OBJ-8.5-1]
+    prompt: >-
+      חשבו את השטח הכלוא בין הגרפים $y=x^2$ ו-$y=x^3$.
+    answer: >-
+      $\frac{1}{12}$
+    solution:
+      - kind: idea
+        text: >-
+          מוצאים את נקודות החיתוך, קובעים מי עליון בנקודה אחת שביניהן, ומחשבים את האינטגרל של העליון פחות התחתון.
+      - kind: computation
+        text: >-
+          $x^2=x^3$ פירושו $x^2(x-1)=0$: החיתוכים ב-$x=0$ וב-$x=1$.
+      - kind: step
+        text: >-
+          ב-$x=\frac12$: $x^2=\frac14$ ו-$x^3=\frac18$. לכן בקטע $(0,1)$ הגרף של $x^2$ עליון. (ליד 0 שני הגרפים
+          קטנים, אבל חזקה גבוהה יותר קטנה עוד יותר.)
+      - kind: computation
+        text: >-
+          $A=\int_0^1\left(x^2-x^3\right)dx=\frac13-\frac14=\frac{1}{12}$.
+      - kind: check
+        text: >-
+          התוצאה חיובית, כמו שטח. ומי שמחסר בסדר ההפוך מקבל מספר שלילי, $\int_0^1\left(x^3-x^2\right)dx=-\frac{1}{12}$: הסימן שהסדר
+          הפוך.
+      - kind: result
+        text: >-
+          $A=\frac{1}{12}$.
+
+  - id: W-8.5-02
+    level: basic
+    objectives: [OBJ-8.5-2]
+    prompt: >-
+      התחום שמתחת ל-$y=e^{-x}$, $0\le x\le\ln2$, מסתובב סביב ציר $x$. חשבו את נפח הגוף.
+    answer: >-
+      $\frac{3\pi}{8}$
+    solution:
+      - kind: idea
+        text: >-
+          שיטת הדיסקות: הפרוסה בנקודה $x$ היא דיסקה ברדיוס $e^{-x}$, ושטחה $\pi\left(e^{-x}\right)^2=\pi e^{-2x}$.
+      - kind: computation
+        text: >-
+          $V=\pi\int_0^{\ln2}e^{-2x}\,dx=\pi\left[-\frac{e^{-2x}}{2}\right]_0^{\ln2}$.
+      - kind: computation
+        text: >-
+          $e^{-2\ln2}=\left(e^{\ln2}\right)^{-2}=2^{-2}=\frac14$, ולכן
+          $V=\pi\left(-\frac18+\frac12\right)=\frac{3\pi}{8}$.
+      - kind: check
+        text: >-
+          הגוף נמצא בתוך גליל ברדיוס 1 ובגובה $\ln2\approx0.693$ (שוכב על ציר $x$), שנפחו $\pi\ln2\approx2.18$, ומכיל גליל ברדיוס
+          $\frac12$ באותו אורך, שנפחו $\frac{\pi\ln2}{4}\approx0.54$. ואכן $\frac{3\pi}{8}\approx1.18$ ביניהם. ✓ בלי
+          הריבוע היה יוצא $\pi\int_0^{\ln2}e^{-x}dx=\frac\pi2$.
+      - kind: result
+        text: >-
+          $V=\frac{3\pi}{8}\approx1.18$.
+
+  - id: W-8.5-03
+    level: basic
+    objectives: [OBJ-8.5-3]
+    prompt: >-
+      התחום שמתחת ל-$y=\frac1x$, $1\le x\le3$, מסתובב סביב ציר $y$. חשבו את הנפח בשיטת הקליפות.
+    answer: >-
+      $4\pi$
+    solution:
+      - kind: idea
+        text: >-
+          פס אנכי בנקודה $x$ יוצר קליפה ברדיוס $d(x)=x$ (המרחק לציר $y$) ובגובה $h(x)=\frac1x$. נפח הקליפה בערך
+          $2\pi\,d(x)\,h(x)\,dx=2\pi\cdot x\cdot\frac1x\,dx$.
+      - kind: computation
+        text: >-
+          $V=2\pi\int_1^3x\cdot\frac1x\,dx=2\pi\int_1^3dx=2\pi\cdot2=4\pi$.
+      - kind: check
+        text: >-
+          הרדיוס והגובה מבטלים זה את זה: כל הקליפות בעלות אותו "שטח פרוס" $2\pi$. סיבוב סביב ציר $x$ היה נותן גוף אחר:
+          $\pi\int_1^3\frac{dx}{x^2}=\frac{2\pi}{3}$.
+      - kind: result
+        text: >-
+          $V=4\pi$.
+
+  - id: W-8.5-04
+    level: mid
+    qualitative: true
+    objectives: [OBJ-8.5-1]
+    prompt: >-
+      קבעו אם כל טענה נכונה, ונמקו: טענה נכונה בנימוק קצר, טענה שגויה בדוגמה נגדית.
+
+
+      (א) השטח בין הגרפים של $f$ ו-$g$ בקטע $[a,b]$ הוא תמיד $\left|\int_a^b\bigl(f(x)-g(x)\bigr)dx\right|$.
+
+
+      (ב) אם $f\ge g$ בקטע $[a,b]$, ומזיזים את שני הגרפים 5 יחידות למטה, השטח שביניהם לא משתנה.
+
+
+      (ג) השטח הכלוא בין הגרף של $f$ לציר $x$ בקטע $[a,b]$ הוא תמיד $\int_a^bf(x)\,dx$.
+    answer: >-
+      (א) לא נכון. (ב) נכון. (ג) לא נכון.
+    solution:
+      - kind: idea
+        text: >-
+          השטח הוא $\int_a^b|f-g|\,dx$. ערך מוחלט **מחוץ** לאינטגרל אינו אותו דבר: חלקים עם סימנים שונים מתקזזים
+          בתוך האינטגרל לפני שלוקחים ערך מוחלט.
+      - kind: computation
+        text: >-
+          (א) לא נכון. $f(x)=x$ ו-$g(x)=x^3$ ב-$[-1,1]$: $\int_{-1}^{1}\left(x-x^3\right)dx=0$, כי האינטגרנד אי-זוגי.
+          אבל הגרפים כולאים שני חלקים, כל אחד בשטח $\int_0^1\left(x-x^3\right)dx=\frac14$, והשטח $\frac12$.
+      - kind: step
+        text: >-
+          (ב) נכון. $(f-5)-(g-5)=f-g$: גובה כל פס לא השתנה, ולכן גם השטח. התחום רק זז.
+      - kind: computation
+        text: >-
+          (ג) לא נכון. זה המקרה $g=0$ של (א): $\int_0^{2\pi}\sin x\,dx=0$, אבל השטח בין $\sin x$ לציר ב-$[0,2\pi]$ הוא
+          $\int_0^{\pi}\sin x\,dx+\int_{\pi}^{2\pi}(-\sin x)\,dx=2+2=4$.
+      - kind: check
+        text: >-
+          הטענות (א) ו-(ג) נכונות כשאחד הגרפים מעל השני בכל הקטע (ב-(ג): כש-$f\ge0$), כי אז אין שינוי סימן.
+      - kind: result
+        text: >-
+          (א) לא נכון ($x$ ו-$x^3$ ב-$[-1,1]$: האינטגרל 0, השטח $\frac12$). (ב) נכון. (ג) לא נכון ($\sin x$ ב-$[0,2\pi]$:
+          האינטגרל 0, השטח 4).
+
+  - id: W-8.5-05
+    level: mid
+    objectives: [OBJ-8.5-1]
+    prompt: >-
+      חשבו את השטח הכלוא בין $y=\sin x$ ו-$y=\sin2x$ בקטע $[0,\pi]$.
+    answer: >-
+      $\frac52$
+    solution:
+      - kind: idea
+        text: >-
+          מוצאים את כל החיתוכים בקטע, ובכל תת-קטע מחסרים מהעליון את התחתון. כאן הגרפים מחליפים מקום, ולכן צריך פיצול.
+      - kind: computation
+        text: >-
+          $\sin2x=\sin x$ פירושו $2\sin x\cos x-\sin x=0$, כלומר $\sin x\,(2\cos x-1)=0$. בקטע $[0,\pi]$:
+          $\sin x=0$ ב-$x=0,\pi$, ו-$\cos x=\frac12$ ב-$x=\frac\pi3$.
+      - kind: step
+        text: >-
+          ב-$x=\frac\pi6$: $\sin2x=\frac{\sqrt3}{2}>\frac12=\sin x$, ולכן ב-$\left(0,\frac\pi3\right)$ הגרף של
+          $\sin2x$ עליון. ב-$x=\frac\pi2$: $\sin2x=0<1=\sin x$, ולכן ב-$\left(\frac\pi3,\pi\right)$ הגרף של $\sin x$
+          עליון.
+      - kind: computation
+        text: >-
+          קדומה של $\sin2x-\sin x$ היא $\cos x-\frac{\cos2x}{2}$. בחלק הראשון:
+          $\left[-\frac{\cos2x}{2}+\cos x\right]_0^{\pi/3}=\left(\frac14+\frac12\right)-\left(-\frac12+1\right)=\frac14$.
+      - kind: computation
+        text: >-
+          בחלק השני, עם הקדומה ההפוכה $\frac{\cos2x}{2}-\cos x$:
+          $\left[\frac{\cos2x}{2}-\cos x\right]_{\pi/3}^{\pi}=\left(\frac12+1\right)-\left(-\frac14-\frac12\right)=\frac94$.
+      - kind: check
+        text: >-
+          שני החלקים חיוביים. ומי שלא מפצל מקבל $\int_0^\pi(\sin x-\sin2x)\,dx=\frac94-\frac14=2$: החלק הראשון נספר
+          בשלילה.
+      - kind: result
+        text: >-
+          $A=\frac14+\frac94=\frac52$.
+
+  - id: W-8.5-06
+    level: mid
+    objectives: [OBJ-8.5-2]
+    prompt: >-
+      התחום החסום בגרף של $y=\sqrt x$, בישר $y=2$ ובציר $y$ מסתובב סביב הישר $y=2$. חשבו את הנפח.
+    answer: >-
+      $\frac{8\pi}{3}$
+    solution:
+      - kind: given
+        text: >-
+          $\sqrt x=2$ ב-$x=4$. התחום: $0\le x\le4$, בין $y=\sqrt x$ (למטה) ל-$y=2$ (למעלה). ציר הסיבוב הוא הגבול העליון.
+      - kind: idea
+        text: >-
+          הציר נוגע בתחום לכל אורכו, ולכן אין חור: הפרוסה בנקודה $x$ היא דיסקה. הרדיוס שלה הוא המרחק מהציר $y=2$
+          לקצה הרחוק של התחום, הגרף: $2-\sqrt x$.
+      - kind: computation
+        text: >-
+          $\left(2-\sqrt x\right)^2=4-4\sqrt x+x$, ולכן
+          $V=\pi\int_0^4\left(4-4\sqrt x+x\right)dx$. עם $\int_0^4\sqrt x\,dx=\frac23\cdot8=\frac{16}{3}$: $V=\pi\left(16-\frac{64}{3}+8\right)=\frac{8\pi}{3}$.
+      - kind: check
+        text: >-
+          בדיקה בהשלמה למלבן: התחום שלנו והתחום שמתחת ל-$y=\sqrt x$ (בין הגרף לציר $x$, ב-$0\le x\le4$) מרכיבים
+          יחד את המלבן $0\le x\le4$, $0\le y\le2$. סביב $y=2$ המלבן יוצר גליל ברדיוס 2 ובגובה 4 (שוכב על הצד), בנפח
+          $\pi\cdot2^2\cdot4=16\pi$. התחום התחתון יוצר טבעות: $R=2$ (מהציר $y=2$ עד ציר $x$, הקצה הרחוק) ו-$r=2-\sqrt x$ (עד הגרף),
+          ו-$R^2-r^2=4-\left(4-4\sqrt x+x\right)=4\sqrt x-x$, ולכן הנפח שלו $\pi\int_0^4\left(4\sqrt x-x\right)dx=\pi\left(\frac{64}{3}-8\right)=\frac{40\pi}{3}$.
+          ואכן $\frac{8\pi}{3}+\frac{40\pi}{3}=16\pi$. ✓
+      - kind: check
+        text: >-
+          טעות נפוצה היא למדוד מציר $x$: $\pi\int_0^4\left(2^2-x\right)dx=8\pi$, הנפח בסיבוב סביב ציר $x$, גוף אחר.
+      - kind: result
+        text: >-
+          $V=\frac{8\pi}{3}\approx8.38$.
+
+  - id: W-8.5-07
+    level: mid
+    qualitative: true
+    objectives: [OBJ-8.5-3, OBJ-8.5-2]
+    prompt: >-
+      התחום שבין $y=x$ ל-$y=x^2$ מסתובב סביב ציר $y$. סטודנט טוען: "בקליפות הגובה הוא $x$, כי זה הגרף העליון". חשבו
+      את הנפח בקליפות, מצאו את הטעות בטענה, ובדקו בטבעות אופקיות.
+    answer: >-
+      $\frac\pi6$. הגובה של הקליפה הוא $x-x^2$, אורך הפס שבתוך התחום, ולא $x$.
+    solution:
+      - kind: idea
+        text: >-
+          הגובה של קליפה הוא אורך הפס האנכי **שבתוך התחום**: מהגרף התחתון עד העליון. רק כשהתחום מגיע עד ציר $x$ הגובה
+          הוא הגרף העליון לבדו.
+      - kind: computation
+        text: >-
+          החיתוכים: $x=x^2$ ב-$x=0,1$, וביניהם $x\ge x^2$. רדיוס $d(x)=x$, גובה $h(x)=x-x^2$:
+          $V=2\pi\int_0^1x\left(x-x^2\right)dx=2\pi\left(\frac13-\frac14\right)=\frac\pi6$.
+      - kind: step
+        text: >-
+          עם הגובה של הסטודנט היה יוצא $2\pi\int_0^1x\cdot x\,dx=\frac{2\pi}{3}$: הנפח של כל המשולש שמתחת ל-$y=x$, כולל
+          החלק שמתחת לפרבולה, שאינו בתחום.
+      - kind: check
+        text: >-
+          בטבעות אופקיות: בגובה $y$, כש-$0\le y\le1$, התחום משתרע מ-$x=y$ (הישר) עד $x=\sqrt y$ (הפרבולה). המרחקים
+          לציר $y$: $R=\sqrt y$, $r=y$. $V=\pi\int_0^1\left(y-y^2\right)dy=\pi\left(\frac12-\frac13\right)=\frac\pi6$. ✓
+      - kind: result
+        text: >-
+          $V=\frac\pi6$; הגובה הנכון $x-x^2$.
+
+  - id: W-8.5-08
+    level: exam
+    objectives: [OBJ-8.5-2, OBJ-8.5-3]
+    prompt: >-
+      התחום $D$ חסום בגרף של $y=\ln x$, בציר $x$ ובישר $x=e$.
+
+
+      (א) $D$ מסתובב סביב ציר $x$. חשבו את הנפח.
+
+
+      (ב) $D$ מסתובב סביב ציר $y$. חשבו את הנפח בקליפות, ובדקו בטבעות אופקיות.
+    answer: >-
+      (א) $\pi(e-2)\approx2.26$. (ב) $\frac{\pi\left(e^2+1\right)}{2}\approx13.18$.
+    solution:
+      - kind: given
+        text: >-
+          $\ln x=0$ ב-$x=1$, ולכן $D$ הוא $1\le x\le e$, $0\le y\le\ln x$.
+      - kind: idea
+        text: >-
+          (א) דיסקות ברדיוס $\ln x$: האינטגרנד $\pi\ln^2x$. (ב) קליפות ברדיוס $x$ ובגובה $\ln x$: האינטגרנד
+          $2\pi x\ln x$. שני האינטגרלים באינטגרציה בחלקים (שיעור 7.3).
+      - kind: computation
+        text: >-
+          (א) בחלקים, עם $u=\ln^2x$ ו-$v'=1$: $\int\ln^2x\,dx=x\ln^2x-2\int\ln x\,dx$, ו-$\int\ln x\,dx=x\ln x-x+C$, ולכן $\int\ln^2x\,dx=x\ln^2x-2x\ln x+2x+C$. בין 1 ל-$e$:
+          $(e-2e+2e)-(0-0+2)=e-2$. לכן $V=\pi(e-2)$.
+      - kind: computation
+        text: >-
+          (ב) בחלקים, עם $u=\ln x$ ו-$v'=x$: $\int x\ln x\,dx=\frac{x^2}{2}\ln x-\frac{x^2}{4}+C$. בין 1 ל-$e$:
+          $\left(\frac{e^2}{2}-\frac{e^2}{4}\right)-\left(0-\frac14\right)=\frac{e^2+1}{4}$. לכן
+          $V=2\pi\cdot\frac{e^2+1}{4}=\frac{\pi\left(e^2+1\right)}{2}$.
+      - kind: check
+        text: >-
+          (ב) בטבעות: בגובה $y$, כש-$0\le y\le1$, התחום משתרע מ-$x=e^y$ (העקום) עד $x=e$ (הישר). $R=e$ ו-$r=e^y$:
+          $\pi\int_0^1\left(e^2-e^{2y}\right)dy=\pi\left(e^2-\frac{e^2-1}{2}\right)=\frac{\pi\left(e^2+1\right)}{2}$. ✓
+      - kind: check
+        text: >-
+          (א) $0\le\ln x\le1$ בקטע שאורכו $e-1\approx1.72$, ולכן הנפח קטן מהגליל $\pi(e-1)\approx5.40$. ✓
+      - kind: result
+        text: >-
+          (א) $V=\pi(e-2)$. (ב) $V=\frac{\pi\left(e^2+1\right)}{2}$.
+
+  - id: W-8.5-09
+    level: exam
+    objectives: [OBJ-8.5-1]
+    prompt: >-
+      מצאו את הקבוע $k$ שבשבילו הישר $y=k$ מחלק לשני חלקים שווים בשטח את התחום שבין הפרבולה $y=4-x^2$ לציר $x$.
+    answer: >-
+      $k=4-2\sqrt[3]{2}\approx1.48$
+    solution:
+      - kind: idea
+        text: >-
+          מחשבים את השטח הכולל, ואת השטח של החלק שמעל $y=k$ כפונקציה של $k$, ודורשים שהוא יהיה חצי.
+      - kind: computation
+        text: >-
+          הפרבולה חותכת את ציר $x$ ב-$x=\pm2$. השטח הכולל: $\int_{-2}^{2}\left(4-x^2\right)dx=16-\frac{16}{3}=\frac{32}{3}$.
+          החצי: $\frac{16}{3}$.
+      - kind: step
+        text: >-
+          הישר $y=k$, עם $0<k<4$, חותך את הפרבולה ב-$4-x^2=k$, כלומר $x=\pm s$ עם $s=\sqrt{4-k}$. החלק העליון כלוא
+          בין הפרבולה (למעלה) לישר (למטה), ב-$|x|\le s$.
+      - kind: computation
+        text: >-
+          $4-k=s^2$, ולכן העליון פחות התחתון הוא $4-x^2-k=s^2-x^2$, והשטח העליון
+          $\int_{-s}^{s}\left(s^2-x^2\right)dx=2s^3-\frac{2s^3}{3}=\frac{4s^3}{3}$.
+      - kind: computation
+        text: >-
+          $\frac{4s^3}{3}=\frac{16}{3}$ נותן $s^3=4$, כלומר $s=\sqrt[3]4$, ו-$4-k=s^2=\sqrt[3]{16}=2\sqrt[3]2$.
+      - kind: check
+        text: >-
+          $k\approx4-2.520=1.480$, בין 0 ל-4. ✓ והוא מתחת ל-2, אמצע הגובה: הגיוני, כי הפרבולה רחבה למטה וצרה למעלה,
+          ולכן חצי השטח העליון "תופס" יותר מחצי הגובה.
+      - kind: result
+        text: >-
+          $k=4-2\sqrt[3]2\approx1.48$.
+
+  - id: W-8.5-10
+    level: exam
+    qualitative: true
+    objectives: [OBJ-8.5-2]
+    prompt: >-
+      לכל $p>0$ נתבונן בתחום שמתחת ל-$y=\frac{1}{x^p}$, $x\ge1$, ובגוף שנוצר מסיבובו סביב ציר $x$. לאילו ערכים של $p$
+      שטח התחום אינסופי, אבל נפח הגוף סופי? מה הנפח במקרה $p=\frac34$?
+    answer: >-
+      $\frac12<p\le1$. ב-$p=\frac34$: שטח אינסופי ונפח $2\pi$.
+    solution:
+      - kind: idea
+        text: >-
+          השטח הוא $\int_1^\infty x^{-p}\,dx$, והנפח, בדיסקות, $\pi\int_1^\infty\left(x^{-p}\right)^2dx=\pi\int_1^\infty x^{-2p}\,dx$.
+          שניהם אינטגרלים סטנדרטיים משיעור 8.3: $\int_1^\infty\frac{dx}{x^q}$ מתכנס בדיוק כש-$q>1$.
+      - kind: step
+        text: >-
+          השטח אינסופי כש-$p\le1$. הנפח סופי כש-$2p>1$, כלומר $p>\frac12$. שני התנאים יחד: $\frac12<p\le1$.
+      - kind: computation
+        text: >-
+          ב-$p=\frac34$: $V=\pi\int_1^\infty x^{-3/2}\,dx$, ו-$\int_1^Rx^{-3/2}\,dx=\left[-2x^{-1/2}\right]_1^R=2-\frac{2}{\sqrt R}\to2$ כש-$R\to\infty$. לכן $V=2\pi$.
+      - kind: check
+        text: >-
+          המקרה $p=1$ הוא הצופר של גבריאל מהשיעור, עם נפח $\pi$; ובנוסחה $\int_1^\infty\frac{dx}{x^q}=\frac{1}{q-1}$, עם
+          $q=2p=\frac32$, מתקבל $\pi\cdot2$. ✓ ב-$p=\frac12$ הנפח $\pi\int_1^\infty\frac{dx}{x}$ כבר מתבדר.
+      - kind: result
+        text: >-
+          $\frac12<p\le1$; ב-$p=\frac34$ הנפח $2\pi$.
+
+challenge:
+  - id: W-8.5-c1
+    stars: 1
+    objectives: [OBJ-8.5-3, OBJ-8.5-2]
+    prompt: >-
+      העיגול $x^2+y^2\le4$ מסתובב סביב הישר $x=4$ ויוצר טבעת עבה, כמו סופגנייה (טורוס). חשבו את נפחה בשיטת הקליפות.
+      (רמז: אינטגרל אחד שיתקבל הוא שטח של חצי עיגול, ואחר מתאפס מסימטריה.)
+    answer: >-
+      $32\pi^2\approx315.8$
+    solution:
+      - kind: idea
+        text: >-
+          פסים אנכיים, מקבילים לציר $x=4$, יוצרים קליפות. כל העיגול משמאל לציר, ולכן הרדיוס של הקליפה בנקודה $x$ הוא
+          $d(x)=4-x$. הגובה $h(x)$ הוא אורך הפס בתוך העיגול, מ-$y=-\sqrt{4-x^2}$ עד $y=\sqrt{4-x^2}$.
+      - kind: computation
+        text: >-
+          $V=2\pi\int_{-2}^{2}(4-x)\cdot2\sqrt{4-x^2}\,dx$. מפרקים לשני איברים: $16\pi\int_{-2}^{2}\sqrt{4-x^2}\,dx$ פחות $4\pi\int_{-2}^{2}x\sqrt{4-x^2}\,dx$.
+      - kind: step
+        text: >-
+          $\int_{-2}^{2}\sqrt{4-x^2}\,dx$ הוא השטח שמתחת לחצי העיגול העליון ברדיוס 2, כלומר $\frac12\pi\cdot2^2=2\pi$.
+          והאינטגרנד $x\sqrt{4-x^2}$ אי-זוגי, ולכן האינטגרל השני על הקטע הסימטרי הוא 0 (שיעור 8.2).
+      - kind: computation
+        text: >-
+          $V=16\pi\cdot2\pi-0=32\pi^2$.
+      - kind: check
+        text: >-
+          בטבעות אופקיות: בגובה $y$, כש-$|y|\le2$, העיגול משתרע מ-$x=-\sqrt{4-y^2}$ עד $x=\sqrt{4-y^2}$, והמרחקים לציר
+          הם $R=4+\sqrt{4-y^2}$ ו-$r=4-\sqrt{4-y^2}$. $R^2-r^2=(R-r)(R+r)=2\sqrt{4-y^2}\cdot8$, ולכן
+          $V=16\pi\int_{-2}^{2}\sqrt{4-y^2}\,dy=16\pi\cdot2\pi=32\pi^2$. ✓
+      - kind: result
+        text: >-
+          $V=32\pi^2$.
+    source:
+      name: 'G. Strang, E. Herman, Calculus Volume 1 (OpenStax)'
+      year: 2016
+      problem: 'Section 6.3 (Volumes of Revolution: Cylindrical Shells), exercise 162'
+      url: https://openstax.org/books/calculus-volume-1/pages/6-3-volumes-of-revolution-cylindrical-shells
+      verified: '2026-11-27'
+      adapted: true
+
+  - id: W-8.5-c2
+    stars: 2
+    objectives: [OBJ-8.5-1]
+    prompt: >-
+      הישר האופקי $y=c$ חותך את הגרף של $y=2x-3x^3$ ברביע הראשון בשתי נקודות, $x=a$ ו-$x=b$ עם $0<a<b$. נוצרים שני
+      תחומים: הראשון חסום בציר $y$, בישר $y=c$ ובגרף, ב-$0\le x\le a$ (הישר מעל הגרף); השני חסום בגרף ובישר,
+      ב-$a\le x\le b$ (הגרף מעל הישר). מצאו את $c$ שבשבילו שני התחומים שווים בשטח.
+    answer: >-
+      $c=\frac49$
+    solution:
+      - kind: idea
+        text: >-
+          לא צריך לחשב את $a$. השטח הראשון הוא $\int_0^a(c-f)\,dx$, והשני $\int_a^b(f-c)\,dx$, כש-$f(x)=2x-3x^3$. הם
+          שווים בדיוק כשההפרש שלהם אפס, וההפרש הוא אינטגרל אחד: $\int_0^b(f-c)\,dx=0$. השטח עם הסימן מ-0 עד $b$ מתאפס.
+      - kind: step
+        text: >-
+          $\int_0^b(f-c)\,dx=\int_a^b(f-c)\,dx-\int_0^a(c-f)\,dx$ (אדיטיביות). לכן התנאי הוא
+          $\int_0^bf\,dx=bc$, ועם $c=f(b)$, הנקודה $(b,c)$ על הגרף.
+      - kind: computation
+        text: >-
+          $\int_0^b\left(2x-3x^3\right)dx=b^2-\frac34b^4$, ו-$b\,f(b)=2b^2-3b^4$. השוויון $b^2-\frac34b^4=2b^2-3b^4$
+          נותן $\frac94b^4=b^2$, ועם $b>0$: $b^2=\frac49$, $b=\frac23$.
+      - kind: computation
+        text: >-
+          $c=f\left(\tfrac23\right)=\frac43-3\cdot\frac{8}{27}=\frac43-\frac89=\frac49$.
+      - kind: check
+        text: >-
+          צריך ש-$b=\frac23$ יהיה החיתוך **הימני**: המקסימום של $f$ ב-$x\ge0$ הוא ב-$f'(x)=2-9x^2=0$, כלומר
+          $x=\frac{\sqrt2}{3}\approx0.471<\frac23$, ולכן $\frac23$ על הענף היורד. ✓ החיתוך השמאלי הוא
+          $a=\frac{\sqrt3-1}{3}\approx0.244$, ושני השטחים, בחישוב ישיר, שווים ל-$\frac{2\sqrt3}{9}-\frac13\approx0.0516$. ✓
+      - kind: result
+        text: >-
+          $c=\frac49$.
+    source:
+      name: 'The 54th William Lowell Putnam Mathematical Competition (Kalva archive)'
+      year: 1993
+      problem: 'A1'
+      url: https://prase.cz/kalva/putnam/psoln/psol931.html
+      verified: '2026-11-27'
+      adapted: true

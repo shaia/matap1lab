@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 8.2 figure: <Spread figure={DefIntLab} figureProps={{ mode, f, … }}>.
+ * mode: symmetry, upper. The props, step keys, task ids and the data-* hooks for e2e specs are documented at the top
+ * of DefIntLab.tsx; the preset ids are those of the registries SYM and UP in src/math/defint.ts.
+ */
+import DefIntLab, { type DefIntLabProps } from './DefIntLab';
+type Props = DefIntLabProps;
+---
+
+<DefIntLab client:visible {...Astro.props} />

@@ -1,0 +1,67 @@
+/* DefIntLab readout and controls. Colours come from tokens.css only. */
+
+/* the outermost LTR island of a readout row scrolls inside its own line box on a phone; a nested one (an ∫ with its
+   limits inside a formula) stays inline */
+.di-readout .q bdi {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+/* a long formula (G′ by the chain rule) is one LTR island that may break only between its pieces */
+.di-readout .q bdi.di-wrap {
+  white-space: normal;
+}
+.di-nb {
+  white-space: nowrap;
+}
+.di-readout .q bdi bdi {
+  display: inline;
+  max-width: none;
+  overflow: visible;
+  vertical-align: baseline;
+}
+.di-readout sub,
+.di-readout sup {
+  font-size: 0.72em;
+}
+
+/* a slider wrapped for its data-control hook takes the full row, like a bare slider */
+.di-ctl {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+.di-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+}
+.di-lab {
+  color: var(--ink-2);
+}
+.di-select select {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  max-width: 100%;
+}
+.di-select select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Hebrew sentences in the readout: the global .q is an LTR quantity; here a row is a Hebrew sentence with
+   LTR islands (<bdi dir="ltr">), so it runs right to left and may wrap. */
+.rtl-q {
+  display: contents;
+}
+.rtl-q .q {
+  direction: rtl;
+  white-space: normal;
+}
