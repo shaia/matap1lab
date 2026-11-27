@@ -1,0 +1,10 @@
+---
+/**
+ * Chapter 4.6 figure: <Spread figure={LimitLab} figureProps={{ mode, … }}>.
+ * mode: approach, ivt, extreme. The props, step keys and task ids are documented at the top of LimitLab.tsx.
+ */
+import LimitLab, { type LimitLabProps } from './LimitLab';
+type Props = LimitLabProps;
+---
+
+<LimitLab client:visible {...Astro.props} />

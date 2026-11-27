@@ -1,0 +1,25 @@
+- id: v-4-5-ostapenko-intro
+  youtubeId: 69JYcz7UxIc
+  title: פונקציות היפרבוליות
+  channel: Vadim Zeev Ostapenko
+  lang: he
+  captions: []
+  start: 0
+  minutes: 10
+  why: >-
+    לפי התיאור: הסבר קצר בעברית על פונקציות היפרבוליות, ההגדרה ותכונות בסיסיות. השוו את ההגדרות שם ל-$\cosh x$
+    ול-$\sinh x$ של השיעור, ובדקו בעצמכם בכל תכונה שמוזכרת אם היא נובעת מההגדרות בלבד. אם מופיעות שם נגזרות, הן
+    יגיעו בפרק 5.
+  verified: '2026-11-26'
+- id: v-4-5-khan-hyperbola
+  youtubeId: Wfpb-fniSSk
+  title: Hyperbolic functions and the unit hyperbola | Hyperbolic functions | Precalculus | Khan Academy
+  channel: Khan Academy
+  lang: en
+  captions: [en]
+  start: 0
+  minutes: 9
+  why: >-
+    לפי הכותרת והתיאור ("למה הן נקראות פונקציות היפרבוליות"): הנקודה $(\cosh t,\sinh t)$ על ההיפרבולה $x^2-y^2=1$,
+    לעומת $(\cos t,\sin t)$ על מעגל היחידה. השוו לאיור 4.5א: למה רק הענף הימני?
+  verified: '2026-11-26'

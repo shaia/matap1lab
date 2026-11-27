@@ -1,0 +1,529 @@
+# Workbook of lesson 4.5 — hyperbolic functions.
+# Objectives (src/course.ts):
+#   OBJ-4.5-1  define sinh and cosh through the exponential and sketch them
+#   OBJ-4.5-2  check the basic identity cosh^2 - sinh^2 = 1 and compare it with the trigonometric one
+#   OBJ-4.5-3  find the inverse hyperbolic functions through the logarithm
+# Conventions: no derivatives, no integrals (the physics formulas are stated, not derived); complex numbers from
+# chapter 3 allowed. Every number recomputed with sympy in screens/tools/lesson-4-5.py.
+lesson: '4.5'
+practice:
+  - id: W-4.5-01
+    level: basic
+    objectives: [OBJ-4.5-1]
+    prompt: >-
+      חשבו בדיוק, בלי מחשבון:
+
+      (א) $\cosh(\ln5)$
+
+      (ב) $\sinh(\ln5)$
+
+      (ג) $\tanh(\ln5)$
+
+      (ד) $\cosh(-\ln5)$ ו-$\tanh(-\ln5)$
+    answer: >-
+      (א) $\frac{13}{5}$. (ב) $\frac{12}{5}$. (ג) $\frac{12}{13}$. (ד) $\frac{13}{5}$, ומינוס $\frac{12}{13}$.
+    solution:
+      - kind: idea
+        text: >-
+          מציבים בהגדרות, ומשתמשים בכך ש-$e^{\ln5}=5$ ו-$e^{-\ln5}=\frac{1}{e^{\ln5}}=\frac15$. ב-(ד) אין צורך לחשב מחדש:
+          $\cosh$ זוגית ו-$\tanh$ אי-זוגית.
+      - kind: computation
+        text: >-
+          (א) $\cosh(\ln5)=\frac{5+\frac15}{2}=\frac{26/5}{2}=\frac{13}{5}$.
+      - kind: computation
+        text: >-
+          (ב) $\sinh(\ln5)=\frac{5-\frac15}{2}=\frac{24/5}{2}=\frac{12}{5}$.
+      - kind: computation
+        text: >-
+          (ג) $\tanh(\ln5)=\frac{12/5}{13/5}=\frac{12}{13}$.
+      - kind: step
+        text: >-
+          (ד) $\cosh(-\ln5)=\cosh(\ln5)=\frac{13}{5}$, כי $\cosh$ זוגית: הסכום $e^x+e^{-x}$ לא משתנה כשמחליפים את $x$
+          במינוס $x$. ו-$\tanh(-\ln5)=\frac{\sinh(-\ln5)}{\cosh(-\ln5)}=\frac{-12/5}{13/5}=-\frac{12}{13}$.
+      - kind: check
+        text: >-
+          הזהות הבסיסית: $\left(\frac{13}{5}\right)^2-\left(\frac{12}{5}\right)^2=\frac{169-144}{25}=1$. וגם
+          $\cosh+\sinh=\frac{25}{5}=5=e^{\ln5}$. ו-$\frac{12}{13}$ בין מינוס 1 ל-1, כמו שצריך לטנגנס היפרבולי.
+      - kind: result
+        text: >-
+          $\cosh(\ln5)=\frac{13}{5}$, $\sinh(\ln5)=\frac{12}{5}$, $\tanh(\ln5)=\frac{12}{13}$; $\cosh(-\ln5)=\frac{13}{5}$
+          ו-$\tanh(-\ln5)=-\frac{12}{13}$.
+
+  - id: W-4.5-02
+    level: basic
+    qualitative: true
+    objectives: [OBJ-4.5-1]
+    prompt: >-
+      בלי מחשבון ובלי טבלת ערכים: הסבירו איך בונים את הגרף של $y=\cosh x$ מתוך שני הגרפים $y=\frac{e^x}{2}$
+      ו-$y=\frac{e^{-x}}{2}$, וענו:
+
+      (א) האם הגרף של $\cosh$ נמצא מעל שני הגרפים האלה, מתחתם, או ביניהם?
+
+      (ב) איפה הוא קרוב ל-$\frac{e^x}{2}$, ואיפה ל-$\frac{e^{-x}}{2}$?
+
+      (ג) מה הנקודה הנמוכה שלו, ולמה הוא סימטרי?
+
+      (ד) ואיפה נמצא הגרף של $\sinh$ ביחס ל-$\frac{e^x}{2}$?
+    answer: >-
+      (א) מעל שניהם: $\cosh x$ הוא הסכום שלהם, ושניהם חיוביים. (ב) מימין ליד $\frac{e^x}{2}$, משמאל ליד $\frac{e^{-x}}{2}$.
+      (ג) $(0,1)$; סימטרי ביחס לציר האנכי כי שני החצאים תמונות ראי זה של זה. (ד) מתחתיו, ומתקרב אליו כש-$x$ גדל.
+    solution:
+      - kind: idea
+        text: >-
+          $\cosh x=\frac{e^x}{2}+\frac{e^{-x}}{2}$: מחברים את הגבהים של שני הגרפים בכל $x$. הגרף של $\frac{e^{-x}}{2}$
+          הוא שיקוף של הגרף של $\frac{e^x}{2}$ בציר האנכי (שיעור 4.2). שני הגבהים חיוביים תמיד.
+      - kind: step
+        text: >-
+          (א) בכל $x$, $\cosh x$ גדול מכל אחד מהמחוברים, כי השני חיובי: $\cosh x-\frac{e^x}{2}=\frac{e^{-x}}{2}>0$, ובאותו
+          אופן $\cosh x-\frac{e^{-x}}{2}=\frac{e^{x}}{2}>0$. הגרף מעל שניהם.
+      - kind: step
+        text: >-
+          (ב) ההפרש מ-$\frac{e^x}{2}$ הוא $\frac{e^{-x}}{2}$, שקטן מאוד כש-$x$ גדול וחיובי: מימין הגרף צמוד ל-$\frac{e^x}{2}$
+          מלמעלה. משמאל המצב הפוך, והגרף צמוד ל-$\frac{e^{-x}}{2}$.
+      - kind: step
+        text: >-
+          (ג) ב-$x=0$ שני החצאים שווים, $\frac12$ כל אחד, והגרף עובר ב-$(0,1)$. זו הנקודה הנמוכה, כי
+          $e^x+e^{-x}-2=\left(e^{x/2}-e^{-x/2}\right)^2\ge0$. הסימטריה: החלפת $x$ במינוס $x$ מחליפה בין שני החצאים, והסכום
+          לא משתנה, כלומר $\cosh$ זוגית.
+      - kind: step
+        text: >-
+          (ד) $\sinh x=\frac{e^x}{2}-\frac{e^{-x}}{2}$, ולכן $\frac{e^x}{2}-\sinh x=\frac{e^{-x}}{2}>0$: הגרף של $\sinh$ מתחת
+          ל-$\frac{e^x}{2}$, וההפרש שואף ל-0 כש-$x$ גדל. משמאל $\sinh x$ קרוב ל-$-\frac{e^{-x}}{2}$, ושלילי.
+      - kind: check
+        text: >-
+          במספרים: $\cosh2\approx3.762$ ו-$\frac{e^2}{2}\approx3.695$, ההפרש $\frac{e^{-2}}{2}\approx0.068$. באיור 4.5א, עם
+          המתג "החצאים", רואים את שלושת הגרפים יחד.
+      - kind: result
+        text: >-
+          הגרף של $\cosh$ הוא סכום שני החצאים: מעל שניהם, צמוד ל-$\frac{e^x}{2}$ מימין ול-$\frac{e^{-x}}{2}$ משמאל, עם
+          נקודה נמוכה $(0,1)$ וסימטריה ביחס לציר האנכי. הגרף של $\sinh$ מתחת ל-$\frac{e^x}{2}$ וצמוד אליו מימין.
+
+  - id: W-4.5-03
+    level: basic
+    objectives: [OBJ-4.5-2]
+    prompt: >-
+      פשטו, לכל $x$ ממשי:
+
+      (א) $\cosh x+\sinh x$
+
+      (ב) $(\cosh x-\sinh x)^2$
+
+      (ג) $(\cosh x+\sinh x)(\cosh x-\sinh x)$
+
+      (ד) $(\cosh x+\sinh x)^3$
+    answer: >-
+      (א) $e^x$. (ב) $e^{-2x}$. (ג) $1$. (ד) $e^{3x}$.
+    solution:
+      - kind: idea
+        text: >-
+          מחברים ומחסרים את ההגדרות: $\cosh x+\sinh x=e^x$ ו-$\cosh x-\sinh x=e^{-x}$. אחרי זה כל סעיף הוא חוק חזקות.
+      - kind: computation
+        text: >-
+          (א) $\frac{e^x+e^{-x}}{2}+\frac{e^x-e^{-x}}{2}=\frac{2e^x}{2}=e^x$: החלקים $\frac{e^{-x}}{2}$ מתבטלים.
+      - kind: computation
+        text: >-
+          (ב) $\cosh x-\sinh x=\frac{2e^{-x}}{2}=e^{-x}$, ולכן $(\cosh x-\sinh x)^2=\left(e^{-x}\right)^2=e^{-2x}$.
+      - kind: computation
+        text: >-
+          (ג) $e^x\cdot e^{-x}=e^0=1$. זו בדיוק הזהות הבסיסית: אגף שמאל הוא הפרש ריבועים, $\cosh^2x-\sinh^2x$.
+      - kind: computation
+        text: >-
+          (ד) $\left(e^x\right)^3=e^{3x}$.
+      - kind: check
+        text: >-
+          ב-$x=0$: (א) $1+0=1=e^0$; (ב) $(1-0)^2=1$; (ג) $1$; (ד) $1$. וב-$x=\ln2$, עם $\cosh(\ln2)=\frac54$
+          ו-$\sinh(\ln2)=\frac34$: (א) $\frac54+\frac34=2$, (ב) $\left(\frac12\right)^2=\frac14=e^{-2\ln2}$.
+      - kind: result
+        text: >-
+          $e^x$; $e^{-2x}$; $1$; $e^{3x}$.
+
+  - id: W-4.5-04
+    level: mid
+    objectives: [OBJ-4.5-2]
+    prompt: >-
+      ידוע ש-$\cosh x=\frac53$ ו-$x<0$.
+
+      (א) מצאו את $\sinh x$ ואת $\tanh x$.
+
+      (ב) מצאו את $x$.
+
+      (ג) מה היה משתנה בתשובות אילו נתון היה $x>0$?
+    answer: >-
+      (א) $\sinh x=-\frac43$, $\tanh x=-\frac45$. (ב) $x=-\ln3$. (ג) הסימנים מתהפכים: $\sinh x=\frac43$, $\tanh x=\frac45$,
+      $x=\ln3$.
+    solution:
+      - kind: idea
+        text: >-
+          מהזהות הבסיסית, $\sinh^2x=\cosh^2x-1$. כאן, בניגוד ל-$\cosh$, הסימן **אינו** נקבע מעצמו: $\sinh$ אי-זוגית, ו-$\sinh x$
+          שלילי בדיוק כש-$x<0$. את $x$ מקבלים מ-$e^x=\cosh x+\sinh x$.
+      - kind: computation
+        text: >-
+          (א) $\sinh^2x=\frac{25}{9}-1=\frac{16}{9}$, ולכן $\sinh x=\pm\frac43$. מכיוון ש-$x<0$, $\sinh x<0$: $\sinh x=-\frac43$.
+          אז $\tanh x=\frac{-4/3}{5/3}=-\frac45$.
+      - kind: computation
+        text: >-
+          (ב) $e^x=\cosh x+\sinh x=\frac53-\frac43=\frac13$, ולכן $x=\ln\frac13=-\ln3$.
+      - kind: step
+        text: >-
+          (ג) $\cosh$ זוגית, ולכן גם $x=\ln3$ מקיים $\cosh x=\frac53$. שם $\sinh x=+\frac43$, $\tanh x=\frac45$, ו-$e^x=\frac53+\frac43=3$.
+      - kind: check
+        text: >-
+          ישירות: $\sinh(-\ln3)=\frac{\frac13-3}{2}=-\frac43$ ו-$\cosh(-\ln3)=\frac{\frac13+3}{2}=\frac53$. נכון.
+      - kind: result
+        text: >-
+          $\sinh x=-\frac43$, $\tanh x=-\frac45$, $x=-\ln3$. עם $x>0$: $\frac43$, $\frac45$ ו-$\ln3$.
+
+  - id: W-4.5-05
+    level: mid
+    objectives: [OBJ-4.5-2]
+    prompt: >-
+      (א) הוכיחו מההגדרות ש-$\sinh2x=2\sinh x\cosh x$ לכל $x$.
+
+      (ב) בדקו את הזהות ב-$x=\ln2$: חשבו את שני האגפים בנפרד.
+
+      (ג) מהי הזהות הטריגונומטרית המקבילה? האם הסימן השתנה, ולמה זה מתאים לכלל האצבע של השיעור?
+    answer: >-
+      (א) $2\cdot\frac{e^x-e^{-x}}{2}\cdot\frac{e^x+e^{-x}}{2}=\frac{e^{2x}-e^{-2x}}{2}$. (ב) שני האגפים $\frac{15}{8}$. (ג)
+      $\sin2x=2\sin x\cos x$; אין שינוי סימן, כי אין במחובר מכפלה של שני סינוסים.
+    solution:
+      - kind: idea
+        text: >-
+          מציבים את ההגדרות באגף ימין, ומזהים הפרש ריבועים: $(a-b)(a+b)=a^2-b^2$, עם $a=e^x$ ו-$b=e^{-x}$.
+      - kind: computation
+        text: >-
+          (א) $2\sinh x\cosh x=2\cdot\frac{\left(e^x-e^{-x}\right)\left(e^x+e^{-x}\right)}{4}=\frac{e^{2x}-e^{-2x}}{2}$, וזה
+          $\sinh$ של $2x$ לפי ההגדרה.
+      - kind: computation
+        text: >-
+          (ב) $\sinh(\ln2)=\frac{2-\frac12}{2}=\frac34$ ו-$\cosh(\ln2)=\frac{2+\frac12}{2}=\frac54$, ולכן
+          $2\sinh x\cosh x=2\cdot\frac34\cdot\frac54=\frac{30}{16}=\frac{15}{8}$. מנגד $2x=\ln4$, ו-$\sinh(\ln4)=\frac{4-\frac14}{2}=\frac{15}{8}$.
+      - kind: step
+        text: >-
+          (ג) $\sin2x=2\sin x\cos x$: אותה צורה, אותו סימן. בכלל האצבע הסימן מתהפך רק במחובר שיש בו מכפלה של **שני**
+          סינוסים; כאן יש סינוס אחד וקוסינוס אחד. ובהצבה $ix$: $\sin(2ix)=2\sin(ix)\cos(ix)$ נותן $i\sinh2x=2i\sinh x\cosh x$,
+          ומחלקים ב-$i$.
+      - kind: check
+        text: >-
+          ב-$x=0$: $\sinh0=0=2\cdot0\cdot1$. והסימן: $\sinh2x$ ו-$\sinh x$ באותו סימן, כי $\cosh x>0$.
+      - kind: result
+        text: >-
+          $\sinh2x=2\sinh x\cosh x$; ב-$x=\ln2$ שני האגפים $\frac{15}{8}$; זו העתקה ישירה של $\sin2x=2\sin x\cos x$, בלי
+          שינוי סימן.
+
+  - id: W-4.5-06
+    level: mid
+    qualitative: true
+    objectives: [OBJ-4.5-2]
+    prompt: >-
+      בטריגונומטריה $\cos(a+b)=\cos a\cos b-\sin a\sin b$.
+
+      (א) נחשו, לפי כלל האצבע של הסימנים, נוסחה ל-$\cosh(a+b)$.
+
+      (ב) הוכיחו את הניחוש מההגדרות.
+
+      (ג) סטודנט העתיק בלי לשנות סימן: $\cosh(a+b)=\cosh a\cosh b-\sinh a\sinh b$. בדקו ב-$a=\ln2$, $b=\ln3$: מה הוא
+      חישב בפועל?
+    answer: >-
+      (א) $\cosh(a+b)=\cosh a\cosh b+\sinh a\sinh b$. (ב) פותחים סוגריים ב-$e$. (ג) הנכון $\frac{37}{12}=\cosh(\ln6)$; הנוסחה
+      שלו נותנת $\frac{13}{12}=\cosh\left(\ln\frac32\right)$, כלומר $\cosh(a-b)$.
+    solution:
+      - kind: idea
+        text: >-
+          במחובר $\sin a\sin b$ יש מכפלה של שני סינוסים, ולכן הסימן שלו מתהפך. כלל האצבע רק מנחש; ההוכחה היא הצבה של
+          ההגדרות ופתיחת סוגריים, כשכל מכפלה של אקספוננטים מחברת מעריכים.
+      - kind: step
+        text: >-
+          (א) הניחוש: $\cosh(a+b)=\cosh a\cosh b+\sinh a\sinh b$.
+      - kind: computation
+        text: >-
+          (ב) $4\cosh a\cosh b=\left(e^a+e^{-a}\right)\left(e^b+e^{-b}\right)=e^{a+b}+e^{a-b}+e^{-a+b}+e^{-a-b}$ ו-$4\sinh a\sinh b=\left(e^a-e^{-a}\right)\left(e^b-e^{-b}\right)=e^{a+b}-e^{a-b}-e^{-a+b}+e^{-a-b}$.
+      - kind: computation
+        text: >-
+          מחברים: האיברים המעורבים $e^{a-b}$ ו-$e^{-a+b}$ מתבטלים, ונשאר $2e^{a+b}+2e^{-(a+b)}$. מחלקים ב-4:
+          $\cosh a\cosh b+\sinh a\sinh b=\frac{e^{a+b}+e^{-(a+b)}}{2}=\cosh(a+b)$.
+      - kind: computation
+        text: >-
+          (ג) $\cosh(\ln2)=\frac54$, $\sinh(\ln2)=\frac34$, $\cosh(\ln3)=\frac53$, $\sinh(\ln3)=\frac43$. הנוסחה הנכונה:
+          $\frac54\cdot\frac53+\frac34\cdot\frac43=\frac{25}{12}+1=\frac{37}{12}$, ואכן $\cosh(\ln6)=\frac{6+\frac16}{2}=\frac{37}{12}$.
+          הנוסחה של הסטודנט: $\frac{25}{12}-1=\frac{13}{12}$.
+      - kind: step
+        text: >-
+          $\frac{13}{12}=\cosh\left(\ln\frac32\right)=\frac{\frac32+\frac23}{2}$, ו-$\ln\frac32=\ln3-\ln2=b-a$. מכיוון ש-$\cosh$
+          זוגית, הסטודנט חישב את $\cosh(a-b)$: בחיסור בהגדרות האיברים $e^{\pm(a+b)}$ מתבטלים ונשארים $e^{\pm(a-b)}$.
+      - kind: check
+        text: >-
+          ב-$b=0$: $\cosh a\cdot1+\sinh a\cdot0=\cosh a$. וב-$b=-a$: $\cosh^2a-\sinh^2a=1=\cosh0$, הזהות הבסיסית.
+      - kind: result
+        text: >-
+          $\cosh(a+b)=\cosh a\cosh b+\sinh a\sinh b$, עם פלוס. הנוסחה עם המינוס היא $\cosh(a-b)$: ב-$a=\ln2$, $b=\ln3$ היא נותנת
+          $\frac{13}{12}$ במקום $\frac{37}{12}$.
+
+  - id: W-4.5-07
+    level: mid
+    objectives: [OBJ-4.5-3]
+    prompt: >-
+      פתרו בעזרת לוגריתם, ותנו ערך מדויק וערך מקורב:
+
+      (א) $\sinh x=-2$
+
+      (ב) $\cosh x=3$ (כל הפתרונות)
+    answer: >-
+      (א) $x=\ln\left(\sqrt5-2\right)=-\ln\left(2+\sqrt5\right)\approx-1.444$. (ב) $x=\pm\ln\left(3+2\sqrt2\right)\approx\pm1.763$.
+    solution:
+      - kind: idea
+        text: >-
+          מציבים $u=e^x>0$, כופלים ב-$u$ ומקבלים משוואה ריבועית ב-$u$. שומרים רק שורשים חיוביים, ובסוף $x=\ln u$.
+      - kind: computation
+        text: >-
+          (א) $u-\frac1u=-4$, כלומר $u^2+4u-1=0$, ו-$u=\frac{-4\pm\sqrt{16+4}}{2}=-2\pm\sqrt5$. השורש $-2-\sqrt5$ שלילי
+          ונפסל. נשאר $u=\sqrt5-2\approx0.236$, ו-$x=\ln\left(\sqrt5-2\right)$.
+      - kind: step
+        text: >-
+          מפשטים: $\left(\sqrt5-2\right)\left(\sqrt5+2\right)=5-4=1$, ולכן $\ln\left(\sqrt5-2\right)=-\ln\left(\sqrt5+2\right)\approx-1.444$.
+          זה מתאים לכך ש-$\sinh$ אי-זוגית: הפתרון של $\sinh x=2$ הוא $\ln\left(2+\sqrt5\right)$, וכאן קיבלנו את הנגדי שלו.
+      - kind: computation
+        text: >-
+          (ב) $u+\frac1u=6$, כלומר $u^2-6u+1=0$, ו-$u=3\pm\sqrt{8}=3\pm2\sqrt2$. שני השורשים חיוביים, והמכפלה שלהם
+          $9-8=1$. לכן $x=\pm\ln\left(3+2\sqrt2\right)\approx\pm1.763$.
+      - kind: check
+        text: >-
+          (א) $e^x=\sqrt5-2$ ו-$e^{-x}=\sqrt5+2$, ולכן $\sinh x=\frac{(\sqrt5-2)-(\sqrt5+2)}{2}=-2$. (ב) $e^x=3+2\sqrt2$ ו-$e^{-x}=3-2\sqrt2$,
+          והסכום חלקי 2 הוא $\frac{6}{2}=3$.
+      - kind: result
+        text: >-
+          (א) $x=-\ln\left(2+\sqrt5\right)\approx-1.444$; (ב) $x=\pm\ln\left(3+2\sqrt2\right)\approx\pm1.763$, ו-$\operatorname{arcosh}3$
+          הוא הפתרון החיובי.
+
+  - id: W-4.5-08
+    level: exam
+    objectives: [OBJ-4.5-3, OBJ-4.5-1]
+    prompt: >-
+      (א) פתרו את המשוואה $3\cosh x-\sinh x=3$.
+
+      (ב) לאילו ערכים של הקבוע $c$ יש למשוואה $3\cosh x-\sinh x=c$ פתרון ממשי? מתי בדיוק פתרון אחד?
+
+      (ג) הסיקו מה הערך הקטן ביותר של $3\cosh x-\sinh x$, ובאיזה $x$ הוא מתקבל.
+    answer: >-
+      (א) $x=0$ או $x=\ln2$. (ב) $c\ge2\sqrt2$; פתרון יחיד כש-$c=2\sqrt2$, ב-$x=\frac12\ln2$. (ג) $2\sqrt2$, ב-$x=\frac12\ln2$.
+    solution:
+      - kind: idea
+        text: >-
+          כותבים את אגף שמאל בעזרת $e^x$ ו-$e^{-x}$; הוא נעשה צירוף פשוט שלהם. עם $u=e^x>0$ מקבלים משוואה ריבועית ב-$u$, וכל
+          שורש **חיובי** שלה נותן פתרון $x=\ln u$.
+      - kind: computation
+        text: >-
+          $3\cosh x-\sinh x=\frac{3e^x+3e^{-x}-e^x+e^{-x}}{2}=\frac{2e^x+4e^{-x}}{2}=e^x+2e^{-x}$.
+      - kind: computation
+        text: >-
+          (א) $u+\frac2u=3$, כלומר $u^2-3u+2=0$, $(u-1)(u-2)=0$. שני השורשים חיוביים: $u=1$ נותן $x=0$, ו-$u=2$ נותן $x=\ln2$.
+      - kind: step
+        text: >-
+          (ב) $u^2-cu+2=0$. תזכורת מהתיכון, נוסחאות ויאטה: במשוואה $u^2+bu+c'=0$ סכום השורשים
+          הוא $-b$ והמכפלה שלהם $c'$. כאן הסכום $c$ והמכפלה 2. המכפלה חיובית, ולכן לשורשים (כשהם ממשיים) אותו סימן, הסימן
+          של הסכום $c$.
+          צריך שורש ממשי, כלומר $c^2-8\ge0$, וגם שורשים חיוביים, כלומר $c>0$. יחד: $c\ge2\sqrt2$.
+      - kind: step
+        text: >-
+          כש-$c>2\sqrt2$ יש שני שורשים חיוביים שונים, ולכן שני פתרונות $x$. כש-$c=2\sqrt2$ יש שורש כפול $u=\frac{c}{2}=\sqrt2$,
+          ולכן פתרון יחיד $x=\ln\sqrt2=\frac12\ln2$.
+      - kind: step
+        text: >-
+          (ג) כל ערך $c$ ש-$3\cosh x-\sinh x$ מקבל הוא $c$ שלמשוואה יש פתרון, ולכן הערכים הם בדיוק $c\ge2\sqrt2$, והקטן ביותר
+          $2\sqrt2$. ישירות: $u+\frac2u-2\sqrt2=\frac{\left(u-\sqrt2\right)^2}{u}\ge0$, עם שוויון רק ב-$u=\sqrt2$.
+      - kind: check
+        text: >-
+          (א) ב-$x=\ln2$: $3\cdot\frac54-\frac34=\frac{15-3}{4}=3$. ב-$x=0$: $3\cdot1-0=3$. (ג) $3>2\sqrt2\approx2.83$, ולכן
+          ל-(א) צריכים להיות שני פתרונות, כמו שיצא. וב-$x=\frac12\ln2$: $e^x=\sqrt2$, והערך $\sqrt2+\frac{2}{\sqrt2}=2\sqrt2$.
+      - kind: result
+        text: >-
+          (א) $x=0$, $x=\ln2$. (ב) $c\ge2\sqrt2$, ופתרון יחיד בדיוק כש-$c=2\sqrt2$. (ג) הערך הקטן ביותר $2\sqrt2$, ב-$x=\frac12\ln2$.
+
+  - id: W-4.5-09
+    level: exam
+    qualitative: true
+    objectives: [OBJ-4.5-3]
+    prompt: >-
+      נכון או לא נכון? נמקו, ולטענה שגויה תנו דוגמה נגדית ותקנו אותה.
+
+      (א) $\operatorname{arcosh}(\cosh x)=x$ לכל $x$ ממשי.
+
+      (ב) $\cosh(\operatorname{arcosh}y)=y$ לכל $y\ge1$.
+
+      (ג) $\operatorname{arsinh}(\sinh x)=x$ לכל $x$ ממשי.
+
+      (ד) $\operatorname{arsinh}(-y)=-\operatorname{arsinh}y$ לכל $y$, וזה נובע מהנוסחה עם הלוגריתם.
+    answer: >-
+      (א) לא נכון: $\operatorname{arcosh}(\cosh x)=|x|$; למשל ב-$x=-2$ מקבלים 2. (ב) נכון. (ג) נכון. (ד) נכון:
+      $\left(\sqrt{y^2+1}-y\right)\left(\sqrt{y^2+1}+y\right)=1$.
+    solution:
+      - kind: idea
+        text: >-
+          $f^{-1}(f(x))=x$ נכון רק ל-$x$ בתחום שעליו $f$ הפכה (שיעור 4.3). $\operatorname{arcosh}$ היא ההפוכה של $\cosh$
+          **המצומצם** ל-$x\ge0$, ומחזירה תמיד מספר $\ge0$. $\sinh$ חד-חד-ערכית על כל הישר, בלי צמצום.
+      - kind: step
+        text: >-
+          (א) לא נכון. ב-$x=-2$: $\cosh(-2)=\cosh2$, ו-$\operatorname{arcosh}(\cosh2)=2\ne-2$. בנוסחה: מ-$e^{-2}$ ו-$e^{2}$, השורש
+          עם הפלוס הוא $e^{2}$, ולכן $\ln e^2=2$. התיקון: $\operatorname{arcosh}(\cosh x)=|x|$, כי $\cosh x=\cosh|x|$ ו-$|x|\ge0$.
+      - kind: step
+        text: >-
+          (ב) נכון. $\operatorname{arcosh}y$ מוגדר כפתרון של $\cosh x=y$ (זה שב-$x\ge0$), ולכן $\cosh$ שלו הוא $y$.
+      - kind: step
+        text: >-
+          (ג) נכון. $\sinh$ עולה, ולכן חד-חד-ערכית על כל הישר: $\operatorname{arsinh}(\sinh x)$ הוא ה-$t$ היחיד עם
+          $\sinh t=\sinh x$, כלומר $x$.
+      - kind: computation
+        text: >-
+          (ד) $\operatorname{arsinh}(-y)=\ln\left(-y+\sqrt{y^2+1}\right)$. מכיוון ש-$\left(\sqrt{y^2+1}-y\right)\left(\sqrt{y^2+1}+y\right)=y^2+1-y^2=1$,
+          שני המספרים הפכיים, וה-$\ln$ שלהם נגדיים: $\ln\left(\sqrt{y^2+1}-y\right)=-\ln\left(y+\sqrt{y^2+1}\right)=-\operatorname{arsinh}y$.
+      - kind: check
+        text: >-
+          (ד) ב-$y=\frac43$: $\operatorname{arsinh}\frac43=\ln\left(\frac43+\frac53\right)=\ln3$, ו-$\operatorname{arsinh}\left(-\frac43\right)=\ln\left(-\frac43+\frac53\right)=\ln\frac13=-\ln3$.
+          וההפוכה של פונקציה אי-זוגית חד-חד-ערכית היא אי-זוגית: תמונת הראי של גרף סימטרי ביחס לראשית סימטרית גם היא.
+      - kind: result
+        text: >-
+          (א) לא נכון: $\operatorname{arcosh}(\cosh x)=|x|$. (ב), (ג), (ד) נכונים; $\operatorname{arsinh}$ אי-זוגית.
+
+  - id: W-4.5-10
+    level: exam
+    objectives: [OBJ-4.5-3, OBJ-4.5-1]
+    prompt: >-
+      צנחן נופל ממנוחה. כשמתחשבים בהתנגדות האוויר, המהירות שלו אחרי $t$ שניות היא $v(t)=v_T\tanh\frac{gt}{v_T}$, כאשר
+      $v_T=50$ מטר לשנייה (המהירות הסופית) ו-$g=9.8$ מטר לשנייה בריבוע. (את הנוסחה עצמה לא צריך להוכיח.)
+
+      (א) מה המהירות אחרי 5 שניות?
+
+      (ב) אחרי כמה שניות המהירות מגיעה ל-90% מ-$v_T$? תנו ביטוי מדויק בעזרת $\ln$ וערך מקורב.
+
+      (ג) הראו ש-$v(t)<v_T$ לכל $t$, ושההפרש הוא $v_T-v(t)=\frac{2v_T}{e^{2gt/v_T}+1}$. כמה הוא אחרי 10 שניות?
+    answer: >-
+      (א) בערך $37.7$ מטר לשנייה. (ב) $t=\frac{v_T}{2g}\ln19\approx7.51$ שניות. (ג) $\tanh<1$; אחרי 10 שניות ההפרש בערך
+      $1.95$ מטר לשנייה.
+    solution:
+      - kind: idea
+        text: >-
+          (א) הצבה. (ב) משוואה $\tanh s=0.9$, עם $s=\frac{gt}{v_T}$: פותרים בעזרת $\operatorname{artanh}$ ואז מבודדים את $t$.
+          (ג) הכתיבה $\tanh s=1-\frac{2}{e^{2s}+1}$.
+      - kind: computation
+        text: >-
+          (א) $\frac{gt}{v_T}=\frac{9.8\cdot5}{50}=0.98$, ו-$\tanh0.98\approx0.7531$, ולכן $v(5)\approx50\cdot0.7531\approx37.7$ מטר לשנייה.
+      - kind: computation
+        text: >-
+          (ב) $\tanh s=0.9$ נותן $s=\operatorname{artanh}0.9=\frac12\ln\frac{1.9}{0.1}=\frac12\ln19\approx1.4722$. אז
+          $t=\frac{v_T}{g}\cdot s=\frac{50}{9.8}\cdot\frac12\ln19\approx5.102\cdot1.4722\approx7.51$ שניות.
+      - kind: computation
+        text: >-
+          (ג) $v_T-v=v_T(1-\tanh s)=v_T\cdot\frac{2}{e^{2s}+1}$, וזה חיובי לכל $s$: $v<v_T$ תמיד. אחרי 10 שניות $s=1.96$,
+          $e^{3.92}\approx50.4$, וההפרש $\frac{100}{51.4}\approx1.95$ מטר לשנייה.
+      - kind: check
+        text: >-
+          (ב) ב-$t\approx7.51$: $s\approx1.472$ ו-$\tanh1.472\approx0.900$. וסדר הגדלים מתאים: אחרי 5 שניות 75%, אחרי $7.5$
+          שניות 90%, אחרי 10 שניות בערך 96%. ובהתחלה המהירות קרובה ל-$gt$ של נפילה חופשית: אחרי $0.1$ שנייה $s=0.0196$,
+          ו-$\tanh$ של מספר קטן כזה כמעט שווה לו (במחשבון, $\tanh0.1\approx0.0997$).
+      - kind: result
+        text: >-
+          (א) $v(5)\approx37.7$ מטר לשנייה. (ב) $t=\frac{v_T}{2g}\ln19\approx7.51$ שניות. (ג) $v_T-v=\frac{2v_T}{e^{2gt/v_T}+1}>0$;
+          אחרי 10 שניות בערך $1.95$ מטר לשנייה.
+
+challenge:
+  - id: W-4.5-c1
+    stars: 1
+    objectives: [OBJ-4.5-2]
+    prompt: >-
+      (א) הוכיחו שלכל $n$ טבעי, $(\cosh x+\sinh x)^n=\cosh nx+\sinh nx$ ו-$(\cosh x-\sinh x)^n=\cosh nx-\sinh nx$. זו
+      ההקבלה ההיפרבולית של נוסחת דה-מואבר (שיעור 3.3).
+
+      (ב) הסיקו ש-$\cosh3x=4\cosh^3x-3\cosh x$ לכל $x$. (רמז: חברו את שתי הזהויות של (א) עם $n=3$, ופתחו בבינום.)
+
+      (ג) הוכיחו מההגדרות ש-$\sinh(x+y)=\sinh x\cosh y+\cosh x\sinh y$.
+    answer: >-
+      (א) $\cosh x\pm\sinh x=e^{\pm x}$, ו-$e^{\pm nx}=\cosh nx\pm\sinh nx$. (ב) חצי הסכום של שתי הזהויות:
+      $\cosh^3x+3\cosh x\sinh^2x=\cosh3x$, ואז $\sinh^2x=\cosh^2x-1$. (ג) פותחים סוגריים באקספוננטים.
+    solution:
+      - kind: idea
+        text: >-
+          כל הקושי נעלם כשעוברים לאקספוננטים: $\cosh x+\sinh x=e^x$ ו-$\cosh x-\sinh x=e^{-x}$. חזקה של אקספוננט היא כפל של
+          המעריך. ב-(ב) משווים את מה שהבינום נותן למה ש-(א) נותן.
+      - kind: computation
+        text: >-
+          (א) $(\cosh x+\sinh x)^n=\left(e^x\right)^n=e^{nx}=\cosh nx+\sinh nx$, כי $\cosh t+\sinh t=e^t$ לכל $t$, ובפרט
+          ל-$t=nx$. באותו אופן $(\cosh x-\sinh x)^n=e^{-nx}=\cosh nx-\sinh nx$.
+      - kind: computation
+        text: >-
+          (ב) נסמן $c=\cosh x$, $s=\sinh x$. בבינום, $(c+s)^3=c^3+3c^2s+3cs^2+s^3$ ו-$(c-s)^3=c^3-3c^2s+3cs^2-s^3$. בסכום
+          המחוברים עם חזקה אי-זוגית של $s$ מתבטלים: $(c+s)^3+(c-s)^3=2c^3+6cs^2$.
+      - kind: step
+        text: >-
+          לפי (א) עם $n=3$, הסכום הזה הוא $(\cosh3x+\sinh3x)+(\cosh3x-\sinh3x)=2\cosh3x$. לכן $\cosh3x=c^3+3cs^2$. מהזהות
+          הבסיסית $s^2=c^2-1$, ולכן $\cosh3x=c^3+3c\left(c^2-1\right)=4c^3-3c$.
+      - kind: computation
+        text: >-
+          (ג) $4\sinh x\cosh y=\left(e^x-e^{-x}\right)\left(e^y+e^{-y}\right)=e^{x+y}+e^{x-y}-e^{-x+y}-e^{-x-y}$ ו-$4\cosh x\sinh y=\left(e^x+e^{-x}\right)\left(e^y-e^{-y}\right)=e^{x+y}-e^{x-y}+e^{-x+y}-e^{-x-y}$.
+          בסכום האיברים המעורבים מתבטלים: $2e^{x+y}-2e^{-(x+y)}$. מחלקים ב-4 ומקבלים $\sinh(x+y)$.
+      - kind: check
+        text: >-
+          (ב) ב-$x=\ln2$: $\cosh(3\ln2)=\cosh(\ln8)=\frac{8+\frac18}{2}=\frac{65}{16}$, ו-$4\left(\frac54\right)^3-3\cdot\frac54=\frac{125}{16}-\frac{60}{16}=\frac{65}{16}$.
+          השוו ל-$\cos3x=4\cos^3x-3\cos x$ (שיעור 3.3): כאן אותה נוסחה בדיוק, כי במחובר $3cs^2$ יש שני סינוסים והוא מחליף
+          סימן, אבל אחר כך גם הזהות הבסיסית מחליפה סימן.
+      - kind: result
+        text: >-
+          $(\cosh x\pm\sinh x)^n=\cosh nx\pm\sinh nx$; $\cosh3x=4\cosh^3x-3\cosh x$; $\sinh(x+y)=\sinh x\cosh y+\cosh x\sinh y$.
+    source:
+      name: 'Gilbert Strang, Calculus (MIT OpenCourseWare RES.18-001), Section 6.7 Hyperbolic Functions'
+      year: 1991
+      problem: 'Section 6.7, Problems 7 and 8'
+      url: https://www.ocw.mit.edu/courses/res-18-001-calculus-fall-2023/mitres_18_001_f17_ch06.pdf
+      verified: '2026-11-26'
+      adapted: true
+
+  - id: W-4.5-c2
+    stars: 1
+    objectives: [OBJ-4.5-2, OBJ-4.5-1]
+    prompt: >-
+      בשיעור 3.4 הגדרנו לכל $z$ מרוכב $\cos z=\frac{e^{iz}+e^{-iz}}{2}$ ו-$\sin z=\frac{e^{iz}-e^{-iz}}{2i}$. באותו אופן
+      נגדיר $\cosh z=\frac{e^z+e^{-z}}{2}$ ו-$\sinh z=\frac{e^z-e^{-z}}{2}$ לכל $z$ מרוכב.
+
+      (א) הראו ש-$\cos(ix)=\cosh x$ ו-$\sin(ix)=i\sinh x$ לכל $x$ ממשי, וחשבו את $\cos i$ ואת $\sin i$.
+
+      (ב) הראו ש-$\cosh(iy)=\cos y$ ו-$\sinh(iy)=i\sin y$ לכל $y$ ממשי.
+
+      (ג) מצאו את כל המספרים המרוכבים $z$ שעבורם $\cosh z=0$, ואת כל אלה שעבורם $\sinh z=0$. האם יש ביניהם מספרים ממשיים?
+    answer: >-
+      (א) $\cos i=\cosh1\approx1.543$, $\sin i=i\sinh1\approx1.175i$. (ב) מציבים $iy$ בהגדרות. (ג) $\cosh z=0$ בדיוק
+      כש-$z=i\left(\frac{\pi}{2}+\pi k\right)$; $\sinh z=0$ בדיוק כש-$z=\pi ki$, $k$ שלם. הממשי היחיד: $z=0$ עבור $\sinh$.
+    solution:
+      - kind: idea
+        text: >-
+          (א) ו-(ב) הן הצבה בהגדרות, עם $i\cdot i=-1$. ב-(ג) כופלים את המשוואה ב-$e^z$ ומקבלים משוואה ב-$e^{2z}$, שאותה
+          פותרים כמו בשיעור 3.4: $e^w=-1$ או $e^w=1$.
+      - kind: computation
+        text: >-
+          (א) $\cos(ix)=\frac{e^{i\cdot ix}+e^{-i\cdot ix}}{2}=\frac{e^{-x}+e^{x}}{2}=\cosh x$, ו-$\sin(ix)=\frac{e^{-x}-e^{x}}{2i}$.
+          מכיוון ש-$\frac{1}{i}=-i$, זה $-i\cdot\frac{e^{-x}-e^{x}}{2}=i\cdot\frac{e^{x}-e^{-x}}{2}=i\sinh x$. ב-$x=1$:
+          $\cos i=\cosh1\approx1.543$ ו-$\sin i=i\sinh1\approx1.175i$.
+      - kind: computation
+        text: >-
+          (ב) $\cosh(iy)=\frac{e^{iy}+e^{-iy}}{2}=\cos y$, לפי הנוסחה של שיעור 3.4. ו-$\sinh(iy)=\frac{e^{iy}-e^{-iy}}{2}=i\cdot\frac{e^{iy}-e^{-iy}}{2i}=i\sin y$.
+      - kind: computation
+        text: >-
+          (ג) $\cosh z=0$ פירושו $e^z+e^{-z}=0$. כופלים ב-$e^z\ne0$: $e^{2z}=-1$. מ-$\log(-1)=i(\pi+2\pi k)$ (שיעור 3.4)
+          מקבלים $2z=i(\pi+2\pi k)$, כלומר $z=i\left(\frac{\pi}{2}+\pi k\right)$.
+      - kind: computation
+        text: >-
+          $\sinh z=0$ פירושו $e^{2z}=1$, כלומר $2z=2\pi ki$ ו-$z=\pi ki$. מספר ממשי ביניהם: רק $z=0$ (עבור $\sinh$). ל-$\cosh$
+          אין אף אפס ממשי, כמו ש-$\cosh x\ge1$ על הישר.
+      - kind: check
+        text: >-
+          לפי (ב), $\cosh(iy)=\cos y$, ולכן האפסים של $\cosh$ על הציר המדומה הם $iy$ עם $\cos y=0$, כלומר $y=\frac{\pi}{2}+\pi k$:
+          בדיוק מה שיצא. ובאותו אופן $\sinh(iy)=i\sin y$ מתאפס ב-$y=\pi k$. האפסים של $\cosh$ ו-$\sinh$ הם האפסים של $\cos$
+          ו-$\sin$, מסובבים ברבע סיבוב אל הציר המדומה.
+      - kind: result
+        text: >-
+          $\cos(ix)=\cosh x$, $\sin(ix)=i\sinh x$, $\cos i\approx1.543$, $\sin i\approx1.175i$; $\cosh z=0$ בדיוק
+          ב-$z=i\left(\frac{\pi}{2}+\pi k\right)$, ו-$\sinh z=0$ בדיוק ב-$z=\pi ki$. אין ל-$\cosh$ אפסים ממשיים.
+    source:
+      name: 'Gilbert Strang, Calculus (MIT OpenCourseWare RES.18-001), Section 6.7 Hyperbolic Functions'
+      year: 1991
+      problem: 'Section 6.7, Problems 58 and 59'
+      url: https://www.ocw.mit.edu/courses/res-18-001-calculus-fall-2023/mitres_18_001_f17_ch06.pdf
+      verified: '2026-11-26'
+      adapted: true

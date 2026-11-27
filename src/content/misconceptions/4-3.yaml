@@ -2,19 +2,19 @@
 - id: MC-c4-exp-base-small
   title: חושבים שכל אקספוננט שואף לאינסוף
   belief: >-
-    $a^x\to\infty$ כש-$x\to\infty$ לכל בסיס $a>0$.
+    $a^x$ גדל בלי גבול כש-$x$ גדל, לכל בסיס $a>0$.
   truth: >-
-    ל-$a>1$ כן. ל-$0<a<1$ הפונקציה **יורדת**: $\left(\tfrac12\right)^x=2^{-x}\to0$ כש-$x\to\infty$, ושואפת לאינסוף כש-$x\to-\infty$.
-  remedy: { lesson: '4.3', label: 'אקספוננט עם בסיס קטן מ-1' }
+    ל-$a>1$ כן. ל-$0<a<1$ הפונקציה **יורדת**: $\left(\tfrac12\right)^x=2^{-x}$ מתקרבת ל-0 כש-$x$ גדל, וגדלה בלי גבול כש-$x$ שלילי וגדול בערכו המוחלט.
+  remedy: { lesson: '4.3', anchor: base-below-one, label: 'אקספוננט עם בסיס קטן מ-1' }
 
 - id: MC-c4-ln-near-zero
   title: חושבים שהלוגריתם שואף ל-0 ליד 0
   belief: >-
-    $\ln x\to0$ כש-$x\to0^+$, או ש-$\ln0=0$.
+    $\ln x$ מתקרב ל-0 כש-$x$ מתקרב ל-0 מימין, או ש-$\ln0=0$.
   truth: >-
-    $\ln1=0$, לא $\ln0$. ליד 0 מימין $\ln x\to-\infty$: $\ln(e^{-M})=-M$ לכל $M$. ציר $y$ הוא אסימפטוטה אנכית של
+    $\ln1=0$, לא $\ln0$. ליד 0 מימין $\ln x$ יורד בלי גבול: $\ln(e^{-M})=-M$ לכל $M$. ציר $y$ הוא אסימפטוטה אנכית של
     $\ln x$, ו-$\ln0$ אינו מוגדר.
-  remedy: { lesson: '4.3', label: 'ln ליד 0' }
+  remedy: { lesson: '4.3', anchor: log-behaviour, label: 'ln ליד 0' }
 
 - id: MC-c4-bigger-base-bigger
   title: חושבים שבסיס גדול יותר נותן תמיד ערך גדול יותר
@@ -23,15 +23,15 @@
   truth: >-
     $3^x>2^x$ רק ל-$x>0$; ל-$x<0$ ההפך ($3^{-1}<2^{-1}$). בלוגריתמים: $\log_3x=\frac{\ln x}{\ln3}$ קטן בערכו המוחלט
     מ-$\log_2x=\frac{\ln x}{\ln2}$, ולכן ל-$x>1$ דווקא $\log_2x>\log_3x$.
-  remedy: { lesson: '4.3', label: 'השוואת בסיסים' }
+  remedy: { lesson: '4.3', anchor: compare-bases, label: 'השוואת בסיסים' }
 
 - id: MC-c4-log-bounded
   title: חושבים שללוגריתם יש אסימפטוטה אופקית
   belief: >-
-    $\ln x$ גדל לאט כל כך שהוא מתקרב לערך סופי כש-$x\to\infty$.
+    $\ln x$ גדל לאט כל כך שהוא מתקרב לערך סופי כש-$x$ גדל מאוד.
   truth: >-
     $\ln x$ גדל לאט אבל **לא חסום**: לכל $M$, $\ln x>M$ כש-$x>e^M$. אין לו אסימפטוטה אופקית.
-  remedy: { lesson: '4.3', label: 'ln איטי אבל לא חסום' }
+  remedy: { lesson: '4.3', anchor: log-behaviour, label: 'ln איטי אבל לא חסום' }
 
 - id: MC-c4-e-limit-is-1
   title: חושבים ש-(1+1/n) בחזקת n שואף ל-1
@@ -40,7 +40,7 @@
   truth: >-
     הבסיס מתקרב ל-1 **והמעריך גדל** באותו זמן; שתי המגמות מתחרות. הגבול הוא $e\approx2.718$: ל-$n=1000$ מתקבל כבר
     $2.7169\ldots$.
-  remedy: { lesson: '4.3', label: 'המספר e כגבול' }
+  remedy: { lesson: '4.3', anchor: e-limit, label: 'המספר e כגבול' }
 
 - id: MC-c4-exp-product-confusion
   title: מבלבלים את e בחזקת 2x עם 2 כפול e בחזקת x
@@ -48,7 +48,7 @@
     $e^{2x}=2e^x$, ולכן מ-$e^{2x}=5$ מקבלים $e^x=\frac52$.
   truth: >-
     $e^{2x}=\left(e^x\right)^2$. מ-$e^{2x}=5$ לוקחים $\ln$: $2x=\ln5$, ו-$x=\frac{\ln5}{2}$.
-  remedy: { lesson: '4.3', label: 'חוקי חזקות עם e' }
+  remedy: { lesson: '4.3', anchor: solve-exp, label: 'חוקי חזקות עם e' }
 
 - id: MC-c4-exp-log-coefficient
   title: מבטלים exp ו-ln גם כשיש מקדם ביניהם
@@ -56,7 +56,7 @@
     $e^{3\ln x}=3x$.
   truth: >-
     $e^{\ln u}=u$ רק כשבמעריך יש בדיוק $\ln u$. קודם מכניסים את המקדם: $3\ln x=\ln(x^3)$, ולכן $e^{3\ln x}=x^3$ (ל-$x>0$).
-  remedy: { lesson: '4.3', label: 'e ו-ln כפונקציות הפוכות' }
+  remedy: { lesson: '4.3', anchor: log-rules, label: 'e ו-ln כפונקציות הפוכות' }
 
 - id: MC-c4-ln-product-is-product
   title: חושבים שלוגריתם של מכפלה הוא מכפלת הלוגריתמים
@@ -64,7 +64,7 @@
     $\ln(ab)=\ln a\cdot\ln b$.
   truth: >-
     $\ln(ab)=\ln a+\ln b$: הלוגריתם הופך כפל לחיבור. בדיקה: $\ln(1\cdot e)=1$, ואילו $\ln1\cdot\ln e=0$.
-  remedy: { lesson: '4.3', label: 'חוקי הלוגריתם' }
+  remedy: { lesson: '4.3', anchor: log-rules, label: 'חוקי הלוגריתם' }
 
 - id: MC-c4-inverse-domain-ignored
   title: משתמשים בזהות של פונקציה הפוכה מחוץ לתחום שלה
@@ -73,7 +73,7 @@
   truth: >-
     $f^{-1}(f(x))=x$ לכל $x$ בתחום של $f$, ו-$f(f^{-1}(y))=y$ לכל $y$ בתחום של $f^{-1}$. $\ln(e^x)=x$ לכל $x$, אבל
     $e^{\ln x}=x$ רק ל-$x>0$: ל-$x\le0$ הביטוי $\ln x$ אינו מוגדר.
-  remedy: { lesson: '4.3', label: 'פונקציות הפוכות ותחומיהן' }
+  remedy: { lesson: '4.3', anchor: inverse-domain, label: 'פונקציות הפוכות ותחומיהן' }
 
 - id: MC-c4-inverse-is-reciprocal
   title: מבלבלים פונקציה הפוכה עם אחד חלקי הפונקציה
@@ -82,25 +82,25 @@
   truth: >-
     $f^{-1}$ מבטלת את $f$: $f^{-1}(f(x))=x$. מוצאים אותה מפתרון $y=f(x)$ לפי $x$. הסימון $\sin^{-1}x$ פירושו
     $\arcsin x$, ו-$\frac1{\sin x}$ הוא דבר אחר לגמרי.
-  remedy: { lesson: '4.3', label: 'מהי פונקציה הפוכה' }
+  remedy: { lesson: '4.3', anchor: inverse, label: 'מהי פונקציה הפוכה' }
 
 - id: MC-c4-power-beats-exp
   title: חושבים שחזקה גבוהה מנצחת אקספוננט
   belief: >-
-    $x^{100}$ גדל מהר יותר מ-$e^x$, ולכן $\frac{x^{100}}{e^x}\to\infty$.
+    $x^{100}$ גדל מהר יותר מ-$e^x$, ולכן $\frac{x^{100}}{e^x}$ גדל בלי גבול.
   truth: >-
-    כל אקספוננט עם בסיס גדול מ-1 גדל בסופו של דבר מהר יותר מכל חזקה: $\frac{x^{n}}{e^x}\to0$ כש-$x\to\infty$, לכל $n$.
+    כל אקספוננט עם בסיס גדול מ-1 גדל בסופו של דבר מהר יותר מכל חזקה: $\frac{x^{n}}{e^x}$ מתקרב ל-0 כש-$x$ גדל, לכל $n$.
     החזקה מובילה רק בטווח מוגבל.
-  remedy: { lesson: '4.3', label: 'סולם קצבי הגידול' }
+  remedy: { lesson: '4.3', anchor: growth-race, label: 'סולם קצבי הגידול' }
 
 - id: MC-c4-faster-means-already-bigger
   title: חושבים שהפונקציה שגדלה מהר יותר כבר גדולה יותר
   belief: >-
     $2^x$ גדל מהר יותר מ-$x^{10}$, ולכן $2^x>x^{10}$ לכל $x>1$ (או לכל $x>10$).
   truth: >-
-    "גדל מהר יותר" הוא אמירה על $x\to\infty$: היחס $\frac{2^x}{x^{10}}\to\infty$. אבל $2^{10}=1024<10^{10}$, והעקיפה
+    "גדל מהר יותר" הוא אמירה על $x$ גדולים מאוד: היחס $\frac{2^x}{x^{10}}$ גדל בסוף בלי גבול. אבל $2^{10}=1024<10^{10}$, והעקיפה
     קורית רק ליד $x\approx58.8$.
-  remedy: { lesson: '4.3', label: 'מתי האקספוננט עוקף' }
+  remedy: { lesson: '4.3', anchor: faster-not-bigger, label: 'מתי האקספוננט עוקף' }
 
 - id: MC-c4-exp-as-linear
   title: מתייחסים לדעיכה מעריכית כאל ירידה לינארית
@@ -109,4 +109,13 @@
   truth: >-
     בדעיכה מעריכית נשאר **אותו חלק יחסי** בכל פרק זמן שווה: $N=N_0\left(\tfrac12\right)^{t/T}$. כדי שיישאר $10\%$ צריך
     $\left(\tfrac12\right)^{t/T}=\tfrac1{10}$, כלומר $t=T\frac{\ln10}{\ln2}\approx3.32\,T$.
-  remedy: { lesson: '4.3', label: 'דעיכה מעריכית וזמן מחצית חיים' }
+  remedy: { lesson: '4.3', anchor: decay, label: 'דעיכה מעריכית וזמן מחצית חיים' }
+
+- id: MC-c4-compound-unbounded
+  title: חושבים שריבית שמחושבת לעתים קרובות יותר נותנת סכום בלי גבול
+  belief: >-
+    אם מחשבים ריבית שנתית של $100\%$ פעמים רבות יותר בשנה, בחלקים קטנים יותר, הסכום בסוף השנה גדל בלי גבול.
+  truth: >-
+    הסכום אכן גדל עם מספר הפעמים $n$, אבל כל חלק קטן יותר: $\left(1+\frac1n\right)^n$ גדל ומתקרב ל-$e\approx2.718$ ואינו עובר
+    אותו. גם ריבית שמחושבת בכל שנייה נותנת פחות מ-$2.72$ על כל שקל.
+  remedy: { lesson: '4.3', anchor: e-limit, label: 'המספר e כגבול של ריבית דריבית' }

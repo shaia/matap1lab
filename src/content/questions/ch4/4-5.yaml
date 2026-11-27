@@ -66,7 +66,7 @@ questions:
         misconception: MC-c4-hyperbolic-periodic
       - text: '$-1\le\cosh x\le1$, כמו הקוסינוס'
         feedback: >-
-          $\cosh x\to\infty$ כש-$x\to\pm\infty$. רק השם והזהויות דומים לקוסינוס, לא הגרף.
+          כש-$|x|$ גדל, $\cosh x$ גדל בלי גבול (בערך כמו $\frac{e^{|x|}}{2}$). רק השם והזהויות דומים לקוסינוס, לא הגרף.
         misconception: MC-c4-hyperbolic-periodic
 
   - id: Q-4.5-identity-pick
@@ -135,17 +135,18 @@ questions:
     objectives: [OBJ-4.5-1]
     level: mid
     prompt: >-
-      מהו $\lim_{x\to\infty}\tanh x$?
+      לאיזה מספר מתקרב $\tanh x$ כש-$x$ גדל מאוד?
     choices:
       - text: '1'
         correct: true
         feedback: >-
-          נכון. $\tanh x=\frac{e^x-e^{-x}}{e^x+e^{-x}}=\frac{1-e^{-2x}}{1+e^{-2x}}\to1$. הישר $y=1$ הוא אסימפטוטה אופקית.
-      - text: '$\infty$'
+          נכון. $\tanh x=\frac{e^x-e^{-x}}{e^x+e^{-x}}=\frac{1-e^{-2x}}{1+e^{-2x}}$, וכש-$x$ גדל מאוד $e^{-2x}$ מתקרב ל-0, ולכן
+          השבר מתקרב ל-1. הישר $y=1$ הוא אסימפטוטה אופקית.
+      - text: 'הוא גדל בלי גבול'
         feedback: >-
           המונה והמכנה גדלים שניהם כמו $\frac{e^x}{2}$, והיחס ביניהם מתקרב ל-1. תמיד $|\sinh x|<\cosh x$, ולכן $|\tanh x|<1$.
         misconception: MC-c4-tanh-unbounded
-      - text: 'אינו קיים, כי $\tanh$ מחזורית כמו $\tan$'
+      - text: 'לאף מספר: $\tanh$ מחזורית כמו $\tan$'
         feedback: >-
           $\tanh$ אינה מחזורית ואין לה אסימפטוטות אנכיות: המכנה $\cosh x\ge1$ לעולם אינו מתאפס.
         misconception: MC-c4-hyperbolic-periodic
@@ -273,7 +274,7 @@ questions:
   - id: Q-4.5-cosh2x
     type: numeric
     objectives: [OBJ-4.5-2]
-    level: exam
+    level: mid
     prompt: >-
       ידוע ש-$\sinh x=2$. חשבו את $\cosh(2x)$. (היעזרו בזהות $\cosh2x=\cosh^2x+\sinh^2x$, שנובעת מההגדרות.)
     answer: 9
@@ -314,7 +315,7 @@ questions:
   - id: Q-4.5-cable-sag
     type: numeric
     objectives: [OBJ-4.5-1]
-    level: exam
+    level: mid
     prompt: >-
       כבל חשמל תלוי בין שני עמודים שנמצאים ב-$x=-15$ וב-$x=15$ (מטרים), וצורתו $y=20\cosh\frac x{20}$. בכמה מטרים גבוהה נקודת
       התלייה בעמוד מהנקודה הנמוכה ביותר של הכבל?
@@ -325,3 +326,27 @@ questions:
       $20\left(\cosh\frac34-1\right)$.
     wrongFeedback: >-
       איפה הנקודה הנמוכה של $\cosh$? חשבו את הגובה שם ובעמוד, והחסירו.
+
+  - id: Q-4.5-artanh-value
+    type: numeric
+    objectives: [OBJ-4.5-3]
+    level: mid
+    prompt: >-
+      מצאו את $x$ שעבורו $\tanh x=\frac13$. (אפשר לכתוב ערך מדויק, כמו ln 3 או 3√2)
+    answer: 0.34657359027997264
+    tolerance: 0.001
+    correctFeedback: >-
+      נכון, $x=\frac12\ln2\approx0.347$. מ-$\frac{e^{2x}-1}{e^{2x}+1}=\frac13$: $3e^{2x}-3=e^{2x}+1$, כלומר $e^{2x}=2$, ולכן
+      $2x=\ln2$. זה גם $\operatorname{artanh}\frac13=\frac12\ln\frac{1+\frac13}{1-\frac13}=\frac12\ln2$.
+    wrongFeedback: >-
+      כתבו $\tanh x=\frac{e^{2x}-1}{e^{2x}+1}$, פתרו את המשוואה (הלינארית) עבור $e^{2x}$, ורק אז קחו $\ln$.
+    commonWrong:
+      - value: 0.6931471805599453
+        feedback: >-
+          $\ln2$ הוא $2x$, לא $x$: המשוואה נתנה $e^{2x}=2$. חלקו ב-2. (בדיקה: $\tanh(\ln2)=\frac{4-1}{4+1}=\frac35$, לא $\frac13$.)
+        misconception: MC-c4-artanh-half-dropped
+      - value: -0.34657359027997264
+        feedback: >-
+          זה $\frac12\ln\frac12$: הפכתם את השבר, $\frac{1-y}{1+y}$ במקום $\frac{1+y}{1-y}$. בדיקת סימן: $\tanh x>0$ בדיוק
+          כש-$x>0$, ולכן הפתרון חיובי.
+        misconception: MC-c4-artanh-fraction-flipped

@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 4 figure: <Spread figure={CircleLab} figureProps={{ mode, … }}>.
+ * mode: 'trig' (unit circle and graph), 'wave' (A sin(ωx + φ)), 'arc' (arcsin, arccos, arctan on the circle), 'hyper'
+ * (cosh and sinh on the hyperbola). The props, step keys and task ids are documented at the top of CircleLab.tsx.
+ */
+import CircleLab, { type CircleLabProps } from './CircleLab';
+type Props = CircleLabProps;
+---
+
+<CircleLab client:visible {...Astro.props} />

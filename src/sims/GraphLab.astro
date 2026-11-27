@@ -1,0 +1,11 @@
+---
+/**
+ * Chapter 4 figure: <Spread figure={GraphLab} figureProps={{ mode, f, … }}>.
+ * mode: read, compose, transform, solve, parity, inverse. The props, step keys and task ids are documented at the top
+ * of GraphLab.tsx; the function ids are those of the registry in src/math/functions.ts.
+ */
+import GraphLab, { type GraphLabProps } from './GraphLab';
+type Props = GraphLabProps;
+---
+
+<GraphLab client:visible {...Astro.props} />

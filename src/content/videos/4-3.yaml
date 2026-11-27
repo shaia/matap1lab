@@ -1,0 +1,25 @@
+- id: v-4-3-numberphile-e
+  youtubeId: AuA2EAgAegE
+  title: e (Euler's Number) - Numberphile
+  channel: Numberphile
+  lang: en
+  captions: [en, he]
+  start: 0
+  minutes: 11
+  why: >-
+    לפי התיאור: ד״ר ג׳יימס גרים מספר על המספר $e$. צפו בו אחרי איור 4.3ב, והשוו את הדרך שבה הוא מגיע אל $e$ לסיפור
+    של הריבית דריבית שבאיור, ואת המספרים שהוא מקבל לטבלה שבשיעור.
+  verified: '2026-11-26'
+- id: v-4-3-3b1b-growth
+  youtubeId: Kas0tIxDvrg
+  title: Exponential growth and epidemics
+  channel: 3Blue1Brown
+  lang: en
+  captions: [en, he]
+  start: 0
+  minutes: 9
+  why: >-
+    לפי התיאור: מבוא לגידול מעריכי ולגידול לוגיסטי, עם מגפה כדוגמה, ובו התאמה של קו ישר ללוגריתמים של הנתונים. השוו
+    לאיור 4.3ג עם המתג "ציר ערכים לוגריתמי" דלוק, שבו גם $e^x$ נעשה קו ישר. (התיאור מזכיר בדרך אגב נגזרת; את הנגזרות נפגוש בפרק 5,
+    ואין צורך בהן כדי לעקוב.)
+  verified: '2026-11-26'

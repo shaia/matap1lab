@@ -11,18 +11,18 @@ questions:
     objectives: [OBJ-4.6-1]
     level: basic
     prompt: >-
-      (מהסיכומים, עמ׳ 4) חשבו את $\lim_{x\to2}\frac{x^2-5x+6}{x-2}$.
+      (מסיכומי ההרצאות שהקורס נבנה לפיהם) חשבו את $\lim_{x\to2}\frac{x^2-5x+6}{x-2}$.
     answer: -1
     tolerance: 0.001
     correctFeedback: >-
-      נכון. $x^2-5x+6=(x-2)(x-3)$, ול-$x\ne2$ המנה היא $x-3$, ששואפת ל-$-1$. בסיכומים גם בדיקה מספרית: $f(1.99)=-1.01$,
+      נכון. $x^2-5x+6=(x-2)(x-3)$, ול-$x\ne2$ המנה היא $x-3$, ששואפת למינוס 1. בדיקה מספרית: $f(1.99)=-1.01$,
       $f(2.01)=-0.99$.
     wrongFeedback: >-
       הצבה נותנת $\frac00$. פרקו את המונה לגורמים וצמצמו.
     commonWrong:
       - value: 0
         feedback: >-
-          המונה שואף ל-0, אבל גם המכנה. $\frac00$ אינו 0: אחרי הצמצום המנה $x-3$, ושם $x=2$ נותן $-1$.
+          המונה שואף ל-0, אבל גם המכנה. $\frac00$ אינו 0: אחרי הצמצום המנה $x-3$, ושם $x=2$ נותן מינוס 1.
         misconception: MC-c4-zero-over-zero
 
   - id: Q-4.6-notes-removable
@@ -30,11 +30,11 @@ questions:
     objectives: [OBJ-4.6-1]
     level: basic
     prompt: >-
-      (מהסיכומים, עמ׳ 3) חשבו את $\lim_{x\to1}\frac{x^2-3x+2}{x^2-1}$.
+      (מסיכומי ההרצאות שהקורס נבנה לפיהם) חשבו את $\lim_{x\to1}\frac{x^2-3x+2}{x^2-1}$.
     answer: -0.5
     tolerance: 0.001
     correctFeedback: >-
-      נכון. $\frac{(x-1)(x-2)}{(x-1)(x+1)}=\frac{x-2}{x+1}$ ל-$x\ne\pm1$, וב-$x=1$ זה $-\frac12$.
+      נכון. $\frac{(x-1)(x-2)}{(x-1)(x+1)}=\frac{x-2}{x+1}$ ל-$x\ne\pm1$, וב-$x=1$ זה מינוס חצי.
     wrongFeedback: >-
       פרקו מונה ומכנה לגורמים, צמצמו את הגורם המשותף, ורק אז הציבו.
     commonWrong:
@@ -49,7 +49,7 @@ questions:
     qualitative: true
     level: basic
     prompt: >-
-      (מהסיכומים, עמ׳ 6) $f(x)=2x+1$ ל-$x<3$ ו-$f(x)=x^2$ ל-$x\ge3$. איזו אי-רציפות יש ל-$f$ ב-$x=3$?
+      (מסיכומי ההרצאות שהקורס נבנה לפיהם) $f(x)=2x+1$ ל-$x<3$ ו-$f(x)=x^2$ ל-$x\ge3$. איזו אי-רציפות יש ל-$f$ ב-$x=3$?
     choices:
       - text: 'קפיצה: הגבול משמאל 7 והגבול מימין 9'
         correct: true
@@ -78,11 +78,11 @@ questions:
           נכון. $\left|\frac{\sin x}x\right|\le\frac1x\to0$: מונה חסום חלקי מכנה שגדל.
       - text: '1'
         feedback: >-
-          $\frac{\sin x}x\to1$ כש-$x\to0$ (בסיכומים, עמ׳ 5). כאן $x\to\infty$, והסינוס לא גדל בכלל.
+          $\frac{\sin x}x\to1$ כש-$x\to0$. כאן $x\to\infty$, והסינוס לא גדל בכלל.
         misconception: MC-c4-sinx-over-x-everywhere
       - text: 'הגבול אינו קיים, כי $\sin x$ מתנודד'
         feedback: >-
-          המונה מתנודד, אבל המנה כולה כלואה בין $-\frac1x$ ל-$\frac1x$, ושני אלה שואפים ל-0.
+          המונה מתנודד, אבל המנה כולה חסומה בערכה המוחלט: $\left|\frac{\sin x}{x}\right|\le\frac1x$, ו-$\frac1x\to0$.
         misconception: MC-c4-oscillation-no-limit
 
   - id: Q-4.6-one-sided
@@ -93,13 +93,13 @@ questions:
     prompt: >-
       מה נכון לגבי $\lim_{x\to0}\frac1x$?
     choices:
-      - text: 'הגבול אינו קיים: מימין $+\infty$ ומשמאל $-\infty$'
+      - text: 'הגבול אינו קיים: מימין $\frac1x\to+\infty$ ומשמאל $\frac1x\to-\infty$'
         correct: true
         feedback: >-
-          נכון. הגבולות החד-צדדיים שונים (בסיכומים, עמ׳ 6). לעומת זאת $\lim_{x\to0}\frac1{x^2}=+\infty$ משני הצדדים.
+          נכון. הגבולות החד-צדדיים שונים. לעומת זאת $\lim_{x\to0}\frac1{x^2}=+\infty$ משני הצדדים.
       - text: '$\infty$'
         feedback: >-
-          זה הגבול מימין בלבד. ב-$x=-0.001$ הערך $-1000$.
+          זה הגבול מימין בלבד. ב-$x=-0.001$ הערך מינוס 1000.
         misconception: MC-c4-one-sided-ignored
       - text: '0'
         feedback: >-
@@ -126,7 +126,7 @@ questions:
         misconception: MC-c4-zero-denominator-infinite
       - text: 'ב-$x=-2$ האי-רציפות סליקה, כי הגבולות החד-צדדיים "שווים לאינסוף"'
         feedback: >-
-          גבול אינסופי אינו גבול סופי, ושום ערך ב-$-2$ לא יתקן אותו. (וכאן גם הסימנים שונים: $+\infty$ משמאל, $-\infty$ מימין.)
+          גבול אינסופי אינו גבול סופי, ושום ערך ב-$x=-2$ לא יתקן אותו. (וכאן גם הסימנים שונים: משמאל $f\to+\infty$, מימין $f\to-\infty$.)
         misconception: MC-c4-removable-vs-jump
 
   - id: Q-4.6-removable-value
@@ -180,11 +180,11 @@ questions:
     commonWrong:
       - value: 0
         feedback: >-
-          0 הוא היחס בין האיברים החופשיים ($\frac01$). אבל כש-$x$ גדול האיברים $3x^2$ ו-$-2x^2$ גדולים מכל השאר.
+          0 הוא היחס בין האיברים החופשיים ($\frac01$). אבל כש-$x$ גדול האיברים $3x^2$ ו-$(-2x^2)$ גדולים מכל השאר.
         misconception: MC-c4-rational-limit-at-infinity
       - value: 1.5
         feedback: >-
-          המקדם המוביל במכנה הוא $-2$, לא 2: הסדר $1-2x^2$ מסתיר את הסימן.
+          המקדם המוביל במכנה הוא מינוס 2, לא 2: הסדר $1-2x^2$ מסתיר את הסימן.
         misconception: MC-c4-rational-limit-at-infinity
 
   - id: Q-4.6-sin-1-over-x
@@ -198,16 +198,16 @@ questions:
       - text: 'לא נכון'
         correct: true
         feedback: >-
-          נכון. ליד 0 הפונקציה מקבלת את כל הערכים בין $-1$ ל-1 שוב ושוב (בסיכומים, עמ׳ 6), ואין לה גבול אף מצד אחד.
+          נכון. ליד 0 הפונקציה מקבלת את כל הערכים בין מינוס 1 ל-1 שוב ושוב, ואין לה גבול אף מצד אחד.
       - text: 'נכון'
         feedback: >-
-          לסליקה צריך שהגבול יהיה קיים. ב-$x=\frac1{\pi/2+2\pi n}$ הערך 1, וב-$x=\frac1{3\pi/2+2\pi n}$ הערך $-1$, ושתי הסדרות
+          לסליקה צריך שהגבול יהיה קיים. ב-$x=\frac1{\pi/2+2\pi n}$ הערך 1, וב-$x=\frac1{3\pi/2+2\pi n}$ הערך מינוס 1, ושתי הסדרות
           מתקרבות ל-0.
         misconception: MC-c4-bounded-has-limit
     reasons:
       - text: 'הגבול אינו קיים: יש נקודות קרובות ל-0 כרצוננו שבהן $f=1$ ואחרות שבהן $f=-1$'
         correct: true
-        feedback: 'בדיוק. זו אי-רציפות "מסוג שני": לא סליקה ולא קפיצה.'
+        feedback: 'בדיוק. בנקודה כזו אין גבול: היא לא סליקה ולא קפיצה.'
       - text: 'פונקציה חסומה ליד נקודה תמיד מתכנסת בה'
         feedback: >-
           חסימות אומרת שהערכים לא בורחים לאינסוף, לא שהם מתייצבים. $\sin\frac1x$ חסומה ומתנודדת.
@@ -284,7 +284,7 @@ questions:
   - id: Q-4.6-glue
     type: numeric
     objectives: [OBJ-4.6-2]
-    level: exam
+    level: mid
     prompt: >-
       $f(x)=ax+1$ ל-$x<2$ ו-$f(x)=x^2-a$ ל-$x\ge2$. לאיזה ערך של $a$ הפונקציה רציפה ב-$x=2$?
     answer: 1
@@ -297,7 +297,8 @@ questions:
     commonWrong:
       - value: 3
         feedback: >-
-          $a=3$ פותר $2a+1=4+a$: איבדתם את הסימן של $-a$ בנוסחה הימנית. עם $a=3$ הגבול משמאל 7 ומימין 1: קפיצה.
+          $a=3$ פותר $2a+1=4+a$: איבדתם את המינוס שלפני $a$ בנוסחה הימנית. עם $a=3$ הגבול משמאל 7 ומימין 1: קפיצה.
+        misconception: MC-c4-glue-sign
 
   - id: Q-4.6-bisection
     type: numeric
@@ -340,3 +341,29 @@ questions:
         feedback: >-
           כנראה החלפתם את המכנה $\sqrt{x^2+3x}+x$ ב-$x$ בלבד. אבל $\sqrt{x^2+3x}\approx x$, ולכן המכנה בערך $2x$.
         misconception: MC-c4-rational-limit-at-infinity
+
+  - id: Q-4.6-undefined-limit
+    type: twotier
+    objectives: [OBJ-4.6-1]
+    qualitative: true
+    level: basic
+    prompt: >-
+      נכון או לא נכון: $g(x)=\frac{x^2-9}{x-3}$ אינה מוגדרת ב-$x=3$, ולכן הגבול $\lim_{x\to3}g(x)$ אינו קיים.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $g(x)=\frac{(x-3)(x+3)}{x-3}=x+3$ לכל $x\ne3$, ולכן $\lim_{x\to3}g(x)=6$. הגרף הוא ישר עם חור אחד, בנקודה
+          $(3,6)$.
+      - text: 'נכון'
+        feedback: >-
+          הגבול מדבר על הערכים **ליד** 3, לא **ב**-3. ב-$x=2.99$ הערך $5.99$, וב-$x=3.01$ הערך $6.01$: הם מתקרבים ל-6.
+        misconception: MC-c4-undefined-no-limit
+    reasons:
+      - text: 'הגבול תלוי רק בערכים ליד הנקודה, והם מתקרבים ל-6'
+        correct: true
+        feedback: 'בדיוק. הערך בנקודה עצמה אינו משתתף בגבול; כאן חסר רק הוא, ולכן זו אי-רציפות סליקה.'
+      - text: 'כשהפונקציה אינה מוגדרת בנקודה, אין לה שם שום התנהגות מסודרת'
+        feedback: >-
+          לא נכון: ההתנהגות ליד 3 מסודרת לגמרי, $g(x)=x+3$. רק הנקודה $x=3$ עצמה חסרה.
+        misconception: MC-c4-undefined-no-limit

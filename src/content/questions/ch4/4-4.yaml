@@ -83,7 +83,7 @@ questions:
     commonWrong:
       - value: -1.0471975511965976
         feedback: >-
-          $-\frac\pi3$ אינה בטווח של $\arccos$, ו-$\cos\left(-\frac\pi3\right)=+\frac12$. ל-$\arcsin$ מותר לצאת שלילי, ל-$\arccos$ לא.
+          $-\frac\pi3$ אינה בתמונה של $\arccos$, ו-$\cos\left(-\frac\pi3\right)=+\frac12$. ל-$\arcsin$ מותר לצאת שלילי, ל-$\arccos$ לא.
         misconception: MC-c4-arccos-range
 
   - id: Q-4.4-sin-inverse-notation
@@ -167,7 +167,7 @@ questions:
         misconception: MC-c4-inverse-needs-one-to-one
       - text: 'כי זה המחזור של הסינוס'
         feedback: >-
-          המחזור של הסינוס הוא $2\pi$, והקטע באורך $\pi$. בוחרים קטע שבו הסינוס עולה, ולא מחזור שלם (שבו כל ערך מתקבל פעמיים).
+          המחזור של הסינוס הוא $2\pi$, והקטע באורך $\pi$. בוחרים קטע שבו הסינוס עולה, ולא מחזור שלם (שבו כמעט כל ערך מתקבל פעמיים).
         misconception: MC-c4-inverse-needs-one-to-one
 
   - id: Q-4.4-arctan-facts
@@ -181,7 +181,7 @@ questions:
       - text: '$\arctan$ מוגדרת לכל $x$ ממשי'
         correct: true
         feedback: 'נכון. הטנגנס מקבל כל ערך ממשי ב-$\left(-\frac\pi2,\frac\pi2\right)$.'
-      - text: '$\arctan x\to\frac\pi2$ כש-$x\to\infty$'
+      - text: 'כש-$x$ גדל בלי גבול, $\arctan x$ מתקרב ל-$\frac\pi2$'
         correct: true
         feedback: 'נכון. האסימפטוטות האנכיות של הטנגנס הופכות לאסימפטוטות אופקיות $y=\pm\frac\pi2$ של ההפוכה.'
       - text: '$\arctan(\tan x)=x$ לכל $x$ שבו $\tan x$ מוגדר'
@@ -190,8 +190,9 @@ questions:
         misconception: MC-c4-inverse-range-ignored
       - text: 'התמונה של $\arctan$ היא $(-\pi,\pi)$'
         feedback: >-
-          התמונה היא $\left(-\frac\pi2,\frac\pi2\right)$, הקטע שאליו צמצמנו את הטנגנס.
-        misconception: MC-c4-arcsin-arccos-range-swap
+          התמונה היא $\left(-\frac\pi2,\frac\pi2\right)$, הקטע שאליו צמצמנו את הטנגנס. הקטע $(-\pi,\pi]$ הוא של הארגומנט
+          הראשי (שיעור 3.2), שמשתמש ב-$\arctan$ ומתקן ב-$\pi$ כשצריך.
+        misconception: MC-c4-arctan-range-arg
 
   - id: Q-4.4-arcsin-sin-value
     type: numeric
@@ -208,7 +209,7 @@ questions:
     commonWrong:
       - value: 2.356194490192345
         feedback: >-
-          $\frac{3\pi}4$ אינה בטווח של $\arcsin$. הפונקציות מבטלות זו את זו רק בקטע $\left[-\frac\pi2,\frac\pi2\right]$.
+          $\frac{3\pi}4$ אינה בתמונה של $\arcsin$. הפונקציות מבטלות זו את זו רק בקטע $\left[-\frac\pi2,\frac\pi2\right]$.
         misconception: MC-c4-inverse-range-ignored
 
   - id: Q-4.4-arcsin-sin-claim
@@ -292,7 +293,7 @@ questions:
   - id: Q-4.4-tan-arccos
     type: expr
     objectives: [OBJ-4.4-3]
-    level: exam
+    level: mid
     prompt: >-
       פשטו את $\tan(\arccos x)$ לביטוי אלגברי ב-$x$, ל-$0<x\le1$ (במשתנה x).
     answer: 'sqrt(1 - x^2)/x'
@@ -333,3 +334,29 @@ questions:
           קיבלתם $\arctan2+\arctan3=\arctan(-1)=-\frac\pi4$, ואז $-\frac\pi4+\frac\pi4=0$. אבל $\arctan2+\arctan3$ חיובי ובין
           $\frac\pi2$ ל-$\pi$: הזווית שם עם טנגנס $-1$ היא $\frac{3\pi}4$, לא הערך הראשי $-\frac\pi4$.
         misconception: MC-c4-inverse-range-ignored
+
+  # Added with the lesson (2026-11-26): detects MC-c4-arctan-range-closed. arctan 1000 ≈ 89.94° (lesson-4-4.py).
+  - id: Q-4.4-arctan-open
+    type: twotier
+    objectives: [OBJ-4.4-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      נכון או לא נכון: יש מספר ממשי $y$ שעבורו $\arctan y=\frac\pi2$.
+    choices:
+      - text: 'לא נכון'
+        correct: true
+        feedback: >-
+          נכון. $\arctan y$ מתקרב ל-$\frac\pi2$ כש-$y$ גדל, אבל לא מגיע אליו: גם $\arctan1000$ הוא רק בערך $89.94^\circ$.
+      - text: 'נכון'
+        feedback: >-
+          אילו $\arctan y=\frac\pi2$, היה $y=\tan\frac\pi2$. אבל $\tan\frac\pi2$ אינו מוגדר, כי $\cos\frac\pi2=0$.
+        misconception: MC-c4-arctan-range-closed
+    reasons:
+      - text: 'הטנגנס מצומצם לקטע הפתוח $\left(-\frac\pi2,\frac\pi2\right)$, כי בקצוות הוא אינו מוגדר; זו התמונה של $\arctan$'
+        correct: true
+        feedback: 'בדיוק. הקצוות $\pm\frac\pi2$ הם אסימפטוטות אופקיות של $\arctan$, לא ערכים שלו.'
+      - text: 'התמונה של $\arctan$ היא $\left[-\frac\pi2,\frac\pi2\right]$, כמו של $\arcsin$'
+        feedback: >-
+          ל-$\arcsin$ הקצוות שייכים, כי $\sin\frac\pi2=1$ מוגדר. לטנגנס אין ערך ב-$\frac\pi2$, ולכן הקטע של $\arctan$ פתוח.
+        misconception: MC-c4-arctan-range-closed

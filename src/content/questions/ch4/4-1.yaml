@@ -75,7 +75,7 @@ questions:
     qualitative: true
     level: basic
     prompt: >-
-      (מהסיכומים, עמ׳ 9) כתבו את $h(x)=\sin(x^3)$ כהרכבה $h(x)=f(g(x))$. מהן $f$ ו-$g$?
+      כתבו את $h(x)=\sin(x^3)$ כהרכבה $h(x)=f(g(x))$. מהן $f$ ו-$g$?
     choices:
       - text: '$f(u)=\sin u$ ו-$g(x)=x^3$'
         correct: true
@@ -237,7 +237,7 @@ questions:
       - text: 'בין שני שורשים פונקציה תמיד מונוטונית'
         feedback: >-
           בין שני שורשים פרבולה מגיעה לקודקוד ומחליפה כיוון.
-        misconception: MC-c4-graph-increasing-positive
+        misconception: MC-c4-monotone-between-zeros
 
   - id: Q-4.1-notes-graph
     type: mc
@@ -245,21 +245,20 @@ questions:
     qualitative: true
     level: mid
     prompt: >-
-      (מהסיכומים, עמ׳ 3) ל-$x\ne\pm1$, $\frac{x^2-3x+2}{x^2-1}=\frac{x-2}{x+1}$. בסיכומים הגרף של $\frac{x-2}{x+1}$ צויר יורד ליד
-      $x=1$. מה נכון לגבי $g(x)=\frac{x-2}{x+1}$ בקטע $(-1,\infty)$?
+      $h(x)=\frac{x+3}{x-2}$. סטודנט שרטט את הגרף של $h$ עולה בקטע $(2,\infty)$, "כי שם היא חיובית". מה נכון לגבי $h$
+      בקטע $(2,\infty)$?
     choices:
-      - text: '$g$ עולה, כי $g(x)=1-\frac{3}{x+1}$ ו-$\frac3{x+1}$ קטן כש-$x$ גדל'
+      - text: '$h$ יורדת, כי $h(x)=1+\frac{5}{x-2}$ ו-$\frac5{x-2}$ קטן כש-$x$ גדל'
         correct: true
         feedback: >-
-          נכון. למשל $g(0)=-2$, $g(1)=-\frac12$, $g(2)=0$: הערכים גדלים. השרטוט בסיכומים שגוי בכיוון (הנקודה
-          $\left(1,-\frac12\right)$ נכונה).
-      - text: '$g$ יורדת, כי היא שלילית ב-$(-1,2)$'
+          נכון. למשל $h(3)=6$, $h(4)=\frac72$, $h(7)=2$: הערכים חיוביים וקטנים. השרטוט של הסטודנט שגוי בכיוון.
+      - text: '$h$ עולה, כי היא חיובית ב-$(2,\infty)$'
         feedback: >-
-          שלילית אינה יורדת: $g(0)=-2<g(1)=-\frac12$. הערכים שליליים אבל גדלים.
+          חיובית אינה עולה: $h(3)=6>h(4)=\frac72$. הערכים חיוביים אבל קטנים.
         misconception: MC-c4-graph-increasing-positive
-      - text: '$g$ חותכת את ציר $y$ ב-$y=2$'
+      - text: '$h$ חותכת את ציר $y$ בגובה מינוס 3'
         feedback: >-
-          2 הוא השורש של $g$, החיתוך עם ציר $x$. ציר $y$ נחתך ב-$g(0)=-2$.
+          מינוס 3 הוא השורש של $h$, שם הגרף חותך את ציר $x$. את ציר $y$ הגרף חותך ב-$h(0)=-\frac32$.
         misconception: MC-c4-intercept-axes-swap
 
   - id: Q-4.1-domain-sqrt-ln

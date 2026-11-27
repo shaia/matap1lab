@@ -1,0 +1,67 @@
+/* LimitLab readout. Colours come from tokens.css only. */
+
+.sim-readout .q bdi {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+}
+
+.lim-tablewrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.lim-table {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  direction: ltr;
+}
+
+.lim-table th,
+.lim-table td {
+  padding: 0.1rem 0.7rem;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--rule);
+}
+
+.lim-table tr.now td {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* shape swatches: the circle and the square of the canvas, a disc in the limit colour */
+.lim-sw {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-inline: 0.2rem;
+  vertical-align: baseline;
+  background: var(--ink-3);
+}
+
+.lim-sw-l {
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.lim-sw-r {
+  background: var(--equip);
+}
+
+.lim-sw-lim {
+  background: var(--limit);
+  border-radius: 50%;
+}
+
+/* Hebrew sentences in the readout: the global .q is an LTR quantity; here a row is a Hebrew sentence with
+   LTR islands (<bdi dir="ltr">), so it runs right to left and may wrap. */
+.rtl-q {
+  display: contents;
+}
+.rtl-q .q {
+  direction: rtl;
+  white-space: normal;
+}

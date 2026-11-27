@@ -1,4 +1,35 @@
 # Terms first defined in lesson 4.6 (limits and continuity, intuitively).
+- id: function-limit
+  term: גבול של פונקציה
+  en: limit of a function
+  symbol: '\lim_{x\to a}f(x)=L'
+  definition: >-
+    $\lim_{x\to a}f(x)=L$ אומר שהערכים $f(x)$ מתקרבים ל-$L$ כרצוננו כש-$x$ קרוב מספיק ל-$a$, משני הצדדים ובלי להיות
+    שווה ל-$a$. הערך $f(a)$ עצמו (אם הוא בכלל מוגדר) אינו משפיע על הגבול. כשהערכים גדלים מעל כל מספר כותבים
+    $\lim_{x\to a}f(x)=\infty$: זה תיאור של ההתנהגות, ולא גבול שהוא מספר.
+  lesson: '4.6'
+- id: limit-at-infinity
+  term: גבול באינסוף
+  en: limit at infinity
+  symbol: '\lim_{x\to\infty}f(x)=L'
+  definition: >-
+    הערך שאליו $f(x)$ מתקרבת כש-$x$ גדל בלי גבול ($x\to\infty$) או קטן בלי גבול ($x\to-\infty$). למשל
+    $\lim_{x\to\infty}\frac1x=0$. אז הישר $y=L$ הוא אסימפטוטה אופקית של הגרף.
+  lesson: '4.6'
+- id: bounded-function
+  term: פונקציה חסומה
+  en: bounded function
+  definition: >-
+    פונקציה שכל הערכים שלה (בקטע שמדברים עליו) נמצאים בין שני מספרים קבועים: יש $M$ כך ש-$|f(x)|\le M$. למשל
+    $|\sin x|\le1$ לכל $x$. חסימות אינה מבטיחה גבול: $\sin\frac1x$ חסומה ואין לה גבול ב-0.
+  lesson: '4.6'
+- id: squeeze-rule
+  term: כלל הסנדוויץ׳
+  en: squeeze rule
+  definition: >-
+    אם $g(x)\le f(x)\le h(x)$ ליד $a$, ושתי הפונקציות החיצוניות שואפות לאותו גבול $L$, גם $f$ שואפת ל-$L$: היא כלואה
+    ביניהן. למשל $\left|\frac{\sin x}{x}\right|\le\frac1x$ ל-$x>0$, ולכן $\frac{\sin x}{x}\to0$ כש-$x\to\infty$.
+  lesson: '4.6'
 - id: one-sided-limit
   term: גבול חד-צדדי
   en: one-sided limit
@@ -26,20 +57,19 @@
   term: אי-רציפות מסוג קפיצה
   en: jump discontinuity
   definition: >-
-    נקודה שבה שני הגבולות החד-צדדיים קיימים וסופיים אבל שונים (בסיכומים: "מסוג ראשון"). גודל הקפיצה הוא ההפרש ביניהם.
+    נקודה שבה שני הגבולות החד-צדדיים קיימים וסופיים אבל שונים. גודל הקפיצה הוא ההפרש ביניהם.
   lesson: '4.6'
 - id: infinite-discontinuity
   term: אי-רציפות אינסופית
   en: infinite discontinuity
   definition: >-
-    נקודה שבה לפחות אחד הגבולות החד-צדדיים אינסופי, כמו $\frac1x$ ב-0: הגרף מתקרב לאסימפטוטה אנכית. יחד עם נקודות שבהן
-    גבול חד-צדדי אינו קיים כלל ($\sin\frac1x$ ב-0), הסיכומים קוראים לזה "מסוג שני".
+    נקודה שבה לפחות אחד הגבולות החד-צדדיים אינסופי, כמו $\frac1x$ ב-0: הגרף מתקרב לאסימפטוטה אנכית.
   lesson: '4.6'
 - id: intermediate-value-theorem
   term: משפט ערך הביניים
   en: intermediate value theorem
   definition: >-
-    אם $f$ רציפה בקטע הסגור $[a,b]$ ו-$c$ מספר בין $f(a)$ ל-$f(b)$, יש $x_0\in[a,b]$ עם $f(x_0)=c$. בפרט, אם $f(a)$ ו-$f(b)$
+    אם $f$ רציפה בקטע הסגור $[a,b]$ ו-$k$ מספר בין $f(a)$ ל-$f(b)$, יש $c\in[a,b]$ עם $f(c)=k$; כש-$k$ ממש בין שני הערכים, $a<c<b$. בפרט, אם $f(a)$ ו-$f(b)$
     בסימנים מנוגדים, ל-$f$ יש שורש בקטע. המשפט נותן קיום, לא יחידות.
   lesson: '4.6'
 - id: extreme-value-theorem
@@ -47,7 +77,7 @@
   en: extreme value theorem
   definition: >-
     פונקציה רציפה בקטע **סגור** $[a,b]$ מקבלת בו ערך גדול ביותר וערך קטן ביותר. בקטע פתוח, או בלי רציפות, זה עלול
-    להיכשל: $x$ ב-$(0,1)$ אין מקסימום.
+    להיכשל: ל-$x$ ב-$(0,1)$ אין מקסימום.
   lesson: '4.6'
 - id: bisection-method
   term: שיטת החצייה

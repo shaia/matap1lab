@@ -12,17 +12,17 @@ questions:
     qualitative: true
     level: basic
     prompt: >-
-      מה קורה ל-$\left(\frac12\right)^x$ כש-$x\to\infty$?
+      מה קורה ל-$\left(\frac12\right)^x$ כש-$x$ גדל מאוד?
     choices:
-      - text: 'שואף ל-0'
+      - text: 'מתקרב ל-0'
         correct: true
         feedback: >-
           נכון. $\left(\frac12\right)^x=2^{-x}=\frac1{2^x}$, והמכנה גדל בלי גבול. הגרף יורד ומתקרב לציר $x$ (אסימפטוטה אופקית).
-      - text: 'שואף ל-$\infty$'
+      - text: 'גדל בלי גבול'
         feedback: >-
           זה נכון לבסיס גדול מ-1. בבסיס $\frac12$ כל הגדלה של $x$ ב-1 **מחצה** את הערך.
         misconception: MC-c4-exp-base-small
-      - text: 'שואף ל-1'
+      - text: 'מתקרב ל-1'
         feedback: >-
           $\left(\frac12\right)^0=1$, אבל ככל ש-$x$ גדל הערך נחצה שוב ושוב: $\frac12,\frac14,\frac18,\ldots$
         misconception: MC-c4-exp-base-small
@@ -32,18 +32,18 @@ questions:
     objectives: [OBJ-4.3-1]
     level: basic
     prompt: >-
-      מה קורה ל-$\ln x$ כש-$x\to0^+$?
+      מה קורה ל-$\ln x$ כש-$x$ מתקרב ל-0 מימין?
     choices:
-      - text: 'שואף ל-$-\infty$'
+      - text: 'יורד בלי גבול (למינוס אינסוף)'
         correct: true
         feedback: >-
           נכון. $\ln\left(e^{-10}\right)=-10$, $\ln\left(e^{-100}\right)=-100$: ככל ש-$x$ קרוב יותר ל-0, הלוגריתם שלילי יותר.
           ציר $y$ הוא אסימפטוטה אנכית.
-      - text: 'שואף ל-0'
+      - text: 'מתקרב ל-0'
         feedback: >-
           $\ln$ מתאפס ב-1, לא ב-0. ליד 0 הלוגריתם שלילי וגדל בערכו המוחלט בלי גבול.
         misconception: MC-c4-ln-near-zero
-      - text: 'שואף ל-1'
+      - text: 'מתקרב ל-1'
         feedback: >-
           $\ln e=1$ ו-$\ln1=0$. ליד 0 הלוגריתם הוא מספר שלילי גדול.
         misconception: MC-c4-ln-near-zero
@@ -54,7 +54,7 @@ questions:
     qualitative: true
     level: basic
     prompt: >-
-      נכון או לא נכון: $\left(1+\frac1n\right)^n\to1$ כש-$n\to\infty$.
+      נכון או לא נכון: כש-$n$ גדל מאוד, $\left(1+\frac1n\right)^n$ מתקרב ל-1.
     choices:
       - text: 'לא נכון'
         correct: true
@@ -65,12 +65,37 @@ questions:
           חשבו ל-$n=10$: $1.1^{10}\approx2.59$, רחוק מ-1. המעריך הגדל מנצח את הבסיס שמתקרב ל-1.
         misconception: MC-c4-e-limit-is-1
     reasons:
-      - text: 'הבסיס מתקרב ל-1 אבל המעריך גדל, והגבול הוא המספר $e$'
+      - text: 'הבסיס מתקרב ל-1 אבל המעריך גדל, והערכים מתקרבים למספר $e$'
         correct: true
-        feedback: 'בדיוק. כך מוגדר $e$ (בסיכומים, עמ׳ 12).'
+        feedback: 'בדיוק. כך מוגדר $e$.'
       - text: '1 בכל חזקה הוא 1'
         feedback: >-
           הבסיס אינו 1, הוא $1+\frac1n>1$, וחזקה גבוהה של מספר מעט גדול מ-1 יכולה להיות גדולה.
+        misconception: MC-c4-e-limit-is-1
+
+  - id: Q-4.3-compound-minute
+    type: mc
+    objectives: [OBJ-4.3-2]
+    qualitative: true
+    level: basic
+    prompt: >-
+      בנק א׳ מחשב ריבית שנתית של $100\%$ פעם אחת בשנה. בנק ב׳ מחשב את אותה ריבית שנתית בכל דקה, $n=525{,}600$ פעמים בשנה,
+      חלק $\frac1n$ בכל פעם. כמה יהיה בבנק ב׳ בסוף השנה על כל שקל שהופקד?
+    choices:
+      - text: 'קצת פחות מ-$2.72$ שקלים, כלומר בערך פי $1.36$ ממה שיש בבנק א׳'
+        correct: true
+        feedback: >-
+          נכון. $\left(1+\frac1n\right)^n$ גדל עם $n$ ומתקרב ל-$e\approx2.71828$; ב-$n=525{,}600$ הוא כבר $2.71828$ בקירוב של
+          חמש ספרות. בבנק א׳ יש 2, ו-$\frac{e}{2}\approx1.36$.
+      - text: 'סכום עצום: חצי מיליון חישובים של ריבית מגדילים את הסכום בלי גבול'
+        feedback: >-
+          הסכום אכן גדל עם מספר החישובים, אבל כל ריבית קטנה פי $n$. התוספות מתכווצות, והסכום נדחס מתחת ל-$e$: כבר ב-$n=1000$
+          יש $2.7169$, וב-$n=10^6$ יש $2.71828$.
+        misconception: MC-c4-compound-unbounded
+      - text: 'כמעט שקל אחד: ריבית של $\frac{1}{525{,}600}$ היא כמעט אפס'
+        feedback: >-
+          כל ריבית לבד כמעט אפס, אבל יש $525{,}600$ כאלה, וכל אחת מחושבת על סכום שכבר גדל. הבסיס $1+\frac1n$ מתקרב ל-1,
+          והמעריך גדל באותו זמן.
         misconception: MC-c4-e-limit-is-1
 
   - id: Q-4.3-solve-exp
@@ -141,11 +166,11 @@ questions:
     qualitative: true
     level: mid
     prompt: >-
-      נכון או לא נכון: ל-$\ln x$ יש אסימפטוטה אופקית כש-$x\to\infty$, כי הוא גדל לאט מאוד.
+      נכון או לא נכון: ל-$\ln x$ יש אסימפטוטה אופקית כש-$x$ גדל מאוד, כי הוא גדל לאט מאוד.
     choices:
       - text: 'לא נכון'
         correct: true
-        feedback: 'נכון. $\ln x\to\infty$, אף שלאט מאוד: כדי להגיע ל-10 צריך $x=e^{10}\approx22026$.'
+        feedback: 'נכון. $\ln x$ גדל בלי גבול, אף שלאט מאוד: כדי להגיע ל-10 צריך $x=e^{10}\approx22026$.'
       - text: 'נכון'
         feedback: >-
           אילו $\ln x$ היה חסום ב-$M$, אז ב-$x=e^{M+1}$ היה מתקבל $\ln x=M+1>M$. אין חסם.
@@ -234,7 +259,7 @@ questions:
     qualitative: true
     level: basic
     prompt: >-
-      סדרו את הפונקציות לפי קצב הגידול שלהן כש-$x\to\infty$.
+      סדרו את הפונקציות לפי קצב הגידול שלהן כש-$x$ גדל מאוד.
     help: 'גררו את הפונקציה שגדלה הכי מהר למעלה, ואת האיטית ביותר למטה.'
     items:
       - { id: ex, label: '$e^x$' }
@@ -244,7 +269,7 @@ questions:
       - { id: ln, label: '$\ln x$' }
     order: [ex, two, cube, root, ln]
     correctFeedback: >-
-      נכון. אקספוננטים מנצחים כל חזקה, ובין אקספוננטים הבסיס הגדול מנצח ($\frac{e^x}{2^x}=\left(\frac e2\right)^x\to\infty$);
+      נכון. אקספוננטים מנצחים כל חזקה, ובין אקספוננטים הבסיס הגדול מנצח ($\frac{e^x}{2^x}=\left(\frac e2\right)^x$ גדל בלי גבול);
       כל חזקה חיובית, אפילו $\sqrt x$, מנצחת את הלוגריתם.
     wrongFeedback: >-
       הסולם: לוגריתם ≺ חזקות (לפי המעריך) ≺ אקספוננטים (לפי הבסיס). מה גדל מהר יותר, $e^x$ או $2^x$?
@@ -254,21 +279,21 @@ questions:
     objectives: [OBJ-4.3-3]
     level: mid
     prompt: >-
-      מהו $\lim_{x\to\infty}\frac{x^{100}}{e^x}$?
+      מה קורה למנה $\frac{x^{100}}{e^x}$ כש-$x$ גדל מאוד?
     choices:
-      - text: '0'
+      - text: 'מתקרבת ל-0'
         correct: true
         feedback: >-
           נכון. כל אקספוננט עם בסיס גדול מ-1 גדל בסופו של דבר מהר יותר מכל חזקה. (ב-$x=100$ המונה עוד גדול יותר, אבל
           ב-$x=1000$ כבר $e^{1000}\approx10^{434}$ מול $1000^{100}=10^{300}$.)
-      - text: '$\infty$'
+      - text: 'גדלה בלי גבול'
         feedback: >-
           המעריך 100 מרשים, אבל הוא קבוע. $e^x$ מוכפל ב-$e$ בכל צעד של 1, ו-$x^{100}$ מוכפל ב-$\left(1+\frac1x\right)^{100}$, שמתקרב
           ל-1.
         misconception: MC-c4-power-beats-exp
-      - text: '1'
+      - text: 'מתקרבת ל-1'
         feedback: >-
-          אין סיבה ששתי הפונקציות יגדלו באותו קצב: היחס ביניהן שואף ל-0.
+          אין סיבה ששתי הפונקציות יגדלו באותו קצב: היחס ביניהן מתקרב ל-0.
         misconception: MC-c4-power-beats-exp
 
   - id: Q-4.3-crossover
@@ -288,9 +313,9 @@ questions:
           חשבו ב-$x=20$: $2^{20}\approx10^6$, ו-$20^{10}\approx10^{13}$. "גדל מהר יותר" מבטיח עקיפה, לא מתי.
         misconception: MC-c4-faster-means-already-bigger
     reasons:
-      - text: '"גדל מהר יותר" היא טענה על היחס כש-$x\to\infty$, והעקיפה יכולה לקרות מאוחר'
+      - text: '"גדל מהר יותר" היא טענה על היחס כש-$x$ גדל מאוד, והעקיפה יכולה לקרות מאוחר'
         correct: true
-        feedback: 'בדיוק. היחס $\frac{2^x}{x^{10}}\to\infty$, אבל ב-$x=10$ הוא בערך $10^{-7}$.'
+        feedback: 'בדיוק. היחס $\frac{2^x}{x^{10}}$ גדל בסוף בלי גבול, אבל ב-$x=10$ הוא בערך $10^{-7}$.'
       - text: 'אחרי $x=10$ המעריך של $2^x$ גדול מ-10'
         feedback: >-
           השוואת המעריכים אינה השוואת הערכים: $2^{11}=2048$ ו-$11^{10}\approx2.6\cdot10^{10}$. הבסיסים שונים.
@@ -320,7 +345,7 @@ questions:
   - id: Q-4.3-exp-vs-power-count
     type: numeric
     objectives: [OBJ-4.3-3]
-    level: exam
+    level: mid
     prompt: >-
       כמה פתרונות יש למשוואה $2^x=x^{10}$ עם $x>0$?
     answer: 2
@@ -329,7 +354,7 @@ questions:
       נכון. ב-$x=1$: $2>1$; ב-$x=2$: $4<1024$, ולכן חיתוך ליד $1.08$. החזקה מובילה עד שהאקספוננט עוקף ליד $x\approx58.8$
       ($2^{59}\approx5.8\cdot10^{17}>59^{10}\approx5.1\cdot10^{17}$), ומשם הוא מוביל לתמיד.
     wrongFeedback: >-
-      בדקו את הסדר ב-$x=1$, ב-$x=2$, ובערכים גדולים מאוד: מי גדל מהר יותר כש-$x\to\infty$?
+      בדקו את הסדר ב-$x=1$, ב-$x=2$, ובערכים גדולים מאוד: מי גדל מהר יותר כש-$x$ גדל מאוד?
     commonWrong:
       - value: 1
         feedback: >-
